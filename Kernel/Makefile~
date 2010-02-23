@@ -1,0 +1,19 @@
+# Makefile for SimpleOS Kernel
+
+SOURCES= $(patsubst %.s,%.o,$(wildcard *.s)) $(patsubst %.c,%.o,$(wildcard *.c))
+
+CC=gcc
+CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32
+LDFLAGS=-Tlink.ld -mi386
+ASFLAGS=-felf32
+
+all: $(SOURCES) link
+
+clean:
+	-rm *.o ./Build/Kernel
+
+link:
+	ld $(LDFLAGS) -o ./Build/Kernel $(SOURCES)
+
+.s.o:
+	nasm $(ASFLAGS) $<

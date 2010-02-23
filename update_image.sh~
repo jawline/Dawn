@@ -1,18 +1,30 @@
 #!/bin/bash
 #update_image.sh
-#SimpleOS ISO Image updater.
-#Updated Tue 23rd, Feb
+#SimpleOS ISO Image generator.
+#Updated Tue 23rd, Feb, 2010
 
-#MOUNT Image
-echo "Mounting Image"
-sudo mkdir t_disk_mount
-sudo mount -o loop diskimage.iso t_disk_mount
+#Requirements: genisoimage installed on the computer.
+#	       etc/menu.lst to exist
+#	       etc/stage2_eltorito to exist.
 
-#MOVE Files
-echo "Moving Kernel"
-sudo cp Kernel/Build/Kernel t_disk_mount/boot/Kernel
+#	       The disk will still be bootable if no Kernel is copied. but the bootloader will not function as desired.
 
-#UNMOUNT Image
-echo "Unmounting Image"
-sudo umount t_disk_mount
-sudo rmdir t_disk_mount
+#Make temporary directory
+echo "Creating temporary directory."
+mkdir temp_disk
+mkdir -p temp_disk/boot/grub/
+
+echo "Copying bootloader."
+cp etc/menu.lst temp_disk/boot/grub/menu.lst
+cp etc/stage2_eltorito temp_disk/boot/grub/stage2_eltorito
+
+echo "Copying Kernel"
+cp Kernel/Build/Kernel temp_disk/boot/Kernel
+
+echo "Generating ISO image"
+genisoimage -quiet -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 4 -boot-info-table -o boot_disk.iso temp_disk
+
+echo "Removing temporary directory"
+
+rm -r temp_disk
+echo "Done!"

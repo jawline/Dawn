@@ -1,0 +1,8 @@
+default 0
+#timeout 30
+ 
+#title Boot from hard disk
+#chainloader (hd0)+1
+ 
+title SimpleOS
+kernel /boot/Kernel    # Edit it to the filename of your kernel.

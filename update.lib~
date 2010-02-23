@@ -1,15 +1,5 @@
-#!/bin/bash
-#update_image.sh
-#SimpleOS ISO Image generator.
-#Updated Tue 23rd, Feb, 2010
-
-#Requirements: genisoimage installed on the computer.
-#	       etc/menu.lst to exist
-#	       etc/stage2_eltorito to exist.
-
-#	       The disk will still be bootable if no Kernel is copied. but the bootloader will not function as desired.
-
-#Make temporary directory
+update_image()
+{
 echo "Creating temporary directory."
 mkdir temp_disk
 mkdir -p temp_disk/boot/grub/
@@ -28,3 +18,4 @@ echo "Removing temporary directory"
 
 rm -r temp_disk
 echo "Done!"
+}

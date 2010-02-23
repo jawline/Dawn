@@ -4,9 +4,39 @@
 #include "multiboot.h"
 #include "screen.h"
 
+void Print_Memory_Information(struct multiboot *mboot_ptr) {
+    char TEXT_BUFFER[256];
+
+    text_mode_write("Memory Limits\n");
+
+    //Write out the lower and upper memory limits in the multiboot header
+    itoa(mboot_ptr->mem_lower, TEXT_BUFFER, 10);
+	
+    text_mode_write("Lower Memory: ");
+    text_mode_write(TEXT_BUFFER);
+    text_mode_write("\n");
+
+    itoa(mboot_ptr->mem_upper, TEXT_BUFFER, 10);
+	
+    text_mode_write("Upper Memory: ");
+    text_mode_write(TEXT_BUFFER);
+    text_mode_write("\n");
+
+}
+
+//Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot *mboot_ptr)
 {
+    //Clear all the screen as there may be (Probably will be) stuff written on the screen by the bootloader.
     text_mode_clearscreen();
-    text_mode_write("Hello World");    
+
+    //Begin the boot procedure.
+    text_mode_write("SimpleOS Booting...\n\n");
+
+    //Print out the upper and lower limits of memory
+    Print_Memory_Information(mboot_ptr);
+
+    text_mode_write("\n");
+
     return 0xDEADBABA;
 }

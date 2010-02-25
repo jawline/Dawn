@@ -5,6 +5,7 @@
 #include "screen.h"
 #include "gdt.h"
 #include "idt.h"
+#include "interrupt_handler.h"
 
 void Print_Memory_Information(struct multiboot *mboot_ptr) {
     char TEXT_BUFFER[256];
@@ -47,6 +48,12 @@ void Init_IDT() {
    text_mode_write("Done Initializing IDT\n");
 }
 
+void Init_Timer() {
+   text_mode_write("Initializing a timer\n");
+   init_timer(50);
+   text_mode_write("Done Initializing timer\n");
+}
+
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot *mboot_ptr)
 {
@@ -68,6 +75,10 @@ int main(struct multiboot *mboot_ptr)
 
     Print_Loaded_Module_Information(mboot_ptr);
     text_mode_write("\n");
+
+    Init_Timer();
+
+    asm volatile("sti");
 
     return 0xDEADBABA;
 }

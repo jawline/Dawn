@@ -1,6 +1,8 @@
 #ifndef _INTERRUPT_DESCRIPTOR_TABLE_DEF_H_
 #define _INTERRUPT_DESCRIPTOR_TABLE_DEF_H_
 #include "int_types.h"
+#include "isr.h"
+#include "irq.h"
 
 /* A entry onto the interrupt descriptor table */
 
@@ -22,6 +24,14 @@ struct idt_ptr
     uint32 base;
 
 } __attribute__((packed));
+
+typedef struct registers
+{
+   uint32 ds;                  // Data segment selector
+   uint32 edi, esi, ebp, esp, ebx, edx, ecx, eax; // Pushed by pusha.
+   uint32 int_no, err_code;    // Interrupt number and error code (if applicable)
+   uint32 eip, cs, eflags, useresp, ss; // Pushed by the processor automatically.
+} idt_call_registers_t; 
 
 void Initialize_IDT(); //Start the IDT!
 

@@ -3,6 +3,8 @@
 
 #include "multiboot.h"
 #include "screen.h"
+#include "gdt.h"
+#include "idt.h"
 
 void Print_Memory_Information(struct multiboot *mboot_ptr) {
     char TEXT_BUFFER[256];
@@ -39,6 +41,12 @@ void Init_GDT() {
    text_mode_write("Done Initializing GDT\n");
 }
 
+void Init_IDT() {
+   text_mode_write("Initializing IDT\n");
+   Initialize_IDT();
+   text_mode_write("Done Initializing IDT\n");
+}
+
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot *mboot_ptr)
 {
@@ -47,7 +55,11 @@ int main(struct multiboot *mboot_ptr)
 
     //Begin the boot procedure.
     text_mode_write("SimpleOS Booting...\n\n");
+
     Init_GDT();
+    text_mode_write("\n");
+
+    Init_IDT();
     text_mode_write("\n");
 
     //Print out the upper and lower limits of memory

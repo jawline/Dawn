@@ -1,0 +1,9 @@
+#ifndef _REAL_TIME_CLOCK_DEF_H_
+#define _REAL_TIME_CLOCK_DEF_H_
+
+#include "cmos_time.h"
+
+void Initialize_RTC();
+cmos_time_struct Get_System_Time();
+
+#endif

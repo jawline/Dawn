@@ -2,11 +2,8 @@
 #include "idt.h"
 #include "screen.h"
 
-uint32 tick = 0;
-
 static void timer_callback(idt_call_registers_t regs)
 {
-   tick++;
 }
 
 void init_timer(uint32 frequency)

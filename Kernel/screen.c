@@ -5,6 +5,17 @@ static uint16 * video_memory_location = (uint16 *)0xB8000;
 static uint8 cursor_x = 0;
 static uint8 cursor_y = 0;
 
+void text_mode_set_x(uint8 x) {
+	cursor_x = x;
+}
+
+void text_mode_set_y(uint8 y) {
+	cursor_y = y;
+}
+
+static uint8 active_foreground_col = 15;
+static uint8 active_background_col = 0;
+
 static void text_mode_move_cursor() {
     // The screen is 80 characters wide...
     uint16 cursorLocation = cursor_y * 80 + cursor_x;
@@ -61,14 +72,16 @@ void text_mode_clearscreen() {
     text_mode_move_cursor();
 }
 
+void text_mode_set_fg_color(uint8 col) {
+	active_foreground_col = col;
+}
+
 void text_mode_putc(char c) {
     // The background colour is black (0), the foreground is white (15).
-    uint8 backColour = 0;
-    uint8 foreColour = 15;
 
     // The attribute byte is made up of two nibbles - the lower being the 
     // foreground colour, and the upper the background colour.
-    uint8  attributeByte = (backColour << 4) | (foreColour & 0x0F);
+    uint8  attributeByte = (active_background_col << 4) | (active_foreground_col & 0x0F);
     // The attribute byte is the top 8 bits of the word we have to send to the
     // VGA board.
     uint16 attribute = attributeByte << 8;
@@ -122,7 +135,7 @@ void text_mode_putc(char c) {
 
 }
 
-void text_mode_write(char * Array) {
+void text_mode_write(const char * Array) {
 	unsigned int i = 0;
 	while (Array[i]) {
 		text_mode_putc(Array[i++]);	

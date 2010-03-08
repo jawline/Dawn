@@ -9,71 +9,59 @@
 #include "cmos_time.h"
 #include "panic.h"
 #include "cmos.h"
+#include "headers/printf.h"
+#include "phys_mm.h"
+
+extern uint32 end; //The end of the kernel
 
 void Print_Memory_Information(struct multiboot *mboot_ptr) {
-    char TEXT_BUFFER[256];
 
-    text_mode_write("Memory Limits:\n");
-
-    //Write out the lower and upper memory limits in the multiboot header
-    itoa(mboot_ptr->mem_lower, TEXT_BUFFER, 10);
+    prints("Memory Limits:\n");
 	
-    text_mode_write("Lower Memory: ");
-    text_mode_write(TEXT_BUFFER);
-    text_mode_write("\n");
-
-    itoa(mboot_ptr->mem_upper, TEXT_BUFFER, 10);
+    prints("Lower Memory: ");
+    printuh(mboot_ptr->mem_lower);
+    prints("\n");
 	
-    text_mode_write("Upper Memory: ");
-    text_mode_write(TEXT_BUFFER);
-    text_mode_write("\n");
+    prints("Upper Memory: ");
+    printuh(mboot_ptr->mem_upper);
+    prints("\n");
 }
 
 void Print_Loaded_Module_Information(struct multiboot *mboot_ptr) {
-    char TEXT_BUFFER[256];
 
-    text_mode_write("Modules Information:\n");
-    itoa(mboot_ptr->mods_count, TEXT_BUFFER, 10);
-    text_mode_write("Modules Count: ");
-    text_mode_write(TEXT_BUFFER);    
-    text_mode_write("\n");
+    prints("Modules Information:\n");
+    prints("Modules Count: ");
+    printi(mboot_ptr->mods_count); 
+    prints("\n");
 }
 
 void Init_GDT() {
-   text_mode_write("Initializing GDT");
+   prints("Initializing GDT");
+
    initialize_gdt();
+
    text_mode_set_x(70);
    text_mode_set_fg_color(GREEN);
    text_mode_write("[ OK ]");
    text_mode_set_fg_color(WHITE);
 
-    text_mode_write("\n");
+   prints("\n");
 }
 
 void Init_IDT() {
-   text_mode_write("Initializing IDT");
+   prints("Initializing IDT");
+   
    Initialize_IDT();
    text_mode_set_x(70);
    text_mode_set_fg_color(GREEN);
    text_mode_write("[ OK ]");
    text_mode_set_fg_color(WHITE);
 
-    text_mode_write("\n");
-}
-
-void Init_Paging(uint32 umem) {
-   text_mode_write("Initializing Paging");
-   Initialize_Paging(umem * 0x400);
-   text_mode_set_x(70);
-   text_mode_set_fg_color(GREEN);
-   text_mode_write("[ OK ]");
-   text_mode_set_fg_color(WHITE);
-
-   text_mode_write("\n");
+   prints("\n");
 }
 
 void Init_Timer() {
-   text_mode_write("Initializing the system timer");
+   prints("Initializing the system timer");
 
    init_timer(50);
 
@@ -82,7 +70,7 @@ void Init_Timer() {
    text_mode_write("[ OK ]");
    text_mode_set_fg_color(WHITE);
 
-   text_mode_write("\n");
+   prints("\n");
 }
 
 void Print_Time_Info() {
@@ -131,6 +119,20 @@ void Print_Time_Info() {
 	text_mode_write("\n");
 }
 
+void Init_VM() { //Initialize virtual memory
+
+   prints("Initializing virtual memory");
+   
+   init_phys_mm(end);
+   init_virt_mm();
+   text_mode_set_x(70);
+   text_mode_set_fg_color(GREEN);
+   text_mode_write("[ OK ]");
+   text_mode_set_fg_color(WHITE);
+
+   prints("\n");
+}
+
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot *mboot_ptr)
 {
@@ -142,8 +144,8 @@ int main(struct multiboot *mboot_ptr)
 
     Init_GDT();
     Init_IDT();
-    Init_Paging((mboot_ptr->mem_upper + mboot_ptr->mem_lower) - (0x1000 * 3));
     Init_Timer();
+    Init_VM();
     text_mode_write("\n");
 
     //Print out the upper and lower limits of memory
@@ -154,14 +156,12 @@ int main(struct multiboot *mboot_ptr)
     text_mode_write("\n");
 
     enable_interrupts();
-    Init_SysTime();
 
-    Print_Time_Info();
+	//PAGE FAULT MEH
+	uint32 * addr = 0x1000000;
+	uint32 b = *addr;
 
-    char TBuffer[128];
-    uint64 Val = 18446744073709551615;
-    itoa_64(Val, TBuffer, 10);
-    text_mode_write(TBuffer);
+    for (;;)
 
     return 0xDEADBABA;
 }

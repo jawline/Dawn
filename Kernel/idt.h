@@ -1,6 +1,6 @@
 #ifndef _INTERRUPT_DESCRIPTOR_TABLE_DEF_H_
 #define _INTERRUPT_DESCRIPTOR_TABLE_DEF_H_
-#include "int_types.h"
+#include "headers/int_types.h"
 #include "isr.h"
 #include "irq.h"
 

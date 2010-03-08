@@ -1,6 +1,6 @@
 #ifndef _GDT_DEFINITIONS_DEF_H_
 #define _GDT_DEFINITIONS_DEF_H_
-#include "int_types.h"
+#include "headers/int_types.h"
 
 
 //This structure is the structure of a single entry onto the GDT (Global descriptor table)

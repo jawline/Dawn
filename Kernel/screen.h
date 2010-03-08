@@ -1,6 +1,6 @@
 #ifndef _SCREEN_DEF_H_
 #define _SCREEN_DEF_H_
-#include "int_types.h"
+#include "headers/int_types.h"
 
 #define WHITE 15
 #define BLACK 0

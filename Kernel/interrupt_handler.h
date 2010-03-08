@@ -1,6 +1,6 @@
 #ifndef _INTERRUPT_HANDLER_DEF_H_
 #define _INTERRUPT_HANDLER_DEF_H_
-#include "int_types.h"
+#include "headers/int_types.h"
 #define GET_IRQ(x) x + 32
 
 typedef void (*isr_t)(registers_t);

@@ -62,6 +62,7 @@ void init_virt_mm() {
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
 	pt = (uint32*) (pagedir[1022] & PAGE_MASK);
 	memset (pt, 0, 0x1000);
+	pt[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
 
 	pagedir[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
 

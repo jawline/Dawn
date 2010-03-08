@@ -35,6 +35,10 @@ inline void start_paging() {
   asm volatile ("mov %0, %%cr0" : : "r" (cr0)); //Set the value of cr0 to the new desired value
 }
 
+void mark_paging_enabled() {
+	paging_enabled = 1;
+}
+
 void init_virt_mm() {
 	register_interrupt_handler (14, &page_fault); //Register the page fault handler.
 	
@@ -58,6 +62,7 @@ void init_virt_mm() {
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
 	pt = (uint32*) (pagedir[1022] & PAGE_MASK);
 	memset (pt, 0, 0x1000);
+	pt[1023] = (uint32)pd | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
 
 	pagedir[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
 
@@ -67,8 +72,8 @@ void init_virt_mm() {
 	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR  >> 12));
 	page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
 	memset (page_tables[pt_idx*1024], 0, 0x1000);
+
+	mark_paging_enabled();
 }
 
-void mark_paging_enabled() {
-	paging_enabled = 1;
-}
+

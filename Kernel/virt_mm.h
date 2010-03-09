@@ -12,8 +12,13 @@
 #define PAGE_TABLE_IDX(x) ((uint32) x%1024)
 
 #define page_directory_t uint32
+#include "headers/int_types.h"
 
 void init_virt_mm();
+
 void mark_paging_enabled();
+void map (uint32 va, uint32 pa, uint32 flags);
+void unmap (uint32 va);
+char get_mapping (uint32 va, uint32 *pa);
 
 #endif

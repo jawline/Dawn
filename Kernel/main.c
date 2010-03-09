@@ -11,6 +11,7 @@
 #include "cmos.h"
 #include "headers/printf.h"
 #include "phys_mm.h"
+#include "virt_mm.h"
 
 extern uint32 end; //The end of the kernel
 
@@ -119,12 +120,13 @@ void Print_Time_Info() {
 	text_mode_write("\n");
 }
 
-void Init_VM() { //Initialize virtual memory
+void Init_VM(struct multiboot * mboot_ptr) { //Initialize virtual memory
 
    prints("Initializing virtual memory");
    
    init_phys_mm(end);
    init_virt_mm();
+   map_free_pages(mboot_ptr);
    text_mode_set_x(70);
    text_mode_set_fg_color(GREEN);
    text_mode_write("[ OK ]");
@@ -140,26 +142,49 @@ int main(struct multiboot *mboot_ptr)
     text_mode_clearscreen();
 
     //Begin the boot procedure.
-    text_mode_write("SimpleOS Booting...\n\n");
+    prints("SimpleOS Booting...\n\n");
 
     Init_GDT();
     Init_IDT();
     Init_Timer();
-    Init_VM();
-    text_mode_write("\n");
+    Init_VM(mboot_ptr);
+    prints("\n");
 
     //Print out the upper and lower limits of memory
     Print_Memory_Information(mboot_ptr);
-    text_mode_write("\n");
+    prints("\n");
 
     Print_Loaded_Module_Information(mboot_ptr);
-    text_mode_write("\n");
+    prints("\n");
 
     enable_interrupts();
 
-	//PAGE FAULT MEH
-	uint32 * addr = 0x1000000;
-	uint32 b = *addr;
+    printf("Performing some virtual memory texts. tests\n");
+    uint32 fraddr = 0;
+    uint32 virtaddr = 3765694;
+    fraddr = alloc_frame();
+    printf("Maping physical location 0x%x to virtual location 0x%x\n", fraddr, virtaddr);
+    map(virtaddr, fraddr, PAGE_PRESENT | PAGE_WRITE);
+    printf("Done\n");
+
+    uint32 * ptr = virtaddr; //At the start of our now mapped frame
+    uint32 i;
+    for (i = 0; i < 1024; i++) {
+	*ptr = 32;
+	ptr++;
+    }
+
+    printf("Assigned the hole frame to the number 32 1024 times\nProceeding to print the first 3 ints of the frame.\n");
+    ptr = virtaddr;
+    
+    for (i = 0; i < 3; i++) {
+	printf("Number %i Value %i\n", i, *ptr);    	
+	ptr++;
+    }
+
+    printf("Unmapping the page and trying to access pointer (This should throw a page fault and crash the kernel)\n");
+    unmap(virtaddr);
+    *ptr = 3;
 
     for (;;)
 

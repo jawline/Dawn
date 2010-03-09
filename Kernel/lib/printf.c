@@ -1,5 +1,6 @@
 #include "../headers/int_types.h"
 #include "../headers/printf.h"
+#include "../headers/va_list.h"
 
 void printi(int32 s) {
 	char Buffer[11];
@@ -50,4 +51,21 @@ void printuh(uint32 n) {
     {
         putc(tmp+'0');
     }
+}
+
+void printf(const char * fmt, ...) {
+        static char buf [1024]; //Maximum size to be printed is 1024 chars.
+        va_list args;
+
+        int i;
+ 
+        va_start(args, fmt);
+
+        i = vsprintf(buf,fmt,args);
+
+        va_end(args);
+
+        buf[i] = '\0';
+
+        prints(buf);
 }

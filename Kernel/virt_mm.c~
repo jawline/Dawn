@@ -18,6 +18,54 @@ void page_fault (idt_call_registers_t *regs)
   for (;;) ;
 }
 
+//Map the virtual address VA to the physical address PA with the appropriate flags.
+//VA = Virtual Address, PA = Physical Address, Flags = The flags to be set with the page.
+void map (uint32 va, uint32 pa, uint32 flags)
+{
+  uint32 virtual_page = va / 0x1000;
+  uint32 pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
+
+  // Find the appropriate page table for the physical address.
+  if (page_directory[pt_idx] == 0)
+  {
+    //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
+    page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
+    memset (page_tables[pt_idx*1024], 0, 0x1000);
+  }
+
+  // Now that the page table definately exists, we can update the PTE.
+  page_tables[virtual_page] = (pa & PAGE_MASK) | flags;
+}
+
+//Unmap the virtual address VA from its physical address
+void unmap (uint32 va)
+{
+  uint32 virtual_page = va / 0x1000;
+  
+  page_tables[virtual_page] = 0;
+
+  //Signal to the CPU that a page mapping has been invalidated.
+  asm volatile ("invlpg (%0)" : : "a" (va));
+}
+
+//Get whether the virtual address is mapped or not (Returns 1 or 0, true or false)
+//If Pa is non null sets pa to the physical address of the mapping
+char get_mapping (uint32 va, uint32 *pa)
+{
+  uint32 virtual_page = va / 0x1000;
+  uint32 pt_idx = PAGE_DIR_IDX(virtual_page);
+
+  // Find the appropriate page table for 'va'.
+  if (page_directory[pt_idx] == 0)
+    return 0;
+
+  if (page_tables[virtual_page] != 0)
+  {
+    if (pa) *pa = page_tables[virtual_page] & PAGE_MASK;
+    return 1;
+  }
+}
+
 
 inline void switch_page_directory (page_directory_t * nd)
 {
@@ -62,13 +110,14 @@ void init_virt_mm() {
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
 	pt = (uint32*) (pagedir[1022] & PAGE_MASK);
 	memset (pt, 0, 0x1000);
-	pt[1023] = (uint32)pd | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
+	pt[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
 
 	pagedir[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
 
 	switch_page_directory(pagedir); //Set the current page dire
 	start_paging();
 
+	//Map where the physical memory manager keeps its stack.
 	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR  >> 12));
 	page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
 	memset (page_tables[pt_idx*1024], 0, 0x1000);

@@ -1,6 +1,8 @@
 #include "phys_mm.h"
 #include "virt_mm.h"
 
+#include "multiboot.h"
+
 #include "panic.h"
 
 #include "headers/int_types.h"
@@ -47,10 +49,40 @@ void free_frame(uint32 frame) {
 	}
 
 	if (phys_mm_smax <= phys_mm_slock) { //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb of stack space)
-		//TODO: MAP!
+	    map (phys_mm_smax, frame, PAGE_PRESENT | PAGE_WRITE);
+	    phys_mm_smax += 4096;	
 	} else {
 		uint32 * stack = phys_mm_slock;
 		*stack = frame;
 		phys_mm_slock += sizeof(uint32);	
 	}
+}
+
+//Does the initialization of the free pages using the memory map provided by the mboot header.
+void map_free_pages(struct multiboot * mboot_ptr) {
+
+  uint32 i = mboot_ptr->mmap_addr;
+
+  while (i < mboot_ptr->mmap_addr + mboot_ptr->mmap_length)
+  {
+    mmap_entry_t *me = (mmap_entry_t*) i;
+    
+    // Does this entry specify usable RAM?
+    if (me->type == 1)
+    {
+
+      uint32 j;
+
+      // For every page in this entry, add to the free page stack.
+      for (j = me->base_addr_low; j < me->base_addr_low+me->length_low; j += 0x1000)
+      {
+        free_frame(j);
+      }
+
+    }
+
+    // The multiboot specification is strange in this respect - the size member does not include "size" itself in its calculations,
+    // so we must add sizeof a 32bit int
+    i += me->size + sizeof (uint32);
+  }
 }

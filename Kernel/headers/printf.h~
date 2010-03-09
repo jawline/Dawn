@@ -6,6 +6,8 @@
 #define putc(char) text_mode_putc(char)
 
 void printi(int32 i);
+void printui(uint32 i);
 void printuh(uint32 i);
+void printf(const char *fmt, ...);
 
 #endif

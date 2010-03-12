@@ -1,6 +1,6 @@
 #ifndef _MULTIBOOT_HEADER_H_
 #define _MULTIBOOT_HEADER_H_
-#include "headers/int_types.h"
+#include <int_types.h>
 
 #define MULTIBOOT_FLAG_MEM     0x001
 #define MULTIBOOT_FLAG_DEVICE  0x002

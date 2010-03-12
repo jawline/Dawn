@@ -1,6 +1,6 @@
 #ifndef _KERNEL_PANIC_DEF_H_
 #define _KERNEL_PANIC_DEF_H_
-#include "screen.h"
+#include "drivers/screen.h"
 #include "common.h"
 
 #define PANIC(msg) panic(msg, __FILE__, __LINE__);

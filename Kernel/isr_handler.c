@@ -1,7 +1,6 @@
-#include "idt.h"
-#include "screen.h"
+#include <interrupts/idt.h>
 #include "common.h"
-#include "interrupt_handler.h"
+#include <interrupts/interrupt_handler.h>
 
 extern isr_t interrupt_handlers[256];
 

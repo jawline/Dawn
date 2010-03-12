@@ -1,5 +1,4 @@
 #include "cmos_time.h"
-#include "screen.h"
 
 #define BINARY_MODE_BIT 0x04
 #define H_FORMAT_BIT 0x02

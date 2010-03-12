@@ -1,6 +1,5 @@
 #include "timer.h"
-#include "idt.h"
-#include "screen.h"
+#include <interrupts/idt.h>
 
 static void timer_callback(idt_call_registers_t regs)
 {

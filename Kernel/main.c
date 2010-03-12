@@ -2,16 +2,41 @@
 // Main function is the entry point of the kernel.
 
 #include "multiboot.h"
-#include "screen.h"
+#include "drivers/screen.h"
 #include "gdt.h"
-#include "idt.h"
-#include "interrupt_handler.h"
 #include "cmos_time.h"
 #include "panic.h"
 #include "cmos.h"
-#include "headers/printf.h"
+#include <printf.h>
 #include "phys_mm.h"
 #include "virt_mm.h"
+#include "heap.h"
+
+#include <stdlib.h>
+
+char CBuffer[1024];
+uint8 cptr = 0;
+
+void exec_cb() {
+	CBuffer[cptr] = '\0';
+	printf("\nExecute %s", CBuffer);
+	CBuffer[0] = '\0';
+	cptr = 0;
+}
+
+void kboard_callback(uint8 cb) {
+	if (cb == '\r') //Carriage return
+	{ exec_cb(); printf("\n:> ");  } else {
+
+	
+	if (cb == '\b') { if (cptr > 0) cptr--; CBuffer[cptr] = ' '; if (cptr > 0) { putc(cb); putc(' '); putc('\b'); } }
+	else {  CBuffer[cptr] = cb;
+		cptr++;
+		putc(cb);
+	}
+
+	}
+}
 
 extern uint32 end; //The end of the kernel
 
@@ -146,7 +171,6 @@ int main(struct multiboot *mboot_ptr)
 
     Init_GDT();
     Init_IDT();
-    Init_Timer();
     Init_VM(mboot_ptr);
     prints("\n");
 
@@ -159,33 +183,28 @@ int main(struct multiboot *mboot_ptr)
 
     enable_interrupts();
 
-    printf("Performing some virtual memory texts. tests\n");
-    uint32 fraddr = 0;
-    uint32 virtaddr = 3765694;
-    fraddr = alloc_frame();
-    printf("Maping physical location 0x%x to virtual location 0x%x\n", fraddr, virtaddr);
-    map(virtaddr, fraddr, PAGE_PRESENT | PAGE_WRITE);
-    printf("Done\n");
-
-    uint32 * ptr = virtaddr; //At the start of our now mapped frame
-    uint32 i;
-    for (i = 0; i < 1024; i++) {
-	*ptr = 32;
-	ptr++;
-    }
-
-    printf("Assigned the hole frame to the number 32 1024 times\nProceeding to print the first 3 ints of the frame.\n");
-    ptr = virtaddr;
+    init_kheap();
     
-    for (i = 0; i < 3; i++) {
-	printf("Number %i Value %i\n", i, *ptr);    	
-	ptr++;
+    extern uint32 phys_mm_slock;
+    uint32 pmmt = phys_mm_slock;
+    uint32 freeram = 0;
+
+    while (pmmt > PHYS_MM_STACK_ADDR) {
+	pmmt -= sizeof(uint32);
+        freeram += 4096; //1Kb of ram free
     }
+    
+    uint32 freemb = freeram / 1024;
+    freemb = freemb / 1024;
+    printf("Unmapped RAM %u (MBs) after heap initialization\n", freemb);
+    
+    uint32 * addr = malloc(32);
+    free(addr);
 
-    printf("Unmapping the page and trying to access pointer (This should throw a page fault and crash the kernel)\n");
-    unmap(virtaddr);
-    *ptr = 3;
-
+    init_keyboard();
+    set_keyboard_callback(&kboard_callback);
+    
+    printf(":> ");
     for (;;)
 
     return 0xDEADBABA;

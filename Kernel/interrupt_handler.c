@@ -1,4 +1,4 @@
-#include "interrupt_handler.h"
+#include <interrupts/interrupt_handler.h>
 
 isr_t interrupt_handlers[256];
 

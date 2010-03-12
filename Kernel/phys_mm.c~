@@ -59,7 +59,7 @@ void free_frame(uint32 frame) {
 }
 
 //Does the initialization of the free pages using the memory map provided by the mboot header.
-void map_free_pages(multiboot_header_t * mboot_ptr) {
+void map_free_pages(struct multiboot * mboot_ptr) {
 
   uint32 i = mboot_ptr->mmap_addr;
 

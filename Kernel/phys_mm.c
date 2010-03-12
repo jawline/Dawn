@@ -5,7 +5,6 @@
 
 #include "panic.h"
 
-#include "headers/int_types.h"
 #include "virt_mm.h"
 
 uint32 used_mem_end = 0;

@@ -1,6 +1,6 @@
 #ifndef _COMMON_DEF_H_
 #define _COMMON_DEF_H_
-#include "headers/int_types.h"
+#include <int_types.h>
 
 #define disable_interrupts() asm volatile("cli");
 #define enable_interrupts() asm volatile("sti");

@@ -1,0 +1,23 @@
+#ifndef _VA_LIST_DEF_H_
+#define _VA_LIST_DEF_H_
+
+//Define a va_list as a void *
+typedef void * va_list;
+
+#define	STACK_WIDTH	sizeof(int)
+
+#define	TYPE_WIDTH(TYPE)				\
+	((sizeof(TYPE) + STACK_WIDTH - 1) & ~(STACK_WIDTH - 1))
+
+#define	va_start(PTR, LASTARG)				\
+	PTR = (va_list)((char *)&(LASTARG) + TYPE_WIDTH(LASTARG))
+
+#define va_end(PTR)
+
+#define va_arg(PTR, TYPE)	(			\
+	(char *)(PTR) += TYPE_WIDTH(TYPE)		\
+				,			\
+	*((TYPE *) ((char *)(PTR) - TYPE_WIDTH(TYPE)))	\
+				)
+
+#endif

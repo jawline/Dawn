@@ -11,11 +11,36 @@
 #include "phys_mm.h"
 #include "virt_mm.h"
 #include "heap.h"
+#include "threads.h"
+
+#include "vfs.h"
 
 #include <stdlib.h>
 
 char CBuffer[1024];
 uint8 cptr = 0;
+
+int abs(int var)
+{
+if ( var < 0)
+var = -var;
+return var;
+}
+
+#define NEXT(n, i)  (((n) + (i)/(n)) >> 1)
+
+unsigned int isqrt(int number) {
+  unsigned int n  = 1;
+  unsigned int n1 = NEXT(n, number);
+
+  while(abs(n1 - n) > 1) {
+    n  = n1;
+    n1 = NEXT(n, number);
+  }
+  while(n1*n1 > number)
+    n1--;
+  return n1;
+}
 
 void exec_cb() {
 	CBuffer[cptr] = '\0';
@@ -29,7 +54,7 @@ void kboard_callback(uint8 cb) {
 	{ exec_cb(); printf("\n:> ");  } else {
 
 	
-	if (cb == '\b') { if (cptr > 0) cptr--; CBuffer[cptr] = ' '; if (cptr != 0) { putc(cb); putc(' '); putc('\b'); } }
+	if (cb == '\b') { if (cptr > 0) cptr--; CBuffer[cptr] = ' '; if (cptr > 0) { putc(cb); putc(' '); putc('\b'); } }
 	else {  CBuffer[cptr] = cb;
 		cptr++;
 		putc(cb);
@@ -172,6 +197,7 @@ int main(struct multiboot *mboot_ptr)
     Init_GDT();
     Init_IDT();
     Init_VM(mboot_ptr);
+    Init_Timer();
     prints("\n");
 
     //Print out the upper and lower limits of memory
@@ -196,16 +222,70 @@ int main(struct multiboot *mboot_ptr)
     
     uint32 freemb = freeram / 1024;
     freemb = freemb / 1024;
-    printf("Unmapped RAM %u (MBs) after heap initialization\n", freemb);
+    printf("Unmapped RAM %u (MBs) after heap initialization\n", freemb);    
     
-    uint32 * addr = malloc(32);
-    free(addr);
+    thread_t * maint = initialize_threading();
+    initialize_thread_scheduler(maint);
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);
     
+
+
+    fs_node_t * rootfs = init_vfs();
+    fs_node_t * base = malloc(sizeof(fs_node_t));
+    strcpy(base->name, "devices");
+
+    fs_node_t * other = malloc(sizeof(fs_node_t));
+    strcpy(other->name, "initrd");
+
+    fs_node_t * system = malloc(sizeof(fs_node_t));
+    strcpy(system->name, "system");
+
+    fs_node_t * system2 = malloc(sizeof(fs_node_t));
+    strcpy(system2->name, "system22zz2");
+
+    root_bind_node(base);
+    root_bind_node(other);
+    root_bind_node(system);
+    root_bind_node(system2);
+
+    struct dirent * ret = 0;
+    int idx = 0;
+    while (1) {
+	ret = readdir_fs(rootfs, idx);
+	if (ret == 0) break;
+	else {
+		printf("Root Node %s\n", ret->name);
+		free(ret);
+		idx++;
+	}    
+    }
+
+    printf("Root Unbind Node\n");
+
+    root_unbind_node(system2);
+    free(system2);
+
+    printf("Next\n");
+
+
+    ret = 0;
+    idx = 0;
+    while (1) {
+	ret = readdir_fs(rootfs, idx);
+	if (ret == 0) break;
+	else {
+		printf("Root Node %s\n", ret->name);
+		free(ret);
+		idx++;
+	}    
+    }
+
+    printf("%i\n", is_directory(rootfs));
+
     printf(":> ");
-    for (;;)
+    for (;;) {  }
 
     return 0xDEADBABA;
 }

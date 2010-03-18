@@ -58,6 +58,15 @@ void memset(uint32 *dest, uint8 val, uint32 len)
     for ( ; len != 0; len--) *temp++ = val;
 }
 
+void memcpy(uint8 * dest, uint8 * src, uint32 len) {
+	int iter = 0;
+	
+	for (iter = 0; iter < len; iter++) {
+		*dest = *src;
+		dest++; src++;	
+	}
+}
+
 uint64 __div_64_32(uint64* dividend, uint32 divisor)
 {
    uint32 dividendLow, dividendLow2, dividendHigh, remainder;
@@ -84,4 +93,26 @@ uint32 strlen(const char * str)
     const char *s;
     for (s = str; *s; ++s);
     return(s - str);
+}
+
+int strcmp (const char * src, const char * dst)
+{
+        int ret = 0 ;
+
+        while( ! (ret = *(unsigned char *)src - *(unsigned char *)dst) && *dst)
+                ++src, ++dst;
+
+        if ( ret < 0 )
+                ret = -1 ;
+        else if ( ret > 0 )
+                ret = 1 ;
+
+        return( ret );
+}
+
+char *strcpy(char *dest, const char *src)
+{
+   char *save = dest;
+   while(*dest++ = *src++);
+   return save;
 }

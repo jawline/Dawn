@@ -1,7 +1,7 @@
 #include "virt_mm.h"
 #include "phys_mm.h"
 
-#include "interrupt_handler.h"
+#include <interrupts/interrupt_handler.h>
 #include "panic.h"
 #include <interrupts/idt.h>
 
@@ -138,6 +138,10 @@ void init_virt_mm() {
 	memset (page_tables[pt_idx*1024], 0, 0x1000);
 
 	mark_paging_enabled();
+}
+
+void copy_page_directory(page_directory_t * pgdir) {
+	uint32 addr = alloc_frame();
 }
 
 

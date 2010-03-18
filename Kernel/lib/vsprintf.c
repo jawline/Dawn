@@ -3,7 +3,7 @@
  * Wirzenius wrote this portably, Torvalds fucked it up :-)
  */
 
-#include "../headers/vsprintf.h"
+#include <vsprintf.h>
 
 /* we use this so that we can do without the ctype library */
 #define is_digit(c)     ((c) >= '0' && (c) <= '9')

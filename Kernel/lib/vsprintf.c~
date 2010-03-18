@@ -121,7 +121,7 @@ int vsprintf(char * buf, const char * fmt, va_list args)
                         field_width = skip_atoi(&fmt);
                 else if (*fmt == '*') {
                         /* it's the next argument */
-                        field_width = va_arg(args, int);
+                        field_width = (int) va_arg(args, int);
                         if (field_width < 0) {
                                 field_width = -field_width;
                                 flags |= LEFT;

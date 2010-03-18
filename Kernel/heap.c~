@@ -1,5 +1,5 @@
 #include "heap.h"
-#include "headers/printf.h"
+#include <printf.h>
 
 uint32 alloc_mem(uint32 size, heap_t * heap);
 void free_mem(uint32 address, heap_t * heap);

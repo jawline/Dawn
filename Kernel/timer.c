@@ -3,6 +3,7 @@
 
 static void timer_callback(idt_call_registers_t regs)
 {
+	thread_schedule_tick();
 }
 
 void init_timer(uint32 frequency)

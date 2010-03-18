@@ -11,11 +11,36 @@
 #include "phys_mm.h"
 #include "virt_mm.h"
 #include "heap.h"
+#include "threads.h"
+
+#include "vfs.h"
 
 #include <stdlib.h>
 
 char CBuffer[1024];
 uint8 cptr = 0;
+
+int abs(int var)
+{
+if ( var < 0)
+var = -var;
+return var;
+}
+
+#define NEXT(n, i)  (((n) + (i)/(n)) >> 1)
+
+unsigned int isqrt(int number) {
+  unsigned int n  = 1;
+  unsigned int n1 = NEXT(n, number);
+
+  while(abs(n1 - n) > 1) {
+    n  = n1;
+    n1 = NEXT(n, number);
+  }
+  while(n1*n1 > number)
+    n1--;
+  return n1;
+}
 
 void exec_cb() {
 	CBuffer[cptr] = '\0';
@@ -172,6 +197,7 @@ int main(struct multiboot *mboot_ptr)
     Init_GDT();
     Init_IDT();
     Init_VM(mboot_ptr);
+    Init_Timer();
     prints("\n");
 
     //Print out the upper and lower limits of memory
@@ -196,16 +222,21 @@ int main(struct multiboot *mboot_ptr)
     
     uint32 freemb = freeram / 1024;
     freemb = freemb / 1024;
-    printf("Unmapped RAM %u (MBs) after heap initialization\n", freemb);
+    printf("Unmapped RAM %u (MBs) after heap initialization\n", freemb);    
     
-    uint32 * addr = malloc(32);
-    free(addr);
+    thread_t * maint = initialize_threading();
+    initialize_thread_scheduler(maint);
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);
     
+
+
+    fs_node_t * rootfs = init_vfs();
+    printf("is_directory root_fs check %i\n", is_directory(rootfs));
+
     printf(":> ");
-    for (;;)
+    for (;;) {  }
 
     return 0xDEADBABA;
 }

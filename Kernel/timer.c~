@@ -1,8 +1,9 @@
 #include "timer.h"
-#include "idt.h"
+#include <interrupts/idt.h>
 
 static void timer_callback(idt_call_registers_t regs)
 {
+	printf("TimerTick\n");
 }
 
 void init_timer(uint32 frequency)

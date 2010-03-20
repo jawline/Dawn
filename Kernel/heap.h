@@ -1,6 +1,6 @@
 #ifndef _HEAP_DEF_H_
 #define _HEAP_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 #include "virt_mm.h"
 #include "phys_mm.h"
 

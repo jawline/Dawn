@@ -1,6 +1,6 @@
 #ifndef _CMOS_TIME_DEF_H_
 #define _CMOS_TIME_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 #include "cmos.h"
 #include "common.h"
 

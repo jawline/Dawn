@@ -1,6 +1,6 @@
 #ifndef _THREAD_DEF_H_
 #define _THREAD_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 #include <stdlib.h>
 #include <printf.h>
 #include "common.h"

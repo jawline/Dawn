@@ -3,3 +3,4 @@ timeout 3
 
 title SimpleOS
 kernel /boot/Kernel    # Edit it to the filename of your kernel.
+module /boot/ramdisk

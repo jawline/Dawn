@@ -1,6 +1,6 @@
-#include "../headers/int_types.h"
-#include "../headers/printf.h"
-#include "../headers/va_list.h"
+#include <int_types.h>
+#include <printf.h>
+#include <va_list.h>
 
 void printi(int32 s) {
 	char Buffer[11];

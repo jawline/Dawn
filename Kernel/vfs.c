@@ -103,8 +103,9 @@ uint32 read_fs(fs_node_t *node, uint32 offset, uint32 size, uint8 *buffer)
   // Has the node got a read callback?
   if (node->read != 0)
     return node->read(node, offset, size, buffer);
-  else
+  else {
     return 0;
+  }
 }
 
 uint32 write_fs(fs_node_t *node, uint32 offset, uint32 size, uint8 *buffer)

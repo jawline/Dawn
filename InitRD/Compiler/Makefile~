@@ -1,0 +1,7 @@
+CC=gcc 
+CFLAGS=-Wall -I ../../Include/initrd/ -I ../../Include/types/ -o Compiler
+
+main: main.o 
+
+clean:
+	rm *.o

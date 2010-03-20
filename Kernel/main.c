@@ -12,39 +12,61 @@
 #include "virt_mm.h"
 #include "heap.h"
 #include "threads.h"
+#include "fs_binds/initrd.h"
+#include "reboot.h"
 
 #include "vfs.h"
 
 #include <stdlib.h>
 
+
+void recur_list_dir(fs_node_t * node) {
+    printf("Listing directory %s\n", node->name);
+    struct dirent * ent = 0;
+
+    uint32 iter = 0; 
+    while (1) {
+
+	ent = readdir_fs(node, iter);
+
+	if (ent == 0) {
+		break;	
+	}
+
+
+	fs_node_t * nent = finddir_fs(node, ent->name);
+
+	free(ent);
+
+	if (!is_directory(nent)) {
+		printf("File %s\n", nent->name);
+	} else {
+		printf("Directory %s\n", nent->name);
+		recur_list_dir(nent);
+	}
+
+	iter++;
+    }
+    printf("End of directory %s\n", node->name);
+}
+
 char CBuffer[1024];
-uint8 cptr = 0;
+int cptr = 0;
 
-int abs(int var)
-{
-if ( var < 0)
-var = -var;
-return var;
-}
-
-#define NEXT(n, i)  (((n) + (i)/(n)) >> 1)
-
-unsigned int isqrt(int number) {
-  unsigned int n  = 1;
-  unsigned int n1 = NEXT(n, number);
-
-  while(abs(n1 - n) > 1) {
-    n  = n1;
-    n1 = NEXT(n, number);
-  }
-  while(n1*n1 > number)
-    n1--;
-  return n1;
-}
 
 void exec_cb() {
 	CBuffer[cptr] = '\0';
-	printf("\nExecute %s", CBuffer);
+	printf("\nExecute %s\n", CBuffer);
+
+	if (strcmp(CBuffer, "ls") == 0) {
+		recur_list_dir(init_vfs()); //Init VFS returns a fs_node_t * to root if its already been initialized	
+	} else if (strcmp(CBuffer, "reboot") == 0) {
+		reboot(); //Reboot the system	
+	} else if (strcmp(CBuffer, "shutdown") == 0) {
+		printf("System safe to power off\n");
+		for (;;) { }
+	}
+	
 	CBuffer[0] = '\0';
 	cptr = 0;
 }
@@ -54,7 +76,7 @@ void kboard_callback(uint8 cb) {
 	{ exec_cb(); printf("\n:> ");  } else {
 
 	
-	if (cb == '\b') { if (cptr > 0) cptr--; CBuffer[cptr] = ' '; if (cptr > 0) { putc(cb); putc(' '); putc('\b'); } }
+	if (cb == '\b') { cptr--; if (cptr >= 0) { CBuffer[cptr] = ' '; } if (cptr >= 0) { putc('\b'); putc(' ');putc('\b'); } }
 	else {  CBuffer[cptr] = cb;
 		cptr++;
 		putc(cb);
@@ -64,27 +86,6 @@ void kboard_callback(uint8 cb) {
 }
 
 extern uint32 end; //The end of the kernel
-
-void Print_Memory_Information(struct multiboot *mboot_ptr) {
-
-    prints("Memory Limits:\n");
-	
-    prints("Lower Memory: ");
-    printuh(mboot_ptr->mem_lower);
-    prints("\n");
-	
-    prints("Upper Memory: ");
-    printuh(mboot_ptr->mem_upper);
-    prints("\n");
-}
-
-void Print_Loaded_Module_Information(struct multiboot *mboot_ptr) {
-
-    prints("Modules Information:\n");
-    prints("Modules Count: ");
-    printi(mboot_ptr->mods_count); 
-    prints("\n");
-}
 
 void Init_GDT() {
    prints("Initializing GDT");
@@ -170,11 +171,11 @@ void Print_Time_Info() {
 	text_mode_write("\n");
 }
 
-void Init_VM(struct multiboot * mboot_ptr) { //Initialize virtual memory
+void Init_VM(struct multiboot * mboot_ptr, uint32 nd) { //Initialize virtual memory
 
    prints("Initializing virtual memory");
    
-   init_phys_mm(end);
+   init_phys_mm(nd);
    init_virt_mm();
    map_free_pages(mboot_ptr);
    text_mode_set_x(70);
@@ -183,6 +184,17 @@ void Init_VM(struct multiboot * mboot_ptr) { //Initialize virtual memory
    text_mode_set_fg_color(WHITE);
 
    prints("\n");
+}
+
+void Init_INITRD(struct multiboot * mboot_ptr, fs_node_t * root) {
+
+	if (mboot_ptr->mods_count != 1) {
+		printf("Error, Initial RAM disk not loaded\n");
+		return;	
+	}
+
+	fs_node_t * initrd = initialize_initrd(*((uint32*)mboot_ptr->mods_addr), "system", root);
+	root_bind_node(initrd);
 }
 
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
@@ -196,15 +208,12 @@ int main(struct multiboot *mboot_ptr)
 
     Init_GDT();
     Init_IDT();
-    Init_VM(mboot_ptr);
+
+    uint32 * mods_addr = (uint32 *)mboot_ptr->mods_addr;    
+    mods_addr++;
+    Init_VM(mboot_ptr, *mods_addr);
+    
     Init_Timer();
-    prints("\n");
-
-    //Print out the upper and lower limits of memory
-    Print_Memory_Information(mboot_ptr);
-    prints("\n");
-
-    Print_Loaded_Module_Information(mboot_ptr);
     prints("\n");
 
     enable_interrupts();
@@ -227,13 +236,13 @@ int main(struct multiboot *mboot_ptr)
     thread_t * maint = initialize_threading();
     initialize_thread_scheduler(maint);
 
+    fs_node_t * rootfs = init_vfs();
+    Init_INITRD(mboot_ptr, rootfs);
+
     init_keyboard();
     set_keyboard_callback(&kboard_callback);
-    
 
-
-    fs_node_t * rootfs = init_vfs();
-    printf("is_directory root_fs check %i\n", is_directory(rootfs));
+    fs_node_t * initrd = finddir_fs(rootfs, "system");
 
     printf(":> ");
     for (;;) {  }

@@ -1,6 +1,6 @@
 #ifndef _VIRTUAL_FILE_SYSTEM_DEF_H_
 #define _VIRTUAL_FILE_SYSTEM_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 
 #define FS_FILE 0x1
 #define FS_DIR 0x2
@@ -23,6 +23,7 @@ struct filesystem_node {
 
 	uint32 flags; //32 bit bitmask for flags
 	uint32 length; //32 bit int, size of the file.
+	uint32 inode; //Internal node, Unique for each file
 
 	io_operation write;
 	io_operation read;

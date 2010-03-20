@@ -1,6 +1,6 @@
 #ifndef _PHYSICAL_MEMORY_MANAGER_DEF_H_
 #define _PHYSICAL_MEMORY_MANAGER_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 
 #define PHYS_MM_STACK_ADDR 0xFF000000
 

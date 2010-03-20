@@ -2,7 +2,7 @@
 #include <interrupts/irq.h>
 #include <interrupts/idt.h>
 #include <printf.h>
-#include <int_types.h>
+#include <types/int_types.h>
 
 char lowercase[256] = { 0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '\b', 0, 
 			'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\r', 0, 

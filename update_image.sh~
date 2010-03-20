@@ -20,6 +20,7 @@ cp etc/stage2_eltorito temp_disk/boot/grub/stage2_eltorito
 
 echo "Copying Kernel"
 cp Kernel/Build/Kernel temp_disk/boot/Kernel
+cp InitRD/ramdisk.img temp_disk/boot/ramdisk
 
 echo "Generating ISO image"
 genisoimage -quiet -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 4 -boot-info-table -o boot_disk.iso temp_disk

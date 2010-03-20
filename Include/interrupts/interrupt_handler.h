@@ -1,6 +1,6 @@
 #ifndef _INTERRUPT_HANDLER_DEF_H_
 #define _INTERRUPT_HANDLER_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 
 #define GET_IRQ(x) x + 32
 

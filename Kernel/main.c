@@ -31,22 +31,19 @@ typedef struct {
 
 cmd_list cmds[256];
 
-int ls_func (void * stack) 
+int ls_func (void * null) 
 {
-	printf("list directories thread started\n");
-
 	print_directory(init_vfs(), 1);
 
-	free(stack);
 	return 1;
 }
 
-int mem_map (void * stack) 
+int mem_map (void * null) 
 {
-	printf("list allocated chunks thread started\n");
-
+	//Call the heap list_chunks function
 	list_chunks(&kernel_heap);
 
+	//Calculate free pages in bytes
 	extern uint32 phys_mm_slock;
 	uint32 pmmt = phys_mm_slock;
 	uint32 freeram = 0;
@@ -57,11 +54,10 @@ int mem_map (void * stack)
 		freeram += 4096; //1Kb of ram free
 	}
 	    
-	uint32 freemb = freeram / 1024;
-	freemb = freemb / 1024;
+	uint32 freemb = freeram / 1024; //Bytes to Kb
+	freemb = freemb / 1024; //Kb to  Mb
 	printf("Unmapped RAM %u (MBs)\n", freemb);    
 
-	free(stack);
 	return 1;
 }
 
@@ -73,7 +69,6 @@ void exec_cb()
 	if (cptr <= 0) 
 	{
 		cptr = 0;
-		CBuffer[0] = '\0';
 		return;
 	}
 
@@ -85,17 +80,15 @@ void exec_cb()
 	{
 		if (strcmp(CBuffer, cmds[i].str) == 0) 
 		{
-			uint32 * stack = malloc(1200);
-
-			thread_t * thread = create_thread(cmds[i].function, stack, stack + 0xFE);
-			add_thread(thread);
+			printf("\n");
+			cmds[i].function(0);
 			done = 1;
 		}	
 	}
 
 	if (done == 0)
 	{
-		printf("\nError, Function not found");
+		printf("\nError, Function %s not found", CBuffer);
 	}
 
 	cptr = 0;

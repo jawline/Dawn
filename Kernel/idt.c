@@ -7,7 +7,8 @@ extern void idt_flush(uint32 ptr);
 static void idt_set_gate(uint8 num, uint32 base, uint16 sel, uint8 flags);
 
 //This loads the IDT
-void Initialize_IDT() {
+void Initialize_IDT() 
+{
 	idt_ptr.limit = sizeof(struct idt_entry) * 256 -1;
    	idt_ptr.base  = (uint32)&idt;
 

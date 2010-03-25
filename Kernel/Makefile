@@ -1,6 +1,6 @@
 # Makefile for SimpleOS Kernel
 
-SOURCES= $(patsubst %.s,%.o,$(wildcard *.s)) $(patsubst %.c,%.o,$(wildcard *.c)) $(patsubst %.c,%.o,$(wildcard ./lib/*.c)) $(patsubst %.c,%.o,$(wildcard ./drivers/*.c)) $(patsubst %.c,%.o,$(wildcard ./fs_binds/*.c))
+SOURCES= $(patsubst %.s,%.o,$(wildcard *.s)) $(patsubst %.c,%.o,$(wildcard *.c)) $(patsubst %.c,%.o,$(wildcard ../lib/*.c)) $(patsubst %.c,%.o,$(wildcard ./drivers/*.c)) $(patsubst %.c,%.o,$(wildcard ./fs/*.c))
 
 CC=gcc
 CFLAGS=-nostdlib -nostdinc -fno-builtin -I ../Include -fno-stack-protector -m32
@@ -10,7 +10,7 @@ ASFLAGS=-felf32
 all: $(SOURCES) link
 
 clean:
-	-rm *.o ./fs_binds/*.o ./drivers/*.o ./lib/*.o ./Build/Kernel
+	-rm *.o ./fs/*.o ./drivers/*.o ../lib/*.o ./Build/Kernel
 
 link:
 	ld $(LDFLAGS) -o ./Build/Kernel $(SOURCES)

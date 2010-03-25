@@ -10,6 +10,11 @@
 #	       The disk will still be bootable if no Kernel is copied. but the bootloader will not function as desired.
 
 #Make temporary directory
+echo "Recompiling initial RAM disks";
+cd InitRD
+sh buildrd.sh
+cd ../
+
 echo "Creating temporary directory."
 mkdir temp_disk
 mkdir -p temp_disk/boot/grub/

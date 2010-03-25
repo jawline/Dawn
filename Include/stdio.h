@@ -4,4 +4,4 @@
 #include "printf.h"
 #include "va_list.h"
 
-#endif
+#endif //_STDIO_DEF_H_

@@ -6,4 +6,4 @@
 
 void init_timer(uint32 frequency);
 
-#endif
+#endif //TIMER_H

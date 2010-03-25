@@ -15,7 +15,7 @@
 
 #define VER_MAJOR 0
 #define VER_MINOR 2
-#define VER_REV 4
+#define VER_REV 6
 
 typedef struct {
 	struct initrd_fent st; //File header structure
@@ -126,6 +126,15 @@ int main(int argc, char **argv)
 		fclose(fin);
 	}
 
+	fseek(fout, 0, SEEK_END);
+	end = ftell(fout);
+	fseek(fout, 0, SEEK_SET);
+	head.ramdisk_size = end;
+	
+	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
+		printf("Unable to write the initial RAM disk header\n");	
+	}	
+
 	for (i = 0; i < nmfiles; i++) { //Third (And Final) file pass.
 		fseek(fout, helper_list[i].loc, SEEK_SET); //Seek to the start of the header
 		helper_list[i].st.start = helper_list[i].mloc;
@@ -137,7 +146,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	printf("Done\n");
+	printf("RAM disk written. %d bytes\n", head.ramdisk_size);
 
 	return 0;
 }

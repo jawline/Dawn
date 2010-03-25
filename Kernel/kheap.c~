@@ -1,16 +1,19 @@
 #include "heap.h"
 
 heap_t kernel_heap;
-#define HEAP_ADDR 0xC0000000
+#define HEAP_ADDR 0x80000000 //Half way through logical memory brooo
 
-void init_heap() {
+void init_kheap() 
+{
 	init_heap(&kernel_heap, HEAP_ADDR);
 }
 
-uint32 kmalloc(uint32 mem) {
+uint32 kmalloc(uint32 mem) 
+{
 	return alloc_mem(mem, &kernel_heap);
 }
 
-void kfree(uint32 addr) {
+void kfree(uint32 addr)
+{
 	free_mem(addr, &kernel_heap);
 }

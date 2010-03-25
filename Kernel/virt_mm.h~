@@ -12,7 +12,7 @@
 #define PAGE_TABLE_IDX(x) ((uint32) x%1024)
 
 #define page_directory_t uint32
-#include <int_types.h>
+#include <types/int_types.h>
 
 void init_virt_mm();
 

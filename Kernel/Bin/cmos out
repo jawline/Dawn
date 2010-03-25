@@ -1,0 +1,46 @@
+void Print_Time_Info() 
+{
+	cmos_time_struct LoadedTime;
+	fill_cmos_tstruct(&LoadedTime);
+
+	char TBuf[128];
+	itoa(LoadedTime.seconds, TBuf, 10);
+	text_mode_write("Seconds: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.minutes, TBuf, 10);
+	text_mode_write("Minutes: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.hours, TBuf, 10);
+	text_mode_write("Hours: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.dayofweek, TBuf, 10);
+	text_mode_write("Day of the week: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.day, TBuf, 10);
+	text_mode_write("Day of the month: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.month, TBuf, 10);
+	text_mode_write("Month: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.year, TBuf, 10);
+	text_mode_write("Year: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+
+	itoa(LoadedTime.century, TBuf, 10);
+	text_mode_write("Century: ");
+	text_mode_write(TBuf);
+	text_mode_write("\n");
+}

@@ -1,6 +1,6 @@
 #ifndef _SCREEN_DEF_H_
 #define _SCREEN_DEF_H_
-#include <int_types.h>
+#include <types/int_types.h>
 
 #define WHITE 15
 #define BLACK 0
@@ -15,4 +15,4 @@ void text_mode_set_fg_color(uint8 col);
 void text_mode_set_x(uint8 x);
 void text_mode_set_y(uint8 y);
 
-#endif
+#endif //_SCREEN_DEF_H_

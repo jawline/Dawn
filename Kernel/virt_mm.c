@@ -88,7 +88,8 @@ inline void switch_page_directory (page_directory_t * nd)
   asm volatile ("mov %0, %%cr3" : : "r" (nd));
 }
 
-inline void start_paging() {
+inline void start_paging() 
+{
   uint32 cr0;
 
   asm volatile ("mov %%cr0, %0" : "=r" (cr0)); //Get the current value of cr0
@@ -98,7 +99,8 @@ inline void start_paging() {
   asm volatile ("mov %0, %%cr0" : : "r" (cr0)); //Set the value of cr0 to the new desired value
 }
 
-void mark_paging_enabled() {
+void mark_paging_enabled() 
+{
 	paging_enabled = 1;
 }
 
@@ -119,7 +121,9 @@ void init_virt_mm() {
 	uint32 * pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory
  	
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
+	{
 		pt[i] = i * 4096 | PAGE_PRESENT | PAGE_WRITE;	
+	}
 
 	// Assign the second-last table and zero it. (TODO: Find out if this is necessary)
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;

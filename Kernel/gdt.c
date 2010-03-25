@@ -6,7 +6,9 @@ gdt_ptr_t   gdt_ptr;
 static void gdt_set_gate(int32, uint32, uint32, uint8, uint8);
 extern void gdt_flush(uint32);
 
-void initialize_gdt() {
+//Global descriptor table setup
+void initialize_gdt() 
+{
    gdt_ptr.limit = (sizeof(gdt_entry_t) * 5) - 1;
    gdt_ptr.base  = (uint32)&gdt_entries;
 
@@ -19,7 +21,8 @@ void initialize_gdt() {
    gdt_flush((uint32)&gdt_ptr);
 }
 
-static void gdt_set_gate(int32 num, uint32 base, uint32 limit, uint8 access, uint8 gran) {
+static void gdt_set_gate(int32 num, uint32 base, uint32 limit, uint8 access, uint8 gran) 
+{
    gdt_entries[num].base_low    = (base & 0xFFFF);
    gdt_entries[num].base_middle = (base >> 16) & 0xFF;
    gdt_entries[num].base_high   = (base >> 24) & 0xFF;

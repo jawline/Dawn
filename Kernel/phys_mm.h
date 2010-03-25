@@ -8,4 +8,4 @@ void init_phys_mm(uint32 start_addr);
 uint32 alloc_frame();
 void free_frame(uint32 frame);
 
-#endif
+#endif //PHYSICAL_MEMORY_MANAGER_DEF_H_

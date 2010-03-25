@@ -4,7 +4,8 @@
 #include "cmos.h"
 #include "common.h"
 
-typedef struct {
+typedef struct 
+{
 	uint8 seconds, minutes, hours, dayofweek, day, month, year, century;
 } cmos_time_struct;
 

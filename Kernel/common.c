@@ -2,48 +2,78 @@
 
 uint64 __div_64_32(uint64* dividend, uint32 divisor);
 
-char* itoa(int value, char* result, int base) {
+char* itoa(int value, char* result, int base) 
+{
 	// check that the base if valid
-	if (base < 2 || base > 36) { *result = '\0'; return result; }
+	if (base < 2 || base > 36) 
+	{ 
+		*result = '\0';
+		return result; 
+	}
 	
 	char* ptr = result, *ptr1 = result, tmp_char;
 	int tmp_value;
 	
-	do {
+	do 
+	{
 		tmp_value = value;
 		value /= base;
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
 	} while ( value );
 	
 	// Apply negative sign
-	if (tmp_value < 0) *ptr++ = '-';
+	if (tmp_value < 0) 
+	{
+
+		*ptr++ = '-';
+
+	}
+
 	*ptr-- = '\0';
-	while(ptr1 < ptr) {
+
+	while(ptr1 < ptr) 
+	{
+
 		tmp_char = *ptr;
 		*ptr--= *ptr1;
 		*ptr1++ = tmp_char;
+
 	}
 
 	return result;
 }
 
-char* itoa_64(uint64 value, char* result, int base) {
+char* itoa_64(uint64 value, char* result, int base) 
+{
 	// check that the base if valid
-	if (base < 2 || base > 36) { *result = '\0'; return result; }
+	if (base < 2 || base > 36)
+	{ 
+		*result = '\0'; 
+		return result;
+	}
 	
 	char* ptr = result, *ptr1 = result, tmp_char;
 	int tmp_value;
 	
-	do {
+	do 
+	{
 		tmp_value = value;
 		__div_64_32(&value, base);
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
 	} while ( value );
 	
 	// Apply negative sign
-	if (tmp_value < 0) *ptr++ = '-';
+	if (tmp_value < 0) 
+	{
+	
+		*ptr++ = '-';
+
+	}
+
 	*ptr-- = '\0';
-	while(ptr1 < ptr) {
+
+	while(ptr1 < ptr) 
+	{
 		tmp_char = *ptr;
 		*ptr--= *ptr1;
 		*ptr1++ = tmp_char;
@@ -55,13 +85,19 @@ char* itoa_64(uint64 value, char* result, int base) {
 void memset(uint32 *dest, uint8 val, uint32 len)
 {
     uint8 *temp = (uint8 *)dest;
-    for ( ; len != 0; len--) *temp++ = val;
+    
+    for ( ; len != 0; len--)
+    { 
+	*temp++ = val;
+    }
 }
 
-void memcpy(uint8 * dest, uint8 * src, uint32 len) {
+void memcpy(uint8 * dest, uint8 * src, uint32 len) 
+{
 	int iter = 0;
 	
-	for (iter = 0; iter < len; iter++) {
+	for (iter = 0; iter < len; iter++) 
+	{
 		*dest = *src;
 		dest++; src++;	
 	}

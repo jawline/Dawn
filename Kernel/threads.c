@@ -10,22 +10,27 @@ uint32 t_ids = 0;
 
 static void thread_exit ();
 
-void initialize_thread_scheduler(thread_t * start) {
+void initialize_thread_scheduler(thread_t * start) 
+{
 	thread_list_start = malloc(sizeof(thread_entry_t));
+
 	thread_list_start->thread = start;
 	thread_list_start->next = thread_list_start; //Link back to itself as the next thread
 	thread_list_start->quant = RR_QUANT;
+
 	thread_list_current = thread_list_start;
 }
 
-void thread_schedule_tick() {
+void thread_schedule_tick() 
+{
 	if (thread_list_current == 0) return;
 
-	if (thread_list_current->quant < 1) { //Swap to the next thread
+	if (thread_list_current->quant < 1) //Swap to the next thread 
+	{
 		thread_list_current = thread_list_current->next;
 		thread_list_current->quant == RR_QUANT;
 
-		asm volatile("sti"); //TODO: Pop everything off the stack before switching threads
+		asm volatile("sti"); //TODO: Pop everything off the stack before switching threads - REVISION, NVM code execution returns here.
 
 		switch_thread(thread_list_current->thread);
 	} else {
@@ -33,12 +38,14 @@ void thread_schedule_tick() {
 	}
 }
 
-void add_thread(thread_t * thread) {
+void add_thread(thread_t * thread) 
+{
 	//Where is the end of the list
 	thread_entry_t * next = malloc(sizeof(thread_entry_t));
 	thread_entry_t * iter = thread_list_start;
 
-	while (1) { //Find the entry that links back to the start
+	while (1) //Find the entry that links back to the start
+	{
 		if (iter->next == thread_list_start) break;
 		iter = iter->next;
 	}
@@ -51,15 +58,20 @@ void add_thread(thread_t * thread) {
 void remove_thread(thread_t * thread) {
 	thread_entry_t * iter = thread_list_start;
 
-	while (1) {
-		if (iter->next->thread == thread) {
+	while (1) 
+	{
+		if (iter->next->thread == thread)
+		{
 			break;		
 		}
+
 		iter = iter->next;
+
 	}
 
 	//Iter = the thread entry before the thread that needs to be removed
 	iter->next = iter->next->next; //Remove it from the list
+
 	return;
 }
 
@@ -112,6 +124,7 @@ void switch_thread (thread_t *next)
 void thread_exit ()
 {
   disable_interrupts();
+
   register uint32 val asm ("eax");
 
   printf("Thread exited with value %d\n", val);

@@ -9,6 +9,6 @@ typedef struct
 	uint8 seconds, minutes, hours, dayofweek, day, month, year, century;
 } cmos_time_struct;
 
-void fill_cmos_tstruct(cmos_time_struct * tstruct);
+void fill_cmos_tstruct(cmos_time_struct* tstruct);
 
 #endif

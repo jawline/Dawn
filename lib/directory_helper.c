@@ -1,9 +1,11 @@
 #include <fs/dir.h>
 #include <stdlib.h>
 
-void print_directory(fs_node_t * node, int recur) {
+void print_directory(fs_node_t* node, int recur) {
+
     printf("Listing directory %s\n", node->name);
-    struct dirent * ent = 0;
+
+    struct dirent* ent = 0;
 
     uint32 iter = 0; 
     while (1) {
@@ -16,13 +18,16 @@ void print_directory(fs_node_t * node, int recur) {
 	}
 
 
-	fs_node_t * nent = finddir_fs(node, ent->name);
+	fs_node_t* nent = finddir_fs(node, ent->name);
 
 	free(ent);
 
 	if (!is_directory(nent)) {
+
 		printf("File %s\n", nent->name);
+
 	} else {
+
 		printf("Directory %s\n", nent->name);
 		if (recur) {
 			print_directory(nent, 1);
@@ -31,5 +36,6 @@ void print_directory(fs_node_t * node, int recur) {
 
 	iter++;
     }
+
     printf("End of directory %s\n", node->name);
 }

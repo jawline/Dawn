@@ -13,12 +13,15 @@ struct dirent // One of these is returned by the readdir call, according to POSI
 
 struct filesystem_node;
 
-typedef uint32 (*io_operation) (struct filesystem_node * node, uint32 * offset ,uint32 size, uint8 * ptr);
-typedef void (*cmd_operation) (struct filesystem_node * node);
-typedef struct dirent * (*read_directory_t) (struct filesystem_node *, uint32);
-typedef struct fs_node * (*find_directory_t) (struct filesystem_node *, char * name);
+typedef uint32 (*io_operation) (struct filesystem_node* node, uint32* offset, uint32 size, uint8* ptr);
 
-typedef struct fs_node_t * (*bind_node_t) (struct filesystem_node * boundto, struct filesystem_node * tobind);
+typedef void (*cmd_operation) (struct filesystem_node* node);
+
+typedef struct dirent* (*read_directory_t) (struct filesystem_node* node, uint32 idx);
+
+typedef struct fs_node* (*find_directory_t) (struct filesystem_node* node,char* name);
+
+typedef struct fs_node_t* (*bind_node_t) (struct filesystem_node* boundto, struct filesystem_node* tobind);
 
 struct filesystem_node {
 	char name[128]; //Character array, name
@@ -42,8 +45,8 @@ struct filesystem_node {
 
 typedef struct filesystem_node fs_node_t;
 
-fs_node_t * init_vfs();
+fs_node_t* init_vfs();
 
-int is_directory(fs_node_t * node);
+int is_directory(fs_node_t* node);
 
 #endif

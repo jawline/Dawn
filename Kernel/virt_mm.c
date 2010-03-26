@@ -6,10 +6,10 @@
 #include <interrupts/idt.h>
 
 uint8 paging_enabled = 0;
-page_directory_t * current_pagedir = 0;
+page_directory_t* current_pagedir = 0;
 
-uint32 * page_directory = (uint32 *) PAGE_DIR_VIRTUAL_ADDR;
-uint32 * page_tables = (uint32 *) PAGE_TABLE_VIRTUAL_ADDR;
+uint32* page_directory = (uint32*) PAGE_DIR_VIRTUAL_ADDR;
+uint32* page_tables = (uint32*) PAGE_TABLE_VIRTUAL_ADDR;
 
 void page_fault (idt_call_registers_t regs)
 {
@@ -118,7 +118,7 @@ void init_virt_mm() {
 	//Needs replacing - IDMap the first 4MB of memory
 	pagedir[0] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
 	 
-	uint32 * pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory
+	uint32* pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory
  	
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{

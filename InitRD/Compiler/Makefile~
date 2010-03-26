@@ -1,5 +1,5 @@
 CC=gcc 
-CFLAGS=-Wall -I ../../Include/initrd/ -I ../../Include/types/ -o Compiler
+CFLAGS=-I ../../Include/initrd/ -I ../../Include/types -W 
 
 main: main.o 
 

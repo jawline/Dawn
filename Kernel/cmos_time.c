@@ -9,7 +9,7 @@ int cmos_bcd_to_decimal(int bcd)
 }
 
 
-inline void fill_cmos_tstruct(cmos_time_struct * tstruct) 
+inline void fill_cmos_tstruct(cmos_time_struct* tstruct) 
 {
 	uint32 IntBuffer;
 	uint8 h_fmt = 0;

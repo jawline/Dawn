@@ -1,16 +1,16 @@
 #include "threads.h"
 
-thread_t * current_thread;
-thread_t * main_thread;
+thread_t* current_thread;
+thread_t* main_thread;
 
-thread_entry_t * thread_list_start = 0;
-thread_entry_t * thread_list_current = 0;
+thread_entry_t* thread_list_start = 0;
+thread_entry_t* thread_list_current = 0;
 
 uint32 t_ids = 0;
 
 static void thread_exit ();
 
-void initialize_thread_scheduler(thread_t * start) 
+void initialize_thread_scheduler(thread_t* start) 
 {
 	thread_list_start = malloc(sizeof(thread_entry_t));
 
@@ -38,11 +38,11 @@ void thread_schedule_tick()
 	}
 }
 
-void add_thread(thread_t * thread) 
+void add_thread(thread_t* thread) 
 {
 	//Where is the end of the list
-	thread_entry_t * next = malloc(sizeof(thread_entry_t));
-	thread_entry_t * iter = thread_list_start;
+	thread_entry_t* next = malloc(sizeof(thread_entry_t));
+	thread_entry_t* iter = thread_list_start;
 
 	while (1) //Find the entry that links back to the start
 	{
@@ -55,8 +55,8 @@ void add_thread(thread_t * thread)
 	iter->next = next;
 }
 
-void remove_thread(thread_t * thread) {
-	thread_entry_t * iter = thread_list_start;
+void remove_thread(thread_t* thread) {
+	thread_entry_t* iter = thread_list_start;
 
 	while (1) 
 	{
@@ -75,9 +75,9 @@ void remove_thread(thread_t * thread) {
 	return;
 }
 
-thread_t *initialize_threading ()
+thread_t* initialize_threading ()
 {
-  thread_t *thread = malloc (sizeof (thread_t));
+  thread_t* thread = malloc (sizeof (thread_t));
   thread->t_id  = t_ids++;
   
   current_thread = thread;
@@ -86,9 +86,9 @@ thread_t *initialize_threading ()
   return thread;
 }
 
-thread_t *create_thread (int (*fn)(void*), void *arg, uint32 *stack)
+thread_t* create_thread (int (*fn)(void*), void* arg, uint32* stack)
 {
-  thread_t *thread = malloc (sizeof (thread_t));
+  thread_t* thread = malloc (sizeof (thread_t));
   memset (thread, 0, sizeof (thread_t));
   thread->t_id = t_ids++;
   
@@ -102,7 +102,7 @@ thread_t *create_thread (int (*fn)(void*), void *arg, uint32 *stack)
   return thread;
 }
 
-void switch_thread (thread_t *next)
+void switch_thread (thread_t* next)
 {
   asm volatile ("mov %%esp, %0" : "=r" (current_thread->esp));
   asm volatile ("mov %%ebp, %0" : "=r" (current_thread->ebp));

@@ -2,7 +2,7 @@
 #define _VA_LIST_DEF_H_
 
 //Define a va_list as a void *
-typedef void * va_list;
+typedef void* va_list;
 
 #define __va_rounded_size(TYPE) \
    (((sizeof(TYPE) + sizeof(int) - 1) / sizeof(int)) * sizeof(int))

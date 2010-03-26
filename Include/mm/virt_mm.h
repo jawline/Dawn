@@ -19,6 +19,6 @@ void init_virt_mm();
 void mark_paging_enabled();
 void map (uint32 va, uint32 pa, uint32 flags);
 void unmap (uint32 va);
-char get_mapping (uint32 va, uint32 *pa);
+char get_mapping (uint32 va, uint32* pa);
 
 #endif //_VIRTUAL_MEMORY_MANAGER_DEF_H_

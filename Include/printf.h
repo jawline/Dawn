@@ -8,6 +8,6 @@
 void printi(int32 i);
 void printui(uint32 i);
 void printuh(uint32 i);
-void printf(const char *fmt, ...);
+void printf(const char* fmt, ...);
 
 #endif

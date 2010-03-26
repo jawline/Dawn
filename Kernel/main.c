@@ -23,11 +23,16 @@
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot *mboot_ptr)
 {
-    init_kernel(mboot_ptr, 0);
+    
+    //Needs the multiboot location to function, 1 signals that the init routines should be noisy and cover the screen in stuff
+    init_kernel(mboot_ptr, 1);
 
+    //We can has interrupts now...
     enable_interrupts();
 
+    //Run whatever the kernel is designed to do after initialization
     post_init();
+
     for (;;) {  }
 
     return 0xDEADBABA;

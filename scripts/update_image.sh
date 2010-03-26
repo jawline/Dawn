@@ -9,6 +9,9 @@
 
 #	       The disk will still be bootable if no Kernel is copied. but the bootloader will not function as desired.
 
+#cd to the OS directory
+cd ..
+
 #Make temporary directory
 echo "Recompiling initial RAM disks";
 cd InitRD

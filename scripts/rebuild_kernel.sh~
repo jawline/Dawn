@@ -1,4 +1,5 @@
 #!/bin/sh
+cd ..
 
 echo "Moving to Kernel directory"
 cd Kernel

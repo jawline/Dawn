@@ -78,9 +78,10 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output) //visual_outpu
 	iprintf("Initialization Started\n");
 	init_GDT(visual_output);
 	init_IDT(visual_output);
-	init_MemoryManagers(mboot_ptr, visual_output);
-	init_Timer(visual_output);
 
+	init_MemoryManagers(mboot_ptr, visual_output);
+
+	init_Timer(visual_output);
 
 	//Initialize the kernel heap
         init_kheap();

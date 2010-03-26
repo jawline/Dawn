@@ -26,6 +26,7 @@ void init_heap(heap_t * heap, uint32 address)
 
 	uint32 frame_addr = alloc_frame();
 	map(heap->heap_location, frame_addr, PAGE_PRESENT | PAGE_WRITE);
+	memset(heap->heap_location, 0, 4096);
 
 	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
 	memset(ptr, 0, sizeof(heap_entry_t)); //Initialize it.
@@ -78,6 +79,7 @@ uint32 alloc_mem(uint32 size, heap_t * heap)
 			uint32 end = ((uint32) ptr) + ptr->size + sizeof(heap_entry_t);
 
 			map(end, frame_addr, PAGE_PRESENT | PAGE_WRITE); //Mapped now! =)
+			memset(end, 0, 4096);
 			
 			if (ptr->used == 0) 
 			{

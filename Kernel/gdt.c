@@ -9,6 +9,8 @@ extern void gdt_flush(uint32);
 //Global descriptor table setup
 void initialize_gdt() 
 {
+   memset(&gdt_entries, 0, sizeof(gdt_entry_t) * 5);
+
    gdt_ptr.limit = (sizeof(gdt_entry_t) * 5) - 1;
    gdt_ptr.base  = (uint32)&gdt_entries;
 

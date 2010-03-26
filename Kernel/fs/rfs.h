@@ -10,7 +10,7 @@
 
 struct rfs_structure 
 {
-	fs_node_t ** directory_entrys; //The fs nodes in this directory
+	fs_node_t** directory_entrys; //The fs nodes in this directory
 	uint32 num_directory_entrys; //A int used to store the size of the array
 };
 

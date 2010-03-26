@@ -1,5 +1,5 @@
-#include <mm/virt_mm.h>
-#include <mm/phys_mm.h>
+#include "virt_mm.h"
+#include "phys_mm.h"
 
 #include <interrupts/interrupt_handler.h>
 #include "panic.h"

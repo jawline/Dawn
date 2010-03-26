@@ -8,8 +8,9 @@
    (And the binding of all file systems together), do not overestimate its capabilities...
  */
 
-struct rfs_structure {
-	fs_node_t ** directory_entrys; //The fs nodes in this directory
+struct rfs_structure 
+{
+	fs_node_t** directory_entrys; //The fs nodes in this directory
 	uint32 num_directory_entrys; //A int used to store the size of the array
 };
 

@@ -1,9 +1,11 @@
-#include <mm/phys_mm.h>
-#include <mm/virt_mm.h>
+#include <mm/phys_mm.h"
+#include <mm/virt_mm.h"
 
 #include "multiboot.h"
 
 #include "panic.h"
+
+#include "virt_mm.h"
 
 uint32 used_mem_end = 0;
 

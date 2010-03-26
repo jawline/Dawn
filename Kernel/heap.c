@@ -27,11 +27,18 @@ void init_heap(heap_t * heap, uint32 address)
 	if (heap == 0) return;
 
 	DEBUG_PRINT("Creating Heap\n");
+	memset(heap, 0, sizeof(heap_t));
+	DEBUG_PRINT("0'ed Heap\n");
 
 	//Set the heap location to the specified address
-	heap->heap_location = (address + 0x1000) & PAGE_MASK; //Page aligned boundry
+	heap->heap_location = address & PAGE_MASK; //Page aligned boundry
+	DEBUG_PRINTX(heap->heap_location);
+	DEBUG_PRINT("\n");
 
 	uint32 frame_addr = alloc_frame();
+	DEBUG_PRINTX(frame_addr);
+	DEBUG_PRINT("\n");
+
 	map(heap->heap_location, frame_addr, PAGE_PRESENT | PAGE_WRITE);
 
 	DEBUG_PRINT("Mapped Heap\n");

@@ -1,6 +1,0 @@
-#ifndef _KERNEL_INITIALIZATION_H_
-#define _KERNEL_INITIALIZATION_H_
-
-void init_kernel();
-
-#endif

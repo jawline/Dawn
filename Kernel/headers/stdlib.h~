@@ -1,8 +1,0 @@
-#ifndef _STD_LIB_DEF_H_
-#define _STD_LIB_DEF_H_
-
-#define malloc(mem) common_malloc(mem)
-#define alloc(mem) malloc(mem)
-#define free(mem) common_free(mem)
-
-#endif

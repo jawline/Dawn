@@ -84,14 +84,14 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output) //visual_outpu
 	init_Timer(visual_output);
 
 	//Initialize the kernel heap
-        init_kheap();
+        //init_kheap();
    
 	//Initialize the main thread (Or, in other words, setup the kernel as a single thread) and initialize the thread scheduler
-	thread_t * maint = initialize_threading();
-	initialize_thread_scheduler(maint);
+	//thread_t * maint = initialize_threading();
+	//initialize_thread_scheduler(maint);
 
-	fs_node_t * rootfs = init_vfs();
-	init_ramdisk(mboot_ptr, rootfs);
+	//fs_node_t * rootfs = init_vfs();
+	//init_ramdisk(mboot_ptr, rootfs);
 	
 	iprintf("End of initialization\n");
 }

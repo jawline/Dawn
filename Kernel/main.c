@@ -9,6 +9,7 @@
 #include "cmos.h"
 #include <printf.h>
 #include <mm/phys_mm.h>
+#include <version/version.h>
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
 #include "threads.h"
@@ -26,6 +27,8 @@ int main(struct multiboot *mboot_ptr)
     
     //Needs the multiboot location to function, 1 signals that the init routines should be noisy and cover the screen in stuff
     init_kernel(mboot_ptr, 1);
+
+    printf("Simple OS Version %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
 
     //We can has interrupts now...
     enable_interrupts();

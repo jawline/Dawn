@@ -84,7 +84,7 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output) //visual_outpu
 	init_Timer(visual_output);
 
 	//Initialize the kernel heap
-        //init_kheap();
+        init_kheap();
    
 	//Initialize the main thread (Or, in other words, setup the kernel as a single thread) and initialize the thread scheduler
 	//thread_t * maint = initialize_threading();

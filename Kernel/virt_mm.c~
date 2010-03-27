@@ -6,6 +6,13 @@
 #include <interrupts/idt.h>
 #include <debug/debug.h>
 
+#define ReloadCR3() \
+      __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
+
+#define __flush_tlb_single(addr) \
+   __asm__ __volatile__("invlpg %0": :"m" (*(char *) addr))
+
+
 uint8 paging_enabled = 0;
 page_directory_t* current_pagedir = 0;
 
@@ -47,14 +54,16 @@ void map (uint32 va, uint32 pa, uint32 flags)
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
     page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
     DEBUG_PRINT("Debug Message: allocated frame\n");
-    asm volatile ("invlpg (%0)" : : "a" (va));
 
+    ReloadCR3();
+ 
     memset (page_tables[pt_idx*1024], 0, 0x1000);
     DEBUG_PRINT("Debug Message: Memset new page table\n");
   }
 
   // Now that the page table definately exists, we can update the PTE.
   page_tables[virtual_page] = (pa & PAGE_MASK) | flags;
+  __flush_tlb_single(va);
 }
 
 //Unmap the virtual address VA from its physical address

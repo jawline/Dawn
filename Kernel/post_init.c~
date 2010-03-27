@@ -132,6 +132,8 @@ void post_init() {
     cmds[1].function = mem_map;
     cmds[2].str = "reboot";
     cmds[2].function = reboot_f;
+    cmds[2].str = "help";
+    cmds[2].function = help_f;
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);

@@ -10,6 +10,7 @@
 #include <printf.h>
 #include <mm/phys_mm.h>
 #include <version/version.h>
+#include <debug/debug.h>
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
 #include "threads.h"

@@ -45,9 +45,6 @@ void page_fault (idt_call_registers_t regs)
 //VA = Virtual Address, PA = Physical Address, Flags = The flags to be set with the page.
 void map (uint32 va, uint32 pa, uint32 flags)
 {
-  DEBUG_PRINT("Debug Message: virt_mm.c mapping address ");
-  DEBUG_PRINTX(va);
-  DEBUG_PRINT("\n");
 
   uint32 virtual_page = va / 0x1000;
   uint32 pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index

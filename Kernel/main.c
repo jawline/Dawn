@@ -10,6 +10,7 @@
 #include <printf.h>
 #include <mm/phys_mm.h>
 #include <version/version.h>
+#include <debug/debug.h>
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
 #include "threads.h"
@@ -24,9 +25,13 @@
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot *mboot_ptr)
 {
-    
+
+    #if defined(DEBUG_MODE)    
     //Needs the multiboot location to function, 1 signals that the init routines should be noisy and cover the screen in stuff
     init_kernel(mboot_ptr, 1);
+    #else
+    init_kernel(mboot_ptr, 0);
+    #endif
 
     printf("Simple OS Version %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
 

@@ -58,7 +58,7 @@ void map (uint32 va, uint32 pa, uint32 flags)
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
     page_directory[pt_idx] = (alloc_frame() & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
     DEBUG_PRINT("Debug Message: virt_mm.c allocated frame\n");
-    page_tables[pt_idx * 1024] = 0;
+    page_tables[pt_idx * 1024] = 0; //TODO: WHY does this fix!?!?! Assuming null memory somewhere (Have to be) fix asap.
     memset (page_tables[pt_idx*1024], 0, 0x1000);
     DEBUG_PRINT("Debug Message: virt_mm.c memset new page table\n");
   }

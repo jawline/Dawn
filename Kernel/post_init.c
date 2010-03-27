@@ -26,6 +26,15 @@ void reboot_f(void * null) {
 	reboot();
 }
 
+void help_f(void * null) {
+	printf("Known functions\n");
+	printf("help - this\n");
+	printf("reboot - reboot the PC (May not function as desired in specific emulators\n");
+	printf("ls - list every file & directory in the VFS recursively\n");
+	printf("print_allocmap - print the heaps current allocation map and how much free memory there is\n");
+	printf("End of known functions\n");
+}
+
 int mem_map (void * null) 
 {
 	//Call the heap list_chunks function
@@ -123,6 +132,8 @@ void post_init() {
     cmds[1].function = mem_map;
     cmds[2].str = "reboot";
     cmds[2].function = reboot_f;
+    cmds[2].str = "help";
+    cmds[2].function = help_f;
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);

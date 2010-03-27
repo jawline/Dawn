@@ -1,11 +1,13 @@
-#include <mm/phys_mm.h"
-#include <mm/virt_mm.h"
+#include <mm/phys_mm.h>
+#include <mm/virt_mm.h>
+#include <debug/debug.h>
+
+#undef DEBUG_MODE
+#define DEBUG_MODE 1
 
 #include "multiboot.h"
 
 #include "panic.h"
-
-#include "virt_mm.h"
 
 uint32 used_mem_end = 0;
 
@@ -25,6 +27,7 @@ uint32 alloc_frame()
 {
 	if (paging_enabled == 0) 
 	{
+		DEBUG_PRINT("Allocate Page. Paging Disabled\n");
 		used_mem_end += 4096; //Add 4096 bytes (4kb) to used_mem_end address
 		return used_mem_end - 4096; //Return the old address
 		//The reason why this works is that all memory up to used_mem_end is identity mapped when paging is enabled
@@ -32,6 +35,8 @@ uint32 alloc_frame()
 	} 
 	else 
 	{
+		DEBUG_PRINT("Allocate Page. Paging Enabled\n");
+
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
 		{
@@ -40,8 +45,16 @@ uint32 alloc_frame()
 
 		// Pop off the stack.
 		phys_mm_slock -= sizeof (uint32);
+		
+		DEBUG_PRINT("STACK_LOCATION ");
+		DEBUG_PRINTX(phys_mm_slock);
+		DEBUG_PRINT("\n");
+
 		uint32 * stack = (uint32 *)phys_mm_slock;
-		  
+		DEBUG_PRINT("STACK ");
+		DEBUG_PRINTX(stack);
+		DEBUG_PRINT("\n");
+
 		return *stack;
 	}
 }
@@ -79,6 +92,7 @@ void map_free_pages(struct multiboot * mboot_ptr)
 {
 
   uint32 i = mboot_ptr->mmap_addr;
+  uint32 dbiter = 0;
 
   while (i < mboot_ptr->mmap_addr + mboot_ptr->mmap_length)
   {
@@ -94,6 +108,7 @@ void map_free_pages(struct multiboot * mboot_ptr)
       for (j = me->base_addr_low; j < me->base_addr_low+me->length_low; j += 0x1000)
       {
         free_frame(j);
+	dbiter++;
       }
 
     }
@@ -102,5 +117,9 @@ void map_free_pages(struct multiboot * mboot_ptr)
     // so we must add sizeof a 32bit int
     i += me->size + sizeof (uint32);
   }
+
+  DEBUG_PRINT("Debug Message: Map Free Pages finished with 0x");
+  DEBUG_PRINTX(dbiter);
+  DEBUG_PRINT(" 4096 bytes of mapped memory\n"); 
 
 }

@@ -2,9 +2,6 @@
 #include <printf.h>
 #include <debug/debug.h>
 
-//This undef redefines DEBUG_MODE as one for this file, causing DEBUG_PRINT to output
-#undef DEBUG_MODE
-#define DEBUG_MODE 1
 
 uint32 alloc_mem(uint32 size, heap_t * heap);
 void free_mem(uint32 address, heap_t * heap);
@@ -35,7 +32,13 @@ void init_heap(heap_t * heap, uint32 address)
 	DEBUG_PRINTX(heap->heap_location);
 	DEBUG_PRINT("\n");
 
-	uint32 frame_addr = alloc_frame();
+	uint32 frame_addr = 0;
+
+	DEBUG_PRINT("TWRITE\n");
+	frame_addr = 32;
+	DEBUG_PRINT("D-X\n");
+
+	frame_addr = alloc_frame();
 	DEBUG_PRINT("Debug Message: Allocated frame\n");
 	DEBUG_PRINTX(frame_addr);
 	DEBUG_PRINT("\n");

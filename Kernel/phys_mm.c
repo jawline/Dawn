@@ -2,9 +2,6 @@
 #include <mm/virt_mm.h>
 #include <debug/debug.h>
 
-#undef DEBUG_MODE
-#define DEBUG_MODE 1
-
 #include "multiboot.h"
 
 #include "panic.h"

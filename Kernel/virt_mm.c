@@ -4,6 +4,7 @@
 #include <interrupts/interrupt_handler.h>
 #include "panic.h"
 #include <interrupts/idt.h>
+#include <debug/debug.h>
 
 uint8 paging_enabled = 0;
 page_directory_t* current_pagedir = 0;
@@ -45,7 +46,11 @@ void map (uint32 va, uint32 pa, uint32 flags)
   {
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
     page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
+    DEBUG_PRINT("Debug Message: allocated frame\n");
+    asm volatile ("invlpg (%0)" : : "a" (va));
+
     memset (page_tables[pt_idx*1024], 0, 0x1000);
+    DEBUG_PRINT("Debug Message: Memset new page table\n");
   }
 
   // Now that the page table definately exists, we can update the PTE.

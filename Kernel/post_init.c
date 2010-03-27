@@ -1,6 +1,7 @@
 #include "post_init.h"
 #include <heap/heap.h>
 #include <stdio.h>
+#include "reboot.h"
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -19,6 +20,10 @@ int ls_func (void * null)
 	print_directory(init_vfs(), 1);
 
 	return 1;
+}
+
+void reboot_f(void * null) {
+	reboot();
 }
 
 int mem_map (void * null) 
@@ -116,6 +121,8 @@ void post_init() {
     cmds[0].function = ls_func;
     cmds[1].str = "print_allocmap";
     cmds[1].function = mem_map;
+    cmds[2].str = "reboot";
+    cmds[2].function = reboot_f;
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);

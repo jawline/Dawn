@@ -74,7 +74,6 @@ void free_frame(uint32 frame)
 
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)
 	{
-
 	    map (phys_mm_smax, frame, PAGE_PRESENT | PAGE_WRITE);
 	    phys_mm_smax += 4096;
 	

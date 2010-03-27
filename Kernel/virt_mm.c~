@@ -45,6 +45,10 @@ void page_fault (idt_call_registers_t regs)
 //VA = Virtual Address, PA = Physical Address, Flags = The flags to be set with the page.
 void map (uint32 va, uint32 pa, uint32 flags)
 {
+  DEBUG_PRINT("Debug Message: virt_mm.c mapping address ");
+  DEBUG_PRINTX(va);
+  DEBUG_PRINT("\n");
+
   uint32 virtual_page = va / 0x1000;
   uint32 pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
 
@@ -52,13 +56,11 @@ void map (uint32 va, uint32 pa, uint32 flags)
   if (page_directory[pt_idx] == 0)
   {
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
-    page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
-    DEBUG_PRINT("Debug Message: allocated frame\n");
-
-    ReloadCR3();
- 
+    page_directory[pt_idx] = (alloc_frame() & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
+    DEBUG_PRINT("Debug Message: virt_mm.c allocated frame\n");
+    page_tables[pt_idx * 1024] = 0;
     memset (page_tables[pt_idx*1024], 0, 0x1000);
-    DEBUG_PRINT("Debug Message: Memset new page table\n");
+    DEBUG_PRINT("Debug Message: virt_mm.c memset new page table\n");
   }
 
   // Now that the page table definately exists, we can update the PTE.
@@ -74,7 +76,7 @@ void unmap (uint32 va)
   page_tables[virtual_page] = 0;
 
   //Signal to the CPU that a page mapping has been invalidated.
-  asm volatile ("invlpg (%0)" : : "a" (va));
+  __flush_tlb_single(va);
 }
 
 //Get whether the virtual address is mapped or not (Returns 1 or 0, true or false)
@@ -131,9 +133,10 @@ void init_virt_mm() {
 	//TODO: Remake this strip of code
 	//Needs replacing - IDMap the first 4MB of memory
 	pagedir[0] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
-	 
-	uint32* pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory
- 	
+	memset(pagedir[0], 0, 4096);
+
+	uint32* pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory 	
+
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{
 		pt[i] = i * 4096 | PAGE_PRESENT | PAGE_WRITE;	
@@ -141,8 +144,10 @@ void init_virt_mm() {
 
 	// Assign the second-last table and zero it. (TODO: Find out if this is necessary)
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
+	memset(pagedir[1022], 0, 4096);
 	pt = (uint32*) (pagedir[1022] & PAGE_MASK);
 	memset (pt, 0, 0x1000);
+
 	pt[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
 
 	pagedir[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory

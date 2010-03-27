@@ -1,6 +1,7 @@
 #include "post_init.h"
 #include <heap/heap.h>
 #include <stdio.h>
+#include "reboot.h"
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -19,6 +20,10 @@ int ls_func (void * null)
 	print_directory(init_vfs(), 1);
 
 	return 1;
+}
+
+void reboot_f(void * null) {
+	reboot();
 }
 
 int mem_map (void * null) 
@@ -71,7 +76,7 @@ void exec_cb()
 
 	if (done == 0)
 	{
-		printf("\nError, Function %s not found", CBuffer);
+		printf("\nError, Function %s not found\n", CBuffer);
 	}
 
 	cptr = 0;

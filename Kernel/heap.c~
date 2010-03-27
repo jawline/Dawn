@@ -26,9 +26,9 @@ void init_heap(heap_t * heap, uint32 address)
 	//Double check the heap ptr is valid
 	if (heap == 0) return;
 
-	DEBUG_PRINT("Creating Heap\n");
+	DEBUG_PRINT("Debug Message: Creating Heap\n");
 	memset(heap, 0, sizeof(heap_t));
-	DEBUG_PRINT("0'ed Heap\n");
+	DEBUG_PRINT("Debug Message: 0'ed Heap\n");
 
 	//Set the heap location to the specified address
 	heap->heap_location = address & PAGE_MASK; //Page aligned boundry
@@ -36,28 +36,29 @@ void init_heap(heap_t * heap, uint32 address)
 	DEBUG_PRINT("\n");
 
 	uint32 frame_addr = alloc_frame();
+	DEBUG_PRINT("Debug Message: Allocated frame\n");
 	DEBUG_PRINTX(frame_addr);
 	DEBUG_PRINT("\n");
 
 	map(heap->heap_location, frame_addr, PAGE_PRESENT | PAGE_WRITE);
 
-	DEBUG_PRINT("Mapped Heap\n");
+	DEBUG_PRINT("Debug Message: Mapped Heap\n");
 
 	memset(heap->heap_location, 0, 4096);
-	DEBUG_PRINT("0'ed HEAP\n");
+	DEBUG_PRINT("Debug Message: 0'ed HEAP\n");
 
 	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
 	memset(ptr, 0, sizeof(heap_entry_t)); //Initialize it.
-	DEBUG_PRINT("Created first heap entry\n");
+	DEBUG_PRINT("Debug Message: Created first heap entry\n");
 
 	ptr->used = 0; //Not used
 	ptr->size = 4096 - sizeof(heap_entry_t); //One frame has been allocated. 4096 bytes of heap space at the minute. The heap entrys are also in the space so we need to take into account for them (Only one at the minute though =) )
 
-	DEBUG_PRINT("Set ptr size\n");
+	DEBUG_PRINT("Debug Message: Set ptr size\n");
 
 	ptr->next = 0; //ptr->next = NULL, this tells the heap that this is the last entry on the heap.
 	ptr->prev = 0;
-	DEBUG_PRINT("Ptr->next set\n");
+	DEBUG_PRINT("Debug Message: Ptr->next set\n");
 }
 
 uint32 alloc_mem(uint32 size, heap_t * heap) 

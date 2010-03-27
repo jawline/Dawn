@@ -27,7 +27,7 @@ uint32 alloc_frame()
 {
 	if (paging_enabled == 0) 
 	{
-		DEBUG_PRINT("Allocate Page. Paging Disabled\n");
+		DEBUG_PRINT("Debug Message: Allocate Page. Paging Disabled\n");
 		used_mem_end += 4096; //Add 4096 bytes (4kb) to used_mem_end address
 		return used_mem_end - 4096; //Return the old address
 		//The reason why this works is that all memory up to used_mem_end is identity mapped when paging is enabled
@@ -35,7 +35,7 @@ uint32 alloc_frame()
 	} 
 	else 
 	{
-		DEBUG_PRINT("Allocate Page. Paging Enabled\n");
+		DEBUG_PRINT("Debug Message: Allocate Page. Paging Enabled\n");
 
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
@@ -43,16 +43,20 @@ uint32 alloc_frame()
 			PANIC("Error:out of memory."); //This will crash the OS when we run out of frames (Bad idea much?) TODO: Revise this to not crash the OS, at least, not immediately
 		}
 
-		// Pop off the stack.
-		phys_mm_slock -= sizeof (uint32);
-		
-		DEBUG_PRINT("STACK_LOCATION ");
+		DEBUG_PRINT("Debug Message: Previous stack location ");
 		DEBUG_PRINTX(phys_mm_slock);
 		DEBUG_PRINT("\n");
 
+		// Pop off the stack.
+		phys_mm_slock -= sizeof (uint32);
+
 		uint32 * stack = (uint32 *)phys_mm_slock;
-		DEBUG_PRINT("STACK ");
+		DEBUG_PRINT("Debug Message: Stack location ");
 		DEBUG_PRINTX(stack);
+		DEBUG_PRINT("\n");
+
+		DEBUG_PRINT("Debug Message: Stack return ");
+		DEBUG_PRINTX(*stack);
 		DEBUG_PRINT("\n");
 
 		return *stack;

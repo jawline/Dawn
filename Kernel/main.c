@@ -13,7 +13,6 @@
 #include <debug/debug.h>
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
-#include "threads.h"
 #include "fs/initrd.h"
 #include "reboot.h"
 

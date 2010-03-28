@@ -15,6 +15,9 @@ extern uint32 paging_enabled;
 
 void init_phys_mm(uint32 start) 
 {
+	DEBUG_PRINT("Debug Message: Used memory end 0x");
+	DEBUG_PRINTX(start);
+	DEBUG_PRINT("\n");
 
 	used_mem_end = (start + 0x1000) & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
 

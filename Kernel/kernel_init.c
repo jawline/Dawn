@@ -10,7 +10,7 @@
 #include <mm/phys_mm.h>
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
-#include "threads.h"
+#include <threads/threads.h>
 #include "fs/initrd.h"
 #include "reboot.h"
 
@@ -46,7 +46,7 @@ void init_MemoryManagers(struct multiboot * mboot_ptr, int visual_output)
     mods_addr++;
 
     init_phys_mm(mods_addr);
-    init_virt_mm();
+    init_virt_mm(mods_addr);
     map_free_pages(mboot_ptr);
     iprintf("Memory Managers (PMM, VMM) [OK]\n");
 }
@@ -89,6 +89,8 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output) //visual_outpu
 	//Initialize the main thread (Or, in other words, setup the kernel as a single thread) and initialize the thread scheduler
 	thread_t * maint = initialize_threading();
 	initialize_thread_scheduler(maint);
+
+	initialize_process_manager();
 
 	fs_node_t * rootfs = init_vfs();
 	init_ramdisk(mboot_ptr, rootfs);

@@ -74,14 +74,12 @@ void free_frame(uint32 frame)
 
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)
 	{
-	    DEBUG_PRINT("Debug Message: Expanded heap\n");
 	    map (phys_mm_smax, frame, PAGE_PRESENT | PAGE_WRITE);
 	    phys_mm_smax += 4096;
 	
 	}
 	else
 	{
-		DEBUG_PRINT("Debug Message: Did not expand heap\n");
 		//We still have stack space left to pop to,
 		uint32 * stack = phys_mm_slock;
 		*stack = frame;

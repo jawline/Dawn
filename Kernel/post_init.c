@@ -58,6 +58,10 @@ int mem_map (void * null)
 	return 1;
 }
 
+int list_proc_func(void * null) {
+	list_processes();	
+}
+
 char CBuffer[1024];
 int cptr = 0;
 
@@ -91,7 +95,8 @@ void exec_cb()
 	cptr = 0;
 }
 
-void kboard_callback(uint8 cb) {
+void kboard_callback(uint8 cb) 
+{
 
 	if (cb == '\r') //Carriage return
 	{ 
@@ -125,15 +130,20 @@ void kboard_callback(uint8 cb) {
 }
 
 
-void post_init() {
+void post_init() 
+{
     cmds[0].str = "ls";
     cmds[0].function = ls_func;
     cmds[1].str = "print_allocmap";
     cmds[1].function = mem_map;
     cmds[2].str = "reboot";
     cmds[2].function = reboot_f;
-    cmds[2].str = "help";
-    cmds[2].function = help_f;
+    cmds[3].str = "help";
+    cmds[3].function = help_f;
+    cmds[4].str = "lproc";
+    cmds[4].function = list_proc_func;
+
+    printf("First free virtual address %x\n", first_free_virt_addr());
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);

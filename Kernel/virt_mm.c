@@ -15,6 +15,7 @@
 
 uint8 paging_enabled = 0;
 page_directory_t* current_pagedir = 0;
+page_directory_t* kernel_pagedir = 0;
 
 uint32* page_directory = (uint32*) PAGE_DIR_VIRTUAL_ADDR;
 uint32* page_tables = (uint32*) PAGE_TABLE_VIRTUAL_ADDR;
@@ -117,7 +118,7 @@ void mark_paging_enabled()
 	paging_enabled = 1;
 }
 
-void init_virt_mm() {
+void init_virt_mm(uint32 mem_end) {
 	register_interrupt_handler (14, &page_fault); //Register the page fault handler.
 	
 	uint32 i = 0;
@@ -149,7 +150,8 @@ void init_virt_mm() {
 
 	pagedir[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
 
-	switch_page_directory(pagedir); //Set the current page dire
+	switch_page_directory(pagedir); //Set the current page dir
+	kernel_pagedir = current_pagedir;
 	start_paging();
 
 	//Map where the physical memory manager keeps its stack.
@@ -160,3 +162,16 @@ void init_virt_mm() {
 	mark_paging_enabled();
 }
 
+uint32 first_free_virt_addr() //Very simple function to find the first free address (Unmapped virtual address)
+{ 
+
+	uint32 iter = 0;
+		for (iter = 0x2000; iter < 0xFFFFFFFF; iter += 0x1000)
+		{
+			if (get_mapping(iter, 0) == 1) {
+				return iter;			
+			}
+		}
+
+	return 0;
+}

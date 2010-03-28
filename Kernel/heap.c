@@ -29,17 +29,17 @@ void init_heap(heap_t * heap, uint32 address)
 
 	//Set the heap location to the specified address
 	heap->heap_location = address & PAGE_MASK; //Page aligned boundry
+	DEBUG_PRINT("Debug Message: Heap Location ");
 	DEBUG_PRINTX(heap->heap_location);
 	DEBUG_PRINT("\n");
 
 	uint32 frame_addr = 0;
 
-	DEBUG_PRINT("TWRITE\n");
-	frame_addr = 32;
-	DEBUG_PRINT("D-X\n");
+	frame_addr = 0;
 
 	frame_addr = alloc_frame();
-	DEBUG_PRINT("Debug Message: Allocated frame\n");
+
+	DEBUG_PRINT("Debug Message: Allocated frame ");
 	DEBUG_PRINTX(frame_addr);
 	DEBUG_PRINT("\n");
 

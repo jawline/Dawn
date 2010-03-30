@@ -21,4 +21,7 @@ void map (uint32 va, uint32 pa, uint32 flags);
 void unmap (uint32 va);
 char get_mapping (uint32 va, uint32* pa);
 
+void enable_paging();
+void disable_paging();
+
 #endif //_VIRTUAL_MEMORY_MANAGER_DEF_H_

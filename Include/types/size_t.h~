@@ -2,6 +2,6 @@
 #define _SIZE_T_DEF_H_
 
 /* standard size_t type */
-typedef unsigned size_t;
+typedef unsigned int size_t;
 
 #endif

@@ -8,7 +8,8 @@ extern uint32 end; //The end of the kernel
 
 typedef int (*cmdfunc) (void * arg);
 
-typedef struct {
+typedef struct 
+{
 	char * str;
 	cmdfunc function;
 } cmd_list;
@@ -22,11 +23,13 @@ int ls_func (void * null)
 	return 1;
 }
 
-void reboot_f(void * null) {
+void reboot_f(void * null) 
+{
 	reboot();
 }
 
-void help_f(void * null) {
+void help_f(void * null) 
+{
 	printf("Known functions\n");
 	printf("help - this\n");
 	printf("reboot - reboot the PC (May not function as desired in specific emulators\n");
@@ -142,8 +145,6 @@ void post_init()
     cmds[3].function = help_f;
     cmds[4].str = "lproc";
     cmds[4].function = list_proc_func;
-
-    printf("First free virtual address %x\n", first_free_virt_addr());
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);

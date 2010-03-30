@@ -13,7 +13,9 @@
    __asm__ __volatile__("invlpg %0": :"m" (*(char *) addr))
 
 
+uint8 paging_setup = 0;
 uint8 paging_enabled = 0;
+
 page_directory_t* current_pagedir = 0;
 page_directory_t* kernel_pagedir = 0;
 
@@ -115,10 +117,39 @@ inline void start_paging()
 
 void mark_paging_enabled() 
 {
+	paging_setup = 1;
 	paging_enabled = 1;
 }
 
-void init_virt_mm(uint32 mem_end) {
+//Declared in virt_mm_asm.s
+extern void asm_disable_paging();
+extern void asm_enable_paging();
+
+//Function to switch paging back on
+void enable_paging() 
+{
+	if (paging_setup == 1 && paging_enabled == 1) 
+	{
+		asm_enable_paging();
+		paging_enabled = 0;
+		return; 
+	}
+}
+
+//Function to switch paging off
+void disable_paging() 
+{
+	if (paging_setup == 1 && paging_enabled == 0)
+	{
+		asm_disable_paging();		
+		paging_enabled = 1;
+		return;
+	}
+}
+
+
+void init_virt_mm(uint32 mem_end) 
+{
 	register_interrupt_handler (14, &page_fault); //Register the page fault handler.
 	
 	uint32 i = 0;

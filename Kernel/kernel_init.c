@@ -11,8 +11,11 @@
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
 #include <threads/threads.h>
+#include "kstack.h"
 #include "fs/initrd.h"
 #include "reboot.h"
+#include <process/process.h>
+#include <types/size_t.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -54,7 +57,7 @@ void init_MemoryManagers(struct multiboot * mboot_ptr, int visual_output)
 //Init the system clock
 void init_Timer(int visual_output) 
 {
-   init_timer(50);
+   init_timer(100);
    iprintf("System Timer [OK]\n");
 }
 
@@ -72,7 +75,7 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 }
 
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
-void init_kernel(struct multiboot * mboot_ptr, int visual_output) //visual_output signals whether or not to call printf
+void init_kernel(struct multiboot * mboot_ptr, int visual_output, size_t initial_esp) //visual_output signals whether or not to call printf
 {
 	init_screen();
 	iprintf("Initialization Started\n");
@@ -90,10 +93,13 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output) //visual_outpu
 	thread_t * maint = initialize_threading();
 	initialize_thread_scheduler(maint);
 
-	initialize_process_manager();
+	process_t * kproc = initialize_kernel_process();
+	initialize_process_scheduler(kproc);
 
 	fs_node_t * rootfs = init_vfs();
 	init_ramdisk(mboot_ptr, rootfs);
+
+	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
 	
 	iprintf("End of initialization\n");
 }

@@ -19,15 +19,6 @@ struct process_structure
 
 typedef struct process_structure process_t;
 
-struct process_scheduler_entry 
-{
-	process_t* process;
-	struct process_scheduler_entry * next;
-};
-
-typedef struct process_scheduler_entry process_s_t;
-
-process_t* initialize_process_manager(); //Returns the kernel process
-void process_manager_tick();
+process_t* initialize_kernel_process(); //Returns the kernel process
 
 #endif

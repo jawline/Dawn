@@ -14,7 +14,7 @@
 #define page_directory_t uint32
 #include <types/int_types.h>
 
-void init_virt_mm();
+void init_virt_mm(uint32 val);
 
 void mark_paging_enabled();
 void map (uint32 va, uint32 pa, uint32 flags);

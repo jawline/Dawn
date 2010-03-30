@@ -1,6 +1,6 @@
 # Makefile for SimpleOS Kernel
 
-SOURCES= $(patsubst %.s,%.o,$(wildcard *.s)) $(patsubst %.c,%.o,$(wildcard *.c)) $(patsubst %.c,%.o,$(wildcard ../lib/*.c)) $(patsubst %.c,%.o,$(wildcard ./drivers/*.c)) $(patsubst %.c,%.o,$(wildcard ./fs/*.c)) $(patsubst %.c,%.o,$(wildcard ./scheduler/*.c))
+SOURCES= $(patsubst %.s,%.o,$(wildcard *.s)) $(patsubst %.c,%.o,$(wildcard *.c)) $(patsubst %.c,%.o,$(wildcard ../lib/*.c)) $(patsubst %.c,%.o,$(wildcard ./drivers/*.c)) $(patsubst %.c,%.o,$(wildcard ./fs/*.c)) $(patsubst %.c,%.o,$(wildcard ./scheduler/*.c)) $(patsubst %.c,%.o,$(wildcard ./mm/*.c)) $(patsubst %.s,%.o,$(wildcard ./mm/*.s))
 
 CC=gcc
 CFLAGS=-nostdlib -nostdinc -fno-builtin -I ../Include -fno-stack-protector -m32

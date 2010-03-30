@@ -2,7 +2,7 @@
 #include <mm/virt_mm.h>
 #include <debug/debug.h>
 
-#include "multiboot.h"
+#include <multiboot.h>
 
 #include "panic.h"
 
@@ -124,5 +124,22 @@ void map_free_pages(struct multiboot * mboot_ptr)
   DEBUG_PRINT("Debug Message: Map Free Pages finished with 0x");
   DEBUG_PRINTX(dbiter);
   DEBUG_PRINT(" 4096 bytes of mapped memory\n"); 
+}
 
+extern void asm_copy_frame(uint32 dest, uint32 src);
+
+//Copy a page from physical address source to physical address destination (NOTE: PAGING WILL BE DISABLED!)
+void copy_frame(uint32 phys_addr_dest, uint32 phys_addr_src) 
+{
+	if (paging_enabled == 0) return; //TODO: Copy frame with paging disabled (P*ss easy, just memcpy)
+
+	DEBUG_PRINT("Debug Message: Copying 0x");
+	DEBUG_PRINTX(phys_addr_src);
+
+	DEBUG_PRINT(" to 0x");
+	DEBUG_PRINTX(phys_addr_dest);
+
+	DEBUG_PRINT("\n");
+
+	asm_copy_frame(phys_addr_src, phys_addr_dest);
 }

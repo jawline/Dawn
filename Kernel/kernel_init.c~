@@ -112,7 +112,6 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, size_t initial
 
 	DEBUG_PRINT("Switching page dir\n");
 
-	PANIC("FAIL\n");
 	
 	iprintf("End of initialization\n");
 }

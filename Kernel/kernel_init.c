@@ -105,5 +105,13 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, size_t initial
 	//If its moved into higher memory, it gets copied, so fork() causes two processes with indavidual stacks to be created.
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
 	
+	extern page_directory_t* kernel_pagedir;
+
+	page_directory_t* page_directory = kernel_pagedir;
+	page_directory_t* new_page_directory = copy_page_dir(page_directory);
+
+	DEBUG_PRINT("Switching page dir\n");
+
+	
 	iprintf("End of initialization\n");
 }

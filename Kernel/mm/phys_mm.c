@@ -19,7 +19,7 @@ void init_phys_mm(uint32 start)
 	DEBUG_PRINTX(start);
 	DEBUG_PRINT("\n");
 
-	used_mem_end = (start + 0x1000) & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
+	used_mem_end = start & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
 
 }
 
@@ -35,7 +35,6 @@ uint32 alloc_frame()
 	} 
 	else 
 	{
-		DEBUG_PRINT("Debug Message: Allocate Page. Paging Enabled\n");
 
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
@@ -43,21 +42,10 @@ uint32 alloc_frame()
 			PANIC("Error:out of memory."); //This will crash the OS when we run out of frames (Bad idea much?) TODO: Revise this to not crash the OS, at least, not immediately
 		}
 
-		DEBUG_PRINT("Debug Message: Previous stack location ");
-		DEBUG_PRINTX(phys_mm_slock);
-		DEBUG_PRINT("\n");
-
 		// Pop off the stack.
 		phys_mm_slock -= sizeof (uint32);
 
 		uint32 * stack = (uint32 *)phys_mm_slock;
-		DEBUG_PRINT("Debug Message: Stack location ");
-		DEBUG_PRINTX(stack);
-		DEBUG_PRINT("\n");
-
-		DEBUG_PRINT("Debug Message: Stack return ");
-		DEBUG_PRINTX(*stack);
-		DEBUG_PRINT("\n");
 
 		return *stack;
 	}
@@ -126,10 +114,9 @@ void map_free_pages(struct multiboot * mboot_ptr)
   DEBUG_PRINT(" 4096 bytes of mapped memory\n"); 
 }
 
-extern void asm_copy_frame(uint32 dest, uint32 src);
+extern void asm_copy_frame(uint32 src, uint32 dest);
 
-//Copy a page from physical address source to physical address destination (NOTE: PAGING WILL BE DISABLED!)
-void copy_frame(uint32 phys_addr_dest, uint32 phys_addr_src) 
+void copy_frame(uint32 phys_addr_src, uint32 phys_addr_dest) 
 {
 	if (paging_enabled == 0) return; //TODO: Copy frame with paging disabled (P*ss easy, just memcpy)
 
@@ -141,5 +128,5 @@ void copy_frame(uint32 phys_addr_dest, uint32 phys_addr_src)
 
 	DEBUG_PRINT("\n");
 
-	asm_copy_frame(phys_addr_dest, phys_addr_src);
+	asm_copy_frame(phys_addr_src, phys_addr_dest);
 }

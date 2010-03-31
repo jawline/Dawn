@@ -10,7 +10,7 @@ ASFLAGS=-felf32
 all: $(SOURCES) link
 
 clean:
-	-rm *.o ./fs/*.o ./drivers/*.o ../lib/*.o ./Build/Kernel
+	-rm *.o ./fs/*.o ./drivers/*.o ./mm/*.o ./scheduler/*.o ../lib/*.o ./Build/Kernel
 
 link:
 	ld $(LDFLAGS) -o ./Build/Kernel $(SOURCES)

@@ -11,8 +11,12 @@
 #define PAGE_DIR_IDX(x) ((uint32) x/1024)
 #define PAGE_TABLE_IDX(x) ((uint32) x%1024)
 
+#define PAGE_SIZE 4096
+
 #define page_directory_t uint32
 #include <types/int_types.h>
+
+#define KERNEL_TABLES 100
 
 void init_virt_mm(uint32 val);
 

@@ -301,7 +301,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 	unmap(t_kernel_mapdir);
 	unmap(firstfree);
-	unmap(temp_newdir_map);
+	unmap(t_mapdir);
 	unmap(c_addr);
 
 	pop_eflags();

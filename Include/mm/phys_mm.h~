@@ -2,7 +2,7 @@
 #define _PHYSICAL_MEMORY_MANAGER_DEF_H_
 #include <types/int_types.h>
 
-#define PHYS_MM_STACK_ADDR 0xFF000000
+#define PHYS_MM_STACK_ADDR 0xC00000
 
 void init_phys_mm(uint32 start_addr);
 

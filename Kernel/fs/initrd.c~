@@ -5,6 +5,11 @@
 #include <initrd/initrd_fent.h>
 #include <stdlib.h>
 #include <debug/debug.h>
+#include <panic.h>
+
+/* The intent of this file it to provide a interface to bind the initial ramdisk in its structure to the virtual file system of the operating system
+   to do this it creates several lists of directories, files and several other arrays of memory to link the two
+*/
 
 uint32 mem_start = 0;
 
@@ -92,13 +97,22 @@ uint32 write_ird(fs_node_t *node, uint32 offset, uint32 size, uint8 *buffer)
 
 fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent) 
 {
+
 	mem_start = start;
 	struct initial_ramdisk_header* header;
+
+
+
 	struct initrd_dirent* en_ptr = 0;
 	struct initrd_fent* fe_ptr = 0;
 	uint32 iter = 0, i2;
 
 	header = start; //Header = the start location
+
+	if (header->ramdisk_magic != RAMMAGIC) {
+		printf("0x%x should be 0x%x\n", header->ramdisk_magic, RAMMAGIC);
+		PANIC("Error, RAMDISK magic incorrect");	
+	}
 
 	uint32* dirchunk_start = start + sizeof(struct initial_ramdisk_header);
 	num_directories = *dirchunk_start;
@@ -109,7 +123,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 	en_ptr = ((uint32)dirchunk_start) + sizeof(uint32);
 	
 	//Add the directories to a list
-	for (iter = 0; iter < (*dirchunk_start); iter++) 
+	for (iter = 0; iter < num_directories; iter++) 
 	{
 		strcpy(dir_list[iter].name, en_ptr->name);
 		dir_list[iter].inode = iter; //Useful when using the helper arrays

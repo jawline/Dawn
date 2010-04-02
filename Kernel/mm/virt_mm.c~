@@ -164,6 +164,13 @@ void init_virt_mm(uint32 mem_end)
 
 	page_directory_t * pagedir = (page_directory_t *) alloc_frame(); //Paging isn't enabled so this should just give us 4kb at the end of used memory.
 	
+	for (i = 0; i < 1024; i++) {
+		if (pagedir[i] != 0) {
+			printf("Pagedir 0x%x\n", pagedir[i]);	
+			PANIC("F");
+		}
+	}
+
 	//Null it all!!! (Initialize the table)
 	memset(pagedir, 0, PAGE_SIZE);
 
@@ -267,13 +274,16 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	//Copy all of the map directories
 	uint32 iter = 0;
 
-	for (iter = 0; iter < KERNEL_TABLES; iter++) {
-		if (c_addr[iter] != 0) {
-			temp_newdir_map[iter] = copy_page_table(c_addr[iter], 0) | PAGE_PRESENT | PAGE_WRITE;
+	//Make all the kernel tables identical
+	for (iter = 0; iter < KERNEL_TABLES; iter++) 
+	{
+		if (c_addr[iter] != 0) 
+		{
+			temp_newdir_map[iter] = c_addr[iter];
 		}
 	}
 
-	for (iter = KERNEL_TABLES; iter < 1024; iter++)
+	for (iter = KERNEL_TABLES; iter < 1023; iter++)
 	{
 		if (c_addr[iter] != 0) 
 		{
@@ -282,15 +292,23 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 		}
 	}
 
-	uint32 t_mloc = alloc_frame();
+	if (temp_newdir_map[1023] != 0)
+	{	
+		//Shouldnt be non null
+		DEBUG_PRINT("Error, temp_newdir_map != 0\n");
+	}
 
-	if (temp_newdir_map[1022] == 0) 
+	if (temp_newdir_map[1022] == 0)
 	{
+		DEBUG_PRINT("Creating a new frame for entry 1022\n");
+		uint32 t_mloc = alloc_frame();
 		temp_newdir_map[1022] = t_mloc | PAGE_PRESENT | PAGE_WRITE;
+	} else {
+		DEBUG_PRINT("Not creating a new frame for entry 1022\n");	
 	}
 
 	uint32 firstfree = first_free_vk_addr();
-	map(firstfree, t_mloc, PAGE_PRESENT | PAGE_WRITE);
+	map(firstfree, temp_newdir_map[1022] >> 12, PAGE_PRESENT | PAGE_WRITE);
 
 	uint32* pt = firstfree;
 	memset (pt, 0, 0x1000);
@@ -301,7 +319,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 	unmap(t_kernel_mapdir);
 	unmap(firstfree);
-	unmap(t_mapdir);
+	unmap(temp_newdir_map);
 	unmap(c_addr);
 
 	pop_eflags();

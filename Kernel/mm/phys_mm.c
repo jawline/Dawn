@@ -19,7 +19,7 @@ void init_phys_mm(uint32 start)
 	DEBUG_PRINTX(start);
 	DEBUG_PRINT("\n");
 
-	used_mem_end = start & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
+	used_mem_end = (start + 0x1000) & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
 
 }
 
@@ -58,7 +58,7 @@ void free_frame(uint32 frame)
 		return; //If paging isn't enabled we are not going to be able to free a frame of virtual memory and the stacks location is virtual (Cannot be accessed without paging)	
 	}	
 
-	if (frame < used_mem_end) 
+	if (frame < used_mem_end + PAGE_SIZE) 
 	{
 		return; //Anything under used_mem_end is identity mapped (Physical Address == Virtual Address) never remap it.
 	}
@@ -66,7 +66,7 @@ void free_frame(uint32 frame)
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)
 	{
 	    map (phys_mm_smax, frame, PAGE_PRESENT | PAGE_WRITE);
-	    phys_mm_smax += 4096;
+	    phys_mm_smax += PAGE_SIZE;
 	
 	}
 	else

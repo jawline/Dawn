@@ -1,3 +1,8 @@
+
+/* The purpose of this file is to initialize the kernel into a standard state with virtual memory, a heap, a virtual file system, a IDT and a GDT if necessary. 
+   Also to initialize any other subsystems such as the timer which may be required for SimpleOS to function properly
+*/
+
 #include "kernel_init.h"
 #include "drivers/screen.h"
 #include "multiboot.h"
@@ -46,12 +51,13 @@ void init_IDT(int visual_output)
 //Use the last loaded module (The one after the RAM disk)
 void init_MemoryManagers(struct multiboot * mboot_ptr, int visual_output)
 {
-    uint32 * mods_addr = (uint32 *)mboot_ptr->mods_addr;    
+    uint32* mods_addr = (uint32*) mboot_ptr->mods_addr;    
     mods_addr++;
 
-    init_phys_mm(mods_addr);
-    init_virt_mm(mods_addr);
+    init_phys_mm(*mods_addr);
+    init_virt_mm(*mods_addr);
     map_free_pages(mboot_ptr);
+
     iprintf("Memory Managers (PMM, VMM) [OK]\n");
 }
 
@@ -71,18 +77,20 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 		return;	
 	}
 
-	fs_node_t * initrd = initialize_initrd(*((uint32*)mboot_ptr->mods_addr), "system", init_vfs() /* Returns root */);
+	uint32* addr = mboot_ptr->mods_addr;
+
+	fs_node_t* initrd = initialize_initrd( *addr, "system", init_vfs() /* Returns root */);
+
 	bindnode_fs(init_vfs() /* returns root */ , initrd);
 }
 
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
-void init_kernel(struct multiboot * mboot_ptr, int visual_output, size_t initial_esp) //visual_output signals whether or not to call printf
+void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
 	init_screen();
 	iprintf("Initialization Started\n");
 	init_GDT(visual_output);
 	init_IDT(visual_output);
-
 	init_MemoryManagers(mboot_ptr, visual_output);
 
 	init_Timer(visual_output);
@@ -104,14 +112,13 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, size_t initial
 	//Reason for moving the stack. fork() needs to copy a stack, however when its < the kernels end (As grub sets it up) it will be identity mapped, not copied
 	//If its moved into higher memory, it gets copied, so fork() causes two processes with indavidual stacks to be created.
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
-	
+
 	extern page_directory_t* kernel_pagedir;
+	page_directory_t* pd = copy_page_dir(kernel_pagedir);
 
-	page_directory_t* page_directory = kernel_pagedir;
-	page_directory_t* new_page_directory = copy_page_dir(page_directory);
+	printf("D\n");
 
-	DEBUG_PRINT("Switching page dir\n");
-
+	switch_page_directory(pd);
 	
 	iprintf("End of initialization\n");
 }

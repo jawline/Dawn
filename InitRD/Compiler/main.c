@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 	}
 
 	struct initial_ramdisk_header head;
+	head.ramdisk_magic = RAMMAGIC;
 	head.ramdisk_size = sizeof(struct initial_ramdisk_header);
 	
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {

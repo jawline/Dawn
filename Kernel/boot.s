@@ -1,6 +1,10 @@
 ;
 ; boot.s - Kernel start location
 ; File also defines the multiboot header
+; The intention of this file is to call the kernels main entry point (main function) after setting up the appropriate information on the stack (Pushing the location of the multiboot header 
+; and any other needed information from the boot)
+;
+; Status: Working, No immediate revision needed
 ;
 
 MBOOT_PAGE_ALIGN    equ 1<<0    ; Load kernel and modules on a page boundary

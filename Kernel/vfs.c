@@ -3,6 +3,12 @@
 #include <fs/vfs.h>
 #include "fs/rfs.h"
 
+/* The intent of this file is to create a set of functions providing the kernel with easy manipulation of the virtual file system.
+   the file also contains a pointer to the root node of root_fs for easy access
+
+   STATUS: Working, no immediate revision needed
+*/
+
 fs_node_t* root_fs = 0;
 
 void init_root_fs() 

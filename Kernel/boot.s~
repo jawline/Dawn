@@ -35,10 +35,12 @@ mboot:
 [EXTERN main]                   ; This is the entry point of our C code
 
 start:
-    ;Push stack location
-    push    esp
+
     ; Load multiboot information:
     push    ebx
+
+    ;Push stack location
+    push    esp
 
     ; Execute the kernel:
     cli                         ; Disable interrupts.

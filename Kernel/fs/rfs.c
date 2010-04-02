@@ -1,6 +1,8 @@
 #include "rfs.h"
 #include <stdlib.h>
 
+/* The intent of this file is to create a set of functions that allow for the "Root" volatile region of the virtual file system to be easly implemented */
+
 rfs_t* rfs_entrys_pointer = 0;
 uint32 num_rfs_entrys = 0;
 

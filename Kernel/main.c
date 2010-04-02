@@ -15,6 +15,7 @@
 #include <heap/heap.h>
 #include "fs/initrd.h"
 #include "reboot.h"
+#include <panic.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -25,7 +26,7 @@
 int main(uint32 initial_stackloc, struct multiboot *mboot_ptr)
 {
 
-    #if defined(DEBUG_MODE)    
+    #if defined(DEBUG_MODE)
     //Needs the multiboot location to function, 1 signals that the init routines should be noisy and cover the screen in stuff
     init_kernel(mboot_ptr, 1, initial_stackloc);
     #else

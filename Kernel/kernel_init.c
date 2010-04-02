@@ -115,10 +115,8 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 
 	extern page_directory_t* kernel_pagedir;
 	page_directory_t* pd = copy_page_dir(kernel_pagedir);
-
-	printf("D\n");
-
 	switch_page_directory(pd);
+	switch_page_directory(kernel_pagedir);
 	
 	iprintf("End of initialization\n");
 }

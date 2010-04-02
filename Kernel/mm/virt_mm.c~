@@ -231,13 +231,13 @@ uint32 copy_page_table(uint32 * pt, uint32 copy)
 		{
 			if (copy == 1) 
 			{
-			uint32 copied_p_addr = alloc_frame();
-			copy_frame(existing_addr[iter], copied_p_addr);
-			new_addr[iter] = copied_p_addr | PAGE_PRESENT | PAGE_WRITE;
+				uint32 copied_p_addr = alloc_frame();
+				copy_frame(existing_addr[iter] & ~0xFFF, copied_p_addr);
+				new_addr[iter] = copied_p_addr | PAGE_PRESENT | PAGE_WRITE;
 			}
 			else 
 			{
-			new_addr[iter] = existing_addr[iter];
+				new_addr[iter] = existing_addr[iter];
 			}
 		}
 	}
@@ -288,7 +288,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 		if (c_addr[iter] != 0) 
 		{
 			//Copy the page table
-			temp_newdir_map[iter] = copy_page_table(c_addr[iter], 1) | PAGE_PRESENT | PAGE_WRITE;
+			temp_newdir_map[iter] = copy_page_table(c_addr[iter] & ~0xFFF, 1) | PAGE_PRESENT | PAGE_WRITE;
 		}
 	}
 

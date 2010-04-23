@@ -12,10 +12,6 @@
 #define __flush_tlb_single(addr) \
    __asm__ __volatile__("invlpg %0": :"m" (*(char *) addr))
 
-#define push_eflags() asm volatile("pushf");
-#define pop_eflags() asm volatile("popf");
-
-
 uint8 paging_setup = 0;
 uint8 paging_enabled = 0;
 
@@ -166,8 +162,7 @@ void init_virt_mm(uint32 mem_end)
 	
 	for (i = 0; i < 1024; i++) {
 		if (pagedir[i] != 0) {
-			printf("Pagedir 0x%x\n", pagedir[i]);	
-			PANIC("F");
+			pagedir[i] = 0;
 		}
 	}
 
@@ -250,8 +245,6 @@ uint32 copy_page_table(uint32 * pt, uint32 copy)
 
 page_directory_t* copy_page_dir(page_directory_t* pagedir) 
 {
-	//Push the state of eflags
-	push_eflags();
 
 	//Disable interrupts
 	disable_interrupts();
@@ -321,8 +314,6 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	unmap(firstfree);
 	unmap(temp_newdir_map);
 	unmap(c_addr);
-
-	pop_eflags();
 
 	return ret_phys;
 }

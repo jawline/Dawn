@@ -3,7 +3,8 @@
 
 void print_directory(fs_node_t* node, int recur) {
 
-    printf("Listing directory %s\n", node->name);
+    printf("Listing directory %s", node->name);
+    printf(" Length %i\n", node->length);
 
     struct dirent* ent = 0;
 
@@ -24,7 +25,7 @@ void print_directory(fs_node_t* node, int recur) {
 
 	if (!is_directory(nent)) {
 
-		printf("File %s\n", nent->name);
+		printf("File %s Length %i\n", nent->name, nent->length);
 
 	} else {
 

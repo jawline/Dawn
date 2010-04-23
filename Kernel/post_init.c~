@@ -2,13 +2,15 @@
 #include <heap/heap.h>
 #include <stdio.h>
 #include "reboot.h"
+#include <common.h>
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
 
 typedef int (*cmdfunc) (void * arg);
 
-typedef struct {
+typedef struct 
+{
 	char * str;
 	cmdfunc function;
 } cmd_list;
@@ -22,11 +24,13 @@ int ls_func (void * null)
 	return 1;
 }
 
-void reboot_f(void * null) {
+void reboot_f(void * null) 
+{
 	reboot();
 }
 
-void help_f(void * null) {
+void help_f(void * null) 
+{
 	printf("Known functions\n");
 	printf("help - this\n");
 	printf("reboot - reboot the PC (May not function as desired in specific emulators\n");
@@ -56,10 +60,6 @@ int mem_map (void * null)
 	printf("Unmapped RAM %u (MBs)\n", freemb);    
 
 	return 1;
-}
-
-int list_proc_func(void * null) {
-	list_processes();	
 }
 
 char CBuffer[1024];
@@ -97,6 +97,7 @@ void exec_cb()
 
 void kboard_callback(uint8 cb) 
 {
+	disable_interrupts();
 
 	if (cb == '\r') //Carriage return
 	{ 
@@ -127,6 +128,8 @@ void kboard_callback(uint8 cb)
 		}
 
 	}
+
+	return;
 }
 
 
@@ -140,9 +143,11 @@ void post_init()
     cmds[2].function = reboot_f;
     cmds[3].str = "help";
     cmds[3].function = help_f;
-    cmds[4].str = "lproc";
-    cmds[4].function = list_proc_func;
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);
+
+    for (;;)
+    {
+    }
 }

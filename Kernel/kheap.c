@@ -1,7 +1,7 @@
 #include <heap/heap.h>
 
 heap_t kernel_heap;
-#define HEAP_ADDR 0x80000000 //Half way through logical memory brooo
+#define HEAP_ADDR 0x300000
 
 void init_kheap() 
 {

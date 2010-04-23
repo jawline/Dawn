@@ -1,7 +1,6 @@
 #ifndef _KERNEL_STACK_DEF_H_
 #define _KERNEL_STACK_DEF_H_
 
-#define KERNEL_STACK_START 0x7FFFFFFF
-#define KERNEL_STACK_SIZE 0x2000 //2kb stack
-
+#define KERNEL_STACK_START 0x2FFFFF
+#define KERNEL_STACK_SIZE 0x6000 //2kb stack
 #endif

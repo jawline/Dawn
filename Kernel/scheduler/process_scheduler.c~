@@ -1,8 +1,14 @@
 #include "process_scheduler.h"
 #include <stdlib.h>
+#include <common.h>
+#include <mm/virt_mm.h>
 
 process_t* kernel_process = 0;
+process_s_t* kernel_entry = 0;
 process_s_t* current_entry = 0;
+uint32 cswitches = 0;
+
+#define FAIL_MAGIC 0x12345
 
 void initialize_process_scheduler(process_t * kproc) 
 {
@@ -13,10 +19,88 @@ void initialize_process_scheduler(process_t * kproc)
 	current_entry->process = kproc;
 	current_entry->quant = DEFAULT_PROCESS_QUANT;
 	current_entry->next = current_entry; //Loop back onto itself (Think of the list as a circle =) )
+	kernel_entry = current_entry;
 }
 
-static inline void switch_process(process_s_t * cur) {
+void add_process(process_t* proc) 
+{
+	push_eflags();
+	disable_interrupts();
 
+	process_s_t* new = malloc(sizeof(process_s_t));
+	memset(new, 0, sizeof(process_s_t));
+	new->process = proc;
+	new->quant = DEFAULT_PROCESS_QUANT;
+
+	process_s_t* sentry = kernel_entry;
+
+	//Loop to find the last entry
+	while (1) 
+	{
+		if (sentry->next == kernel_entry)
+		{
+			//Links back to the kernel, last entry
+			new->next = sentry->next;
+			sentry->next = new;
+			break;
+		}
+		else
+		{
+			//Continue
+			sentry = sentry->next;
+		}
+	}
+
+	pop_eflags();
+}
+
+extern uint32 read_eip();
+extern page_directory_t* current_pagedir;
+
+static inline void switch_process(process_s_t* cur)
+{
+	if (!cur) return;
+
+	uint32 esp, ebp, eip;
+	page_directory_t* pagedir = 0;
+
+	asm volatile("mov %%esp, %0" : "=r"(esp));
+	asm volatile("mov %%ebp, %0" : "=r"(ebp));
+
+
+	eip = read_eip();
+	
+	if (eip == FAIL_MAGIC) return;
+	
+
+
+	cur->process->eip = eip;
+	cur->process->esp = esp;
+	cur->process->ebp = ebp;
+
+	cur->process->page_dir = current_pagedir;
+
+
+	current_entry = cur->next;
+
+	eip = current_entry->process->eip;
+	ebp = current_entry->process->ebp;
+	esp = current_entry->process->esp;
+
+	pagedir = current_entry->process->page_dir;
+	current_pagedir = pagedir;
+
+	asm volatile("         \
+	  mov %0, %%ecx;       \
+	  mov %1, %%esp;       \
+	  mov %2, %%ebp;       \
+	  mov %3, %%cr3;       \
+	  mov $0x12345, %%eax; \
+	  sti;                 \
+	  jmp  %%ecx           "
+	:: "r"(eip), "r"(esp), "r"(ebp), "r"(pagedir));
+
+	return;
 }
 
 void process_scheduler_tick() 
@@ -25,16 +109,10 @@ void process_scheduler_tick()
 
 	if (current_entry->quant < 1) 
 	{
-		//Process context switching
-		if (current_entry->next == current_entry) 
-		{
-			//There is only one proc don't waste time switching context
-			current_entry->quant = DEFAULT_PROCESS_QUANT;
-		} else 
-		{
-			switch_process(current_entry->process, current_entry->next->process);	
-		}
-
+			//Process context switching
+			current_entry->next->quant = DEFAULT_PROCESS_QUANT;
+			switch_process(current_entry);
+			
 	}
 }
 

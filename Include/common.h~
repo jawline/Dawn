@@ -5,10 +5,6 @@
 #define disable_interrupts() asm volatile("cli");
 #define enable_interrupts() asm volatile("sti");
 
-#define push_eflags() asm volatile("pushf");
-#define pop_eflags() asm volatile("popf");
-
-
 //The itoa implementation found at http://www.jb.man.ac.uk/~slowe/cpp/itoa.html
 //Converts integer to a character array using the specified base
 char* itoa(int value, char* result, int base);

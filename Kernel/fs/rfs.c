@@ -53,6 +53,10 @@ void root_bind_node(fs_node_t* boundto, fs_node_t* node) {
 		free(rfs_struct->directory_entrys);
 		rfs_struct->directory_entrys = dir_entrys_new;
 	}
+
+	boundto->length = rfs_struct->num_directory_entrys;
+
+	return;
 }
 
 void root_unbind_node(fs_node_t* boundto, fs_node_t* node) {
@@ -85,7 +89,10 @@ void root_unbind_node(fs_node_t* boundto, fs_node_t* node) {
 		rfs_struct->directory_entrys = new_node_dir;
 		rfs_struct->num_directory_entrys--;
 	}
-	
+
+	boundto->length = rfs_struct->num_directory_entrys;
+
+	return;	
 }
 
 fs_node_t* create_rfs_directory(char * name) 

@@ -2,6 +2,7 @@
 #include <heap/heap.h>
 #include <stdio.h>
 #include "reboot.h"
+#include <common.h>
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -61,10 +62,6 @@ int mem_map (void * null)
 	return 1;
 }
 
-int list_proc_func(void * null) {
-	list_processes();	
-}
-
 char CBuffer[1024];
 int cptr = 0;
 
@@ -100,6 +97,7 @@ void exec_cb()
 
 void kboard_callback(uint8 cb) 
 {
+	disable_interrupts();
 
 	if (cb == '\r') //Carriage return
 	{ 
@@ -130,12 +128,14 @@ void kboard_callback(uint8 cb)
 		}
 
 	}
+
+	return;
 }
 
 
 void post_init() 
 {
-    cmds[0].str = "ls";
+    cmds[0].str = "list_dirs";
     cmds[0].function = ls_func;
     cmds[1].str = "print_allocmap";
     cmds[1].function = mem_map;
@@ -143,9 +143,11 @@ void post_init()
     cmds[2].function = reboot_f;
     cmds[3].str = "help";
     cmds[3].function = help_f;
-    cmds[4].str = "lproc";
-    cmds[4].function = list_proc_func;
 
     init_keyboard();
     set_keyboard_callback(&kboard_callback);
+
+    for (;;)
+    {
+    }
 }

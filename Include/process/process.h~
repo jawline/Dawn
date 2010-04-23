@@ -2,6 +2,8 @@
 #define _PROCESS_DEFINITION_H_
 #include <mm/virt_mm.h>
 
+#define KERNEL_PID 0
+
 #define PROC_FLAG_KILLABLE 0x1
 
 struct process_structure 
@@ -13,7 +15,7 @@ struct process_structure
 
 	uint32 pid, pflags;
 
-	uint32 esp, ebp, ebx, esi, edi;
+	uint32 esp, ebp, eip, ebx, esi, edi;
 
 };
 

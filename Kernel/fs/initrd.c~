@@ -8,18 +8,20 @@
 #include <panic.h>
 
 /* The intent of this file it to provide a interface to bind the initial ramdisk in its structure to the virtual file system of the operating system
-   to do this it creates several lists of directories, files and several other arrays of memory to link the two
+   to do this it creates several lists of directories, files and several other arrays of memory to link the two.
+   It also contains some functions the OS uses the query the initial ram disk such as ird_finddir, ird_readdir and read_ird
+   The initial ramdisk is not writable
 */
 
-uint32 mem_start = 0;
+static uint32 mem_start = 0;
 
-uint32* start_list = 0;
-fs_node_t* file_list = 0;
-uint32 num_files = 0;
+static uint32* start_list = 0;
+static fs_node_t* file_list = 0;
+static uint32 num_files = 0;
 
-uint32** dir_file_list = 0;
-fs_node_t* dir_list = 0;
-uint32 num_directories = 0;
+static uint32** dir_file_list = 0;
+static fs_node_t* dir_list = 0;
+static uint32 num_directories = 0;
 
 fs_node_t * initrd_root_node = 0;
 
@@ -130,6 +132,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 		dir_list[iter].flags = FS_DIR; //Its a directory! Yay
 		dir_list[iter].readdir = ird_dir_readdir;
 		dir_list[iter].finddir = ird_dir_finddir;
+		dir_list[iter].length = en_ptr->fentrys;
 		dir_file_list[iter] = malloc(sizeof(uint32) * (en_ptr->fentrys + 1));
 		dir_file_list[iter][0] = en_ptr->fentrys; //So that the finddir and readdir functions know how many files are in the directory
 
@@ -190,6 +193,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 	initrd_root_node->flags = FS_DIR;
 	initrd_root_node->readdir = ird_root_readdir;
 	initrd_root_node->finddir = ird_root_finddir;
+	initrd_root_node->length = num_directories;
 
 	return initrd_root_node;
 }

@@ -1,0 +1,5 @@
+[GLOBAL get_cpuid_features]
+get_cpuid_features:
+	mov eax, 0x1
+	cpuid
+	mov eax, edx

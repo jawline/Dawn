@@ -1,0 +1,2 @@
+#define DEVICE_KEYBOARD 1
+#define DEVICE_MOUSE 2

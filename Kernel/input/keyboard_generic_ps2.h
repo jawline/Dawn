@@ -7,6 +7,5 @@
 typedef (*keyboard_callback) (uint8 ascik);
 
 void init_keyboard();
-void set_keyboard_callback(keyboard_callback s);
 
 #endif //_KEYBOARD_GENERIC_PS2_

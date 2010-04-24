@@ -1,0 +1,13 @@
+#include "cpu.h"
+#include <printf.h>
+
+extern const char* cpuid_call_vendor();
+
+const char* cpuid_getvendor()
+{
+	if (!cpuid_supported()) return "Unsupported";
+	
+	printf("%s\n", cpuid_call_vendor());
+
+	return "\0";
+}

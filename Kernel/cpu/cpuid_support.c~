@@ -1,0 +1,8 @@
+#include "cpu.h"
+
+uint8 cpuid_supported()
+{
+	uint8 result;
+
+	return 0;
+}

@@ -1,8 +1,10 @@
-#include "keyboard_generic.h"
+#include "keyboard_generic_ps2.h"
 #include <interrupts/irq.h>
 #include <interrupts/idt.h>
 #include <printf.h>
 #include <types/int_types.h>
+#include "keyboard.h"
+#include "input.h"
 
 char lowercase[256] = 
 {
@@ -28,11 +30,7 @@ char shifted[256] =
 			'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 0, 0, 0, ' '
 };
 
-uint8 shift_state = 0;
-uint8 escaped = 0;
-uint8 caps_lock = 0;
-
-static keyboard_callback cback = 0;
+static uint32 flags = 0;
 
 void keyboard_isr_callback(idt_call_registers_t regs) 
 {
@@ -41,36 +39,44 @@ void keyboard_isr_callback(idt_call_registers_t regs)
 
     switch(sc) {
         case 0x2a: 
-            shift_state = 1; 
+            flags = flags | FLAG_SHIFT_STATE;
             break;
  
         case 0xaa: 
-            shift_state = 0;
+            flags = flags ^ FLAG_SHIFT_STATE;
             break;
 
 	case 0xe0:
-	    escaped = 1;
-	    break;
-
-        case 0x36:
-	    shift_state = !shift_state;
+	    flags = flags | FLAG_ESCAPED; 
 	    break;
 
 	case 0x3a:
-	    caps_lock = !caps_lock;
+
+	    if ((flags & FLAG_CAPS_LOCK))
+	    {
+		//Caps lock is on
+		flags = flags ^ FLAG_CAPS_LOCK; //Swap bit to 0 using XOR
+            }
+ 	    else 
+	    {
+		flags = flags | FLAG_CAPS_LOCK; //Swap bit to 1 using OR
+	    }
+
 	    break;
  
         default:
-	   if (escaped) { escaped = 0; break; }
-           if (sc & 0x80) {
+	   if ((flags & FLAG_ESCAPED)) 
+	   { 
+		flags = flags ^ FLAG_ESCAPED; /* Set the bit to 0 */
+		break; 
+	   }
+           if (sc & 0x80) 
+	   {
               /* Ignore the break code */
-           } else {
-	      if (shift_state != 0) 
-              	cback(shifted[sc]);
-	      else if (caps_lock)
-		cback(uppercase[sc]);
-	      else
-              	cback(lowercase[sc]);
+           } 
+	   else 
+	   {
+		send_input_message(DEVICE_KEYBOARD, sc, &flags);
            }
            break;
      }
@@ -89,9 +95,4 @@ void init_keyboard()
 		t2 = temp; 
 	}
 
-}
-
-void set_keyboard_callback(keyboard_callback s) 
-{
-	cback = s;
 }

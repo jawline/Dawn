@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include "reboot.h"
 #include <common.h>
+#include "timers/clock.h"
+#include "input/input.h"
+#include "input/mouse.h"
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -62,6 +65,23 @@ int mem_map (void * null)
 	return 1;
 }
 
+int cpuid_out (void * null) 
+{
+
+	if (cpuid_supported())
+	{
+		printf("CPUID Supported\n");
+		printf("CPU Vendor: %s\n", cpuid_getvendor());
+		printf("CPU Features: 0x%x\n", cpuid_features());
+	}
+	else
+	{
+		printf("CPUID not supported\n");
+	}
+
+	return 1;
+}
+
 char CBuffer[1024];
 int cptr = 0;
 
@@ -113,7 +133,7 @@ void kboard_callback(uint8 cb)
 			{ 
 				CBuffer[cptr] = ' '; 
 			} 
-			if (cptr >= 0) 
+			if (cptr >= 0)
 			{ 
 				putc('\b'); 
 				putc(' ');
@@ -132,10 +152,24 @@ void kboard_callback(uint8 cb)
 	return;
 }
 
+void input_callback(uint32 dev, uint32 dat, void* flags)
+{
+	uint32 kflags = *(uint32*)flags;
+	kboard_callback(keyboard_chlookup_asci(dat, kflags));
+}
+
+void mouse_callback(uint32 dev, uint32 dat, void* flags)
+{
+	mouse_input_t* i = (mouse_input_t*) flags;
+	text_mode_move_vx(i->mouse_x / 16);
+	text_mode_move_vy(-(i->mouse_y / 30));
+}
+
 
 void post_init() 
 {
-    cmds[0].str = "ls";
+
+    cmds[0].str = "list_dirs";
     cmds[0].function = ls_func;
     cmds[1].str = "print_allocmap";
     cmds[1].function = mem_map;
@@ -143,9 +177,12 @@ void post_init()
     cmds[2].function = reboot_f;
     cmds[3].str = "help";
     cmds[3].function = help_f;
+    cmds[3].str = "cpuid";
+    cmds[3].function = cpuid_out;
 
-    init_keyboard();
-    set_keyboard_callback(&kboard_callback);
+
+    register_input_listener(DEVICE_KEYBOARD, input_callback);
+    register_input_listener(DEVICE_MOUSE, mouse_callback);
 
     for (;;)
     {

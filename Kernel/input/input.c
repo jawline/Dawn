@@ -6,8 +6,10 @@ input_listener_t* g_listenerList = 0;
 void initialize_input()
 {
 	g_listenerList = 0;
-	init_keyboard();
+
 	init_mouse();
+	init_keyboard();
+
 }
 
 void send_input_message(uint32 device, uint32 main, void* additional)

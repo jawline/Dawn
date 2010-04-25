@@ -170,14 +170,18 @@ void post_init()
 
     cmds[0].str = "list_dirs";
     cmds[0].function = ls_func;
+
     cmds[1].str = "print_allocmap";
     cmds[1].function = mem_map;
+
     cmds[2].str = "reboot";
     cmds[2].function = reboot_f;
+
     cmds[3].str = "help";
     cmds[3].function = help_f;
-    cmds[3].str = "cpuid";
-    cmds[3].function = cpuid_out;
+
+    cmds[4].str = "cpuid";
+    cmds[4].function = cpuid_out;
 
 
     register_input_listener(DEVICE_KEYBOARD, input_callback);

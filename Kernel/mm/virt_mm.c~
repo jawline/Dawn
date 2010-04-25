@@ -162,8 +162,7 @@ void init_virt_mm(uint32 mem_end)
 	
 	for (i = 0; i < 1024; i++) {
 		if (pagedir[i] != 0) {
-			printf("Pagedir 0x%x\n", pagedir[i]);	
-			PANIC("F");
+			pagedir[i] = 0;
 		}
 	}
 

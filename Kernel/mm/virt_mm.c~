@@ -169,11 +169,14 @@ void init_virt_mm(uint32 mem_end)
 	//Null it all!!! (Initialize the table)
 	memset(pagedir, 0, PAGE_SIZE);
 
-	//TODO: Remake this strip of code
-	//Needs replacing - IDMap the first 4MB of memory
-	pagedir[0] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
-	memset(pagedir[0], 0, PAGE_SIZE);
+	//Create a page table for every kernel reserved page
+	for (unsigned int i = 0; i < KERNEL_TABLES; i++)
+	{
+		pagedir[i] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
+		memset(pagedir[i], 0, PAGE_SIZE);
+	}
 
+	//ID map the first 4MB Of memory
 	uint32* pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory 	
 
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)

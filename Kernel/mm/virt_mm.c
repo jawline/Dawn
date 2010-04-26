@@ -2,7 +2,7 @@
 #include <mm/phys_mm.h>
 
 #include <interrupts/interrupt_handler.h>
-#include "panic.h"
+#include <panic/panic.h>
 #include <interrupts/idt.h>
 #include <debug/debug.h>
 

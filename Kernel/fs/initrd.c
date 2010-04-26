@@ -5,7 +5,7 @@
 #include <initrd/initrd_fent.h>
 #include <stdlib.h>
 #include <debug/debug.h>
-#include <panic.h>
+#include <panic/panic.h>
 
 /* The intent of this file it to provide a interface to bind the initial ramdisk in its structure to the virtual file system of the operating system
    to do this it creates several lists of directories, files and several other arrays of memory to link the two.

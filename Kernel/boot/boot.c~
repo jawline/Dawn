@@ -1,22 +1,8 @@
 // SimpleOS Entry Point
 // Main function is the entry point of the kernel.
 
-#include "multiboot.h"
-#include "drivers/screen.h"
-#include "gdt.h"
-#include "cmos_time.h"
-#include "panic.h"
-#include "cmos.h"
-#include <printf.h>
-#include <mm/phys_mm.h>
+#include <multiboot.h>
 #include <version/version.h>
-#include <debug/debug.h>
-#include <mm/virt_mm.h>
-#include <heap/heap.h>
-#include "fs/initrd.h"
-#include "reboot.h"
-#include <panic.h>
-
 #include <fs/vfs.h>
 #include <fs/dir.h>
 

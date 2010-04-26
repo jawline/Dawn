@@ -4,7 +4,7 @@
 
 #include <multiboot.h>
 
-#include "panic.h"
+#include <panic/panic.h>
 
 uint32 used_mem_end = 0;
 
@@ -118,8 +118,6 @@ extern void asm_copy_frame(uint32 src, uint32 dest);
 
 void copy_frame(uint32 phys_addr_src, uint32 phys_addr_dest) 
 {
-	if (paging_enabled == 0) return; //TODO: Copy frame with paging disabled (P*ss easy, just memcpy)
-
 	DEBUG_PRINT("Debug Message: Copying 0x");
 	DEBUG_PRINTX(phys_addr_src);
 

@@ -1,9 +1,9 @@
 #include "post_init.h"
 #include <heap/heap.h>
 #include <stdio.h>
-#include "reboot.h"
+#include <system/reboot.h>
 #include <common.h>
-#include "timers/clock.h"
+#include <timers/clock.h>
 #include "input/input.h"
 #include "input/mouse.h"
 

@@ -170,7 +170,7 @@ void init_virt_mm(uint32 mem_end)
 	memset(pagedir, 0, PAGE_SIZE);
 
 	//Create a page table for every kernel reserved page
-	for (unsigned int i = 0; i < KERNEL_TABLES; i++)
+	for (i = 0; i < KERNEL_TABLES; i++)
 	{
 		pagedir[i] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
 		memset(pagedir[i], 0, PAGE_SIZE);

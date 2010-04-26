@@ -11,7 +11,7 @@ void pit_callback()
 void initialize_system_clock()
 {
 	set_pit_callback(pit_callback);
-	init_pit(1000000);
+	init_pit(1000);
 }
 
 unsigned long get_clock_ticks()

@@ -1,4 +1,4 @@
-#include "clock.h"
+#include <timers/clock.h>
 #include "pit.h"
 
 unsigned long clock_ticks = 0;

@@ -4,20 +4,20 @@
 */
 
 #include "kernel_init.h"
-#include "drivers/screen.h"
-#include "multiboot.h"
+#include "../drivers/screen.h"
+#include <multiboot.h>
 #include <stdio.h>
-#include "gdt.h"
-#include "cmos_time.h"
-#include "panic.h"
-#include "cmos.h"
+#include <mm/gdt.h>
+#include <time/cmos_time.h>
+#include <panic/panic.h>
+#include <system/cmos.h>
 #include <printf.h>
 #include <mm/phys_mm.h>
 #include <mm/virt_mm.h>
 #include <heap/heap.h>
-#include "kstack.h"
-#include "fs/initrd.h"
-#include "reboot.h"
+#include "../stack/kstack.h"
+#include "../fs/initrd.h"
+#include <system/reboot.h>
 #include <types/size_t.h>
 #include <debug/debug.h>
 

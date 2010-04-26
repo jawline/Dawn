@@ -4,12 +4,12 @@
 */
 
 #include "kernel_init.h"
-#include "../drivers/screen.h"
+#include <screen/screen.h>
 #include <multiboot.h>
 #include <stdio.h>
 #include <mm/gdt.h>
 #include <time/cmos_time.h>
-#include "../panic/panic.h"
+#include <panic/panic.h>
 #include <system/cmos.h>
 #include <printf.h>
 #include <mm/phys_mm.h>

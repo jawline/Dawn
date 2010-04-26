@@ -4,7 +4,7 @@
 */
 
 #include "kernel_init.h"
-#include "../drivers/screen.h"
+#include <screen/screen.h>
 #include <multiboot.h>
 #include <stdio.h>
 #include <mm/gdt.h>
@@ -27,11 +27,6 @@
 #include <stdlib.h>
 
 #define iprintf(x) if (visual_output) { printf(x); }
-
-void init_screen() //All we really need to do here is clear the screen
-{
-	text_mode_clearscreen();
-}
 
 void init_GDT(int visual_output) 
 {

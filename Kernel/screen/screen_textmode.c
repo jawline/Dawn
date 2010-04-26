@@ -1,12 +1,9 @@
-#include "screen.h"
+#include <screen/screen.h>
 
 //The VGA Frame buffer starts at 0xB8000
 static uint16 * video_memory_location = (uint16 *)0xB8000;
 static uint8 cursor_x = 0;
 static uint8 cursor_y = 0;
-
-static uint8 vc_x = 0;
-static uint8 vc_y = 0;
 
 void text_mode_set_x(uint8 x) 
 {
@@ -24,25 +21,11 @@ static uint8 active_background_col = 0;
 static void text_mode_move_cursor() 
 {
     // The screen is 80 characters wide...
-    uint16 cursorLocation = vc_y * 80 + vc_x;
+    uint16 cursorLocation = cursor_y * 80 + cursor_x;
     outb(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
     outb(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
     outb(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
     outb(0x3D5, cursorLocation);      // Send the low cursor byte.
-}
-
-void text_mode_move_vx(int8 x)
-{
-	vc_x += x;
-	if (vc_x > 80) vc_x = 79;
-	text_mode_move_cursor();
-}
-
-void text_mode_move_vy(int8 y)
-{
-	vc_y += y;
-	if (vc_y > 25) vc_y = 24;
-	text_mode_move_cursor();
 }
 
 // Scrolls the text on the screen up by one line.

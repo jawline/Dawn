@@ -25,7 +25,7 @@ sources:
 link:
 	@ld $(LDFLAGS) -o ./Build/Kernel $(SOURCES)
 
-todolist:
+todo:
 	-@for file in $(ALLFILES); do fgrep -H -e TODO -e FIXME $$file; done; true
 
 .s.o:

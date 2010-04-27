@@ -1,6 +1,4 @@
 [BITS 32]
-[EXTERN irq_common_stub]
-[EXTERN isr_common_stub]
 
 %macro ISR_NOERRCODE 1
   global isr%1

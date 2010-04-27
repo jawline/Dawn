@@ -1,9 +1,12 @@
 #include <screen/screen.h>
+#include <terminal/terminal.h>
+#include <stdlib.h>
 
 //The VGA Frame buffer starts at 0xB8000
 static uint16 * video_memory_location = (uint16 *)0xB8000;
-static uint8 cursor_x = 0;
-static uint8 cursor_y = 0;
+static unsigned int cursor_x = 0;
+static unsigned int cursor_y = 0;
+static terminal_t* current_terminal = 0;
 
 void text_mode_set_x(uint8 x) 
 {
@@ -81,10 +84,13 @@ void text_mode_set_fg_color(uint8 col)
 	active_foreground_col = col;
 }
 
+void text_mode_set_bg_color(uint8 col) 
+{
+	active_background_col = col;
+}
+
 void text_mode_putc(char c) 
 {
-    // The background colour is black (0), the foreground is white (15).
-
     // The attribute byte is made up of two nibbles - the lower being the 
     // foreground colour, and the upper the background colour.
     uint8  attributeByte = (active_background_col << 4) | (active_foreground_col & 0x0F);
@@ -141,10 +147,92 @@ void text_mode_putc(char c)
 
 }
 
-void text_mode_write(const char * Array) 
+void text_mode_hardwrite(const char * Array) 
 {
 	unsigned int i = 0;
 	while (Array[i]) {
 		text_mode_putc(Array[i++]);	
 	}
+}
+
+void backup_terminal(terminal_t* term)
+{
+	term->m_backupData = malloc(sizeof(uint16) * term->m_width * term->m_height);
+	memcpy(term->m_backupData, video_memory_location, sizeof(uint16) * term->m_width * term->m_height);
+
+	term->m_used = 0;
+	term->f_putchar = 0;
+	term->f_setForeground = 0;
+	term->f_setBackground = 0;
+	term->f_updateCursor = 0;
+}
+
+void text_mode_tputc(terminal_t* term, char c)
+{
+	text_mode_putc(c);
+	term->m_cursorX = cursor_x;
+	term->m_cursorY = cursor_y;
+}
+
+void text_mode_tsetfg(terminal_t* term, uint8 col)
+{
+	text_mode_set_fg_color(col);
+}
+
+void text_mode_tsetbg(terminal_t* term, uint8 col)
+{
+	text_mode_set_bg_color(col);
+}
+
+void text_mode_tclear(terminal_t* term)
+{
+	text_mode_clearscreen();
+}
+
+void text_mode_tup(terminal_t* term)
+{
+	cursor_x = term->m_cursorX;
+	cursor_y = term->m_cursorY;
+}
+
+void text_mode_sett(terminal_t* term)
+{
+	if (current_terminal != 0)
+		backup_terminal(current_terminal);
+
+	current_terminal = 0;
+	term->m_used = 1;
+
+	if (term->m_height != 25 || term->m_width != 80)
+	{
+		//Incompatable with this terminal
+		current_terminal = 0;
+		text_mode_clearscreen();
+		return; //Crash
+	}
+
+	text_mode_clearscreen();
+
+	cursor_x = term->m_cursorX;
+	cursor_y = term->m_cursorY;
+	text_mode_move_cursor();
+	
+	if (term->m_backupData != 0)
+	{
+		//Restore from backed up data
+		memcpy(video_memory_location, term->m_backupData, sizeof(uint16) * term->m_width * term->m_height);
+		free(term->m_backupData);
+		term->m_backupData = 0; //Null it after
+	}
+
+	term->f_putchar = text_mode_tputc;
+	term->f_clear = text_mode_tclear;
+	term->f_updateCursor = text_mode_tup;
+
+	term->f_setForeground = text_mode_tsetfg;
+
+	term->f_setBackground = text_mode_tsetbg;
+
+	current_terminal = term;
+
 }

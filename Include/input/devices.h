@@ -1,0 +1,7 @@
+#ifndef _INPUT_DEVICES_
+#define _INPUT_DEVICES_
+
+#define DEVICE_KEYBOARD 1
+#define DEVICE_MOUSE 2
+
+#endif //_INPUT_DEVICES_

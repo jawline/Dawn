@@ -16,7 +16,7 @@ ASFLAGS=-felf32
 all: $(SOURCES) link
 
 clean:
-	-@rm $(SOURCES) ./Build/Kernel
+	-@rm $(OBJECTS) ./Build/Kernel
 
 sources:
 	@echo $(SSOURCES)

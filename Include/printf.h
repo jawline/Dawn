@@ -2,8 +2,8 @@
 #define _PRINT_F_DEF_H_
 #include <types/int_types.h>
 
-#define prints(string) text_mode_write(string)
-#define putc(char) text_mode_putc(char)
+#define prints(string) kputs(string)
+#define putc(char) kputc(char)
 
 void printi(int32 i);
 void printui(uint32 i);

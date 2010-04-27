@@ -1,7 +1,7 @@
 #ifndef _PS2_MOUSE_DEF_H_
 #define _PS2_MOUSE_DEF_H_
 #include <common.h>
-#include "mouse.h"
+#include <input/mouse.h>
 
 #define PORT_1 0x60
 #define PORT_2 0x64

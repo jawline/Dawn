@@ -50,6 +50,7 @@ uint8 load_keytable_asci(fs_node_t* node)
 	DEBUG_PRINT("Loading new keytable ");
 	DEBUG_PRINT(node->name);
 	DEBUG_PRINT("\n");
+
 	if (!node) return 0;
 	if (node->length != (256 * 3)) //Has to be the exact right size for a keytable
 	{

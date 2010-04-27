@@ -6,6 +6,7 @@ input_listener_t* g_listenerList = 0;
 void initialize_input()
 {
 	g_listenerList = 0;
+
 	init_mouse();
 	init_keyboard();
 

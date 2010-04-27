@@ -6,13 +6,13 @@ void panic(const char *message, const char *file, uint32 line)
     asm volatile("cli"); // Disable interrupts.
     char TBuffer[128];
     itoa(line, TBuffer, 10);
-    text_mode_write("PANIC(");
-    text_mode_write(message);
-    text_mode_write(") at ");
-    text_mode_write(file);
-    text_mode_write(":");
-    text_mode_write(TBuffer);
-    text_mode_write("\n");
+    text_mode_hardwrite("PANIC(");
+    text_mode_hardwrite(message);
+    text_mode_hardwrite(") at ");
+    text_mode_hardwrite(file);
+    text_mode_hardwrite(":");
+    text_mode_hardwrite(TBuffer);
+    text_mode_hardwrite("\n");
     // Halt by going into an infinite loop.
     for(;;);
 }
@@ -24,13 +24,13 @@ void panic_assert(const char *file, uint32 line, const char *desc)
     char TBuffer[128];
     itoa(line, TBuffer, 10);
 
-    text_mode_write("ASSERTION-FAILED(");
-    text_mode_write(desc);
-    text_mode_write(") at ");
-    text_mode_write(file);
-    text_mode_write(":");
-    text_mode_write(TBuffer);
-    text_mode_write("\n");
+    text_mode_hardwrite("ASSERTION-FAILED(");
+    text_mode_hardwrite(desc);
+    text_mode_hardwrite(") at ");
+    text_mode_hardwrite(file);
+    text_mode_hardwrite(":");
+    text_mode_hardwrite(TBuffer);
+    text_mode_hardwrite("\n");
     // Halt by going into an infinite loop.
     for(;;);
 }

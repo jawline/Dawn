@@ -24,8 +24,8 @@ void mouse_isr_callback(idt_call_registers_t regs)
     case 2:
       mouse_byte[2]=inb(PORT_1);
       istruct.i_byte = mouse_byte[0];
-      istruct.mouse_y = mouse_byte[1];
-      istruct.mouse_x = mouse_byte[2];
+      istruct.mouse_x = mouse_byte[1];
+      istruct.mouse_y = mouse_byte[2];
       send_input_message(DEVICE_MOUSE, 0, &istruct);
       mouse_cycle=0;
       break;

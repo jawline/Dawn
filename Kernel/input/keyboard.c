@@ -1,4 +1,4 @@
-#include "keyboard.h"
+#include <input/keyboard.h>
 #include <debug/debug.h>
 
 char lowercase[256] = 

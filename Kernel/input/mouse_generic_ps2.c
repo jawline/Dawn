@@ -3,7 +3,7 @@
 #include <interrupts/irq.h>
 #include <interrupts/idt.h>
 #include <interrupts/interrupt_handler.h>
-#include "devices.h"
+#include <input/devices.h>
 
 uint8 mouse_cycle=0;     //unsigned char
 int8 mouse_byte[3];    //signed char

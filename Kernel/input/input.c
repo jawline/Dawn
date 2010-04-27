@@ -1,4 +1,4 @@
-#include "input.h"
+#include <input/input.h>
 #include <stdlib.h>
 
 input_listener_t* g_listenerList = 0;

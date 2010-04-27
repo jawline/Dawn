@@ -75,12 +75,14 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 {
 	initialize_system_clock();
 	initialize_input();
-
-	init_screen();
-	iprintf("Initialization Started\n");
 	init_GDT(visual_output);
 	init_IDT(visual_output);
 	init_MemoryManagers(mboot_ptr, visual_output);
+	init_screen();
+
+	init_kterm();
+	iprintf("Initialization Started\n");
+
 
 	//Initialize the kernel heap
         init_kheap();
@@ -91,10 +93,6 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	//Reason for moving the stack. fork() needs to copy a stack, however when its < the kernels end (As grub sets it up) it will be identity mapped, not copied
 	//If its moved into higher memory, it gets copied, so fork() causes two processes with indavidual stacks to be created.
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
-
-	extern page_directory_t kernel_pagedir;
-	page_directory_t npg = copy_page_dir(kernel_pagedir);
-	switch_page_directory(npg);
 	
 	iprintf("End of initialization\n");
 }

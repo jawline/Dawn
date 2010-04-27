@@ -25,7 +25,6 @@ uint32 alloc_frame()
 {
 	if (paging_enabled == 0) 
 	{
-		DEBUG_PRINT("Debug Message: Allocate Page. Paging Disabled\n");
 		used_mem_end += 4096; //Add 4096 bytes (4kb) to used_mem_end address
 		return used_mem_end - 4096; //Return the old address
 		//The reason why this works is that all memory up to used_mem_end is identity mapped when paging is enabled

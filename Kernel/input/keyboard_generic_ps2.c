@@ -3,8 +3,8 @@
 #include <interrupts/idt.h>
 #include <printf.h>
 #include <types/int_types.h>
-#include "keyboard.h"
-#include "input.h"
+#include <input/keyboard.h>
+#include <input/input.h>
 
 static uint32 flags = 0;
 

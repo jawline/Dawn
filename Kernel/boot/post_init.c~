@@ -4,8 +4,9 @@
 #include <system/reboot.h>
 #include <common.h>
 #include <timers/clock.h>
-#include "input/input.h"
-#include "input/mouse.h"
+#include <input/input.h>
+#include <input/mouse.h>
+#include <terminal/terminal.h>
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -186,6 +187,8 @@ void post_init()
 
     register_input_listener(DEVICE_KEYBOARD, input_callback);
     register_input_listener(DEVICE_MOUSE, mouse_callback);
+
+    init_kterm();
 
     for (;;)
     {

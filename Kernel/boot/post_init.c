@@ -7,6 +7,7 @@
 #include <input/input.h>
 #include <input/mouse.h>
 #include <terminal/terminal.h>
+#include <process/process.h>
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -162,9 +163,19 @@ void input_callback(uint32 dev, uint32 dat, void* flags)
 void mouse_callback(uint32 dev, uint32 dat, void* flags)
 {
 	mouse_input_t* i = (mouse_input_t*) flags;
-	printf("Mouse moved %i %i\n", i->mouse_x, i->mouse_y);
 }
 
+void Entry(void* Arg)
+{
+	printf("Entry\n");
+	return;
+}
+
+void Exit()
+{
+	printf("Exit\n");
+	return;
+}
 
 void post_init() 
 {

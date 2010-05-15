@@ -1,0 +1,6 @@
+#ifndef _DISK_INPUT_OUTPUT_DEF_H_
+#define _DISK_INPUT_OUTPUT_DEF_H_
+
+
+
+#endif //_DISK_INPUT_OUTPUT_DEF_H_

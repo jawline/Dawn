@@ -97,5 +97,6 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
 	
 	init_kproc();
+	pio_init();
 	DEBUG_PRINT("End of initialization\n");
 }

@@ -135,8 +135,6 @@ uint8 pio_28bit_read(pio_device device, uint16* destination, uint32 lba, uint8 n
 		unsigned int i = 0;
 		for (i = 0; i < 256; i++) {		
 			*destination = inw(device.device_base);
-			if (*destination != 0)			
-				printf("0x%x ", *destination);
 			destination++;
 		}
 
@@ -233,21 +231,4 @@ void print_pio_debug(pio_device dev)
 	{
 		printf("Slave device unknown. Either non-existant or incompatable hardware\n");
 	}
-}
-
-void pio_init()
-{
-	pio_device dev;
-	dev.device_ctrl = 0x3F6;
-	dev.device_base = 0x1F0;
-	dev.slave_bit = 0;
-
-	if (pio_soft_reset(dev) == 1)
-	{
-		printf("PIO Timeout. HDD access disabled\n");
-		print_pio_debug(dev);
-		return;
-	}
-
-	print_pio_debug(dev);
 }

@@ -20,6 +20,8 @@
 #include <system/reboot.h>
 #include <types/size_t.h>
 #include <debug/debug.h>
+#include <hdd/disk_device.h>
+#include <pci/pci.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -70,6 +72,8 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 	bindnode_fs(init_vfs() /* returns root */ , initrd);
 }
 
+uint16 buffer[2048];
+
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
 void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
@@ -79,8 +83,6 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	init_IDT(visual_output);
 	init_MemoryManagers(mboot_ptr, visual_output);
 	init_screen();
-
-
 
 
 	//Initialize the kernel heap
@@ -97,6 +99,43 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
 	
 	init_kproc();
-	pio_init();
 	DEBUG_PRINT("End of initialization\n");
+
+	disk_device dev;
+	dev.device_ctrl = 0x3F6;
+	dev.device_base = 0x1F0;
+	dev.slave_bit = 0;
+
+	device_init(dev);
+	device_read(buffer, 0, 8, dev);
+	
+	uint8* tptr = (uint32*) buffer + (0x1BE);
+
+	unsigned int i = 0;
+	for (i = 0; i < 16; i++)
+	{
+		printf("%x ", *tptr);
+	}
+
+	pci_device pdev;
+	pdev.bus = 0;
+	pdev.slot = 0;
+	unsigned int j = 0;
+
+	for (j = 0; j < 255; j++)
+	{
+
+		for (i = 0; i < 255; i++)
+		{
+
+			if (pciDeviceExists(pdev) == 1)
+			{
+				printf("DEVICE EXISTS Vendor ID 0x%x Device ID 0x%x Class 0x%x\n", pciDeviceGetVendor(pdev), pciDeviceGetDeviceId(pdev), pciDeviceGetClass(pdev));
+			}
+
+		pdev.slot++;
+		}
+	
+	pdev.bus++;
+	}
 }

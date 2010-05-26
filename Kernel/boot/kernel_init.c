@@ -65,7 +65,7 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 		return;	
 	}
 
-	uint32* addr = mboot_ptr->mods_addr;
+	uint32* addr = (uint32*) mboot_ptr->mods_addr;
 
 	fs_node_t* initrd = initialize_initrd( *addr, "system", init_vfs() /* Returns root */);
 

@@ -6,12 +6,14 @@
 
 #define MASK_USED 0x1
 
-typedef struct {
+struct heap_entry {
 	uint8 used;
 	uint32 size; //Size (in bytes) of this block
-	uint32* next; //Location of the next header
-	uint32* prev; //Location of the previous header.
-} heap_entry_t;
+	struct heap_entry* next; //Location of the next header
+	struct heap_entry* prev; //Location of the previous header.
+};
+
+typedef struct heap_entry heap_entry_t;
 
 typedef struct {
 	uint32 heap_location; //Heaps location (In virtual memory)

@@ -11,7 +11,7 @@ process_t* init_kproc()
 	disable_interrupts();
 	if (kernel_proc != 0) return kernel_proc;
 
-	process_t* ret = malloc(sizeof(process_t));
+	process_t* ret = (process_t*) malloc(sizeof(process_t));
 	strcpy(ret->m_Name, "KernelProcess");
 	ret->m_ID = 0;
 

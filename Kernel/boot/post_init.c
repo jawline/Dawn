@@ -187,10 +187,10 @@ void post_init()
     cmds[1].function = mem_map;
 
     cmds[2].str = "reboot";
-    cmds[2].function = reboot_f;
+    cmds[2].function = (cmdfunc) reboot_f;
 
     cmds[3].str = "help";
-    cmds[3].function = help_f;
+    cmds[3].function = (cmdfunc) help_f;
 
     cmds[4].str = "cpuid";
     cmds[4].function = cpuid_out;

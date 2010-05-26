@@ -64,9 +64,9 @@ void init_heap(heap_t * heap, uint32 address)
 	DEBUG_PRINT("Debug Message: Ptr->next set\n");
 }
 
-uint32 alloc_mem(uint32 size, heap_t * heap) 
+uint32 alloc_mem(uint32 size, heap_t* heap) 
 {
-	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
+	heap_entry_t* ptr = (heap_entry_t*) heap->heap_location;
 	uint8 result = 0;
 
 	while (1) 
@@ -84,7 +84,7 @@ uint32 alloc_mem(uint32 size, heap_t * heap)
 				} 
 				else 
 				{
-					heap_entry_t * newptr = ((uint32) ptr) + sizeof(heap_entry_t) + size;
+					heap_entry_t* newptr = (heap_entry_t*) (((uint32) ptr) + sizeof(heap_entry_t) + size);
 					newptr->used = 0;
 					newptr->size = ptr->size - size - sizeof(heap_entry_t);
 					newptr->next = ptr->next;

@@ -157,7 +157,7 @@ void text_mode_hardwrite(const char * Array)
 
 void backup_terminal(terminal_t* term)
 {
-	term->m_backupData = malloc(sizeof(uint16) * term->m_width * term->m_height);
+	term->m_backupData = (void*) (malloc(sizeof(uint16) * term->m_width * term->m_height));
 	memcpy(term->m_backupData, video_memory_location, sizeof(uint16) * term->m_width * term->m_height);
 
 	term->m_used = 0;

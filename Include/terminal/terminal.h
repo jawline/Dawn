@@ -2,6 +2,8 @@
 #define _TERMINAL_DEFINITION_H_
 #include <common.h>
 
+struct abstract_terminal;
+
 typedef void (*term_updatecursor)(struct abstract_terminal* term);
 typedef void (*term_putc)(struct abstract_terminal* term, char c);
 

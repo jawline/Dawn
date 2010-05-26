@@ -29,12 +29,12 @@ int ls_func (void * null)
 	return 1;
 }
 
-void reboot_f(void * null) 
+int reboot_f(void * null) 
 {
 	reboot();
 }
 
-void help_f(void * null) 
+int help_f(void * null) 
 {
 	printf("Known functions\n");
 	printf("help - this\n");
@@ -82,6 +82,12 @@ int cpuid_out (void * null)
 	}
 
 	return 1;
+}
+
+int crash_me(void* null)
+{
+	uint32* FX = 0xABCDEF12;
+	*FX = 3;
 }
 
 char CBuffer[1024];
@@ -195,18 +201,24 @@ void post_init()
     cmds[4].str = "cpuid";
     cmds[4].function = cpuid_out;
 
+    cmds[4].str = "crash_me";
+    cmds[4].function = crash_me;
+
 
     register_input_listener(DEVICE_KEYBOARD, input_callback);
     register_input_listener(DEVICE_MOUSE, mouse_callback);
     int CPS = CLOCKS_PER_SECOND;
- 
-    int* FD = 0x599254;
-    int B = *FD; //Force a page fault
 
     for (;;)
     {
 	unsigned long long next_sec = clock() + CLOCKS_PER_SECOND;
 	while (clock() < next_sec);
-	printf("Second has passed. %u Ticks per second. %u Ticks since boot.\n", CPS, clock());
+	unsigned int pcx = kgetcx();
+	unsigned int pcy = kgetcy();
+	kmovecy(0);
+	kmovecx(0);
+	printf("%u Ticks per second.\n%u Ticks since boot.\n", CPS, clock());
+	kmovecy(pcy);
+	kmovecx(pcx);
     }
 }

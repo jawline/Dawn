@@ -199,6 +199,7 @@ void text_mode_tup(terminal_t* term)
 {
 	cursor_x = term->m_cursorX;
 	cursor_y = term->m_cursorY;
+	text_mode_move_cursor();
 }
 
 void text_mode_sett(terminal_t* term)

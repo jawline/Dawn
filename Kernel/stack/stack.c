@@ -48,11 +48,17 @@ stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp)
 	DEBUG_PRINTX(offset);
 	DEBUG_PRINT("\n");
 
-	stack_t new_stack_pointer = (stack_t) ((size_t)old_stack_pointer) + offset;
-	stack_t new_base_pointer  = (stack_t) ((size_t)old_base_pointer)  + offset; 
+	stack_t new_stack_pointer = (stack_t) (((size_t)old_stack_pointer) + offset);
+	stack_t new_base_pointer  = (stack_t) (((size_t)old_base_pointer ) + offset);
+
+	DEBUG_PRINT("New Stack Pointer: "); DEBUG_PRINTX(new_stack_pointer);
+	DEBUG_PRINT(" New Base Pointer: "); DEBUG_PRINT(new_base_pointer);
+	DEBUG_PRINT("\n");
 
 	//Copy over the new stack
-	memcpy((void*)new_stack_pointer, (void*)old_stack_pointer, initial_esp -  ((size_t)old_stack_pointer)); 
+	memcpy((void*)new_stack_pointer, (void*)old_stack_pointer, initial_esp -  ((size_t)old_stack_pointer));
+
+	DEBUG_PRINT("Debug Message: Done with memcpy\n");
 
 	size_t i = 0;
 

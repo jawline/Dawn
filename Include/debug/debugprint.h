@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "debug.h"
 
 #if defined(DEBUG_MODE)
 #define DEBUG_PRINT(x) printf(x)

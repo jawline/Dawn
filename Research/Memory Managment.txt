@@ -1,0 +1,5 @@
+Operating system kernels need to be able to manage how much physical memory there is available, and where it is mapped to virtual memory.
+To do this typically, a memory manager is designed and implemented in the kernels source code. In SimpleOS (My Implementation) the kernel maps every free physical "Frame" of memory
+to a stack at boot. When a new frame of memory is required any part of the kernel can call alloc_frame() to recieve the location in physical memory to a free/unused area. when it is done with it
+it calls the free_frame function which pushes it back to the top of the stack. Note that it gives the location of the physical memory, and that memory needs to be mapped to a virtual address before
+it can be used (See virtual memory)

@@ -198,8 +198,15 @@ void post_init()
 
     register_input_listener(DEVICE_KEYBOARD, input_callback);
     register_input_listener(DEVICE_MOUSE, mouse_callback);
+    int CPS = CLOCKS_PER_SECOND;
+ 
+    int* FD = 0x599254;
+    int B = *FD; //Force a page fault
 
     for (;;)
     {
+	unsigned long long next_sec = clock() + CLOCKS_PER_SECOND;
+	while (clock() < next_sec);
+	printf("Second has passed. %u Ticks per second. %u Ticks since boot.\n", CPS, clock());
     }
 }

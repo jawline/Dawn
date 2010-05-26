@@ -27,6 +27,28 @@ void kputc(char c)
 	g_kernelTerminal->f_putchar(g_kernelTerminal, c);
 }
 
+void kmovecx(unsigned int x)
+{
+	g_kernelTerminal->m_cursorX = x;
+	g_kernelTerminal->f_updateCursor(g_kernelTerminal);
+}
+
+void kmovecy(unsigned int y)
+{
+	g_kernelTerminal->m_cursorY = y;
+	g_kernelTerminal->f_updateCursor(g_kernelTerminal);
+}
+
+unsigned int kgetcx()
+{
+	return g_kernelTerminal->m_cursorX;
+}
+
+unsigned int kgetcy()
+{
+	return g_kernelTerminal->m_cursorY;
+}
+
 void kputs(const char* s)
 {
 	for (; *s != 0; s++)

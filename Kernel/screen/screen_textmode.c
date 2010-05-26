@@ -4,18 +4,24 @@
 
 //The VGA Frame buffer starts at 0xB8000
 static uint16 * video_memory_location = (uint16 *)0xB8000;
+
 static unsigned int cursor_x = 0;
 static unsigned int cursor_y = 0;
+
 static terminal_t* current_terminal = 0;
 
 void text_mode_set_x(uint8 x) 
 {
 	cursor_x = x;
+	if (current_terminal)
+		current_terminal->m_cursorX = x;
 }
 
 void text_mode_set_y(uint8 y) 
 {
 	cursor_y = y;
+	if (current_terminal)
+		current_terminal->m_cursorY = y;
 }
 
 static uint8 active_foreground_col = 15;

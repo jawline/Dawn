@@ -1,7 +1,7 @@
 #include <timers/clock.h>
 #include "pit.h"
 
-unsigned long clock_ticks = 0;
+unsigned long long clock_ticks;
 
 void pit_callback()
 {
@@ -10,11 +10,12 @@ void pit_callback()
 
 void initialize_system_clock()
 {
+	clock_ticks = 0;
 	set_pit_callback(pit_callback);
 	init_pit(1000);
 }
 
-unsigned long get_clock_ticks()
+unsigned long long get_clock_ticks()
 {
 	return clock_ticks;
 }

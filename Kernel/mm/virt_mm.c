@@ -32,23 +32,84 @@ extern uint32 used_mem_end; //End of kernel used memory at initialization of pag
 
 void page_fault (idt_call_registers_t regs)
 {
-  printf("[KERNEL FAULT]\n");
+  cls();
+  printf("--------------------------------------------------------------------------------");
+  printf("|  W        W       OO         OO        OO       PPPPPP   SSSSSSS  YY     YY  |");
+  printf("|  W        W     OO  OO     OO  OO    OO  OO     P    P   S         YY   YY   |");
+  printf("|  W        W    O      O   O      O  O      O    P    P   S          YY YY    |");
+  printf("|  W   WW   W    O      O   O      O  O      O    PPPPPP   S           YYY     |");
+  printf("|  W  W  W  W    O      O   O      O  O      O    P        SSSSSSS      Y      |");
+  printf("|  W W    W W    O      O   O      O  O      O    P              S      Y      |");
+  printf("|  WW      WW     OO  OO     OO  OO    OO  OO     P              S      Y      |");
+  printf("|  W        W       OO         OO        OO       P        SSSSSSS      Y      |");
+  printf("--------------------------------------------------------------------------------");
 
   uint32 faulting_address;
   asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
 
-  printf("[PAGE FAULT]\n[LOCATION 0x%x]\n", faulting_address);
+  printf("| The kernel has crashed. The reason was a segmentation fault.                 |");
+  printf("| below are the details                                                        |");
+  printf("|                                                                              |");
+  printf("| Page fault at location 0x%x", faulting_address);
+  kmovecx(79);
+  printf("|");
+  
+
   int present   = (regs.err_code & 0x1); // Page not present
   int rw = regs.err_code & 0x2;           // Write operation?
   int us = regs.err_code & 0x4;           // Processor was in user-mode?
   int reserved = regs.err_code & 0x8;     // Overwritten CPU-reserved bits of page entry?
   int id = regs.err_code & 0x10;          // Caused by an instruction fetch?
-  if (present) printf("[PAGE PRESENT]\n"); else printf("[PAGE NOT PRESENT]\n");
-  if (rw) printf("[WRITE OPERATION]\n");
-  if (us) printf("[USER MODE]\n");
-  if (reserved) printf("[RESERVED MEMORY OVERWRITE]\n");
-  if (id) printf("[INSTRUCTION FETCH]\n");
+
+  if (present) 
+  {
+  	printf("| PAGE PRESENT                                                                 |");
+  } 
+  else 
+  {
+  	printf("| PAGE NOT PRESENT                                                             |");
+  }
+  
+  if (rw)
+  {
+	printf("| WRITE OPERATION                                                              |");
+  }
+  else
+  {
+  	printf("| READ OPERATION                                                               |");
+  }
+
+  if (us)
+  {
+  	printf("| USER MODE FAULT                                                              |");
+  }
+  else
+  {
+  	printf("| KERNEL MODE FAULT                                                            |");
+  }
+
+  if (reserved) 
+  {
+ 	printf("| RESERVED MEMORY OVERWRITE                                                    |");
+  }
+  else
+  {
+  	printf("| NOT RESERVED MEMORY OVERWRITE                                                |");
+  }
+
+  if (id)
+  {
+ 	printf("| INSTRUCTION FETCH                                                            |");
+  }
+  else
+  {
+	printf("| NOT INSTRUCTION FETCH                                                        |");
+  }
+
+  printf("--------------------------------------------------------------------------------");
+
   PANIC("Page Fault!");
+
   for (;;) ;
 }
 

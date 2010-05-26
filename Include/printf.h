@@ -4,6 +4,7 @@
 
 #define prints(string) kputs(string)
 #define putc(char) kputc(char)
+#define cls() kcls();
 
 void printi(int32 i);
 void printui(uint32 i);

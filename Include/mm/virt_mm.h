@@ -11,18 +11,17 @@
 #define PAGE_DIR_IDX(x) ((uint32) x/1024)
 #define PAGE_TABLE_IDX(x) ((uint32) x%1024)
 
-#define PAGE_SIZE 4096
-
 #define page_directory_t uint32
-#include <types/int_types.h>
+#include <types/memory.h>
 
-#define KERNEL_TABLES 100
+extern unsigned int KERNEL_TABLES;
+extern unsigned int PAGE_SIZE;
 
 void init_virt_mm(uint32 val);
 
 void mark_paging_enabled();
 void map (uint32 va, uint32 pa, uint32 flags);
-void unmap (uint32 va);
+void unmap (LOCATION va);
 char get_mapping (uint32 va, uint32* pa);
 
 void enable_paging();

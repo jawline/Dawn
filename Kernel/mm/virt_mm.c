@@ -5,6 +5,7 @@
 #include <panic/panic.h>
 #include <interrupts/idt.h>
 #include <debug/debug.h>
+#include <types/memory.h>
 
 #define ReloadCR3() \
       __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
@@ -23,6 +24,9 @@ uint32* page_tables = (uint32*) PAGE_TABLE_VIRTUAL_ADDR;
 
 uint32 first_free_virt_addr();
 uint32 first_free_vk_addr();
+
+unsigned int KERNEL_TABLES = 100;
+unsigned int PAGE_SIZE = 4096;
 
 extern uint32 used_mem_end; //End of kernel used memory at initialization of paging
 
@@ -50,11 +54,11 @@ void page_fault (idt_call_registers_t regs)
 
 //Map the virtual address VA to the physical address PA with the appropriate flags.
 //VA = Virtual Address, PA = Physical Address, Flags = The flags to be set with the page.
-void map (uint32 va, uint32 pa, uint32 flags)
+void map (LOCATION va,LOCATION pa, uint32 flags)
 {
 
-  uint32 virtual_page = va / 0x1000;
-  uint32 pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
+  LOCATION virtual_page = va / 0x1000;
+  PAGE_INDEX pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
 
   // Find the appropriate page table for the physical address.
   if (page_directory[pt_idx] == 0)
@@ -63,7 +67,7 @@ void map (uint32 va, uint32 pa, uint32 flags)
     page_directory[pt_idx] = (alloc_frame() & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
     DEBUG_PRINT("Debug Message: virt_mm.c allocated frame\n");
     page_tables[pt_idx * 1024] = 0; //TODO: WHY does this fix!?!?! Assuming null memory somewhere (Have to be) fix asap.
-    memset (page_tables[pt_idx*1024], 0, 0x1000);
+    memset (((POINTER)page_tables[pt_idx*1024]), 0, 0x1000);
     DEBUG_PRINT("Debug Message: virt_mm.c memset new page table\n");
   }
 
@@ -73,9 +77,9 @@ void map (uint32 va, uint32 pa, uint32 flags)
 }
 
 //Unmap the virtual address VA from its physical address
-void unmap (uint32 va)
+void unmap (LOCATION va)
 {
-  uint32 virtual_page = va / 0x1000;
+  LOCATION virtual_page = va / 0x1000;
   
   page_tables[virtual_page] = 0;
 
@@ -173,11 +177,11 @@ void init_virt_mm(uint32 mem_end)
 	for (i = 0; i < KERNEL_TABLES; i++)
 	{
 		pagedir[i] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
-		memset(pagedir[i], 0, PAGE_SIZE);
+		memset(((POINTER)pagedir[i]), 0, PAGE_SIZE);
 	}
 
 	//ID map the first 4MB Of memory
-	uint32* pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory 	
+	POINTER pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory 	
 
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{
@@ -186,7 +190,7 @@ void init_virt_mm(uint32 mem_end)
 
 	// Assign the second-last table and zero it.
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
-	memset(pagedir[1022], 0, PAGE_SIZE);
+	memset(((POINTER)pagedir[1022]), 0, PAGE_SIZE);
 	pt = (uint32*) (pagedir[1022] & PAGE_MASK);
 	memset (pt, 0, PAGE_SIZE);
 
@@ -201,20 +205,20 @@ void init_virt_mm(uint32 mem_end)
 	//Map where the physical memory manager keeps its stack.
 	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR  >> 12));
 	page_directory[pt_idx] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
-	memset (page_tables[pt_idx*1024], 0, PAGE_SIZE);
+	memset(((POINTER)page_tables[pt_idx*1024]), 0, PAGE_SIZE);
 
 	mark_paging_enabled();
 }
 
-uint32 copy_page_table(uint32 * pt, uint32 copy)
+uint32 copy_page_table(POINTER pt, uint8 copy)
 {
 
 	uint32 ret_phys = alloc_frame();
 
-	uint32* existing_addr = first_free_vk_addr();
-	map(existing_addr, pt, PAGE_PRESENT | PAGE_WRITE); //Map the physical address of pt to a virtual address temporeraly	
-	uint32* new_addr = first_free_vk_addr();
-	map(new_addr, ret_phys, PAGE_PRESENT | PAGE_WRITE); //Map the physical address of the new addr to a virtual address temporeraly
+	POINTER existing_addr = (POINTER) first_free_vk_addr();
+	map((LOCATION)existing_addr, (LOCATION)pt, PAGE_PRESENT | PAGE_WRITE); //Map the physical address of pt to a virtual address temporeraly	
+	POINTER new_addr = (POINTER) first_free_vk_addr();
+	map((LOCATION)new_addr, (LOCATION)ret_phys, PAGE_PRESENT | PAGE_WRITE); //Map the physical address of the new addr to a virtual address temporeraly
 
 	memset(new_addr, 0, PAGE_SIZE);
 
@@ -240,8 +244,8 @@ uint32 copy_page_table(uint32 * pt, uint32 copy)
 		}
 	}
 
-	unmap(existing_addr);
-	unmap(new_addr);
+	unmap((LOCATION)existing_addr);
+	unmap((LOCATION)new_addr);
 
 	return ret_phys;
 }
@@ -253,19 +257,20 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	disable_interrupts();
 
 	//Allocate a 4kb frame from the pmm
-	page_directory_t* ret_phys = alloc_frame();
+	page_directory_t* ret_phys = (page_directory_t*) alloc_frame();
+	if (ret_phys == 0) return 0; //alloc frame failed. return nil
 
 	//Find a temporary mapped location in memory for the new page table
-	page_directory_t* temp_newdir_map = first_free_vk_addr();
-	map(temp_newdir_map, ret_phys, PAGE_PRESENT | PAGE_WRITE);
+	page_directory_t* temp_newdir_map = (page_directory_t*) first_free_vk_addr();
+	map((LOCATION)temp_newdir_map, (LOCATION)ret_phys, PAGE_PRESENT | PAGE_WRITE);
 	memset(temp_newdir_map, 0, PAGE_SIZE); //Null the 4kb
 
 	//Find a temporary mapped location in memory for the directory to be copied
-	page_directory_t* c_addr = first_free_vk_addr();
-	map(c_addr, pagedir, PAGE_PRESENT | PAGE_WRITE);
+	page_directory_t* c_addr = (page_directory_t*) first_free_vk_addr();
+	map((LOCATION)c_addr, (LOCATION)pagedir, PAGE_PRESENT | PAGE_WRITE);
 
-	page_directory_t* t_kernel_mapdir = first_free_vk_addr();
-	map(t_kernel_mapdir, kernel_pagedir, PAGE_PRESENT | PAGE_WRITE);
+	page_directory_t* t_kernel_mapdir = (page_directory_t*)first_free_vk_addr();
+	map((LOCATION)t_kernel_mapdir, (LOCATION)kernel_pagedir, PAGE_PRESENT | PAGE_WRITE);
 
 	//Copy all of the map directories
 	uint32 iter = 0;
@@ -284,7 +289,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 		if (c_addr[iter] != 0) 
 		{
 			//Copy the page table
-			temp_newdir_map[iter] = copy_page_table(c_addr[iter] & ~0xFFF, 1) | PAGE_PRESENT | PAGE_WRITE;
+			temp_newdir_map[iter] = copy_page_table(((POINTER)(c_addr[iter] & ~0xFFF)), 1) | PAGE_PRESENT | PAGE_WRITE;
 		}
 	}
 
@@ -306,17 +311,17 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	uint32 firstfree = first_free_vk_addr();
 	map(firstfree, temp_newdir_map[1022] & ~0xFFF, PAGE_PRESENT | PAGE_WRITE);
 
-	uint32* pt = firstfree;
+	uint32* pt = (POINTER)firstfree;
 	memset (pt, 0, 0x1000);
 
 	pt[1023] = (uint32) ret_phys | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
 
 	temp_newdir_map[1023] = (uint32) ret_phys | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
 
-	unmap(t_kernel_mapdir);
-	unmap(firstfree);
-	unmap(temp_newdir_map);
-	unmap(c_addr);
+	unmap(((LOCATION)t_kernel_mapdir));
+	unmap(((LOCATION)firstfree));
+	unmap(((LOCATION)temp_newdir_map));
+	unmap(((LOCATION)c_addr));
 
 	return ret_phys;
 }

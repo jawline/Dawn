@@ -72,8 +72,6 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 	bindnode_fs(init_vfs() /* returns root */ , initrd);
 }
 
-uint16 buffer[2048];
-
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
 void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
@@ -101,26 +99,12 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	init_kproc();
 	DEBUG_PRINT("End of initialization\n");
 
-	disk_device dev;
-	dev.device_ctrl = 0x3F6;
-	dev.device_base = 0x1F0;
-	dev.slave_bit = 0;
-
-	device_init(dev);
-	device_read(buffer, 0, 8, dev);
-	
-	uint8* tptr = (uint32*) buffer + (0x1BE);
-
-	unsigned int i = 0;
-	for (i = 0; i < 16; i++)
-	{
-		printf("%x ", *tptr);
-	}
-
 	pci_device pdev;
 	pdev.bus = 0;
 	pdev.slot = 0;
+	pdev.function = 0;
 	unsigned int j = 0;
+	unsigned int i = 0;
 
 	for (j = 0; j < 255; j++)
 	{
@@ -131,11 +115,15 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 			if (pciDeviceExists(pdev) == 1)
 			{
 				printf("DEVICE EXISTS Vendor ID 0x%x Device ID 0x%x Class 0x%x\n", pciDeviceGetVendor(pdev), pciDeviceGetDeviceId(pdev), pciDeviceGetClass(pdev));
+				uint8 b1 = pciConfigReadByte(pdev, 0);
+				uint8 b2 = pciConfigReadByte(pdev, 1);
+				uint16 concat = (b1) | (b2 << 8);
+				printf("Concat %x\n", concat);
 			}
 
 		pdev.slot++;
 		}
-	
+	pdev.slot = 0;
 	pdev.bus++;
 	}
 }

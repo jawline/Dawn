@@ -3,6 +3,7 @@
 #include <debug/debug.h>
 #include <multiboot.h>
 #include <panic/panic.h>
+#include <types/memory.h>
 
 uint32 used_mem_end = 0;
 
@@ -36,7 +37,8 @@ uint32 alloc_frame()
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
 		{
-			PANIC("Error:out of memory."); //This will crash the OS when we run out of frames (Bad idea much?) TODO: Revise this to not crash the OS, at least, not immediately
+			DEBUG_PRINT("Out of physical frames of memory\n");
+			return 0; //Frame 0 should never be free
 		}
 
 		// Pop off the stack.
@@ -69,7 +71,7 @@ void free_frame(uint32 frame)
 	else
 	{
 		//We still have stack space left to pop to,
-		uint32 * stack = phys_mm_slock;
+		uint32* stack = ((POINTER)phys_mm_slock);
 		*stack = frame;
 		phys_mm_slock += sizeof(uint32);	
 	}

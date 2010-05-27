@@ -209,6 +209,9 @@ void post_init()
     register_input_listener(DEVICE_MOUSE, mouse_callback);
     int CPS = CLOCKS_PER_SECOND;
 
+    scheduler_init(init_kproc());
+    enable_interrupts(); //Reenable interrupts shut off by copy_page_dir
+
     for (;;)
     {
 	unsigned long long next_sec = clock() + CLOCKS_PER_SECOND;

@@ -49,16 +49,15 @@ void switch_process(process_t* from, process_t* to)
 	esp = to->esp;
 	ebp = to->ebp;
 
-	asm volatile(
-	"       	     \
-	cli;                 \
-	mov %0, %%ecx;       \
-	mov %3, %%cr3;       \
-	mov %2, %%ebp;       \
-	mov %1, %%esp;       \
-	mov $0x12345, %%eax; \
-	sti;                 \
-	jmp *%%ecx           "
+	   asm volatile("         \
+	     cli;                 \
+	     mov %0, %%ecx;       \
+	     mov %1, %%esp;       \
+	     mov %2, %%ebp;       \
+	     mov %3, %%cr3;       \
+	     mov $0x12345, %%eax; \
+	     sti;                 \
+	     jmp *%%ecx           "
 	: : "r"(eip), "r"(esp), "r"(ebp), "r"(to->m_pageDir));
 
 	return;

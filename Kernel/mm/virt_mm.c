@@ -47,8 +47,22 @@ void page_fault (idt_call_registers_t regs)
   uint32 faulting_address;
   asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
 
-  printf("| The kernel has crashed. The reason was a segmentation fault.                 |");
+  printf("| The kernel has crashed. The reason was a paging fault.                       |");
   printf("| below are the details                                                        |");
+  printf("| current page directory location 0x%x", current_pagedir);
+  kmovecx(79);
+  printf("|");
+ 
+  if (current_pagedir == kernel_pagedir)
+  {
+  	printf("| Current page directory = Kernel page directory                               |");
+  }
+  else
+  {
+  	printf("| Current page directory != Kernel page directory                              |");
+  }
+
+  printf("|                                                                              |");
   printf("|                                                                              |");
   printf("| Page fault at location 0x%x", faulting_address);
   kmovecx(79);
@@ -369,20 +383,36 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 		DEBUG_PRINT("Not creating a new frame for entry 1022\n");	
 	}
 
+	DEBUG_PRINT("Mapping first free to "); DEBUG_PRINTX(temp_newdir_map[1022]);
 	uint32 firstfree = first_free_vk_addr();
 	map(firstfree, temp_newdir_map[1022] & ~0xFFF, PAGE_PRESENT | PAGE_WRITE);
 
+	DEBUG_PRINT("Memsetting firstfree to nil\n");
 	uint32* pt = (POINTER)firstfree;
 	memset (pt, 0, 0x1000);
 
+	DEBUG_PRINT("Setting the last page entry to loop back\n");
 	pt[1023] = (uint32) ret_phys | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
-
 	temp_newdir_map[1023] = (uint32) ret_phys | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
+
+	DEBUG_PRINT("Unampping\n");
 
 	unmap(((LOCATION)t_kernel_mapdir));
 	unmap(((LOCATION)firstfree));
 	unmap(((LOCATION)temp_newdir_map));
 	unmap(((LOCATION)c_addr));
+
+
+	//Switch to the page directory and ensure all pages mapped for the copy are unmapped
+	page_directory_t* backup = current_pagedir;
+	switch_page_directory(ret_phys);
+	unmap(((LOCATION)t_kernel_mapdir));
+	unmap(((LOCATION)firstfree));
+	unmap(((LOCATION)temp_newdir_map));
+	unmap(((LOCATION)c_addr));
+	switch_page_directory(backup);
+
+	DEBUG_PRINT("Returning\n");
 
 	return ret_phys;
 }

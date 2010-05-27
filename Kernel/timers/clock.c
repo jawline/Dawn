@@ -6,6 +6,7 @@ unsigned long long clock_ticks;
 void pit_callback()
 {
 	clock_ticks++;
+	scheduler_on_tick();
 }
 
 void initialize_system_clock()

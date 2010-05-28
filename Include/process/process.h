@@ -8,7 +8,7 @@ struct process_structure
 	unsigned int m_ID;
 	char m_Name[64];
 
-	uint32 esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */;
+	uint32 esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */; /* The rest is stored by the interrupt */
 	page_directory_t* m_pageDir;
 };
 

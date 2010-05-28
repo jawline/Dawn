@@ -404,13 +404,19 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 
 	//Switch to the page directory and ensure all pages mapped for the copy are unmapped
-	page_directory_t* backup = current_pagedir;
+	/*page_directory_t* backup = current_pagedir;
+	
+
+	PANIC("PRE-SWITCH");
 	switch_page_directory(ret_phys);
+	PANIC("POST-SWITCH");
+
 	unmap(((LOCATION)t_kernel_mapdir));
 	unmap(((LOCATION)firstfree));
 	unmap(((LOCATION)temp_newdir_map));
 	unmap(((LOCATION)c_addr));
-	switch_page_directory(backup);
+
+	switch_page_directory(backup); */
 
 	DEBUG_PRINT("Returning\n");
 

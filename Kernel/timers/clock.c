@@ -1,4 +1,5 @@
 #include <timers/clock.h>
+#include <panic/panic.h>
 #include "pit.h"
 
 unsigned long long clock_ticks;
@@ -6,6 +7,7 @@ unsigned long long clock_ticks;
 void pit_callback()
 {
 	clock_ticks++;
+
 	scheduler_on_tick();
 }
 

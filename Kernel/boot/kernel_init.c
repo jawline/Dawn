@@ -92,38 +92,7 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	init_kterm();
 	DEBUG_PRINT("KTerm Started\n");
 
-	//Reason for moving the stack. fork() needs to copy a stack, however when its < the kernels end (As grub sets it up) it will be identity mapped, not copied
-	//If its moved into higher memory, it gets copied, so fork() causes two processes with indavidual stacks to be created.
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
 	
-	init_kproc();
-	DEBUG_PRINT("End of initialization\n");
-
-	pci_device pdev;
-	pdev.bus = 0;
-	pdev.slot = 0;
-	pdev.function = 0;
-	unsigned int j = 0;
-	unsigned int i = 0;
-
-	for (j = 0; j < 255; j++)
-	{
-
-		for (i = 0; i < 255; i++)
-		{
-
-			if (pciDeviceExists(pdev) == 1)
-			{
-				printf("DEVICE EXISTS Vendor ID 0x%x Device ID 0x%x Class 0x%x\n", pciDeviceGetVendor(pdev), pciDeviceGetDeviceId(pdev), pciDeviceGetClass(pdev));
-				uint8 b1 = pciConfigReadByte(pdev, 0);
-				uint8 b2 = pciConfigReadByte(pdev, 1);
-				uint16 concat = (b1) | (b2 << 8);
-				printf("Concat %x\n", concat);
-			}
-
-		pdev.slot++;
-		}
-	pdev.slot = 0;
-	pdev.bus++;
-	}
+	scheduler_init(init_kproc());
 }

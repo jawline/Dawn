@@ -8,6 +8,7 @@
 #include <input/mouse.h>
 #include <terminal/terminal.h>
 #include <process/process.h>
+#include <panic/panic.h>
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -185,7 +186,6 @@ void Exit()
 
 void post_init() 
 {
-
     cmds[0].str = "list_dirs";
     cmds[0].function = ls_func;
 
@@ -204,24 +204,35 @@ void post_init()
     cmds[4].str = "crash_me";
     cmds[4].function = crash_me;
 
-
     register_input_listener(DEVICE_KEYBOARD, input_callback);
     register_input_listener(DEVICE_MOUSE, mouse_callback);
+
     int CPS = CLOCKS_PER_SECOND;
 
-    scheduler_init(init_kproc());
-    enable_interrupts(); //Reenable interrupts shut off by copy_page_dir
+    uint32 kres;
+    kres = kfork();
 
-    for (;;)
-    {
-	unsigned long long next_sec = clock() + CLOCKS_PER_SECOND;
-	while (clock() < next_sec);
-	unsigned int pcx = kgetcx();
-	unsigned int pcy = kgetcy();
-	kmovecy(0);
-	kmovecx(0);
-	printf("%u Ticks per second.\n%u Ticks since boot.\n", CPS, clock());
-	kmovecy(pcy);
-	kmovecx(pcx);
+    if (kres == 0) { //Parent
+    	enable_interrupts();
+	
+	    for (;;)
+	    {
+		unsigned long long next_sec = clock() + CLOCKS_PER_SECOND;
+		while (clock() < next_sec);
+		unsigned int pcx = kgetcx();
+		unsigned int pcy = kgetcy();
+		kmovecy(0);
+		kmovecx(0);
+		printf("%u Ticks per second.\n%u Ticks since boot.\n", CPS, clock());
+		kmovecy(pcy);
+		kmovecx(pcx);
+	    }
+
     }
+    else
+    {
+	//Child
+	for (;;) {} //Loop forever
+    }
+   
 }

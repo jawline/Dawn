@@ -5,30 +5,6 @@
 #include <version/version.h>
 #include <common.h>
 
-// We declare a pointer to the VGA array and its attributes
-unsigned short *video = (unsigned short *)0xB8000; // We could also use the virtual address 0xC00B8000
-unsigned char attrib = 0xF; // White text on black background
- 
-// Clears the screen
-void cls()
-{
-	int i = 0;
- 
-	for (i = 0; i < 80 * 25; i++)
-		video[i] = (attrib << 8) | 0;
-}
-
-char Buff[256];
- 
-// Prints the welcome message ;)
-void helloworld()
-{
-	int i = 0;
- 
-	for (i = 0; i < 80; i++)
-		video[i] = (attrib << 8) | Buff[i];
-}
-
 // Declare the page directory and a page table, both 4kb-aligned
 unsigned long kernelpagedir[1024] __attribute__ ((aligned (4096)));
 unsigned long lowpagetable[1024] __attribute__ ((aligned (4096)));
@@ -69,63 +45,16 @@ void init_paging()
 			"mov %%eax, %%cr0\n" :: "m" (kernelpagedirPtr));
 }
 
-struct gdt_entry
-{
-	unsigned short limit_low;
-	unsigned short base_low;
-	unsigned char base_middle;
-	unsigned char access;
-	unsigned char granularity;
-	unsigned char base_high;
-} __attribute__((packed));
- 
-struct gdt_ptr
-{
-	unsigned short limit;
-	unsigned int base;
-} __attribute__((packed));
- 
-// We'll need at least 3 entries in our GDT...
- 
-struct gdt_entry gdt[3];
-struct gdt_ptr gp;
- 
-// Extern assembler function
-void gdt_flush();
- 
-// Very simple: fills a GDT entry using the parameters
-void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran)
-{
-	gdt[num].base_low = (base & 0xFFFF);
-	gdt[num].base_middle = (base >> 16) & 0xFF;
-	gdt[num].base_high = (base >> 24) & 0xFF;
- 
-	gdt[num].limit_low = (limit & 0xFFFF);
-	gdt[num].granularity = ((limit >> 16) & 0x0F);
- 
-	gdt[num].granularity |= (gran & 0xF0);
-	gdt[num].access = access;
-}
- 
-// Sets our 3 gates and installs the real GDT through the assembler function
-void gdt_install()
-{
-	gp.limit = (sizeof(struct gdt_entry) * 6) - 1;
-	gp.base = (unsigned int)&gdt;
- 
-	gdt_set_gate(0, 0, 0, 0, 0);
-	gdt_set_gate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
-	gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
- 
-	temp_gdt_flush();
-}
-
 //Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
 int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack pointer */)
 {
+    //Install a temporery GDT that maps the first 4MB of code so tha shizzle can be accsizzled
     init_paging();
+
+    //Install the real GDT
     init_GDT();
 
+    //The kernel SHOULLDD now init fine, and think its in the magical land of the higher half
 
     #if defined(DEBUG_MODE)
     	//Needs the multiboot location to function, 1 signals that the init routines should be noisy and cover the screen in stuff

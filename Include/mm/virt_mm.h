@@ -11,10 +11,11 @@
 #define PAGE_DIR_IDX(x) ((uint32) x/1024)
 #define PAGE_TABLE_IDX(x) ((uint32) x%1024)
 
+#define KERNEL_START 0xC0000000
+
 #define page_directory_t uint32
 #include <types/memory.h>
 
-extern unsigned int KERNEL_TABLES;
 extern unsigned int PAGE_SIZE;
 
 void init_virt_mm(uint32 val);

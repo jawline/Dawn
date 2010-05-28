@@ -1,0 +1,1 @@
+Current limitations, if the Kernel & Ramdisk together use more then 4MB of physical space there will be a oopsie. Will look into fixing soon

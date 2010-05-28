@@ -1,11 +1,11 @@
 #include <heap/heap.h>
+#include <mm/virt_mm.h>
+#define KERNEL_HEAP_ADDR KERNEL_START + 0x10000000
 
 heap_t kernel_heap;
-#define HEAP_ADDR 0x300000
-
 void init_kheap() 
 {
-	init_heap(&kernel_heap, HEAP_ADDR);
+	init_heap(&kernel_heap, KERNEL_HEAP_ADDR);
 }
 
 uint32 kmalloc(uint32 mem) 

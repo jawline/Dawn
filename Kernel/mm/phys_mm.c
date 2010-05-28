@@ -19,7 +19,6 @@ void init_phys_mm(uint32 start)
 	DEBUG_PRINT("\n");
 
 	used_mem_end = (start + 0x1000) & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
-
 }
 
 uint32 alloc_frame() 

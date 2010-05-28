@@ -25,7 +25,6 @@ uint32* page_tables = (uint32*) PAGE_TABLE_VIRTUAL_ADDR;
 uint32 first_free_virt_addr();
 uint32 first_free_vk_addr();
 
-unsigned int KERNEL_TABLES = 100;
 unsigned int PAGE_SIZE = 4096;
 
 extern uint32 used_mem_end; //End of kernel used memory at initialization of paging
@@ -230,6 +229,10 @@ void disable_paging()
 	}
 }
 
+uint32 get_table(uint32 address)
+{
+	return address / PAGE_SIZE / 1024;
+}
 
 void init_virt_mm(uint32 mem_end) 
 {
@@ -248,20 +251,17 @@ void init_virt_mm(uint32 mem_end)
 	//Null it all!!! (Initialize the table)
 	memset(pagedir, 0, PAGE_SIZE);
 
-	//Create a page table for every kernel reserved page
-	for (i = 0; i < KERNEL_TABLES; i++)
-	{
-		pagedir[i] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE; //Allocate a 4kb "Frame" of memory for this page.
-		memset(((POINTER)pagedir[i]), 0, PAGE_SIZE);
-	}
+	pagedir[0] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
 
 	//ID map the first 4MB Of memory
-	POINTER pt = (uint32*) (pagedir[0] & PAGE_MASK); //Pointer to the page directory 	
+	POINTER pt = (POINTER) (pagedir[0] & PAGE_MASK); //Pointer to the page directory
 
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{
-		pt[i] = i * PAGE_SIZE | PAGE_PRESENT | PAGE_WRITE;	
+		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_WRITE;	
 	}
+
+	pagedir[get_table(KERNEL_START)] = pagedir[0];
 
 	// Assign the second-last table and zero it.
 	pagedir[1022] = alloc_frame() | PAGE_PRESENT | PAGE_WRITE;
@@ -287,171 +287,10 @@ void init_virt_mm(uint32 mem_end)
 
 uint32 copy_page_table(POINTER pt, uint8 copy)
 {
-
-	uint32 ret_phys = alloc_frame();
-
-	POINTER existing_addr = (POINTER) first_free_vk_addr();
-	map((LOCATION)existing_addr, (LOCATION)pt, PAGE_PRESENT | PAGE_WRITE); //Map the physical address of pt to a virtual address temporeraly	
-	POINTER new_addr = (POINTER) first_free_vk_addr();
-	map((LOCATION)new_addr, (LOCATION)ret_phys, PAGE_PRESENT | PAGE_WRITE); //Map the physical address of the new addr to a virtual address temporeraly
-
-	memset(new_addr, 0, PAGE_SIZE);
-
-	uint32 iter = 0;
-	DEBUG_PRINT("Copying page table 0x");
-	DEBUG_PRINTX(pt);
-	DEBUG_PRINT("\n");
-
-	for (iter = 0; iter < 1024; iter++)
-	{
-		if (existing_addr[iter] != 0)
-		{
-			if (copy == 1) 
-			{
-				uint32 copied_p_addr = alloc_frame();
-				copy_frame(existing_addr[iter] & ~0xFFF, copied_p_addr);
-				new_addr[iter] = copied_p_addr | PAGE_PRESENT | PAGE_WRITE;
-			}
-			else 
-			{
-				new_addr[iter] = existing_addr[iter];
-			}
-		}
-	}
-
-	unmap((LOCATION)existing_addr);
-	unmap((LOCATION)new_addr);
-
-	return ret_phys;
+	return 0;
 }
 
 page_directory_t* copy_page_dir(page_directory_t* pagedir) 
 {
-
-	//Disable interrupts
-	disable_interrupts();
-
-	//Allocate a 4kb frame from the pmm
-	page_directory_t* ret_phys = (page_directory_t*) alloc_frame();
-	if (ret_phys == 0) return 0; //alloc frame failed. return nil
-
-	//Find a temporary mapped location in memory for the new page table
-	page_directory_t* temp_newdir_map = (page_directory_t*) first_free_vk_addr();
-	map((LOCATION)temp_newdir_map, (LOCATION)ret_phys, PAGE_PRESENT | PAGE_WRITE);
-	memset(temp_newdir_map, 0, PAGE_SIZE); //Null the 4kb
-
-	//Find a temporary mapped location in memory for the directory to be copied
-	page_directory_t* c_addr = (page_directory_t*) first_free_vk_addr();
-	map((LOCATION)c_addr, (LOCATION)pagedir, PAGE_PRESENT | PAGE_WRITE);
-
-	page_directory_t* t_kernel_mapdir = (page_directory_t*)first_free_vk_addr();
-	map((LOCATION)t_kernel_mapdir, (LOCATION)kernel_pagedir, PAGE_PRESENT | PAGE_WRITE);
-
-	//Copy all of the map directories
-	uint32 iter = 0;
-
-	//Make all the kernel tables identical
-	for (iter = 0; iter < KERNEL_TABLES; iter++) 
-	{
-		if (c_addr[iter] != 0) 
-		{
-			temp_newdir_map[iter] = c_addr[iter];
-		}
-	}
-
-	for (iter = KERNEL_TABLES; iter < 1023; iter++)
-	{
-		if (c_addr[iter] != 0) 
-		{
-			//Copy the page table
-			temp_newdir_map[iter] = copy_page_table(((POINTER)(c_addr[iter] & ~0xFFF)), 1) | PAGE_PRESENT | PAGE_WRITE;
-		}
-	}
-
-	if (temp_newdir_map[1023] != 0)
-	{	
-		//Shouldnt be non null
-		DEBUG_PRINT("Error, temp_newdir_map != 0\n");
-	}
-
-	if (temp_newdir_map[1022] == 0)
-	{
-		DEBUG_PRINT("Creating a new frame for entry 1022\n");
-		uint32 t_mloc = alloc_frame();
-		temp_newdir_map[1022] = t_mloc | PAGE_PRESENT | PAGE_WRITE;
-	} else {
-		DEBUG_PRINT("Not creating a new frame for entry 1022\n");	
-	}
-
-	DEBUG_PRINT("Mapping first free to "); DEBUG_PRINTX(temp_newdir_map[1022]);
-	uint32 firstfree = first_free_vk_addr();
-	map(firstfree, temp_newdir_map[1022] & ~0xFFF, PAGE_PRESENT | PAGE_WRITE);
-
-	DEBUG_PRINT("Memsetting firstfree to nil\n");
-	uint32* pt = (POINTER)firstfree;
-	memset (pt, 0, 0x1000);
-
-	DEBUG_PRINT("Setting the last page entry to loop back\n");
-	pt[1023] = (uint32) ret_phys | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
-	temp_newdir_map[1023] = (uint32) ret_phys | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
-
-	DEBUG_PRINT("Unampping\n");
-
-	unmap(((LOCATION)t_kernel_mapdir));
-	unmap(((LOCATION)firstfree));
-	unmap(((LOCATION)temp_newdir_map));
-	unmap(((LOCATION)c_addr));
-
-
-	//Switch to the page directory and ensure all pages mapped for the copy are unmapped
-	/*page_directory_t* backup = current_pagedir;
-	
-
-	PANIC("PRE-SWITCH");
-	switch_page_directory(ret_phys);
-	PANIC("POST-SWITCH");
-
-	unmap(((LOCATION)t_kernel_mapdir));
-	unmap(((LOCATION)firstfree));
-	unmap(((LOCATION)temp_newdir_map));
-	unmap(((LOCATION)c_addr));
-
-	switch_page_directory(backup); */
-
-	DEBUG_PRINT("Returning\n");
-
-	return ret_phys;
-}
-
-//TODO: Optimize
-uint32 first_free_vk_addr()
-{
-	uint32 iter = 0;
-	uint32 pa = 0;
-
-		for (iter = 0; iter < (1024 * PAGE_SIZE) * KERNEL_TABLES; iter += PAGE_SIZE)
-		{
-			if (get_mapping(iter, &pa) == 0) {
-				return iter;	
-			}
-		}
-
-	return 0;
-}
-
-//TODO: Optimize (Use the pagedir & pt you can iterate quicker)
-uint32 first_free_virt_addr() //Very simple function to find the first free address (Unmapped virtual address)
-{ 
-
-	uint32 iter = 0;
-	uint32 pa = 0;
-
-		for (iter = (1024 * PAGE_SIZE) * KERNEL_TABLES; iter < 0xFFFFFFFF; iter += PAGE_SIZE)
-		{
-			if (get_mapping(iter, &pa) == 0) {
-				return iter;	
-			}
-		}
-
 	return 0;
 }

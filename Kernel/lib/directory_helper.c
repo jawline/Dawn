@@ -14,7 +14,6 @@ void print_directory(fs_node_t* node, int recur) {
 	ent = readdir_fs(node, iter);
 
 	if (ent == 0) {
-		free(ent);
 		break;	
 	}
 

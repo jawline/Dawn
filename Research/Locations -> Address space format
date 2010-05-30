@@ -3,5 +3,5 @@
 0xC0000000->0xD0000000 - 256MB Kernel code space
 0xD0000000->0xE0000000 - 256MB Kernel heap space
 0xE0000000->0xE1000000 - Physical memory manager stack
-0xE0000000->0xE1001000 - Kernel stack
+0xE0000000->0xE1002000 - Kernel stack
 0xE1001000->0xFFFFFFFF - Reserved

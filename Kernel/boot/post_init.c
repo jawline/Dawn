@@ -186,6 +186,7 @@ void Exit()
 
 void post_init() 
 {
+
     cmds[0].str = "list_dirs";
     cmds[0].function = ls_func;
 
@@ -209,24 +210,11 @@ void post_init()
 
     int CPS = CLOCKS_PER_SECOND;
 
-    uint32 kres;
+    uint32 kres = 0;
     kres = kfork();
 
     if (kres == 0) { //Parent
     	enable_interrupts();
-	
-	    for (;;)
-	    {
-		unsigned long long next_sec = clock() + CLOCKS_PER_SECOND;
-		while (clock() < next_sec);
-		unsigned int pcx = kgetcx();
-		unsigned int pcy = kgetcy();
-		kmovecy(0);
-		kmovecx(0);
-		printf("%u Ticks per second.\n%u Ticks since boot.\n", CPS, clock());
-		kmovecy(pcy);
-		kmovecx(pcx);
-	    }
 
     }
     else

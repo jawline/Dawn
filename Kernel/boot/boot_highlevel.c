@@ -4,10 +4,11 @@
 #include <multiboot.h>
 #include <version/version.h>
 #include <common.h>
+#include <stdlib.h>
 
 // Declare the page directory and a page table, both 4kb-aligned
-unsigned long kernelpagedir[1024] __attribute__ ((aligned (4096)));
-unsigned long lowpagetable[1024] __attribute__ ((aligned (4096)));
+uint32 kernelpagedir[1024] __attribute__ ((aligned (4096)));
+uint32 lowpagetable[1024] __attribute__ ((aligned (4096)));
  
 // This function fills the page directory and the page table,
 // then enables paging by putting the address of the page directory
@@ -23,6 +24,8 @@ void init_paging()
 								// virtual address to physical address
 	lowpagetablePtr = (char *)lowpagetable + 0x40000000;	// Same for the page table
  
+	memset(kernelpagedir, 0, sizeof(uint32) * 1024);
+
 	// Counts from 0 to 1023 to...
 	for (k = 0; k < 1024; k++)
 	{
@@ -51,9 +54,6 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     //Install a temporery GDT that maps the first 4MB of code so tha shizzle can be accsizzled
     init_paging();
 
-    //Install the real GDT
-    init_GDT();
-
     //The kernel SHOULLDD now init fine, and think its in the magical land of the higher half
 
     #if defined(DEBUG_MODE)
@@ -71,7 +71,7 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     //Run whatever the kernel is designed to do after initialization
     post_init();
 
-    for (;;) {  }
+    for (;;) {  } 
 
     return 0xDEADBABA;
 }

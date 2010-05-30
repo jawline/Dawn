@@ -5,14 +5,14 @@
 #include <panic/panic.h>
 #include <types/memory.h>
 
-uint32 used_mem_end = 0;
+MEM_LOC used_mem_end = 0;
 
-uint32 phys_mm_slock = PHYS_MM_STACK_ADDR;
-uint32 phys_mm_smax = PHYS_MM_STACK_ADDR;
+MEM_LOC phys_mm_slock = PHYS_MM_STACK_ADDR;
+MEM_LOC phys_mm_smax = PHYS_MM_STACK_ADDR;
 
 extern uint32 paging_enabled;
 
-void init_phys_mm(uint32 start) 
+void init_phys_mm(MEM_LOC start) 
 {
 	DEBUG_PRINT("Debug Message: Used memory end 0x");
 	DEBUG_PRINTX(start);
@@ -63,7 +63,7 @@ void free_frame(uint32 frame)
 
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)
 	{
-	    map (phys_mm_smax, frame, PAGE_PRESENT | PAGE_WRITE);
+	    map ((POINTER) phys_mm_smax, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE);
 	    phys_mm_smax += PAGE_SIZE;
 	
 	}

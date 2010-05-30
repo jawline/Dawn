@@ -3,7 +3,8 @@
 #include "int_types.h"
 
 #define POINTER uint32*
-#define LOCATION uint32
+#define MEM_LOC uint32
+
 #define PAGE_INDEX uint32
 
 #endif

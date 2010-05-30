@@ -25,13 +25,17 @@ void scheduler_on_tick()
 			{
 				if (current_proc == other_proc)
 				{
+
 					current_proc = kernel_proc;
 					switch_process(other_proc, kernel_proc);
+
 				}
 				else
 				{
+
 					current_proc = other_proc;
 					switch_process(kernel_proc, other_proc);
+
 				}
 			}
 			else

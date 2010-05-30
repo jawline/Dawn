@@ -12,6 +12,7 @@ struct dirent* root_readdir (fs_node_t* node, uint32 idx) {
 	if (rfs_struct->num_directory_entrys > idx) 
 	{
 		struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+		memset(ret, 0, sizeof(struct dirent));
 		strcpy(ret->name, rfs_struct->directory_entrys[idx]->name);
 		return ret;
 	}

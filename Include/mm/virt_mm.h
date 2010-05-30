@@ -12,6 +12,8 @@
 #define PAGE_TABLE_IDX(x) ((uint32) x%1024)
 
 #define KERNEL_START 0xC0000000
+#define KERNEL_RESERVED_START KERNEL_START + 0x20001000
+#define KERNEL_MEMORY_END 0xFFFFFFFF
 
 #define page_directory_t uint32
 #include <types/memory.h>
@@ -21,8 +23,8 @@ extern unsigned int PAGE_SIZE;
 void init_virt_mm(uint32 val);
 
 void mark_paging_enabled();
-void map (uint32 va, uint32 pa, uint32 flags);
-void unmap (LOCATION va);
+void map (POINTER va, POINTER pa, uint32 flags);
+void unmap (POINTER va);
 char get_mapping (uint32 va, uint32* pa);
 
 void enable_paging();

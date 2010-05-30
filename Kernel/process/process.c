@@ -66,7 +66,7 @@ int kfork()
 
 		new_process->esp = esp;
 		new_process->ebp = ebp;
-		new_process->ebp = ebp;
+		new_process->eip = current_eip;
 
 		printf("Set ESP 0x%x\nEBP 0x%x\n", esp, ebp);
 
@@ -76,7 +76,7 @@ int kfork()
 	}
 	else
 	{
-
+		for (;;) { }
 		return 1; //Return 1 - Child
 	}
 }

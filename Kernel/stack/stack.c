@@ -2,6 +2,7 @@
 #include <mm/virt_mm.h>
 #include <debug/debug.h>
 #include <types/memory.h>
+#include <panic/panic.h>
 
 //Returns the location of the new stack (The value passed in new_start) if succesful, null otherwise
 //NOTE: A stack unwinds downards, so the mapping = new_start to new_start - size
@@ -17,12 +18,14 @@ stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp)
 	DEBUG_PRINTX(new_start);
 	DEBUG_PRINT("\n");
 
-	LOCATION end = ((unsigned int)new_start) - size;
+	POINTER end = ((unsigned int)new_start) - size;
+
 	//This for loop maps new_start to new_start - size with physical memory
-	for (iter = (LOCATION)new_start; iter >= end; iter -= 0x1000) 
+	for (iter = new_start; iter >= end; iter -= 0x1000) 
 	{
-		LOCATION frame = alloc_frame();
-		map((LOCATION)iter, (LOCATION)frame, PAGE_PRESENT | PAGE_WRITE);
+		POINTER frame = alloc_frame();
+
+		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE);
 	}
 	
 	stack_t old_stack_pointer = 0; 

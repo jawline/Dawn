@@ -75,21 +75,36 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
 void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
-	initialize_system_clock();
-	initialize_input();
+	//Load the archaic 
 	init_GDT(visual_output);
-	init_IDT(visual_output);
-	init_MemoryManagers(mboot_ptr, visual_output);
-	init_screen();
 
+	//Interrupts description table
+	init_IDT(visual_output);
+	
+	//Initialize the PMM and VMM
+	init_MemoryManagers(mboot_ptr, visual_output);
 
 	//Initialize the kernel heap
         init_kheap();
 
+	//Self Explanatory
+	init_screen();
+
+	//System timers
+	initialize_system_clock();
+
+	//Input interfaces
+	initialize_input();
+
+	//Init the virtual file system
 	fs_node_t * rootfs = init_vfs();
+	
+	//Load and hook the ramdisk to the root file system
 	init_ramdisk(mboot_ptr, rootfs);
 
+	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	init_kterm();
+
 	DEBUG_PRINT("KTerm Started\n");
 
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);

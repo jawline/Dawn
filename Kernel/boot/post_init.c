@@ -17,7 +17,8 @@ typedef int (*cmdfunc) (void * arg);
 
 typedef struct 
 {
-	char * str;
+	char* str;
+	char* description;
 	cmdfunc function;
 } cmd_list;
 
@@ -32,17 +33,21 @@ int ls_func (void * null)
 
 int reboot_f(void * null) 
 {
-	reboot();
+	kernel_reboot();
 }
 
 int help_f(void * null) 
 {
-	printf("Known functions\n");
-	printf("help - this\n");
-	printf("reboot - reboot the PC (May not function as desired in specific emulators\n");
-	printf("ls - list every file & directory in the VFS recursively\n");
-	printf("print_allocmap - print the heaps current allocation map and how much free memory there is\n");
-	printf("End of known functions\n");
+	unsigned int iter = 0;
+	
+	for (iter = 0; iter < 256; iter++)
+	{
+		if (cmds[iter].str != 0)
+		{
+			printf("Function: %s Description: %s\n", cmds[iter].str, cmds[iter].description);
+		}
+	}
+
 }
 
 int mem_map (void * null) 
@@ -187,29 +192,44 @@ void Exit()
 void post_init() 
 {
 
+    unsigned int iter = 0;
+    for (iter = 0; iter < 256; iter++)
+    {
+	cmds[iter].str = 0;
+	cmds[iter].function = 0;
+	cmds[iter].description = 0;
+    }
+
     cmds[0].str = "list_dirs";
+    cmds[0].description = "List all directories from root";
     cmds[0].function = ls_func;
 
     cmds[1].str = "print_allocmap";
+    cmds[1].description = "Print kernel memory map and unmapped RAM";
     cmds[1].function = mem_map;
 
     cmds[2].str = "reboot";
+    cmds[2].description = "Reboot machine";
     cmds[2].function = (cmdfunc) reboot_f;
 
     cmds[3].str = "help";
+    cmds[3].description = "List functions & descriptions";
     cmds[3].function = (cmdfunc) help_f;
 
     cmds[4].str = "cpuid";
+    cmds[4].description = "List capabilities of the processor";
     cmds[4].function = cpuid_out;
 
-    cmds[4].str = "crash_me";
-    cmds[4].function = crash_me;
+    cmds[5].str = "crash_me";
+    cmds[5].description = "Page fault to crash the kernel";
+    cmds[5].function = crash_me;
 
     register_input_listener(DEVICE_KEYBOARD, input_callback);
     register_input_listener(DEVICE_MOUSE, mouse_callback);
 
     int CPS = CLOCKS_PER_SECOND;
 
+    
     uint32 kres = 0;
     kres = kfork();
 
@@ -220,7 +240,8 @@ void post_init()
     else
     {
 	//Child
-	for (;;) {} //Loop forever
+	for (;;) { } //Loop forever
     }
-   
+
+   for (;;) { }
 }

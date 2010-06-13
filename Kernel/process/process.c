@@ -76,7 +76,6 @@ int kfork()
 	}
 	else
 	{
-		for (;;) { }
 		return 1; //Return 1 - Child
 	}
 }
@@ -105,17 +104,19 @@ inline void switch_process(process_t* from, process_t* to)
 	eip = to->eip;
 	esp = to->esp;
 	ebp = to->ebp;
+	page_directory_t* pagedir = to->m_pageDir;
 
-	switch_page_directory(to->m_pageDir);
+	extern page_directory_t* current_pagedir;
+	current_pagedir = pagedir;
 
-	asm volatile("        	     \
-	    	mov %1, %%esp;       \
-	     	mov %2, %%ebp;       \
-		mov %0, %%ecx;       \
-	     	mov $0x12345, %%eax; \
-	     	sti;                 \
-	     	jmp *%%ecx           "
-	: : "r"(eip), "r"(esp), "r"(ebp));
+	asm volatile("cli; \
+		      mov %1, %%esp; \
+		      mov %2, %%ebp; \
+		      mov %0, %%ecx; \
+		      mov %3, %%cr3; \
+		      mov $0x12345, %%eax; \
+		      sti; \
+		      jmp %%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
 
 	return;
 }

@@ -20,7 +20,7 @@ typedef uchar byte;
 /* Check if bit n in flags is set */
 #define check_flag(flags, n) ((flags) & bit(n))
 
-void reboot()
+void kernel_reboot()
 {
     byte temp;
 

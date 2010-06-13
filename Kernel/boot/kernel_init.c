@@ -78,11 +78,14 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	//Load the archaic 
 	init_GDT(visual_output);
 
-	//Interrupts description table
-	init_IDT(visual_output);
-	
 	//Initialize the PMM and VMM
 	init_MemoryManagers(mboot_ptr, visual_output);
+
+	//Move the stack to a nicer location in memory
+	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
+
+	//Interrupts description table
+	init_IDT(visual_output);
 
 	//Initialize the kernel heap
         init_kheap();
@@ -106,8 +109,8 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	init_kterm();
 
 	DEBUG_PRINT("KTerm Started\n");
-
-	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
 	
-	//scheduler_init(init_kproc());
+	printf("Initial ESP %x\n", initial_esp);
+
+	scheduler_init(init_kproc());
 }

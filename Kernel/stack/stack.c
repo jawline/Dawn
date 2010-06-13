@@ -9,16 +9,18 @@
 
 stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp) 
 {
-	new_start = (stack_t) (((size_t)new_start) & PAGE_MASK); //Page align it
-	unsigned int iter = 0; //for iterator
+
+	MEM_LOC iter = 0; //for iterator
 
 	DEBUG_PRINT("Debug Message: Mapping new stack between 0x");
-	DEBUG_PRINTX(((size_t)new_start) - size);
+	DEBUG_PRINTX(new_start - size);
 	DEBUG_PRINT(" and 0x");
 	DEBUG_PRINTX(new_start);
 	DEBUG_PRINT("\n");
 
-	POINTER end = ((unsigned int)new_start) - size;
+
+
+	MEM_LOC end = new_start - size;
 
 	//This for loop maps new_start to new_start - size with physical memory
 	for (iter = new_start; iter >= end; iter -= 0x1000) 
@@ -27,7 +29,7 @@ stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp)
 
 		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE);
 	}
-	
+
 	stack_t old_stack_pointer = 0; 
 	asm volatile("mov %%esp, %0" : "=r" (old_stack_pointer));
 
@@ -46,7 +48,7 @@ stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp)
 	DEBUG_PRINTX(initial_esp);
 	DEBUG_PRINT("\n");
 
-	size_t offset = ((size_t)new_start) - initial_esp;
+	int64 offset = ((size_t)new_start) - initial_esp;
 	DEBUG_PRINT("Debug Message: Calculated stack offset 0x");
 	DEBUG_PRINTX(offset);
 	DEBUG_PRINT("\n");

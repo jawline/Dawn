@@ -58,6 +58,7 @@ void Initialize_IDT()
 	idt_set_gate( 29, (uint32)isr29 , 0x08, 0x8E);
 	idt_set_gate( 30, (uint32)isr30 , 0x08, 0x8E);
 	idt_set_gate( 31, (uint32)isr31 , 0x08, 0x8E);
+	idt_set_gate( 127, (uint32)isr127 , 0x08, 0x8E);
 
 	//Set the irq handlers up.
   	idt_set_gate(32, (uint32)irq0, 0x08, 0x8E);

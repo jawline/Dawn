@@ -138,6 +138,13 @@ void map (POINTER va, POINTER pa, uint32 flags)
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
     page_directory[pt_idx] = (alloc_frame()) | PAGE_PRESENT | PAGE_WRITE;
     ReloadCR3();
+
+    unsigned int i = 0;
+    
+    for (i = 0; i < 1024; i++)
+    {
+    	page_tables[(pt_idx * 1024) + i] = 0;
+    }
   }
 
   // Now that the page table definately exists, we can update the PTE.

@@ -1,6 +1,7 @@
 #include "post_init.h"
 #include <heap/heap.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <system/reboot.h>
 #include <common.h>
 #include <timers/clock.h>
@@ -9,6 +10,8 @@
 #include <terminal/terminal.h>
 #include <process/process.h>
 #include <panic/panic.h>
+#include <fs/vfs.h>
+#include "../loaders/elf/parser.h"
 
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
@@ -88,6 +91,11 @@ int cpuid_out (void * null)
 	}
 
 	return 1;
+}
+
+int list_proc(void* null)
+{
+
 }
 
 int crash_me(void* null)
@@ -189,6 +197,11 @@ void Exit()
 	return;
 }
 
+fs_node_t* get_node(fs_node_t* node, const char* Name)
+{
+	return finddir_fs(node, Name);
+}
+
 void post_init() 
 {
 
@@ -227,21 +240,89 @@ void post_init()
     register_input_listener(DEVICE_KEYBOARD, input_callback);
     register_input_listener(DEVICE_MOUSE, mouse_callback);
 
-    int CPS = CLOCKS_PER_SECOND;
+    fs_node_t* system = get_node(init_vfs(), "system");
+    fs_node_t* root = get_node(system, "root");
 
-    
-    uint32 kres = 0;
-    kres = kfork();
+    fs_node_t* line = get_node(root, "Line.x");
 
-    if (kres == 0) { //Parent
-    	enable_interrupts();
-
-    }
-    else
+    if (line != 0)
     {
-	//Child
-	for (;;) { } //Loop forever
-    }
+	printf("Found Line.x\n");
+	void* Data = malloc(line->length);
+	read_fs(line, 0, line->length, Data);
+	e32_header head = parseElfHeader(Data, line->length);
 
-   for (;;) { }
+	if (head.e_type == ELF_EXE)
+	{
+		printf("Line.x is a executable\n");
+	}
+
+	if (elfHeaderValid(head) == 1)
+	{
+		printf("Valid elf header\n");
+	} else
+	{
+		printf("Invalid elf header\n");
+	}
+
+	if (getElfHeaderClass(head) == ELF_CLASS_32)
+	{
+		printf("32 bits (Loadable)\n");
+	} else 
+	{
+		printf("Prolly unloadable. Gohna try anyways\n");
+	}
+
+	if (getElfHeaderVersion(head) == ELF_VERSION_CURRENT)
+	{
+		printf("Versions are correct (looking good)\n");
+	}
+
+	if (getElfHeaderData(head) == ELF_DATA_LSB)
+	{
+		printf("ELF_DATA_LSB = true. If ELF_CLASS_32 should be IA32 compatable\n");
+	}
+
+	printf("Line %x\n", head.e_type);
+
+	unsigned int i = 0;
+	uint32 is = 0;
+
+	for (i = 0; i < head.e_phnum; i++)
+	{
+		e32_pheader pHead = parseElfProgramHeader(Data, line->length, head, i);
+
+		if (pHead.p_type == PT_LOAD)
+		{
+			printf("Loadable segment\n");
+		} else
+		{
+			printf("Unloadable segment 0x%x\n", pHead.p_type);
+		}
+
+		printf("Offset %x\n", pHead.p_offset);
+		printf("Virtual %x Physical %x\n", pHead.p_vaddr, pHead.p_paddr);
+
+		printf("Mapping virtual\n");
+
+		if (pHead.p_type == PT_LOAD)
+		{
+			//Check that every byte is mapped (CHEAP)
+			for (is = pHead.p_vaddr; is < pHead.p_vaddr + pHead.p_memsz; is += PAGE_SIZE)
+			{
+				if (get_mapping(is, 0) == 0)
+				{
+					//Map it
+					uint32 newframe = alloc_frame();
+					map(is, newframe, PAGE_PRESENT | PAGE_WRITE);
+				}
+			}
+		
+			memcpy(pHead.p_vaddr, Data + pHead.p_offset, pHead.p_memsz);
+
+			asm volatile("jmp %0" :: "r" (pHead.p_vaddr));
+		}
+	}
+    }
+    
 }

@@ -12,6 +12,16 @@
 #cd to the OS directory
 cd ..
 
+#Build Line
+echo "Rebuilding Line"
+cd Line
+make clean
+make
+cd ..
+
+#Copy Line to the ramdisk dir
+cp Line/Build/Line InitRD/Line.x
+
 #Make temporary directory
 echo "Recompiling initial RAM disks";
 cd InitRD

@@ -136,15 +136,16 @@ void map (POINTER va, POINTER pa, uint32 flags)
   if (page_directory[pt_idx] == 0)
   {
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
-    page_directory[pt_idx] = (alloc_frame() & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
+    page_directory[pt_idx] = (alloc_frame()) | PAGE_PRESENT | PAGE_WRITE;
     DEBUG_PRINT("Debug Message: virt_mm.c allocated frame\n");
     page_tables[pt_idx * 1024] = 0; //TODO: WHY does this fix!?!?! Assuming null memory somewhere (Have to be) fix asap.
     memset (((POINTER)page_tables[pt_idx*1024]), 0, 0x1000);
     DEBUG_PRINT("Debug Message: virt_mm.c memset new page table\n");
+    ReloadCR3();
   }
 
   // Now that the page table definately exists, we can update the PTE.
-  page_tables[(MEM_LOC)virtual_page] = (((MEM_LOC)pa) & PAGE_MASK) | flags;
+  page_tables[(MEM_LOC)virtual_page] = (((MEM_LOC)pa)) | flags;
   __flush_tlb_single(va);
 }
 
@@ -296,8 +297,7 @@ void init_virt_mm(uint32 mem_end)
 
 	mark_paging_enabled();
 
-
-	for (i = get_table(KERNEL_START); i < 1022; i++)
+	for (i = 0; i < 1022; i++)
 	{
 		if (page_directory[i] == 0) {
 			MEM_LOC address = alloc_frame();

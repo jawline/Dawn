@@ -87,7 +87,7 @@ fs_node_t* ird_dir_finddir (fs_node_t* node, char* name)
 uint32 read_ird(fs_node_t *node, uint32 offset, uint32 size, uint8* buffer)
 {
 	if (offset + size > node->length) return 0;
-	uint8 * loc = start_list[node->inode];
+	uint8* loc = start_list[node->inode];
 	memcpy(buffer, ((uint32)loc + (uint32)offset), size); //Copy the mem mems
 	return size; //Not much error checking we can do. If a page fault occurs somethings gone wrong =)
 }
@@ -174,7 +174,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 	for (iter = 0; iter < (*nm_files); iter++) 
 	{
 
-		start_list[iter] = start + fe_ptr->start;
+		start_list[iter] = (start + fe_ptr->start) - 1;
 
 		strcpy(file_list[iter].name, fe_ptr->name);
 		file_list[iter].inode = iter;

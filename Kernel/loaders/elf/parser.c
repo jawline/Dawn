@@ -22,8 +22,6 @@ e32_pheader parseElfProgramHeader(void* Data, unsigned int Length, e32_header He
 	MEM_LOC start_loc = Header.e_phoff + (Header.e_phentsize * number);
 	MEM_LOC read_loc = ((MEM_LOC)Data) + start_loc;
 
-	printf("Added %x readloc %x\n", start_loc, read_loc);
-
 	if (Length < start_loc) {
 		memset(&Ret, 0, sizeof(e32_pheader));
 	}

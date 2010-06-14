@@ -1,6 +1,6 @@
-# Makefile for SimpleOS Line
+# Makefile for SimpleOS Line program
 
-PROJDIRS := ./ ../Shared/sources/ ../API/sources/
+PROJDIRS := ./sources ../Shared/sources/ ../API/sources/
 CSOURCES := $(shell find $(PROJDIRS) -name "*.c")
 SSOURCES := $(shell find $(PROJDIRS) -name "*.s")
 ALLFILES := $(CSOURCES) $(SSOURCES)
@@ -10,7 +10,7 @@ OBJECTS := $(shell find $(PROJDIRS) -name "*.o")
 SOURCES := $(patsubst %.s,%.o,$(SSOURCES)) $(patsubst %.c,%.o,$(CSOURCES))
 
 CC=gcc
-CFLAGS=-nostdlib -nostdinc -fno-builtin -I ../Shared/headers -I ../API/headers/ -fno-stack-protector -m32
+CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I ../Shared/headers -I ../API/headers/ -fno-stack-protector -m32
 LDFLAGS=-Tlink.ld -melf_i386
 ASFLAGS=-felf32
 

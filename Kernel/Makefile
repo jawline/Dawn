@@ -1,6 +1,6 @@
 # Makefile for SimpleOS Kernel
 
-PROJDIRS := ./ ../Shared/sources/
+PROJDIRS := ./sources ../Shared/sources/
 CSOURCES := $(shell find $(PROJDIRS) -name "*.c")
 SSOURCES := $(shell find $(PROJDIRS) -name "*.s")
 ALLFILES := $(CSOURCES) $(SSOURCES)
@@ -10,7 +10,7 @@ OBJECTS := $(shell find $(PROJDIRS) -name "*.o")
 SOURCES := $(patsubst %.s,%.o,$(SSOURCES)) $(patsubst %.c,%.o,$(CSOURCES))
 
 CC=gcc
-CFLAGS=-nostdlib -nostdinc -fno-builtin -I ../kernel_include -I ../Shared/headers -fno-stack-protector -m32
+CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I ../Shared/headers -fno-stack-protector -m32
 LDFLAGS=-Tlink.ld -melf_i386
 ASFLAGS=-felf32
 

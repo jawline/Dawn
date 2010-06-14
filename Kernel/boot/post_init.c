@@ -16,6 +16,19 @@
 extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
 
+void kernel_keyboard_callback(uint32 device, uint32 main, void* additional)
+{
+	char input = keyboard_chlookup_asci(main, *((uint32*)additional));
+	process_t* cproc = get_current_process();
+
+	cproc->m_inputBuffer[cproc->m_inputCurPosition] = input;
+
+	if (cproc->m_inputCurPosition + 1 < cproc->m_inputBufferLength)
+	{
+		cproc->m_inputCurPosition = cproc->m_inputCurPosition + 1;
+	}
+}
+
 fs_node_t* get_node(fs_node_t* node, const char* Name)
 {
 	return finddir_fs(node, Name);
@@ -23,6 +36,7 @@ fs_node_t* get_node(fs_node_t* node, const char* Name)
 
 void post_init() 
 {
+    register_input_listener(DEVICE_KEYBOARD, &kernel_keyboard_callback);
 
     fs_node_t* system = get_node(init_vfs(), "system");
     fs_node_t* root = get_node(system, "root");

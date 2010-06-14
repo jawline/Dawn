@@ -3,7 +3,7 @@
 
 static clock_callback on_pit_tick = 0;
 
-static void pit_tick_callback(idt_call_registers_t regs)
+static idt_call_registers_t pit_tick_callback(idt_call_registers_t regs)
 {
 	if (on_pit_tick)
 	{

@@ -8,7 +8,7 @@
 
 static uint32 flags = 0;
 
-void keyboard_isr_callback(idt_call_registers_t regs) 
+idt_call_registers_t keyboard_isr_callback(idt_call_registers_t regs) 
 {
     uint8 sc = inb(0x60);
     char new_char;

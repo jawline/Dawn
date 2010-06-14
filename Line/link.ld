@@ -2,7 +2,7 @@ ENTRY(start)
 
 SECTIONS
 {
-    . = 0x500000;
+    . = 0x1000000;
     
     .setup :
     {

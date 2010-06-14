@@ -9,7 +9,7 @@ uint8 mouse_cycle=0;     //unsigned char
 int8 mouse_byte[3];    //signed char
 mouse_input_t istruct;
 
-void mouse_isr_callback(idt_call_registers_t regs) 
+idt_call_registers_t mouse_isr_callback(idt_call_registers_t regs) 
 {
   switch(mouse_cycle)
   {

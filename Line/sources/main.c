@@ -1,7 +1,10 @@
 #include <types/memory.h>
 #include <common.h>
 #include <printf.h>
-#include <version/version.h>
+
+#include <version/kernel_version.h>
+#include <version/os_version.h>
+
 #include <syscall/syscall.h>
 #include <printf.h>
 
@@ -26,7 +29,8 @@ void exec_cmd()
 	else if (strcmp("help", Pointer) == 0)
 	{
 		printf("Line - Command line tool for SimpleOS\n");
-		printf("Compiled with SimpleOS version %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
+		printf("Line - Executable compiled for Kernel version %i.%i.%i codename %s\n", KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION, KVERSION_CODENAME);
+		printf("Compiled as part of OS version %i.%i.%i codename %s\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
 		printf("No real functions yet.\n");
 	}
 	else
@@ -39,7 +43,8 @@ int start(int argc, void* argv)
 {
 	syscall_set_input_buffer(Data, 1024);
 
-	printf("Line - Executable compiled for SimpleOS version %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
+	printf("Line - Executable compiled for Kernel version %i.%i.%i codename %s\n", KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION, KVERSION_CODENAME);
+	printf("Compiled as part of OS version %i.%i.%i codename %s\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
 
 	printf("Line.x:> ");
 	Pointer[0] = '\0';

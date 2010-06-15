@@ -129,7 +129,7 @@ void page_fault (idt_call_registers_t regs)
 //VA = Virtual Address, PA = Physical Address, Flags = The flags to be set with the page.
 void map (POINTER va, POINTER pa, uint32 flags)
 {
-  POINTER virtual_page = (POINTER)(((MEM_LOC)va) / 0x1000);
+  MEM_LOC virtual_page = (MEM_LOC)(((MEM_LOC)va) / 0x1000);
   PAGE_INDEX pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
 
   // Find the appropriate page table for the physical address.
@@ -305,6 +305,8 @@ void init_virt_mm(uint32 mem_end)
 		if (page_directory[i] == 0) {
 			MEM_LOC address = alloc_frame();
 			page_directory[i] = (address & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
+
+			//Null it
 			POINTER pt = free_kernel_virtual_address();
 			map(pt, address, PAGE_PRESENT | PAGE_WRITE);
 			memset(pt, 0, PAGE_SIZE);
@@ -347,11 +349,19 @@ MEM_LOC copy_page_table(MEM_LOC pt, uint8 copy)
 	{
 		if (temp_read_addr[i] != 0)
 		{
-			MEM_LOC New_Frame = copy_page(temp_read_addr[i]);
-			temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_WRITE;
+			if (copy == 1)
+			{
+				MEM_LOC New_Frame = copy_page(temp_read_addr[i]);
+				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_WRITE;
+			}
+			else
+			{
+				temp_write_addr[i] == temp_read_addr[i];
+			}
 		}
 		else
 		{
+			temp_write_addr[i] = 0;
 			//Nufink to copy
 		}
 	}
@@ -397,8 +407,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 		}
 		else
 		{
-			//Do nuting iniyt
-
+			copying_to[i] = 0;
 		}
 	}
 
@@ -415,22 +424,20 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	map(pt, frame, PAGE_PRESENT | PAGE_WRITE);
 	memset (pt, 0, PAGE_SIZE);
 
-	pt[1023] = (uint32)pagedir | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
-	unmap(pt);
+	POINTER opt = free_kernel_virtual_address();
+	map(opt, being_copied[1022], PAGE_PRESENT | PAGE_WRITE);
 
-	copying_to[1023] = ((MEM_LOC)return_location) | PAGE_PRESENT | PAGE_WRITE; //Loop back address
+	memcpy(pt, opt, PAGE_SIZE);
+
+	pt[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
+
+	unmap(pt);
+	unmap(opt);
+
+	copying_to[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Loop back address
 
 	unmap(being_copied);
 	unmap(copying_to);
-
-	page_directory_t* backup = current_pagedir;
-
-	switch_page_directory(pagedir);
-
-		unmap(being_copied);
-		unmap(copying_to);
-
-	switch_page_directory(backup);
 
 	return return_location;
 }

@@ -2,7 +2,7 @@
 // Main function is the entry point of the kernel.
 
 #include <multiboot.h>
-#include <version/version.h>
+#include <version/kernel_version.h>
 #include <common.h>
 #include <stdlib.h>
 
@@ -63,7 +63,7 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     	init_kernel(mboot, 0, stack_ptr);
     #endif
 
-    printf("Simple OS Version %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
+    printf("Kernel Name: %s Version: %i.%i.%i\n", KVERSION_CODENAME, KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION);
 
     //We can has interrupts now...
     enable_interrupts();

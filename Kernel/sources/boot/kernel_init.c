@@ -72,6 +72,8 @@ void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root)
 	bindnode_fs(init_vfs() /* returns root */ , initrd);
 }
 
+extern heap_t kernel_heap;
+
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
 void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {

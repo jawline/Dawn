@@ -34,6 +34,9 @@ fs_node_t* get_node(fs_node_t* node, const char* Name)
 	return finddir_fs(node, Name);
 }
 
+extern page_directory_t* page_tables;
+extern heap_t kernel_heap;
+
 void post_init() 
 {
     register_input_listener(DEVICE_KEYBOARD, &kernel_keyboard_callback);

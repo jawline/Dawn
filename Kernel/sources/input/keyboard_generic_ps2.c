@@ -64,6 +64,7 @@ void init_keyboard()
 	
 	//Clear the existing keyboard buffer after the keyboard IRQ has been registered. Makes sure that the keyboard controller will trigger a IRQ
 	uint8 temp, t2;
+
 	while (1) 
 	{
 		temp = inb(0x60);

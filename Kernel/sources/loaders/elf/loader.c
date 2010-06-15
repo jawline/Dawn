@@ -4,6 +4,7 @@
 #include <mm/virt_mm.h>
 #include <types/int_types.h>
 #include <types/memory.h>
+#include <panic/panic.h>
 
 typedef int (*entry_point) (int argc, void* argv);
 
@@ -49,6 +50,7 @@ int loadAndExecuteElf(fs_node_t* Node)
 	unsigned int i = 0;
 	uint32 is = 0;
 
+
 	for (i = 0; i < head.e_phnum; i++)
 	{
 		e32_pheader pHead = parseElfProgramHeader(Data, Node->length, head, i);
@@ -70,8 +72,8 @@ int loadAndExecuteElf(fs_node_t* Node)
 		}
 	}
 
-	entry_point nao = head.e_entry;
-	int ret = nao(0, 0);
+	entry_point application_entry_pointer = head.e_entry;
+	int ret = application_entry_pointer(0, 0);
 
 	return ret; //Return the return value of the executable
 }

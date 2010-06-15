@@ -3,6 +3,7 @@
 #define KERNEL_HEAP_ADDR KERNEL_START + 0x10000000
 
 heap_t kernel_heap;
+
 void init_kheap() 
 {
 	init_heap(&kernel_heap, KERNEL_HEAP_ADDR);

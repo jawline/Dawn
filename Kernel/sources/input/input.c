@@ -7,7 +7,7 @@ void initialize_input()
 {
 	g_listenerList = 0;
 
-	init_mouse();
+	//init_mouse(); //TODO: Fix mouse driver
 	init_keyboard();
 
 }

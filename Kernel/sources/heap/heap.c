@@ -1,6 +1,7 @@
 #include <heap/heap.h>
 #include <printf.h>
 #include <debug/debug.h>
+#include <panic/panic.h>
 
 
 uint32 alloc_mem(uint32 size, heap_t * heap);
@@ -101,10 +102,12 @@ uint32 alloc_mem(uint32 size, heap_t* heap)
 		{
 			//Map another 4kb onto the heap
 			//This is the last entry on the heap SO if its not used we can just += the size otherwise we have to create a whole new one (More work for mee)
+
 			uint32 frame_addr = alloc_frame();
 			uint32 end = ((uint32) ptr) + ptr->size + sizeof(heap_entry_t);
 
 			map(end, frame_addr, PAGE_PRESENT | PAGE_WRITE); //Mapped now! =)
+
 			memset(end, 0, 4096);
 			
 			if (ptr->used == 0) 
@@ -116,11 +119,12 @@ uint32 alloc_mem(uint32 size, heap_t* heap)
 				//Create a new entry at end and link it to the heap
 				heap_entry_t * nptr = (heap_entry_t *) end;
 				nptr->used = 0;
-				nptr->size = 4096;
+				nptr->size = PAGE_SIZE;
 				nptr->prev = ptr;
 				nptr->next = 0;
 				ptr->next = nptr;
 			}
+
 
 			return alloc_mem(size, heap);
 		}

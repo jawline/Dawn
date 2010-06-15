@@ -103,15 +103,37 @@ void init_mouse()
 	outb(0x64, 0xA8); //Enable the auxillery mouse device
 
 	//Enable interrupts
+
+	//0x20 to 0x64 = Get compaq status byte
 	wait_mouse_out();
 	outb(0x64, 0x20);
 
+	//Read the value from 0x60 (The compaq status byte)
 	wait_mouse_in();
-	_status = (inb(0x60) | 2);
+	_status = inb(0x60);
+
+	//Check if bit 5 is set
+	if (_status & 0x20 == 0x20)
+	{
+		//XOR 0x5 should leave bit 5 free 
+		_status = _status ^ 0x20;
+	}
+
+	//Set bit 1 to true
+	_status = _status | 0x2;
+	
+	//Send set compaq byte command (0x60) to mouse port (0x64)
 	wait_mouse_out();
 	outb(0x64, 0x60);
+
+	//Send the new status to 0x60
 	wait_mouse_out();
 	outb(0x60, _status);
+
+	//May send a ACK or may not
+	read_mouse_data(); //ACK
+
+	//End of enabling interrupts
 	
 	send_mouse_command(0xF6);
 	read_mouse_data(); //ACK

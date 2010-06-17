@@ -15,12 +15,21 @@ void postbox_pop_top()
 	postbox_top(&get_current_process()->m_processPostbox);
 }
 
-unsigned int num_syscalls = 3;
+char get_key_mapping(unsigned char scancode, unsigned long flags)
+{
+	return keyboard_chlookup_asci(scancode, flags);
+}
 
-static void *syscalls[3] = {
+extern void scheduler_block_me();
+
+unsigned int num_syscalls = 5;
+
+static void *syscalls[5] = {
    &printf,
    &postbox_location,
-   &postbox_pop_top
+   &postbox_pop_top,
+   &get_key_mapping,
+   &scheduler_block_me,
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)

@@ -6,7 +6,7 @@
 struct process_entry_t
 {
 	process_t* process_pointer;
-	unsigned int ticks_tell_die;
+	int ticks_tell_die;
 
 	struct process_entry_t* next;
 };
@@ -35,7 +35,7 @@ void scheduler_init(process_t* kp)
 
 void scheduler_on_tick()
 {
-	if (list_current->ticks_tell_die == 0)
+	if (list_current->ticks_tell_die < 1)
 	{
 		process_t* proc = list_current->process_pointer;
 
@@ -91,9 +91,30 @@ void scheduler_add(process_t* op)
 
 }
 
+//Sleeps the current process on the next tick
+void scheduler_block_me()
+{
+	if (list_current == 0) return;
+
+	list_current->ticks_tell_die = 0;
+}
+
 process_t* get_current_process()
 {
 	if (list_current == 0) return 0;
 
 	return list_current->process_pointer;
+}
+
+void scheduler_global_message(process_message msg)
+{
+	scheduler_proc* iter = list_root;
+
+	while (1)
+	{
+		postbox_add(&iter->process_pointer->m_processPostbox, msg);
+
+		if (iter->next == list_root) break;
+		iter = iter->next;
+	}
 }

@@ -16,8 +16,11 @@
 
 DEFN_SYSCALL0(postbox_location, 1);
 DEFN_SYSCALL0(postbox_pop_top, 2);
+DEFN_SYSCALL2(scancode_to_asci, 3, unsigned char, unsigned long);
+DEFN_SYSCALL0(block_process, 4);
 
 char Pointer[1024];
+int c_ptr = 0;
 
 void exec_cmd()
 {
@@ -52,6 +55,7 @@ int start(int argc, void* argv)
 	for (;;)
 	{
 		process_postbox* m_pb = (process_postbox*) syscall_postbox_location();
+
 		if (m_pb->first != 0)
 		{
 			process_message message = m_pb->first->data;
@@ -62,8 +66,41 @@ int start(int argc, void* argv)
 				if (message.message_data[0] == DEVICE_KEYBOARD)
 				{
 					//its a keyboard message even!
+					char C = syscall_scancode_to_asci(message.message_data[1], message.message_data[2]);
+
+					if (C == '\r')
+					{	
+						if (c_ptr != 0)
+						{
+							exec_cmd();
+							c_ptr = 0;
+							Pointer[c_ptr] = '\0';
+							printf("Line.x:> ");
+						}
+					}
+					else if (C == '\b')
+					{
+						if (c_ptr != 0)
+						{
+							printf("\b \b");
+							c_ptr--;
+							Pointer[c_ptr] = '\0';
+						}
+					}
+					else
+					{
+						Pointer[c_ptr] = C;
+						Pointer[c_ptr + 1] = '\0';
+						c_ptr++;
+						printf("%c", C);
+					}
 				}
+			} else
+			{
+				syscall_block_process();
 			}
+			
+			syscall_postbox_pop_top();
 		}
 	}
 

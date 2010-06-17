@@ -28,7 +28,7 @@ void kernel_keyboard_callback(uint32 device, uint32 main, void* additional)
 	da.message_data[1] = main;
 	da.message_data[2] = *((uint32*)additional);
 
-	postbox_add(&get_current_process()->m_processPostbox, da);
+	scheduler_global_message(da);
 }
 
 fs_node_t* get_node(fs_node_t* node, const char* Name)
@@ -51,18 +51,9 @@ void post_init()
     {
 	enable_interrupts();
 
-	printf("The kernel process is still running over here! And we has cookies to (Proof the multiple code paths/processes are working)\n");
-	for (;;) {}
+	for (;;) { postbox_top(&get_current_process()->m_processPostbox); scheduler_block_me(); }
     } else
     {
-
-	    process_message da;
-	    memset(&da, 0, sizeof(process_message));
-
-	    da.ID = 3;
-
-	    postbox_add(&get_current_process()->m_processPostbox, da);
-
 	    //Find Line.x
 	    fs_node_t* system = get_node(init_vfs(), "system");
 	    fs_node_t* root = get_node(system, "root");

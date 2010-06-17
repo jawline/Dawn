@@ -133,10 +133,14 @@ void map (POINTER va, POINTER pa, uint32 flags)
   PAGE_INDEX pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
 
   // Find the appropriate page table for the physical address.
+  // If the page table does not exist then create a new one for it.
   if (page_directory[pt_idx] == 0)
   {
+
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
     page_directory[pt_idx] = (alloc_frame()) | PAGE_PRESENT | PAGE_WRITE;
+    
+    //Reload the CR3 register to update virtual mappings
     ReloadCR3();
 
     unsigned int i = 0;
@@ -211,93 +215,75 @@ void mark_paging_enabled()
 extern void asm_disable_paging();
 extern void asm_enable_paging();
 
-//Function to switch paging back on
-void enable_paging() 
-{
-	if (paging_setup == 1 && paging_enabled == 1) 
-	{
-		asm_enable_paging();
-		paging_enabled = 0;
-		return; 
-	}
-}
-
-//Function to switch paging off
-void disable_paging() 
-{
-	if (paging_setup == 1 && paging_enabled == 0)
-	{
-		asm_disable_paging();		
-		paging_enabled = 1;
-		return;
-	}
-}
-
 uint32 get_table(uint32 address)
 {
 	return address / PAGE_SIZE / 1024;
 }
 
 //Used in initialization only!
+//Identity maps the first page or so
 void identity_map_pages(page_directory_t* pagedir)
 {
-
+	//Map a page at the end of used memory
 	MEM_LOC frame = alloc_frame();
 	pagedir[0] = frame | PAGE_PRESENT | PAGE_WRITE;
 
-	//ID map the first 4MB Of memory
+	//Create a pointer to the new page table
 	POINTER pt = (POINTER) frame; //Pointer to the page directory
 
+	//Iterate through, setting each page to the correct location in memories
 	unsigned int i = 0;
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{
 		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_WRITE;	
 	}
 
+	//Set the KERNEL_START address to the pagedir address
 	pagedir[get_table(KERNEL_START)] = pagedir[0];
-
 }
 
 void init_virt_mm(uint32 mem_end) 
 {
+	unsigned int i = 0; //Used as a iterator throughout the function
+
 	register_interrupt_handler (14, &page_fault); //Register the page fault handler.
-	
-	unsigned int i = 0;
+					              //Called when bad little processes try to access memory they can't (Doesn't exist or not available to them)
 
 	page_directory_t * pagedir = (page_directory_t *) alloc_frame(); //Paging isn't enabled so this should just give us 4kb at the end of used memory.
-	
-	for (i = 0; i < 1024; i++) {
-		if (pagedir[i] != 0) {
-			pagedir[i] = 0;
-		}
-	}
 
-	//Null it all!!! (Initialize the table)
+	//Null it all!!! (Clear the page directory)
 	memset(pagedir, 0, PAGE_SIZE);
 
+	//Identity map the first 4MBs of memory to KERNEL_START and 0x0
 	identity_map_pages(pagedir);
 
 	// Assign the second-last table and zero it.
-	MEM_LOC frame = alloc_frame();
-	pagedir[1022] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
-	POINTER pt = (POINTER) frame;
-	memset (pt, 0, PAGE_SIZE);
+	MEM_LOC frame = alloc_frame(); //Allocate a 4KB frame
+	pagedir[1022] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Set the 1022nd page table to the new frame address
 
-	pt[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
+	POINTER pt = (POINTER) frame; //Pointer to the new frame
+	memset (pt, 0, PAGE_SIZE); //Null the frame
 
-	pagedir[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory
+	pt[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory. So when paging is active PAGE_DIR_VIRTUAL_ADDR = the page directory
+
+	pagedir[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory. Causing page_tables to link back to the phyical page tables
 
 	switch_page_directory(pagedir); //Set the current page dir
-	kernel_pagedir = current_pagedir;
-	start_paging();
 
-	//Map where the physical memory manager keeps its stack.
-	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR  >> 12));
-	frame = alloc_frame();
+	start_paging(); //Paging should already be active (Higher-Half Kernel) - But just to be sure
+
+	kernel_pagedir = pagedir; //Set the kernel page directory to the directory that was just created
+
+	//Map where the physical memory manager keeps its stack. (Just the page table), this is because on the first expansion of the stack the map would need 2 frames while only having one (The first free page of memory) available. Bad things would follow
+	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR / 0x1000));
+
+	frame = alloc_frame(); //Allocate a frame for the page table
 	page_directory[pt_idx] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
 
+	//Nulll it
 	memset((POINTER)frame, 0, PAGE_SIZE);
 
+	//Mark paging enabled (Other areas of the kernel will now consider paging to be active)
 	mark_paging_enabled();
 
 	for (i = get_table(KERNEL_START); i < 1022; i++)
@@ -305,12 +291,7 @@ void init_virt_mm(uint32 mem_end)
 		if (page_directory[i] == 0) {
 			MEM_LOC address = alloc_frame();
 			page_directory[i] = (address & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
-
-			//Null it
-			POINTER pt = free_kernel_virtual_address();
-			map(pt, address, PAGE_PRESENT | PAGE_WRITE);
-			memset(pt, 0, PAGE_SIZE);
-			unmap(pt);
+			ReloadCR3();
 		}
 	}
 }
@@ -378,18 +359,12 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 	page_directory_t* return_location = (page_directory_t*) alloc_frame();
 
-	DEBUG_PRINT("Copying page dir ");
-	DEBUG_PRINTX(pagedir);
-	DEBUG_PRINT("\n");
-
 	POINTER being_copied = free_kernel_virtual_address();
 	map(being_copied, pagedir, PAGE_PRESENT | PAGE_WRITE);
 
 	POINTER copying_to = free_kernel_virtual_address();
 	map(copying_to, return_location, PAGE_PRESENT | PAGE_WRITE);
 	memset(copying_to, 0, PAGE_SIZE);
-
-	DEBUG_PRINT("Mapped copying and to be copied\n");
 
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
 
@@ -418,7 +393,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 	// Assign the second-last table and zero it.
 	MEM_LOC frame = alloc_frame();
-	pagedir[1022] = frame | PAGE_PRESENT | PAGE_WRITE;
+	copying_to[1022] = frame | PAGE_PRESENT | PAGE_WRITE;
 
 	POINTER pt = free_kernel_virtual_address();
 	map(pt, frame, PAGE_PRESENT | PAGE_WRITE);
@@ -442,6 +417,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	return return_location;
 }
 
+//Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process
 POINTER free_kernel_virtual_address()
 {
 	unsigned int i = KERNEL_RESERVED_START; //Start after the IDMapped region

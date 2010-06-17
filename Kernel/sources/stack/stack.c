@@ -12,59 +12,34 @@ stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp)
 
 	MEM_LOC iter = 0; //for iterator
 
-	DEBUG_PRINT("Debug Message: Mapping new stack between 0x");
-	DEBUG_PRINTX(new_start - size);
-	DEBUG_PRINT(" and 0x");
-	DEBUG_PRINTX(new_start);
-	DEBUG_PRINT("\n");
 
-
-
-	MEM_LOC end = new_start - size;
+	MEM_LOC end = new_start - size; //The stack expands downwards.
 
 	//This for loop maps new_start to new_start - size with physical memory
 	for (iter = new_start; iter >= end; iter -= 0x1000) 
 	{
-		POINTER frame = alloc_frame();
+		POINTER frame = alloc_frame(); //Allocate the frame
 
-		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE);
+		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE); //Map it to the virtual address
 	}
 
 	stack_t old_stack_pointer = 0; 
-	asm volatile("mov %%esp, %0" : "=r" (old_stack_pointer));
+	asm volatile("mov %%esp, %0" : "=r" (old_stack_pointer)); //The old stack & base pointers = the esp & ebp registers respectivally
 
 	stack_t old_base_pointer = 0;
 	asm volatile("mov %%ebp, %0" : "=r" (old_base_pointer)); 
 
-	DEBUG_PRINT("Debug Message: Old stack location 0x");
-	DEBUG_PRINTX(old_stack_pointer);
-	DEBUG_PRINT("\n");
-
-	DEBUG_PRINT("Debug Message: Old stack base 0x");
-	DEBUG_PRINTX(old_base_pointer);
-	DEBUG_PRINT("\n");
-
-	DEBUG_PRINT("Debug Message: Initial esp 0x");
-	DEBUG_PRINTX(initial_esp);
-	DEBUG_PRINT("\n");
-
+	//Use a big int because the stack may be moving backwards in memory (Needs to be possible positive or negative)
 	int64 offset = ((size_t)new_start) - initial_esp;
-	DEBUG_PRINT("Debug Message: Calculated stack offset 0x");
-	DEBUG_PRINTX(offset);
-	DEBUG_PRINT("\n");
 
+	//Calculate the new stack & base pointers by adding the offset between the stack locations
 	stack_t new_stack_pointer = (stack_t) (((size_t)old_stack_pointer) + offset);
 	stack_t new_base_pointer  = (stack_t) (((size_t)old_base_pointer ) + offset);
 
-	DEBUG_PRINT("Debug: New Stack Pointer: "); DEBUG_PRINTX(new_stack_pointer); DEBUG_PRINT("\n");
-	DEBUG_PRINT("Debug: New Base Pointer: "); DEBUG_PRINTX(new_base_pointer);
-	DEBUG_PRINT("\n");
-
-	//Copy over the new stack
+	//Copy over the new stack - copy size initial_esp - esp to new_stack_pointer
+	//This copies the size between the current stack pointer and the initial stack start to the new stack
 	memcpy((void*)new_stack_pointer, (void*)old_stack_pointer, initial_esp -  ((size_t)old_stack_pointer));
-
-	DEBUG_PRINT("Debug Message: Done with memcpy\n");
-
+	
 	size_t i = 0;
 
 	for(i = (size_t) new_start; i > (size_t) new_start-size; i -= sizeof(uint32))
@@ -83,10 +58,9 @@ stack_t move_stack(stack_t new_start, size_t size, size_t initial_esp)
 	   }
 	}
 
+	//Set the ESP and EBP to the new stack.
 	asm volatile("mov %0, %%esp" : : "r" (new_stack_pointer));
 	asm volatile("mov %0, %%ebp" : : "r" (new_base_pointer));
-
-	DEBUG_PRINT("Debug Message: Done moving the stack\n");
 
 	return new_start;
 }

@@ -63,7 +63,7 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     	init_kernel(mboot, 0, stack_ptr);
     #endif
 
-    printf("Kernel Name: %s Version: %i.%i.%i\n", KVERSION_CODENAME, KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION);
+    printf("Kernel Codename: \"%s\" Version: %i.%i.%i\n", KVERSION_CODENAME, KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION);
 
     //We can has interrupts now...
     enable_interrupts();

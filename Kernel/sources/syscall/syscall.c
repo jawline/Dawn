@@ -5,28 +5,22 @@
 
 process_t* get_current_process();
 
-void proc_set_ibuffer(char* m_data, unsigned int len)
+MEM_LOC postbox_location()
 {
-	set_process_input_buffer(get_current_process(), m_data, len);
+	return &get_current_process()->m_processPostbox;
 }
 
-MEM_LOC proc_get_cp()
+void postbox_pop_top()
 {
-	return get_current_process()->m_inputCurPosition;
+	postbox_top(&get_current_process()->m_processPostbox);
 }
 
-void proc_set_cp(unsigned int loc)
-{
-	get_current_process()->m_inputCurPosition = loc;
-}
+unsigned int num_syscalls = 3;
 
-unsigned int num_syscalls = 4;
-
-static void *syscalls[4] = {
+static void *syscalls[3] = {
    &printf,
-   &proc_set_ibuffer,
-   &proc_get_cp,
-   &proc_set_cp
+   &postbox_location,
+   &postbox_pop_top
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)
@@ -44,6 +38,7 @@ idt_call_registers_t syscall_handler(idt_call_registers_t regs)
    // push them all onto the stack in the correct order. The function will
    // use all the parameters it wants, and we can pop them all back off afterwards.
    MEM_LOC ret;
+
    asm volatile (" \
 		   push %1; \
 		   push %2; \
@@ -58,6 +53,7 @@ idt_call_registers_t syscall_handler(idt_call_registers_t regs)
 		   pop %%ebx; \
 		" : "=a" (ret) : "r" (regs.edi), "r" (regs.esi), "r" (regs.edx), "r" (regs.ecx), "r" (regs.ebx), "r" (location));
 
+   //Ret the return value of registers_t to ret. Its pushed to eax before the interrupt returns (iret instruction) allowing the process that was executing before the syscall to handle it
    regs.eax = ret;
 
    return regs;
@@ -65,6 +61,7 @@ idt_call_registers_t syscall_handler(idt_call_registers_t regs)
 
 void kernel_initialise_syscalls()
 {
-	register_interrupt_handler (127, &syscall_handler);
+	register_interrupt_handler (127, &syscall_handler); //Syscall = Interrupt 127
+
 	return;
 }

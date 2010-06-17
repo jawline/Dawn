@@ -4,6 +4,7 @@
 
 unsigned long long clock_ticks;
 
+//When the PIT is triggered call a scheduler tick and add one to the clock ticks (Setup so different timers can be used for the scheduler/clock Etcetera)
 void pit_callback()
 {
 	clock_ticks++;

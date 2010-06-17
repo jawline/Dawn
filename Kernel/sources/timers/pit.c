@@ -7,7 +7,7 @@ static idt_call_registers_t pit_tick_callback(idt_call_registers_t regs)
 {
 	if (on_pit_tick)
 	{
-		on_pit_tick();
+		on_pit_tick(); //Call the pit callback
 	}
 }
 

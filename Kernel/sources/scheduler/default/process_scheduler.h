@@ -1,7 +1,7 @@
 #ifndef _PROCESS_SCHEDULER_DEF_H_
 #define _PROCESS_SCHEDULER_DEF_H_
 #include <process/process.h>
-#define _STD_NANO_ 50
+#define _STD_NANO_ 5
 
 void scheduler_init(process_t* kproc);
 

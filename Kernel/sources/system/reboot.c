@@ -22,9 +22,11 @@ typedef uchar byte;
 
 void kernel_reboot()
 {
+    /* The code below attempts to reboot the computer by sending a reset CPU command through the keyboard interface (Wierd place to put the reset CPU command?) */
+
     byte temp;
 
-    asm volatile ("CLI"); /* disable all interrupts */
+    asm volatile ("cli"); /* disable all interrupts */
 
     /* Clear all keyboard buffers (output and command buffers) */
     do
@@ -35,5 +37,6 @@ void kernel_reboot()
     } while (check_flag(temp, KBRD_BIT_UDATA) != 0);
 
     outb(KBRD_INTRFC, KBRD_RESET); /* pulse CPU reset line */
-    asm volatile ("HLT"); /* if that didn't work, halt the CPU */
+
+    asm volatile ("hlt"); /* if that didn't work, halt the CPU */
 }

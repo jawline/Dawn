@@ -63,7 +63,7 @@ int loadAndExecuteElf(fs_node_t* Node)
 				if (get_mapping(is, 0) == 0)
 				{
 					//Map it
-					uint32 newframe = alloc_frame();
+					MEM_LOC newframe = alloc_frame();
 					map(is, newframe, PAGE_PRESENT | PAGE_WRITE);
 				}
 			}
@@ -73,6 +73,7 @@ int loadAndExecuteElf(fs_node_t* Node)
 	}
 
 	entry_point application_entry_pointer = head.e_entry;
+
 	int ret = application_entry_pointer(0, 0);
 
 	return ret; //Return the return value of the executable

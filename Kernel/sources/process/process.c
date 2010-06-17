@@ -67,7 +67,6 @@ int kfork()
 		new_process->esp = esp;
 		new_process->ebp = ebp;
 		new_process->eip = current_eip;
-		new_process->m_inputBuffer = 0;
 
 		scheduler_add(new_process);	
 
@@ -77,13 +76,6 @@ int kfork()
 	{
 		return 1; //Return 1 - Child
 	}
-}
-
-void set_process_input_buffer(process_t* process,char* m_Data, unsigned int len)
-{
-	process->m_inputBuffer = m_Data;
-	process->m_inputBufferLength = len;
-	process->m_inputCurPosition = 0;
 }
 
 inline void switch_process(process_t* from, process_t* to)
@@ -125,4 +117,78 @@ inline void switch_process(process_t* from, process_t* to)
 		      jmp %%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
 
 	return;
+}
+
+//Get the top message without removing it
+process_message postbox_peek(process_postbox* pb)
+{
+	if (pb->first == 0)
+	{
+		process_message ret;
+		ret.ID = -1; //-1 = No messages left to read
+		return ret;
+	}
+
+	return pb->first->data;
+}
+
+process_message postbox_top(process_postbox* pb)
+{
+	if (pb->first == 0)
+	{
+		process_message ret;
+		ret.ID = -1; //-1 = No messages left to read
+		return ret;
+	}
+
+	postbox_message_entry* message = pb->first;
+
+	if (pb->first->next != 0)
+	{
+		pb->first = message->next;
+	} else
+	{
+		pb->first = 0;
+	}
+
+	process_message ret = message->data;
+	free(message);
+
+	return ret;
+}
+
+void postbox_add(process_postbox* pb, process_message msg)
+{
+	if (pb->first == 0)
+	{
+		//Create pb->first
+		postbox_message_entry* new_entry = malloc(sizeof(postbox_message_entry));
+		new_entry->data = msg;
+		new_entry->next = 0;
+
+		pb->first = new_entry;
+	}
+	else
+	{
+		//Add to the end of the list
+		postbox_message_entry* last = pb->first;
+
+		//Find the last entry
+		while (1)
+		{
+			if (last->next == 0)
+			{
+				break;
+			} else
+			{
+				last = last->next;
+			}
+		}
+
+		postbox_message_entry* new_entry = malloc(sizeof(postbox_message_entry));
+		new_entry->data = msg;
+		new_entry->next = 0;
+
+		last->next = new_entry;		
+	}
 }

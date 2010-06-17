@@ -111,8 +111,6 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	init_kterm();
 
 	DEBUG_PRINT("KTerm Started\n");
-	
-	printf("Initial ESP %x\n", initial_esp);
 
 	//Initialize the system call interface
 	kernel_initialise_syscalls();

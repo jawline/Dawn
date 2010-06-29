@@ -3,9 +3,7 @@
 #include <panic/panic.h>
 
 static process_t* kernel_proc = 0;
-static unsigned int next_pid = 1;
-
-#define STACK_LOCATION 0x80000000
+static unsigned int next_pid = 0;
 
 process_t* init_kproc()
 {
@@ -22,6 +20,8 @@ process_t* init_kproc()
 	ret->m_pageDir = kernel_pagedir;
 
 	kernel_proc = ret;
+
+	init_used_list(kernel_proc);
 
 	return ret;
 }
@@ -53,6 +53,8 @@ int kfork()
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
 
+	init_used_list(new_process);
+
 	//Set the processes unique ID
 	next_pid++;
 	new_process->m_ID = next_pid;
@@ -68,7 +70,7 @@ int kfork()
 		new_process->ebp = ebp;
 		new_process->eip = current_eip;
 
-		scheduler_add(new_process);	
+		scheduler_add(new_process);
 
 		return 0; //Return 0 - Parent
 	}
@@ -76,6 +78,11 @@ int kfork()
 	{
 		return 1; //Return 1 - Child
 	}
+}
+
+void rename_current_process(const char* Str)
+{
+	set_process_name(get_current_process(), Str);
 }
 
 inline void switch_process(process_t* from, process_t* to)
@@ -114,7 +121,7 @@ inline void switch_process(process_t* from, process_t* to)
 		      mov %3, %%cr3; \
 		      mov $0x12345, %%eax; \
 		      sti; \
-		      jmp %%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
+		      jmp *%%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
 
 	return;
 }
@@ -130,6 +137,11 @@ process_message postbox_peek(process_postbox* pb)
 	}
 
 	return pb->first->data;
+}
+
+//Kill the process
+void kill_process(process_t* p)
+{
 }
 
 process_message postbox_top(process_postbox* pb)
@@ -155,6 +167,11 @@ process_message postbox_top(process_postbox* pb)
 	free(message);
 
 	return ret;
+}
+
+void set_process_name(process_t* proc, const char* Name)
+{
+	strcpy(proc->m_Name, Name);
 }
 
 void postbox_add(process_postbox* pb, process_message msg)

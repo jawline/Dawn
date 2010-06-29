@@ -1,8 +1,11 @@
 #ifndef _PROCESS_DEF_H_
 #define _PROCESS_DEF_H_
-#include <mm/virt_mm.h>
+
+#include <mm/pagedir.h>
 #include <common.h>
 #include <process/postbox.h>
+
+#define INPUT_BIT 0x1 //First bit = Do I want to hear about input?!?
 
 struct process_structure
 {
@@ -11,8 +14,16 @@ struct process_structure
 
 	uint32 esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */; /* The rest is stored by the interrupt  that triggers the switch */
 
+	unsigned long m_processingTime; //How much time have we spent processing this process?
+
+	unsigned int m_postboxFlags; //What does this process want to recieve? Do I want to hear about input events etc?
 	process_postbox m_processPostbox;
+
 	page_directory_t* m_pageDir;
+
+	MEM_LOC* m_usedListRoot; //Root location of the used list
+	unsigned long m_usedListSize;
+	unsigned long m_usedListLocation; //Location of the end of the current list irrespect to the root
 };
 
 typedef struct process_structure process_t;

@@ -7,6 +7,6 @@
 //Export initialize_system_clock sets up the correct timer and callbacks
 void initialize_system_clock();
 
-unsigned long long get_clock_ticks(); //Number of time the clock has "ticked"
+unsigned long get_clock_ticks(); //Number of time the clock has "ticked"
 
 #endif //_CLOCK_DEF_H_

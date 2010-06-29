@@ -18,24 +18,26 @@ extern heap_t kernel_heap;
 extern uint32 end; //The end of the kernel
 extern process_t* get_current_process();
 
+//The kernel callback for a keyboard event
+//Registered with the kernel input manager in void post_init(); with a register_input_listener(DEVICE_KEYBOARD) call
 void kernel_keyboard_callback(uint32 device, uint32 main, void* additional)
 {
+
+	//Create a new message to send to the all processes
 	process_message da;
 
+	//Initialize the message and set the data
 	memset(&da, 0, sizeof(process_message));
 	da.ID = INPUT_MESSAGE;
 	da.message_data[0] = device;
 	da.message_data[1] = main;
 	da.message_data[2] = *((uint32*)additional);
 
-	scheduler_global_message(da);
+	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
+	scheduler_global_message(da, INPUT_BIT);
 }
 
-fs_node_t* get_node(fs_node_t* node, const char* Name)
-{
-	return finddir_fs(node, Name);
-}
-
+//External links to the kernel page directory and kernel heap
 extern page_directory_t* kernel_pagedir;
 extern heap_t kernel_heap;
 
@@ -49,18 +51,44 @@ void post_init()
 
     if (result == 0) //Parent
     {
-	enable_interrupts();
+	int result = kfork();
 
-	for (;;) { postbox_top(&get_current_process()->m_processPostbox); scheduler_block_me(); }
+        if (result == 0)
+	{
+		//System idle halts the processor between interrupts when it is active. This is to slow the processor, lower memory usage & heat etcetera.
+		//TODO: Give system idle a priority within the scheduler so that the processor spends less time idling when other processes want to be powered
+		enable_interrupts();
+
+		//Rename the idle process
+		set_process_name(get_current_process(), "System Idle");
+
+		
+		//Loop and continually halt the processor, this will cause the processor to idle between interrupts
+		for (;;) { 
+			asm volatile("hlt"); 
+		}
+
+	}
+	else
+	{
+		//Rename this to other process (Just here to prove system works)
+		set_process_name(get_current_process(), "Other Process");
+
+		for (;;)
+		{
+			scheduler_block_me();
+		}
+	}
+
     } else
     {
 	    //Find Line.x
-	    fs_node_t* system = get_node(init_vfs(), "system");
-	    fs_node_t* root = get_node(system, "root");
+	    fs_node_t* system = finddir_fs(init_vfs(), "system");
+	    fs_node_t* root = finddir_fs(system, "root");
 
-	    fs_node_t* line = get_node(root, "Line.x");
+	    fs_node_t* line = finddir_fs(root, "Line.x");
 
-	    enable_interrupts();
+	    rename_current_process("Line.x");
 
 	    //Execute Line.x
 	    if (line != 0)
@@ -71,9 +99,9 @@ void post_init()
 
 	    //Wait 3 seconds
 	    long long data = clock() + (CLOCKS_PER_SECOND * 3);
-	     
+
 	    printf("Reboot in 3 seconds...\n");
-	    
+
 	    while (data > clock())
 	    {
 	    }

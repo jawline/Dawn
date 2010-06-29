@@ -112,6 +112,10 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 
 	DEBUG_PRINT("KTerm Started\n");
 
+	printf("CPUID Features: %x\n", get_cpuid_features());
+
+	printf("CPU Vendor: %s\n", cpuid_getvendor());
+
 	//Initialize the system call interface
 	kernel_initialise_syscalls();
 

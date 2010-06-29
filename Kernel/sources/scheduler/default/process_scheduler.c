@@ -51,6 +51,10 @@ void scheduler_on_tick()
 		switch_process(proc, oproc);
 	} else
 	{
+
+		//increment the counter of the time spent on this process
+		list_current->process_pointer->m_processingTime++;
+
 		//One tick closer to being context switched
 		list_current->ticks_tell_die--;
 	}
@@ -106,13 +110,31 @@ process_t* get_current_process()
 	return list_current->process_pointer;
 }
 
-void scheduler_global_message(process_message msg)
+process_t* scheduler_return_process(unsigned int iter)
+{
+	scheduler_proc* iterator = list_root;
+	unsigned int i = 0;
+
+	for (i = 0; i < iter; i++)
+	{
+		if (iterator->next == list_root) return 0;
+		iterator = iterator->next;
+	}
+
+	return iterator->process_pointer;
+}
+
+void scheduler_global_message(process_message msg, unsigned int bit)
 {
 	scheduler_proc* iter = list_root;
 
 	while (1)
 	{
-		postbox_add(&iter->process_pointer->m_processPostbox, msg);
+		//Test if this process wants to hear about this event
+		if (iter->process_pointer->m_postboxFlags & bit == bit)
+		{
+			postbox_add(&iter->process_pointer->m_processPostbox, msg);
+		}
 
 		if (iter->next == list_root) break;
 		iter = iter->next;

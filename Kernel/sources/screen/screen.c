@@ -16,6 +16,8 @@ void init_screen()
 
 	//Clear any rubbish left on the screen by the bootloader/BIOS/Anything that came before the kernel
 	text_mode_clearscreen();
+
+	init_vga_driver();
 }
 
 //Get the screen mode

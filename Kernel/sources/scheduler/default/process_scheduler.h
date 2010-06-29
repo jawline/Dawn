@@ -11,6 +11,6 @@ void scheduler_remove(process_t* old_process);
 void scheduler_on_tick();
 
 //Send a message to all processes
-void scheduler_global_message(process_message msg);
+void scheduler_global_message(process_message msg, unsigned int bit);
 
 #endif //_PROCESS_SCHEDULER_DEF_H_

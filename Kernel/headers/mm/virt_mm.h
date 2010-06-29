@@ -15,7 +15,7 @@
 #define KERNEL_RESERVED_START KERNEL_START + 0x20001000
 #define KERNEL_MEMORY_END 0xFFFFFFFF
 
-#define page_directory_t uint32
+#include <mm/pagedir.h>
 #include <types/memory.h>
 
 extern unsigned int PAGE_SIZE;

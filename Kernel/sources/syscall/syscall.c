@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <process/process.h>
 #include "../scheduler/default/process_scheduler.h"
+#include <timers/clock.h>
 
 process_t* get_current_process();
+extern MEM_LOC calculate_free_frames();
 
 MEM_LOC postbox_location()
 {
@@ -15,21 +17,66 @@ void postbox_pop_top()
 	postbox_top(&get_current_process()->m_processPostbox);
 }
 
+void postbox_set_bit(unsigned int bit)
+{
+	get_current_process()->m_postboxFlags = get_current_process()->m_postboxFlags | bit;
+}
+
+MEM_LOC syscall_return_current_process()
+{
+	return get_current_process();
+}
+
 char get_key_mapping(unsigned char scancode, unsigned long flags)
 {
 	return keyboard_chlookup_asci(scancode, flags);
 }
 
+MEM_LOC clocks_per_second()
+{
+	return CLOCKS_PER_SECOND;
+}
+
+MEM_LOC system_uptime()
+{
+	return get_clock_ticks();
+}
+
+extern unsigned int PAGE_SIZE;
+
+MEM_LOC get_page_size()
+{
+	return PAGE_SIZE;
+}
+
+MEM_LOC syscall_get_process(unsigned int iter)
+{
+	return scheduler_return_process(iter);
+}
+
+void request_reboot()
+{
+	kernel_reboot(); //For now, just reboot the system. Its prolly the right thing to do
+}
+
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 5;
+unsigned int num_syscalls = 13;
 
-static void *syscalls[5] = {
+static void *syscalls[13] = {
    &printf,
    &postbox_location,
    &postbox_pop_top,
    &get_key_mapping,
    &scheduler_block_me,
+   &postbox_set_bit,
+   &calculate_free_frames,
+   &get_page_size,
+   &request_reboot,
+   &clocks_per_second,
+   &system_uptime,
+   &syscall_get_process,
+   &syscall_return_current_process
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)

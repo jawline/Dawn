@@ -1,4 +1,4 @@
-#include <pci/pci.h>
+#include <devices/pci/pci.h>
 
 uint32 pciConfigReadRegister(pci_device device, uint8 reg)
 {
@@ -6,7 +6,6 @@ uint32 pciConfigReadRegister(pci_device device, uint8 reg)
 	uint32 lslot = (uint32) device.slot;
 	uint32 lfunc = (uint32) device.function;
 
-	/* create configuration address as per Figure 1 */
 	uint32 address = (uint32)((lbus << 16) | (lslot << 11) | (lfunc << 8) | (reg) | ((uint32)0x80000000));
 
 	outl(0xCF8, address);
@@ -22,12 +21,11 @@ uint16 pciConfigReadWord (pci_device device, uint16 offset)
 
 uint8 pciConfigReadByte (pci_device device, uint16 offset)
 {
-	printf("Lo %x\n", pciConfigReadRegister(device, offset & 0xFC));
 	uint8 tmp = (uint8) ((pciConfigReadRegister(device, offset & 0xFC) >> ((offset) * 8)) & 0xff);
 	return tmp;
 }
 
-uint8 pciDeviceExists(pci_device device)
+unsigned char pciDeviceExists(pci_device device)
 {
     device.function = 0;
 
@@ -40,22 +38,34 @@ return 1;
 
 //512 256 128 64 32 16 8 4 2 1
 
-uint16 pciDeviceGetVendor(pci_device device)
+unsigned short pciDeviceGetVendor(pci_device device)
 {
 	device.function = 0;
 	uint16 ret = pciConfigReadWord(device, 0);
 	return ret;
 }
 
-uint16 pciDeviceGetDeviceId(pci_device device)
+unsigned short pciDeviceGetDeviceId(pci_device device)
 {
 	device.function = 0;
 	uint16 ret = pciConfigReadWord(device, 2);
 	return ret;
 }
 
-uint8 pciDeviceGetClass(pci_device device)
+unsigned char pciDeviceGetClass(pci_device device)
 {
 	device.function = 0;
 	return pciConfigReadByte(device, 11);
+}
+
+unsigned char pciDeviceGetSubclass(pci_device device)
+{
+	device.function = 0;
+	return pciConfigReadByte(device, 10);
+}
+
+unsigned char pciDeviceGetHeaderType(pci_device dev)
+{
+	dev.function = 0;
+	return pciConfigReadByte(dev, 14);
 }

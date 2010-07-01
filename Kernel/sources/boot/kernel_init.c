@@ -21,7 +21,7 @@
 #include <types/size_t.h>
 #include <debug/debug.h>
 #include <hdd/disk_device.h>
-#include <pci/pci.h>
+#include <devices/pci/pci.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -112,12 +112,12 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 
 	DEBUG_PRINT("KTerm Started\n");
 
-	printf("CPUID Features: %x\n", get_cpuid_features());
-
-	printf("CPU Vendor: %s\n", cpuid_getvendor());
-
 	//Initialize the system call interface
 	kernel_initialise_syscalls();
 
+	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
+	init_devices();
+
+	//Initialize the system scheduler
 	scheduler_init(init_kproc());
 }

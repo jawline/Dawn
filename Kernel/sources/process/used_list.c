@@ -21,6 +21,13 @@ void expand_used_list(process_t* process)
 	process->m_usedListRoot = new_loc;
 }
 
+//TODO: Used list shrinking
+
+MEM_LOC used_list_top(process_t* process)
+{
+	return *((MEM_LOC*) process->m_usedListRoot);
+}
+
 void used_list_add(process_t* process, MEM_LOC location)
 {
 	if (process->m_usedListSize == process->m_usedListLocation)

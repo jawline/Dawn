@@ -95,6 +95,53 @@ void scheduler_add(process_t* op)
 
 }
 
+//To anybody calling this, remember to re-enable interrupts
+void scheduler_remove(process_t* op)
+{
+	disable_interrupts();
+
+	//Find the scheduler entry
+	scheduler_proc* iterator_process = list_root;
+
+	for (;;)
+	{
+		if (iterator_process->next == list_root)
+		{
+			return; //Cannot find the right proc
+		}
+		else
+		{
+			//Is the next process the one that needs to be killed
+			if (iterator_process->next->process_pointer == op)
+			{
+				//Process
+				break;
+			}
+			else
+			{
+				iterator_process = iterator_process->next;
+			}
+		}
+	}
+
+	//Store the proc
+	scheduler_proc* next = iterator_process->next;
+
+	if (list_current == next)
+	{
+		//If its currently being executed then go ahhhhh
+		list_current = next->next;
+	}
+
+	//Remove it from the list
+	iterator_process->next = iterator_process->next->next;
+
+	//Free it
+	free(next);
+
+	return;
+}
+
 //Sleeps the current process on the next tick
 void scheduler_block_me()
 {
@@ -133,10 +180,15 @@ void scheduler_global_message(process_message msg, unsigned int bit)
 		//Test if this process wants to hear about this event
 		if (iter->process_pointer->m_postboxFlags & bit == bit)
 		{
+
 			postbox_add(&iter->process_pointer->m_processPostbox, msg);
+
 		}
 
 		if (iter->next == list_root) break;
+
 		iter = iter->next;
+
 	}
+
 }

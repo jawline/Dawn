@@ -54,7 +54,7 @@ MEM_LOC alloc_frame()
 	}
 }
 
-void free_frame(uint32 frame) 
+void free_frame(MEM_LOC frame) 
 {
 	if (paging_enabled == 0) 
 	{
@@ -80,7 +80,7 @@ void free_frame(uint32 frame)
 	else
 	{
 		//We still have stack space left to pop to,
-		uint32* stack = ((POINTER)phys_mm_slock);
+		MEM_LOC* stack = ((POINTER)phys_mm_slock);
 		*stack = frame;
 		phys_mm_slock += sizeof(uint32);	
 	}

@@ -26,6 +26,35 @@ process_t* init_kproc()
 	return ret;
 }
 
+void free_process(process_t* process)
+{
+	//No interrupts ploz
+	disable_interrupts();
+
+	if (process == kernel_proc) {
+		return; //Don't want to get red of PID 0
+	}
+	else
+	{
+		//This kills the used list and frees every used page
+		while (process->m_usedListLocation != 0)
+		{
+			MEM_LOC top = used_list_top(process);
+			free_frame(top);
+			used_list_remove(process, top);
+		}
+
+		free(process->m_usedListRoot);
+
+		//TODO: Free page directory
+
+		free(process);
+	}
+
+	printf("Killed\n");
+
+}
+
 extern process_t* get_current_process();
 
 int kfork()
@@ -109,6 +138,35 @@ inline void switch_process(process_t* from, process_t* to)
 	eip = to->eip;
 	esp = to->esp;
 	ebp = to->ebp;
+	page_directory_t* pagedir = to->m_pageDir;
+
+	extern page_directory_t* current_pagedir;
+	current_pagedir = pagedir;
+
+	asm volatile("cli; \
+		      mov %1, %%esp; \
+		      mov %2, %%ebp; \
+		      mov %0, %%ecx; \
+		      mov %3, %%cr3; \
+		      mov $0x12345, %%eax; \
+		      sti; \
+		      jmp *%%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
+
+	return;
+}
+
+//Jump to the next process
+inline void jump_process(process_t* to)
+{
+	if (!to) return; //Invalid ptrs?
+	disable_interrupts();
+
+	uint32 esp, ebp, eip;
+
+	eip = to->eip;
+	esp = to->esp;
+	ebp = to->ebp;
+
 	page_directory_t* pagedir = to->m_pageDir;
 
 	extern page_directory_t* current_pagedir;

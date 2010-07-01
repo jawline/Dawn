@@ -59,11 +59,23 @@ void request_reboot()
 	kernel_reboot(); //For now, just reboot the system. Its prolly the right thing to do
 }
 
+
+void kill_current_process()
+{
+	//Call to kill the current process
+	printf("Call to kill current process!\n");
+	process_t* current = get_current_process();
+	scheduler_remove(current);
+	free_process(current);
+	
+	jump_process(get_current_process());
+}
+
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 13;
+unsigned int num_syscalls = 14;
 
-static void *syscalls[13] = {
+static void *syscalls[14] = {
    &printf,
    &postbox_location,
    &postbox_pop_top,
@@ -76,7 +88,8 @@ static void *syscalls[13] = {
    &clocks_per_second,
    &system_uptime,
    &syscall_get_process,
-   &syscall_return_current_process
+   &syscall_return_current_process,
+   &kill_current_process
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)

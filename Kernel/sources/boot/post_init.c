@@ -74,6 +74,11 @@ void post_init()
 		//Rename this to other process (Just here to prove system works)
 		set_process_name(get_current_process(), "Other Process");
 
+		//KPROC
+		MEM_LOC num = 13;
+		MEM_LOC a;
+		asm volatile("int $127" : "=a" (a) : "0" (num));
+
 		for (;;)
 		{
 			scheduler_block_me();
@@ -108,7 +113,6 @@ void post_init()
 
 	    printf("Reboot.\n");
 
-	    //Reboot system
 	    kernel_reboot();
     }
 }

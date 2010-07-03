@@ -417,6 +417,11 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	return return_location;
 }
 
+void free_page_dir(page_directory_t* pd)
+{
+
+}
+
 //Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process
 POINTER free_kernel_virtual_address()
 {

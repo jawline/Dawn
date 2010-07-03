@@ -22,10 +22,12 @@ void expand_used_list(process_t* process)
 }
 
 //TODO: Used list shrinking
+int fzero = 0;
 
 MEM_LOC used_list_top(process_t* process)
 {
-	return *((MEM_LOC*) process->m_usedListRoot);
+	MEM_LOC* ulocation = process->m_usedListRoot;
+	return *ulocation;
 }
 
 void used_list_add(process_t* process, MEM_LOC location)
@@ -51,14 +53,14 @@ void used_list_remove(process_t* process, MEM_LOC location)
 	
 	unsigned long iter = 0;
 
-	for (iter = 0; iter < process->m_usedListSize; iter += sizeof(MEM_LOC))
+	for (iter = 0; iter < process->m_usedListLocation; iter += sizeof(MEM_LOC))
 	{
 		if (*ulocation == location)
 		{
 			//Fouuund it
-			memcpy(ulocation, ulocation + 1, process->m_usedListSize - iter);
+			memcpy(ulocation, ulocation + 1, process->m_usedListLocation - iter);
 
-			process->m_usedListSize -= sizeof(MEM_LOC);
+			process->m_usedListLocation -= sizeof(MEM_LOC);
 
 			return;
 		}

@@ -1,6 +1,6 @@
 //Kernel Terminal
 #include <terminal/terminal.h>
-static terminal_t* g_kernelTerminal = 0;
+terminal_t* g_kernelTerminal = 0;
 
 void kputc(char c);
 

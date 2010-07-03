@@ -4,6 +4,7 @@
 
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
+extern terminal_t* g_kernelTerminal;
 
 process_t* init_kproc()
 {
@@ -23,6 +24,8 @@ process_t* init_kproc()
 
 	init_used_list(kernel_proc);
 
+	ret->m_pTerminal = g_kernelTerminal;
+
 	return ret;
 }
 
@@ -32,7 +35,7 @@ void free_process(process_t* process)
 	disable_interrupts();
 
 	if (process == kernel_proc) {
-		return; //Don't want to get red of PID 0
+		return; //Don't want to get rid of PID 0
 	}
 	else
 	{
@@ -44,14 +47,18 @@ void free_process(process_t* process)
 			used_list_remove(process, top);
 		}
 
+		//Empty the post box
+		while (process->m_processPostbox.first != 0)
+		{
+			postbox_top(&process->m_processPostbox);
+		}
+
 		free(process->m_usedListRoot);
 
 		//TODO: Free page directory
 
 		free(process);
 	}
-
-	printf("Killed\n");
 
 }
 
@@ -78,6 +85,8 @@ int kfork()
 
 	//Give it a generic name fo-now
 	strcpy(new_process->m_Name, "ChildProcess");
+
+	new_process->m_pTerminal = parent->m_pTerminal;
 
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;

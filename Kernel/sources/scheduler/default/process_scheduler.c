@@ -37,18 +37,29 @@ void scheduler_on_tick()
 {
 	if (list_current->ticks_tell_die < 1)
 	{
-		process_t* proc = list_current->process_pointer;
+		if (list_current->next->process_pointer->m_shouldDestroy == 1)
+		{
+			process_t* current = list_current->next->process_pointer;
 
-		//Swap to the next process
-		list_current = list_current->next;
+			scheduler_remove(current);
+			free_process(current);
+		}
+		else
+		{
+			process_t* proc = list_current->process_pointer;
 
-		process_t* oproc = list_current->process_pointer;
+			//Swap to the next process
+			list_current = list_current->next;
 
-		//Give me a nano!
-		list_current->ticks_tell_die = _STD_NANO_;
+			process_t* oproc = list_current->process_pointer;
 
-		//Swap to the new process
-		switch_process(proc, oproc);
+			//Give me a nano!
+			list_current->ticks_tell_die = _STD_NANO_;
+
+			//Swap to the new process
+			switch_process(proc, oproc);
+		}
+
 	} else
 	{
 

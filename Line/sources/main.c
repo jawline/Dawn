@@ -21,11 +21,27 @@
 
 #include <clock/clock.h>
 
+#include <heap/heap.h>
+
+DEFN_SYSCALL0(get_kheap, 14);
 DEFN_SYSCALL2(scancode_to_asci, 3, unsigned char, unsigned long);
 DEFN_SYSCALL1(set_flag, 5, unsigned int);
 
 char Pointer[1024];
 int c_ptr = 0;
+
+void list_chunks(heap_t * heap) //List all active chunks in a heap. 
+{
+	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
+
+	printf("Scanning 0x%x\n", ptr);
+
+	while (ptr) 
+	{
+		printf("Chunk %x size %i used %i\n", ptr, ptr->size, ptr->used);
+		ptr = (heap_entry_t *) ptr->next;
+	}
+}
 
 char exec_cmd()
 {
@@ -45,6 +61,12 @@ char exec_cmd()
 		printf("reboot - request the kernel to reboot the system\n");
 		printf("uptime - Lists the seconds minutes and hours the system has been up for\n");
 		printf("lproc - Lists information about all scheduled processes\n");
+		printf("lheap - List the chunks in the kernel heap (Not this applications heap\n");
+	}
+	else if (strcmp("lheap", Pointer) == 0)
+	{
+		heap_t* kheap = syscall_get_kheap();
+		list_chunks(kheap);
 	}
 	else if (strcmp("uptime", Pointer) == 0)
 	{

@@ -112,7 +112,13 @@ void post_init()
 	    }
 
 	    printf("Reboot.\n");
+	    
+            MEM_LOC num = 13;
+	    MEM_LOC a;
+	    asm volatile("int $127" : "=a" (a) : "0" (num));
 
-	    kernel_reboot();
+	    for (;;)
+	    {
+            }
     }
 }

@@ -3,6 +3,9 @@
 #include <process/process.h>
 #include "../scheduler/default/process_scheduler.h"
 #include <timers/clock.h>
+#include <heap/heap.h>
+
+extern heap_t kernel_heap;
 
 process_t* get_current_process();
 extern MEM_LOC calculate_free_frames();
@@ -54,29 +57,40 @@ MEM_LOC syscall_get_process(unsigned int iter)
 	return scheduler_return_process(iter);
 }
 
+MEM_LOC syscall_get_kernel_heap()
+{
+	return &kernel_heap;
+}
+
 void request_reboot()
 {
 	kernel_reboot(); //For now, just reboot the system. Its prolly the right thing to do
 }
 
-
+extern page_directory_t* kernel_pagedir;
 void kill_current_process()
 {
-	//Call to kill the current process
-	printf("Call to kill current process!\n");
-	process_t* current = get_current_process();
-	scheduler_remove(current);
-	free_process(current);
-	
-	jump_process(get_current_process());
+	get_current_process()->m_shouldDestroy = 1;
+}
+
+void syscall_printf(const char* Line)
+{
+	if (get_current_process()->m_pTerminal != 0)
+	{
+		while (*Line)
+		{
+			get_current_process()->m_pTerminal->f_putchar(get_current_process()->m_pTerminal, *Line);
+			Line++;
+		}
+	}
 }
 
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 14;
+unsigned int num_syscalls = 15;
 
-static void *syscalls[14] = {
-   &printf,
+static void *syscalls[15] = {
+   &syscall_printf,
    &postbox_location,
    &postbox_pop_top,
    &get_key_mapping,
@@ -89,7 +103,8 @@ static void *syscalls[14] = {
    &system_uptime,
    &syscall_get_process,
    &syscall_return_current_process,
-   &kill_current_process
+   &kill_current_process,
+   &syscall_get_kernel_heap
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)

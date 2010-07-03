@@ -2,24 +2,15 @@
 #include <printf.h>
 #include <debug/debug.h>
 #include <panic/panic.h>
+#include <mm/virt_mm.h>
+#include <mm/phys_mm.h>
 
 
 uint32 alloc_mem(uint32 size, heap_t * heap);
 void free_mem(uint32 address, heap_t * heap);
 
-void list_chunks(heap_t * heap) //List all active chunks in a heap. 
-{
-	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
-
-	while (ptr) 
-	{
-		printf("Chunk %x size %i used %i\n", ptr, ptr->size, ptr->used);
-		ptr = (heap_entry_t *) ptr->next;
-	}
-}
-
 //Does memory mapping itself, no need to map the first frame of the heap - and if you do you will lose memory to the void.
-void init_heap(heap_t * heap, uint32 address) 
+void init_heap(heap_t * heap, uint32 address)
 {
 	//Double check the heap ptr is valid
 	if (heap == 0) return;

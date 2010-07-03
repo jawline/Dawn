@@ -72,6 +72,8 @@ int loadAndExecuteElf(fs_node_t* Node)
 		}
 	}
 
+	free(Data); //Free the temp buffer
+
 	entry_point application_entry_pointer = head.e_entry;
 
 	int ret = application_entry_pointer(0, 0);

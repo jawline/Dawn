@@ -4,6 +4,7 @@
 #include <mm/pagedir.h>
 #include <common.h>
 #include <process/postbox.h>
+#include <terminal/terminal.h>
 
 #define INPUT_BIT 0x1 //First bit = Do I want to hear about input?!?
 
@@ -24,6 +25,10 @@ struct process_structure
 	MEM_LOC* m_usedListRoot; //Root location of the used list
 	unsigned long m_usedListSize;
 	unsigned long m_usedListLocation; //Location of the end of the current list irrespect to the root
+
+	unsigned char m_shouldDestroy;
+
+	terminal_t* m_pTerminal;
 };
 
 typedef struct process_structure process_t;

@@ -12,5 +12,13 @@ terminal_t* make_terminal(unsigned int width, unsigned int height)
 	ret->m_width = width;
 	ret->m_height = height;
 
+	ret->m_backupData = malloc(sizeof(uint16) * ret->m_width * ret->m_height);
+
 	return ret;
+}
+
+void free_terminal(terminal_t* term)
+{
+	free(term->m_backupData);
+	free(term);
 }

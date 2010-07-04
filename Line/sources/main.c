@@ -24,6 +24,7 @@
 #include <heap/heap.h>
 
 DEFN_SYSCALL0(get_kheap, 14);
+DEFN_SYSCALL0(cls, 15);
 DEFN_SYSCALL2(scancode_to_asci, 3, unsigned char, unsigned long);
 DEFN_SYSCALL1(set_flag, 5, unsigned int);
 
@@ -62,11 +63,16 @@ char exec_cmd()
 		printf("uptime - Lists the seconds minutes and hours the system has been up for\n");
 		printf("lproc - Lists information about all scheduled processes\n");
 		printf("lheap - List the chunks in the kernel heap (Not this applications heap\n");
+		printf("cls - Clear the screen");
 	}
 	else if (strcmp("lheap", Pointer) == 0)
 	{
 		heap_t* kheap = syscall_get_kheap();
 		list_chunks(kheap);
+	}
+	else if (strcmp("cls", Pointer) == 0)
+	{
+		syscall_cls();
 	}
 	else if (strcmp("uptime", Pointer) == 0)
 	{

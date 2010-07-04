@@ -85,11 +85,19 @@ void syscall_printf(const char* Line)
 	}
 }
 
+void syscall_clearscreen()
+{
+	if (get_current_process()->m_pTerminal != 0)
+	{
+		get_current_process()->m_pTerminal->f_clear(get_current_process()->m_pTerminal);
+	}
+}
+
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 15;
+unsigned int num_syscalls = 16;
 
-static void *syscalls[15] = {
+static void *syscalls[16] = {
    &syscall_printf,
    &postbox_location,
    &postbox_pop_top,
@@ -104,7 +112,8 @@ static void *syscalls[15] = {
    &syscall_get_process,
    &syscall_return_current_process,
    &kill_current_process,
-   &syscall_get_kernel_heap
+   &syscall_get_kernel_heap,
+   &syscall_clearscreen
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)

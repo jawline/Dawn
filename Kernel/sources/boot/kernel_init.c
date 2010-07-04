@@ -107,6 +107,9 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	//Load and hook the ramdisk to the root file system
 	init_ramdisk(mboot_ptr, rootfs);
 
+	//Initialize the devices file system
+	init_dev_fs();
+
 	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	init_kterm();
 

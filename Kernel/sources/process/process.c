@@ -55,6 +55,12 @@ void free_process(process_t* process)
 
 		free(process->m_usedListRoot);
 
+		if (process->m_pTerminal)
+		{
+			//TODO: Free process terminal
+			//free_terminal(process->m_pTerminal);
+		}
+
 		//TODO: Free page directory
 
 		free(process);

@@ -62,7 +62,6 @@ void post_init()
 		//Rename the idle process
 		set_process_name(get_current_process(), "System Idle");
 
-		
 		//Loop and continually halt the processor, this will cause the processor to idle between interrupts
 		for (;;) { 
 			asm volatile("hlt"); 
@@ -87,6 +86,18 @@ void post_init()
 
     } else
     {
+	    //Setup a terminal
+	    terminal_t* p_terminal = 0;
+	    extern terminal_t* g_kernelTerminal;
+
+	    p_terminal = make_terminal(80, 25);
+	    get_current_process()->m_pTerminal = p_terminal;
+
+	    set_default_tcallbacks(p_terminal);
+	    set_terminal_context(p_terminal);
+	    printf("Hello world\n");
+	    
+
 	    //Find Line.x
 	    fs_node_t* system = finddir_fs(init_vfs(), "system");
 	    fs_node_t* root = finddir_fs(system, "root");
@@ -102,23 +113,12 @@ void post_init()
 		printf("Line.x returned %i\n", loadAndExecuteElf(line));
 	    }
 
-	    //Wait 3 seconds
-	    long long data = clock() + (CLOCKS_PER_SECOND * 3);
+	    //Set the root console as active
+            printf("Reverting back to root console\n");
+	    set_terminal_context(g_kernelTerminal);
 
-	    printf("Reboot in 3 seconds...\n");
-
-	    while (data > clock())
-	    {
-	    }
-
-	    printf("Reboot.\n");
-	    
             MEM_LOC num = 13;
 	    MEM_LOC a;
 	    asm volatile("int $127" : "=a" (a) : "0" (num));
-
-	    for (;;)
-	    {
-            }
     }
 }

@@ -63,7 +63,7 @@ char exec_cmd()
 		printf("uptime - Lists the seconds minutes and hours the system has been up for\n");
 		printf("lproc - Lists information about all scheduled processes\n");
 		printf("lheap - List the chunks in the kernel heap (Not this applications heap\n");
-		printf("cls - Clear the screen");
+		printf("cls - Clear the screen\n");
 	}
 	else if (strcmp("lheap", Pointer) == 0)
 	{
@@ -152,7 +152,7 @@ char exec_cmd()
 
 int main(int argc, void* argv)
 {
-
+	c_ptr = 0;
 	syscall_set_flag(INPUT_BIT);
 
 	unsigned long cps = get_clocks_per_second();

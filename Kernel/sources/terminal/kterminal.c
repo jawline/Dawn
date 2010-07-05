@@ -4,6 +4,11 @@
 terminal_t* g_kernelTerminal = 0;
 terminal_t* g_terminalInContext = 0;
 
+terminal_t* getTerminalInContext()
+{
+	return g_terminalInContext;
+}
+
 void kernel_terminal_putc(terminal_t* term, char c)
 {
 	if (term == g_terminalInContext)
@@ -11,28 +16,24 @@ void kernel_terminal_putc(terminal_t* term, char c)
 	else
 	{
 		//Write to the backup data which stores a copy of the terminal when its not in context
-		text_mode_putc_prec(term->m_backupData, 0, 15, &term->m_cursorX, &term->m_cursorY, c);
+		text_mode_putc_prec(term->m_backupData, term->m_backgroundColour, term->m_foregroundColour, &term->m_cursorX, &term->m_cursorY, c);
 	}
 }
 
 void kernel_terminal_setfg(terminal_t* term, uint8 col)
 {
+	term->m_foregroundColour = col;
+
 	if (term == g_terminalInContext)
 		text_mode_tsetfg(term, col);
-	else
-	{
-		//TODO: Set the fg colour of the terminal when not in context
-	}
 }
 
 void kernel_terminal_setbg(terminal_t* term, uint8 col)
 {
+	term->m_backgroundColour = col;
+
 	if (term == g_terminalInContext)
 		text_mode_tsetbg(term, col);
-	else
-	{
-		//TODO: Set the bg colour of the terminal when not in context
-	}
 }
 
 void kernel_terminal_clear(terminal_t* term)

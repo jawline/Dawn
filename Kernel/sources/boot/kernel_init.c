@@ -22,11 +22,14 @@
 #include <debug/debug.h>
 #include <hdd/disk_device.h>
 #include <devices/pci/pci.h>
+#include <terminal/terminal.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
 
 #include <stdlib.h>
+
+extern terminal_t* getTerminalInContext();
 
 #define iprintf(x) if (visual_output) { printf(x); }
 
@@ -112,6 +115,7 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 
 	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	init_kterm();
+	getTerminalInContext()->f_clear(getTerminalInContext);
 
 	DEBUG_PRINT("KTerm Started\n");
 

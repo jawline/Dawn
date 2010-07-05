@@ -39,6 +39,19 @@ void free_process(process_t* process)
 	}
 	else
 	{
+
+		if (process->m_pTerminal != 0)
+		{
+			if (getTerminalInContext() == process->m_pTerminal)
+			{
+				set_terminal_context(g_kernelTerminal);
+			}
+
+			free_terminal(process->m_pTerminal);
+
+			process->m_pTerminal = 0;
+		}
+
 		//This kills the used list and frees every used page
 		while (process->m_usedListLocation != 0)
 		{
@@ -54,12 +67,6 @@ void free_process(process_t* process)
 		}
 
 		free(process->m_usedListRoot);
-
-		if (process->m_pTerminal)
-		{
-			//TODO: Free process terminal
-			//free_terminal(process->m_pTerminal);
-		}
 
 		//TODO: Free page directory
 

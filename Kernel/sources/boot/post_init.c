@@ -68,21 +68,6 @@ void post_init()
 		}
 
 	}
-	else
-	{
-		//Rename this to other process (Just here to prove system works)
-		set_process_name(get_current_process(), "Other Process");
-
-		//KPROC
-		MEM_LOC num = 13;
-		MEM_LOC a;
-		asm volatile("int $127" : "=a" (a) : "0" (num));
-
-		for (;;)
-		{
-			scheduler_block_me();
-		}
-	}
 
     } else
     {
@@ -95,8 +80,6 @@ void post_init()
 
 	    set_default_tcallbacks(p_terminal);
 	    set_terminal_context(p_terminal);
-	    printf("Hello world\n");
-	    
 
 	    //Find Line.x
 	    fs_node_t* system = finddir_fs(init_vfs(), "system");
@@ -115,6 +98,7 @@ void post_init()
 
 	    //Set the root console as active
             printf("Reverting back to root console\n");
+
 	    set_terminal_context(g_kernelTerminal);
 
             MEM_LOC num = 13;

@@ -19,6 +19,8 @@ struct abstract_terminal {
 	unsigned int m_height;
 	unsigned int m_cursorX;
 	unsigned int m_cursorY;
+	unsigned int m_backgroundColour;
+	unsigned int m_foregroundColour;
 
 	void* m_backupData; //Can be used to store the data when a abstract terminal loses context.
 

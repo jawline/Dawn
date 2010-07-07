@@ -7,6 +7,7 @@
 ; Update - Friday the 28th of May - Now setup so it jumps using the GDT trick. Kernel now has to setup paging and identity map the first few mbs PRIOR to setting up the GDT
 ;
 ; Update - Wed the 7th of July - Using a cheap page directory instead of the fake GDT. GDT trick = Ugly hack
+; Update - 4MB Pages enabled but not necessarily used
 ;
 
 [BITS 32]                       ; All instructions should be 32-bit.
@@ -19,6 +20,9 @@ MBOOT_HEADER_MAGIC  equ 0x1BADB002 ; Multiboot Magic value
 ; pass a symbol table.
 MBOOT_HEADER_FLAGS  equ MBOOT_PAGE_ALIGN | MBOOT_MEM_INFO
 MBOOT_CHECKSUM      equ -(MBOOT_HEADER_MAGIC + MBOOT_HEADER_FLAGS)
+
+KERNEL_VIRTUAL_BASE equ 0xC0000000                  ; 3GB
+KERNEL_PAGE_NUMBER equ (KERNEL_VIRTUAL_BASE >> 22)  ; Page directory index of kernel's 4MB PTE.
 
 [GLOBAL mboot]                  ; Make 'mboot' accessible from C.
 [EXTERN code]                   ; Start of the '.text' section.
@@ -40,40 +44,38 @@ mboot:
 [GLOBAL start]                  ; Kernel entry point.
 [EXTERN main]                   ; This is the entry point of our C code
 start:
-    lgdt [trickgdt]
+	mov ecx, boot_pagedir
+	mov cr3, ecx                                        ; Load Page Directory Base Register
+	
+	mov ecx, cr4
+	or ecx, 0x00000010                          ; Set PSE bit in CR4 to enable 4MB pages.
+	mov cr4, ecx
 
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
+	mov ecx, cr0
+	or ecx, 0x80000000                          ; Set PG bit in CR0 to enable paging.
+	mov cr0, ecx
+	
+	jmp higherhalf
 
-    jmp 0x08:higherhalf
+[section .setup] ; tells the assembler to include this data in the '.setup' section
+align 0x1000
+boot_pagedir:
+	dd 0x83
+	times (KERNEL_PAGE_NUMBER - 1) dd 0                 ; Pages before kernel space.
+	; This page directory entry defines a 4MB page containing the kernel.
+	dd 0x83
+	times (1024 - KERNEL_PAGE_NUMBER - 1) dd 0  ; Pages after the kernel image.
 
 [SECTION .text]
 higherhalf:
-	mov esp, sys_stack
+	mov esp, sys_stack_start
 	push esp
 	push ebx
 	call main
 	jmp $
-
-[section .setup] ; tells the assembler to include this data in the '.setup' section
- 
-trickgdt:
-	dw gdt_end - gdt - 1 ; size of the GDT
-	dd gdt ; linear address of GDT
-
-gdt:
-	dd 0, 0							; null gate
-	db 0xFF, 0xFF, 0, 0, 0, 10011010b, 11001111b, 0x40	; code selector 0x08: base 0x40000000, limit 0xFFFFFFFF, type 0x9A, granularity 0xCF
-	db 0xFF, 0xFF, 0, 0, 0, 10010010b, 11001111b, 0x40	; data selector 0x10: base 0x40000000, limit 0xFFFFFFFF, type 0x92, granularity 0xCF
- 
-gdt_end:
- 
+	 
 [section .bss]
  
 resb 0x4000
-sys_stack:
+sys_stack_start: ;After the RESB because stacks expand downwards
 	; our kernel stack

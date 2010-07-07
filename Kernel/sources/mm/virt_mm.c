@@ -367,7 +367,6 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	memset(copying_to, 0, PAGE_SIZE);
 
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
-
 	copying_to[0] = being_copied[0];
 
 	unsigned int i = 0;

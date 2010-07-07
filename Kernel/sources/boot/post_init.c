@@ -50,24 +50,22 @@ void post_init()
     int result = kfork();
 
     if (result == 0) //Parent
-    {
-	int result = kfork();
+    	{
 
-        if (result == 0)
-	{
 		//System idle halts the processor between interrupts when it is active. This is to slow the processor, lower memory usage & heat etcetera.
 		//TODO: Give system idle a priority within the scheduler so that the processor spends less time idling when other processes want to be powered
 		enable_interrupts();
 
 		//Rename the idle process
 		set_process_name(get_current_process(), "System Idle");
+		scheduler_block_me();
+
+		enable_interrupts();
 
 		//Loop and continually halt the processor, this will cause the processor to idle between interrupts
 		for (;;) { 
 			asm volatile("hlt"); 
 		}
-
-	}
 
     } else
     {
@@ -80,6 +78,9 @@ void post_init()
 
 	    set_default_tcallbacks(p_terminal);
 	    set_terminal_context(p_terminal);
+
+	    //Always perform a f_clear - Cursor bug, doesn't appear without a f_clear don't know why. Might just make this a design feature *Hehe*
+	    p_terminal->f_clear(p_terminal);
 
 	    //Find Line.x
 	    fs_node_t* system = finddir_fs(init_vfs(), "system");

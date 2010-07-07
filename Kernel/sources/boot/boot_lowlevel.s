@@ -6,8 +6,11 @@
 ;
 ; Update - Friday the 28th of May - Now setup so it jumps using the GDT trick. Kernel now has to setup paging and identity map the first few mbs PRIOR to setting up the GDT
 ;
+; Update - Wed the 7th of July - Using a cheap page directory instead of the fake GDT. GDT trick = Ugly hack
+;
 
 [BITS 32]                       ; All instructions should be 32-bit.
+[SECTION .setup]
 
 MBOOT_PAGE_ALIGN    equ 1<<0    ; Load kernel and modules on a page boundary
 MBOOT_MEM_INFO      equ 1<<1    ; Provide your kernel with memory info
@@ -34,7 +37,6 @@ mboot:
     dd  end                     ; End of kernel.
     dd  start                   ; Kernel entry point (initial EIP).
 
-[SECTION .setup]
 [GLOBAL start]                  ; Kernel entry point.
 [EXTERN main]                   ; This is the entry point of our C code
 start:

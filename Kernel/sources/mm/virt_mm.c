@@ -417,9 +417,44 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	return return_location;
 }
 
+void free_page_table(page_directory_t* pt)
+{
+	POINTER being_freed = free_kernel_virtual_address();
+	map(being_freed, pt, PAGE_PRESENT | PAGE_WRITE);
+
+	unsigned int i = 0;
+	for (i = 1; i < get_table(KERNEL_START); i++)
+	{
+		if (being_freed[i] != 0)
+		{
+			free_frame(being_freed[i]);
+		}
+	}
+
+	unmap(being_freed);
+
+	free_frame(pt);
+}
+
 void free_page_dir(page_directory_t* pd)
 {
+	disable_interrupts(); //Disable interrupts
 
+	POINTER being_freed = free_kernel_virtual_address();
+	map(being_freed, pd, PAGE_PRESENT | PAGE_WRITE);
+
+	unsigned int i = 0;
+	for (i = 1; i < get_table(KERNEL_START); i++)
+	{
+		if (being_freed[i] != 0)
+		{
+			free_page_table(being_freed[i]);
+		}
+	}
+
+	free_frame(pd);
+
+	unmap(being_freed);
 }
 
 //Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process

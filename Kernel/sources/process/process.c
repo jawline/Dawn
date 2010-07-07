@@ -47,7 +47,10 @@ void free_process(process_t* process)
 				set_terminal_context(g_kernelTerminal);
 			}
 
-			free_terminal(process->m_pTerminal);
+			if (process->m_pTerminal == g_kernelTerminal) //Don't delete
+			{
+				free_terminal(process->m_pTerminal);
+			}
 
 			process->m_pTerminal = 0;
 		}
@@ -68,10 +71,13 @@ void free_process(process_t* process)
 
 		free(process->m_usedListRoot);
 
-		//TODO: Free page directory
+		free_page_dir(process->m_pageDir);
 
 		free(process);
 	}
+
+
+	printf("Free frames at end %x\n", calculate_free_frames());
 
 }
 
@@ -122,6 +128,8 @@ int kfork()
 		new_process->eip = current_eip;
 
 		scheduler_add(new_process);
+
+		printf("Free frames at start %x\n", calculate_free_frames());
 
 		return 0; //Return 0 - Parent
 	}
@@ -217,11 +225,6 @@ process_message postbox_peek(process_postbox* pb)
 	}
 
 	return pb->first->data;
-}
-
-//Kill the process
-void kill_process(process_t* p)
-{
 }
 
 process_message postbox_top(process_postbox* pb)

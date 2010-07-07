@@ -43,6 +43,7 @@ void kernel_terminal_clear(terminal_t* term)
 	else
 	{
 		//Clear the screen using the direct video memory access on the backup data
+		text_mode_clearscreen_prec(term->m_backupData, term->m_backgroundColour, &term->m_cursorX, &term->m_cursorY); 
 	}
 }
 

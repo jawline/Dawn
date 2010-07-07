@@ -91,6 +91,7 @@ uint32 alloc_mem(uint32 size, heap_t* heap)
 
 		if (ptr->next == 0) 
 		{
+		        printf("Expanded heap\n");
 			//Map another 4kb onto the heap
 			//This is the last entry on the heap SO if its not used we can just += the size otherwise we have to create a whole new one (More work for mee)
 

@@ -161,6 +161,7 @@ uint8 detect_device_type(pio_device dev)
 	if (cl==0x69 && ch==0x96) return T_SATAPI;
 	if (cl==0 && ch == 0) return T_PATA;
 	if (cl==0x3c && ch==0xc3) return T_SATA;
+
 	return T_UNKNOWN;
 }
 

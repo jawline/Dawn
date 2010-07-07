@@ -15,18 +15,22 @@ terminal_t* make_terminal(unsigned int width, unsigned int height)
 	ret->m_width = width;
 	ret->m_height = height;
 
+	//Set the cursor X and Y
+	ret->m_cursorX = 0;
+	ret->m_cursorY = 0;
+
 	//Set the foreground and background values to defaults
 	ret->m_backgroundColour = m_defaultBGC;
 	ret->m_foregroundColour = m_defaultFGC;
 
 	ret->m_backupData = malloc(sizeof(uint16) * ret->m_width * ret->m_height);
+	memset(ret->m_backupData, 0, sizeof(uint16) * ret->m_width * ret->m_height);
 
 	return ret;
 }
 
 void free_terminal(terminal_t* term)
 {
-	//ToDo: FixMe
 	free(term->m_backupData);
 	free(term);
 }

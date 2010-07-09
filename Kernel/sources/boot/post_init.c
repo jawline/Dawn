@@ -46,7 +46,7 @@ void post_init()
     register_input_listener(DEVICE_KEYBOARD, &kernel_keyboard_callback);
 
     enable_interrupts(); //Fork process disables interrupts
-    
+
     int result = kfork();
 
     if (result == 0) //Parent
@@ -69,18 +69,10 @@ void post_init()
 
     } else
     {
-	    //Setup a terminal
-	    terminal_t* p_terminal = 0;
 	    extern terminal_t* g_kernelTerminal;
+	    get_current_process()->m_pTerminal = g_kernelTerminal;
 
-	    p_terminal = make_terminal(80, 25);
-	    get_current_process()->m_pTerminal = p_terminal;
-
-	    set_default_tcallbacks(p_terminal);
-	    set_terminal_context(p_terminal);
-
-	    //Always perform a f_clear - Cursor bug, doesn't appear without a f_clear don't know why. Might just make this a design feature *Hehe*
-	    p_terminal->f_clear(p_terminal);
+	    rename_current_process("Line.x");
 
 	    //Find Line.x
 	    fs_node_t* system = finddir_fs(init_vfs(), "system");
@@ -88,22 +80,28 @@ void post_init()
 
 	    fs_node_t* line = finddir_fs(root, "Line.x");
 
-	    rename_current_process("Line.x");
-
 	    //Execute Line.x
 	    if (line != 0)
 	    {
 		printf("Found Line.x\n");
 		printf("Line.x returned %i\n", loadAndExecuteElf(line));
+	    } else
+	    {
+		printf("Error Line.x not found\n");
 	    }
+
+		/*
 
 	    //Set the root console as active
             printf("Reverting back to root console\n");
 
-	    set_terminal_context(g_kernelTerminal);
+	    set_terminal_context(g_kernelTerminal); */
 
             MEM_LOC num = 13;
 	    MEM_LOC a;
 	    asm volatile("int $127" : "=a" (a) : "0" (num));
+	for (;;) {}
     }
+
+    for (;;) { }
 }

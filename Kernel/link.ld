@@ -2,34 +2,54 @@ ENTRY(start)
 
 SECTIONS
 {
-    . = 0x100000;
-    
-    .setup :
-    {
-	*(.setup)
-    }
+    . += 0xC0100000;
 
-    . += 0xC0000000;
+    kstart = .;
+    _kstart = .;
+    __kstart = .;
 
     .text : AT(ADDR(.text) - 0xC0000000)
     {
-	code = .; _code = .;__code = .;
+	code = .; 
+	_code = .;
+	__code = .;
+
 	*(.text)
+        *(.rodata*)
+
+	ecode = .;
+	_ecode = .;
+	__ecode = .;
     }
 
     .data ALIGN (4096) : AT(ADDR(.data) - 0xC0000000)
     {
-	data = .; _data = .; __data = .;
+	data = .;
+	_data = .;
+	__data = .;
+
 	*(.data)
-	*(.rodata*)
+
+	edata = .;
+	_edata = .;
+	__edata = .;
     }
 
-    .bss ALIGN (4096) : AT(ADDR(.bss) - 0xC0000000)
+    .bss : AT(ADDR(.bss) - 0xC0000000)
     {
-	bss = .; _bss = .; __bss = .;
-	*(COMMON*)
-	*(.bss*)
+	sbss = .;
+	_sbss = .;
+	__sbss = .;
+
+	*(COMMON)
+	*(.bss)
+
+	ebss = .;
+	_ebss = .;
+	__ebss = .;
     }
 
-    end = .; _end = .; __end = .;
+    k_end = .;
+    _k_end = .;
+    __k_end = .;
 }

@@ -11,7 +11,7 @@
 ;
 
 [BITS 32]                       ; All instructions should be 32-bit.
-[SECTION .setup]
+
 
 MBOOT_PAGE_ALIGN    equ 1<<0    ; Load kernel and modules on a page boundary
 MBOOT_MEM_INFO      equ 1<<1    ; Provide your kernel with memory info
@@ -25,10 +25,11 @@ KERNEL_VIRTUAL_BASE equ 0xC0000000                  ; 3GB
 KERNEL_PAGE_NUMBER equ (KERNEL_VIRTUAL_BASE >> 22)  ; Page directory index of kernel's 4MB PTE.
 
 [GLOBAL mboot]                  ; Make 'mboot' accessible from C.
-[EXTERN code]                   ; Start of the '.text' section.
-[EXTERN bss]                    ; Start of the .bss section.
-[EXTERN end]                    ; End of the last loadable section.
+[EXTERN _code]                   ; Start of the '.text' section.
+[EXTERN _sbss]                    ; Start of the .bss section.
+[EXTERN _k_end]                    ; End of the last loadable section.
 
+[SECTION .text]
 mboot:
     dd  MBOOT_HEADER_MAGIC      ; GRUB will search for this value on each
                                 ; 4-byte boundary in your kernel file
@@ -36,15 +37,16 @@ mboot:
     dd  MBOOT_CHECKSUM          ; To ensure that the above values are correct
     
     dd  mboot                   ; Location of this descriptor
-    dd  code                    ; Start of kernel '.text' (code) section.
-    dd  bss                     ; End of kernel '.data' section.
-    dd  end                     ; End of kernel.
-    dd  start                   ; Kernel entry point (initial EIP).
+    dd  _code                    ; Start of kernel '.text' (code) section.
+    dd  _sbss                     ; End of kernel '.data' section.
+    dd  _k_end                    ; End of kernel.
+    dd  start                  ; Kernel entry point (initial EIP).
 
 [GLOBAL start]                  ; Kernel entry point.
 [EXTERN main]                   ; This is the entry point of our C code
+
 start:
-	mov ecx, boot_pagedir
+	mov ecx, boot_pagedir - KERNEL_VIRTUAL_BASE
 	mov cr3, ecx                                        ; Load Page Directory Base Register
 	
 	mov ecx, cr4
@@ -55,9 +57,24 @@ start:
 	or ecx, 0x80000000                          ; Set PG bit in CR0 to enable paging.
 	mov cr0, ecx
 	
-	jmp higherhalf
+	jmp higherhalf + KERNEL_VIRTUAL_BASE
 
-[section .setup] ; tells the assembler to include this data in the '.setup' section
+higherhalf:
+	;mov dword [boot_pagedir], 0
+	; Apparently it does matter invlpg[0]
+
+	mov esp, sys_stack_start
+	push esp
+
+	;Pass the multiboot structure
+	push sys_stack_start
+	push ebx
+
+	call main
+
+	jmp $
+
+[SECTION .data]
 align 0x1000
 boot_pagedir:
 	dd 0x83
@@ -66,13 +83,7 @@ boot_pagedir:
 	dd 0x83
 	times (1024 - KERNEL_PAGE_NUMBER - 1) dd 0  ; Pages after the kernel image.
 
-[SECTION .text]
-higherhalf:
-	mov esp, sys_stack_start
-	push esp
-	push ebx
-	call main
-	jmp $
+
 	 
 [section .bss]
  

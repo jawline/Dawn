@@ -47,32 +47,64 @@ void init_IDT(int visual_output)
 
 //Initialize the physical and virtual memory managers
 //Use the last loaded module (The one after the RAM disk)
-void init_MemoryManagers(struct multiboot * mboot_ptr, int visual_output)
+void init_MemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start, MEM_LOC kernel_end, int visual_output)
 {
-    uint32* mods_addr = (uint32*) mboot_ptr->mods_addr;    
-    mods_addr++;
-
-    init_phys_mm(*mods_addr);
-    init_virt_mm(*mods_addr);
+    kernel_end = kernel_end - kernel_start;
+    init_phys_mm(kernel_end);
+    init_virt_mm(kernel_end);
     map_free_pages(mboot_ptr);
 
     iprintf("Memory Managers (PMM, VMM) [OK]\n");
 }
 
-void init_ramdisk(struct multiboot * mboot_ptr, fs_node_t * root) 
+//This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
+void init_ramdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_node_t * root) 
 {
-
-	if (mboot_ptr->mods_count != 1) {
-		printf("Error, Initial RAM disk not loaded\n");
-		PANIC("No RAM disk");
-		return;	
-	}
-
+	/*
+	//OLD
 	uint32* addr = (uint32*) mboot_ptr->mods_addr;
 
-	fs_node_t* initrd = initialize_initrd( *addr, "system", init_vfs() /* Returns root */);
+	fs_node_t* initrd = initialize_initrd( *addr, "system", init_vfs());
 
-	bindnode_fs(init_vfs() /* returns root */ , initrd);
+	bindnode_fs(init_vfs() , initrd); 
+	*/
+
+	size_t ramdisk_size = ramdisk_phys_end - ramdisk_phys_start;
+
+	printf("Ramdisk Size: 0x%x bytes\n", ramdisk_size);
+
+	void* ramdisk_new_location = malloc(ramdisk_size);
+	size_t copied = 0;
+	size_t to_copy = ramdisk_size;
+
+	while (copied < to_copy)
+	{
+		POINTER t_vaddr = free_kernel_virtual_address();
+		map(t_vaddr, ramdisk_phys_start + copied, PAGE_PRESENT | PAGE_WRITE);
+
+		MEM_LOC loc = ramdisk_new_location;
+		loc += copied;
+
+		if ((to_copy) > PAGE_SIZE)
+		{
+			POINTER ploc = (POINTER) loc;
+			memcpy(ploc, t_vaddr, PAGE_SIZE);
+		}
+		else
+		{
+			POINTER ploc = (POINTER) loc;
+			memcpy(ploc, t_vaddr, ramdisk_phys_end - ramdisk_phys_start);
+		}
+
+		unmap(t_vaddr);
+
+		copied += PAGE_SIZE;
+		to_copy -= PAGE_SIZE;
+	}
+
+	fs_node_t* initrd = initialize_initrd(ramdisk_new_location, "system", init_vfs());
+
+	bindnode_fs(init_vfs() , initrd); 
 }
 
 extern heap_t kernel_heap;
@@ -83,8 +115,11 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	//Load the archaic 
 	init_GDT(visual_output);
 
+	extern void k_end;
+	MEM_LOC kEndLocation = (POINTER)&k_end;
+
 	//Initialize the PMM and VMM
-	init_MemoryManagers(mboot_ptr, visual_output);
+	init_MemoryManagers(mboot_ptr, KERNEL_START, kEndLocation, visual_output);
 
 	//Move the stack to a nicer location in memory
 	move_stack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
@@ -107,9 +142,6 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	//Init the virtual file system
 	fs_node_t * rootfs = init_vfs();
 	
-	//Load and hook the ramdisk to the root file system
-	init_ramdisk(mboot_ptr, rootfs);
-
 	//Initialize the devices file system
 	init_dev_fs();
 
@@ -125,6 +157,17 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
 	init_devices();
 
+	if (mboot_ptr->mods_count == 1)
+	{ 
+		//Load and hook the ramdisk to the root file system
+		init_ramdisk(*((LPOINTER)(mboot_ptr->mods_addr)), *((LPOINTER)(mboot_ptr->mods_addr + 4)), rootfs);
+	}
+
 	//Initialize the system scheduler
 	scheduler_init(init_kproc());
+
+	printf("K_End 0x%x\n", kEndLocation);
+
+	printf("Result 0x%x\n", *((LPOINTER)(mboot_ptr->mods_addr)));
+	printf("Result 0x%x\n", *((LPOINTER)(mboot_ptr->mods_addr + 4)));
 }

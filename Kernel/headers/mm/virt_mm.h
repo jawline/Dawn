@@ -25,7 +25,7 @@ void init_virt_mm(uint32 val);
 void mark_paging_enabled();
 void map (POINTER va, POINTER pa, uint32 flags);
 void unmap (POINTER va);
-char get_mapping (uint32 va, uint32* pa);
+char get_mapping (MEM_LOC va, MEM_LOC* pa);
 
 void enable_paging();
 void disable_paging();

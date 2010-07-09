@@ -229,7 +229,7 @@ void identity_map_pages(page_directory_t* pagedir)
 	pagedir[0] = frame | PAGE_PRESENT | PAGE_WRITE;
 
 	//Create a pointer to the new page table
-	POINTER pt = (POINTER) frame; //Pointer to the page directory
+	LPOINTER pt = (POINTER) frame; //Pointer to the page directory
 
 	//Iterate through, setting each page to the correct location in memories
 	unsigned int i = 0;
@@ -261,7 +261,7 @@ void init_virt_mm(uint32 mem_end)
 	MEM_LOC frame = alloc_frame(); //Allocate a 4KB frame
 	pagedir[1022] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Set the 1022nd page table to the new frame address
 
-	POINTER pt = (POINTER) frame; //Pointer to the new frame
+	LPOINTER pt = (POINTER) frame; //Pointer to the new frame
 	memset (pt, 0, PAGE_SIZE); //Null the frame
 
 	pt[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory. So when paging is active PAGE_DIR_VIRTUAL_ADDR = the page directory
@@ -318,10 +318,10 @@ MEM_LOC copy_page_table(MEM_LOC pt, uint8 copy)
 {
 	MEM_LOC new_page_table = alloc_frame();
 
-	POINTER temp_read_addr = free_kernel_virtual_address();
+	LPOINTER temp_read_addr = free_kernel_virtual_address();
 	map(temp_read_addr, pt, PAGE_PRESENT | PAGE_WRITE);
 
-	POINTER temp_write_addr = free_kernel_virtual_address();
+	LPOINTER temp_write_addr = free_kernel_virtual_address();
 	map(temp_write_addr, new_page_table, PAGE_PRESENT | PAGE_WRITE);
 	memset(temp_write_addr, 0, PAGE_SIZE);	
 	
@@ -359,10 +359,10 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 	page_directory_t* return_location = (page_directory_t*) alloc_frame();
 
-	POINTER being_copied = free_kernel_virtual_address();
+	LPOINTER being_copied = free_kernel_virtual_address();
 	map(being_copied, pagedir, PAGE_PRESENT | PAGE_WRITE);
 
-	POINTER copying_to = free_kernel_virtual_address();
+	LPOINTER copying_to = free_kernel_virtual_address();
 	map(copying_to, return_location, PAGE_PRESENT | PAGE_WRITE);
 	memset(copying_to, 0, PAGE_SIZE);
 
@@ -394,11 +394,11 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	MEM_LOC frame = alloc_frame();
 	copying_to[1022] = frame | PAGE_PRESENT | PAGE_WRITE;
 
-	POINTER pt = free_kernel_virtual_address();
+	LPOINTER pt = free_kernel_virtual_address();
 	map(pt, frame, PAGE_PRESENT | PAGE_WRITE);
 	memset (pt, 0, PAGE_SIZE);
 
-	POINTER opt = free_kernel_virtual_address();
+	LPOINTER opt = free_kernel_virtual_address();
 	map(opt, being_copied[1022], PAGE_PRESENT | PAGE_WRITE);
 
 	memcpy(pt, opt, PAGE_SIZE);
@@ -418,7 +418,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 
 void free_page_table(page_directory_t* pt)
 {
-	POINTER being_freed = free_kernel_virtual_address();
+	LPOINTER being_freed = free_kernel_virtual_address();
 	map(being_freed, pt, PAGE_PRESENT | PAGE_WRITE);
 
 	unsigned int i = 0;
@@ -439,7 +439,7 @@ void free_page_dir(page_directory_t* pd)
 {
 	disable_interrupts(); //Disable interrupts
 
-	POINTER being_freed = free_kernel_virtual_address();
+	LPOINTER being_freed = free_kernel_virtual_address();
 	map(being_freed, pd, PAGE_PRESENT | PAGE_WRITE);
 
 	unsigned int i = 0;
@@ -451,9 +451,11 @@ void free_page_dir(page_directory_t* pd)
 		}
 	}
 
-	free_frame(pd);
+
+	free_frame(being_freed[1022]);
 
 	unmap(being_freed);
+	free_frame(pd);
 }
 
 //Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process

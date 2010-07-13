@@ -11,7 +11,7 @@ SOURCES := $(patsubst %.s,%.o,$(SSOURCES)) $(patsubst %.c,%.o,$(CSOURCES))
 
 CC=gcc
 CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I ../Shared/headers -I ../API/headers/ -fno-stack-protector -m32
-LDFLAGS=-Tlink.ld -melf_i386
+LDFLAGS=-melf_i386
 ASFLAGS=-felf32
 
 all: $(SOURCES) link

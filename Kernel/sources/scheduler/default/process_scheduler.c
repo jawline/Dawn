@@ -168,6 +168,18 @@ process_t* get_current_process()
 	return list_current->process_pointer;
 }
 
+void scheduler_kill_current_process()
+{
+	if (list_current == 0) return 0;
+
+	get_current_process()->m_shouldDestroy = 1;
+
+	for (;;)
+	{
+		scheduler_block_me();
+	}
+}
+
 process_t* scheduler_return_process(unsigned int iter)
 {
 	scheduler_proc* iterator = list_root;

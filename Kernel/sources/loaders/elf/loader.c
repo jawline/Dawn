@@ -47,36 +47,50 @@ int loadAndExecuteElf(fs_node_t* Node)
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
-	unsigned int i = 0;
-	uint32 is = 0;
+	//This segment of code correlates to the loading of the data into virtual memory
 
+	printf("Iterating through %i program headers\n", head.e_phnum);
 
-	for (i = 0; i < head.e_phnum; i++)
+	//Iterate through every program header
+	unsigned int header_iter = 0;
+	for (header_iter = 0; header_iter < head.e_phnum; header_iter++)
 	{
-		e32_pheader pHead = parseElfProgramHeader(Data, Node->length, head, i);
 
-		if (pHead.p_type == PT_LOAD)
+		e32_pheader program_header = parseElfProgramHeader(Data, Node->length, head, header_iter);
+
+		printf("Loaded program head %i. p_type 0x%x p_offset 0x%x v_addr 0x%x p_addr 0x%x p_filesz 0x%x p_memsz 0x%x p_align 0x%x\n", header_iter, program_header.p_type, program_header.p_offset, program_header.p_vaddr, program_header.p_paddr, program_header.p_filesz, program_header.p_memsz, program_header.p_align);
+
+		if (program_header.p_type == PT_LOAD)
 		{
-			//Check that every byte is mapped (CHEAP)
-			for (is = pHead.p_vaddr; is < pHead.p_vaddr + pHead.p_memsz; is += PAGE_SIZE)
+			MEM_LOC v_addr_iter = program_header.p_vaddr;
+
+			for (v_addr_iter = program_header.p_vaddr; v_addr_iter <= program_header.p_vaddr + program_header.p_memsz; v_addr_iter += PAGE_SIZE)
 			{
-				if (get_mapping(is, 0) == 0)
+				if (get_mapping(v_addr_iter, 0) == 0)
 				{
-					//Map it
-					MEM_LOC newframe = alloc_frame();
-					map(is, newframe, PAGE_PRESENT | PAGE_WRITE);
+					printf("Page not yet mapped\n");
+					map(v_addr_iter, alloc_frame(), PAGE_PRESENT | PAGE_WRITE);
+					printf("Page has been mapped\n");
+				}
+				else
+				{
+					printf("Page already mapped\n");
 				}
 			}
 
-			memcpy(pHead.p_vaddr, Data + pHead.p_offset, pHead.p_filesz);
+			memset(program_header.p_vaddr, 0, program_header.p_memsz);
+			memcpy(program_header.p_vaddr, Data + program_header.p_offset, program_header.p_filesz);
+			printf("Copied memory data\n");
 		}
+
 	}
 
-	free(Data); //Free the temp buffer
+	//This segment of code correlates to its execution
+	int result_from_process = 0;
 
-	entry_point application_entry_pointer = head.e_entry;
+	entry_point program_entry_ponter = head.e_entry;
 
-	int ret = application_entry_pointer(0, 0);
+	result_from_process = program_entry_ponter(0, 0);
 
-	return ret; //Return the return value of the executable
+	return result_from_process;
 }

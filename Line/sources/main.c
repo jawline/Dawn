@@ -150,8 +150,14 @@ char exec_cmd()
 	return 0;
 }
 
+void tfunc()
+{
+	return 50;
+}
+
 int main(int argc, void* argv)
 {
+
 	c_ptr = 0;
 	syscall_set_flag(INPUT_BIT);
 

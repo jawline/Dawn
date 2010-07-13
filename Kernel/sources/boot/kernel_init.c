@@ -23,6 +23,7 @@
 #include <hdd/disk_device.h>
 #include <devices/pci/pci.h>
 #include <terminal/terminal.h>
+#include <initrd/initrd_header.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -60,11 +61,13 @@ void init_MemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start, MEM_
 //This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
 void init_ramdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_node_t * root) 
 {
-	/*
-	//OLD
-	uint32* addr = (uint32*) mboot_ptr->mods_addr;
 
-	fs_node_t* initrd = initialize_initrd( *addr, "system", init_vfs());
+
+	/*	
+	//OLD
+	MEM_LOC addr = ramdisk_phys_start;
+
+	fs_node_t* initrd = initialize_initrd( addr, "system", init_vfs());
 
 	bindnode_fs(init_vfs() , initrd); 
 	*/
@@ -74,37 +77,79 @@ void init_ramdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_node_
 	printf("Ramdisk Size: 0x%x bytes\n", ramdisk_size);
 
 	void* ramdisk_new_location = malloc(ramdisk_size);
-	size_t copied = 0;
-	size_t to_copy = ramdisk_size;
 
-	while (copied < to_copy)
+	MEM_LOC start_mapping_location = ramdisk_phys_start;
+	MEM_LOC end_mapping_location = ramdisk_phys_end;
+
+	while (start_mapping_location < end_mapping_location)
 	{
-		POINTER t_vaddr = free_kernel_virtual_address();
-		map(t_vaddr, ramdisk_phys_start + copied, PAGE_PRESENT | PAGE_WRITE);
-
-		MEM_LOC loc = ramdisk_new_location;
-		loc += copied;
-
-		if ((to_copy) > PAGE_SIZE)
-		{
-			POINTER ploc = (POINTER) loc;
-			memcpy(ploc, t_vaddr, PAGE_SIZE);
-		}
-		else
-		{
-			POINTER ploc = (POINTER) loc;
-			memcpy(ploc, t_vaddr, ramdisk_phys_end - ramdisk_phys_start);
-		}
-
-		unmap(t_vaddr);
-
-		copied += PAGE_SIZE;
-		to_copy -= PAGE_SIZE;
+		map(start_mapping_location, start_mapping_location, PAGE_PRESENT | PAGE_WRITE);
+		start_mapping_location += PAGE_SIZE;
 	}
 
-	fs_node_t* initrd = initialize_initrd(ramdisk_new_location, "system", init_vfs());
+	start_mapping_location = ramdisk_phys_start;
+	end_mapping_location = ramdisk_phys_end;
 
-	bindnode_fs(init_vfs() , initrd); 
+	memcpy(ramdisk_new_location, start_mapping_location, ramdisk_size);
+
+	while (end_mapping_location > start_mapping_location)
+	{
+		unmap(end_mapping_location);
+		end_mapping_location -= PAGE_SIZE;
+	}
+
+	printf("Computing consistency check: ");
+
+	struct initial_ramdisk_header* head = ramdisk_new_location;
+
+	unsigned char digest[16];
+	MEM_LOC DLOC = head;
+	DLOC += sizeof(struct initial_ramdisk_header);
+
+	MDData(DLOC, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
+
+	unsigned int iter = 0;
+	for (iter = 0; iter < 16; iter++)
+	{
+		printf("%x", digest[iter]);
+	}
+
+	printf("\n");
+	
+	if (MDCompare(head->ramdisk_checksum, digest) == 0)
+	{
+		printf("Error: CHECKSUM Incorrect ");
+
+		iter = 0;
+		for (iter = 0; iter < 16; iter++)
+		{
+			printf("%x", head->ramdisk_checksum[iter]);
+		}
+
+		printf("\n");
+
+		MEM_LOC dloc = ramdisk_new_location;
+		dloc += head->ramdisk_size - 10;
+
+		for (iter = 0; iter < 10; iter++)
+		{
+			unsigned char* byte = dloc;
+			printf("%x ", *byte);
+			dloc++;
+		}
+		
+		free(ramdisk_new_location);
+
+	}
+	else
+	{
+
+		//Load the ramdisk only of consistancy check is coo
+		fs_node_t* initrd = initialize_initrd(ramdisk_new_location, "system", init_vfs());
+
+		bindnode_fs(init_vfs() , initrd);
+
+	}
 }
 
 extern heap_t kernel_heap;
@@ -155,7 +200,7 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	kernel_initialise_syscalls();
 
 	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
-	init_devices();
+	//init_devices();
 
 	if (mboot_ptr->mods_count == 1)
 	{ 

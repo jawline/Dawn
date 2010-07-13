@@ -10,5 +10,6 @@ int exit(int val)
 
 	asm volatile("mov %0, %%ebp; \
 		      mov %1, %%esp;" :: "r" (mebp), "r" (mesp));
+
 	return val;
 }

@@ -1,13 +1,8 @@
-ENTRY(start)
+ENTRY(_start)
 
 SECTIONS
 {
-    . = 0x1000000;
-    
-    .setup :
-    {
-	*(.setup)
-    }
+    . = 0xA000000;
 
     .text : AT(ADDR(.text))
     {
@@ -15,14 +10,14 @@ SECTIONS
 	*(.text)
     }
 
-    .data ALIGN (4096) : AT(ADDR(.data))
+    .data : AT(ADDR(.data))
     {
 	data = .; _data = .; __data = .;
 	*(.data)
 	*(.rodata*)
     }
 
-    .bss ALIGN (4096) : AT(ADDR(.bss))
+    .bss : AT(ADDR(.bss))
     {
 	bss = .; _bss = .; __bss = .;
 	*(COMMON*)

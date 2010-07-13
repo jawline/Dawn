@@ -6,6 +6,7 @@
 #include <interrupts/idt.h>
 #include <debug/debug.h>
 #include <types/memory.h>
+#include <process/process.h>
 
 #define ReloadCR3() \
       __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
@@ -28,99 +29,127 @@ unsigned int PAGE_SIZE = 4096;
 
 extern uint32 used_mem_end; //End of kernel used memory at initialization of paging
 
+extern process_t* get_current_process();
+
 void page_fault (idt_call_registers_t regs)
 {
-  cls();
-  printf("--------------------------------------------------------------------------------");
-  printf("|  W        W       OO         OO        OO       PPPPPP   SSSSSSS  YY     YY  |");
-  printf("|  W        W     OO  OO     OO  OO    OO  OO     P    P   S         YY   YY   |");
-  printf("|  W        W    O      O   O      O  O      O    P    P   S          YY YY    |");
-  printf("|  W   WW   W    O      O   O      O  O      O    PPPPPP   S           YYY     |");
-  printf("|  W  W  W  W    O      O   O      O  O      O    P        SSSSSSS      Y      |");
-  printf("|  W W    W W    O      O   O      O  O      O    P              S      Y      |");
-  printf("|  WW      WW     OO  OO     OO  OO    OO  OO     P              S      Y      |");
-  printf("|  W        W       OO         OO        OO       P        SSSSSSS      Y      |");
-  printf("--------------------------------------------------------------------------------");
-
-  uint32 faulting_address;
-  asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
-
-  printf("| The kernel has crashed. The reason was a paging fault.                       |");
-  printf("| below are the details                                                        |");
-  printf("| current page directory location 0x%x", current_pagedir);
-  kmovecx(79);
-  printf("|");
- 
-  if (current_pagedir == kernel_pagedir)
+  if (get_current_process() != init_kproc())
   {
-  	printf("| Current page directory = Kernel page directory                               |");
+	int present   = (regs.err_code & 0x1); // Page not present
+	int rw = regs.err_code & 0x2;           // Write operation?
+	if (rw == 0x2) rw = 1;
+
+	int us = regs.err_code & 0x4;           // Processor was in user-mode?
+	if (us == 0x4) us = 1;
+
+	int reserved = regs.err_code & 0x8;     // Overwritten CPU-reserved bits of page entry?
+	if (reserved == 0x8) reserved = 1;
+
+	int id = regs.err_code & 0x10;          // Caused by an instruction fetch?
+	if (id = 0x10) id = 1;
+
+	uint32 faulting_address;
+	asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
+
+	int mapping = get_mapping(faulting_address, 0);
+
+	printf("Error - Page fault in process %i at location 0x%x ( present: %i write: %i us: %i reserved %i: instr: %i mapping: %i) process forced to exit\n", get_current_process()->m_ID, faulting_address, present, rw, us, reserved, id, mapping);
+	scheduler_kill_current_process();
   }
   else
   {
-  	printf("| Current page directory != Kernel page directory                              |");
-  }
+	  cls();
+	  printf("--------------------------------------------------------------------------------");
+	  printf("|  W        W       OO         OO        OO       PPPPPP   SSSSSSS  YY     YY  |");
+	  printf("|  W        W     OO  OO     OO  OO    OO  OO     P    P   S         YY   YY   |");
+	  printf("|  W        W    O      O   O      O  O      O    P    P   S          YY YY    |");
+	  printf("|  W   WW   W    O      O   O      O  O      O    PPPPPP   S           YYY     |");
+	  printf("|  W  W  W  W    O      O   O      O  O      O    P        SSSSSSS      Y      |");
+	  printf("|  W W    W W    O      O   O      O  O      O    P              S      Y      |");
+	  printf("|  WW      WW     OO  OO     OO  OO    OO  OO     P              S      Y      |");
+	  printf("|  W        W       OO         OO        OO       P        SSSSSSS      Y      |");
+	  printf("--------------------------------------------------------------------------------");
 
-  printf("|                                                                              |");
-  printf("|                                                                              |");
-  printf("| Page fault at location 0x%x", faulting_address);
-  kmovecx(79);
-  printf("|");
-  
+	  uint32 faulting_address;
+	  asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
 
-  int present   = (regs.err_code & 0x1); // Page not present
-  int rw = regs.err_code & 0x2;           // Write operation?
-  int us = regs.err_code & 0x4;           // Processor was in user-mode?
-  int reserved = regs.err_code & 0x8;     // Overwritten CPU-reserved bits of page entry?
-  int id = regs.err_code & 0x10;          // Caused by an instruction fetch?
+	  printf("| The kernel has crashed. The reason was a paging fault.                       |");
+	  printf("| below are the details                                                        |");
+	  printf("| current page directory location 0x%x", current_pagedir);
+	  kmovecx(79);
+	  printf("|");
+	 
+	  if (current_pagedir == kernel_pagedir)
+	  {
+	  	printf("| Current page directory = Kernel page directory                               |");
+	  }
+	  else
+	  {
+	  	printf("| Current page directory != Kernel page directory                              |");
+	  }
 
-  if (present) 
-  {
-  	printf("| PAGE PRESENT                                                                 |");
-  } 
-  else 
-  {
-  	printf("| PAGE NOT PRESENT                                                             |");
-  }
-  
-  if (rw)
-  {
-	printf("| WRITE OPERATION                                                              |");
-  }
-  else
-  {
-  	printf("| READ OPERATION                                                               |");
-  }
+	  printf("|                                                                              |");
+	  printf("|                                                                              |");
+	  printf("| Page fault at location 0x%x", faulting_address);
+	  kmovecx(79);
+	  printf("|");
+	  
 
-  if (us)
-  {
-  	printf("| USER MODE FAULT                                                              |");
-  }
-  else
-  {
-  	printf("| KERNEL MODE FAULT                                                            |");
-  }
+	  int present   = (regs.err_code & 0x1); // Page not present
+	  int rw = regs.err_code & 0x2;           // Write operation?
+	  int us = regs.err_code & 0x4;           // Processor was in user-mode?
+	  int reserved = regs.err_code & 0x8;     // Overwritten CPU-reserved bits of page entry?
+	  int id = regs.err_code & 0x10;          // Caused by an instruction fetch?
 
-  if (reserved) 
-  {
- 	printf("| RESERVED MEMORY OVERWRITE                                                    |");
-  }
-  else
-  {
-  	printf("| NOT RESERVED MEMORY OVERWRITE                                                |");
-  }
+	  if (present) 
+	  {
+	  	printf("| PAGE PRESENT                                                                 |");
+	  } 
+	  else 
+	  {
+	  	printf("| PAGE NOT PRESENT                                                             |");
+	  }
+	  
+	  if (rw)
+	  {
+		printf("| WRITE OPERATION                                                              |");
+	  }
+	  else
+	  {
+	  	printf("| READ OPERATION                                                               |");
+	  }
 
-  if (id)
-  {
- 	printf("| INSTRUCTION FETCH                                                            |");
-  }
-  else
-  {
-	printf("| NOT INSTRUCTION FETCH                                                        |");
-  }
+	  if (us)
+	  {
+	  	printf("| USER MODE FAULT                                                              |");
+	  }
+	  else
+	  {
+	  	printf("| KERNEL MODE FAULT                                                            |");
+	  }
 
-  printf("--------------------------------------------------------------------------------");
+	  if (reserved) 
+	  {
+	 	printf("| RESERVED MEMORY OVERWRITE                                                    |");
+	  }
+	  else
+	  {
+	  	printf("| NOT RESERVED MEMORY OVERWRITE                                                |");
+	  }
 
-  PANIC("Page Fault!");
+	  if (id)
+	  {
+	 	printf("| INSTRUCTION FETCH                                                            |");
+	  }
+	  else
+	  {
+		printf("| NOT INSTRUCTION FETCH                                                        |");
+	  }
+
+	  printf("--------------------------------------------------------------------------------");
+
+	  PANIC("Page Fault!");
+  }
 
   for (;;) ;
 }

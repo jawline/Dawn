@@ -4,6 +4,7 @@
 #include "../scheduler/default/process_scheduler.h"
 #include <timers/clock.h>
 #include <heap/heap.h>
+#include <panic/panic.h>
 
 extern heap_t kernel_heap;
 
@@ -118,7 +119,6 @@ static void *syscalls[16] = {
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)
 {
-
    // Firstly, check if the requested syscall number is valid.
    // The syscall number is found in EAX.
    if (regs.eax >= num_syscalls)
@@ -138,7 +138,7 @@ idt_call_registers_t syscall_handler(idt_call_registers_t regs)
 		   push %3; \
 		   push %4; \
 		   push %5; \
-		   call *%6; \
+		   call %6; \
 		   pop %%ebx; \
 		   pop %%ebx; \
 		   pop %%ebx; \

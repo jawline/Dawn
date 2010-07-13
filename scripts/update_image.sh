@@ -3,14 +3,12 @@
 #SimpleOS ISO Image generator.
 #Updated Tue 23rd, Feb, 2010
 
-#Requirements: genisoimage installed on the computer.
-#	       etc/menu.lst to exist
-#	       etc/stage2_eltorito to exist.
-
-#	       The disk will still be bootable if no Kernel is copied. but the bootloader will not function as desired.
-
 #cd to the OS directory
 cd ..
+
+#Get the hard drive image
+echo "Image name: "
+read image_name
 
 #Build Line
 echo "Rebuilding Line"
@@ -28,22 +26,18 @@ cd InitRD
 sh buildrd.sh
 cd ../
 
-echo "Creating temporary directory."
-mkdir temp_disk
-mkdir -p temp_disk/boot/grub/
+sudo losetup /dev/loop0 $image_name
 
-echo "Copying bootloader."
-cp etc/menu.lst temp_disk/boot/grub/menu.lst
-cp etc/stage2_eltorito temp_disk/boot/grub/stage2_eltorito
+echo "Installing drive, use /dev/loop0 as the addresses"
+sh scripts/install_drive.sh
+
+sudo umount ./tmount
+sudo mount /dev/loop0 ./tmount
 
 echo "Copying Kernel"
-cp Kernel/Build/Kernel temp_disk/boot/Kernel
-cp InitRD/ramdisk.img temp_disk/boot/ramdisk
+sudo cp Kernel/Build/Kernel tmount/boot/Kernel
+sudo cp InitRD/ramdisk.img tmount/boot/ramdisk
 
-echo "Generating ISO image"
-genisoimage -quiet -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 4 -boot-info-table -o boot_disk.iso temp_disk
+sudo umount ./tmount
 
-echo "Removing temporary directory"
-
-rm -r temp_disk
 echo "Done!"

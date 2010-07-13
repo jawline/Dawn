@@ -1,21 +1,15 @@
 #include <stdio.h>
 
-#include <int_types.h>
-#include <initrd_dirent.h>
-#include <initrd_fent.h>
-#include <initrd_header.h>
+#include <types/int_types.h>
+#include <initrd/initrd_dirent.h>
+#include <initrd/initrd_fent.h>
+#include <initrd/initrd_header.h>
 
-/* NOTES ABOUT INITIAL RAM DISKS*/
-
-/* They need to be compiled with the same compiler & for the same archetecture as the kernel itself. 
-   They are not cross platform compatable (In their current state any way)
-   Two compilers may pack the structs or order the integers in different ways (For instance Little endian - Big Endian conversion), this could lead to big problems.
-   Recompile for each desired archetecture
-*/
+#include "md5use.h"
 
 #define VER_MAJOR 0
 #define VER_MINOR 2
-#define VER_REV 6
+#define VER_REV 7
 
 typedef struct {
 	struct initrd_fent st; //File header structure
@@ -24,7 +18,7 @@ typedef struct {
 	uint32 mlen; //Memory length
 } file_helper;
 
-file_helper * helper_list;
+file_helper* helper_list;
 
 int main(int argc, char **argv)
 {
@@ -46,6 +40,13 @@ int main(int argc, char **argv)
 	}
 
 	struct initial_ramdisk_header head;
+	memset(&head, 0, sizeof(struct initial_ramdisk_header));
+
+	head.ramdisk_checksum[0] = 0;
+	head.ramdisk_checksum[1] = 0;
+	head.ramdisk_checksum[2] = 0;
+	head.ramdisk_checksum[3] = 0;
+
 	head.ramdisk_magic = RAMMAGIC;
 	head.ramdisk_size = sizeof(struct initial_ramdisk_header);
 	
@@ -136,7 +137,7 @@ int main(int argc, char **argv)
 		printf("Unable to write the initial RAM disk header\n");	
 	}	
 
-	for (i = 0; i < nmfiles; i++) { //Third (And Final) file pass.
+	for (i = 0; i < nmfiles; i++) { //Third file pass.
 		fseek(fout, helper_list[i].loc, SEEK_SET); //Seek to the start of the header
 		helper_list[i].st.start = helper_list[i].mloc;
 		helper_list[i].st.size = helper_list[i].mlen;
@@ -147,7 +148,50 @@ int main(int argc, char **argv)
 		}
 	}
 
+	fclose(fout);
+
+	fout = fopen(argv[1], "rb");
+	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);	
+
+	void* Data = malloc(end - sizeof(struct initial_ramdisk_header));
+	size_t Read = fread(Data, end - sizeof(struct initial_ramdisk_header), 1, fout);
+
+	if (Read != 1)
+	{
+		printf("Error computing ramdisk hash\n");
+		printf("RDBYTE %i\n", Read);
+		return -1;
+	}
+
+	unsigned char digest[16];
+	MDData(Data, end - sizeof(struct initial_ramdisk_header), digest);
+
+	printf("Computing checksum\n");
+
+	unsigned int iter = 0;
+	for (iter = 0; iter < 16; iter++)
+	{
+		printf("%x", digest[iter]);
+		head.ramdisk_checksum[iter] = digest[iter];
+	}
+
+	printf("\nEnd of digest\n");
+
+	free(Data);
+
+	fclose(fout);
+
+	fout = fopen(argv[1], "r+b");
+
+	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
+		printf("Unable to write the initial RAM disk header\n");	
+	}	
+
 	printf("RAM disk written. %d bytes\n", head.ramdisk_size);
+
+	fclose(fout);
+
+	printf("Compiled\n");
 
 	return 0;
 }

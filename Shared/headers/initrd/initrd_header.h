@@ -6,6 +6,7 @@
 //The header at the start of the RAM disk
 struct initial_ramdisk_header {
 	uint32 ramdisk_magic;
+	uint8 ramdisk_checksum[16];
 	uint32 ramdisk_size; //Size in bytes of the RD
 } __attribute__((packed));
 

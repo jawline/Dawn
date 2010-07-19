@@ -25,10 +25,11 @@ typedef struct fs_node_t* (*bind_node_t) (struct filesystem_node* boundto, struc
 
 struct filesystem_node {
 	char name[128]; //Character array, name
+	struct filesystem_node* parent; //Pointer to the parent
 
 	uint32 flags; //32 bit bitmask for flags
-	uint32 length; //32 bit int, size of the file.
-	uint32 inode; //Internal node, Unique for each file
+	unsigned long length; //long integer, size of the file.
+	unsigned long inode; //Internal node, Unique for each file
 
 	io_operation write;
 	io_operation read;

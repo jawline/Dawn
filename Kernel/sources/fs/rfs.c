@@ -9,6 +9,42 @@ uint32 num_rfs_entrys = 0;
 struct dirent* root_readdir (fs_node_t* node, uint32 idx) {
 	rfs_t* rfs_struct = &rfs_entrys_pointer[node->inode];
 
+	if (node->parent == 0)
+	{
+		if (idx == 0)
+		{
+			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+			memset(ret, 0, sizeof(struct dirent));
+			strcpy(ret->name, ".");
+			return ret;
+		}
+		else
+		{
+			idx = idx - 1;
+		}
+	}
+	else
+	{
+		if (idx == 0)
+		{
+			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+			memset(ret, 0, sizeof(struct dirent));
+			strcpy(ret->name, ".");
+			return ret;
+		}
+		else if (idx == 1)
+		{
+			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+			memset(ret, 0, sizeof(struct dirent));
+			strcpy(ret->name, "..");
+			return ret;
+		}
+		else
+		{
+			idx = idx - 2;
+		}
+	}
+
 	if (rfs_struct->num_directory_entrys > idx) 
 	{
 		struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
@@ -21,8 +57,25 @@ struct dirent* root_readdir (fs_node_t* node, uint32 idx) {
 }
 
 fs_node_t* root_finddir (fs_node_t* node, char* name) {
+
 	rfs_t* rfs_struct = &rfs_entrys_pointer[node->inode];
 	uint32 iter = 0;
+
+	if (strcmp(name, ".") == 0)
+	{
+		return node;
+	}
+	else if (strcmp(name, "..") == 0)
+	{
+		if (node->parent != 0)
+		{
+			return node->parent;
+		}
+		else
+		{	
+			return 0;
+		}
+	}
 
 	for (iter = 0; iter < rfs_struct->num_directory_entrys; iter++) 
 	{
@@ -55,7 +108,14 @@ void root_bind_node(fs_node_t* boundto, fs_node_t* node) {
 		rfs_struct->directory_entrys = dir_entrys_new;
 	}
 
-	boundto->length = rfs_struct->num_directory_entrys;
+	if (boundto->parent != 0)
+	{
+		boundto->length = rfs_struct->num_directory_entrys + 2;
+	}
+	else
+	{
+		boundto->length = rfs_struct->num_directory_entrys + 1;
+	}
 
 	return;
 }
@@ -91,12 +151,19 @@ void root_unbind_node(fs_node_t* boundto, fs_node_t* node) {
 		rfs_struct->num_directory_entrys--;
 	}
 
-	boundto->length = rfs_struct->num_directory_entrys;
+	if (boundto->parent != 0)
+	{
+		boundto->length = rfs_struct->num_directory_entrys + 2;
+	}
+	else
+	{
+		boundto->length = rfs_struct->num_directory_entrys + 1;
+	}
 
 	return;	
 }
 
-fs_node_t* create_rfs_directory(char * name) 
+fs_node_t* create_rfs_directory(char * name, fs_node_t* parent) 
 {
 	num_rfs_entrys++;
 
@@ -116,6 +183,15 @@ fs_node_t* create_rfs_directory(char * name)
 		
 		ret->bindnode = (bind_node_t) root_bind_node;
 		ret->unbindnode = (bind_node_t) root_unbind_node;
+
+		ret->parent = parent;
+
+		if (parent == 0) {
+			ret->length = 1;
+		} else {
+			ret->length = 2;
+		}
+
 		return ret;
 
 	} 
@@ -141,6 +217,15 @@ fs_node_t* create_rfs_directory(char * name)
 		
 		ret->bindnode = (bind_node_t) root_bind_node;
 		ret->unbindnode = (bind_node_t) root_unbind_node;
+
+		if (parent == 0) {
+			ret->length = 1;
+		} else {
+			ret->length = 2;
+		}
+
+		ret->parent = parent;
+
 		return ret;
 	}
 }

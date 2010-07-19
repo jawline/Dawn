@@ -94,11 +94,27 @@ void syscall_clearscreen()
 	}
 }
 
+void syscall_set_fgc(unsigned char fgc)
+{
+	if (get_current_process()->m_pTerminal != 0)
+	{
+		get_current_process()->m_pTerminal->f_setForeground(get_current_process()->m_pTerminal, fgc);
+	}	
+}
+
+void syscall_set_bgc(unsigned char bgc)
+{
+	if (get_current_process()->m_pTerminal != 0)
+	{
+		get_current_process()->m_pTerminal->f_setBackground(get_current_process()->m_pTerminal, bgc);
+	}	
+}
+
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 16;
+unsigned int num_syscalls = 18;
 
-static void *syscalls[16] = {
+static void *syscalls[18] = {
    &syscall_printf,
    &postbox_location,
    &postbox_pop_top,
@@ -114,7 +130,9 @@ static void *syscalls[16] = {
    &syscall_return_current_process,
    &kill_current_process,
    &syscall_get_kernel_heap,
-   &syscall_clearscreen
+   &syscall_clearscreen,
+   &syscall_set_fgc,
+   &syscall_set_bgc
 };
 
 idt_call_registers_t syscall_handler(idt_call_registers_t regs)

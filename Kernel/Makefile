@@ -29,5 +29,12 @@ link:
 todo:
 	-@for file in $(ALLFILES); do fgrep -H -e TODO -e FIXME $$file; done; true
 
+rfs_dirs_created:
+	-@for file in $(ALLFILES); do fgrep -H -e create_rfs_directory $$file; done; true
+
+list_dirs:
+	-@for file in $(ALLFILES); do fgrep -H -e print_directory $$file; done; true
+
+
 .s.o:
 	@nasm $(ASFLAGS) $<

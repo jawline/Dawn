@@ -17,21 +17,29 @@ void print_directory(fs_node_t* node, int recur) {
 		break;	
 	}
 
-
 	fs_node_t* nent = finddir_fs(node, ent->name);
 
-	free(ent);
 
 	if (!is_directory(nent)) {
 
-		printf("File %s Length %i\n", nent->name, nent->length);
+		printf("File %s Length %i\n", ent->name, nent->length);
+		free(ent);
 
 	} else {
 
-		printf("Directory %s\n", nent->name);
-		if (recur) {
+		printf("Directory %s\n", ent->name);
+
+		if (strcmp(ent->name, ".") == 0)
+		{
+		}
+		else if (strcmp(ent->name, "..") == 0)
+		{
+		}
+		else if (recur == 1) {
 			print_directory(nent, 1);
 		}
+
+		free(ent);
 	}
 
 	iter++;

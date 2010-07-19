@@ -13,7 +13,7 @@ fs_node_t* root_fs = 0;
 
 void init_root_fs() 
 {
-	root_fs = create_rfs_directory("root");
+	root_fs = create_rfs_directory("root", 0);
 }
 
 fs_node_t* init_vfs() 
@@ -126,36 +126,11 @@ void unbindnode_fs(fs_node_t* node, fs_node_t* target)
 
 }
 
-fs_node_t* evaluate_path(const char* path, fs_node_t* clevel, fs_node_t* root)
+//Find a node given a string
+fs_node_t* evaluate_path(const char* path, fs_node_t* start_directory)
 {
 	if (!path) return 0;
-	if (!clevel) return 0;
-	if (!root) return 0;
+	if (!start_directory) return 0;
 
-	fs_node_t* ret = 0;
-	fs_node_t* current = 0;
-	uint32 plength = strlen(path);
-	if (plength == 0) return 0;
-
-	uint8 from_current = 0;
-	
-	if (path[0] == '/')
-	{
-		//From the root directory
-	}
-	else
-	{
-		from_current = 1;
-	}
-
-	if (from_current == 1)
-	{
-		current = clevel;
-	}
-	else
-	{
-		current = root;
-	}
-
-	return ret;
+	unsigned int path_length = strlen(path);
 }

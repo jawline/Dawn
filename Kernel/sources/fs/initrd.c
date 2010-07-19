@@ -195,5 +195,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 	initrd_root_node->finddir = ird_root_finddir;
 	initrd_root_node->length = num_directories;
 
+	initrd_root_node->parent = parent;
+
 	return initrd_root_node;
 }

@@ -28,9 +28,6 @@ cd ../
 
 sudo losetup /dev/loop0 $image_name
 
-echo "Installing drive, use /dev/loop0 as the addresses"
-sh scripts/install_drive.sh
-
 sudo umount ./tmount
 sudo mount /dev/loop0 ./tmount
 

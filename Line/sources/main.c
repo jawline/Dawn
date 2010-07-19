@@ -25,6 +25,8 @@
 
 DEFN_SYSCALL0(get_kheap, 14);
 DEFN_SYSCALL0(cls, 15);
+DEFN_SYSCALL1(setfg, 16, unsigned char);
+DEFN_SYSCALL1(setbg, 17, unsigned char);
 DEFN_SYSCALL2(scancode_to_asci, 3, unsigned char, unsigned long);
 DEFN_SYSCALL1(set_flag, 5, unsigned int);
 
@@ -150,13 +152,11 @@ char exec_cmd()
 	return 0;
 }
 
-void tfunc()
-{
-	return 50;
-}
-
 int main(int argc, void* argv)
 {
+	syscall_setbg(0);
+	syscall_setfg(15);
+	syscall_cls();	
 
 	c_ptr = 0;
 	syscall_set_flag(INPUT_BIT);

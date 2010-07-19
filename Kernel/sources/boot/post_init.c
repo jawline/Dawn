@@ -70,7 +70,13 @@ void post_init()
     } else
     {
 	    extern terminal_t* g_kernelTerminal;
-	    get_current_process()->m_pTerminal = g_kernelTerminal;
+	    terminal_t* m_processTerminal = make_terminal(80, 25);
+
+	    set_default_tcallbacks(m_processTerminal);
+	    set_terminal_context(m_processTerminal);
+	    
+	    get_current_process()->m_pTerminal = m_processTerminal;
+
 
 	    rename_current_process("Line.x");
 
@@ -90,17 +96,20 @@ void post_init()
 		printf("Error Line.x not found\n");
 	    }
 
-		/*
-
 	    //Set the root console as active
             printf("Reverting back to root console\n");
 
-	    set_terminal_context(g_kernelTerminal); */
+	    set_terminal_context(g_kernelTerminal);
 
+	    print_directory(init_vfs(), 1);
+
+	    //Call syscall 13 triggers kill this process
             MEM_LOC num = 13;
 	    MEM_LOC a;
 	    asm volatile("int $127" : "=a" (a) : "0" (num));
-	for (;;) {}
+
+	    //Just a simple protection
+            for (;;) {}
     }
 
     for (;;) { }

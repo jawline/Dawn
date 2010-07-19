@@ -25,8 +25,8 @@ void text_mode_set_y(uint8 y)
 		current_terminal->m_cursorY = y;
 }
 
-static uint8 active_foreground_col = 15;
-static uint8 active_background_col = 0;
+static const uint8 active_foreground_col = 15;
+static const uint8 active_background_col = 0;
 
 static void text_mode_move_cursor() 
 {
@@ -41,10 +41,10 @@ static void text_mode_move_cursor()
 
 }
 
-void text_mode_scroll_prec(uint16* video_memory, unsigned int* cx, unsigned int* cy)
+void text_mode_scroll_prec(uint16* video_memory, unsigned char bgc, unsigned char fgc, unsigned int* cx, unsigned int* cy)
 {
     // Get a space character with the default colour attributes.
-    uint8 attributeByte = (0 /*black*/ << 4) | (15 /*white*/ & 0x0F);
+    uint8 attributeByte = (bgc << 4) | (fgc & 0x0F);
     uint16 blank = 0x20 /* space */ | (attributeByte << 8);
 
     // Row 25 is the end, this means we need to scroll up
@@ -122,13 +122,13 @@ void text_mode_putc_prec(uint16* video_memory, uint8 bgc, uint8 fgc, unsigned in
         *cy = *cy + 1;
     }
 
-    text_mode_scroll_prec(video_memory, cx, cy);
+    text_mode_scroll_prec(video_memory, bgc, fgc, cx, cy);
 }
 
-void text_mode_clearscreen_prec(uint16* video_memory, uint8 bgc, unsigned int* cx, unsigned int* cy) 
+void text_mode_clearscreen_prec(uint16* video_memory, uint8 bgc, uint8 fgc, unsigned int* cx, unsigned int* cy) 
 {
     // Make an attribute byte for the default colours
-    uint8 attributeByte = (bgc /*black*/ << 4) | (15 /*white*/ & 0x0F);
+    uint8 attributeByte = (bgc /*black*/ << 4) | (fgc /*white*/ & 0x0F);
     uint16 blank = 0x20 /* space */ | (attributeByte << 8);
 
     int i;
@@ -142,31 +142,23 @@ void text_mode_clearscreen_prec(uint16* video_memory, uint8 bgc, unsigned int* c
     *cy = 0;
 }
 
-// Scrolls the text on the screen up by one line.
-void text_mode_scroll()
-{
-	text_mode_scroll_prec(video_memory_location, &cursor_x, &cursor_y);
-}
-
 void text_mode_clearscreen() 
 {
-    text_mode_clearscreen_prec(video_memory_location, active_background_col, &cursor_x, &cursor_y);
+    text_mode_clearscreen_prec(video_memory_location, active_background_col, active_foreground_col, &cursor_x, &cursor_y);
     text_mode_move_cursor();
 }
 
 void text_mode_set_fg_color(uint8 col) 
 {
-	active_foreground_col = col;
 }
 
 void text_mode_set_bg_color(uint8 col) 
 {
-	active_background_col = col;
 }
 
 void text_mode_putc(char c) 
 {
-     text_mode_putc_prec(video_memory_location, active_background_col, active_foreground_col, &cursor_x, &cursor_y, c);
+    text_mode_putc_prec(video_memory_location, active_background_col, active_foreground_col, &cursor_x, &cursor_y, c);
 
     // Move the hardware cursor.
     text_mode_move_cursor();
@@ -187,9 +179,11 @@ void backup_terminal(terminal_t* term)
 
 void text_mode_tputc(terminal_t* term, char c)
 {
-	text_mode_putc(c);
+	text_mode_putc_prec(video_memory_location, term->m_backgroundColour, term->m_foregroundColour, &cursor_x, &cursor_y, c);
 	term->m_cursorX = cursor_x;
 	term->m_cursorY = cursor_y;
+
+	text_mode_move_cursor();
 }
 
 void text_mode_tsetfg(terminal_t* term, uint8 col)
@@ -204,7 +198,8 @@ void text_mode_tsetbg(terminal_t* term, uint8 col)
 
 void text_mode_tclear(terminal_t* term)
 {
-	text_mode_clearscreen();
+    text_mode_clearscreen_prec(video_memory_location, term->m_backgroundColour, term->m_foregroundColour, &cursor_x, &cursor_y);
+    text_mode_move_cursor();
 }
 
 void text_mode_tup(terminal_t* term)

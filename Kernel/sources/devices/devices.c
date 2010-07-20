@@ -1,9 +1,64 @@
 #include <devices/pci/pci.h>
 #include <stdio.h>
+#include <panic/panic.h>
+
+void init_pci_device(pci_device active_dev)
+{
+	unsigned char class = pciDeviceGetClass(active_dev);
+	unsigned char subclass = pciDeviceGetSubclass(active_dev);
+
+	switch (class)
+	{
+
+		case CLASS_TYPE_MASS_STORAGE:
+		{
+			//Mass storage device, iterate through the possibles
+			switch (subclass)
+			{
+				case MASS_STORAGE_TYPE_IDE:
+				{
+					printf("IDE controller found, being initialized\n");
+					printf("Vendor 0x%x\n", pciDeviceGetVendor(active_dev));
+					printf("ID 0x%x\n", pciDeviceGetDeviceId(active_dev));
+					printf("Bus %x slot %x function %x\n", active_dev.bus, active_dev.slot, active_dev.function);
+					printf("Bar0 0x%x Bar1 0x%x Bar2 0x%x Bar3 0x%x\n", pciDeviceGetBar0(active_dev), pciDeviceGetBar1(active_dev), pciDeviceGetBar2(active_dev), pciDeviceGetBar3(active_dev));
+
+					unsigned long primary_channel_io = 0, secondary_channel_io = 0, primary_channel_ctrl = 0, secondary_channel_ctrl = 0;
+
+					if (pciDeviceGetBar0(active_dev) == 0x0 || pciDeviceGetBar0(active_dev) == 0x1)
+					{
+						primary_channel_io = 0x1F0;
+					}
+
+					if (pciDeviceGetBar1(active_dev) == 0x0 || pciDeviceGetBar1(active_dev) == 0x1)
+					{
+						primary_channel_io = 0x3F4;
+					}
+
+					//INCOMPLETE: Finish this initialization			
+
+					break;
+				};
+
+				default:
+				{
+					printf("Unhandled mass storage device\n");
+					//Unhandled storage device
+					break;
+				};
+			};
+		};
+
+		default:
+		{
+			//Unhandled device
+			break;
+		};
+	}
+}
 
 void init_devices()
 {
-	printf("DEVICE SUBSYSTEM STARTED\n");
 
 	printf("Scanning PCI bus\n");
 
@@ -13,7 +68,9 @@ void init_devices()
 
 	unsigned int busi = 0;
 	unsigned int sloti = 0;
+	unsigned int functioni = 0;
 	unsigned int ndev = 0;
+
 
 	for (busi = 0; busi < 255; busi++)
 	{
@@ -21,33 +78,26 @@ void init_devices()
 		{
 			Dev.bus = busi;
 			Dev.slot = sloti;
+			Dev.function = 0;
 
 			if (pciDeviceExists(Dev))
 			{
-				printf("Device exists on bus %i slot %i\n", busi, sloti);
-				printf("Device ID: 0x%x\n", pciDeviceGetDeviceId(Dev));
-				printf("Device Class: 0x%x\n", pciDeviceGetClass(Dev));
-				printf("Device Subclass: 0x%x\n", pciDeviceGetSubclass(Dev));				
-
 				if (pciDeviceGetHeaderType(Dev) == 0x80)
 				{
-					printf("Device has many functions\n");
-				} else if (pciDeviceGetHeaderType(Dev) == 0)
-				{
-					printf("Device is a general device\n");
-				} else if (pciDeviceGetHeaderType(Dev) == 0x1)
-				{
-					printf("PCI->PCI Bridge\n");
-				} else if (pciDeviceGetHeaderType(Dev) == 0x2)
-				{
-					printf("CardBus Bridge\n");
+
+					for (functioni = 0; functioni < 3; functioni++)
+					{
+						Dev.function = functioni;
+						init_pci_device(Dev);
+						ndev++;
+					}
+
 				} else
 				{
-					printf("Header type %x unknown\n", pciDeviceGetHeaderType(Dev));
+					init_pci_device(Dev);
+					ndev++;					
 				}
-
-				printf("Device Vendor: 0x%x\n", pciDeviceGetVendor(Dev));
-				ndev++;
+			
 			}
 		}
 
@@ -55,5 +105,4 @@ void init_devices()
 	}
 
 	printf("%i devices found\n", ndev);
-	printf("DEVICE SUBSYSTEM INITIALIZED\n");
 }

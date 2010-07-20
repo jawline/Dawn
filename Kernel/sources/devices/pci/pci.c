@@ -27,7 +27,6 @@ uint8 pciConfigReadByte (pci_device device, uint16 offset)
 
 unsigned char pciDeviceExists(pci_device device)
 {
-    device.function = 0;
 
     if (pciConfigReadWord(device, 0) == 0xFFFF) {
     	return 0;
@@ -40,32 +39,57 @@ return 1;
 
 unsigned short pciDeviceGetVendor(pci_device device)
 {
-	device.function = 0;
 	uint16 ret = pciConfigReadWord(device, 0);
 	return ret;
 }
 
 unsigned short pciDeviceGetDeviceId(pci_device device)
 {
-	device.function = 0;
 	uint16 ret = pciConfigReadWord(device, 2);
 	return ret;
 }
 
 unsigned char pciDeviceGetClass(pci_device device)
 {
-	device.function = 0;
 	return pciConfigReadByte(device, 11);
 }
 
 unsigned char pciDeviceGetSubclass(pci_device device)
 {
-	device.function = 0;
 	return pciConfigReadByte(device, 10);
 }
 
 unsigned char pciDeviceGetHeaderType(pci_device dev)
 {
-	dev.function = 0;
 	return pciConfigReadByte(dev, 14);
+}
+
+uint32 pciDeviceGetBar0(pci_device dev)
+{
+	return pciConfigReadRegister(dev, 16);
+}
+
+uint32 pciDeviceGetBar1(pci_device dev)
+{
+	return pciConfigReadRegister(dev, 18);
+}
+
+uint32 pciDeviceGetBar2(pci_device dev)
+{
+	return pciConfigReadRegister(dev, 20);
+}
+
+uint32 pciDeviceGetBar3(pci_device dev)
+{
+	return pciConfigReadRegister(dev, 22);
+}
+
+uint32 pciDeviceGetBar4(pci_device dev)
+{
+	return pciConfigReadRegister(dev, 24);
+}
+
+uint32 pciDeviceGetBar5(pci_device dev)
+{
+	return pciConfigReadRegister(dev, 26);
 }

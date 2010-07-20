@@ -3,8 +3,19 @@
 
 fs_node_t* dev_root = 0;
 
-void init_dev_fs()
+fs_node_t* init_device_fs(fs_node_t* parent)
 {
-	dev_root = create_rfs_directory("Devices", init_vfs());
-	bindnode_fs(init_vfs(), dev_root);
+
+	if (dev_root != 0)
+	{
+		return dev_root;
+	}
+
+	dev_root = create_rfs_directory("Devices", parent);
+	bindnode_fs(parent, dev_root);
+
+	//Initialize deviceFS subsystems
+	init_hard_drive_fs(dev_root);
+
+	return dev_root;
 }

@@ -22,6 +22,13 @@
 #define CLASS_TYPE_DATA_ACQUISITION_CONTROLLER 0x11
 #define CLASS_TYPE_UNDEF 0xFF
 
+#define MASS_STORAGE_TYPE_IDE 0x1
+
+#define GENERAL_PURPOSE 0
+#define MANY_FUNCTIONS 0x80
+#define PCI_BRIDGE 0x1
+#define CARDBUS_BRIDGE 0x2
+
 typedef struct {
 	uint8 bus;
 	uint8 slot;

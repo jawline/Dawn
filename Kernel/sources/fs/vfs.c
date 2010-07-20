@@ -3,7 +3,8 @@
 #include <fs/vfs.h>
 #include "rfs.h"
 
-/* The intent of this file is to create a set of functions providing the kernel with easy manipulation of the virtual file system.
+/*
+   The intent of this file is to create a set of functions providing the kernel with easy manipulation of the virtual file system.
    the file also contains a pointer to the root node of root_fs for easy access
 
    STATUS: Working, no immediate revision needed
@@ -89,6 +90,42 @@ void close_fs(fs_node_t* node) {
 
 struct dirent* readdir_fs (fs_node_t* node, uint32 idx) {
 
+	if (node->parent == 0)
+	{
+		if (idx == 0)
+		{
+			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+			memset(ret, 0, sizeof(struct dirent));
+			strcpy(ret->name, ".");
+			return ret;
+		}
+		else
+		{
+			idx = idx - 1;
+		}
+	}
+	else
+	{
+		if (idx == 0)
+		{
+			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+			memset(ret, 0, sizeof(struct dirent));
+			strcpy(ret->name, ".");
+			return ret;
+		}
+		else if (idx == 1)
+		{
+			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
+			memset(ret, 0, sizeof(struct dirent));
+			strcpy(ret->name, "..");
+			return ret;
+		}
+		else
+		{
+			idx = idx - 2;
+		}
+	}
+
 	if (node->readdir != 0)
 	{
 		return node->readdir(node, idx);
@@ -98,6 +135,14 @@ struct dirent* readdir_fs (fs_node_t* node, uint32 idx) {
 }
 
 fs_node_t* finddir_fs (fs_node_t* node, char* name) {
+
+	if (strcmp(name, "..") == 0)
+	{
+		return node->parent;
+	} else if (strcmp(name, ".") == 0)
+	{
+		return node;
+	}
 
 	if (node->finddir != 0) 
 	{

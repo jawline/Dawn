@@ -104,7 +104,6 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 	struct initial_ramdisk_header* header;
 
 
-
 	struct initrd_dirent* en_ptr = 0;
 	struct initrd_fent* fe_ptr = 0;
 	uint32 iter = 0, i2;
@@ -115,6 +114,9 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 		printf("0x%x should be 0x%x\n", header->ramdisk_magic, RAMMAGIC);
 		PANIC("Error, RAMDISK magic incorrect");	
 	}
+
+	//Create the initrd node.
+	initrd_root_node = malloc(sizeof(fs_node_t));
 
 	uint32* dirchunk_start = start + sizeof(struct initial_ramdisk_header);
 	num_directories = *dirchunk_start;
@@ -133,6 +135,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 		dir_list[iter].readdir = ird_dir_readdir;
 		dir_list[iter].finddir = ird_dir_finddir;
 		dir_list[iter].length = en_ptr->fentrys;
+		dir_list[iter].parent = initrd_root_node;
 		dir_file_list[iter] = malloc(sizeof(uint32) * (en_ptr->fentrys + 1));
 		dir_file_list[iter][0] = en_ptr->fentrys; //So that the finddir and readdir functions know how many files are in the directory
 
@@ -185,9 +188,8 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 		fe_ptr++;
 	}
 
-	//Create the initrd node.
-	initrd_root_node = malloc(sizeof(fs_node_t));
 
+	//Initialize the initrd node
 	memset(initrd_root_node, 0, sizeof(fs_node_t));
 	strcpy(initrd_root_node->name, name);
 	initrd_root_node->flags = FS_DIR;

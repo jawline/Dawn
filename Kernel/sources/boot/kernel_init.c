@@ -188,7 +188,7 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	fs_node_t * rootfs = init_vfs();
 	
 	//Initialize the devices file system
-	init_dev_fs();
+	init_device_fs(init_vfs());
 
 	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	init_kterm();
@@ -200,7 +200,7 @@ void init_kernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial
 	kernel_initialise_syscalls();
 
 	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
-	//init_devices();
+	init_devices();
 
 	if (mboot_ptr->mods_count == 1)
 	{ 

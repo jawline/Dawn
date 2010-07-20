@@ -211,18 +211,27 @@ void print_pio_debug(pio_device dev)
 	switch (device_type)
 	{
 		case T_PATAPI:
+		{
 			printf("PATAPI\n");
 			break;
+		}
 		case T_SATAPI:
+		{
 			printf("SATAPI\n");
 			break;
+		}
 		case T_SATA:
+		{
 			printf("SATA\n");
 			break;
+		}
 		case T_PATA:
+		{
 			printf("PATA\n");
 			break;
-		case T_UNKNOWN: {
+		}
+		case T_UNKNOWN: 
+		{
 			printf("UNKNOWN\n");			
 			break;
 		}

@@ -1,11 +1,14 @@
 #include "cpu.h"
 #include <printf.h>
 
-extern const char* cpuid_call_vendor();
-
+//Global string, used a buffer for the vendor string
 char VendorString[13];
 
-void cpuid_get_vendor_real(char* Buffer)
+//Function: cpuidGetVendorReal
+//Arguments: a character buffer
+//Returns: None
+//Description: Moves the vendor string of a cpuid call to the char*
+void cpuidGetVendorReal(char* Buffer)
 {
 	unsigned long input = 0;
 
@@ -22,16 +25,23 @@ void cpuid_get_vendor_real(char* Buffer)
 	memcpy(Buffer, &ebx, sizeof(unsigned long));
 	memcpy(Buffer + sizeof(unsigned long), &edx, sizeof(unsigned long));
 	memcpy(Buffer + sizeof(unsigned long) + sizeof(unsigned long), &ecx, sizeof(unsigned long));
+	Buffer[12] = '\0'; //Terminate the vendor string
 
 	return;
 }
 
-const char* cpuid_getvendor()
+//Functions: cpuidGetVendor
+//Arguments: None
+//Returns: pointer to a 13 byte character array containing a null terminated vendor string
+//Description: Get the vendor string from the cpuid function
+const char* cpuidGetVendor()
 {
-	if (!cpuid_supported()) return "Unsupported";
+	//If cpuid isn't supported tell the user so
+	if (!cpuidSupported()) return "Unsupported";
 
+	//Copy unkown over before copying the vendor string
 	strcpy(VendorString, "Unknown");
-	cpuid_get_vendor_real(VendorString);
+	cpuidGetVendorReal(VendorString);
 
 	return VendorString;
 }

@@ -10,7 +10,7 @@ uint32 alloc_mem(uint32 size, heap_t * heap);
 void free_mem(uint32 address, heap_t * heap);
 
 //Does memory mapping itself, no need to map the first frame of the heap - and if you do you will lose memory to the void.
-void init_heap(heap_t * heap, uint32 address)
+void initializeHeap(heap_t * heap, uint32 address)
 {
 	//Double check the heap ptr is valid
 	if (heap == 0) return;
@@ -56,7 +56,7 @@ void init_heap(heap_t * heap, uint32 address)
 	DEBUG_PRINT("Debug Message: Ptr->next set\n");
 }
 
-uint32 alloc_mem(uint32 size, heap_t* heap) 
+uint32 heapAllocateMemory(uint32 size, heap_t* heap) 
 {
 	heap_entry_t* ptr = (heap_entry_t*) heap->heap_location;
 	uint8 result = 0;
@@ -118,7 +118,7 @@ uint32 alloc_mem(uint32 size, heap_t* heap)
 			}
 
 
-			return alloc_mem(size, heap);
+			return heapAllocateMemory(size, heap);
 		}
 
 		ptr = (heap_entry_t *) ptr->next; //Move onto the next chunk
@@ -127,7 +127,7 @@ uint32 alloc_mem(uint32 size, heap_t* heap)
 	return 0;
 }
 
-void free_mem(uint32 address, heap_t * heap)
+void heapFreeMemory(uint32 address, heap_t * heap)
 {
 	heap_entry_t * ptr = (heap_entry_t *) (address - sizeof(heap_entry_t));
 	heap_entry_t * optr = 0;

@@ -1,61 +1,34 @@
 #include "syscall.h"
 #include <stdio.h>
-#include <process/process.h>
 #include "../scheduler/default/process_scheduler.h"
-#include <timers/clock.h>
 #include <heap/heap.h>
 #include <panic/panic.h>
+#include <mm/virt_mm.h>
 
 extern heap_t kernel_heap;
 
-process_t* get_current_process();
+extern process_t* get_current_process();
 extern MEM_LOC calculate_free_frames();
 
-MEM_LOC postbox_location()
-{
-	return &get_current_process()->m_processPostbox;
-}
-
-void postbox_pop_top()
-{
-	postbox_top(&get_current_process()->m_processPostbox);
-}
-
-void postbox_set_bit(unsigned int bit)
-{
-	get_current_process()->m_postboxFlags = get_current_process()->m_postboxFlags | bit;
-}
-
-MEM_LOC syscall_return_current_process()
-{
-	return get_current_process();
-}
+extern MEM_LOC postboxLocation();
+extern void postboxPopTop();
+extern void postboxSetBit(int bit);
+extern MEM_LOC syscallReturnCurrentProcess();
+extern void syscallKillCurrentProcess();
 
 char get_key_mapping(unsigned char scancode, unsigned long flags)
 {
 	return keyboard_chlookup_asci(scancode, flags);
 }
 
-MEM_LOC clocks_per_second()
-{
-	return CLOCKS_PER_SECOND;
-}
+extern unsigned int syscallClocksPerSecond();
+extern unsigned long syscallGetSystemUptime();
 
-MEM_LOC system_uptime()
-{
-	return get_clock_ticks();
-}
-
-extern unsigned int PAGE_SIZE;
+extern MEM_LOC syscallGetProcess(unsigned int iter);
 
 MEM_LOC get_page_size()
 {
 	return PAGE_SIZE;
-}
-
-MEM_LOC syscall_get_process(unsigned int iter)
-{
-	return scheduler_return_process(iter);
 }
 
 MEM_LOC syscall_get_kernel_heap()
@@ -63,79 +36,43 @@ MEM_LOC syscall_get_kernel_heap()
 	return &kernel_heap;
 }
 
-void request_reboot()
-{
-	kernel_reboot(); //For now, just reboot the system. Its prolly the right thing to do
-}
+extern void syscallRequestReboot();
 
-extern page_directory_t* kernel_pagedir;
-void kill_current_process()
-{
-	get_current_process()->m_shouldDestroy = 1;
-}
-
-void syscall_printf(const char* Line)
-{
-	if (get_current_process()->m_pTerminal != 0)
-	{
-		while (*Line)
-		{
-			get_current_process()->m_pTerminal->f_putchar(get_current_process()->m_pTerminal, *Line);
-			Line++;
-		}
-	}
-}
-
-void syscall_clearscreen()
-{
-	if (get_current_process()->m_pTerminal != 0)
-	{
-		get_current_process()->m_pTerminal->f_clear(get_current_process()->m_pTerminal);
-	}
-}
-
-void syscall_set_fgc(unsigned char fgc)
-{
-	if (get_current_process()->m_pTerminal != 0)
-	{
-		get_current_process()->m_pTerminal->f_setForeground(get_current_process()->m_pTerminal, fgc);
-	}	
-}
-
-void syscall_set_bgc(unsigned char bgc)
-{
-	if (get_current_process()->m_pTerminal != 0)
-	{
-		get_current_process()->m_pTerminal->f_setBackground(get_current_process()->m_pTerminal, bgc);
-	}	
-}
+extern void syscallPrintf(const char* Line);
+extern void syscallClearscreen();
+extern void syscallSetFgc(unsigned char fgc);
+extern void syscallSetBgc(unsigned char bgc);
 
 extern void scheduler_block_me();
 
 unsigned int num_syscalls = 18;
 
 static void *syscalls[18] = {
-   &syscall_printf,
-   &postbox_location,
-   &postbox_pop_top,
+   &syscallPrintf,
+   &postboxLocation,
+   &postboxPopTop,
    &get_key_mapping,
    &scheduler_block_me,
-   &postbox_set_bit,
+   &postboxSetBit,
    &calculate_free_frames,
    &get_page_size,
-   &request_reboot,
-   &clocks_per_second,
-   &system_uptime,
-   &syscall_get_process,
-   &syscall_return_current_process,
-   &kill_current_process,
+   &syscallRequestReboot,
+   &syscallClocksPerSecond,
+   &syscallGetSystemUptime,
+   &syscallGetProcess,
+   &syscallReturnCurrentProcess,
+   &syscallKillCurrentProcess,
    &syscall_get_kernel_heap,
-   &syscall_clearscreen,
-   &syscall_set_fgc,
-   &syscall_set_bgc
+   &syscallClearscreen,
+   &syscallSetFgc,
+   &syscallSetBgc
 };
 
-idt_call_registers_t syscall_handler(idt_call_registers_t regs)
+//Function: syscallHandler
+//Arguments: idt_call_registers_t regs
+//Return: idt_call_registers_t with new values of the registers
+//Description: Handles a syscall (Via interrupt 127) and returns a new set of registers
+idt_call_registers_t syscallHandler(idt_call_registers_t regs)
 {
    // Firstly, check if the requested syscall number is valid.
    // The syscall number is found in EAX.
@@ -170,9 +107,9 @@ idt_call_registers_t syscall_handler(idt_call_registers_t regs)
    return regs;
 }
 
-void kernel_initialise_syscalls()
+void kernelInitializeSyscalls()
 {
-	register_interrupt_handler (127, &syscall_handler); //Syscall = Interrupt 127
+	register_interrupt_handler (127, &syscallHandler); //Syscall = Interrupt 127
 
 	return;
 }

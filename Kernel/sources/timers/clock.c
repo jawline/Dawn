@@ -5,18 +5,18 @@
 unsigned long clock_ticks;
 
 //When the PIT is triggered call a scheduler tick and add one to the clock ticks (Setup so different timers can be used for the scheduler/clock Etcetera)
-void pit_callback()
+void pitCallback()
 {
 	clock_ticks++;
 
 	scheduler_on_tick();
 }
 
-void initialize_system_clock()
+void initializeSystemClock()
 {
 	clock_ticks = 0;
-	set_pit_callback(pit_callback);
-	init_pit(1000);
+	setPitCallback(pitCallback);
+	initializePit(1000);
 }
 
 unsigned long get_clock_ticks()

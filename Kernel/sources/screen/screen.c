@@ -5,7 +5,7 @@ static unsigned int g_screenMode;
 static unsigned int g_screenWidth;
 static unsigned int g_screenHeight;
 
-void init_screen()
+void initializeScreen()
 {
 	//The screen starts in text mode (The BIOS & GRUB should see to that)
 	g_screenMode = MODE_TEXTMODE;
@@ -16,18 +16,16 @@ void init_screen()
 
 	//Clear any rubbish left on the screen by the bootloader/BIOS/Anything that came before the kernel
 	text_mode_clearscreen();
-
-	init_vga_driver();
 }
 
 //Get the screen mode
-unsigned int get_mode()
+unsigned int getScreenMode()
 {
 	return g_screenMode;
 }
 
 //Get a screen attribute (Width, height, Mode, etc)
-unsigned int get_attr(unsigned int ID)
+unsigned int getScreenAttribute(unsigned int ID)
 {
 	switch (ID)
 	{

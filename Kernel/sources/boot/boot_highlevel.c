@@ -13,9 +13,9 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
 
     #if defined(DEBUG_MODE)
     	//Needs the multiboot location to function, 1 signals that the init routines should be noisy and cover the screen in stuff
-    	init_kernel(mboot, 1, stack_ptr);
+    	initializeKernel(mboot, 1, stack_ptr);
     #else
-    	init_kernel(mboot, 0, stack_ptr);
+    	initializeKernel(mboot, 0, stack_ptr);
     #endif
 
     printf("Kernel Codename: \"%s\" Version: %i.%i.%i\n", KVERSION_CODENAME, KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION);
@@ -24,7 +24,7 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     enable_interrupts();
 
     //Run whatever the kernel is designed to do after initialization
-    post_init();
+    postInitialization();
 
     for (;;) {  } 
 

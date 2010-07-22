@@ -1,0 +1,7 @@
+0x0->0x400000 = Identity mapped to physical memory
+0x400000->0xC0000000 - Applications address space. Nothing kernel wise in here
+0xBFFFB000->0xC0000000 - Stack space
+0xC0000000->0xD0000000 - 256MB Kernel code space
+0xD0000000->0xE0000000 - 256MB Kernel heap space
+0xE0000000->0xE1000000 - Physical memory manager stack
+0xE1000000->0xFFFFFFFF - Reserved

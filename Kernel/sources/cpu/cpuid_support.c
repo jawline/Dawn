@@ -1,6 +1,11 @@
 #include "cpu.h"
 
-unsigned char check_cpuid_inline()
+//Function: checkCpuidInlne
+//Arguments: None
+//Return: 1 if true 0 if false
+//Description: Inline ASM to check whether CPUID is supported
+
+inline unsigned char checkCpuidInline()
 {
 	unsigned long eax_reg_value = 0;
 	unsigned char return_value = 0;
@@ -37,7 +42,11 @@ unsigned char check_cpuid_inline()
 	return return_value;
 }
 
-uint8 cpuid_supported()
+//Function:
+//Arguments: None
+//Returns: 1 if true 0 if false
+//Description: Check if the CPUID function is supported
+unsigned char cpuidSupported()
 {
-	return check_cpuid_inline();
+	return checkCpuidInline();
 }

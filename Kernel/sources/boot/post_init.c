@@ -15,12 +15,11 @@
 #include "../loaders/elf/parser.h"
 
 extern heap_t kernel_heap;
-extern uint32 end; //The end of the kernel
 extern process_t* get_current_process();
 
 //The kernel callback for a keyboard event
 //Registered with the kernel input manager in void post_init(); with a register_input_listener(DEVICE_KEYBOARD) call
-void kernel_keyboard_callback(uint32 device, uint32 main, void* additional)
+void kernelKeyboardCallback(uint32 device, uint32 main, void* additional)
 {
 
 	//Create a new message to send to the all processes
@@ -41,9 +40,9 @@ void kernel_keyboard_callback(uint32 device, uint32 main, void* additional)
 extern page_directory_t* kernel_pagedir;
 extern heap_t kernel_heap;
 
-void post_init() 
+void postInitialization() 
 {
-    register_input_listener(DEVICE_KEYBOARD, &kernel_keyboard_callback);
+    register_input_listener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
 
     enable_interrupts(); //Fork process disables interrupts
 
@@ -70,14 +69,18 @@ void post_init()
     } else
     {
 	    extern terminal_t* g_kernelTerminal;
+
+	    //Give this process its own terminal
 	    terminal_t* m_processTerminal = make_terminal(80, 25);
 
+	    //Set up the new terminals callbacks then bring it into context
 	    set_default_tcallbacks(m_processTerminal);
 	    set_terminal_context(m_processTerminal);
-	    
+
+	    //Set the current processes terminal to the new terminal
 	    get_current_process()->m_pTerminal = m_processTerminal;
 
-
+	    //Rename it to the file name of the program its gohna run
 	    rename_current_process("Line.x");
 
 	    //Find Line.x
@@ -99,16 +102,16 @@ void post_init()
 	    //Set the root console as active
             printf("Reverting back to root console\n");
 
+	    //(Bring it into context)
 	    set_terminal_context(g_kernelTerminal);
-
-	    print_directory(init_vfs(), 1);
 
 	    //Call syscall 13 triggers kill this process
             MEM_LOC num = 13;
 	    MEM_LOC a;
 	    asm volatile("int $127" : "=a" (a) : "0" (num));
 
-	    //Just a simple protection
+	    //Just a simple protection in case for some reason the
+	    //processor continues executing down this code path
             for (;;) {}
     }
 

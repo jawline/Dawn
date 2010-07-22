@@ -3,7 +3,7 @@
 
 static clock_callback on_pit_tick = 0;
 
-static idt_call_registers_t pit_tick_callback(idt_call_registers_t regs)
+static idt_call_registers_t pitOnTickCallback(idt_call_registers_t regs)
 {
 	if (on_pit_tick)
 	{
@@ -11,10 +11,10 @@ static idt_call_registers_t pit_tick_callback(idt_call_registers_t regs)
 	}
 }
 
-void init_pit(uint32 frequency)
+void initializePit(uint32 frequency)
 {
    // Firstly, register our timer callback.
-   register_interrupt_handler(GET_IRQ(0), &pit_tick_callback);
+   register_interrupt_handler(GET_IRQ(0), &pitOnTickCallback);
 
    // The value we send to the PIT is the value to divide it's input clock
    // (1193180 Hz) by, to get our required frequency. Important to note is
@@ -33,7 +33,7 @@ void init_pit(uint32 frequency)
    outb(0x40, h);
 }
 
-void set_pit_callback(clock_callback cb)
+void setPitCallback(clock_callback cb)
 {
 	on_pit_tick = cb;
 }

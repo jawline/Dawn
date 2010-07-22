@@ -1,5 +1,9 @@
 #include <panic/panic.h>
 
+//Function: panic
+//Arguments, message (What error message to give), file (The filename of the file where the error occured), line (The line no. of where the error occured)
+//Return: None
+//Description: Panic the kernel, disabling interrupts and looping (calling asm("hlt")) should freeze the processor
 void panic(const char *message, const char *file, uint32 line)
 {
     // We encountered a massive problem and have to stop.
@@ -13,8 +17,12 @@ void panic(const char *message, const char *file, uint32 line)
     text_mode_hardwrite(":");
     text_mode_hardwrite(TBuffer);
     text_mode_hardwrite("\n");
+    
     // Halt by going into an infinite loop.
-    for(;;);
+    for(;;)
+    {
+	asm volatile("hlt");
+    }
 }
 
 void panic_assert(const char *file, uint32 line, const char *desc)
@@ -26,11 +34,14 @@ void panic_assert(const char *file, uint32 line, const char *desc)
 
     text_mode_hardwrite("ASSERTION-FAILED(");
     text_mode_hardwrite(desc);
-    text_mode_hardwrite(") at ");
+    text_mode_hardwrite(") at  h");
     text_mode_hardwrite(file);
     text_mode_hardwrite(":");
     text_mode_hardwrite(TBuffer);
     text_mode_hardwrite("\n");
     // Halt by going into an infinite loop.
-    for(;;);
+    for(;;)
+    {
+	asm volatile("hlt");
+    }
 }

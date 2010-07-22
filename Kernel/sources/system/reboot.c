@@ -20,7 +20,7 @@ typedef uchar byte;
 /* Check if bit n in flags is set */
 #define check_flag(flags, n) ((flags) & bit(n))
 
-void kernel_reboot()
+void kernelReboot()
 {
     /* The code below attempts to reboot the computer by sending a reset CPU command through the keyboard interface (Wierd place to put the reset CPU command?) */
 

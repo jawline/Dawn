@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <panic/panic.h>
 
-void init_pci_device(pci_device active_dev)
+void initializePciDevice(pci_device active_dev)
 {
 	unsigned char class = pciDeviceGetClass(active_dev);
 	unsigned char subclass = pciDeviceGetSubclass(active_dev);
@@ -32,10 +32,20 @@ void init_pci_device(pci_device active_dev)
 
 					if (pciDeviceGetBar1(active_dev) == 0x0 || pciDeviceGetBar1(active_dev) == 0x1)
 					{
-						primary_channel_io = 0x3F4;
+						primary_channel_ctrl = 0x3F4;
 					}
 
-					//INCOMPLETE: Finish this initialization			
+					if (pciDeviceGetBar2(active_dev) == 0x0 || pciDeviceGetBar0(active_dev) == 0x1)
+					{
+						secondary_channel_io = 0x170;
+					}
+
+					if (pciDeviceGetBar3(active_dev) == 0x0 || pciDeviceGetBar0(active_dev) == 0x1)
+					{
+						secondary_channel_ctrl = 0x37F;
+					}
+
+					initializeIdeHardDrive(primary_channel_io, primary_channel_ctrl, secondary_channel_io, secondary_channel_ctrl);	
 
 					break;
 				};
@@ -57,7 +67,7 @@ void init_pci_device(pci_device active_dev)
 	}
 }
 
-void init_devices()
+void initializeDevices()
 {
 
 	printf("Scanning PCI bus\n");
@@ -88,13 +98,13 @@ void init_devices()
 					for (functioni = 0; functioni < 3; functioni++)
 					{
 						Dev.function = functioni;
-						init_pci_device(Dev);
+						initializePciDevice(Dev);
 						ndev++;
 					}
 
 				} else
 				{
-					init_pci_device(Dev);
+					initializePciDevice(Dev);
 					ndev++;					
 				}
 			

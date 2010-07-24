@@ -35,6 +35,9 @@ rfs_dirs_created:
 list_dirs:
 	-@for file in $(ALLFILES); do fgrep -H -e print_directory $$file; done; true
 
+maps:
+	-@for file in $(ALLFILES); do fgrep -H -e map $$file; done; true
+
 
 .s.o:
 	@nasm $(ASFLAGS) $<

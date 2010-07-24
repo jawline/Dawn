@@ -68,6 +68,10 @@ void postInitialization()
 
     } else
     {
+            asm volatile("cli");
+	    switchToUserMode();
+	    for (;;) { }
+
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal

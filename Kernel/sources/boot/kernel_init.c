@@ -38,6 +38,7 @@ extern terminal_t* getTerminalInContext();
 void initializeGdt(int visual_output) 
 {
    initialize_gdt();
+   initializeTss();
    iprintf("GDT [OK]\n");
 }
 
@@ -162,7 +163,7 @@ extern heap_t kernel_heap;
 //Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
 void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
-	//Load the archaic 
+	//Load the archaic GDT 
 	initializeGdt(visual_output);
 
 	extern void k_end;

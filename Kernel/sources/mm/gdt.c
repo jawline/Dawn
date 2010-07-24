@@ -1,17 +1,18 @@
 #include <mm/gdt.h>
 
-gdt_entry_t gdt_entries[5];
+#define NUM_GDT_ENTRIES 6
+gdt_entry_t gdt_entries[NUM_GDT_ENTRIES];
 gdt_ptr_t   gdt_ptr;
 
-static void gdt_set_gate(int32, uint32, uint32, uint8, uint8);
+void gdt_set_gate(int32, uint32, uint32, uint8, uint8);
 extern void gdt_flush(uint32);
 
 //Global descriptor table setup
 void initialize_gdt() 
 {
-   memset(&gdt_entries, 0, sizeof(gdt_entry_t) * 5);
+   memset(&gdt_entries, 0, sizeof(gdt_entry_t) * NUM_GDT_ENTRIES);
 
-   gdt_ptr.limit = (sizeof(gdt_entry_t) * 5) - 1;
+   gdt_ptr.limit = (sizeof(gdt_entry_t) * NUM_GDT_ENTRIES) - 1;
    gdt_ptr.base  = (uint32)&gdt_entries;
 
    gdt_set_gate(0, 0, 0, 0, 0);                // Null segment
@@ -20,10 +21,15 @@ void initialize_gdt()
    gdt_set_gate(3, 0, 0xFFFFFFFF, 0xFA, 0xCF); // User mode code segment
    gdt_set_gate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF); // User mode data segment
 
+   flushGdt();
+}
+
+void flushGdt()
+{
    gdt_flush((uint32)&gdt_ptr);
 }
 
-static void gdt_set_gate(int32 num, uint32 base, uint32 limit, uint8 access, uint8 gran) 
+void gdt_set_gate(int32 num, uint32 base, uint32 limit, uint8 access, uint8 gran) 
 {
    gdt_entries[num].base_low    = (base & 0xFFFF);
    gdt_entries[num].base_middle = (base >> 16) & 0xFF;

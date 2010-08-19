@@ -59,16 +59,16 @@ void kernel_terminal_update_cursor(terminal_t* term)
 
 void kputc(char c);
 
-void init_kterm()
+void initializeKernelTerminal()
 {
 	//Make a new terminal and set the screens terminal to this new terminal
-	g_kernelTerminal = make_terminal(80, 25);
+	g_kernelTerminal = makeNewTerminal(80, 25);
 
-	set_default_tcallbacks(g_kernelTerminal);
-	set_terminal_context(g_kernelTerminal);
+	setDefaultTerminalCallbacks(g_kernelTerminal);
+	setTerminalContext(g_kernelTerminal);
 }
 
-void set_default_tcallbacks(terminal_t* term)
+void setDefaultTerminalCallbacks(terminal_t* term)
 {
 	term->f_updateCursor = &kernel_terminal_update_cursor;
 	term->f_putchar = &kernel_terminal_putc;
@@ -79,7 +79,7 @@ void set_default_tcallbacks(terminal_t* term)
 	term->f_clear = &kernel_terminal_clear;
 }
 
-void set_terminal_context(terminal_t* term)
+void setTerminalContext(terminal_t* term)
 {
 	g_terminalInContext = term;
 	text_mode_sett(term);

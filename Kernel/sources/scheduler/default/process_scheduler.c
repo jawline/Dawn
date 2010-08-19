@@ -16,7 +16,7 @@ typedef struct process_entry_t scheduler_proc;
 scheduler_proc* list_root = 0;
 scheduler_proc* list_current = 0;
 
-void scheduler_init(process_t* kp)
+void initializeScheduler(process_t* kp)
 {
 	//Create and set new_process to all 0's
 	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
@@ -42,7 +42,7 @@ void scheduler_on_tick()
 			process_t* current = list_current->next->process_pointer;
 
 			scheduler_remove(current);
-			free_process(current);
+			freeProcess(current);
 		}
 		else
 		{

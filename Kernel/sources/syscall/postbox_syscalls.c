@@ -1,11 +1,24 @@
 #include <types/memory.h>
 #include <process/process.h>
+#include <process/postbox.h>
+#include <process/message.h>
 
 extern process_t* get_current_process();
+extern process_message postbox_peek(process_postbox* pb);
 
-MEM_LOC postboxLocation()
+unsigned char postboxHasNext()
 {
-	return &get_current_process()->m_processPostbox;
+	process_message toTest;
+	toTest = postbox_peek(&get_current_process()->m_processPostbox);
+	if (toTest.ID == -1) return 0;
+	return 1;
+}
+
+void postboxReadTop(process_message* Message)
+{
+	process_message toCopy;
+	toCopy = postbox_peek(&get_current_process()->m_processPostbox);
+	memcpy(Message, &toCopy, sizeof(process_message));
 }
 
 void postboxPopTop()

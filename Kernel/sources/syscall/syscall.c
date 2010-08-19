@@ -10,62 +10,62 @@ extern heap_t kernel_heap;
 extern process_t* get_current_process();
 extern MEM_LOC calculate_free_frames();
 
-extern MEM_LOC postboxLocation();
+extern unsigned char postboxHasNext();
+extern void postboxReadTop(process_message* Message);
 extern void postboxPopTop();
 extern void postboxSetBit(int bit);
-extern MEM_LOC syscallReturnCurrentProcess();
 extern void syscallKillCurrentProcess();
 
-char get_key_mapping(unsigned char scancode, unsigned long flags)
+extern unsigned char syscallProcessValid(unsigned int iter);
+extern unsigned int syscallGetPid(unsigned int iter);
+extern unsigned long syscallGetProcessingTime(unsigned int iter);
+extern void syscallGetName(char* StrLocation, unsigned int iter);
+
+char getKeyMapping(unsigned char scancode, unsigned long flags)
 {
-	return keyboard_chlookup_asci(scancode, flags);
+	return lookupAsciCharacterFromScancode(scancode, flags);
 }
 
 extern unsigned int syscallClocksPerSecond();
 extern unsigned long syscallGetSystemUptime();
-
-extern MEM_LOC syscallGetProcess(unsigned int iter);
 
 MEM_LOC get_page_size()
 {
 	return PAGE_SIZE;
 }
 
-MEM_LOC syscall_get_kernel_heap()
-{
-	return &kernel_heap;
-}
-
 extern void syscallRequestReboot();
 
-extern void syscallPrintf(const char* Line);
+extern void syscallPrint_t(const char* Line);
 extern void syscallClearscreen();
 extern void syscallSetFgc(unsigned char fgc);
 extern void syscallSetBgc(unsigned char bgc);
 
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 18;
+unsigned int num_syscalls = 21;
 
-static void *syscalls[18] = {
-   &syscallPrintf,
-   &postboxLocation,
-   &postboxPopTop,
-   &get_key_mapping,
-   &scheduler_block_me,
-   &postboxSetBit,
-   &calculate_free_frames,
-   &get_page_size,
-   &syscallRequestReboot,
-   &syscallClocksPerSecond,
-   &syscallGetSystemUptime,
-   &syscallGetProcess,
-   &syscallReturnCurrentProcess,
-   &syscallKillCurrentProcess,
-   &syscall_get_kernel_heap,
-   &syscallClearscreen,
-   &syscallSetFgc,
-   &syscallSetBgc
+static void *syscalls[21] = {
+   &syscallPrint_t, //Syscall 0 - printf prints to active terminal
+   &postboxReadTop, //Syscall 1 - Copys the top of the postbox to location given
+   &postboxPopTop, //Syscall 2 -Pops the top of the postbox
+   &postboxHasNext, //Syscall 3 - Does the postbox have anything for the process to read?
+   &getKeyMapping, //Syscall 4 - Get the key mapping for a scancode
+   &scheduler_block_me, //Syscall 5 - Pause the current process forfitting any remaining processing time
+   &postboxSetBit, //Syscall 6 - Set the process message flags (What it wants to know about)
+   &calculate_free_frames, //Syscall 7 - Return the number of free frames available
+   &get_page_size, //Syscall 8 - Return the size in bytes of each page
+   &syscallRequestReboot, //Syscall 9 - Ask the kernel to reboot
+   &syscallClocksPerSecond, //Syscall 10 - Get the number of clock cycles that occur every second
+   &syscallGetSystemUptime, //Syscall 11 - Get the systems uptime in clocks
+   &syscallClearscreen, //Syscall 12 - Clear the current terminal
+   &syscallSetFgc, //Syscall 13 - Set the current terminals FGC
+   &syscallSetBgc, //Syscall 14 - Set the current terminals BGC
+   &syscallKillCurrentProcess, //Syscall 15 - Flag the current process to be destroyed
+   &syscallProcessValid, //Syscall 16 - Does the iter given link to a valid process?
+   &syscallGetPid, //Syscall 17 - Get the PID of the process linked to the iterator
+   &syscallGetProcessingTime, //Syscall 18 - Get the processing time of the process
+   &syscallGetName //Syscall 19 - Get the name of the process linked to the iterator
 };
 
 //Function: syscallHandler
@@ -82,10 +82,12 @@ idt_call_registers_t syscallHandler(idt_call_registers_t regs)
    // Get the required syscall location.
    void *location = syscalls[regs.eax];
 
-   // We don't know how many parameters the function wants, so we just
+   // Don't know how many parameters the function wants, so just
    // push them all onto the stack in the correct order. The function will
-   // use all the parameters it wants, and we can pop them all back off afterwards.
+   // use all the parameters it wants, pop them all back off afterwards.
    MEM_LOC ret;
+
+   //TODO: I'm not quite sure, the * might break it. testt
 
    asm volatile (" \
 		   push %1; \
@@ -93,7 +95,7 @@ idt_call_registers_t syscallHandler(idt_call_registers_t regs)
 		   push %3; \
 		   push %4; \
 		   push %5; \
-		   call %6; \
+		   call *%6; \
 		   pop %%ebx; \
 		   pop %%ebx; \
 		   pop %%ebx; \

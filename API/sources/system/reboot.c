@@ -1,8 +1,8 @@
 #include <system/reboot.h>
 
-DEFN_SYSCALL0(reboot, 8);
+DEFN_SYSCALL0(reboot, 9);
 
-void request_reboot()
+void requestReboot()
 {
 	syscall_reboot();
 }

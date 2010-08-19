@@ -3,6 +3,6 @@
 #include <syscall/syscall.h>
 
 extern unsigned long clock();
-extern unsigned long get_clocks_per_second();
+extern unsigned long getClocksPerSecond();
 
 #endif //_KERNEL_CLOCK_API_

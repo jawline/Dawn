@@ -1,4 +1,4 @@
-#include "keyboard.h"
+#include <input/keyboard.h>
 #include <debug/debug.h>
 
 char lowercase[256] = 
@@ -25,7 +25,7 @@ char shifted[256] =
 			'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 0, 0, 0, ' '
 };
 
-char keyboard_chlookup_asci(uint8 scancode,uint32 flags)
+char lookupAsciCharacterFromScancode(uint8 scancode,uint32 flags)
 {
 	char retch = 0;
 
@@ -45,7 +45,7 @@ char keyboard_chlookup_asci(uint8 scancode,uint32 flags)
 	return retch;
 }
 
-uint8 load_keytable_asci(fs_node_t* node)
+unsigned char loadAsciKeytable(fs_node_t* node)
 {
 	DEBUG_PRINT("Loading new keytable ");
 	DEBUG_PRINT(node->name);

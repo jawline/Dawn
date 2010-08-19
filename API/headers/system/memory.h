@@ -3,7 +3,7 @@
 #include <types/memory.h>
 #include <syscall/syscall.h>
 
-MEM_LOC get_num_free_frames();
-unsigned long get_page_size();
+MEM_LOC getNumberOfFreeFrames();
+unsigned long getPageSize();
 
 #endif //_MEMORY_DEF_H_

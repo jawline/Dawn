@@ -3,7 +3,7 @@
 
 #define KVERSION_MAJOR 0
 #define KVERSION_MINOR 1
-#define KVERSION_REVISION 8
+#define KVERSION_REVISION 9
 #define KVERSION_CODENAME "Envy"
 
 #endif

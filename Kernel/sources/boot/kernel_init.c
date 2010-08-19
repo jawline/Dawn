@@ -20,7 +20,6 @@
 #include <system/reboot.h>
 #include <types/size_t.h>
 #include <debug/debug.h>
-#include <hdd/disk_device.h>
 #include <devices/pci/pci.h>
 #include <terminal/terminal.h>
 #include <initrd/initrd_header.h>
@@ -57,7 +56,7 @@ void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start,
     kernel_end = kernel_end - kernel_start;
 
     init_phys_mm(kernel_end);
-    init_virt_mm(kernel_end);
+    initializeVirtualMemoryManager(kernel_end);
 
     map_free_pages(mboot_ptr);
 
@@ -188,7 +187,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	initializeSystemClock();
 
 	//Input interfaces
-	initialize_input();
+	initializeInputCallbacks();
 
 	//Init the virtual file system
 	fs_node_t * rootfs = init_vfs();
@@ -197,7 +196,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	init_device_fs(init_vfs());
 
 	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
-	init_kterm();
+	initializeKernelTerminal();
 	getTerminalInContext()->f_clear(getTerminalInContext());
 
 	DEBUG_PRINT("KTerm Started\n");
@@ -215,10 +214,5 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	}
 
 	//Initialize the system scheduler
-	scheduler_init(init_kproc());
-
-	printf("K_End 0x%x\n", kEndLocation);
-
-	printf("Result 0x%x\n", *((LPOINTER)(mboot_ptr->mods_addr)));
-	printf("Result 0x%x\n", *((LPOINTER)(mboot_ptr->mods_addr + 4)));
+	initializeScheduler(initializeKernelProcess());
 }

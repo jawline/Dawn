@@ -13,7 +13,7 @@
 
 #include <process/message.h>
 #include <process/events.h>
-#include <process/process.h>
+#include <process/process_info.h>
 #include <process/cprocess.h>
 
 #include <messages/messages.h>
@@ -23,15 +23,14 @@
 
 #include <heap/heap.h>
 
-DEFN_SYSCALL0(get_kheap, 14);
-DEFN_SYSCALL0(cls, 15);
-DEFN_SYSCALL1(setfg, 16, unsigned char);
-DEFN_SYSCALL1(setbg, 17, unsigned char);
-DEFN_SYSCALL2(scancode_to_asci, 3, unsigned char, unsigned long);
-DEFN_SYSCALL1(set_flag, 5, unsigned int);
+DEFN_SYSCALL0(cls, 12);
+DEFN_SYSCALL1(setfg, 13, unsigned char);
+DEFN_SYSCALL1(setbg, 14, unsigned char);
 
 char Pointer[1024];
 int c_ptr = 0;
+
+unsigned long cps = 0;
 
 void list_chunks(heap_t * heap) //List all active chunks in a heap. 
 {
@@ -64,13 +63,7 @@ char exec_cmd()
 		printf("reboot - request the kernel to reboot the system\n");
 		printf("uptime - Lists the seconds minutes and hours the system has been up for\n");
 		printf("lproc - Lists information about all scheduled processes\n");
-		printf("lheap - List the chunks in the kernel heap (Not this applications heap\n");
 		printf("cls - Clear the screen\n");
-	}
-	else if (strcmp("lheap", Pointer) == 0)
-	{
-		heap_t* kheap = syscall_get_kheap();
-		list_chunks(kheap);
 	}
 	else if (strcmp("cls", Pointer) == 0)
 	{
@@ -79,7 +72,7 @@ char exec_cmd()
 	else if (strcmp("uptime", Pointer) == 0)
 	{
 		unsigned long ticks = clock();
-		unsigned long ticks_per_second = get_clocks_per_second();
+		unsigned long ticks_per_second = cps;
 
 		unsigned int seconds = 0;
 		unsigned int minutes = 0;
@@ -105,7 +98,7 @@ char exec_cmd()
 
 		while (1)
 		{
-			unsigned long time_for_splode = clock() + get_clocks_per_second();
+			unsigned long time_for_splode = clock() + cps;
 			while (time_for_splode > clock()) {}
 			tdeath--;
 
@@ -118,7 +111,7 @@ char exec_cmd()
 		printf("Hah, just kidding\n");
 	}
 	else if (strcmp("lproc", Pointer) == 0)
-	{
+	{/*
 		printf("Listing active processes\n");
 
 		unsigned int iterator = 0;
@@ -134,17 +127,17 @@ char exec_cmd()
 			iterator++;
 		}
 
-		printf("Done\n");
+		printf("Done\n"); */
 	} else if (strcmp("free", Pointer) == 0) {
 		printf("Free memory information\n");
-		MEM_LOC free_frames = get_num_free_frames();
-		MEM_LOC page_size = get_page_size();
+		MEM_LOC free_frames = getNumberOfFreeFrames();
+		MEM_LOC page_size = getPageSize();
 		printf("%i free frames of memory\n", free_frames);
 		printf("Each frame is %i bytes of memory\n", page_size);
 		printf("Therefore there are %i MBs of memory left\n", (free_frames * page_size) / 1024 / 1024);
 
 	} else if (strcmp("reboot", Pointer) == 0) {
-		request_reboot();
+		requestReboot();
 	} else {
 		printf("Command %s not found\n", Pointer);
 	}
@@ -154,14 +147,14 @@ char exec_cmd()
 
 int main(int argc, void* argv)
 {
-	syscall_setbg(0);
-	syscall_setfg(15);
-	syscall_cls();	
+	//syscall_setbg(0);
+	//syscall_setfg(15);
+	//syscall_cls();	
 
 	c_ptr = 0;
-	syscall_set_flag(INPUT_BIT);
+	postboxSetFlags(INPUT_BIT);
 
-	unsigned long cps = get_clocks_per_second();
+	cps = getClocksPerSecond();
 
 	printf("Line - Executable compiled for Kernel version %i.%i.%i codename \"%s\"\n", KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION, KVERSION_CODENAME);
 	printf("Compiled as part of OS version %i.%i.%i codename \"%s\"\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
@@ -171,11 +164,10 @@ int main(int argc, void* argv)
 
 	for (;;)
 	{
-		process_postbox* m_pb = get_process_postbox();
-
-		if (m_pb->first != 0)
+		if (postboxHasNext())
 		{
-			process_message message = m_pb->first->data;
+			process_message message;
+			message = postboxGetNext();
 			
 			if (message.ID == INPUT_MESSAGE)
 			{
@@ -183,7 +175,7 @@ int main(int argc, void* argv)
 				if (message.message_data[0] == DEVICE_KEYBOARD)
 				{
 					//its a keyboard message even!
-					char C = syscall_scancode_to_asci(message.message_data[1], message.message_data[2]);
+					char C = getAsciFromScancode(message.message_data[1], message.message_data[2]);
 
 					if (C == '\r')
 					{	
@@ -214,15 +206,10 @@ int main(int argc, void* argv)
 						printf("%c", C);
 					}
 				}
-			} else
-			{
-				sleep_proc();
 			}
-			
-			process_postbox_remove_top();
 		}
 
-		sleep_proc();
+		sleepProcess();
 	}
 
 	return 1;

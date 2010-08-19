@@ -42,7 +42,7 @@ extern heap_t kernel_heap;
 
 void postInitialization() 
 {
-    register_input_listener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
+    registerInputListener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
 
     enable_interrupts(); //Fork process disables interrupts
 
@@ -68,7 +68,10 @@ void postInitialization()
 
     } else
     {
-            asm volatile("cli");
+	    printf("Started\n");
+
+	    for (;;) {}
+	/*
 	    switchToUserMode();
 	    for (;;) { }
 
@@ -117,6 +120,7 @@ void postInitialization()
 	    //Just a simple protection in case for some reason the
 	    //processor continues executing down this code path
             for (;;) {}
+		*/
     }
 
     for (;;) { }

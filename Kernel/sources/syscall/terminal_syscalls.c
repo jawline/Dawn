@@ -6,7 +6,7 @@
 #include <mm/virt_mm.h>
 extern process_t* get_current_process();
 
-void syscallPrintf(const char* Line)
+void syscallPrint_t(const char* Line)
 {
 	if (get_current_process()->m_pTerminal != 0)
 	{

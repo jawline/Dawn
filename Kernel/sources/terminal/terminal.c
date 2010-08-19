@@ -5,7 +5,7 @@
 const unsigned int m_defaultFGC = 15;
 const unsigned int m_defaultBGC = 0;
 
-terminal_t* make_terminal(unsigned int width, unsigned int height)
+terminal_t* makeNewTerminal(unsigned int width, unsigned int height)
 {
 	//Allocate the memory for the terminal & null it
 	terminal_t* ret = malloc(sizeof(terminal_t));
@@ -29,7 +29,7 @@ terminal_t* make_terminal(unsigned int width, unsigned int height)
 	return ret;
 }
 
-void free_terminal(terminal_t* term)
+void freeTerminal(terminal_t* term)
 {
 	free(term->m_backupData);
 	free(term);

@@ -1,18 +1,18 @@
-#include "input.h"
+#include <input/input.h>
 #include <stdlib.h>
 
 input_listener_t* g_listenerList = 0;
 
-void initialize_input()
+void initializeInputCallbacks()
 {
 	g_listenerList = 0;
 
-	init_mouse();
-	init_keyboard();
+	//init_mouse(); //TODO: Fix mouse driver
+	initializeKeyboard();
 
 }
 
-void send_input_message(uint32 device, uint32 main, void* additional)
+void sendInputMessage(uint32 device, uint32 main, void* additional)
 {
 	if (g_listenerList)
 	{
@@ -34,7 +34,7 @@ void send_input_message(uint32 device, uint32 main, void* additional)
 return;
 }
 
-void register_input_listener(uint32 device, input_listener_callback cb)
+void registerInputListener(uint32 device, input_listener_callback cb)
 {
 	if (g_listenerList)
 	{
@@ -45,8 +45,8 @@ void register_input_listener(uint32 device, input_listener_callback cb)
 		while (iterator->m_next != 0) { iterator = iterator->m_next; }
 
 		//Make the new entry
-		input_listener_t* new_listener = malloc(sizeof(input_listener_t));
-		memset(new_listener, 0, sizeof(input_listener_t));
+		input_listener_t* new_listener = (input_listener_t *) malloc(sizeof(input_listener_t));
+		memset((void*)new_listener, 0, sizeof(input_listener_t));
 		new_listener->m_deviceid = device;
 		new_listener->m_callback = cb;
 		
@@ -55,8 +55,8 @@ void register_input_listener(uint32 device, input_listener_callback cb)
 	}
 	else //No existing listeners yet
 	{
-		g_listenerList = malloc(sizeof(input_listener_t));
-		memset(g_listenerList, 0, sizeof(g_listenerList));
+		g_listenerList = (input_listener_t*) malloc(sizeof(input_listener_t));
+		memset((void*)g_listenerList, 0, sizeof(g_listenerList));
 		g_listenerList->m_deviceid = device;
 		g_listenerList->m_callback = cb;
 	}

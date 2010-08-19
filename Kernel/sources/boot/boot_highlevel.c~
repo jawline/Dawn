@@ -18,13 +18,15 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     	initializeKernel(mboot, 0, stack_ptr);
     #endif
 
+    printf("Dawn - Kernel initialized");
+
     printf("Kernel Codename: \"%s\" Version: %i.%i.%i\n", KVERSION_CODENAME, KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION);
 
     //We can has interrupts now...
     enable_interrupts();
 
     //Run whatever the kernel is designed to do after initialization
-    postInitialize();
+    postInitialization();
 
     for (;;) {  } 
 

@@ -4,6 +4,7 @@
 #include <heap/heap.h>
 #include <panic/panic.h>
 #include <mm/virt_mm.h>
+extern process_t* get_current_process();
 
 void syscallPrintf(const char* Line)
 {

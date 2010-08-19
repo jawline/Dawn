@@ -3,13 +3,13 @@
 #include <interrupts/irq.h>
 #include <interrupts/idt.h>
 #include <interrupts/interrupt_handler.h>
-#include "devices.h"
+#include <input/devices.h>
 
-uint8 mouse_cycle=0;     //unsigned char
-int8 mouse_byte[3];    //signed char
+int mouse_cycle=0;     //unsigned char
+char mouse_byte[3];    //signed char
 mouse_input_t istruct;
 
-void mouse_isr_callback(idt_call_registers_t regs) 
+idt_call_registers_t mouseIrqCallback(idt_call_registers_t regs) 
 {
   switch(mouse_cycle)
   {
@@ -26,14 +26,14 @@ void mouse_isr_callback(idt_call_registers_t regs)
       istruct.i_byte = mouse_byte[0];
       istruct.mouse_x = mouse_byte[1];
       istruct.mouse_y = mouse_byte[2];
-      send_input_message(DEVICE_MOUSE, 0, &istruct);
+      sendInputMessage(DEVICE_MOUSE, 0, &istruct);
       mouse_cycle=0;
       break;
   }
 }
 
 //Wait tell BIT_1 of PORT_1 is not set
-void wait_mouse_out()
+void mouseWaitOutput()
 {
 uint8 readbyte;
 
@@ -55,7 +55,7 @@ uint8 readbyte;
 
 
 //Wait untill bit 0 of PORT_2 Is set.
-void wait_mouse_in()
+void mouseWaitInput()
 {
 uint8 readbyte;
 
@@ -76,45 +76,67 @@ uint8 readbyte;
 
 }
 
-void send_mouse_command(uint8 cmd)
+void sendMouseCommand(uint8 cmd)
 {
-	wait_mouse_out();
+	mouseWaitOutput();
 	outb(PORT_2, CMD);
 
-	wait_mouse_out();
+	mouseWaitOutput();
 	outb(PORT_1, cmd);
 }
 
-uint8 read_mouse_data()
+uint8 readMouseData()
 {
-	wait_mouse_in();
+	mouseWaitInput();
 	uint8 ret = inb(PORT_2);
 
 	return ret;
 }
 
-void init_mouse()
+void initializeMouse()
 {
-	register_interrupt_handler(GET_IRQ(12), mouse_isr_callback);
+	register_interrupt_handler(GET_IRQ(12), mouseIrqCallback);
 
 	uint8 _status;
 
-	wait_mouse_out();
+	mouseWaitOutput();
 	outb(0x64, 0xA8); //Enable the auxillery mouse device
 
 	//Enable interrupts
-	wait_mouse_out();
+
+	//0x20 to 0x64 = Get compaq status byte
+	mouseWaitOutput();
 	outb(0x64, 0x20);
 
-	wait_mouse_in();
-	_status = (inb(0x60) | 2);
-	wait_mouse_out();
-	outb(0x64, 0x60);
-	wait_mouse_out();
-	outb(0x60, _status);
+	//Read the value from 0x60 (The compaq status byte)
+	mouseWaitInput();
+	_status = inb(0x60);
+
+	//Check if bit 5 is set
+	if (_status & 0x20 == 0x20)
+	{
+		//XOR 0x5 should leave bit 5 free 
+		_status = _status ^ 0x20;
+	}
+
+	//Set bit 1 to true
+	_status = _status | 0x2;
 	
-	send_mouse_command(0xF6);
-	read_mouse_data(); //ACK
-	send_mouse_command(0xF4);
-	read_mouse_data(); //ACK
+	//Send set compaq byte command (0x60) to mouse port (0x64)
+	mouseWaitOutput();
+	outb(0x64, 0x60);
+
+	//Send the new status to 0x60
+	mouseWaitOutput();
+	outb(0x60, _status);
+
+	//May send a ACK or may not
+	readMouseData(); //ACK
+
+	//End of enabling interrupts
+	
+	sendMouseCommand(0xF6);
+	readMouseData(); //ACK
+	sendMouseCommand(0xF4);
+	readMouseData(); //ACK
 }

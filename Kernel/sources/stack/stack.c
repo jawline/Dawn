@@ -23,7 +23,7 @@ stack_t moveStack(MEM_LOC new_start, size_t size, MEM_LOC initial_esp)
 	{
 		POINTER frame = alloc_frame(); //Allocate the frame
 
-		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE); //Map it to the virtual address
+		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE | PAGE_USER); //Map it to the virtual address
 	}
 
 	stack_t old_stack_pointer = 0; 

@@ -66,7 +66,7 @@ int loadAndExecuteElf(fs_node_t* Node)
 
 			for (v_addr_iter = program_header.p_vaddr; v_addr_iter <= program_header.p_vaddr + program_header.p_memsz; v_addr_iter += PAGE_SIZE)
 			{
-				if (get_mapping(v_addr_iter, 0) == 0)
+				if (getMapping(v_addr_iter, 0) == 0)
 				{
 					printf("Page not yet mapped\n");
 					map(v_addr_iter, alloc_frame(), PAGE_PRESENT | PAGE_WRITE);

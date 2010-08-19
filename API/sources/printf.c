@@ -1,7 +1,10 @@
 #include <printf.h>
 
+//SYSYCALL Print to terminal invoked by this
 DEFN_SYSCALL1(kernel_print_string, 0, const char*);
 
+//Function: api_printf
+//Description: API definition of printf, sends a formatted string to syscall 0 (Should print to active terminal)
 void api_printf(const char* fmt, ...)
 {
         static char buf [1024]; //Maximum size to be printed is 1024 chars.

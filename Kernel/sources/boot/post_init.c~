@@ -40,9 +40,9 @@ void kernelKeyboardCallback(uint32 device, uint32 main, void* additional)
 extern page_directory_t* kernel_pagedir;
 extern heap_t kernel_heap;
 
-void post_init() 
+void postInitialization() 
 {
-    register_input_listener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
+    registerInputListener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
 
     enable_interrupts(); //Fork process disables interrupts
 
@@ -68,6 +68,12 @@ void post_init()
 
     } else
     {
+	    printf("Started\n");
+
+	/*
+	    switchToUserMode();
+	    for (;;) { }
+
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal
@@ -105,9 +111,6 @@ void post_init()
 	    //(Bring it into context)
 	    set_terminal_context(g_kernelTerminal);
 
-	    //Print the purdy virtual file system, just for kicks
-	    print_directory(init_vfs(), 1);
-
 	    //Call syscall 13 triggers kill this process
             MEM_LOC num = 13;
 	    MEM_LOC a;
@@ -116,6 +119,7 @@ void post_init()
 	    //Just a simple protection in case for some reason the
 	    //processor continues executing down this code path
             for (;;) {}
+		*/
     }
 
     for (;;) { }

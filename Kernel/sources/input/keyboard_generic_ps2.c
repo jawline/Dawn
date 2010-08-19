@@ -8,7 +8,7 @@
 
 static uint32 flags = 0;
 
-idt_call_registers_t keyboard_isr_callback(idt_call_registers_t regs) 
+idt_call_registers_t keyboardIrqCallback(idt_call_registers_t regs) 
 {
     uint8 sc = inb(0x60);
     char new_char;
@@ -52,15 +52,15 @@ idt_call_registers_t keyboard_isr_callback(idt_call_registers_t regs)
            } 
 	   else 
 	   {
-		send_input_message(DEVICE_KEYBOARD, sc, &flags);
+		sendInputMessage(DEVICE_KEYBOARD, sc, &flags);
            }
            break;
      }
 }
 
-void init_keyboard() 
+void initializeKeyboard() 
 {
-	register_interrupt_handler(GET_IRQ(1), &keyboard_isr_callback);
+	register_interrupt_handler(GET_IRQ(1), &keyboardIrqCallback);
 	
 	//Clear the existing keyboard buffer after the keyboard IRQ has been registered. Makes sure that the keyboard controller will trigger a IRQ
 	uint8 temp, t2;

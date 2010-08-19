@@ -23,7 +23,8 @@ page_directory_t* kernel_pagedir = 0;
 uint32* page_directory = (uint32*) PAGE_DIR_VIRTUAL_ADDR;
 uint32* page_tables = (uint32*) PAGE_TABLE_VIRTUAL_ADDR;
 
-POINTER free_kernel_virtual_address();
+POINTER kernelFirstFreeVirtualAddress();
+char getMapping (MEM_LOC va, MEM_LOC *pa);
 
 unsigned int PAGE_SIZE = 4096;
 
@@ -33,7 +34,7 @@ extern process_t* get_current_process();
 
 void page_fault (idt_call_registers_t regs)
 {
-  if (get_current_process() != init_kproc())
+  if (get_current_process() != initializeKernelProcess() /* Returns the kproc if already initialized */ )
   {
 	int present   = (regs.err_code & 0x1); // Page not present
 	int rw = regs.err_code & 0x2;           // Write operation?
@@ -51,7 +52,7 @@ void page_fault (idt_call_registers_t regs)
 	uint32 faulting_address;
 	asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
 
-	int mapping = get_mapping(faulting_address, 0);
+	int mapping = getMapping(faulting_address, 0);
 
 	printf("Error - Page fault in process %i at location 0x%x ( present: %i write: %i us: %i reserved %i: instr: %i mapping: %i) process forced to exit\n", get_current_process()->m_ID, faulting_address, present, rw, us, reserved, id, mapping);
 	scheduler_kill_current_process();
@@ -198,7 +199,7 @@ void unmap (POINTER va)
 
 //Get whether the virtual address is mapped or not (Returns 1 or 0, true or false)
 //If Pa is non null sets pa to the physical address of the mapping
-char get_mapping (uint32 va, uint32 *pa)
+char getMapping (MEM_LOC va, MEM_LOC *pa)
 {
   uint32 virtual_page = va / 0x1000;
   uint32 pt_idx = PAGE_DIR_IDX(virtual_page);
@@ -217,13 +218,13 @@ char get_mapping (uint32 va, uint32 *pa)
 }
 
 
-inline void switch_page_directory (page_directory_t * nd)
+inline void switchPageDirectory (page_directory_t * nd)
 {
   current_pagedir = nd;
   asm volatile ("mov %0, %%cr3" : : "r" (nd));
 }
 
-inline void start_paging() 
+inline void startPaging() 
 {
   uint32 cr0;
 
@@ -234,7 +235,7 @@ inline void start_paging()
   asm volatile ("mov %0, %%cr0" : : "r" (cr0)); //Set the value of cr0 to the new desired value
 }
 
-void mark_paging_enabled() 
+void markPagingEnabled() 
 {
 	paging_setup = 1;
 	paging_enabled = 1;
@@ -244,18 +245,20 @@ void mark_paging_enabled()
 extern void asm_disable_paging();
 extern void asm_enable_paging();
 
-uint32 get_table(uint32 address)
+uint32 getTable(uint32 address)
 {
 	return address / PAGE_SIZE / 1024;
 }
 
 //Used in initialization only!
 //Identity maps the first page or so
-void identity_map_pages(page_directory_t* pagedir)
+
+//TODO: Fix up this code - Possible problems = frame out of first 4mb causing a boot failure
+void identityMapPages(page_directory_t* pagedir)
 {
 	//Map a page at the end of used memory
 	MEM_LOC frame = alloc_frame();
-	pagedir[0] = frame | PAGE_PRESENT | PAGE_WRITE;
+	pagedir[0] = frame | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
 
 	//Create a pointer to the new page table
 	LPOINTER pt = (POINTER) frame; //Pointer to the page directory
@@ -264,14 +267,14 @@ void identity_map_pages(page_directory_t* pagedir)
 	unsigned int i = 0;
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{
-		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_WRITE;	
+		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;	
 	}
 
 	//Set the KERNEL_START address to the pagedir address
-	pagedir[get_table(KERNEL_START)] = pagedir[0];
+	pagedir[getTable(KERNEL_START)] = pagedir[0];
 }
 
-void init_virt_mm(uint32 mem_end) 
+void initializeVirtualMemoryManager(uint32 mem_end) 
 {
 	unsigned int i = 0; //Used as a iterator throughout the function
 
@@ -284,7 +287,7 @@ void init_virt_mm(uint32 mem_end)
 	memset(pagedir, 0, PAGE_SIZE);
 
 	//Identity map the first 4MBs of memory to KERNEL_START and 0x0
-	identity_map_pages(pagedir);
+	identityMapPages(pagedir);
 
 	// Assign the second-last table and zero it.
 	MEM_LOC frame = alloc_frame(); //Allocate a 4KB frame
@@ -297,9 +300,9 @@ void init_virt_mm(uint32 mem_end)
 
 	pagedir[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory. Causing page_tables to link back to the phyical page tables
 
-	switch_page_directory(pagedir); //Set the current page dir
+	switchPageDirectory(pagedir); //Set the current page dirm
 
-	start_paging(); //Paging should already be active (Higher-Half Kernel) - But just to be sure
+	startPaging(); //Paging should already be active (Higher-Half Kernel) - But just to be sure
 
 	kernel_pagedir = pagedir; //Set the kernel page directory to the directory that was just created
 
@@ -313,9 +316,9 @@ void init_virt_mm(uint32 mem_end)
 	memset((POINTER)frame, 0, PAGE_SIZE);
 
 	//Mark paging enabled (Other areas of the kernel will now consider paging to be active)
-	mark_paging_enabled();
+	markPagingEnabled();
 
-	for (i = get_table(KERNEL_START); i < 1022; i++)
+	for (i = getTable(KERNEL_START); i < 1022; i++)
 	{
 		if (page_directory[i] == 0) {
 			MEM_LOC address = alloc_frame();
@@ -325,14 +328,14 @@ void init_virt_mm(uint32 mem_end)
 	}
 }
 
-MEM_LOC copy_page(MEM_LOC pt)
+MEM_LOC copyPage(MEM_LOC pt)
 {
 	MEM_LOC new_page_addr = alloc_frame();
 
-	POINTER temp_read_addr = free_kernel_virtual_address();
+	POINTER temp_read_addr = kernelFirstFreeVirtualAddress();
 	map(temp_read_addr, (POINTER) pt, PAGE_PRESENT | PAGE_WRITE);
 
-	POINTER temp_write_addr = free_kernel_virtual_address();
+	POINTER temp_write_addr = kernelFirstFreeVirtualAddress();
 	map(temp_write_addr, (POINTER) new_page_addr, PAGE_PRESENT | PAGE_WRITE);
 
 	memcpy(temp_write_addr, temp_read_addr, PAGE_SIZE);
@@ -343,14 +346,14 @@ MEM_LOC copy_page(MEM_LOC pt)
 	return new_page_addr;
 }
 
-MEM_LOC copy_page_table(MEM_LOC pt, uint8 copy)
+MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy)
 {
 	MEM_LOC new_page_table = alloc_frame();
 
-	LPOINTER temp_read_addr = free_kernel_virtual_address();
+	LPOINTER temp_read_addr = kernelFirstFreeVirtualAddress();
 	map(temp_read_addr, pt, PAGE_PRESENT | PAGE_WRITE);
 
-	LPOINTER temp_write_addr = free_kernel_virtual_address();
+	LPOINTER temp_write_addr = kernelFirstFreeVirtualAddress();
 	map(temp_write_addr, new_page_table, PAGE_PRESENT | PAGE_WRITE);
 	memset(temp_write_addr, 0, PAGE_SIZE);	
 	
@@ -361,8 +364,8 @@ MEM_LOC copy_page_table(MEM_LOC pt, uint8 copy)
 		{
 			if (copy == 1)
 			{
-				MEM_LOC New_Frame = copy_page(temp_read_addr[i]);
-				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_WRITE;
+				MEM_LOC New_Frame = copyPage(temp_read_addr[i]);
+				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
 			}
 			else
 			{
@@ -382,16 +385,16 @@ MEM_LOC copy_page_table(MEM_LOC pt, uint8 copy)
 	return new_page_table;
 }
 
-page_directory_t* copy_page_dir(page_directory_t* pagedir) 
+page_directory_t* copyPageDir(page_directory_t* pagedir) 
 {
 	disable_interrupts(); //Disable interrupts
 
 	page_directory_t* return_location = (page_directory_t*) alloc_frame();
 
-	LPOINTER being_copied = free_kernel_virtual_address();
+	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
 	map(being_copied, pagedir, PAGE_PRESENT | PAGE_WRITE);
 
-	LPOINTER copying_to = free_kernel_virtual_address();
+	LPOINTER copying_to = kernelFirstFreeVirtualAddress();
 	map(copying_to, return_location, PAGE_PRESENT | PAGE_WRITE);
 	memset(copying_to, 0, PAGE_SIZE);
 
@@ -399,12 +402,12 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	copying_to[0] = being_copied[0];
 
 	unsigned int i = 0;
-	for (i = 1; i < get_table(KERNEL_START); i++)
+	for (i = 1; i < getTable(KERNEL_START); i++)
 	{
 		if (being_copied[i] != 0)
 		{
 
-			MEM_LOC Location = copy_page_table(being_copied[i] & PAGE_MASK, 1);
+			MEM_LOC Location = copyPageTable(being_copied[i] & PAGE_MASK, 1);
 			copying_to[i] = Location | PAGE_PRESENT | PAGE_WRITE;
 
 		}
@@ -414,7 +417,7 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 		}
 	}
 
-	for (i = get_table(KERNEL_START); i < 1022; i++)
+	for (i = getTable(KERNEL_START); i < 1022; i++)
 	{
 		copying_to[i] = being_copied[i];
 	}
@@ -423,11 +426,11 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	MEM_LOC frame = alloc_frame();
 	copying_to[1022] = frame | PAGE_PRESENT | PAGE_WRITE;
 
-	LPOINTER pt = free_kernel_virtual_address();
+	LPOINTER pt = kernelFirstFreeVirtualAddress();
 	map(pt, frame, PAGE_PRESENT | PAGE_WRITE);
 	memset (pt, 0, PAGE_SIZE);
 
-	LPOINTER opt = free_kernel_virtual_address();
+	LPOINTER opt = kernelFirstFreeVirtualAddress();
 	map(opt, being_copied[1022], PAGE_PRESENT | PAGE_WRITE);
 
 	memcpy(pt, opt, PAGE_SIZE);
@@ -445,13 +448,13 @@ page_directory_t* copy_page_dir(page_directory_t* pagedir)
 	return return_location;
 }
 
-void free_page_table(page_directory_t* pt)
+void freePageTable(page_directory_t* pt)
 {
-	LPOINTER being_freed = free_kernel_virtual_address();
+	LPOINTER being_freed = kernelFirstFreeVirtualAddress();
 	map(being_freed, pt, PAGE_PRESENT | PAGE_WRITE);
 
 	unsigned int i = 0;
-	for (i = 1; i < get_table(KERNEL_START); i++)
+	for (i = 1; i < getTable(KERNEL_START); i++)
 	{
 		if (being_freed[i] != 0)
 		{
@@ -464,19 +467,19 @@ void free_page_table(page_directory_t* pt)
 	free_frame(pt);
 }
 
-void free_page_dir(page_directory_t* pd)
+void freePageDir(page_directory_t* pd)
 {
 	disable_interrupts(); //Disable interrupts
 
-	LPOINTER being_freed = free_kernel_virtual_address();
+	LPOINTER being_freed = kernelFirstFreeVirtualAddress();
 	map(being_freed, pd, PAGE_PRESENT | PAGE_WRITE);
 
 	unsigned int i = 0;
-	for (i = 1; i < get_table(KERNEL_START); i++)
+	for (i = 1; i < getTable(KERNEL_START); i++)
 	{
 		if (being_freed[i] != 0)
 		{
-			free_page_table(being_freed[i]);
+			freePageTable(being_freed[i]);
 		}
 	}
 
@@ -488,13 +491,13 @@ void free_page_dir(page_directory_t* pd)
 }
 
 //Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process
-POINTER free_kernel_virtual_address()
+POINTER kernelFirstFreeVirtualAddress()
 {
 	unsigned int i = KERNEL_RESERVED_START; //Start after the IDMapped region
 
 	for (i; i < KERNEL_MEMORY_END; i += PAGE_SIZE)
 	{
-		if (get_mapping(i, 0) == 0)
+		if (getMapping(i, 0) == 0)
 		{
 			return i;
 		}

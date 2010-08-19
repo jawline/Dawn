@@ -1,9 +1,10 @@
 #ifndef _POSTBOX_API_DEF_H_
 #define _POSTBOX_API_DEF_H_
-#include <process/postbox.h>
+#include <process/message.h>
 #include <syscall/syscall.h>
 
-extern void process_postbox_remove_top();
-extern process_postbox* get_process_postbox();
+extern unsigned char postboxHasNext();
+extern process_message postboxGetNext();
+extern void postboxSetFlags(uint32 flags);
 
 #endif //_POSTBOX_API_DEF_H_

@@ -1,14 +1,32 @@
 #include <process/postbox_api.h>
+#include <types/int_types.h>
 
-DEFN_SYSCALL0(postbox_location, 1);
+//Read top reads a message from the top of the postbox
+DEFN_SYSCALL1(postbox_read_top, 1, process_message*);
+
+//Removes the top message from the postbox
 DEFN_SYSCALL0(postbox_pop_top, 2);
 
-void process_postbox_remove_top()
+//Returns 1 if there is data to read 0 if otherwise
+DEFN_SYSCALL0(postbox_has_next, 3);
+
+//Sets the flags on this process's postbox
+DEFN_SYSCALL0(postbox_set_flags, 6);
+
+unsigned char postboxHasNext()
 {
-	syscall_postbox_pop_top();
+	return syscall_postbox_has_next();
 }
 
-process_postbox* get_process_postbox()
+process_message postboxGetNext()
 {
-	return (process_postbox*) syscall_postbox_location();
+	process_message Msg;
+	syscall_postbox_read_top(&Msg);
+	syscall_postbox_pop_top();
+	return Msg;
+}
+
+void postboxSetFlags(uint32 flags)
+{
+	syscall_postbox_set_flags(flags);
 }

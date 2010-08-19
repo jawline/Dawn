@@ -6,7 +6,7 @@ static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
 extern terminal_t* g_kernelTerminal;
 
-process_t* init_kproc()
+process_t* initializeKernelProcess()
 {
 	disable_interrupts();
 	if (kernel_proc != 0) return kernel_proc;
@@ -29,7 +29,7 @@ process_t* init_kproc()
 	return ret;
 }
 
-void free_process(process_t* process)
+void freeProcess(process_t* process)
 {
 	//No interrupts ploz
 	disable_interrupts();
@@ -44,12 +44,12 @@ void free_process(process_t* process)
 		{
 			if (getTerminalInContext() == process->m_pTerminal)
 			{
-				set_terminal_context(g_kernelTerminal);
+				setTerminalContext(g_kernelTerminal);
 			}
 
-			if (process->m_pTerminal == g_kernelTerminal) //Don't delete
+			if (process->m_pTerminal != g_kernelTerminal) //Don't delete
 			{
-				free_terminal(process->m_pTerminal);
+				freeTerminal(process->m_pTerminal);
 			}
 
 			process->m_pTerminal = 0;
@@ -58,20 +58,24 @@ void free_process(process_t* process)
 		//This kills the used list and frees every used page
 		while (process->m_usedListLocation != 0)
 		{
+
 			MEM_LOC top = used_list_top(process);
 			free_frame(top);
 			used_list_remove(process, top);
+
 		}
 
 		//Empty the post box
 		while (process->m_processPostbox.first != 0)
 		{
+		
 			postbox_top(&process->m_processPostbox);
+
 		}
 
 		free(process->m_usedListRoot);
 
-		free_page_dir(process->m_pageDir);
+		freePageDir(process->m_pageDir);
 
 		free(process);
 	}
@@ -96,7 +100,7 @@ int kfork()
 	extern page_directory_t* current_pagedir;
 
 	//Copy the page directory
-	page_directory_t* newprocesspd = copy_page_dir(current_pagedir);
+	page_directory_t* newprocesspd = copyPageDir(current_pagedir);
 
 	//Create a process space for the new process and null iyt
 	process_t* new_process = malloc(sizeof(process_t));
@@ -214,19 +218,6 @@ inline void jump_process(process_t* to)
 	return;
 }
 
-//Get the top message without removing it
-process_message postbox_peek(process_postbox* pb)
-{
-	if (pb->first == 0)
-	{
-		process_message ret;
-		ret.ID = -1; //-1 = No messages left to read
-		return ret;
-	}
-
-	return pb->first->data;
-}
-
 process_message postbox_top(process_postbox* pb)
 {
 	if (pb->first == 0)
@@ -250,6 +241,19 @@ process_message postbox_top(process_postbox* pb)
 	free(message);
 
 	return ret;
+}
+
+//Get the top message without removing it
+process_message postbox_peek(process_postbox* pb)
+{
+	if (pb->first == 0)
+	{
+		process_message ret;
+		ret.ID = -1; //-1 = No messages left to read
+		return ret;
+	}
+
+	return pb->first->data;
 }
 
 void set_process_name(process_t* proc, const char* Name)

@@ -15,7 +15,7 @@ uint8 pio_28bit_wait_busy_drq(pio_device device, uint32 timeout)
 			return 1; //Fail
 		}
 
-		uint8 rb = inb(device.device_ctrl);
+		uint8 rb = inb(device.BAR1 + CTRL_PORT);
 		if ((rb & 0x80) == 0)
 		{
 			//BSY Not set
@@ -36,13 +36,13 @@ uint8 pio_28bit_wait_busy_drq(pio_device device, uint32 timeout)
 uint8 pio_28bit_read(pio_device device, uint16* destination, uint32 lba, uint8 numberOfSectors)
 {
 
-	outb(device.device_base + REG_DEVSEL, 0xE0 | (device.disk << 4) | ((lba >> 24) & 0x0F));  //Select the device (Slave or master) and send the last 4 bits of the LBA
-	outb(device.device_base + 1, 0); //Null the register
-	outb(device.device_base + 2, numberOfSectors); //Set the numberOfSectors
-	outb(device.device_base + 3, (uint8) lba); //First 8 bits of the lba
-	outb(device.device_base + 4, (uint8) (lba >> 8)); //Bits 8-16 of the LBA
-	outb(device.device_base + 5, (uint8) (lba >> 16)); //Bits 16-24 of the LBA
-	outb(device.device_base + 7, 0x20); //Send the read sectors command
+	outb(device.BAR0 + REG_DEVSEL, 0xE0 | (device.disk << 4) | ((lba >> 24) & 0x0F));  //Select the device (Slave or master) and send the last 4 bits of the LBA
+	outb(device.BAR0 + 1, 0); //Null the register
+	outb(device.BAR0 + 2, numberOfSectors); //Set the numberOfSectors
+	outb(device.BAR0 + 3, (uint8) lba); //First 8 bits of the lba
+	outb(device.BAR0 + 4, (uint8) (lba >> 8)); //Bits 8-16 of the LBA
+	outb(device.BAR0 + 5, (uint8) (lba >> 16)); //Bits 16-24 of the LBA
+	outb(device.BAR0 + 7, 0x20); //Send the read sectors command
 
 	unsigned int toRead = numberOfSectors;
 	if (numberOfSectors == 0)
@@ -57,10 +57,10 @@ uint8 pio_28bit_read(pio_device device, uint16* destination, uint32 lba, uint8 n
 			break;
 		}
 
-		inb(device.device_base); //Wait 400ns
-		inb(device.device_base);
-		inb(device.device_base);
-		inb(device.device_base);
+		inb(device.BAR0); //Wait 400ns
+		inb(device.BAR0);
+		inb(device.BAR0);
+		inb(device.BAR0);
 
 		if (pio_28bit_wait_busy_drq(device, RESET_TIMEOUT) == 1)
 		{
@@ -70,7 +70,7 @@ uint8 pio_28bit_read(pio_device device, uint16* destination, uint32 lba, uint8 n
 
 		unsigned int i = 0;
 		for (i = 0; i < 256; i++) {		
-			*destination = inw(device.device_base);
+			*destination = inw(device.BAR0);
 			destination++;
 		}
 

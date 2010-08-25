@@ -1,0 +1,7 @@
+CC=gcc 
+CFLAGS=-I ../../Include/initrd/ -I ../../Include/types -W 
+
+main: main.o 
+
+clean:
+	rm *.o

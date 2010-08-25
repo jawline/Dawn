@@ -11,7 +11,7 @@ DEFN_SYSCALL0(postbox_pop_top, 2);
 DEFN_SYSCALL0(postbox_has_next, 3);
 
 //Sets the flags on this process's postbox
-DEFN_SYSCALL0(postbox_set_flags, 6);
+DEFN_SYSCALL1(postbox_set_flags, 6, uint32);
 
 unsigned char postboxHasNext()
 {

@@ -203,7 +203,6 @@ void scheduler_global_message(process_message msg, unsigned int bit)
 		//Test if this process wants to hear about this event
 		if (iter->process_pointer->m_postboxFlags & bit == bit)
 		{
-
 			postbox_add(&iter->process_pointer->m_processPostbox, msg);
 
 		}

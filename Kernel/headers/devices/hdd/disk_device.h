@@ -9,12 +9,17 @@
 
 typedef struct {
 
-	//Basic info about a disk drive
-	unsigned int device_ctrl; //Control port
-	unsigned int device_base; //Base port
+	//Basic info about a disk drive controller
+	unsigned int BAR0;
+	unsigned int BAR1;
+	unsigned int BAR2;
+	unsigned int BAR3;
 
 	//Which disk to access if the controller handles more then one (For IDE Controllers 1 = slave 0 = primary)
 	unsigned char disk;
+
+	//Information about the disk device
+	char name[64]; //64 byte character array to handle the name
 
 } disk_device;
 

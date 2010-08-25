@@ -10,6 +10,7 @@ unsigned char postboxHasNext()
 {
 	process_message toTest;
 	toTest = postbox_peek(&get_current_process()->m_processPostbox);
+
 	if (toTest.ID == -1) return 0;
 	return 1;
 }
@@ -26,7 +27,7 @@ void postboxPopTop()
 	postbox_top(&get_current_process()->m_processPostbox);
 }
 
-void postboxSetBit(unsigned int bit)
+void postboxSetFlags(uint32 flags)
 {
-	get_current_process()->m_postboxFlags = get_current_process()->m_postboxFlags | bit;
+	get_current_process()->m_postboxFlags = flags;
 }

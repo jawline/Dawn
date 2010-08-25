@@ -21,7 +21,7 @@ stack_t moveStack(MEM_LOC new_start, size_t size, MEM_LOC initial_esp)
 	//This for loop maps new_start to new_start - size with physical memory
 	for (iter = new_start; iter >= end; iter -= 0x1000) 
 	{
-		POINTER frame = alloc_frame(); //Allocate the frame
+		POINTER frame = allocateFrame(); //Allocate the frame
 
 		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE | PAGE_USER); //Map it to the virtual address
 	}

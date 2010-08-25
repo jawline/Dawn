@@ -69,7 +69,7 @@ int loadAndExecuteElf(fs_node_t* Node)
 				if (getMapping(v_addr_iter, 0) == 0)
 				{
 					printf("Page not yet mapped\n");
-					map(v_addr_iter, alloc_frame(), PAGE_PRESENT | PAGE_WRITE);
+					map(v_addr_iter, allocateFrame(), PAGE_PRESENT | PAGE_WRITE);
 					printf("Page has been mapped\n");
 				}
 				else

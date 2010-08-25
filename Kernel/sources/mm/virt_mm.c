@@ -168,7 +168,7 @@ void map (POINTER va, POINTER pa, uint32 flags)
   {
 
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
-    page_directory[pt_idx] = (alloc_frame()) | PAGE_PRESENT | PAGE_WRITE;
+    page_directory[pt_idx] = (allocateFrame()) | PAGE_PRESENT | PAGE_WRITE;
     
     //Reload the CR3 register to update virtual mappings
     ReloadCR3();
@@ -257,7 +257,7 @@ uint32 getTable(uint32 address)
 void identityMapPages(page_directory_t* pagedir)
 {
 	//Map a page at the end of used memory
-	MEM_LOC frame = alloc_frame();
+	MEM_LOC frame = allocateFrame();
 	pagedir[0] = frame | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
 
 	//Create a pointer to the new page table
@@ -281,7 +281,7 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	register_interrupt_handler (14, &page_fault); //Register the page fault handler.
 					              //Called when bad little processes try to access memory they can't (Doesn't exist or not available to them)
 
-	page_directory_t * pagedir = (page_directory_t *) alloc_frame(); //Paging isn't enabled so this should just give us 4kb at the end of used memory.
+	page_directory_t * pagedir = (page_directory_t *) allocateFrame(); //Paging isn't enabled so this should just give us 4kb at the end of used memory.
 
 	//Null it all!!! (Clear the page directory)
 	memset(pagedir, 0, PAGE_SIZE);
@@ -290,7 +290,7 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	identityMapPages(pagedir);
 
 	// Assign the second-last table and zero it.
-	MEM_LOC frame = alloc_frame(); //Allocate a 4KB frame
+	MEM_LOC frame = allocateFrame(); //Allocate a 4KB frame
 	pagedir[1022] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Set the 1022nd page table to the new frame address
 
 	LPOINTER pt = (POINTER) frame; //Pointer to the new frame
@@ -309,7 +309,7 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	//Map where the physical memory manager keeps its stack. (Just the page table), this is because on the first expansion of the stack the map would need 2 frames while only having one (The first free page of memory) available. Bad things would follow
 	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR / 0x1000));
 
-	frame = alloc_frame(); //Allocate a frame for the page table
+	frame = allocateFrame(); //Allocate a frame for the page table
 	page_directory[pt_idx] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
 
 	//Nulll it
@@ -321,16 +321,16 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	for (i = getTable(KERNEL_START); i < 1022; i++)
 	{
 		if (page_directory[i] == 0) {
-			MEM_LOC address = alloc_frame();
+			MEM_LOC address = allocateFrame();
 			page_directory[i] = (address & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
 			ReloadCR3();
 		}
 	}
 }
 
-MEM_LOC copyPage(MEM_LOC pt)
+MEM_LOC copyPage(MEM_LOC pt, process_t* process)
 {
-	MEM_LOC new_page_addr = alloc_frame();
+	MEM_LOC new_page_addr = allocateFrameForProcess(process);
 
 	POINTER temp_read_addr = kernelFirstFreeVirtualAddress();
 	map(temp_read_addr, (POINTER) pt, PAGE_PRESENT | PAGE_WRITE);
@@ -346,9 +346,9 @@ MEM_LOC copyPage(MEM_LOC pt)
 	return new_page_addr;
 }
 
-MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy)
+MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 {
-	MEM_LOC new_page_table = alloc_frame();
+	MEM_LOC new_page_table = allocateFrameForProcess(process);
 
 	LPOINTER temp_read_addr = kernelFirstFreeVirtualAddress();
 	map(temp_read_addr, pt, PAGE_PRESENT | PAGE_WRITE);
@@ -364,7 +364,7 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy)
 		{
 			if (copy == 1)
 			{
-				MEM_LOC New_Frame = copyPage(temp_read_addr[i]);
+				MEM_LOC New_Frame = copyPage(temp_read_addr[i], process);
 				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
 			}
 			else
@@ -385,11 +385,11 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy)
 	return new_page_table;
 }
 
-page_directory_t* copyPageDir(page_directory_t* pagedir) 
+page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process) 
 {
 	disable_interrupts(); //Disable interrupts
 
-	page_directory_t* return_location = (page_directory_t*) alloc_frame();
+	page_directory_t* return_location = (page_directory_t*) allocateFrameForProcess(process);
 
 	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
 	map(being_copied, pagedir, PAGE_PRESENT | PAGE_WRITE);
@@ -407,7 +407,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir)
 		if (being_copied[i] != 0)
 		{
 
-			MEM_LOC Location = copyPageTable(being_copied[i] & PAGE_MASK, 1);
+			MEM_LOC Location = copyPageTable(being_copied[i] & PAGE_MASK, 1, process);
 			copying_to[i] = Location | PAGE_PRESENT | PAGE_WRITE;
 
 		}
@@ -423,7 +423,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir)
 	}
 
 	// Assign the second-last table and zero it.
-	MEM_LOC frame = alloc_frame();
+	MEM_LOC frame = allocateFrameForProcess(process);
 	copying_to[1022] = frame | PAGE_PRESENT | PAGE_WRITE;
 
 	LPOINTER pt = kernelFirstFreeVirtualAddress();
@@ -458,13 +458,13 @@ void freePageTable(page_directory_t* pt)
 	{
 		if (being_freed[i] != 0)
 		{
-			free_frame(being_freed[i]);
+			freeFrame(being_freed[i]);
 		}
 	}
 
 	unmap(being_freed);
 
-	free_frame(pt);
+	freeFrame(pt);
 }
 
 void freePageDir(page_directory_t* pd)
@@ -484,10 +484,10 @@ void freePageDir(page_directory_t* pd)
 	}
 
 
-	free_frame(being_freed[1022]);
+	freeFrame(being_freed[1022]);
 
 	unmap(being_freed);
-	free_frame(pd);
+	freeFrame(pd);
 }
 
 //Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process

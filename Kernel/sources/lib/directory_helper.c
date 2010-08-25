@@ -27,8 +27,6 @@ void print_directory(fs_node_t* node, int recur) {
 
 	} else {
 
-		printf("Directory %s\n", ent->name);
-
 		if (strcmp(ent->name, ".") == 0)
 		{
 		}

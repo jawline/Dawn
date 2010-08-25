@@ -1,6 +1,6 @@
 #ifndef _HARD_DRIVE_FILESYSTEM_H_
 #define _HARD_DRIVE_FILESYSTEM_H_
-#include "rfs.h"
+#include "../fs/rfs.h"
 
 /* The purpose of this file is to provide a abstracted (file based) method for accessing the hard drives */
 

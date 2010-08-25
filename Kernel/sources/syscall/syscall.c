@@ -13,7 +13,7 @@ extern MEM_LOC calculate_free_frames();
 extern unsigned char postboxHasNext();
 extern void postboxReadTop(process_message* Message);
 extern void postboxPopTop();
-extern void postboxSetBit(int bit);
+extern void postboxSetFlags(uint32 bit);
 extern void syscallKillCurrentProcess();
 
 extern unsigned char syscallProcessValid(unsigned int iter);
@@ -52,7 +52,7 @@ static void *syscalls[21] = {
    &postboxHasNext, //Syscall 3 - Does the postbox have anything for the process to read?
    &getKeyMapping, //Syscall 4 - Get the key mapping for a scancode
    &scheduler_block_me, //Syscall 5 - Pause the current process forfitting any remaining processing time
-   &postboxSetBit, //Syscall 6 - Set the process message flags (What it wants to know about)
+   &postboxSetFlags, //Syscall 6 - Set the process message flags (What it wants to know about)
    &calculate_free_frames, //Syscall 7 - Return the number of free frames available
    &get_page_size, //Syscall 8 - Return the size in bytes of each page
    &syscallRequestReboot, //Syscall 9 - Ask the kernel to reboot

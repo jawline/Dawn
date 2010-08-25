@@ -1,6 +1,7 @@
 #ifndef _VIRTUAL_FILE_SYSTEM_DEF_H_
 #define _VIRTUAL_FILE_SYSTEM_DEF_H_
 #include <types/int_types.h>
+#include <devices/hdd/disk_device.h>
 
 #define FS_FILE 0x1
 #define FS_DIR 0x2
@@ -29,7 +30,8 @@ struct filesystem_node {
 
 	uint32 flags; //32 bit bitmask for flags
 	unsigned long length; //long integer, size of the file.
-	unsigned long inode; //Internal node, Unique for each file
+	unsigned long inode;
+	disk_device* device; //Pointer to the disk device this file is located on
 
 	io_operation write;
 	io_operation read;

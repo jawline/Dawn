@@ -3,7 +3,7 @@
 
 typedef struct
 {
-	unsigned int pID; //Process ID number
+	int pID; //Process ID number
 	char Name[64]; //ASCI string containing process name
 	unsigned long processingTime; //How much CPU has been blown on this thing
 } process_info_t;

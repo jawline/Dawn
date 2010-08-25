@@ -1,4 +1,4 @@
-#include "rfs.h"
+#include "../fs/rfs.h"
 #include <fs/vfs.h>
 
 fs_node_t* dev_root = 0;

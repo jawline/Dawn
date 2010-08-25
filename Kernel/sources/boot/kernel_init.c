@@ -215,4 +215,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 
 	//Initialize the system scheduler
 	initializeScheduler(initializeKernelProcess());
+
+	print_directory(init_vfs(), 1);
 }

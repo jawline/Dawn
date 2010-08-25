@@ -1,6 +1,7 @@
-#include <process/process.h>
 #include <stdlib.h>
 #include <panic/panic.h>
+#include <mm/virt_mm.h>
+#include <mm/pagedir.h>
 
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
@@ -34,6 +35,8 @@ void freeProcess(process_t* process)
 	//No interrupts ploz
 	disable_interrupts();
 
+	printf("Attempting to free a process\n");
+
 	if (process == kernel_proc) {
 		return; //Don't want to get rid of PID 0
 	}
@@ -60,7 +63,7 @@ void freeProcess(process_t* process)
 		{
 
 			MEM_LOC top = used_list_top(process);
-			free_frame(top);
+			freeFrame(top);
 			used_list_remove(process, top);
 
 		}
@@ -75,7 +78,7 @@ void freeProcess(process_t* process)
 
 		free(process->m_usedListRoot);
 
-		freePageDir(process->m_pageDir);
+		//freePageDir(process->m_pageDir);
 
 		free(process);
 	}
@@ -93,14 +96,10 @@ int kfork()
 	
 	disable_interrupts();
 
+	printf("Free frames at start %x\n", calculate_free_frames());
+
 	//Store this for later use
 	process_t* parent = get_current_process();
-
-	//Located in virt_mm.c
-	extern page_directory_t* current_pagedir;
-
-	//Copy the page directory
-	page_directory_t* newprocesspd = copyPageDir(current_pagedir);
 
 	//Create a process space for the new process and null iyt
 	process_t* new_process = malloc(sizeof(process_t));
@@ -110,15 +109,20 @@ int kfork()
 	strcpy(new_process->m_Name, "ChildProcess");
 
 	new_process->m_pTerminal = parent->m_pTerminal;
-
-	//Give it a page directory
-	new_process->m_pageDir = newprocesspd;
-
 	init_used_list(new_process);
 
 	//Set the processes unique ID
 	next_pid++;
 	new_process->m_ID = next_pid;
+
+	//Located in virt_mm.c
+	extern page_directory_t* current_pagedir;
+
+	//Copy the page directory
+	page_directory_t* newprocesspd = copyPageDir(current_pagedir, new_process);
+
+	//Give it a page directory
+	new_process->m_pageDir = newprocesspd;
 
 	uint32 current_eip = read_eip();
 
@@ -132,8 +136,6 @@ int kfork()
 		new_process->eip = current_eip;
 
 		scheduler_add(new_process);
-
-		printf("Free frames at start %x\n", calculate_free_frames());
 
 		return 0; //Return 0 - Parent
 	}

@@ -5,7 +5,6 @@
 #include <mm/virt_mm.h>
 #include <mm/phys_mm.h>
 
-
 uint32 alloc_mem(uint32 size, heap_t * heap);
 void free_mem(uint32 address, heap_t * heap);
 
@@ -29,7 +28,7 @@ void initializeHeap(heap_t * heap, uint32 address)
 
 	frame_addr = 0;
 
-	frame_addr = alloc_frame();
+	frame_addr = allocateFrame();
 
 	DEBUG_PRINT("Debug Message: Allocated frame ");
 	DEBUG_PRINTX(frame_addr);
@@ -91,11 +90,11 @@ uint32 heapAllocateMemory(uint32 size, heap_t* heap)
 
 		if (ptr->next == 0) 
 		{
-		        printf("Expanded heap\n");
+		        DEBUG_PRINT("Heap expanded by 4KB\n");
 			//Map another 4kb onto the heap
 			//This is the last entry on the heap SO if its not used we can just += the size otherwise we have to create a whole new one (More work for mee)
 
-			uint32 frame_addr = alloc_frame();
+			uint32 frame_addr = allocateFrame();
 			uint32 end = ((uint32) ptr) + ptr->size + sizeof(heap_entry_t);
 
 			map(end, frame_addr, PAGE_PRESENT | PAGE_WRITE); //Mapped now! =)

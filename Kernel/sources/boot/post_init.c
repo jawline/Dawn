@@ -40,6 +40,8 @@ void kernelKeyboardCallback(uint32 device, uint32 main, void* additional)
 extern page_directory_t* kernel_pagedir;
 extern heap_t kernel_heap;
 
+int alive = 0;
+
 void postInitialization() 
 {
     registerInputListener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
@@ -68,21 +70,47 @@ void postInitialization()
 
     } else
     {
-	    printf("Started\n");
 
-	    for (;;) {}
+
+	    printf("Performing memory tests\n");
+
+            unsigned long FreeFrames = calculate_free_frames();
+
+	    int i = kfork();
+
+	    if (i == 0)
+	    {
+		printf("Parent\n");
+		enable_interrupts();
+		for (;;) {// if (alive == 0) { } else 
+				//{
+					//unsigned long AtEnd = calculate_free_frames();
+					//printf("Before %i After %i\n", FreeFrames, AtEnd);
+				//}
+		}
+	    }
+	    else
+	    {
+		printf("Child\n");
+
+		alive = 1;
+
+		//Call syscall 13 triggers kill this process
+		MEM_LOC num = 15;
+		MEM_LOC a;
+		asm volatile("int $127" : "=a" (a) : "0" (num));	
+		for (;;) {}
+	    }
+
 	/*
-	    switchToUserMode();
-	    for (;;) { }
-
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal
-	    terminal_t* m_processTerminal = make_terminal(80, 25);
+	    terminal_t* m_processTerminal = makeNewTerminal(80, 25);
 
 	    //Set up the new terminals callbacks then bring it into context
-	    set_default_tcallbacks(m_processTerminal);
-	    set_terminal_context(m_processTerminal);
+	    setDefaultTerminalCallbacks(m_processTerminal);
+	    setTerminalContext(m_processTerminal);
 
 	    //Set the current processes terminal to the new terminal
 	    get_current_process()->m_pTerminal = m_processTerminal;
@@ -110,7 +138,7 @@ void postInitialization()
             printf("Reverting back to root console\n");
 
 	    //(Bring it into context)
-	    set_terminal_context(g_kernelTerminal);
+	    setTerminalContext(g_kernelTerminal);
 
 	    //Call syscall 13 triggers kill this process
             MEM_LOC num = 13;
@@ -119,8 +147,7 @@ void postInitialization()
 
 	    //Just a simple protection in case for some reason the
 	    //processor continues executing down this code path
-            for (;;) {}
-		*/
+            for (;;) {} */
     }
 
     for (;;) { }

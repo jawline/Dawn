@@ -22,10 +22,7 @@
 #include <clock/clock.h>
 
 #include <heap/heap.h>
-
-DEFN_SYSCALL0(cls, 12);
-DEFN_SYSCALL1(setfg, 13, unsigned char);
-DEFN_SYSCALL1(setbg, 14, unsigned char);
+#include <process/get_info.h>
 
 char Pointer[1024];
 int c_ptr = 0;
@@ -67,7 +64,7 @@ char exec_cmd()
 	}
 	else if (strcmp("cls", Pointer) == 0)
 	{
-		syscall_cls();
+		clearscreen();
 	}
 	else if (strcmp("uptime", Pointer) == 0)
 	{
@@ -111,23 +108,25 @@ char exec_cmd()
 		printf("Hah, just kidding\n");
 	}
 	else if (strcmp("lproc", Pointer) == 0)
-	{/*
+	{
 		printf("Listing active processes\n");
 
 		unsigned int iterator = 0;
-		process_t* proc = 0;
 
 		while (1)
 		{
-			proc = get_process(iterator);
+			int pid = getProcessID(iterator);
 
-			if (proc == 0) break;
-			printf("Process ID: %i - Name: \"%s\" - CPU attention: %ims\n", proc->m_ID, proc->m_Name, (proc->m_processingTime / (get_clocks_per_second() / 1000)));
+			if (pid == -1) break;
+
+			process_info_t info = getProcessInfo(pid);
+			printf("Process %i Name %s Time %i\n", info.pID, info.Name, info.processingTime);
 
 			iterator++;
 		}
 
-		printf("Done\n"); */
+		printf("Done listing %i processes\n", iterator);
+
 	} else if (strcmp("free", Pointer) == 0) {
 		printf("Free memory information\n");
 		MEM_LOC free_frames = getNumberOfFreeFrames();
@@ -151,6 +150,8 @@ int main(int argc, void* argv)
 	//syscall_setfg(15);
 	//syscall_cls();	
 
+	clearscreen();
+
 	c_ptr = 0;
 	postboxSetFlags(INPUT_BIT);
 
@@ -164,7 +165,8 @@ int main(int argc, void* argv)
 
 	for (;;)
 	{
-		if (postboxHasNext())
+
+		if (postboxHasNext() == 1)
 		{
 			process_message message;
 			message = postboxGetNext();

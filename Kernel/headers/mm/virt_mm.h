@@ -17,6 +17,7 @@
 
 #include <mm/pagedir.h>
 #include <types/memory.h>
+#include <process/process.h>
 
 extern unsigned int PAGE_SIZE;
 
@@ -26,6 +27,7 @@ void mark_paging_enabled();
 void map (POINTER va, POINTER pa, uint32 flags);
 void unmap (POINTER va);
 char get_mapping (MEM_LOC va, MEM_LOC* pa);
+page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process);
 
 void enable_paging();
 void disable_paging();

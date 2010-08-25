@@ -4,29 +4,74 @@
 extern process_t* get_current_process();
 extern process_t* scheduler_return_process(unsigned int iter);
 
-unsigned char syscallProcessValid(unsigned int iter)
+unsigned char syscallProcessValid(unsigned int pid)
 {
-	if (scheduler_return_process(iter) != 0) return 1;
-	else return 0;
+	//Iterate untill found the correct PID
+	process_t* iterator = 0;
+	unsigned int number = 0;
+
+	for (;;)
+	{
+		iterator = scheduler_return_process(number);
+
+		if (iterator == 0) return 0;
+		if (iterator->m_ID == pid) break;
+
+		number = number + 1;
+	}
+
+	return 1;
 }
 
-unsigned int syscallGetPid(unsigned int iter)
+int syscallGetPid(unsigned int iter)
 {
-	if (scheduler_return_process(iter) == 0) return 0;
+	if (scheduler_return_process(iter) == 0) return -1;
 	return scheduler_return_process(iter)->m_ID;
 }
 
-unsigned long syscallGetProcessingTime(unsigned int iter)
+unsigned long syscallGetProcessingTime(unsigned int pid)
 {
-	if (scheduler_return_process(iter) != 0) return 0;
-	return scheduler_return_process(iter)->m_processingTime;
+
+	//Iterate untill found the correct PID
+	process_t* iterator = 0;
+	unsigned int number = 0;
+
+	for (;;)
+	{
+		iterator = scheduler_return_process(number);
+
+		if (iterator == 0) return 0;
+		if (iterator->m_ID == pid) break;
+
+		number = number + 1;
+	}
+
+	//Return the processing time
+	return iterator->m_processingTime;
 }
 
-void syscallGetName(char* StrLocation, unsigned int iter)
-{
-	if (scheduler_return_process(iter) != 0) return;
-	
-	strcpy(StrLocation, scheduler_return_process(iter)->m_Name);
+void syscallGetName(char* StrLocation, unsigned int pid)
+{	
+	//Iterate untill found the correct PID
+	process_t* iterator = 0;
+	unsigned int number = 0;
+
+	for (;;)
+	{
+		iterator = scheduler_return_process(number);
+
+		if (iterator == 0)
+		{
+			strcpy(StrLocation, "Unknown");
+			return;
+		}
+		if (iterator->m_ID == pid) break;
+
+		number = number + 1;
+	}
+
+	//Copy the name into the StrLocation
+	strcpy(StrLocation, iterator->m_Name);
 }
 
 void syscallKillCurrentProcess()

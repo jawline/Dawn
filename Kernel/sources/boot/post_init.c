@@ -70,39 +70,9 @@ void postInitialization()
 
     } else
     {
+	    switchToUserMode();
+	    for (;;) { }
 
-
-	    printf("Performing memory tests\n");
-
-            unsigned long FreeFrames = calculate_free_frames();
-
-	    int i = kfork();
-
-	    if (i == 0)
-	    {
-		printf("Parent\n");
-		enable_interrupts();
-		for (;;) {// if (alive == 0) { } else 
-				//{
-					//unsigned long AtEnd = calculate_free_frames();
-					//printf("Before %i After %i\n", FreeFrames, AtEnd);
-				//}
-		}
-	    }
-	    else
-	    {
-		printf("Child\n");
-
-		alive = 1;
-
-		//Call syscall 13 triggers kill this process
-		MEM_LOC num = 15;
-		MEM_LOC a;
-		asm volatile("int $127" : "=a" (a) : "0" (num));	
-		for (;;) {}
-	    }
-
-	/*
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal
@@ -147,7 +117,7 @@ void postInitialization()
 
 	    //Just a simple protection in case for some reason the
 	    //processor continues executing down this code path
-            for (;;) {} */
+            for (;;) {}
     }
 
     for (;;) { }

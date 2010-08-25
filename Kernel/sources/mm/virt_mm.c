@@ -55,6 +55,7 @@ void page_fault (idt_call_registers_t regs)
 	int mapping = getMapping(faulting_address, 0);
 
 	printf("Error - Page fault in process %i at location 0x%x ( present: %i write: %i us: %i reserved %i: instr: %i mapping: %i) process forced to exit\n", get_current_process()->m_ID, faulting_address, present, rw, us, reserved, id, mapping);
+
 	scheduler_kill_current_process();
   }
   else

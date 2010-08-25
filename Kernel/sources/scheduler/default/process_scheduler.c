@@ -176,7 +176,7 @@ void scheduler_kill_current_process()
 
 	for (;;)
 	{
-		scheduler_block_me();
+		scheduler_on_tick(); //Fake ticks untill the next process is brought into context. Next time this process is handled by the scheduler it will be sent to /dev/null
 	}
 }
 

@@ -25,6 +25,7 @@ uint32* page_tables = (uint32*) PAGE_TABLE_VIRTUAL_ADDR;
 
 POINTER kernelFirstFreeVirtualAddress();
 char getMapping (MEM_LOC va, MEM_LOC *pa);
+char getPageEntry (MEM_LOC va, MEM_LOC *pa);
 
 unsigned int PAGE_SIZE = 4096;
 
@@ -34,8 +35,6 @@ extern process_t* get_current_process();
 
 void page_fault (idt_call_registers_t regs)
 {
-  if (get_current_process() != initializeKernelProcess() /* Returns the kproc if already initialized */ )
-  {
 	int present   = (regs.err_code & 0x1); // Page not present
 	int rw = regs.err_code & 0x2;           // Write operation?
 	if (rw == 0x2) rw = 1;
@@ -54,111 +53,63 @@ void page_fault (idt_call_registers_t regs)
 
 	int mapping = getMapping(faulting_address, 0);
 
-	printf("Error - Page fault in process %i at location 0x%x ( present: %i write: %i us: %i reserved %i: instr: %i mapping: %i) process forced to exit\n", get_current_process()->m_ID, faulting_address, present, rw, us, reserved, id, mapping);
+	printf("Error - Page fault in process %i at location 0x%x ( present: %i write: %i us: %i reserved: %i instr: %i mapping: %i) process forced to exit\n", get_current_process()->m_ID, faulting_address, present, rw, us, reserved, id, mapping);
 
-	scheduler_kill_current_process();
-  }
-  else
-  {
-	  cls();
-	  printf("--------------------------------------------------------------------------------");
-	  printf("|  W        W       OO         OO        OO       PPPPPP   SSSSSSS  YY     YY  |");
-	  printf("|  W        W     OO  OO     OO  OO    OO  OO     P    P   S         YY   YY   |");
-	  printf("|  W        W    O      O   O      O  O      O    P    P   S          YY YY    |");
-	  printf("|  W   WW   W    O      O   O      O  O      O    PPPPPP   S           YYY     |");
-	  printf("|  W  W  W  W    O      O   O      O  O      O    P        SSSSSSS      Y      |");
-	  printf("|  W W    W W    O      O   O      O  O      O    P              S      Y      |");
-	  printf("|  WW      WW     OO  OO     OO  OO    OO  OO     P              S      Y      |");
-	  printf("|  W        W       OO         OO        OO       P        SSSSSSS      Y      |");
-	  printf("--------------------------------------------------------------------------------");
+	MEM_LOC FullMap;
+	getPageEntry(faulting_address, &FullMap);
 
-	  uint32 faulting_address;
-	  asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
+	printf("PAGE_PRESENT: %i\n", FullMap & PAGE_PRESENT);
+	printf("PAGE_USER: %i\n", FullMap & PAGE_USER);
+	printf("PAGE_WRITE: %i\n", FullMap & PAGE_WRITE);
 
-	  printf("| The kernel has crashed. The reason was a paging fault.                       |");
-	  printf("| below are the details                                                        |");
-	  printf("| current page directory location 0x%x", current_pagedir);
-	  kmovecx(79);
-	  printf("|");
-	 
-	  if (current_pagedir == kernel_pagedir)
-	  {
-	  	printf("| Current page directory = Kernel page directory                               |");
-	  }
-	  else
-	  {
-	  	printf("| Current page directory != Kernel page directory                              |");
-	  }
+	MEM_LOC cr3val = 0;
+	asm volatile("mov %%cr3, %0" : "=r" (cr3val));
 
-	  printf("|                                                                              |");
-	  printf("|                                                                              |");
-	  printf("| Page fault at location 0x%x", faulting_address);
-	  kmovecx(79);
-	  printf("|");
-	  
+	printf("Current Pagedir 0x%x\nKernel Pagedir 0x%x\nCR3 0x%x\n", current_pagedir, kernel_pagedir, cr3val);
 
-	  int present   = (regs.err_code & 0x1); // Page not present
-	  int rw = regs.err_code & 0x2;           // Write operation?
-	  int us = regs.err_code & 0x4;           // Processor was in user-mode?
-	  int reserved = regs.err_code & 0x8;     // Overwritten CPU-reserved bits of page entry?
-	  int id = regs.err_code & 0x10;          // Caused by an instruction fetch?
+	if (rw == 0 && us == 0 && present == 0)
+	{
+		printf("Kernel tried to access a non present page entry\n");
+	}
+	else if (rw == 0 && us == 0 && present == 1)
+	{
+		printf("Kernel tried to read a page and caused a protection fault\n");
+	}
+	else if (rw == 1 && us == 0 && present == 0)
+	{
+		printf("Kernel tried to write to a non-existant page and caused a protection fault\n");
+	}
+	else if (rw == 1 && us == 0 && present == 1)
+	{
+		printf("Kernel tried to write to a non-writable page and caused a protection fault\n");
+	}
+	else if (rw == 0 && us == 1 && present == 0)
+	{
+		printf("User mode process tried to access a non present page entry\n");
+	}
+	else if (rw == 0 && us == 1 && present == 1)
+	{
+		printf("User mode process tried to read a page and caused a protection fault\n");
+	}
+	else if (rw == 1 && us == 1 && present == 0)
+	{
+		printf("User mode process tried to write to a non-existant page and caused a protection fault\n");
+	}
+	else if (rw == 1 && us == 1 && present == 1)
+	{
+		printf("User mode process tried to write to a non-writable page and caused a protection fault\n");
+	}
 
-	  if (present) 
-	  {
-	  	printf("| PAGE PRESENT                                                                 |");
-	  } 
-	  else 
-	  {
-	  	printf("| PAGE NOT PRESENT                                                             |");
-	  }
-	  
-	  if (rw)
-	  {
-		printf("| WRITE OPERATION                                                              |");
-	  }
-	  else
-	  {
-	  	printf("| READ OPERATION                                                               |");
-	  }
+	if (current_pagedir != kernel_pagedir)
+		scheduler_kill_current_process();
 
-	  if (us)
-	  {
-	  	printf("| USER MODE FAULT                                                              |");
-	  }
-	  else
-	  {
-	  	printf("| KERNEL MODE FAULT                                                            |");
-	  }
 
-	  if (reserved) 
-	  {
-	 	printf("| RESERVED MEMORY OVERWRITE                                                    |");
-	  }
-	  else
-	  {
-	  	printf("| NOT RESERVED MEMORY OVERWRITE                                                |");
-	  }
-
-	  if (id)
-	  {
-	 	printf("| INSTRUCTION FETCH                                                            |");
-	  }
-	  else
-	  {
-		printf("| NOT INSTRUCTION FETCH                                                        |");
-	  }
-
-	  printf("--------------------------------------------------------------------------------");
-
-	  PANIC("Page Fault!");
-  }
-
-  for (;;) ;
+  for (;;);
 }
 
 //Map the virtual address VA to the physical address PA with the appropriate flags.
 //VA = Virtual Address, PA = Physical Address, Flags = The flags to be set with the page.
-void map (POINTER va, POINTER pa, uint32 flags)
+void map (MEM_LOC va,MEM_LOC pa, uint32 flags)
 {
   MEM_LOC virtual_page = (MEM_LOC)(((MEM_LOC)va) / 0x1000);
   PAGE_INDEX pt_idx = PAGE_DIR_IDX(virtual_page); //Page table index
@@ -169,7 +120,7 @@ void map (POINTER va, POINTER pa, uint32 flags)
   {
 
     //Null page table (Needs to be created) so allocate a frame and initialize (Null) it.
-    page_directory[pt_idx] = (allocateFrame()) | PAGE_PRESENT | PAGE_WRITE;
+    page_directory[pt_idx] = (allocateFrame()) | PAGE_PRESENT | PAGE_USER | PAGE_WRITE;
     
     //Reload the CR3 register to update virtual mappings
     ReloadCR3();
@@ -183,7 +134,8 @@ void map (POINTER va, POINTER pa, uint32 flags)
   }
 
   // Now that the page table definately exists, we can update the PTE.
-  page_tables[(MEM_LOC)virtual_page] = (((MEM_LOC)pa)) | flags;
+  page_tables[(MEM_LOC)virtual_page] = (((MEM_LOC)pa)) | (flags & 0xFFF);
+ 
   __flush_tlb_single(va);
 }
 
@@ -218,6 +170,25 @@ char getMapping (MEM_LOC va, MEM_LOC *pa)
   return 0;
 }
 
+//Get Page entry
+char getPageEntry (MEM_LOC va, MEM_LOC *pa)
+{
+  uint32 virtual_page = va / 0x1000;
+  uint32 pt_idx = PAGE_DIR_IDX(virtual_page);
+
+  // Find the appropriate page table for 'va'.
+  if (page_directory[pt_idx] == 0)
+    return 0;
+
+  if (page_tables[virtual_page] != 0)
+  {
+    if (pa) *pa = page_tables[virtual_page];
+    return 1;
+  }
+
+  return 0;
+}
+
 
 inline void switchPageDirectory (page_directory_t * nd)
 {
@@ -232,7 +203,7 @@ inline void startPaging()
   asm volatile ("mov %%cr0, %0" : "=r" (cr0)); //Get the current value of cr0
 
   cr0 |= 0x80000000; //Bitwise or
-
+ 
   asm volatile ("mov %0, %%cr0" : : "r" (cr0)); //Set the value of cr0 to the new desired value
 }
 
@@ -259,7 +230,7 @@ void identityMapPages(page_directory_t* pagedir)
 {
 	//Map a page at the end of used memory
 	MEM_LOC frame = allocateFrame();
-	pagedir[0] = frame | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
+	pagedir[0] = frame | PAGE_PRESENT | PAGE_USER;
 
 	//Create a pointer to the new page table
 	LPOINTER pt = (POINTER) frame; //Pointer to the page directory
@@ -268,7 +239,7 @@ void identityMapPages(page_directory_t* pagedir)
 	unsigned int i = 0;
 	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
 	{
-		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;	
+		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_USER;	
 	}
 
 	//Set the KERNEL_START address to the pagedir address
@@ -292,14 +263,14 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 
 	// Assign the second-last table and zero it.
 	MEM_LOC frame = allocateFrame(); //Allocate a 4KB frame
-	pagedir[1022] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Set the 1022nd page table to the new frame address
+	pagedir[1022] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //Set the 1022nd page table to the new frame address
 
 	LPOINTER pt = (POINTER) frame; //Pointer to the new frame
 	memset (pt, 0, PAGE_SIZE); //Null the frame
 
-	pt[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory. So when paging is active PAGE_DIR_VIRTUAL_ADDR = the page directory
+	pt[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //The last entry of table 1022 is the page directory. So when paging is active PAGE_DIR_VIRTUAL_ADDR = the page directory
 
-	pagedir[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Loop back to the page directory. Causing page_tables to link back to the phyical page tables
+	pagedir[1023] = ((MEM_LOC)pagedir & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //Loop back to the page directory. Causing page_tables to link back to the phyical page tables
 
 	switchPageDirectory(pagedir); //Set the current page dirm
 
@@ -311,7 +282,7 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	uint32 pt_idx = PAGE_DIR_IDX((PHYS_MM_STACK_ADDR / 0x1000));
 
 	frame = allocateFrame(); //Allocate a frame for the page table
-	page_directory[pt_idx] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
+	page_directory[pt_idx] = (frame & PAGE_MASK) | PAGE_PRESENT | PAGE_USER;
 
 	//Nulll it
 	memset((POINTER)frame, 0, PAGE_SIZE);
@@ -323,7 +294,7 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	{
 		if (page_directory[i] == 0) {
 			MEM_LOC address = allocateFrame();
-			page_directory[i] = (address & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE;
+			page_directory[i] = (address & PAGE_MASK) | PAGE_PRESENT | PAGE_USER;
 			ReloadCR3();
 		}
 	}
@@ -334,10 +305,10 @@ MEM_LOC copyPage(MEM_LOC pt, process_t* process)
 	MEM_LOC new_page_addr = allocateFrameForProcess(process);
 
 	POINTER temp_read_addr = kernelFirstFreeVirtualAddress();
-	map(temp_read_addr, (POINTER) pt, PAGE_PRESENT | PAGE_WRITE);
+	map(temp_read_addr, (POINTER) pt, PAGE_PRESENT | PAGE_USER);
 
 	POINTER temp_write_addr = kernelFirstFreeVirtualAddress();
-	map(temp_write_addr, (POINTER) new_page_addr, PAGE_PRESENT | PAGE_WRITE);
+	map(temp_write_addr, (POINTER) new_page_addr, PAGE_PRESENT | PAGE_USER);
 
 	memcpy(temp_write_addr, temp_read_addr, PAGE_SIZE);
 
@@ -352,11 +323,13 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 	MEM_LOC new_page_table = allocateFrameForProcess(process);
 
 	LPOINTER temp_read_addr = kernelFirstFreeVirtualAddress();
-	map(temp_read_addr, pt, PAGE_PRESENT | PAGE_WRITE);
+	map(temp_read_addr, pt, PAGE_PRESENT | PAGE_USER);
 
 	LPOINTER temp_write_addr = kernelFirstFreeVirtualAddress();
-	map(temp_write_addr, new_page_table, PAGE_PRESENT | PAGE_WRITE);
+	map(temp_write_addr, new_page_table, PAGE_PRESENT | PAGE_USER);
 	memset(temp_write_addr, 0, PAGE_SIZE);	
+
+
 	
 	unsigned int i = 0;
 	for (i = 0; i < 1024; i++)
@@ -366,7 +339,7 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 			if (copy == 1)
 			{
 				MEM_LOC New_Frame = copyPage(temp_read_addr[i], process);
-				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_WRITE | PAGE_USER;
+				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_USER | PAGE_WRITE;
 			}
 			else
 			{
@@ -381,7 +354,7 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 	}
 
 	unmap(temp_read_addr);
-	unmap(temp_write_addr);
+	unmap(temp_write_addr);	
 
 	return new_page_table;
 }
@@ -393,14 +366,16 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 	page_directory_t* return_location = (page_directory_t*) allocateFrameForProcess(process);
 
 	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
-	map(being_copied, pagedir, PAGE_PRESENT | PAGE_WRITE);
+	map(being_copied, pagedir, PAGE_PRESENT | PAGE_USER);
 
 	LPOINTER copying_to = kernelFirstFreeVirtualAddress();
-	map(copying_to, return_location, PAGE_PRESENT | PAGE_WRITE);
+	map(copying_to, return_location, PAGE_PRESENT | PAGE_USER);
 	memset(copying_to, 0, PAGE_SIZE);
 
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
 	copying_to[0] = being_copied[0];
+
+
 
 	unsigned int i = 0;
 	for (i = 1; i < getTable(KERNEL_START); i++)
@@ -409,8 +384,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 		{
 
 			MEM_LOC Location = copyPageTable(being_copied[i] & PAGE_MASK, 1, process);
-			copying_to[i] = Location | PAGE_PRESENT | PAGE_WRITE;
-
+			copying_to[i] = Location | PAGE_PRESENT | PAGE_USER | PAGE_WRITE;
 		}
 		else
 		{
@@ -423,25 +397,26 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 		copying_to[i] = being_copied[i];
 	}
 
+
 	// Assign the second-last table and zero it.
 	MEM_LOC frame = allocateFrameForProcess(process);
-	copying_to[1022] = frame | PAGE_PRESENT | PAGE_WRITE;
+	copying_to[1022] = frame | PAGE_PRESENT | PAGE_USER;
 
 	LPOINTER pt = kernelFirstFreeVirtualAddress();
-	map(pt, frame, PAGE_PRESENT | PAGE_WRITE);
+	map(pt, frame, PAGE_PRESENT | PAGE_USER);
 	memset (pt, 0, PAGE_SIZE);
 
 	LPOINTER opt = kernelFirstFreeVirtualAddress();
-	map(opt, being_copied[1022], PAGE_PRESENT | PAGE_WRITE);
+	map(opt, being_copied[1022], PAGE_PRESENT | PAGE_USER);
 
 	memcpy(pt, opt, PAGE_SIZE);
 
-	pt[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //The last entry of table 1022 is the page directory
+	pt[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //The last entry of table 1022 is the page directory
 
 	unmap(pt);
 	unmap(opt);
 
-	copying_to[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_WRITE; //Loop back address
+	copying_to[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //Loop back address
 
 	unmap(being_copied);
 	unmap(copying_to);
@@ -452,7 +427,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 void freePageTable(page_directory_t* pt)
 {
 	LPOINTER being_freed = kernelFirstFreeVirtualAddress();
-	map(being_freed, pt, PAGE_PRESENT | PAGE_WRITE);
+	map(being_freed, pt, PAGE_PRESENT | PAGE_USER);
 
 	unsigned int i = 0;
 	for (i = 1; i < getTable(KERNEL_START); i++)
@@ -473,7 +448,7 @@ void freePageDir(page_directory_t* pd)
 	disable_interrupts(); //Disable interrupts
 
 	LPOINTER being_freed = kernelFirstFreeVirtualAddress();
-	map(being_freed, pd, PAGE_PRESENT | PAGE_WRITE);
+	map(being_freed, pd, PAGE_PRESENT | PAGE_USER);
 
 	unsigned int i = 0;
 	for (i = 1; i < getTable(KERNEL_START); i++)

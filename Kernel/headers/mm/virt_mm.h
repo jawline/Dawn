@@ -5,14 +5,17 @@
 #define PAGE_PRESENT   0x1
 #define PAGE_WRITE     0x2
 #define PAGE_USER      0x4
+#define PAGE_WRITETHROUGH 0x8
 
 #define PAGE_DIR_VIRTUAL_ADDR   0xFFBFF000
 #define PAGE_TABLE_VIRTUAL_ADDR 0xFFC00000
-#define PAGE_DIR_IDX(x) ((uint32) x/1024)
-#define PAGE_TABLE_IDX(x) ((uint32) x%1024)
+
+//Macros to find the page directory index and the page table index of a entry
+#define PAGE_DIR_IDX(x) ((MEM_LOC) x / (PAGE_SIZE / sizeof(MEM_LOC)) )
+#define PAGE_TABLE_IDX(x) ((MEM_LOC) x % (PAGE_SIZE / sizeof(MEM_LOC)) )
 
 #define KERNEL_START 0xC0000000
-#define KERNEL_RESERVED_START KERNEL_START + 0x20001000
+#define KERNEL_RESERVED_START KERNEL_START + 0x20000000
 #define KERNEL_MEMORY_END 0xFFFFFFFF
 
 #include <mm/pagedir.h>
@@ -24,7 +27,7 @@ extern unsigned int PAGE_SIZE;
 void init_virt_mm(uint32 val);
 
 void mark_paging_enabled();
-void map (POINTER va, POINTER pa, uint32 flags);
+void map (MEM_LOC va,MEM_LOC pa, uint32 flags);
 void unmap (POINTER va);
 char get_mapping (MEM_LOC va, MEM_LOC* pa);
 page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process);

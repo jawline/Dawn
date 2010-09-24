@@ -8,6 +8,6 @@
 #define LOAD_ERROR_BAD_PLATFORM -6
 #define LOAD_ERROR_BAD_HEAD -7
 
-int loadAndExecuteElf(fs_node_t* Node);
+int loadAndExecuteElf(fs_node_t* Node, unsigned char);
 
 #endif //_LOADER_DEF_H_

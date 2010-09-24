@@ -8,7 +8,7 @@
 
 typedef int (*entry_point) (int argc, void* argv);
 
-int loadAndExecuteElf(fs_node_t* Node)
+int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 {
 	//Load the executable into RAM
 	void* Data = malloc(Node->length);
@@ -53,42 +53,60 @@ int loadAndExecuteElf(fs_node_t* Node)
 
 	//Iterate through every program header
 	unsigned int header_iter = 0;
-	for (header_iter = 0; header_iter < head.e_phnum; header_iter++)
+	for (header_iter = 0; header_iter < head.e_phnum - 1; header_iter++)
 	{
 
 		e32_pheader program_header = parseElfProgramHeader(Data, Node->length, head, header_iter);
 
 		printf("Loaded program head %i. p_type 0x%x p_offset 0x%x v_addr 0x%x p_addr 0x%x p_filesz 0x%x p_memsz 0x%x p_align 0x%x\n", header_iter, program_header.p_type, program_header.p_offset, program_header.p_vaddr, program_header.p_paddr, program_header.p_filesz, program_header.p_memsz, program_header.p_align);
 
+		//If the program header is a loadable object, map it into memory
 		if (program_header.p_type == PT_LOAD)
 		{
-			MEM_LOC v_addr_iter = program_header.p_vaddr;
+			MEM_LOC v_addr_start = program_header.p_vaddr;
+			MEM_LOC v_addr_end = v_addr_start + program_header.p_memsz;
 
-			for (v_addr_iter = program_header.p_vaddr; v_addr_iter <= program_header.p_vaddr + program_header.p_memsz; v_addr_iter += PAGE_SIZE)
+			printf("Mapping memory between 0x%x and 0x%x\n", v_addr_start, v_addr_end);
+
+			MEM_LOC iterator = v_addr_start;
+			
+			while (iterator < v_addr_end)
 			{
-				if (getMapping(v_addr_iter, 0) == 0)
-				{
-					printf("Page not yet mapped\n");
-					map(v_addr_iter, allocateFrame(), PAGE_PRESENT | PAGE_WRITE);
-					printf("Page has been mapped\n");
-				}
-				else
-				{
-					printf("Page already mapped\n");
-				}
+				map(iterator, allocateFrame(), PAGE_PRESENT | PAGE_WRITE | PAGE_USER);
+				printf("Mapped from 0x%x to 0x%x\n", iterator, iterator + PAGE_SIZE);
+				iterator += PAGE_SIZE;
 			}
 
-			memset(program_header.p_vaddr, 0, program_header.p_memsz);
-			memcpy(program_header.p_vaddr, Data + program_header.p_offset, program_header.p_filesz);
-			printf("Copied memory data\n");
+			printf("Done\n");
 		}
 
 	}
+
+	//Load the object blocks that where just mapped
+	for (header_iter = 0; header_iter < head.e_phnum - 1; header_iter++)
+	{
+
+		e32_pheader program_header = parseElfProgramHeader(Data, Node->length, head, header_iter);
+
+		//If the program header is a loadable object, map it into memory
+		if (program_header.p_type == PT_LOAD)
+		{
+			memcpy(program_header.p_vaddr, Data + program_header.p_offset, program_header.p_filesz);
+		}
+
+	}
+
+	printf("Running program\n");
 
 	//This segment of code correlates to its execution
 	int result_from_process = 0;
 
 	entry_point program_entry_ponter = head.e_entry;
+
+	if (usermode == 1)
+	{
+		switchToUserMode();
+	}
 
 	result_from_process = program_entry_ponter(0, 0);
 

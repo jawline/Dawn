@@ -34,7 +34,7 @@ void initializeHeap(heap_t * heap, uint32 address)
 	DEBUG_PRINTX(frame_addr);
 	DEBUG_PRINT("\n");
 
-	map(heap->heap_location, frame_addr, PAGE_PRESENT | PAGE_WRITE);
+	map(heap->heap_location, frame_addr, PAGE_PRESENT | PAGE_USER);
 
 	DEBUG_PRINT("Debug Message: Mapped Heap\n");
 
@@ -97,7 +97,7 @@ uint32 heapAllocateMemory(uint32 size, heap_t* heap)
 			uint32 frame_addr = allocateFrame();
 			uint32 end = ((uint32) ptr) + ptr->size + sizeof(heap_entry_t);
 
-			map(end, frame_addr, PAGE_PRESENT | PAGE_WRITE); //Mapped now! =)
+			map(end, frame_addr, PAGE_PRESENT | PAGE_USER); //Mapped now! =)
 
 			memset(end, 0, 4096);
 			

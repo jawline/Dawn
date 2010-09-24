@@ -2,7 +2,10 @@ Simple OS
 
 Simple OS is a project to create a simple, working x86 operating system.
 
-This is a educational project - not a profesional development. Don't expect perfection
+This is a educational project - not a profesional endeavour. Don't expect perfection
 
-The code is available with no licensing and no warrenty - You can take it and do whatever you like with it with no legal obligations ( Though credits are always appritiated :) )
-and I am not responsible when this code does not work for you.
+The code and other resources in this project are provided as is, with no warranty (Explicit or otherwise).
+
+People are free to use any sections of this project as a reference/base for their own projects,
+however the rights to the project itself and any code directly taken (Copy & Pasted) from it remain
+in the hands of their writer (At this point, unless otherwise stated all Blake Loring)

@@ -18,7 +18,7 @@ int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack point
     	initializeKernel(mboot, 0, stack_ptr);
     #endif
 
-    printf("Dawn - Kernel initialized\n");
+    printf("SimpleOS - Kernel initialized\n");
 
     printf("Kernel Codename: \"%s\" Version: %i.%i.%i\n", KVERSION_CODENAME, KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION);
 

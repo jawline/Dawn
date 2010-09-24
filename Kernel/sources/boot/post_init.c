@@ -13,6 +13,7 @@
 #include <messages/messages.h>
 #include <fs/vfs.h>
 #include "../loaders/elf/parser.h"
+#include "../stack/kstack.h"
 
 extern heap_t kernel_heap;
 extern process_t* get_current_process();
@@ -52,7 +53,7 @@ void postInitialization()
 
     if (result == 0) //Parent
     	{
-
+		
 		//System idle halts the processor between interrupts when it is active. This is to slow the processor, lower memory usage & heat etcetera.
 		//TODO: Give system idle a priority within the scheduler so that the processor spends less time idling when other processes want to be powered
 		enable_interrupts();
@@ -66,24 +67,22 @@ void postInitialization()
 		//Loop and continually halt the processor, this will cause the processor to idle between interrupts
 		for (;;) { 
 			asm volatile("hlt"); 
-		}
+		} 
 
     } else
     {
-	    switchToUserMode();
-	    for (;;) { }
-
+	
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal
-	    terminal_t* m_processTerminal = makeNewTerminal(80, 25);
+	   // terminal_t* m_processTerminal = makeNewTerminal(80, 25);
 
 	    //Set up the new terminals callbacks then bring it into context
-	    setDefaultTerminalCallbacks(m_processTerminal);
-	    setTerminalContext(m_processTerminal);
+	   // setDefaultTerminalCallbacks(m_processTerminal);
+	   // setTerminalContext(m_processTerminal);
 
 	    //Set the current processes terminal to the new terminal
-	    get_current_process()->m_pTerminal = m_processTerminal;
+	   // get_current_process()->m_pTerminal = m_processTerminal;
 
 	    //Rename it to the file name of the program its gohna run
 	    rename_current_process("Line.x");
@@ -98,7 +97,7 @@ void postInitialization()
 	    if (line != 0)
 	    {
 		printf("Found Line.x\n");
-		printf("Line.x returned %i\n", loadAndExecuteElf(line));
+		printf("Line.x returned %i\n", loadAndExecuteElf(line, 1));
 	    } else
 	    {
 		printf("Error Line.x not found\n");
@@ -108,12 +107,7 @@ void postInitialization()
             printf("Reverting back to root console\n");
 
 	    //(Bring it into context)
-	    setTerminalContext(g_kernelTerminal);
-
-	    //Call syscall 13 triggers kill this process
-            MEM_LOC num = 13;
-	    MEM_LOC a;
-	    asm volatile("int $127" : "=a" (a) : "0" (num));
+	   // setTerminalContext(g_kernelTerminal);
 
 	    //Just a simple protection in case for some reason the
 	    //processor continues executing down this code path

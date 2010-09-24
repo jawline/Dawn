@@ -106,7 +106,7 @@ void freeFrame(MEM_LOC frame)
 
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)
 	{
-	    map ((POINTER) phys_mm_smax, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE);
+	    map ((POINTER) phys_mm_smax, (POINTER) frame, PAGE_PRESENT | PAGE_USER);
 	    phys_mm_smax += PAGE_SIZE;
 	
 	}

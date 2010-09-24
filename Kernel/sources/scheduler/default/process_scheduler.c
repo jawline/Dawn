@@ -2,6 +2,7 @@
 #include <panic/panic.h>
 #include <stdlib.h>
 #include <common.h>
+#include "../../stack/kstack.h"
 
 struct process_entry_t
 {
@@ -47,6 +48,8 @@ void scheduler_on_tick()
 		else
 		{
 			process_t* proc = list_current->process_pointer;
+
+			setKernelStack(KERNEL_STACK_START);
 
 			//Swap to the next process
 			list_current = list_current->next;

@@ -19,11 +19,11 @@ stack_t moveStack(MEM_LOC new_start, size_t size, MEM_LOC initial_esp)
 	MEM_LOC end = new_start - size; //The stack expands downwards.
 
 	//This for loop maps new_start to new_start - size with physical memory
-	for (iter = new_start; iter >= end; iter -= 0x1000) 
+	for (iter = new_start; iter >= end; iter -= PAGE_SIZE) 
 	{
-		POINTER frame = allocateFrame(); //Allocate the frame
+		MEM_LOC frame = allocateFrame(); //Allocate the frame
 
-		map((POINTER)iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE | PAGE_USER); //Map it to the virtual address
+		map(iter, (POINTER) frame, PAGE_PRESENT | PAGE_WRITE | PAGE_USER); //Map it to the virtual address
 	}
 
 	stack_t old_stack_pointer = 0; 

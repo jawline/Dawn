@@ -88,7 +88,7 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 
 	while (start_mapping_location < end_mapping_location)
 	{
-		map(start_mapping_location, start_mapping_location, PAGE_PRESENT | PAGE_WRITE);
+		map(start_mapping_location, start_mapping_location, PAGE_PRESENT | PAGE_USER);
 		start_mapping_location += PAGE_SIZE;
 	}
 
@@ -171,8 +171,11 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	//Initialize the PMM and VMM
 	initializeMemoryManagers(mboot_ptr, KERNEL_START, kEndLocation, visual_output);
 
+	initializeGeneralProtectionFaultHandler();
+
+
 	//Move the stack to a nicer location in memory
-	moveStack(KERNEL_STACK_START, KERNEL_STACK_SIZE, initial_esp);
+	moveStack(USER_STACK_START, USER_STACK_SIZE, initial_esp);
 
 	//Interrupts description table
 	initializeIdt(visual_output);
@@ -200,6 +203,16 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	getTerminalInContext()->f_clear(getTerminalInContext());
 
 	DEBUG_PRINT("KTerm Started\n");
+
+	//Map the kernel stack
+	int Frames = KERNEL_STACK_SIZE / PAGE_SIZE;
+
+	MEM_LOC iterator;
+	for (iterator = KERNEL_STACK_START - PAGE_SIZE; iterator >= KERNEL_STACK_START - KERNEL_STACK_SIZE; iterator -= PAGE_SIZE)
+	{
+		MEM_LOC page = allocateFrame();
+		map(iterator, page, PAGE_PRESENT | PAGE_USER | PAGE_WRITE);
+	}
 
 	//Initialize the system call interface
 	kernelInitializeSyscalls();

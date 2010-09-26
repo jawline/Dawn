@@ -7,6 +7,7 @@
 #include <debug/debug.h>
 #include <types/memory.h>
 #include <process/process.h>
+#include <process/procfault.h>
 
 #define ReloadCR3() \
       __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
@@ -53,55 +54,12 @@ void page_fault (idt_call_registers_t regs)
 
 	int mapping = getMapping(faulting_address, 0);
 
-	printf("Error - Page fault in process %i at location 0x%x ( present: %i write: %i us: %i reserved: %i instr: %i mapping: %i) process forced to exit\n", get_current_process()->m_ID, faulting_address, present, rw, us, reserved, id, mapping);
+	char Buffer[1024];
+	memset(Buffer, 0, 1024);
 
-	MEM_LOC FullMap;
-	getPageEntry(faulting_address, &FullMap);
+	printFormattedStringToBuffer(Buffer, "Page fault at location 0x%x (present: %i write: %i us: %i reserved: %i instr: %i mapping: %i)", faulting_address, present, rw, us, reserved, id, mapping);
 
-	printf("PAGE_PRESENT: %i\n", FullMap & PAGE_PRESENT);
-	printf("PAGE_USER: %i\n", FullMap & PAGE_USER);
-	printf("PAGE_WRITE: %i\n", FullMap & PAGE_WRITE);
-
-	MEM_LOC cr3val = 0;
-	asm volatile("mov %%cr3, %0" : "=r" (cr3val));
-
-	printf("Current Pagedir 0x%x\nKernel Pagedir 0x%x\nCR3 0x%x\n", current_pagedir, kernel_pagedir, cr3val);
-
-	if (rw == 0 && us == 0 && present == 0)
-	{
-		printf("Kernel tried to access a non present page entry\n");
-	}
-	else if (rw == 0 && us == 0 && present == 1)
-	{
-		printf("Kernel tried to read a page and caused a protection fault\n");
-	}
-	else if (rw == 1 && us == 0 && present == 0)
-	{
-		printf("Kernel tried to write to a non-existant page and caused a protection fault\n");
-	}
-	else if (rw == 1 && us == 0 && present == 1)
-	{
-		printf("Kernel tried to write to a non-writable page and caused a protection fault\n");
-	}
-	else if (rw == 0 && us == 1 && present == 0)
-	{
-		printf("User mode process tried to access a non present page entry\n");
-	}
-	else if (rw == 0 && us == 1 && present == 1)
-	{
-		printf("User mode process tried to read a page and caused a protection fault\n");
-	}
-	else if (rw == 1 && us == 1 && present == 0)
-	{
-		printf("User mode process tried to write to a non-existant page and caused a protection fault\n");
-	}
-	else if (rw == 1 && us == 1 && present == 1)
-	{
-		printf("User mode process tried to write to a non-writable page and caused a protection fault\n");
-	}
-
-	if (current_pagedir != kernel_pagedir)
-		scheduler_kill_current_process();
+	handleFatalProcessFault(FAULT_ID_PAGEFAULT, Buffer);
 
 
   for (;;);

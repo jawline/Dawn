@@ -73,8 +73,7 @@ static void *syscalls[21] = {
 //Return: idt_call_registers_t with new values of the registers
 //Description: Handles a syscall (Via interrupt 127) and returns a new set of registers
 idt_call_registers_t syscallHandler(idt_call_registers_t regs)
-{  
-     printf("Syscall 0x%x\n", regs.eax); 
+{
 
    // Firstly, check if the requested syscall number is valid.
    // The syscall number is found in EAX.

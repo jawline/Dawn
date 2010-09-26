@@ -1,10 +1,11 @@
+#include <process/procfault.h>
+
 void gpfHandler()
 {
-	printf("General protection fault\n");
-	for (;;) { }
+	handleFatalProcessFault(FAULT_ID_GPF, "A GPF occured");
 }
 
 void initializeGeneralProtectionFaultHandler()
 {
-	register_interrupt_handler (13 , &gpfHandler);	
+	register_interrupt_handler (13 , &gpfHandler);
 }

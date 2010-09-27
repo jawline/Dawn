@@ -86,9 +86,20 @@ struct elf_32_program_header {
 	Elf32_Word p_align;
 } __attribute__((packed));
 
+struct elf_32_info {
+	struct elf_32_header m_mainHeader;
+
+	struct elf_32_section_header* m_sectionHeaders;
+	int m_numSectionHeaders;
+
+	struct elf_32_program_header* m_programHeaders;
+	int m_numProgramHeaders;
+};
+
 
 typedef struct elf_32_header e32_header;
 typedef struct elf_32_section_header e32_sheader;
 typedef struct elf_32_program_header e32_pheader;
+typedef struct elf_32_info e32info;
 
 #endif //_ELF_HEADER_DEF_H_

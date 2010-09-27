@@ -1,34 +1,82 @@
 #include "parser.h"
 #include <stdlib.h>
 
-e32_header parseElfHeader(void* Data, unsigned int Length)
+//NOTE: Assumes the fs_node_t* is available to read
+e32_header parseElfHeader(fs_node_t* File)
 {
 	e32_header Ret;
 	
-	if (Length < sizeof(e32_header))
+	if (File->length < sizeof(e32_header))
 	{
+		//Out of bounds. null the return and then memset to 0
 		memset(&Ret, 0, sizeof(e32_header));
 		return Ret;
 	}
 
-	memcpy(&Ret, Data, sizeof(e32_header));
-
+	if (read_fs(File, 0, sizeof(e32_header), &Ret) != sizeof(e32_header))
+	{
+		//Error reading, null and exit the function
+		memset(&Ret, 0, sizeof(e32_header));
+		return Ret;
+	}
+	
 	return Ret;
 }
 
-e32_pheader parseElfProgramHeader(void* Data, unsigned int Length, e32_header Header, unsigned int number)
+//NOTE: Assumes the fs_node_t* is available to read
+e32_pheader parseElfProgramHeader(fs_node_t* File, e32_header Header, unsigned int number)
 {
-	e32_pheader Ret;
+	e32_pheader headerStruct;
 	MEM_LOC start_loc = Header.e_phoff + (Header.e_phentsize * number);
-	MEM_LOC read_loc = ((MEM_LOC)Data) + start_loc;
 
-	if (Length < start_loc) {
-		memset(&Ret, 0, sizeof(e32_pheader));
+	if (File->length < start_loc) {
+		//Out of bounds. Null the return and then exit the function
+		memset(&headerStruct, 0, sizeof(e32_pheader));
+		return headerStruct;
 	}
 
-	memcpy(&Ret, Data + start_loc, Header.e_phentsize);
+	if (read_fs(File, start_loc, Header.e_phentsize, &headerStruct) != Header.e_phentsize)
+	{
+		//Error reading. Null the return and then exit the function
+		memset(&headerStruct, 0, sizeof(e32_pheader));
+	}
 
-	return Ret;
+	//Return value should equal pointer to the program header structure
+	return headerStruct;
+}
+
+//NOTE: Assumes fs_node_t* is available to readora
+void parseElfFile(e32info* info, fs_node_t* File)
+{
+	//Parse the main header
+	info->m_mainHeader = parseElfHeader(File);
+
+	//Allocate the space for the program headers
+	info->m_programHeaders = (e32_pheader*) malloc(sizeof(e32_pheader) * info->m_mainHeader.e_phnum);
+	info->m_numProgramHeaders = info->m_mainHeader.e_phnum;
+
+	//Iterate through and load each header
+	unsigned int headerIterator;
+	for (headerIterator = 0; headerIterator < info->m_numProgramHeaders; headerIterator++)
+	{
+		info->m_programHeaders[headerIterator] = parseElfProgramHeader(File, info->m_mainHeader, headerIterator);
+	}
+
+	//TODO: Section headers and other bits of the ELF
+
+}
+
+void freeElfFileInfo(e32info* info)
+{
+	if (info->m_programHeaders)
+	{
+		free(info->m_programHeaders);
+	}
+
+	if (info->m_sectionHeaders)
+	{
+		free(info->m_sectionHeaders);
+	}
 }
 
 unsigned char elfHeaderValid(e32_header h)

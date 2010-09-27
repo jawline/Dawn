@@ -7,6 +7,8 @@
 #define LOAD_ERROR_NOT_EXE -5
 #define LOAD_ERROR_BAD_PLATFORM -6
 #define LOAD_ERROR_BAD_HEAD -7
+#define LOAD_ERROR_BAD_LOAD -8
+#define LOAD_ERROR_BAD_MAP -9
 
 int loadAndExecuteElf(fs_node_t* Node, unsigned char);
 

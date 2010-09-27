@@ -75,14 +75,14 @@ void postInitialization()
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal
-	   // terminal_t* m_processTerminal = makeNewTerminal(80, 25);
+	    terminal_t* m_processTerminal = makeNewTerminal(80, 25);
 
 	    //Set up the new terminals callbacks then bring it into context
-	   // setDefaultTerminalCallbacks(m_processTerminal);
-	   // setTerminalContext(m_processTerminal);
+	    setDefaultTerminalCallbacks(m_processTerminal);
+	    setTerminalContext(m_processTerminal);
 
 	    //Set the current processes terminal to the new terminal
-	   // get_current_process()->m_pTerminal = m_processTerminal;
+	    get_current_process()->m_pTerminal = m_processTerminal;
 
 	    //Rename it to the file name of the program its gohna run
 	    rename_current_process("Line.x");

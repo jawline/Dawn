@@ -1,0 +1,100 @@
+\hypertarget{process__scheduler_8h}{
+\section{Kernel/sources/scheduler/default/process\_\-scheduler.h File Reference}
+\label{process__scheduler_8h}\index{Kernel/sources/scheduler/default/process\_\-scheduler.h@{Kernel/sources/scheduler/default/process\_\-scheduler.h}}
+}
+{\ttfamily \#include $<$process/process.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{process__scheduler_8h_a6f93d8691b80cdf6332675294025176e}{\_\-STD\_\-NANO\_\-}~5
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{process__scheduler_8h_a28b6bd393b13f91cc5e6d373e0d1cb6e}{scheduler\_\-init} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$kproc)
+\item 
+void \hyperlink{process__scheduler_8h_a9c89da0f7ec43940de9e285837ab0884}{scheduler\_\-add} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$new\_\-process)
+\item 
+void \hyperlink{process__scheduler_8h_ad27804d90f9798cb34d181e7e9bf8404}{scheduler\_\-remove} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$old\_\-process)
+\item 
+void \hyperlink{process__scheduler_8h_a352be131bf4dd6f8a85ea25f379bf06b}{scheduler\_\-on\_\-tick} ()
+\item 
+void \hyperlink{process__scheduler_8h_a72865d5f7cb7d9eedd0f5dc2f07375b1}{scheduler\_\-global\_\-message} (\hyperlink{structprocess__message}{process\_\-message} msg, unsigned int bit)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{process__scheduler_8h_a6f93d8691b80cdf6332675294025176e}{
+\index{process\_\-scheduler.h@{process\_\-scheduler.h}!\_\-STD\_\-NANO\_\-@{\_\-STD\_\-NANO\_\-}}
+\index{\_\-STD\_\-NANO\_\-@{\_\-STD\_\-NANO\_\-}!process_scheduler.h@{process\_\-scheduler.h}}
+\subsubsection[{\_\-STD\_\-NANO\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-STD\_\-NANO\_\-~5}}
+\label{process__scheduler_8h_a6f93d8691b80cdf6332675294025176e}
+
+
+Definition at line 4 of file process\_\-scheduler.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{process__scheduler_8h_a9c89da0f7ec43940de9e285837ab0884}{
+\index{process\_\-scheduler.h@{process\_\-scheduler.h}!scheduler\_\-add@{scheduler\_\-add}}
+\index{scheduler\_\-add@{scheduler\_\-add}!process_scheduler.h@{process\_\-scheduler.h}}
+\subsubsection[{scheduler\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}void scheduler\_\-add (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ new\_\-process}
+\end{DoxyParamCaption}
+)}}
+\label{process__scheduler_8h_a9c89da0f7ec43940de9e285837ab0884}
+
+
+Definition at line 79 of file process\_\-scheduler.c.
+
+\hypertarget{process__scheduler_8h_a72865d5f7cb7d9eedd0f5dc2f07375b1}{
+\index{process\_\-scheduler.h@{process\_\-scheduler.h}!scheduler\_\-global\_\-message@{scheduler\_\-global\_\-message}}
+\index{scheduler\_\-global\_\-message@{scheduler\_\-global\_\-message}!process_scheduler.h@{process\_\-scheduler.h}}
+\subsubsection[{scheduler\_\-global\_\-message}]{\setlength{\rightskip}{0pt plus 5cm}void scheduler\_\-global\_\-message (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-message}}]{ msg, }
+\item[{unsigned int}]{ bit}
+\end{DoxyParamCaption}
+)}}
+\label{process__scheduler_8h_a72865d5f7cb7d9eedd0f5dc2f07375b1}
+
+
+Definition at line 200 of file process\_\-scheduler.c.
+
+\hypertarget{process__scheduler_8h_a28b6bd393b13f91cc5e6d373e0d1cb6e}{
+\index{process\_\-scheduler.h@{process\_\-scheduler.h}!scheduler\_\-init@{scheduler\_\-init}}
+\index{scheduler\_\-init@{scheduler\_\-init}!process_scheduler.h@{process\_\-scheduler.h}}
+\subsubsection[{scheduler\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void scheduler\_\-init (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ kproc}
+\end{DoxyParamCaption}
+)}}
+\label{process__scheduler_8h_a28b6bd393b13f91cc5e6d373e0d1cb6e}
+\hypertarget{process__scheduler_8h_a352be131bf4dd6f8a85ea25f379bf06b}{
+\index{process\_\-scheduler.h@{process\_\-scheduler.h}!scheduler\_\-on\_\-tick@{scheduler\_\-on\_\-tick}}
+\index{scheduler\_\-on\_\-tick@{scheduler\_\-on\_\-tick}!process_scheduler.h@{process\_\-scheduler.h}}
+\subsubsection[{scheduler\_\-on\_\-tick}]{\setlength{\rightskip}{0pt plus 5cm}void scheduler\_\-on\_\-tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{process__scheduler_8h_a352be131bf4dd6f8a85ea25f379bf06b}
+
+
+Definition at line 37 of file process\_\-scheduler.c.
+
+\hypertarget{process__scheduler_8h_ad27804d90f9798cb34d181e7e9bf8404}{
+\index{process\_\-scheduler.h@{process\_\-scheduler.h}!scheduler\_\-remove@{scheduler\_\-remove}}
+\index{scheduler\_\-remove@{scheduler\_\-remove}!process_scheduler.h@{process\_\-scheduler.h}}
+\subsubsection[{scheduler\_\-remove}]{\setlength{\rightskip}{0pt plus 5cm}void scheduler\_\-remove (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ old\_\-process}
+\end{DoxyParamCaption}
+)}}
+\label{process__scheduler_8h_ad27804d90f9798cb34d181e7e9bf8404}
+
+
+Definition at line 113 of file process\_\-scheduler.c.
+

@@ -5,6 +5,15 @@
 #include <vsprintf.h>
 
 #define printf api_printf
+
+/**
+ * @ingroup Output
+ * 
+ * @brief Formatted print function.
+ * @param const char* fmt, the formatted string. ..., any additional arguments
+ * @return None
+ */
+
 void api_printf(const char* fmt, ...);
 
 #endif //_FORMATTED_PRINT_FUNCTION_DEF_H_

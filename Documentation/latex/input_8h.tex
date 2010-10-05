@@ -1,0 +1,81 @@
+\hypertarget{input_8h}{
+\section{Kernel/headers/input/input.h File Reference}
+\label{input_8h}\index{Kernel/headers/input/input.h@{Kernel/headers/input/input.h}}
+}
+{\ttfamily \#include $<$common.h$>$}\par
+{\ttfamily \#include $<$input/devices.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structinput__listener__structure}{input\_\-listener\_\-structure}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{input_8h_a249f249fa5e8b527ea82b0a7b4257691}{input\_\-listener\_\-callback} )(\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} device, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} main, void $\ast$additional)
+\item 
+typedef struct \hyperlink{structinput__listener__structure}{input\_\-listener\_\-structure} \hyperlink{input_8h_a1589bb91ab32c013944bfe4b3aa1a5ba}{input\_\-listener\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{input_8h_a82beb992a0ba732bba6a56a7a370e02b}{initialize\_\-input} ()
+\item 
+void \hyperlink{input_8h_a45517f0ee9467b7aa077dbe6a2110486}{send\_\-input\_\-message} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} device, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} main, void $\ast$additional)
+\item 
+void \hyperlink{input_8h_abb564e50a0a786aa8970a40a26c5fd4e}{register\_\-input\_\-listener} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} device, \hyperlink{input_8h_a249f249fa5e8b527ea82b0a7b4257691}{input\_\-listener\_\-callback} cb)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{input_8h_a249f249fa5e8b527ea82b0a7b4257691}{
+\index{input.h@{input.h}!input\_\-listener\_\-callback@{input\_\-listener\_\-callback}}
+\index{input\_\-listener\_\-callback@{input\_\-listener\_\-callback}!input.h@{input.h}}
+\subsubsection[{input\_\-listener\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf input\_\-listener\_\-callback})({\bf uint32} device, {\bf uint32} main, void $\ast$additional)}}
+\label{input_8h_a249f249fa5e8b527ea82b0a7b4257691}
+
+
+Definition at line 12 of file input.h.
+
+\hypertarget{input_8h_a1589bb91ab32c013944bfe4b3aa1a5ba}{
+\index{input.h@{input.h}!input\_\-listener\_\-t@{input\_\-listener\_\-t}}
+\index{input\_\-listener\_\-t@{input\_\-listener\_\-t}!input.h@{input.h}}
+\subsubsection[{input\_\-listener\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf input\_\-listener\_\-structure} {\bf input\_\-listener\_\-t}}}
+\label{input_8h_a1589bb91ab32c013944bfe4b3aa1a5ba}
+
+
+Definition at line 21 of file input.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{input_8h_a82beb992a0ba732bba6a56a7a370e02b}{
+\index{input.h@{input.h}!initialize\_\-input@{initialize\_\-input}}
+\index{initialize\_\-input@{initialize\_\-input}!input.h@{input.h}}
+\subsubsection[{initialize\_\-input}]{\setlength{\rightskip}{0pt plus 5cm}void initialize\_\-input (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{input_8h_a82beb992a0ba732bba6a56a7a370e02b}
+\hypertarget{input_8h_abb564e50a0a786aa8970a40a26c5fd4e}{
+\index{input.h@{input.h}!register\_\-input\_\-listener@{register\_\-input\_\-listener}}
+\index{register\_\-input\_\-listener@{register\_\-input\_\-listener}!input.h@{input.h}}
+\subsubsection[{register\_\-input\_\-listener}]{\setlength{\rightskip}{0pt plus 5cm}void register\_\-input\_\-listener (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ device, }
+\item[{{\bf input\_\-listener\_\-callback}}]{ cb}
+\end{DoxyParamCaption}
+)}}
+\label{input_8h_abb564e50a0a786aa8970a40a26c5fd4e}
+\hypertarget{input_8h_a45517f0ee9467b7aa077dbe6a2110486}{
+\index{input.h@{input.h}!send\_\-input\_\-message@{send\_\-input\_\-message}}
+\index{send\_\-input\_\-message@{send\_\-input\_\-message}!input.h@{input.h}}
+\subsubsection[{send\_\-input\_\-message}]{\setlength{\rightskip}{0pt plus 5cm}void send\_\-input\_\-message (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ device, }
+\item[{{\bf uint32}}]{ main, }
+\item[{void $\ast$}]{ additional}
+\end{DoxyParamCaption}
+)}}
+\label{input_8h_a45517f0ee9467b7aa077dbe6a2110486}

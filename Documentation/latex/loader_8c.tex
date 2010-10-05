@@ -1,0 +1,80 @@
+\hypertarget{loader_8c}{
+\section{Kernel/sources/loaders/elf/loader.c File Reference}
+\label{loader_8c}\index{Kernel/sources/loaders/elf/loader.c@{Kernel/sources/loaders/elf/loader.c}}
+}
+{\ttfamily \#include \char`\"{}loader.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}parser.h\char`\"{}}\par
+{\ttfamily \#include $<$mm/virt\_\-mm.h$>$}\par
+{\ttfamily \#include $<$types/int\_\-types.h$>$}\par
+{\ttfamily \#include $<$types/memory.h$>$}\par
+{\ttfamily \#include $<$panic/panic.h$>$}\par
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ \hyperlink{loader_8c_a548b0ceff2c7d3c3b657cfe0d4666f1a}{entry\_\-point} )(int argc, void $\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned char \hyperlink{loader_8c_ae03e89ce9219a91724d063dcfb236d9c}{mapMemoryUsingHeader} (\hyperlink{structelf__32__program__header}{e32\_\-pheader} program\_\-header)
+\item 
+unsigned char \hyperlink{loader_8c_a064b5e03c8acc63c917823be362d5474}{loadToMemoryUsingHeader} (\hyperlink{structelf__32__program__header}{e32\_\-pheader} program\_\-header, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$Node)
+\item 
+int \hyperlink{loader_8c_a5c44c0aac1ca51f6cc551082962dfe2d}{loadAndExecuteElf} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$Node, unsigned char usermode)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{loader_8c_a548b0ceff2c7d3c3b657cfe0d4666f1a}{
+\index{loader.c@{loader.c}!entry\_\-point@{entry\_\-point}}
+\index{entry\_\-point@{entry\_\-point}!loader.c@{loader.c}}
+\subsubsection[{entry\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ {\bf entry\_\-point})(int argc, void $\ast$argv)}}
+\label{loader_8c_a548b0ceff2c7d3c3b657cfe0d4666f1a}
+
+
+Definition at line 9 of file loader.c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{loader_8c_a5c44c0aac1ca51f6cc551082962dfe2d}{
+\index{loader.c@{loader.c}!loadAndExecuteElf@{loadAndExecuteElf}}
+\index{loadAndExecuteElf@{loadAndExecuteElf}!loader.c@{loader.c}}
+\subsubsection[{loadAndExecuteElf}]{\setlength{\rightskip}{0pt plus 5cm}int loadAndExecuteElf (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ Node, }
+\item[{unsigned char}]{ usermode}
+\end{DoxyParamCaption}
+)}}
+\label{loader_8c_a5c44c0aac1ca51f6cc551082962dfe2d}
+
+
+Definition at line 57 of file loader.c.
+
+\hypertarget{loader_8c_a064b5e03c8acc63c917823be362d5474}{
+\index{loader.c@{loader.c}!loadToMemoryUsingHeader@{loadToMemoryUsingHeader}}
+\index{loadToMemoryUsingHeader@{loadToMemoryUsingHeader}!loader.c@{loader.c}}
+\subsubsection[{loadToMemoryUsingHeader}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char loadToMemoryUsingHeader (
+\begin{DoxyParamCaption}
+\item[{{\bf e32\_\-pheader}}]{ program\_\-header, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ Node}
+\end{DoxyParamCaption}
+)}}
+\label{loader_8c_a064b5e03c8acc63c917823be362d5474}
+
+
+Definition at line 41 of file loader.c.
+
+\hypertarget{loader_8c_ae03e89ce9219a91724d063dcfb236d9c}{
+\index{loader.c@{loader.c}!mapMemoryUsingHeader@{mapMemoryUsingHeader}}
+\index{mapMemoryUsingHeader@{mapMemoryUsingHeader}!loader.c@{loader.c}}
+\subsubsection[{mapMemoryUsingHeader}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char mapMemoryUsingHeader (
+\begin{DoxyParamCaption}
+\item[{{\bf e32\_\-pheader}}]{ program\_\-header}
+\end{DoxyParamCaption}
+)}}
+\label{loader_8c_ae03e89ce9219a91724d063dcfb236d9c}
+
+
+Definition at line 11 of file loader.c.
+

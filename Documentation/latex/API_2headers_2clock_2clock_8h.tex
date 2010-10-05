@@ -1,0 +1,61 @@
+\hypertarget{API_2headers_2clock_2clock_8h}{
+\section{API/headers/clock/clock.h File Reference}
+\label{API_2headers_2clock_2clock_8h}\index{API/headers/clock/clock.h@{API/headers/clock/clock.h}}
+}
+{\ttfamily \#include $<$syscall/syscall.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long \hyperlink{API_2headers_2clock_2clock_8h_a64751aebe7bbfb0a75d1a44df9f5c3d5}{clock} ()
+\begin{DoxyCompactList}\small\item\em This function returns the number of ticks taht have occured since the system booted. \item\end{DoxyCompactList}\item 
+unsigned long \hyperlink{API_2headers_2clock_2clock_8h_a66ca6603e03e5f37298c7767d887641d}{getClocksPerSecond} ()
+\begin{DoxyCompactList}\small\item\em This function returns the number of ticks that occur every second. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{API_2headers_2clock_2clock_8h_a64751aebe7bbfb0a75d1a44df9f5c3d5}{
+\index{API/headers/clock/clock.h@{API/headers/clock/clock.h}!clock@{clock}}
+\index{clock@{clock}!API/headers/clock/clock.h@{API/headers/clock/clock.h}}
+\subsubsection[{clock}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{API_2headers_2clock_2clock_8h_a64751aebe7bbfb0a75d1a44df9f5c3d5}
+
+
+This function returns the number of ticks taht have occured since the system booted. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned long with the value of the number of system ticks that have occured since the PIT was initialized 
+\end{DoxyReturn}
+
+
+Definition at line 11 of file clock.c.
+
+\hypertarget{API_2headers_2clock_2clock_8h_a66ca6603e03e5f37298c7767d887641d}{
+\index{API/headers/clock/clock.h@{API/headers/clock/clock.h}!getClocksPerSecond@{getClocksPerSecond}}
+\index{getClocksPerSecond@{getClocksPerSecond}!API/headers/clock/clock.h@{API/headers/clock/clock.h}}
+\subsubsection[{getClocksPerSecond}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long getClocksPerSecond (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{API_2headers_2clock_2clock_8h_a66ca6603e03e5f37298c7767d887641d}
+
+
+This function returns the number of ticks that occur every second. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned long with the value of the number of ticks that occur per second. 
+\end{DoxyReturn}
+
+
+Definition at line 6 of file clock.c.
+

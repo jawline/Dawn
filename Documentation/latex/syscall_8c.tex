@@ -1,0 +1,447 @@
+\hypertarget{syscall_8c}{
+\section{Kernel/sources/syscall/syscall.c File Reference}
+\label{syscall_8c}\index{Kernel/sources/syscall/syscall.c@{Kernel/sources/syscall/syscall.c}}
+}
+{\ttfamily \#include \char`\"{}syscall.h\char`\"{}}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include \char`\"{}../scheduler/default/process\_\-scheduler.h\char`\"{}}\par
+{\ttfamily \#include $<$heap/heap.h$>$}\par
+{\ttfamily \#include $<$panic/panic.h$>$}\par
+{\ttfamily \#include $<$mm/virt\_\-mm.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structprocess__structure}{process\_\-t} $\ast$ \hyperlink{syscall_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973}{get\_\-current\_\-process} ()
+\item 
+MEM\_\-LOC \hyperlink{syscall_8c_a0e03a277bc469b763ccae6a218306ce4}{calculate\_\-free\_\-frames} ()
+\item 
+unsigned char \hyperlink{syscall_8c_ab88f67de56ab20fd05b26a8c242ef6dd}{postboxHasNext} ()
+\begin{DoxyCompactList}\small\item\em This function returns true if the application postbox has data waiting to be read. \item\end{DoxyCompactList}\item 
+void \hyperlink{syscall_8c_aead17db7d001bbfc192a381d07236367}{postboxReadTop} (\hyperlink{structprocess__message}{process\_\-message} $\ast$Message)
+\item 
+void \hyperlink{syscall_8c_a42d52743f176f73c3dbffdbc23ca1d26}{postboxPopTop} ()
+\item 
+void \hyperlink{syscall_8c_a74a39431e16777a0322dbdfee1e3590d}{postboxSetFlags} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} bit)
+\begin{DoxyCompactList}\small\item\em This allows the process to set the flags of what it wants to recieve in the kernel as postbox messages. \item\end{DoxyCompactList}\item 
+void \hyperlink{syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4}{syscallKillCurrentProcess} ()
+\item 
+unsigned char \hyperlink{syscall_8c_a0561f60d0b6000eae55ea70554934c0a}{syscallProcessValid} (unsigned int iter)
+\item 
+unsigned int \hyperlink{syscall_8c_aeeca4adac17a030ae9d3c06a6d0f13a1}{syscallGetPid} (unsigned int iter)
+\item 
+unsigned long \hyperlink{syscall_8c_a8d549de96ebe133f7fbc859c3c774b0c}{syscallGetProcessingTime} (unsigned int iter)
+\item 
+void \hyperlink{syscall_8c_a03945431d175dd5183b0540ec4ee7a74}{syscallGetName} (char $\ast$StrLocation, unsigned int iter)
+\item 
+char \hyperlink{syscall_8c_ac98394f390a30033b7bceeefcb8daab7}{getKeyMapping} (unsigned char scancode, unsigned long \hyperlink{sources_2interrupts_2idt_8h_acd8859336a5cb8a70051c97a438726a1}{flags})
+\item 
+unsigned int \hyperlink{syscall_8c_af3c564028b2b295d4e93bc4b0d79bae5}{syscallClocksPerSecond} ()
+\item 
+unsigned long \hyperlink{syscall_8c_aa0e1a7df1d7561485e42fb9fbb80f447}{syscallGetSystemUptime} ()
+\item 
+MEM\_\-LOC \hyperlink{syscall_8c_a7bd78b0c20c3a1436108085a91a9e164}{get\_\-page\_\-size} ()
+\item 
+void \hyperlink{syscall_8c_abb34b362d7f71997c9d47199fcedf78b}{syscallRequestReboot} ()
+\item 
+void \hyperlink{syscall_8c_ad3a622baf1a6e09ce69704fad80d9179}{syscallPrint\_\-t} (const char $\ast$Line)
+\item 
+void \hyperlink{syscall_8c_aab274ca82284758b7849abb948a79801}{syscallClearscreen} ()
+\item 
+void \hyperlink{syscall_8c_ace004b1bbaff00c359c440b60acf7005}{syscallSetFgc} (unsigned char fgc)
+\item 
+void \hyperlink{syscall_8c_a716263cfc2bfff32787a1788a06b0638}{syscallSetBgc} (unsigned char bgc)
+\item 
+void \hyperlink{syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4}{scheduler\_\-block\_\-me} ()
+\item 
+\hyperlink{structregisters}{idt\_\-call\_\-registers\_\-t} \hyperlink{syscall_8c_ab42cb8d86310bf97b42f0e1eb13bbe39}{syscallHandler} (\hyperlink{structregisters}{idt\_\-call\_\-registers\_\-t} regs)
+\item 
+void \hyperlink{syscall_8c_a1d86f84d33e9e46b2df9d0f9d3b02c89}{kernelInitializeSyscalls} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structheap__t}{heap\_\-t} \hyperlink{syscall_8c_a41df3a8d6d716e7b2689bc21c233fcfc}{kernel\_\-heap}
+\item 
+unsigned int \hyperlink{syscall_8c_adeb486fdcdd846d007df681c91356579}{num\_\-syscalls} = 21
+\item 
+static void $\ast$ \hyperlink{syscall_8c_a9d219ad280d4031930afec50fe48434c}{syscalls} \mbox{[}21\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{syscall_8c_a0e03a277bc469b763ccae6a218306ce4}{
+\index{syscall.c@{syscall.c}!calculate\_\-free\_\-frames@{calculate\_\-free\_\-frames}}
+\index{calculate\_\-free\_\-frames@{calculate\_\-free\_\-frames}!syscall.c@{syscall.c}}
+\subsubsection[{calculate\_\-free\_\-frames}]{\setlength{\rightskip}{0pt plus 5cm}MEM\_\-LOC calculate\_\-free\_\-frames (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a0e03a277bc469b763ccae6a218306ce4}
+
+
+Definition at line 173 of file phys\_\-mm.c.
+
+\hypertarget{syscall_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973}{
+\index{syscall.c@{syscall.c}!get\_\-current\_\-process@{get\_\-current\_\-process}}
+\index{get\_\-current\_\-process@{get\_\-current\_\-process}!syscall.c@{syscall.c}}
+\subsubsection[{get\_\-current\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-t}$\ast$ get\_\-current\_\-process (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973}
+
+
+Definition at line 167 of file process\_\-scheduler.c.
+
+\hypertarget{syscall_8c_a7bd78b0c20c3a1436108085a91a9e164}{
+\index{syscall.c@{syscall.c}!get\_\-page\_\-size@{get\_\-page\_\-size}}
+\index{get\_\-page\_\-size@{get\_\-page\_\-size}!syscall.c@{syscall.c}}
+\subsubsection[{get\_\-page\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}MEM\_\-LOC get\_\-page\_\-size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a7bd78b0c20c3a1436108085a91a9e164}
+
+
+Definition at line 32 of file syscall.c.
+
+\hypertarget{syscall_8c_ac98394f390a30033b7bceeefcb8daab7}{
+\index{syscall.c@{syscall.c}!getKeyMapping@{getKeyMapping}}
+\index{getKeyMapping@{getKeyMapping}!syscall.c@{syscall.c}}
+\subsubsection[{getKeyMapping}]{\setlength{\rightskip}{0pt plus 5cm}char getKeyMapping (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{ scancode, }
+\item[{unsigned long}]{ flags}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_ac98394f390a30033b7bceeefcb8daab7}
+
+
+Definition at line 24 of file syscall.c.
+
+\hypertarget{syscall_8c_a1d86f84d33e9e46b2df9d0f9d3b02c89}{
+\index{syscall.c@{syscall.c}!kernelInitializeSyscalls@{kernelInitializeSyscalls}}
+\index{kernelInitializeSyscalls@{kernelInitializeSyscalls}!syscall.c@{syscall.c}}
+\subsubsection[{kernelInitializeSyscalls}]{\setlength{\rightskip}{0pt plus 5cm}void kernelInitializeSyscalls (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a1d86f84d33e9e46b2df9d0f9d3b02c89}
+
+
+Definition at line 115 of file syscall.c.
+
+\hypertarget{syscall_8c_ab88f67de56ab20fd05b26a8c242ef6dd}{
+\index{syscall.c@{syscall.c}!postboxHasNext@{postboxHasNext}}
+\index{postboxHasNext@{postboxHasNext}!syscall.c@{syscall.c}}
+\subsubsection[{postboxHasNext}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char postboxHasNext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_ab88f67de56ab20fd05b26a8c242ef6dd}
+
+
+This function returns true if the application postbox has data waiting to be read. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 if false 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file postbox\_\-api.c.
+
+\hypertarget{syscall_8c_a42d52743f176f73c3dbffdbc23ca1d26}{
+\index{syscall.c@{syscall.c}!postboxPopTop@{postboxPopTop}}
+\index{postboxPopTop@{postboxPopTop}!syscall.c@{syscall.c}}
+\subsubsection[{postboxPopTop}]{\setlength{\rightskip}{0pt plus 5cm}void postboxPopTop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a42d52743f176f73c3dbffdbc23ca1d26}
+
+
+Definition at line 25 of file postbox\_\-syscalls.c.
+
+\hypertarget{syscall_8c_aead17db7d001bbfc192a381d07236367}{
+\index{syscall.c@{syscall.c}!postboxReadTop@{postboxReadTop}}
+\index{postboxReadTop@{postboxReadTop}!syscall.c@{syscall.c}}
+\subsubsection[{postboxReadTop}]{\setlength{\rightskip}{0pt plus 5cm}void postboxReadTop (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-message} $\ast$}]{ Message}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_aead17db7d001bbfc192a381d07236367}
+
+
+Definition at line 18 of file postbox\_\-syscalls.c.
+
+\hypertarget{syscall_8c_a74a39431e16777a0322dbdfee1e3590d}{
+\index{syscall.c@{syscall.c}!postboxSetFlags@{postboxSetFlags}}
+\index{postboxSetFlags@{postboxSetFlags}!syscall.c@{syscall.c}}
+\subsubsection[{postboxSetFlags}]{\setlength{\rightskip}{0pt plus 5cm}void postboxSetFlags (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ bit}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a74a39431e16777a0322dbdfee1e3590d}
+
+
+This allows the process to set the flags of what it wants to recieve in the kernel as postbox messages. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em 32-\/bit}]integer used for bitmask. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line 29 of file postbox\_\-api.c.
+
+\hypertarget{syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4}{
+\index{syscall.c@{syscall.c}!scheduler\_\-block\_\-me@{scheduler\_\-block\_\-me}}
+\index{scheduler\_\-block\_\-me@{scheduler\_\-block\_\-me}!syscall.c@{syscall.c}}
+\subsubsection[{scheduler\_\-block\_\-me}]{\setlength{\rightskip}{0pt plus 5cm}void scheduler\_\-block\_\-me (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4}
+
+
+Definition at line 160 of file process\_\-scheduler.c.
+
+\hypertarget{syscall_8c_aab274ca82284758b7849abb948a79801}{
+\index{syscall.c@{syscall.c}!syscallClearscreen@{syscallClearscreen}}
+\index{syscallClearscreen@{syscallClearscreen}!syscall.c@{syscall.c}}
+\subsubsection[{syscallClearscreen}]{\setlength{\rightskip}{0pt plus 5cm}void syscallClearscreen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_aab274ca82284758b7849abb948a79801}
+
+
+Definition at line 21 of file terminal\_\-syscalls.c.
+
+\hypertarget{syscall_8c_af3c564028b2b295d4e93bc4b0d79bae5}{
+\index{syscall.c@{syscall.c}!syscallClocksPerSecond@{syscallClocksPerSecond}}
+\index{syscallClocksPerSecond@{syscallClocksPerSecond}!syscall.c@{syscall.c}}
+\subsubsection[{syscallClocksPerSecond}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int syscallClocksPerSecond (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_af3c564028b2b295d4e93bc4b0d79bae5}
+
+
+Definition at line 3 of file clock\_\-syscalls.c.
+
+\hypertarget{syscall_8c_a03945431d175dd5183b0540ec4ee7a74}{
+\index{syscall.c@{syscall.c}!syscallGetName@{syscallGetName}}
+\index{syscallGetName@{syscallGetName}!syscall.c@{syscall.c}}
+\subsubsection[{syscallGetName}]{\setlength{\rightskip}{0pt plus 5cm}void syscallGetName (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{ StrLocation, }
+\item[{unsigned int}]{ iter}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a03945431d175dd5183b0540ec4ee7a74}
+
+
+Definition at line 53 of file process\_\-syscalls.c.
+
+\hypertarget{syscall_8c_aeeca4adac17a030ae9d3c06a6d0f13a1}{
+\index{syscall.c@{syscall.c}!syscallGetPid@{syscallGetPid}}
+\index{syscallGetPid@{syscallGetPid}!syscall.c@{syscall.c}}
+\subsubsection[{syscallGetPid}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int syscallGetPid (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ iter}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_aeeca4adac17a030ae9d3c06a6d0f13a1}
+
+
+Definition at line 26 of file process\_\-syscalls.c.
+
+\hypertarget{syscall_8c_a8d549de96ebe133f7fbc859c3c774b0c}{
+\index{syscall.c@{syscall.c}!syscallGetProcessingTime@{syscallGetProcessingTime}}
+\index{syscallGetProcessingTime@{syscallGetProcessingTime}!syscall.c@{syscall.c}}
+\subsubsection[{syscallGetProcessingTime}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long syscallGetProcessingTime (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ iter}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a8d549de96ebe133f7fbc859c3c774b0c}
+
+
+Definition at line 32 of file process\_\-syscalls.c.
+
+\hypertarget{syscall_8c_aa0e1a7df1d7561485e42fb9fbb80f447}{
+\index{syscall.c@{syscall.c}!syscallGetSystemUptime@{syscallGetSystemUptime}}
+\index{syscallGetSystemUptime@{syscallGetSystemUptime}!syscall.c@{syscall.c}}
+\subsubsection[{syscallGetSystemUptime}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long syscallGetSystemUptime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_aa0e1a7df1d7561485e42fb9fbb80f447}
+
+
+Definition at line 8 of file clock\_\-syscalls.c.
+
+\hypertarget{syscall_8c_ab42cb8d86310bf97b42f0e1eb13bbe39}{
+\index{syscall.c@{syscall.c}!syscallHandler@{syscallHandler}}
+\index{syscallHandler@{syscallHandler}!syscall.c@{syscall.c}}
+\subsubsection[{syscallHandler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf idt\_\-call\_\-registers\_\-t} syscallHandler (
+\begin{DoxyParamCaption}
+\item[{{\bf idt\_\-call\_\-registers\_\-t}}]{ regs}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_ab42cb8d86310bf97b42f0e1eb13bbe39}
+
+
+Definition at line 75 of file syscall.c.
+
+\hypertarget{syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4}{
+\index{syscall.c@{syscall.c}!syscallKillCurrentProcess@{syscallKillCurrentProcess}}
+\index{syscallKillCurrentProcess@{syscallKillCurrentProcess}!syscall.c@{syscall.c}}
+\subsubsection[{syscallKillCurrentProcess}]{\setlength{\rightskip}{0pt plus 5cm}void syscallKillCurrentProcess (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4}
+
+
+Definition at line 77 of file process\_\-syscalls.c.
+
+\hypertarget{syscall_8c_ad3a622baf1a6e09ce69704fad80d9179}{
+\index{syscall.c@{syscall.c}!syscallPrint\_\-t@{syscallPrint\_\-t}}
+\index{syscallPrint\_\-t@{syscallPrint\_\-t}!syscall.c@{syscall.c}}
+\subsubsection[{syscallPrint\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}void syscallPrint\_\-t (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ Line}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_ad3a622baf1a6e09ce69704fad80d9179}
+
+
+Definition at line 9 of file terminal\_\-syscalls.c.
+
+\hypertarget{syscall_8c_a0561f60d0b6000eae55ea70554934c0a}{
+\index{syscall.c@{syscall.c}!syscallProcessValid@{syscallProcessValid}}
+\index{syscallProcessValid@{syscallProcessValid}!syscall.c@{syscall.c}}
+\subsubsection[{syscallProcessValid}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char syscallProcessValid (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ iter}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a0561f60d0b6000eae55ea70554934c0a}
+
+
+Definition at line 7 of file process\_\-syscalls.c.
+
+\hypertarget{syscall_8c_abb34b362d7f71997c9d47199fcedf78b}{
+\index{syscall.c@{syscall.c}!syscallRequestReboot@{syscallRequestReboot}}
+\index{syscallRequestReboot@{syscallRequestReboot}!syscall.c@{syscall.c}}
+\subsubsection[{syscallRequestReboot}]{\setlength{\rightskip}{0pt plus 5cm}void syscallRequestReboot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_abb34b362d7f71997c9d47199fcedf78b}
+
+
+Definition at line 1 of file system\_\-syscalls.c.
+
+\hypertarget{syscall_8c_a716263cfc2bfff32787a1788a06b0638}{
+\index{syscall.c@{syscall.c}!syscallSetBgc@{syscallSetBgc}}
+\index{syscallSetBgc@{syscallSetBgc}!syscall.c@{syscall.c}}
+\subsubsection[{syscallSetBgc}]{\setlength{\rightskip}{0pt plus 5cm}void syscallSetBgc (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{ bgc}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_a716263cfc2bfff32787a1788a06b0638}
+
+
+Definition at line 37 of file terminal\_\-syscalls.c.
+
+\hypertarget{syscall_8c_ace004b1bbaff00c359c440b60acf7005}{
+\index{syscall.c@{syscall.c}!syscallSetFgc@{syscallSetFgc}}
+\index{syscallSetFgc@{syscallSetFgc}!syscall.c@{syscall.c}}
+\subsubsection[{syscallSetFgc}]{\setlength{\rightskip}{0pt plus 5cm}void syscallSetFgc (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{ fgc}
+\end{DoxyParamCaption}
+)}}
+\label{syscall_8c_ace004b1bbaff00c359c440b60acf7005}
+
+
+Definition at line 29 of file terminal\_\-syscalls.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{syscall_8c_a41df3a8d6d716e7b2689bc21c233fcfc}{
+\index{syscall.c@{syscall.c}!kernel\_\-heap@{kernel\_\-heap}}
+\index{kernel\_\-heap@{kernel\_\-heap}!syscall.c@{syscall.c}}
+\subsubsection[{kernel\_\-heap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf heap\_\-t} {\bf kernel\_\-heap}}}
+\label{syscall_8c_a41df3a8d6d716e7b2689bc21c233fcfc}
+
+
+Definition at line 5 of file kheap.c.
+
+\hypertarget{syscall_8c_adeb486fdcdd846d007df681c91356579}{
+\index{syscall.c@{syscall.c}!num\_\-syscalls@{num\_\-syscalls}}
+\index{num\_\-syscalls@{num\_\-syscalls}!syscall.c@{syscall.c}}
+\subsubsection[{num\_\-syscalls}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf num\_\-syscalls} = 21}}
+\label{syscall_8c_adeb486fdcdd846d007df681c91356579}
+
+
+Definition at line 46 of file syscall.c.
+
+\hypertarget{syscall_8c_a9d219ad280d4031930afec50fe48434c}{
+\index{syscall.c@{syscall.c}!syscalls@{syscalls}}
+\index{syscalls@{syscalls}!syscall.c@{syscall.c}}
+\subsubsection[{syscalls}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ {\bf syscalls}\mbox{[}21\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{syscall_8c_a9d219ad280d4031930afec50fe48434c}
+{\bfseries Initial value:}
+\begin{DoxyCode}
+ {
+   &syscallPrint_t, 
+   &postboxReadTop, 
+   &postboxPopTop, 
+   &postboxHasNext, 
+   &getKeyMapping, 
+   &scheduler_block_me, 
+   &postboxSetFlags, 
+   &calculate_free_frames, 
+   &get_page_size, 
+   &syscallRequestReboot, 
+   &syscallClocksPerSecond, 
+   &syscallGetSystemUptime, 
+   &syscallClearscreen, 
+   &syscallSetFgc, 
+   &syscallSetBgc, 
+   &syscallKillCurrentProcess, 
+   &syscallProcessValid, 
+   &syscallGetPid, 
+   &syscallGetProcessingTime, 
+   &syscallGetName 
+}
+\end{DoxyCode}
+
+
+Definition at line 48 of file syscall.c.
+

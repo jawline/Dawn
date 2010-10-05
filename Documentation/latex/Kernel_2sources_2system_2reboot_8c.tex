@@ -1,0 +1,146 @@
+\hypertarget{Kernel_2sources_2system_2reboot_8c}{
+\section{Kernel/sources/system/reboot.c File Reference}
+\label{Kernel_2sources_2system_2reboot_8c}\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+}
+{\ttfamily \#include $<$system/reboot.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_a056cf0bd7fb9382d24bdf5b881914a70}{KBRD\_\-INTRFC}~0x64
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_a62f49d4e24f3e45f35bd91b43d7aaf77}{KBRD\_\-BIT\_\-KDATA}~0
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_a9b07ba3afc2b2bfe3693a2d1cfe8706d}{KBRD\_\-BIT\_\-UDATA}~1
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_afb3794d9511a56527253dde521c5d364}{KBRD\_\-IO}~0x60
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_a1f57ddf7fd49829f7680cec93fe0faa5}{KBRD\_\-RESET}~0xFE
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_a62fe4f31d7cd6087317744dd800a86c3}{bit}(n)~(1$<$$<$(n))
+\item 
+\#define \hyperlink{Kernel_2sources_2system_2reboot_8c_adb1669dd3d8f6bc8de74621b35a18184}{check\_\-flag}(\hyperlink{sources_2interrupts_2idt_8h_acd8859336a5cb8a70051c97a438726a1}{flags}, n)~((\hyperlink{sources_2interrupts_2idt_8h_acd8859336a5cb8a70051c97a438726a1}{flags}) \& bit(n))
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned char \hyperlink{Kernel_2sources_2system_2reboot_8c_a65f85814a8290f9797005d3b28e7e5fc}{uchar}
+\item 
+typedef \hyperlink{Kernel_2sources_2system_2reboot_8c_a65f85814a8290f9797005d3b28e7e5fc}{uchar} \hyperlink{Kernel_2sources_2system_2reboot_8c_aab03b25460cef90c4f6f7a7facddc00b}{byte}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Kernel_2sources_2system_2reboot_8c_aa3de94f68e5f0824672252a2eb55a9f2}{kernelReboot} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{Kernel_2sources_2system_2reboot_8c_a62fe4f31d7cd6087317744dd800a86c3}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!bit@{bit}}
+\index{bit@{bit}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{bit}]{\setlength{\rightskip}{0pt plus 5cm}\#define bit(
+\begin{DoxyParamCaption}
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(1$<$$<$(n))}}
+\label{Kernel_2sources_2system_2reboot_8c_a62fe4f31d7cd6087317744dd800a86c3}
+
+
+Definition at line 18 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_adb1669dd3d8f6bc8de74621b35a18184}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!check\_\-flag@{check\_\-flag}}
+\index{check\_\-flag@{check\_\-flag}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{check\_\-flag}]{\setlength{\rightskip}{0pt plus 5cm}\#define check\_\-flag(
+\begin{DoxyParamCaption}
+\item[{}]{{\bf flags}, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~(({\bf flags}) \& bit(n))}}
+\label{Kernel_2sources_2system_2reboot_8c_adb1669dd3d8f6bc8de74621b35a18184}
+
+
+Definition at line 21 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_a62f49d4e24f3e45f35bd91b43d7aaf77}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!KBRD\_\-BIT\_\-KDATA@{KBRD\_\-BIT\_\-KDATA}}
+\index{KBRD\_\-BIT\_\-KDATA@{KBRD\_\-BIT\_\-KDATA}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{KBRD\_\-BIT\_\-KDATA}]{\setlength{\rightskip}{0pt plus 5cm}\#define KBRD\_\-BIT\_\-KDATA~0}}
+\label{Kernel_2sources_2system_2reboot_8c_a62f49d4e24f3e45f35bd91b43d7aaf77}
+
+
+Definition at line 12 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_a9b07ba3afc2b2bfe3693a2d1cfe8706d}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!KBRD\_\-BIT\_\-UDATA@{KBRD\_\-BIT\_\-UDATA}}
+\index{KBRD\_\-BIT\_\-UDATA@{KBRD\_\-BIT\_\-UDATA}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{KBRD\_\-BIT\_\-UDATA}]{\setlength{\rightskip}{0pt plus 5cm}\#define KBRD\_\-BIT\_\-UDATA~1}}
+\label{Kernel_2sources_2system_2reboot_8c_a9b07ba3afc2b2bfe3693a2d1cfe8706d}
+
+
+Definition at line 13 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_a056cf0bd7fb9382d24bdf5b881914a70}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!KBRD\_\-INTRFC@{KBRD\_\-INTRFC}}
+\index{KBRD\_\-INTRFC@{KBRD\_\-INTRFC}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{KBRD\_\-INTRFC}]{\setlength{\rightskip}{0pt plus 5cm}\#define KBRD\_\-INTRFC~0x64}}
+\label{Kernel_2sources_2system_2reboot_8c_a056cf0bd7fb9382d24bdf5b881914a70}
+
+
+Definition at line 9 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_afb3794d9511a56527253dde521c5d364}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!KBRD\_\-IO@{KBRD\_\-IO}}
+\index{KBRD\_\-IO@{KBRD\_\-IO}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{KBRD\_\-IO}]{\setlength{\rightskip}{0pt plus 5cm}\#define KBRD\_\-IO~0x60}}
+\label{Kernel_2sources_2system_2reboot_8c_afb3794d9511a56527253dde521c5d364}
+
+
+Definition at line 15 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_a1f57ddf7fd49829f7680cec93fe0faa5}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!KBRD\_\-RESET@{KBRD\_\-RESET}}
+\index{KBRD\_\-RESET@{KBRD\_\-RESET}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{KBRD\_\-RESET}]{\setlength{\rightskip}{0pt plus 5cm}\#define KBRD\_\-RESET~0xFE}}
+\label{Kernel_2sources_2system_2reboot_8c_a1f57ddf7fd49829f7680cec93fe0faa5}
+
+
+Definition at line 16 of file reboot.c.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{Kernel_2sources_2system_2reboot_8c_aab03b25460cef90c4f6f7a7facddc00b}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!byte@{byte}}
+\index{byte@{byte}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{byte}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf uchar} {\bf byte}}}
+\label{Kernel_2sources_2system_2reboot_8c_aab03b25460cef90c4f6f7a7facddc00b}
+
+
+Definition at line 4 of file reboot.c.
+
+\hypertarget{Kernel_2sources_2system_2reboot_8c_a65f85814a8290f9797005d3b28e7e5fc}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!uchar@{uchar}}
+\index{uchar@{uchar}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{uchar}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned char {\bf uchar}}}
+\label{Kernel_2sources_2system_2reboot_8c_a65f85814a8290f9797005d3b28e7e5fc}
+
+
+Definition at line 3 of file reboot.c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{Kernel_2sources_2system_2reboot_8c_aa3de94f68e5f0824672252a2eb55a9f2}{
+\index{Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}!kernelReboot@{kernelReboot}}
+\index{kernelReboot@{kernelReboot}!Kernel/sources/system/reboot.c@{Kernel/sources/system/reboot.c}}
+\subsubsection[{kernelReboot}]{\setlength{\rightskip}{0pt plus 5cm}void kernelReboot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{Kernel_2sources_2system_2reboot_8c_aa3de94f68e5f0824672252a2eb55a9f2}
+
+
+Definition at line 23 of file reboot.c.
+

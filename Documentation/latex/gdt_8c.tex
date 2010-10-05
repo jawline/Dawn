@@ -1,0 +1,116 @@
+\hypertarget{gdt_8c}{
+\section{Kernel/sources/mm/gdt.c File Reference}
+\label{gdt_8c}\index{Kernel/sources/mm/gdt.c@{Kernel/sources/mm/gdt.c}}
+}
+{\ttfamily \#include $<$mm/gdt.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{gdt_8c_a0ebf207b20b0edc73df4dbb5dba3a4dc}{NUM\_\-GDT\_\-ENTRIES}~6
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{gdt_8c_ad57e976b13f592834eae0c9e07f71bd5}{gdt\_\-set\_\-gate} (\hyperlink{int__types_8h_a56f1a81c92849566ae864511088eb7e8}{int32}, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32}, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32}, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8}, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8})
+\item 
+void \hyperlink{gdt_8c_a8e57c48390f1d202e56b03d4b294dcd5}{gdt\_\-flush} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32})
+\item 
+void \hyperlink{gdt_8c_ae576bf193485d90b87c2e2a53f26d3f6}{initialize\_\-gdt} ()
+\item 
+void \hyperlink{gdt_8c_a4f2e163cdb5efdfe0fd358763fe51d72}{flushGdt} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structgdt__entry__struct}{gdt\_\-entry\_\-t} \hyperlink{gdt_8c_aacd24844604ec6aabd48bf13719b073e}{gdt\_\-entries} \mbox{[}NUM\_\-GDT\_\-ENTRIES\mbox{]}
+\item 
+\hyperlink{structgdt__ptr__struct}{gdt\_\-ptr\_\-t} \hyperlink{gdt_8c_ab0888c07dfb9352ef76d05e63464cf0b}{gdt\_\-ptr}
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{gdt_8c_a0ebf207b20b0edc73df4dbb5dba3a4dc}{
+\index{gdt.c@{gdt.c}!NUM\_\-GDT\_\-ENTRIES@{NUM\_\-GDT\_\-ENTRIES}}
+\index{NUM\_\-GDT\_\-ENTRIES@{NUM\_\-GDT\_\-ENTRIES}!gdt.c@{gdt.c}}
+\subsubsection[{NUM\_\-GDT\_\-ENTRIES}]{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-GDT\_\-ENTRIES~6}}
+\label{gdt_8c_a0ebf207b20b0edc73df4dbb5dba3a4dc}
+
+
+Definition at line 3 of file gdt.c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{gdt_8c_a4f2e163cdb5efdfe0fd358763fe51d72}{
+\index{gdt.c@{gdt.c}!flushGdt@{flushGdt}}
+\index{flushGdt@{flushGdt}!gdt.c@{gdt.c}}
+\subsubsection[{flushGdt}]{\setlength{\rightskip}{0pt plus 5cm}void flushGdt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{gdt_8c_a4f2e163cdb5efdfe0fd358763fe51d72}
+
+
+Definition at line 27 of file gdt.c.
+
+\hypertarget{gdt_8c_a8e57c48390f1d202e56b03d4b294dcd5}{
+\index{gdt.c@{gdt.c}!gdt\_\-flush@{gdt\_\-flush}}
+\index{gdt\_\-flush@{gdt\_\-flush}!gdt.c@{gdt.c}}
+\subsubsection[{gdt\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}void gdt\_\-flush (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{}
+\end{DoxyParamCaption}
+)}}
+\label{gdt_8c_a8e57c48390f1d202e56b03d4b294dcd5}
+\hypertarget{gdt_8c_ad57e976b13f592834eae0c9e07f71bd5}{
+\index{gdt.c@{gdt.c}!gdt\_\-set\_\-gate@{gdt\_\-set\_\-gate}}
+\index{gdt\_\-set\_\-gate@{gdt\_\-set\_\-gate}!gdt.c@{gdt.c}}
+\subsubsection[{gdt\_\-set\_\-gate}]{\setlength{\rightskip}{0pt plus 5cm}void gdt\_\-set\_\-gate (
+\begin{DoxyParamCaption}
+\item[{{\bf int32}}]{ num, }
+\item[{{\bf uint32}}]{ base, }
+\item[{{\bf uint32}}]{ limit, }
+\item[{{\bf uint8}}]{ access, }
+\item[{{\bf uint8}}]{ gran}
+\end{DoxyParamCaption}
+)}}
+\label{gdt_8c_ad57e976b13f592834eae0c9e07f71bd5}
+
+
+Definition at line 32 of file gdt.c.
+
+\hypertarget{gdt_8c_ae576bf193485d90b87c2e2a53f26d3f6}{
+\index{gdt.c@{gdt.c}!initialize\_\-gdt@{initialize\_\-gdt}}
+\index{initialize\_\-gdt@{initialize\_\-gdt}!gdt.c@{gdt.c}}
+\subsubsection[{initialize\_\-gdt}]{\setlength{\rightskip}{0pt plus 5cm}void initialize\_\-gdt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{gdt_8c_ae576bf193485d90b87c2e2a53f26d3f6}
+
+
+Definition at line 11 of file gdt.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{gdt_8c_aacd24844604ec6aabd48bf13719b073e}{
+\index{gdt.c@{gdt.c}!gdt\_\-entries@{gdt\_\-entries}}
+\index{gdt\_\-entries@{gdt\_\-entries}!gdt.c@{gdt.c}}
+\subsubsection[{gdt\_\-entries}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gdt\_\-entry\_\-t} {\bf gdt\_\-entries}\mbox{[}NUM\_\-GDT\_\-ENTRIES\mbox{]}}}
+\label{gdt_8c_aacd24844604ec6aabd48bf13719b073e}
+
+
+Definition at line 4 of file gdt.c.
+
+\hypertarget{gdt_8c_ab0888c07dfb9352ef76d05e63464cf0b}{
+\index{gdt.c@{gdt.c}!gdt\_\-ptr@{gdt\_\-ptr}}
+\index{gdt\_\-ptr@{gdt\_\-ptr}!gdt.c@{gdt.c}}
+\subsubsection[{gdt\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf gdt\_\-ptr\_\-t} {\bf gdt\_\-ptr}}}
+\label{gdt_8c_ab0888c07dfb9352ef76d05e63464cf0b}
+
+
+Definition at line 5 of file gdt.c.
+

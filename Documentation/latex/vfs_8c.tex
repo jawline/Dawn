@@ -1,0 +1,222 @@
+\hypertarget{vfs_8c}{
+\section{Kernel/sources/fs/vfs.c File Reference}
+\label{vfs_8c}\index{Kernel/sources/fs/vfs.c@{Kernel/sources/fs/vfs.c}}
+}
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$heap/heap.h$>$}\par
+{\ttfamily \#include $<$fs/vfs.h$>$}\par
+{\ttfamily \#include \char`\"{}rfs.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{vfs_8c_a822fdeb7af96807041033a14c5f7518f}{init\_\-root\_\-fs} ()
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{vfs_8c_afe34b9b0d52adb516fa4a6a3804cc255}{init\_\-vfs} ()
+\item 
+int \hyperlink{vfs_8c_a6fc8944ed830ab2bf9e076768c7001d3}{is\_\-directory} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{vfs_8c_a8f1c971d8e4f43f1561f951fdb6d92b2}{read\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} offset, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd__fent_8h_a0d40f1591c12f359c3fa3f982f9a221d}{size}, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$buffer)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{vfs_8c_a512fe6cbc568d7460b2bb5b539d8cdcc}{write\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} offset, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd__fent_8h_a0d40f1591c12f359c3fa3f982f9a221d}{size}, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$buffer)
+\item 
+void \hyperlink{vfs_8c_ad841df4edfc706b4dd3e8c6b9dcbda01}{open\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node)
+\item 
+void \hyperlink{vfs_8c_af9bb9350e398f1784e00a233b63a0baf}{close\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node)
+\item 
+struct \hyperlink{structdirent}{dirent} $\ast$ \hyperlink{vfs_8c_a1a26dd32cbad48de29964755891bf1b6}{readdir\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} idx)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{vfs_8c_a289d28f0a303cb07f04cb12e6853e743}{finddir\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, char $\ast$\hyperlink{initrd__fent_8h_a93a4209b66c75fd711969ba8dcd926f5}{name})
+\item 
+void \hyperlink{vfs_8c_a45cd72de0b5fe65f00a4436954bf8404}{bindnode\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$target)
+\item 
+void \hyperlink{vfs_8c_ae462d9c9709094f4d8023d5f2df28ef1}{unbindnode\_\-fs} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$target)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{vfs_8c_a380cf5d0432538ea59626f48acdc4bb8}{evaluate\_\-path} (const char $\ast$path, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$start\_\-directory)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{vfs_8c_ac74abfcc5a0fda2d646f950a9a5fd529}{root\_\-fs} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{vfs_8c_a45cd72de0b5fe65f00a4436954bf8404}{
+\index{vfs.c@{vfs.c}!bindnode\_\-fs@{bindnode\_\-fs}}
+\index{bindnode\_\-fs@{bindnode\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{bindnode\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}void bindnode\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ target}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a45cd72de0b5fe65f00a4436954bf8404}
+
+
+Definition at line 155 of file vfs.c.
+
+\hypertarget{vfs_8c_af9bb9350e398f1784e00a233b63a0baf}{
+\index{vfs.c@{vfs.c}!close\_\-fs@{close\_\-fs}}
+\index{close\_\-fs@{close\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{close\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}void close\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_af9bb9350e398f1784e00a233b63a0baf}
+
+
+Definition at line 81 of file vfs.c.
+
+\hypertarget{vfs_8c_a380cf5d0432538ea59626f48acdc4bb8}{
+\index{vfs.c@{vfs.c}!evaluate\_\-path@{evaluate\_\-path}}
+\index{evaluate\_\-path@{evaluate\_\-path}!vfs.c@{vfs.c}}
+\subsubsection[{evaluate\_\-path}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ evaluate\_\-path (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ path, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ start\_\-directory}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a380cf5d0432538ea59626f48acdc4bb8}
+
+
+Definition at line 175 of file vfs.c.
+
+\hypertarget{vfs_8c_a289d28f0a303cb07f04cb12e6853e743}{
+\index{vfs.c@{vfs.c}!finddir\_\-fs@{finddir\_\-fs}}
+\index{finddir\_\-fs@{finddir\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{finddir\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ finddir\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{char $\ast$}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a289d28f0a303cb07f04cb12e6853e743}
+
+
+Definition at line 137 of file vfs.c.
+
+\hypertarget{vfs_8c_a822fdeb7af96807041033a14c5f7518f}{
+\index{vfs.c@{vfs.c}!init\_\-root\_\-fs@{init\_\-root\_\-fs}}
+\index{init\_\-root\_\-fs@{init\_\-root\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{init\_\-root\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}void init\_\-root\_\-fs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a822fdeb7af96807041033a14c5f7518f}
+
+
+Definition at line 15 of file vfs.c.
+
+\hypertarget{vfs_8c_afe34b9b0d52adb516fa4a6a3804cc255}{
+\index{vfs.c@{vfs.c}!init\_\-vfs@{init\_\-vfs}}
+\index{init\_\-vfs@{init\_\-vfs}!vfs.c@{vfs.c}}
+\subsubsection[{init\_\-vfs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ init\_\-vfs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_afe34b9b0d52adb516fa4a6a3804cc255}
+
+
+Definition at line 20 of file vfs.c.
+
+\hypertarget{vfs_8c_a6fc8944ed830ab2bf9e076768c7001d3}{
+\index{vfs.c@{vfs.c}!is\_\-directory@{is\_\-directory}}
+\index{is\_\-directory@{is\_\-directory}!vfs.c@{vfs.c}}
+\subsubsection[{is\_\-directory}]{\setlength{\rightskip}{0pt plus 5cm}int is\_\-directory (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a6fc8944ed830ab2bf9e076768c7001d3}
+
+
+Definition at line 29 of file vfs.c.
+
+\hypertarget{vfs_8c_ad841df4edfc706b4dd3e8c6b9dcbda01}{
+\index{vfs.c@{vfs.c}!open\_\-fs@{open\_\-fs}}
+\index{open\_\-fs@{open\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{open\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}void open\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_ad841df4edfc706b4dd3e8c6b9dcbda01}
+
+
+Definition at line 71 of file vfs.c.
+
+\hypertarget{vfs_8c_a8f1c971d8e4f43f1561f951fdb6d92b2}{
+\index{vfs.c@{vfs.c}!read\_\-fs@{read\_\-fs}}
+\index{read\_\-fs@{read\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{read\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} read\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ offset, }
+\item[{{\bf uint32}}]{ size, }
+\item[{{\bf uint8} $\ast$}]{ buffer}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a8f1c971d8e4f43f1561f951fdb6d92b2}
+
+
+Definition at line 40 of file vfs.c.
+
+\hypertarget{vfs_8c_a1a26dd32cbad48de29964755891bf1b6}{
+\index{vfs.c@{vfs.c}!readdir\_\-fs@{readdir\_\-fs}}
+\index{readdir\_\-fs@{readdir\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{readdir\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf dirent}$\ast$ readdir\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ idx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}read\mbox{]}}}}
+\label{vfs_8c_a1a26dd32cbad48de29964755891bf1b6}
+
+
+Definition at line 91 of file vfs.c.
+
+\hypertarget{vfs_8c_ae462d9c9709094f4d8023d5f2df28ef1}{
+\index{vfs.c@{vfs.c}!unbindnode\_\-fs@{unbindnode\_\-fs}}
+\index{unbindnode\_\-fs@{unbindnode\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{unbindnode\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}void unbindnode\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ target}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_ae462d9c9709094f4d8023d5f2df28ef1}
+
+
+Definition at line 164 of file vfs.c.
+
+\hypertarget{vfs_8c_a512fe6cbc568d7460b2bb5b539d8cdcc}{
+\index{vfs.c@{vfs.c}!write\_\-fs@{write\_\-fs}}
+\index{write\_\-fs@{write\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{write\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} write\_\-fs (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ offset, }
+\item[{{\bf uint32}}]{ size, }
+\item[{{\bf uint8} $\ast$}]{ buffer}
+\end{DoxyParamCaption}
+)}}
+\label{vfs_8c_a512fe6cbc568d7460b2bb5b539d8cdcc}
+
+
+Definition at line 55 of file vfs.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{vfs_8c_ac74abfcc5a0fda2d646f950a9a5fd529}{
+\index{vfs.c@{vfs.c}!root\_\-fs@{root\_\-fs}}
+\index{root\_\-fs@{root\_\-fs}!vfs.c@{vfs.c}}
+\subsubsection[{root\_\-fs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ {\bf root\_\-fs} = 0}}
+\label{vfs_8c_ac74abfcc5a0fda2d646f950a9a5fd529}
+
+
+Definition at line 13 of file vfs.c.
+

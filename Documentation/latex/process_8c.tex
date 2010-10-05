@@ -1,0 +1,221 @@
+\hypertarget{process_8c}{
+\section{Kernel/sources/process/process.c File Reference}
+\label{process_8c}\index{Kernel/sources/process/process.c@{Kernel/sources/process/process.c}}
+}
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$panic/panic.h$>$}\par
+{\ttfamily \#include $<$mm/virt\_\-mm.h$>$}\par
+{\ttfamily \#include $<$mm/pagedir.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structprocess__structure}{process\_\-t} $\ast$ \hyperlink{process_8c_ac027b9ad3da1710cc3e8d037e3dda0d1}{initializeKernelProcess} ()
+\item 
+void \hyperlink{process_8c_abe7c11b22c98c24e107f6d09868f463f}{freeProcess} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$process)
+\item 
+\hyperlink{structprocess__structure}{process\_\-t} $\ast$ \hyperlink{process_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973}{get\_\-current\_\-process} ()
+\item 
+int \hyperlink{process_8c_a2ab1b490d95e4615cb42ed29ddef2ab6}{kfork} ()
+\item 
+void \hyperlink{process_8c_aa6a2d7b8f7d0ad74a46c3baf98a87c82}{rename\_\-current\_\-process} (const char $\ast$Str)
+\item 
+void \hyperlink{process_8c_ab286609d2a60286f28d939e3c0f94c4e}{switch\_\-process} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$from, \hyperlink{structprocess__structure}{process\_\-t} $\ast$to)
+\item 
+void \hyperlink{process_8c_a2e9fcac3364dedcb7ad55816ee8867fa}{jump\_\-process} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$to)
+\item 
+\hyperlink{structprocess__message}{process\_\-message} \hyperlink{process_8c_abb0ab623082f9b1bedd7747cc9ce9de5}{postbox\_\-top} (\hyperlink{structprocess__postbox}{process\_\-postbox} $\ast$pb)
+\item 
+\hyperlink{structprocess__message}{process\_\-message} \hyperlink{process_8c_ab332071042eeee6f1557cedf3be58921}{postbox\_\-peek} (\hyperlink{structprocess__postbox}{process\_\-postbox} $\ast$pb)
+\item 
+void \hyperlink{process_8c_a8ec9c160458364df27a5f682251cbe74}{set\_\-process\_\-name} (\hyperlink{structprocess__structure}{process\_\-t} $\ast$proc, const char $\ast$Name)
+\item 
+void \hyperlink{process_8c_a3de17c849d9de394b95b696739322ac0}{postbox\_\-add} (\hyperlink{structprocess__postbox}{process\_\-postbox} $\ast$pb, \hyperlink{structprocess__message}{process\_\-message} msg)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{structprocess__structure}{process\_\-t} $\ast$ \hyperlink{process_8c_a707073d202c7bd81b3c287ab2f7add08}{kernel\_\-proc} = 0
+\item 
+static unsigned int \hyperlink{process_8c_a2d1eb406de775c9435141de93526bbab}{next\_\-pid} = 0
+\item 
+\hyperlink{structabstract__terminal}{terminal\_\-t} $\ast$ \hyperlink{process_8c_af798f7940ca701d8de72623efaefb628}{g\_\-kernelTerminal}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{process_8c_abe7c11b22c98c24e107f6d09868f463f}{
+\index{process.c@{process.c}!freeProcess@{freeProcess}}
+\index{freeProcess@{freeProcess}!process.c@{process.c}}
+\subsubsection[{freeProcess}]{\setlength{\rightskip}{0pt plus 5cm}void freeProcess (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ process}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_abe7c11b22c98c24e107f6d09868f463f}
+
+
+Definition at line 33 of file process.c.
+
+\hypertarget{process_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973}{
+\index{process.c@{process.c}!get\_\-current\_\-process@{get\_\-current\_\-process}}
+\index{get\_\-current\_\-process@{get\_\-current\_\-process}!process.c@{process.c}}
+\subsubsection[{get\_\-current\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-t}$\ast$ get\_\-current\_\-process (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973}
+
+
+Definition at line 167 of file process\_\-scheduler.c.
+
+\hypertarget{process_8c_ac027b9ad3da1710cc3e8d037e3dda0d1}{
+\index{process.c@{process.c}!initializeKernelProcess@{initializeKernelProcess}}
+\index{initializeKernelProcess@{initializeKernelProcess}!process.c@{process.c}}
+\subsubsection[{initializeKernelProcess}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-t}$\ast$ initializeKernelProcess (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_ac027b9ad3da1710cc3e8d037e3dda0d1}
+
+
+Definition at line 10 of file process.c.
+
+\hypertarget{process_8c_a2e9fcac3364dedcb7ad55816ee8867fa}{
+\index{process.c@{process.c}!jump\_\-process@{jump\_\-process}}
+\index{jump\_\-process@{jump\_\-process}!process.c@{process.c}}
+\subsubsection[{jump\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}void jump\_\-process (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{process_8c_a2e9fcac3364dedcb7ad55816ee8867fa}
+
+
+Definition at line 195 of file process.c.
+
+\hypertarget{process_8c_a2ab1b490d95e4615cb42ed29ddef2ab6}{
+\index{process.c@{process.c}!kfork@{kfork}}
+\index{kfork@{kfork}!process.c@{process.c}}
+\subsubsection[{kfork}]{\setlength{\rightskip}{0pt plus 5cm}int kfork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_a2ab1b490d95e4615cb42ed29ddef2ab6}
+
+
+Definition at line 93 of file process.c.
+
+\hypertarget{process_8c_a3de17c849d9de394b95b696739322ac0}{
+\index{process.c@{process.c}!postbox\_\-add@{postbox\_\-add}}
+\index{postbox\_\-add@{postbox\_\-add}!process.c@{process.c}}
+\subsubsection[{postbox\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}void postbox\_\-add (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-postbox} $\ast$}]{ pb, }
+\item[{{\bf process\_\-message}}]{ msg}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_a3de17c849d9de394b95b696739322ac0}
+
+
+Definition at line 266 of file process.c.
+
+\hypertarget{process_8c_ab332071042eeee6f1557cedf3be58921}{
+\index{process.c@{process.c}!postbox\_\-peek@{postbox\_\-peek}}
+\index{postbox\_\-peek@{postbox\_\-peek}!process.c@{process.c}}
+\subsubsection[{postbox\_\-peek}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-message} postbox\_\-peek (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-postbox} $\ast$}]{ pb}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_ab332071042eeee6f1557cedf3be58921}
+
+
+Definition at line 249 of file process.c.
+
+\hypertarget{process_8c_abb0ab623082f9b1bedd7747cc9ce9de5}{
+\index{process.c@{process.c}!postbox\_\-top@{postbox\_\-top}}
+\index{postbox\_\-top@{postbox\_\-top}!process.c@{process.c}}
+\subsubsection[{postbox\_\-top}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-message} postbox\_\-top (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-postbox} $\ast$}]{ pb}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_abb0ab623082f9b1bedd7747cc9ce9de5}
+
+
+Definition at line 223 of file process.c.
+
+\hypertarget{process_8c_aa6a2d7b8f7d0ad74a46c3baf98a87c82}{
+\index{process.c@{process.c}!rename\_\-current\_\-process@{rename\_\-current\_\-process}}
+\index{rename\_\-current\_\-process@{rename\_\-current\_\-process}!process.c@{process.c}}
+\subsubsection[{rename\_\-current\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}void rename\_\-current\_\-process (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ Str}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_aa6a2d7b8f7d0ad74a46c3baf98a87c82}
+
+
+Definition at line 148 of file process.c.
+
+\hypertarget{process_8c_a8ec9c160458364df27a5f682251cbe74}{
+\index{process.c@{process.c}!set\_\-process\_\-name@{set\_\-process\_\-name}}
+\index{set\_\-process\_\-name@{set\_\-process\_\-name}!process.c@{process.c}}
+\subsubsection[{set\_\-process\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}void set\_\-process\_\-name (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ proc, }
+\item[{const char $\ast$}]{ Name}
+\end{DoxyParamCaption}
+)}}
+\label{process_8c_a8ec9c160458364df27a5f682251cbe74}
+
+
+Definition at line 261 of file process.c.
+
+\hypertarget{process_8c_ab286609d2a60286f28d939e3c0f94c4e}{
+\index{process.c@{process.c}!switch\_\-process@{switch\_\-process}}
+\index{switch\_\-process@{switch\_\-process}!process.c@{process.c}}
+\subsubsection[{switch\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}void switch\_\-process (
+\begin{DoxyParamCaption}
+\item[{{\bf process\_\-t} $\ast$}]{ from, }
+\item[{{\bf process\_\-t} $\ast$}]{ to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{process_8c_ab286609d2a60286f28d939e3c0f94c4e}
+
+
+Definition at line 153 of file process.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{process_8c_af798f7940ca701d8de72623efaefb628}{
+\index{process.c@{process.c}!g\_\-kernelTerminal@{g\_\-kernelTerminal}}
+\index{g\_\-kernelTerminal@{g\_\-kernelTerminal}!process.c@{process.c}}
+\subsubsection[{g\_\-kernelTerminal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf terminal\_\-t}$\ast$ {\bf g\_\-kernelTerminal}}}
+\label{process_8c_af798f7940ca701d8de72623efaefb628}
+
+
+Definition at line 4 of file kterminal.c.
+
+\hypertarget{process_8c_a707073d202c7bd81b3c287ab2f7add08}{
+\index{process.c@{process.c}!kernel\_\-proc@{kernel\_\-proc}}
+\index{kernel\_\-proc@{kernel\_\-proc}!process.c@{process.c}}
+\subsubsection[{kernel\_\-proc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-t}$\ast$ {\bf kernel\_\-proc} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{process_8c_a707073d202c7bd81b3c287ab2f7add08}
+
+
+Definition at line 6 of file process.c.
+
+\hypertarget{process_8c_a2d1eb406de775c9435141de93526bbab}{
+\index{process.c@{process.c}!next\_\-pid@{next\_\-pid}}
+\index{next\_\-pid@{next\_\-pid}!process.c@{process.c}}
+\subsubsection[{next\_\-pid}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf next\_\-pid} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{process_8c_a2d1eb406de775c9435141de93526bbab}
+
+
+Definition at line 7 of file process.c.
+

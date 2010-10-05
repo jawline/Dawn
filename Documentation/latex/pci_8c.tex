@@ -1,0 +1,239 @@
+\hypertarget{pci_8c}{
+\section{Kernel/sources/devices/pci/pci.c File Reference}
+\label{pci_8c}\index{Kernel/sources/devices/pci/pci.c@{Kernel/sources/devices/pci/pci.c}}
+}
+{\ttfamily \#include $<$devices/pci/pci.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_af261281312f5a8d0dcb7fd5483a132ec}{pciConfigReadRegister} (\hyperlink{structpci__device}{pci\_\-device} device, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} reg)
+\item 
+\hyperlink{int__types_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} \hyperlink{pci_8c_aa4849db06f7c6d1a34a04a001d066042}{pciConfigReadWord} (\hyperlink{structpci__device}{pci\_\-device} device, \hyperlink{int__types_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} offset)
+\item 
+\hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} \hyperlink{pci_8c_a03f8158cbbb7bc47fad237bf7efc10af}{pciConfigReadByte} (\hyperlink{structpci__device}{pci\_\-device} device, \hyperlink{int__types_8h_a05f6b0ae8f6a6e135b0e290c25fe0e4e}{uint16} offset)
+\item 
+unsigned char \hyperlink{pci_8c_a29147cf7af779acdbf9b138c50c388c0}{pciDeviceExists} (\hyperlink{structpci__device}{pci\_\-device} device)
+\item 
+unsigned short \hyperlink{pci_8c_a2fdb9e8acb51a9cafc0aeb63a014163c}{pciDeviceGetVendor} (\hyperlink{structpci__device}{pci\_\-device} device)
+\item 
+unsigned short \hyperlink{pci_8c_ac19e489d76d9f2d54bc9f201e633ffbd}{pciDeviceGetDeviceId} (\hyperlink{structpci__device}{pci\_\-device} device)
+\item 
+unsigned char \hyperlink{pci_8c_abb9c7b476e399b75106afb501298bb0e}{pciDeviceGetClass} (\hyperlink{structpci__device}{pci\_\-device} device)
+\item 
+unsigned char \hyperlink{pci_8c_aad091be6515d27c5b7ed69484fc215e2}{pciDeviceGetSubclass} (\hyperlink{structpci__device}{pci\_\-device} device)
+\item 
+unsigned char \hyperlink{pci_8c_aacefd4cca07e4d96fee0dfa3e2681cf7}{pciDeviceGetHeaderType} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_a055e4a1a70cd1bce508ab70d6b15a6e1}{pciDeviceGetBar0} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_a7e7fa83db42bf873e7a529f5cd1f0e3f}{pciDeviceGetBar1} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_a280a106cfd738a094e7fd3f552bac40b}{pciDeviceGetBar2} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_a8d1ee0111ea9f590103c0247f911aee6}{pciDeviceGetBar3} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_a4a59bd5d30880991ac97225ad0604fb7}{pciDeviceGetBar4} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{pci_8c_a26d17b2e401dfcbe854d5e972b925360}{pciDeviceGetBar5} (\hyperlink{structpci__device}{pci\_\-device} dev)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{pci_8c_a03f8158cbbb7bc47fad237bf7efc10af}{
+\index{pci.c@{pci.c}!pciConfigReadByte@{pciConfigReadByte}}
+\index{pciConfigReadByte@{pciConfigReadByte}!pci.c@{pci.c}}
+\subsubsection[{pciConfigReadByte}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint8} pciConfigReadByte (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device, }
+\item[{{\bf uint16}}]{ offset}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a03f8158cbbb7bc47fad237bf7efc10af}
+
+
+Definition at line 22 of file pci.c.
+
+\hypertarget{pci_8c_af261281312f5a8d0dcb7fd5483a132ec}{
+\index{pci.c@{pci.c}!pciConfigReadRegister@{pciConfigReadRegister}}
+\index{pciConfigReadRegister@{pciConfigReadRegister}!pci.c@{pci.c}}
+\subsubsection[{pciConfigReadRegister}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciConfigReadRegister (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device, }
+\item[{{\bf uint8}}]{ reg}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_af261281312f5a8d0dcb7fd5483a132ec}
+
+
+Definition at line 3 of file pci.c.
+
+\hypertarget{pci_8c_aa4849db06f7c6d1a34a04a001d066042}{
+\index{pci.c@{pci.c}!pciConfigReadWord@{pciConfigReadWord}}
+\index{pciConfigReadWord@{pciConfigReadWord}!pci.c@{pci.c}}
+\subsubsection[{pciConfigReadWord}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint16} pciConfigReadWord (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device, }
+\item[{{\bf uint16}}]{ offset}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_aa4849db06f7c6d1a34a04a001d066042}
+
+
+Definition at line 15 of file pci.c.
+
+\hypertarget{pci_8c_a29147cf7af779acdbf9b138c50c388c0}{
+\index{pci.c@{pci.c}!pciDeviceExists@{pciDeviceExists}}
+\index{pciDeviceExists@{pciDeviceExists}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceExists}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char pciDeviceExists (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a29147cf7af779acdbf9b138c50c388c0}
+
+
+Definition at line 28 of file pci.c.
+
+\hypertarget{pci_8c_a055e4a1a70cd1bce508ab70d6b15a6e1}{
+\index{pci.c@{pci.c}!pciDeviceGetBar0@{pciDeviceGetBar0}}
+\index{pciDeviceGetBar0@{pciDeviceGetBar0}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetBar0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciDeviceGetBar0 (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a055e4a1a70cd1bce508ab70d6b15a6e1}
+
+
+Definition at line 67 of file pci.c.
+
+\hypertarget{pci_8c_a7e7fa83db42bf873e7a529f5cd1f0e3f}{
+\index{pci.c@{pci.c}!pciDeviceGetBar1@{pciDeviceGetBar1}}
+\index{pciDeviceGetBar1@{pciDeviceGetBar1}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetBar1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciDeviceGetBar1 (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a7e7fa83db42bf873e7a529f5cd1f0e3f}
+
+
+Definition at line 72 of file pci.c.
+
+\hypertarget{pci_8c_a280a106cfd738a094e7fd3f552bac40b}{
+\index{pci.c@{pci.c}!pciDeviceGetBar2@{pciDeviceGetBar2}}
+\index{pciDeviceGetBar2@{pciDeviceGetBar2}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetBar2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciDeviceGetBar2 (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a280a106cfd738a094e7fd3f552bac40b}
+
+
+Definition at line 77 of file pci.c.
+
+\hypertarget{pci_8c_a8d1ee0111ea9f590103c0247f911aee6}{
+\index{pci.c@{pci.c}!pciDeviceGetBar3@{pciDeviceGetBar3}}
+\index{pciDeviceGetBar3@{pciDeviceGetBar3}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetBar3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciDeviceGetBar3 (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a8d1ee0111ea9f590103c0247f911aee6}
+
+
+Definition at line 82 of file pci.c.
+
+\hypertarget{pci_8c_a4a59bd5d30880991ac97225ad0604fb7}{
+\index{pci.c@{pci.c}!pciDeviceGetBar4@{pciDeviceGetBar4}}
+\index{pciDeviceGetBar4@{pciDeviceGetBar4}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetBar4}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciDeviceGetBar4 (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a4a59bd5d30880991ac97225ad0604fb7}
+
+
+Definition at line 87 of file pci.c.
+
+\hypertarget{pci_8c_a26d17b2e401dfcbe854d5e972b925360}{
+\index{pci.c@{pci.c}!pciDeviceGetBar5@{pciDeviceGetBar5}}
+\index{pciDeviceGetBar5@{pciDeviceGetBar5}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetBar5}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} pciDeviceGetBar5 (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a26d17b2e401dfcbe854d5e972b925360}
+
+
+Definition at line 92 of file pci.c.
+
+\hypertarget{pci_8c_abb9c7b476e399b75106afb501298bb0e}{
+\index{pci.c@{pci.c}!pciDeviceGetClass@{pciDeviceGetClass}}
+\index{pciDeviceGetClass@{pciDeviceGetClass}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetClass}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char pciDeviceGetClass (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_abb9c7b476e399b75106afb501298bb0e}
+
+
+Definition at line 52 of file pci.c.
+
+\hypertarget{pci_8c_ac19e489d76d9f2d54bc9f201e633ffbd}{
+\index{pci.c@{pci.c}!pciDeviceGetDeviceId@{pciDeviceGetDeviceId}}
+\index{pciDeviceGetDeviceId@{pciDeviceGetDeviceId}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetDeviceId}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short pciDeviceGetDeviceId (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_ac19e489d76d9f2d54bc9f201e633ffbd}
+
+
+Definition at line 46 of file pci.c.
+
+\hypertarget{pci_8c_aacefd4cca07e4d96fee0dfa3e2681cf7}{
+\index{pci.c@{pci.c}!pciDeviceGetHeaderType@{pciDeviceGetHeaderType}}
+\index{pciDeviceGetHeaderType@{pciDeviceGetHeaderType}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetHeaderType}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char pciDeviceGetHeaderType (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_aacefd4cca07e4d96fee0dfa3e2681cf7}
+
+
+Definition at line 62 of file pci.c.
+
+\hypertarget{pci_8c_aad091be6515d27c5b7ed69484fc215e2}{
+\index{pci.c@{pci.c}!pciDeviceGetSubclass@{pciDeviceGetSubclass}}
+\index{pciDeviceGetSubclass@{pciDeviceGetSubclass}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetSubclass}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char pciDeviceGetSubclass (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_aad091be6515d27c5b7ed69484fc215e2}
+
+
+Definition at line 57 of file pci.c.
+
+\hypertarget{pci_8c_a2fdb9e8acb51a9cafc0aeb63a014163c}{
+\index{pci.c@{pci.c}!pciDeviceGetVendor@{pciDeviceGetVendor}}
+\index{pciDeviceGetVendor@{pciDeviceGetVendor}!pci.c@{pci.c}}
+\subsubsection[{pciDeviceGetVendor}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short pciDeviceGetVendor (
+\begin{DoxyParamCaption}
+\item[{{\bf pci\_\-device}}]{ device}
+\end{DoxyParamCaption}
+)}}
+\label{pci_8c_a2fdb9e8acb51a9cafc0aeb63a014163c}
+
+
+Definition at line 40 of file pci.c.
+

@@ -1,0 +1,180 @@
+\hypertarget{structprocess__structure}{
+\section{process\_\-structure Struct Reference}
+\label{structprocess__structure}\index{process\_\-structure@{process\_\-structure}}
+}
+
+
+{\ttfamily \#include $<$process.h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{structprocess__structure_a224ebd60629fb6a835735e891c5ed665}{m\_\-ID}
+\item 
+char \hyperlink{structprocess__structure_ad48e1eeeebc30443de5b7de4a52e22c8}{m\_\-Name} \mbox{[}64\mbox{]}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{structprocess__structure_ab11061d99fc788d301f8a6602df30a07}{esp}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{structprocess__structure_a3fd20d68dc26771c688e272d96d44145}{ebp}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{structprocess__structure_a4267ae7974329fbe4e73475912fc2086}{eip}
+\item 
+unsigned long \hyperlink{structprocess__structure_a6f1bd4287fa411c20b741f5bd8dcdf48}{m\_\-processingTime}
+\item 
+unsigned int \hyperlink{structprocess__structure_aa847b634c602e55ae076b7c1eb60a12a}{m\_\-postboxFlags}
+\item 
+\hyperlink{structprocess__postbox}{process\_\-postbox} \hyperlink{structprocess__structure_a158668d142ff732572d4b738a0b7ba90}{m\_\-processPostbox}
+\item 
+page\_\-directory\_\-t $\ast$ \hyperlink{structprocess__structure_a696c6e2dc6799d60b208651eadbb1361}{m\_\-pageDir}
+\item 
+MEM\_\-LOC $\ast$ \hyperlink{structprocess__structure_a032625c34f249bf0321269843b0b529e}{m\_\-usedListRoot}
+\item 
+unsigned long \hyperlink{structprocess__structure_a542f16320981046ab3943e8c7ed46eab}{m\_\-usedListSize}
+\item 
+unsigned long \hyperlink{structprocess__structure_ab2dc0a220465f2bda420ac4cc053d88b}{m\_\-usedListLocation}
+\item 
+unsigned char \hyperlink{structprocess__structure_a3157fc938c803c37b84700905aadff90}{m\_\-shouldDestroy}
+\item 
+\hyperlink{structabstract__terminal}{terminal\_\-t} $\ast$ \hyperlink{structprocess__structure_a542c418055252b7dedef0c3589f322ca}{m\_\-pTerminal}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file process.h.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{structprocess__structure_a3fd20d68dc26771c688e272d96d44145}{
+\index{process\_\-structure@{process\_\-structure}!ebp@{ebp}}
+\index{ebp@{ebp}!process_structure@{process\_\-structure}}
+\subsubsection[{ebp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf process\_\-structure::ebp}}}
+\label{structprocess__structure_a3fd20d68dc26771c688e272d96d44145}
+
+
+Definition at line 16 of file process.h.
+
+\hypertarget{structprocess__structure_a4267ae7974329fbe4e73475912fc2086}{
+\index{process\_\-structure@{process\_\-structure}!eip@{eip}}
+\index{eip@{eip}!process_structure@{process\_\-structure}}
+\subsubsection[{eip}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf process\_\-structure::eip}}}
+\label{structprocess__structure_a4267ae7974329fbe4e73475912fc2086}
+
+
+Definition at line 16 of file process.h.
+
+\hypertarget{structprocess__structure_ab11061d99fc788d301f8a6602df30a07}{
+\index{process\_\-structure@{process\_\-structure}!esp@{esp}}
+\index{esp@{esp}!process_structure@{process\_\-structure}}
+\subsubsection[{esp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf process\_\-structure::esp}}}
+\label{structprocess__structure_ab11061d99fc788d301f8a6602df30a07}
+
+
+Definition at line 16 of file process.h.
+
+\hypertarget{structprocess__structure_a224ebd60629fb6a835735e891c5ed665}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-ID@{m\_\-ID}}
+\index{m\_\-ID@{m\_\-ID}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-ID}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf process\_\-structure::m\_\-ID}}}
+\label{structprocess__structure_a224ebd60629fb6a835735e891c5ed665}
+
+
+Definition at line 13 of file process.h.
+
+\hypertarget{structprocess__structure_ad48e1eeeebc30443de5b7de4a52e22c8}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-Name@{m\_\-Name}}
+\index{m\_\-Name@{m\_\-Name}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-Name}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf process\_\-structure::m\_\-Name}\mbox{[}64\mbox{]}}}
+\label{structprocess__structure_ad48e1eeeebc30443de5b7de4a52e22c8}
+
+
+Definition at line 14 of file process.h.
+
+\hypertarget{structprocess__structure_a696c6e2dc6799d60b208651eadbb1361}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-pageDir@{m\_\-pageDir}}
+\index{m\_\-pageDir@{m\_\-pageDir}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-pageDir}]{\setlength{\rightskip}{0pt plus 5cm}page\_\-directory\_\-t$\ast$ {\bf process\_\-structure::m\_\-pageDir}}}
+\label{structprocess__structure_a696c6e2dc6799d60b208651eadbb1361}
+
+
+Definition at line 23 of file process.h.
+
+\hypertarget{structprocess__structure_aa847b634c602e55ae076b7c1eb60a12a}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-postboxFlags@{m\_\-postboxFlags}}
+\index{m\_\-postboxFlags@{m\_\-postboxFlags}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-postboxFlags}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf process\_\-structure::m\_\-postboxFlags}}}
+\label{structprocess__structure_aa847b634c602e55ae076b7c1eb60a12a}
+
+
+Definition at line 20 of file process.h.
+
+\hypertarget{structprocess__structure_a6f1bd4287fa411c20b741f5bd8dcdf48}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-processingTime@{m\_\-processingTime}}
+\index{m\_\-processingTime@{m\_\-processingTime}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-processingTime}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf process\_\-structure::m\_\-processingTime}}}
+\label{structprocess__structure_a6f1bd4287fa411c20b741f5bd8dcdf48}
+
+
+Definition at line 18 of file process.h.
+
+\hypertarget{structprocess__structure_a158668d142ff732572d4b738a0b7ba90}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-processPostbox@{m\_\-processPostbox}}
+\index{m\_\-processPostbox@{m\_\-processPostbox}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-processPostbox}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-postbox} {\bf process\_\-structure::m\_\-processPostbox}}}
+\label{structprocess__structure_a158668d142ff732572d4b738a0b7ba90}
+
+
+Definition at line 21 of file process.h.
+
+\hypertarget{structprocess__structure_a542c418055252b7dedef0c3589f322ca}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-pTerminal@{m\_\-pTerminal}}
+\index{m\_\-pTerminal@{m\_\-pTerminal}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-pTerminal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf terminal\_\-t}$\ast$ {\bf process\_\-structure::m\_\-pTerminal}}}
+\label{structprocess__structure_a542c418055252b7dedef0c3589f322ca}
+
+
+Definition at line 31 of file process.h.
+
+\hypertarget{structprocess__structure_a3157fc938c803c37b84700905aadff90}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-shouldDestroy@{m\_\-shouldDestroy}}
+\index{m\_\-shouldDestroy@{m\_\-shouldDestroy}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-shouldDestroy}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char {\bf process\_\-structure::m\_\-shouldDestroy}}}
+\label{structprocess__structure_a3157fc938c803c37b84700905aadff90}
+
+
+Definition at line 29 of file process.h.
+
+\hypertarget{structprocess__structure_ab2dc0a220465f2bda420ac4cc053d88b}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-usedListLocation@{m\_\-usedListLocation}}
+\index{m\_\-usedListLocation@{m\_\-usedListLocation}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-usedListLocation}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf process\_\-structure::m\_\-usedListLocation}}}
+\label{structprocess__structure_ab2dc0a220465f2bda420ac4cc053d88b}
+
+
+Definition at line 27 of file process.h.
+
+\hypertarget{structprocess__structure_a032625c34f249bf0321269843b0b529e}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-usedListRoot@{m\_\-usedListRoot}}
+\index{m\_\-usedListRoot@{m\_\-usedListRoot}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-usedListRoot}]{\setlength{\rightskip}{0pt plus 5cm}MEM\_\-LOC$\ast$ {\bf process\_\-structure::m\_\-usedListRoot}}}
+\label{structprocess__structure_a032625c34f249bf0321269843b0b529e}
+
+
+Definition at line 25 of file process.h.
+
+\hypertarget{structprocess__structure_a542f16320981046ab3943e8c7ed46eab}{
+\index{process\_\-structure@{process\_\-structure}!m\_\-usedListSize@{m\_\-usedListSize}}
+\index{m\_\-usedListSize@{m\_\-usedListSize}!process_structure@{process\_\-structure}}
+\subsubsection[{m\_\-usedListSize}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf process\_\-structure::m\_\-usedListSize}}}
+\label{structprocess__structure_a542f16320981046ab3943e8c7ed46eab}
+
+
+Definition at line 26 of file process.h.
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Kernel/headers/process/\hyperlink{process_8h}{process.h}\end{DoxyCompactItemize}

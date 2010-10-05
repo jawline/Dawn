@@ -46,7 +46,7 @@ void initializeHeap(heap_t * heap, uint32 address)
 	DEBUG_PRINT("Debug Message: Created first heap entry\n");
 
 	ptr->used = 0; //Not used
-	ptr->size = 4096 - sizeof(heap_entry_t); //One frame has been allocated. 4096 bytes of heap space at the minute. The heap entrys are also in the space so we need to take into account for them (Only one at the minute though =) )
+	ptr->size = PAGE_SIZE - sizeof(heap_entry_t); //One frame has been allocated. 4096 bytes of heap space at the minute. The heap entrys are also in the space so we need to take into account for them (Only one at the minute though =) )
 
 	DEBUG_PRINT("Debug Message: Set ptr size\n");
 

@@ -87,6 +87,7 @@ struct elf_32_program_header {
 } __attribute__((packed));
 
 struct elf_32_info {
+
 	struct elf_32_header m_mainHeader;
 
 	struct elf_32_section_header* m_sectionHeaders;

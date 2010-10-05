@@ -1,0 +1,51 @@
+\hypertarget{scancodes_8c}{
+\section{API/sources/scancodes.c File Reference}
+\label{scancodes_8c}\index{API/sources/scancodes.c@{API/sources/scancodes.c}}
+}
+{\ttfamily \#include $<$syscall/syscall.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{scancodes_8c_a1668a935c573bce61f6122943ccc6180}{DEFN\_\-SYSCALL2} (scancode\_\-to\_\-asci, 4, unsigned char, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32})
+\item 
+char \hyperlink{scancodes_8c_aa0ca8aa0c56172690787a8796cf36a1e}{getAsciFromScancode} (unsigned char sc, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{sources_2interrupts_2idt_8h_acd8859336a5cb8a70051c97a438726a1}{flags})
+\begin{DoxyCompactList}\small\item\em This function converts a scancode from the keyboard into a ASCI character. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{scancodes_8c_a1668a935c573bce61f6122943ccc6180}{
+\index{scancodes.c@{scancodes.c}!DEFN\_\-SYSCALL2@{DEFN\_\-SYSCALL2}}
+\index{DEFN\_\-SYSCALL2@{DEFN\_\-SYSCALL2}!scancodes.c@{scancodes.c}}
+\subsubsection[{DEFN\_\-SYSCALL2}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL2 (
+\begin{DoxyParamCaption}
+\item[{scancode\_\-to\_\-asci}]{, }
+\item[{4}]{, }
+\item[{unsigned}]{ char, }
+\item[{{\bf uint32}}]{}
+\end{DoxyParamCaption}
+)}}
+\label{scancodes_8c_a1668a935c573bce61f6122943ccc6180}
+\hypertarget{scancodes_8c_aa0ca8aa0c56172690787a8796cf36a1e}{
+\index{scancodes.c@{scancodes.c}!getAsciFromScancode@{getAsciFromScancode}}
+\index{getAsciFromScancode@{getAsciFromScancode}!scancodes.c@{scancodes.c}}
+\subsubsection[{getAsciFromScancode}]{\setlength{\rightskip}{0pt plus 5cm}char getAsciFromScancode (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{ sc, }
+\item[{{\bf uint32}}]{ flags}
+\end{DoxyParamCaption}
+)}}
+\label{scancodes_8c_aa0ca8aa0c56172690787a8796cf36a1e}
+
+
+This function converts a scancode from the keyboard into a ASCI character. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em unsigned}]char sc, the scancode. uint32 flags, the flags supplied with the scancode (Uppercase, Shifted, Etc) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ASCI Character from the scan code if found. 
+\end{DoxyReturn}
+
+
+Definition at line 5 of file scancodes.c.
+

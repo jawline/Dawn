@@ -1,0 +1,450 @@
+\hypertarget{multiboot_8h}{
+\section{Kernel/headers/multiboot.h File Reference}
+\label{multiboot_8h}\index{Kernel/headers/multiboot.h@{Kernel/headers/multiboot.h}}
+}
+{\ttfamily \#include $<$types/int\_\-types.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmultiboot}{multiboot}
+\item 
+struct \hyperlink{struct____attribute____}{\_\-\_\-attribute\_\-\_\-}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{multiboot_8h_a3efad85ab30d96e506aba9003c0ee4dd}{MULTIBOOT\_\-FLAG\_\-MEM}~0x001
+\item 
+\#define \hyperlink{multiboot_8h_a9f338ee148fe6f4c672e8e53e608d985}{MULTIBOOT\_\-FLAG\_\-DEVICE}~0x002
+\item 
+\#define \hyperlink{multiboot_8h_af58e2129db03f11e8f3d1be24c67f273}{MULTIBOOT\_\-FLAG\_\-CMDLINE}~0x004
+\item 
+\#define \hyperlink{multiboot_8h_a05c950e0dfa2339451b7256de3b6634b}{MULTIBOOT\_\-FLAG\_\-MODS}~0x008
+\item 
+\#define \hyperlink{multiboot_8h_a8ab64e4da5caf65cf7ae2991b984a3cf}{MULTIBOOT\_\-FLAG\_\-AOUT}~0x010
+\item 
+\#define \hyperlink{multiboot_8h_ae67a3767b0bcf8b3a57a1f9d84a0d12c}{MULTIBOOT\_\-FLAG\_\-ELF}~0x020
+\item 
+\#define \hyperlink{multiboot_8h_a2ed735dcce6c8367f6e3ee5f56e16a42}{MULTIBOOT\_\-FLAG\_\-MMAP}~0x040
+\item 
+\#define \hyperlink{multiboot_8h_ab3d220808412fa0f715b0a1844f1843f}{MULTIBOOT\_\-FLAG\_\-CONFIG}~0x080
+\item 
+\#define \hyperlink{multiboot_8h_ab80180da32c134cf24f3dd64e3e14176}{MULTIBOOT\_\-FLAG\_\-LOADER}~0x100
+\item 
+\#define \hyperlink{multiboot_8h_a3fb3ddd4db5c7fb88fd513c66577735a}{MULTIBOOT\_\-FLAG\_\-APM}~0x200
+\item 
+\#define \hyperlink{multiboot_8h_a852a5720b636e1bdc5799f72dd04b8d8}{MULTIBOOT\_\-FLAG\_\-VBE}~0x400
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structmultiboot}{multiboot} \hyperlink{multiboot_8h_a680a5fb091d2c0b62c5a79b2015f5a66}{multiboot\_\-header\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmultiboot}{multiboot} \hyperlink{multiboot_8h_a7b79550ccf44e7debf010fdbbf420327}{\_\-\_\-attribute\_\-\_\-} ((packed))
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{multiboot_8h_a14e4f38664cea511db42cc316940f8af}{\_\-\_\-attribute\_\-\_\-}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a81a27ce50e78368b0d0de1e8767fd32d}{flags}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a8d8ee53e3887e1e2d32982efccd2c724}{mem\_\-lower}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a3c5de351ae0fe276a301d1b9e8f895a7}{mem\_\-upper}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a27690287edb2174929a73f14555657cc}{boot\_\-device}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_ad549dcb3f338c91ed7266cf2c1a33149}{cmdline}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a5ef787141f7ca26152e574fd66f82f74}{mods\_\-count}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_ac32e0bacd3b279c6ab9bdfbf18007646}{mods\_\-addr}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_afbfdd05b9427739fb809284a10183bff}{num}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a0d40f1591c12f359c3fa3f982f9a221d}{size}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_aa31b9b932d389c8fd17de866d58dac50}{addr}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a75248e08ec04ba109698344a7c05115e}{shndx}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a1b13b785d5b6220e5f22c1d34e7faf6a}{mmap\_\-length}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_ab4fbf3a7520be685af340d3a1f4f275e}{mmap\_\-addr}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_acb3648ce21b06f2df6698a8a5baee9e8}{drives\_\-length}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a943f95bf914f533bef4507be8806703a}{drives\_\-addr}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a46565929b56bc0ad845b3953517ab7c3}{config\_\-table}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_ace46a6d18c43918409d9017f8412a6ed}{boot\_\-loader\_\-name}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a98f0d1fff74c6b5f0fa4a5bf9dbf3941}{apm\_\-table}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a48c4060b1df334b13721088a9aba6995}{vbe\_\-control\_\-info}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a3a9e63c4009b2f179bbec54a87720f4f}{vbe\_\-mode\_\-info}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_ae4c03bb951f6eef5e87508d3c888e137}{vbe\_\-mode}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a32a42db201d91f243b3e27ca770faaa4}{vbe\_\-interface\_\-seg}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_aad2e389fc843b242b5e824fda447797f}{vbe\_\-interface\_\-off}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{multiboot_8h_a5f4fc4febf743eb57416d61984e63d4e}{vbe\_\-interface\_\-len}
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{multiboot_8h_a8ab64e4da5caf65cf7ae2991b984a3cf}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-AOUT@{MULTIBOOT\_\-FLAG\_\-AOUT}}
+\index{MULTIBOOT\_\-FLAG\_\-AOUT@{MULTIBOOT\_\-FLAG\_\-AOUT}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-AOUT}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-AOUT~0x010}}
+\label{multiboot_8h_a8ab64e4da5caf65cf7ae2991b984a3cf}
+
+
+Definition at line 9 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a3fb3ddd4db5c7fb88fd513c66577735a}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-APM@{MULTIBOOT\_\-FLAG\_\-APM}}
+\index{MULTIBOOT\_\-FLAG\_\-APM@{MULTIBOOT\_\-FLAG\_\-APM}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-APM}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-APM~0x200}}
+\label{multiboot_8h_a3fb3ddd4db5c7fb88fd513c66577735a}
+
+
+Definition at line 14 of file multiboot.h.
+
+\hypertarget{multiboot_8h_af58e2129db03f11e8f3d1be24c67f273}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-CMDLINE@{MULTIBOOT\_\-FLAG\_\-CMDLINE}}
+\index{MULTIBOOT\_\-FLAG\_\-CMDLINE@{MULTIBOOT\_\-FLAG\_\-CMDLINE}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-CMDLINE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-CMDLINE~0x004}}
+\label{multiboot_8h_af58e2129db03f11e8f3d1be24c67f273}
+
+
+Definition at line 7 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ab3d220808412fa0f715b0a1844f1843f}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-CONFIG@{MULTIBOOT\_\-FLAG\_\-CONFIG}}
+\index{MULTIBOOT\_\-FLAG\_\-CONFIG@{MULTIBOOT\_\-FLAG\_\-CONFIG}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-CONFIG}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-CONFIG~0x080}}
+\label{multiboot_8h_ab3d220808412fa0f715b0a1844f1843f}
+
+
+Definition at line 12 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a9f338ee148fe6f4c672e8e53e608d985}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-DEVICE@{MULTIBOOT\_\-FLAG\_\-DEVICE}}
+\index{MULTIBOOT\_\-FLAG\_\-DEVICE@{MULTIBOOT\_\-FLAG\_\-DEVICE}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-DEVICE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-DEVICE~0x002}}
+\label{multiboot_8h_a9f338ee148fe6f4c672e8e53e608d985}
+
+
+Definition at line 6 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ae67a3767b0bcf8b3a57a1f9d84a0d12c}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-ELF@{MULTIBOOT\_\-FLAG\_\-ELF}}
+\index{MULTIBOOT\_\-FLAG\_\-ELF@{MULTIBOOT\_\-FLAG\_\-ELF}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-ELF}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-ELF~0x020}}
+\label{multiboot_8h_ae67a3767b0bcf8b3a57a1f9d84a0d12c}
+
+
+Definition at line 10 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ab80180da32c134cf24f3dd64e3e14176}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-LOADER@{MULTIBOOT\_\-FLAG\_\-LOADER}}
+\index{MULTIBOOT\_\-FLAG\_\-LOADER@{MULTIBOOT\_\-FLAG\_\-LOADER}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-LOADER}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-LOADER~0x100}}
+\label{multiboot_8h_ab80180da32c134cf24f3dd64e3e14176}
+
+
+Definition at line 13 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a3efad85ab30d96e506aba9003c0ee4dd}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-MEM@{MULTIBOOT\_\-FLAG\_\-MEM}}
+\index{MULTIBOOT\_\-FLAG\_\-MEM@{MULTIBOOT\_\-FLAG\_\-MEM}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-MEM}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-MEM~0x001}}
+\label{multiboot_8h_a3efad85ab30d96e506aba9003c0ee4dd}
+
+
+Definition at line 5 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a2ed735dcce6c8367f6e3ee5f56e16a42}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-MMAP@{MULTIBOOT\_\-FLAG\_\-MMAP}}
+\index{MULTIBOOT\_\-FLAG\_\-MMAP@{MULTIBOOT\_\-FLAG\_\-MMAP}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-MMAP}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-MMAP~0x040}}
+\label{multiboot_8h_a2ed735dcce6c8367f6e3ee5f56e16a42}
+
+
+Definition at line 11 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a05c950e0dfa2339451b7256de3b6634b}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-MODS@{MULTIBOOT\_\-FLAG\_\-MODS}}
+\index{MULTIBOOT\_\-FLAG\_\-MODS@{MULTIBOOT\_\-FLAG\_\-MODS}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-MODS}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-MODS~0x008}}
+\label{multiboot_8h_a05c950e0dfa2339451b7256de3b6634b}
+
+
+Definition at line 8 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a852a5720b636e1bdc5799f72dd04b8d8}{
+\index{multiboot.h@{multiboot.h}!MULTIBOOT\_\-FLAG\_\-VBE@{MULTIBOOT\_\-FLAG\_\-VBE}}
+\index{MULTIBOOT\_\-FLAG\_\-VBE@{MULTIBOOT\_\-FLAG\_\-VBE}!multiboot.h@{multiboot.h}}
+\subsubsection[{MULTIBOOT\_\-FLAG\_\-VBE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MULTIBOOT\_\-FLAG\_\-VBE~0x400}}
+\label{multiboot_8h_a852a5720b636e1bdc5799f72dd04b8d8}
+
+
+Definition at line 15 of file multiboot.h.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{multiboot_8h_a680a5fb091d2c0b62c5a79b2015f5a66}{
+\index{multiboot.h@{multiboot.h}!multiboot\_\-header\_\-t@{multiboot\_\-header\_\-t}}
+\index{multiboot\_\-header\_\-t@{multiboot\_\-header\_\-t}!multiboot.h@{multiboot.h}}
+\subsubsection[{multiboot\_\-header\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf multiboot} {\bf multiboot\_\-header\_\-t}}}
+\label{multiboot_8h_a680a5fb091d2c0b62c5a79b2015f5a66}
+
+
+Definition at line 55 of file multiboot.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{multiboot_8h_a7b79550ccf44e7debf010fdbbf420327}{
+\index{multiboot.h@{multiboot.h}!\_\-\_\-attribute\_\-\_\-@{\_\-\_\-attribute\_\-\_\-}}
+\index{\_\-\_\-attribute\_\-\_\-@{\_\-\_\-attribute\_\-\_\-}!multiboot.h@{multiboot.h}}
+\subsubsection[{\_\-\_\-attribute\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf multiboot} {\bf \_\-\_\-attribute\_\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{(packed)}]{}
+\end{DoxyParamCaption}
+)}}
+\label{multiboot_8h_a7b79550ccf44e7debf010fdbbf420327}
+
+
+\subsection{Variable Documentation}
+\hypertarget{multiboot_8h_a14e4f38664cea511db42cc316940f8af}{
+\index{multiboot.h@{multiboot.h}!\_\-\_\-attribute\_\-\_\-@{\_\-\_\-attribute\_\-\_\-}}
+\index{\_\-\_\-attribute\_\-\_\-@{\_\-\_\-attribute\_\-\_\-}!multiboot.h@{multiboot.h}}
+\subsubsection[{\_\-\_\-attribute\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf elf\_\-32\_\-program\_\-header} {\bf \_\-\_\-attribute\_\-\_\-}}}
+\label{multiboot_8h_a14e4f38664cea511db42cc316940f8af}
+\hypertarget{multiboot_8h_aa31b9b932d389c8fd17de866d58dac50}{
+\index{multiboot.h@{multiboot.h}!addr@{addr}}
+\index{addr@{addr}!multiboot.h@{multiboot.h}}
+\subsubsection[{addr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf addr}}}
+\label{multiboot_8h_aa31b9b932d389c8fd17de866d58dac50}
+
+
+Definition at line 67 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a98f0d1fff74c6b5f0fa4a5bf9dbf3941}{
+\index{multiboot.h@{multiboot.h}!apm\_\-table@{apm\_\-table}}
+\index{apm\_\-table@{apm\_\-table}!multiboot.h@{multiboot.h}}
+\subsubsection[{apm\_\-table}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf apm\_\-table}}}
+\label{multiboot_8h_a98f0d1fff74c6b5f0fa4a5bf9dbf3941}
+
+
+Definition at line 79 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a27690287edb2174929a73f14555657cc}{
+\index{multiboot.h@{multiboot.h}!boot\_\-device@{boot\_\-device}}
+\index{boot\_\-device@{boot\_\-device}!multiboot.h@{multiboot.h}}
+\subsubsection[{boot\_\-device}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf boot\_\-device}}}
+\label{multiboot_8h_a27690287edb2174929a73f14555657cc}
+
+
+Definition at line 59 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ace46a6d18c43918409d9017f8412a6ed}{
+\index{multiboot.h@{multiboot.h}!boot\_\-loader\_\-name@{boot\_\-loader\_\-name}}
+\index{boot\_\-loader\_\-name@{boot\_\-loader\_\-name}!multiboot.h@{multiboot.h}}
+\subsubsection[{boot\_\-loader\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf boot\_\-loader\_\-name}}}
+\label{multiboot_8h_ace46a6d18c43918409d9017f8412a6ed}
+
+
+Definition at line 78 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ad549dcb3f338c91ed7266cf2c1a33149}{
+\index{multiboot.h@{multiboot.h}!cmdline@{cmdline}}
+\index{cmdline@{cmdline}!multiboot.h@{multiboot.h}}
+\subsubsection[{cmdline}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf cmdline}}}
+\label{multiboot_8h_ad549dcb3f338c91ed7266cf2c1a33149}
+
+
+Definition at line 60 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a46565929b56bc0ad845b3953517ab7c3}{
+\index{multiboot.h@{multiboot.h}!config\_\-table@{config\_\-table}}
+\index{config\_\-table@{config\_\-table}!multiboot.h@{multiboot.h}}
+\subsubsection[{config\_\-table}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf config\_\-table}}}
+\label{multiboot_8h_a46565929b56bc0ad845b3953517ab7c3}
+
+
+Definition at line 76 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a943f95bf914f533bef4507be8806703a}{
+\index{multiboot.h@{multiboot.h}!drives\_\-addr@{drives\_\-addr}}
+\index{drives\_\-addr@{drives\_\-addr}!multiboot.h@{multiboot.h}}
+\subsubsection[{drives\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf drives\_\-addr}}}
+\label{multiboot_8h_a943f95bf914f533bef4507be8806703a}
+
+
+Definition at line 74 of file multiboot.h.
+
+\hypertarget{multiboot_8h_acb3648ce21b06f2df6698a8a5baee9e8}{
+\index{multiboot.h@{multiboot.h}!drives\_\-length@{drives\_\-length}}
+\index{drives\_\-length@{drives\_\-length}!multiboot.h@{multiboot.h}}
+\subsubsection[{drives\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf drives\_\-length}}}
+\label{multiboot_8h_acb3648ce21b06f2df6698a8a5baee9e8}
+
+
+Definition at line 73 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a81a27ce50e78368b0d0de1e8767fd32d}{
+\index{multiboot.h@{multiboot.h}!flags@{flags}}
+\index{flags@{flags}!multiboot.h@{multiboot.h}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf flags}}}
+\label{multiboot_8h_a81a27ce50e78368b0d0de1e8767fd32d}
+
+
+Definition at line 54 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a8d8ee53e3887e1e2d32982efccd2c724}{
+\index{multiboot.h@{multiboot.h}!mem\_\-lower@{mem\_\-lower}}
+\index{mem\_\-lower@{mem\_\-lower}!multiboot.h@{multiboot.h}}
+\subsubsection[{mem\_\-lower}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mem\_\-lower}}}
+\label{multiboot_8h_a8d8ee53e3887e1e2d32982efccd2c724}
+
+
+Definition at line 56 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a3c5de351ae0fe276a301d1b9e8f895a7}{
+\index{multiboot.h@{multiboot.h}!mem\_\-upper@{mem\_\-upper}}
+\index{mem\_\-upper@{mem\_\-upper}!multiboot.h@{multiboot.h}}
+\subsubsection[{mem\_\-upper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mem\_\-upper}}}
+\label{multiboot_8h_a3c5de351ae0fe276a301d1b9e8f895a7}
+
+
+Definition at line 57 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ab4fbf3a7520be685af340d3a1f4f275e}{
+\index{multiboot.h@{multiboot.h}!mmap\_\-addr@{mmap\_\-addr}}
+\index{mmap\_\-addr@{mmap\_\-addr}!multiboot.h@{multiboot.h}}
+\subsubsection[{mmap\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mmap\_\-addr}}}
+\label{multiboot_8h_ab4fbf3a7520be685af340d3a1f4f275e}
+
+
+Definition at line 71 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a1b13b785d5b6220e5f22c1d34e7faf6a}{
+\index{multiboot.h@{multiboot.h}!mmap\_\-length@{mmap\_\-length}}
+\index{mmap\_\-length@{mmap\_\-length}!multiboot.h@{multiboot.h}}
+\subsubsection[{mmap\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mmap\_\-length}}}
+\label{multiboot_8h_a1b13b785d5b6220e5f22c1d34e7faf6a}
+
+
+Definition at line 70 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ac32e0bacd3b279c6ab9bdfbf18007646}{
+\index{multiboot.h@{multiboot.h}!mods\_\-addr@{mods\_\-addr}}
+\index{mods\_\-addr@{mods\_\-addr}!multiboot.h@{multiboot.h}}
+\subsubsection[{mods\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mods\_\-addr}}}
+\label{multiboot_8h_ac32e0bacd3b279c6ab9bdfbf18007646}
+
+
+Definition at line 63 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a5ef787141f7ca26152e574fd66f82f74}{
+\index{multiboot.h@{multiboot.h}!mods\_\-count@{mods\_\-count}}
+\index{mods\_\-count@{mods\_\-count}!multiboot.h@{multiboot.h}}
+\subsubsection[{mods\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mods\_\-count}}}
+\label{multiboot_8h_a5ef787141f7ca26152e574fd66f82f74}
+
+
+Definition at line 62 of file multiboot.h.
+
+\hypertarget{multiboot_8h_afbfdd05b9427739fb809284a10183bff}{
+\index{multiboot.h@{multiboot.h}!num@{num}}
+\index{num@{num}!multiboot.h@{multiboot.h}}
+\subsubsection[{num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf num}}}
+\label{multiboot_8h_afbfdd05b9427739fb809284a10183bff}
+
+
+Definition at line 65 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a75248e08ec04ba109698344a7c05115e}{
+\index{multiboot.h@{multiboot.h}!shndx@{shndx}}
+\index{shndx@{shndx}!multiboot.h@{multiboot.h}}
+\subsubsection[{shndx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf shndx}}}
+\label{multiboot_8h_a75248e08ec04ba109698344a7c05115e}
+
+
+Definition at line 68 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a0d40f1591c12f359c3fa3f982f9a221d}{
+\index{multiboot.h@{multiboot.h}!size@{size}}
+\index{size@{size}!multiboot.h@{multiboot.h}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf size}}}
+\label{multiboot_8h_a0d40f1591c12f359c3fa3f982f9a221d}
+
+
+Definition at line 66 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a48c4060b1df334b13721088a9aba6995}{
+\index{multiboot.h@{multiboot.h}!vbe\_\-control\_\-info@{vbe\_\-control\_\-info}}
+\index{vbe\_\-control\_\-info@{vbe\_\-control\_\-info}!multiboot.h@{multiboot.h}}
+\subsubsection[{vbe\_\-control\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf vbe\_\-control\_\-info}}}
+\label{multiboot_8h_a48c4060b1df334b13721088a9aba6995}
+
+
+Definition at line 81 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a5f4fc4febf743eb57416d61984e63d4e}{
+\index{multiboot.h@{multiboot.h}!vbe\_\-interface\_\-len@{vbe\_\-interface\_\-len}}
+\index{vbe\_\-interface\_\-len@{vbe\_\-interface\_\-len}!multiboot.h@{multiboot.h}}
+\subsubsection[{vbe\_\-interface\_\-len}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf vbe\_\-interface\_\-len}}}
+\label{multiboot_8h_a5f4fc4febf743eb57416d61984e63d4e}
+
+
+Definition at line 86 of file multiboot.h.
+
+\hypertarget{multiboot_8h_aad2e389fc843b242b5e824fda447797f}{
+\index{multiboot.h@{multiboot.h}!vbe\_\-interface\_\-off@{vbe\_\-interface\_\-off}}
+\index{vbe\_\-interface\_\-off@{vbe\_\-interface\_\-off}!multiboot.h@{multiboot.h}}
+\subsubsection[{vbe\_\-interface\_\-off}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf vbe\_\-interface\_\-off}}}
+\label{multiboot_8h_aad2e389fc843b242b5e824fda447797f}
+
+
+Definition at line 85 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a32a42db201d91f243b3e27ca770faaa4}{
+\index{multiboot.h@{multiboot.h}!vbe\_\-interface\_\-seg@{vbe\_\-interface\_\-seg}}
+\index{vbe\_\-interface\_\-seg@{vbe\_\-interface\_\-seg}!multiboot.h@{multiboot.h}}
+\subsubsection[{vbe\_\-interface\_\-seg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf vbe\_\-interface\_\-seg}}}
+\label{multiboot_8h_a32a42db201d91f243b3e27ca770faaa4}
+
+
+Definition at line 84 of file multiboot.h.
+
+\hypertarget{multiboot_8h_ae4c03bb951f6eef5e87508d3c888e137}{
+\index{multiboot.h@{multiboot.h}!vbe\_\-mode@{vbe\_\-mode}}
+\index{vbe\_\-mode@{vbe\_\-mode}!multiboot.h@{multiboot.h}}
+\subsubsection[{vbe\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf vbe\_\-mode}}}
+\label{multiboot_8h_ae4c03bb951f6eef5e87508d3c888e137}
+
+
+Definition at line 83 of file multiboot.h.
+
+\hypertarget{multiboot_8h_a3a9e63c4009b2f179bbec54a87720f4f}{
+\index{multiboot.h@{multiboot.h}!vbe\_\-mode\_\-info@{vbe\_\-mode\_\-info}}
+\index{vbe\_\-mode\_\-info@{vbe\_\-mode\_\-info}!multiboot.h@{multiboot.h}}
+\subsubsection[{vbe\_\-mode\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf vbe\_\-mode\_\-info}}}
+\label{multiboot_8h_a3a9e63c4009b2f179bbec54a87720f4f}
+
+
+Definition at line 82 of file multiboot.h.
+

@@ -1,0 +1,229 @@
+\hypertarget{initrd_8c}{
+\section{Kernel/sources/fs/initrd.c File Reference}
+\label{initrd_8c}\index{Kernel/sources/fs/initrd.c@{Kernel/sources/fs/initrd.c}}
+}
+{\ttfamily \#include \char`\"{}initrd.h\char`\"{}}\par
+{\ttfamily \#include $<$types/int\_\-types.h$>$}\par
+{\ttfamily \#include $<$initrd/initrd\_\-header.h$>$}\par
+{\ttfamily \#include $<$initrd/initrd\_\-dirent.h$>$}\par
+{\ttfamily \#include $<$initrd/initrd\_\-fent.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$debug/debug.h$>$}\par
+{\ttfamily \#include $<$panic/panic.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structdirent}{dirent} $\ast$ \hyperlink{initrd_8c_a99fc7b58db443ec9724e97f68bb7d097}{ird\_\-root\_\-readdir} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} idx)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{initrd_8c_ac75b5411098ad82a45642e5d167759eb}{ird\_\-root\_\-finddir} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, char $\ast$\hyperlink{initrd__fent_8h_a93a4209b66c75fd711969ba8dcd926f5}{name})
+\item 
+struct \hyperlink{structdirent}{dirent} $\ast$ \hyperlink{initrd_8c_aac81ec43c72c6f21e73e7f2bea674144}{ird\_\-dir\_\-readdir} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} idx)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{initrd_8c_a8323a1853228aa77cb89e512dee2b114}{ird\_\-dir\_\-finddir} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, char $\ast$\hyperlink{initrd__fent_8h_a93a4209b66c75fd711969ba8dcd926f5}{name})
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd_8c_ac88f507804f0cd1c22ef2f8811b10886}{read\_\-ird} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} offset, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd__fent_8h_a0d40f1591c12f359c3fa3f982f9a221d}{size}, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$buffer)
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd_8c_af784e9bb5d31ce1fcfab6684792f7576}{write\_\-ird} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} offset, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd__fent_8h_a0d40f1591c12f359c3fa3f982f9a221d}{size}, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} $\ast$buffer)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{initrd_8c_a660bcc4a63d45453aa704d9a108089cb}{initialize\_\-initrd} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd__fent_8h_a292119c57ee24c2a250283318f2c34fd}{start}, char $\ast$\hyperlink{initrd__fent_8h_a93a4209b66c75fd711969ba8dcd926f5}{name}, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$parent)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd_8c_a8d322527c14a8aac265695730208e673}{mem\_\-start} = 0
+\item 
+static \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} $\ast$ \hyperlink{initrd_8c_a37fc013761b9275a0a27d69763ec9e7f}{start\_\-list} = 0
+\item 
+static \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{initrd_8c_a99a22b0e6cdd7a0e9e39fab5d42faeab}{file\_\-list} = 0
+\item 
+static \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd_8c_aafccbfd667ac5d52007ff9027b0f9791}{num\_\-files} = 0
+\item 
+static \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} $\ast$$\ast$ \hyperlink{initrd_8c_a21232c0cac18020ff3d913b5fe656580}{dir\_\-file\_\-list} = 0
+\item 
+static \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{initrd_8c_a271e204d2a63992c3cb91b060944d3f9}{dir\_\-list} = 0
+\item 
+static \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{initrd_8c_a4e1eaaa4be51e4483e68d4ff48c02e4c}{num\_\-directories} = 0
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{initrd_8c_a4584965af9ef4c66e787deaf6260b886}{initrd\_\-root\_\-node} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{initrd_8c_a660bcc4a63d45453aa704d9a108089cb}{
+\index{initrd.c@{initrd.c}!initialize\_\-initrd@{initialize\_\-initrd}}
+\index{initialize\_\-initrd@{initialize\_\-initrd}!initrd.c@{initrd.c}}
+\subsubsection[{initialize\_\-initrd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ initialize\_\-initrd (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ start, }
+\item[{char $\ast$}]{ name, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ parent}
+\end{DoxyParamCaption}
+)}}
+\label{initrd_8c_a660bcc4a63d45453aa704d9a108089cb}
+
+
+Definition at line 100 of file initrd.c.
+
+\hypertarget{initrd_8c_a8323a1853228aa77cb89e512dee2b114}{
+\index{initrd.c@{initrd.c}!ird\_\-dir\_\-finddir@{ird\_\-dir\_\-finddir}}
+\index{ird\_\-dir\_\-finddir@{ird\_\-dir\_\-finddir}!initrd.c@{initrd.c}}
+\subsubsection[{ird\_\-dir\_\-finddir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ ird\_\-dir\_\-finddir (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{char $\ast$}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{initrd_8c_a8323a1853228aa77cb89e512dee2b114}
+
+
+Definition at line 71 of file initrd.c.
+
+\hypertarget{initrd_8c_aac81ec43c72c6f21e73e7f2bea674144}{
+\index{initrd.c@{initrd.c}!ird\_\-dir\_\-readdir@{ird\_\-dir\_\-readdir}}
+\index{ird\_\-dir\_\-readdir@{ird\_\-dir\_\-readdir}!initrd.c@{initrd.c}}
+\subsubsection[{ird\_\-dir\_\-readdir}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf dirent}$\ast$ ird\_\-dir\_\-readdir (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ idx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}read\mbox{]}}}}
+\label{initrd_8c_aac81ec43c72c6f21e73e7f2bea674144}
+
+
+Definition at line 56 of file initrd.c.
+
+\hypertarget{initrd_8c_ac75b5411098ad82a45642e5d167759eb}{
+\index{initrd.c@{initrd.c}!ird\_\-root\_\-finddir@{ird\_\-root\_\-finddir}}
+\index{ird\_\-root\_\-finddir@{ird\_\-root\_\-finddir}!initrd.c@{initrd.c}}
+\subsubsection[{ird\_\-root\_\-finddir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ ird\_\-root\_\-finddir (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{char $\ast$}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{initrd_8c_ac75b5411098ad82a45642e5d167759eb}
+
+
+Definition at line 41 of file initrd.c.
+
+\hypertarget{initrd_8c_a99fc7b58db443ec9724e97f68bb7d097}{
+\index{initrd.c@{initrd.c}!ird\_\-root\_\-readdir@{ird\_\-root\_\-readdir}}
+\index{ird\_\-root\_\-readdir@{ird\_\-root\_\-readdir}!initrd.c@{initrd.c}}
+\subsubsection[{ird\_\-root\_\-readdir}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf dirent}$\ast$ ird\_\-root\_\-readdir (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ idx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}read\mbox{]}}}}
+\label{initrd_8c_a99fc7b58db443ec9724e97f68bb7d097}
+
+
+Definition at line 28 of file initrd.c.
+
+\hypertarget{initrd_8c_ac88f507804f0cd1c22ef2f8811b10886}{
+\index{initrd.c@{initrd.c}!read\_\-ird@{read\_\-ird}}
+\index{read\_\-ird@{read\_\-ird}!initrd.c@{initrd.c}}
+\subsubsection[{read\_\-ird}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} read\_\-ird (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ offset, }
+\item[{{\bf uint32}}]{ size, }
+\item[{{\bf uint8} $\ast$}]{ buffer}
+\end{DoxyParamCaption}
+)}}
+\label{initrd_8c_ac88f507804f0cd1c22ef2f8811b10886}
+
+
+Definition at line 87 of file initrd.c.
+
+\hypertarget{initrd_8c_af784e9bb5d31ce1fcfab6684792f7576}{
+\index{initrd.c@{initrd.c}!write\_\-ird@{write\_\-ird}}
+\index{write\_\-ird@{write\_\-ird}!initrd.c@{initrd.c}}
+\subsubsection[{write\_\-ird}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} write\_\-ird (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ offset, }
+\item[{{\bf uint32}}]{ size, }
+\item[{{\bf uint8} $\ast$}]{ buffer}
+\end{DoxyParamCaption}
+)}}
+\label{initrd_8c_af784e9bb5d31ce1fcfab6684792f7576}
+
+
+Definition at line 95 of file initrd.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{initrd_8c_a21232c0cac18020ff3d913b5fe656580}{
+\index{initrd.c@{initrd.c}!dir\_\-file\_\-list@{dir\_\-file\_\-list}}
+\index{dir\_\-file\_\-list@{dir\_\-file\_\-list}!initrd.c@{initrd.c}}
+\subsubsection[{dir\_\-file\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32}$\ast$$\ast$ {\bf dir\_\-file\_\-list} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_a21232c0cac18020ff3d913b5fe656580}
+
+
+Definition at line 22 of file initrd.c.
+
+\hypertarget{initrd_8c_a271e204d2a63992c3cb91b060944d3f9}{
+\index{initrd.c@{initrd.c}!dir\_\-list@{dir\_\-list}}
+\index{dir\_\-list@{dir\_\-list}!initrd.c@{initrd.c}}
+\subsubsection[{dir\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ {\bf dir\_\-list} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_a271e204d2a63992c3cb91b060944d3f9}
+
+
+Definition at line 23 of file initrd.c.
+
+\hypertarget{initrd_8c_a99a22b0e6cdd7a0e9e39fab5d42faeab}{
+\index{initrd.c@{initrd.c}!file\_\-list@{file\_\-list}}
+\index{file\_\-list@{file\_\-list}!initrd.c@{initrd.c}}
+\subsubsection[{file\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ {\bf file\_\-list} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_a99a22b0e6cdd7a0e9e39fab5d42faeab}
+
+
+Definition at line 19 of file initrd.c.
+
+\hypertarget{initrd_8c_a4584965af9ef4c66e787deaf6260b886}{
+\index{initrd.c@{initrd.c}!initrd\_\-root\_\-node@{initrd\_\-root\_\-node}}
+\index{initrd\_\-root\_\-node@{initrd\_\-root\_\-node}!initrd.c@{initrd.c}}
+\subsubsection[{initrd\_\-root\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ {\bf initrd\_\-root\_\-node} = 0}}
+\label{initrd_8c_a4584965af9ef4c66e787deaf6260b886}
+
+
+Definition at line 26 of file initrd.c.
+
+\hypertarget{initrd_8c_a8d322527c14a8aac265695730208e673}{
+\index{initrd.c@{initrd.c}!mem\_\-start@{mem\_\-start}}
+\index{mem\_\-start@{mem\_\-start}!initrd.c@{initrd.c}}
+\subsubsection[{mem\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf mem\_\-start} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_a8d322527c14a8aac265695730208e673}
+
+
+Definition at line 16 of file initrd.c.
+
+\hypertarget{initrd_8c_a4e1eaaa4be51e4483e68d4ff48c02e4c}{
+\index{initrd.c@{initrd.c}!num\_\-directories@{num\_\-directories}}
+\index{num\_\-directories@{num\_\-directories}!initrd.c@{initrd.c}}
+\subsubsection[{num\_\-directories}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf num\_\-directories} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_a4e1eaaa4be51e4483e68d4ff48c02e4c}
+
+
+Definition at line 24 of file initrd.c.
+
+\hypertarget{initrd_8c_aafccbfd667ac5d52007ff9027b0f9791}{
+\index{initrd.c@{initrd.c}!num\_\-files@{num\_\-files}}
+\index{num\_\-files@{num\_\-files}!initrd.c@{initrd.c}}
+\subsubsection[{num\_\-files}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf num\_\-files} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_aafccbfd667ac5d52007ff9027b0f9791}
+
+
+Definition at line 20 of file initrd.c.
+
+\hypertarget{initrd_8c_a37fc013761b9275a0a27d69763ec9e7f}{
+\index{initrd.c@{initrd.c}!start\_\-list@{start\_\-list}}
+\index{start\_\-list@{start\_\-list}!initrd.c@{initrd.c}}
+\subsubsection[{start\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32}$\ast$ {\bf start\_\-list} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{initrd_8c_a37fc013761b9275a0a27d69763ec9e7f}
+
+
+Definition at line 18 of file initrd.c.
+

@@ -1,0 +1,180 @@
+\hypertarget{structfilesystem__node}{
+\section{filesystem\_\-node Struct Reference}
+\label{structfilesystem__node}\index{filesystem\_\-node@{filesystem\_\-node}}
+}
+
+
+{\ttfamily \#include $<$vfs.h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{structfilesystem__node_afa5e9c7fb847e9afe73997d69e961346}{name} \mbox{[}128\mbox{]}
+\item 
+struct \hyperlink{structfilesystem__node}{filesystem\_\-node} $\ast$ \hyperlink{structfilesystem__node_ab3018c8aaf8bafd7a2c85f467887d3d3}{parent}
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{structfilesystem__node_a99cca728c467d0996145533ebb1b7d6b}{flags}
+\item 
+unsigned long \hyperlink{structfilesystem__node_a4d273cc3bb51e987b660ec3e5389389a}{length}
+\item 
+unsigned long \hyperlink{structfilesystem__node_a4bd1dd0eb66e269e50dc84b4700d153d}{inode}
+\item 
+\hyperlink{structdisk__device}{disk\_\-device} $\ast$ \hyperlink{structfilesystem__node_abbd4a067154755521156cf66afec15b6}{device}
+\item 
+\hyperlink{vfs_8h_a8a01766e597d4b5460e7492165497840}{io\_\-operation} \hyperlink{structfilesystem__node_aea69bcf76b190d8d85745816ed072e75}{write}
+\item 
+\hyperlink{vfs_8h_a8a01766e597d4b5460e7492165497840}{io\_\-operation} \hyperlink{structfilesystem__node_a085044cdf553849d4b6719c13242c565}{read}
+\item 
+\hyperlink{vfs_8h_ad910bfb61b46ca535ff2eca0402c3c9c}{cmd\_\-operation} \hyperlink{structfilesystem__node_a3c2d29f74f04c0f194103842a433cd71}{open}
+\item 
+\hyperlink{vfs_8h_ad910bfb61b46ca535ff2eca0402c3c9c}{cmd\_\-operation} \hyperlink{structfilesystem__node_af6ffe9e86be2473a7e7d250cc428f682}{close}
+\item 
+\hyperlink{vfs_8h_a8a1194e474c976c843e89160c4952553}{read\_\-directory\_\-t} \hyperlink{structfilesystem__node_aa0897739cc3714c617920250c743f8c4}{readdir}
+\item 
+\hyperlink{vfs_8h_a1346048d296b171432318f1dc34a57e8}{find\_\-directory\_\-t} \hyperlink{structfilesystem__node_a60a6af56c8e909f3de33a189309f2444}{finddir}
+\item 
+\hyperlink{vfs_8h_a8681ccabf6da3c6e3f97a3274157b331}{bind\_\-node\_\-t} \hyperlink{structfilesystem__node_acfa8d590a2f85e52e5653e6616a1019f}{bindnode}
+\item 
+\hyperlink{vfs_8h_a8681ccabf6da3c6e3f97a3274157b331}{bind\_\-node\_\-t} \hyperlink{structfilesystem__node_a9b9b272d32b2dd8402bc00bc4cf58994}{unbindnode}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file vfs.h.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{structfilesystem__node_acfa8d590a2f85e52e5653e6616a1019f}{
+\index{filesystem\_\-node@{filesystem\_\-node}!bindnode@{bindnode}}
+\index{bindnode@{bindnode}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{bindnode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bind\_\-node\_\-t} {\bf filesystem\_\-node::bindnode}}}
+\label{structfilesystem__node_acfa8d590a2f85e52e5653e6616a1019f}
+
+
+Definition at line 45 of file vfs.h.
+
+\hypertarget{structfilesystem__node_af6ffe9e86be2473a7e7d250cc428f682}{
+\index{filesystem\_\-node@{filesystem\_\-node}!close@{close}}
+\index{close@{close}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmd\_\-operation} {\bf filesystem\_\-node::close}}}
+\label{structfilesystem__node_af6ffe9e86be2473a7e7d250cc428f682}
+
+
+Definition at line 40 of file vfs.h.
+
+\hypertarget{structfilesystem__node_abbd4a067154755521156cf66afec15b6}{
+\index{filesystem\_\-node@{filesystem\_\-node}!device@{device}}
+\index{device@{device}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{device}]{\setlength{\rightskip}{0pt plus 5cm}{\bf disk\_\-device}$\ast$ {\bf filesystem\_\-node::device}}}
+\label{structfilesystem__node_abbd4a067154755521156cf66afec15b6}
+
+
+Definition at line 34 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a60a6af56c8e909f3de33a189309f2444}{
+\index{filesystem\_\-node@{filesystem\_\-node}!finddir@{finddir}}
+\index{finddir@{finddir}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{finddir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf find\_\-directory\_\-t} {\bf filesystem\_\-node::finddir}}}
+\label{structfilesystem__node_a60a6af56c8e909f3de33a189309f2444}
+
+
+Definition at line 43 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a99cca728c467d0996145533ebb1b7d6b}{
+\index{filesystem\_\-node@{filesystem\_\-node}!flags@{flags}}
+\index{flags@{flags}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf filesystem\_\-node::flags}}}
+\label{structfilesystem__node_a99cca728c467d0996145533ebb1b7d6b}
+
+
+Definition at line 31 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a4bd1dd0eb66e269e50dc84b4700d153d}{
+\index{filesystem\_\-node@{filesystem\_\-node}!inode@{inode}}
+\index{inode@{inode}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{inode}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf filesystem\_\-node::inode}}}
+\label{structfilesystem__node_a4bd1dd0eb66e269e50dc84b4700d153d}
+
+
+Definition at line 33 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a4d273cc3bb51e987b660ec3e5389389a}{
+\index{filesystem\_\-node@{filesystem\_\-node}!length@{length}}
+\index{length@{length}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf filesystem\_\-node::length}}}
+\label{structfilesystem__node_a4d273cc3bb51e987b660ec3e5389389a}
+
+
+Definition at line 32 of file vfs.h.
+
+\hypertarget{structfilesystem__node_afa5e9c7fb847e9afe73997d69e961346}{
+\index{filesystem\_\-node@{filesystem\_\-node}!name@{name}}
+\index{name@{name}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf filesystem\_\-node::name}\mbox{[}128\mbox{]}}}
+\label{structfilesystem__node_afa5e9c7fb847e9afe73997d69e961346}
+
+
+Definition at line 28 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a3c2d29f74f04c0f194103842a433cd71}{
+\index{filesystem\_\-node@{filesystem\_\-node}!open@{open}}
+\index{open@{open}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{open}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmd\_\-operation} {\bf filesystem\_\-node::open}}}
+\label{structfilesystem__node_a3c2d29f74f04c0f194103842a433cd71}
+
+
+Definition at line 39 of file vfs.h.
+
+\hypertarget{structfilesystem__node_ab3018c8aaf8bafd7a2c85f467887d3d3}{
+\index{filesystem\_\-node@{filesystem\_\-node}!parent@{parent}}
+\index{parent@{parent}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{parent}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf filesystem\_\-node}$\ast$ {\bf filesystem\_\-node::parent}}}
+\label{structfilesystem__node_ab3018c8aaf8bafd7a2c85f467887d3d3}
+
+
+Definition at line 29 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a085044cdf553849d4b6719c13242c565}{
+\index{filesystem\_\-node@{filesystem\_\-node}!read@{read}}
+\index{read@{read}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{read}]{\setlength{\rightskip}{0pt plus 5cm}{\bf io\_\-operation} {\bf filesystem\_\-node::read}}}
+\label{structfilesystem__node_a085044cdf553849d4b6719c13242c565}
+
+
+Definition at line 37 of file vfs.h.
+
+\hypertarget{structfilesystem__node_aa0897739cc3714c617920250c743f8c4}{
+\index{filesystem\_\-node@{filesystem\_\-node}!readdir@{readdir}}
+\index{readdir@{readdir}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{readdir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf read\_\-directory\_\-t} {\bf filesystem\_\-node::readdir}}}
+\label{structfilesystem__node_aa0897739cc3714c617920250c743f8c4}
+
+
+Definition at line 42 of file vfs.h.
+
+\hypertarget{structfilesystem__node_a9b9b272d32b2dd8402bc00bc4cf58994}{
+\index{filesystem\_\-node@{filesystem\_\-node}!unbindnode@{unbindnode}}
+\index{unbindnode@{unbindnode}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{unbindnode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bind\_\-node\_\-t} {\bf filesystem\_\-node::unbindnode}}}
+\label{structfilesystem__node_a9b9b272d32b2dd8402bc00bc4cf58994}
+
+
+Definition at line 46 of file vfs.h.
+
+\hypertarget{structfilesystem__node_aea69bcf76b190d8d85745816ed072e75}{
+\index{filesystem\_\-node@{filesystem\_\-node}!write@{write}}
+\index{write@{write}!filesystem_node@{filesystem\_\-node}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}{\bf io\_\-operation} {\bf filesystem\_\-node::write}}}
+\label{structfilesystem__node_aea69bcf76b190d8d85745816ed072e75}
+
+
+Definition at line 36 of file vfs.h.
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Kernel/headers/fs/\hyperlink{vfs_8h}{vfs.h}\end{DoxyCompactItemize}

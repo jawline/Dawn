@@ -1,0 +1,195 @@
+\hypertarget{API_2headers_2syscall_2syscall_8h}{
+\section{API/headers/syscall/syscall.h File Reference}
+\label{API_2headers_2syscall_2syscall_8h}\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+}
+{\ttfamily \#include $<$types/memory.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a2573f2dee9768e8cea1119fc6675f4c8}{DECL\_\-SYSCALL0}(fn)~MEM\_\-LOC syscall\_\-\#\#fn();
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a772530f5ea74459dc56d2d1601f64843}{DECL\_\-SYSCALL1}(fn, p1)~MEM\_\-LOC syscall\_\-\#\#fn(p1);
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a45c2ff8cf9a4cea9988d831f24c40641}{DECL\_\-SYSCALL2}(fn, p1, p2)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2);
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a69092cce1211a7456d5887d02fe9ff9d}{DECL\_\-SYSCALL3}(fn, p1, p2, p3)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2,p3);
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a1c38e2f9301a55ff7bc9abd13782c601}{DECL\_\-SYSCALL4}(fn, p1, p2, p3, p4)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2,p3,p4);
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a8f43ece4e4af17d3c1ad559dad050e93}{DECL\_\-SYSCALL5}(fn, p1, p2, p3, p4, p5)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2,p3,p4,p5);
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_ac1decc6f0a704cd3045c1b88fe3e1d0c}{DEFN\_\-SYSCALL0}(fn, \hyperlink{multiboot_8h_afbfdd05b9427739fb809284a10183bff}{num})
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a762f374846284febb9def5944f32249a}{DEFN\_\-SYSCALL1}(fn, \hyperlink{multiboot_8h_afbfdd05b9427739fb809284a10183bff}{num}, P1)
+\item 
+\#define \hyperlink{API_2headers_2syscall_2syscall_8h_a02c924e57e44782b0d090ef57a3a330d}{DEFN\_\-SYSCALL2}(fn, \hyperlink{multiboot_8h_afbfdd05b9427739fb809284a10183bff}{num}, P1, P2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{API_2headers_2syscall_2syscall_8h_a2573f2dee9768e8cea1119fc6675f4c8}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DECL\_\-SYSCALL0@{DECL\_\-SYSCALL0}}
+\index{DECL\_\-SYSCALL0@{DECL\_\-SYSCALL0}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DECL\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}\#define DECL\_\-SYSCALL0(
+\begin{DoxyParamCaption}
+\item[{}]{fn}
+\end{DoxyParamCaption}
+)~MEM\_\-LOC syscall\_\-\#\#fn();}}
+\label{API_2headers_2syscall_2syscall_8h_a2573f2dee9768e8cea1119fc6675f4c8}
+
+
+Definition at line 5 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a772530f5ea74459dc56d2d1601f64843}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DECL\_\-SYSCALL1@{DECL\_\-SYSCALL1}}
+\index{DECL\_\-SYSCALL1@{DECL\_\-SYSCALL1}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DECL\_\-SYSCALL1}]{\setlength{\rightskip}{0pt plus 5cm}\#define DECL\_\-SYSCALL1(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{p1}
+\end{DoxyParamCaption}
+)~MEM\_\-LOC syscall\_\-\#\#fn(p1);}}
+\label{API_2headers_2syscall_2syscall_8h_a772530f5ea74459dc56d2d1601f64843}
+
+
+Definition at line 6 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a45c2ff8cf9a4cea9988d831f24c40641}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DECL\_\-SYSCALL2@{DECL\_\-SYSCALL2}}
+\index{DECL\_\-SYSCALL2@{DECL\_\-SYSCALL2}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DECL\_\-SYSCALL2}]{\setlength{\rightskip}{0pt plus 5cm}\#define DECL\_\-SYSCALL2(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{p1, }
+\item[{}]{p2}
+\end{DoxyParamCaption}
+)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2);}}
+\label{API_2headers_2syscall_2syscall_8h_a45c2ff8cf9a4cea9988d831f24c40641}
+
+
+Definition at line 7 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a69092cce1211a7456d5887d02fe9ff9d}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DECL\_\-SYSCALL3@{DECL\_\-SYSCALL3}}
+\index{DECL\_\-SYSCALL3@{DECL\_\-SYSCALL3}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DECL\_\-SYSCALL3}]{\setlength{\rightskip}{0pt plus 5cm}\#define DECL\_\-SYSCALL3(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{p1, }
+\item[{}]{p2, }
+\item[{}]{p3}
+\end{DoxyParamCaption}
+)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2,p3);}}
+\label{API_2headers_2syscall_2syscall_8h_a69092cce1211a7456d5887d02fe9ff9d}
+
+
+Definition at line 8 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a1c38e2f9301a55ff7bc9abd13782c601}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DECL\_\-SYSCALL4@{DECL\_\-SYSCALL4}}
+\index{DECL\_\-SYSCALL4@{DECL\_\-SYSCALL4}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DECL\_\-SYSCALL4}]{\setlength{\rightskip}{0pt plus 5cm}\#define DECL\_\-SYSCALL4(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{p1, }
+\item[{}]{p2, }
+\item[{}]{p3, }
+\item[{}]{p4}
+\end{DoxyParamCaption}
+)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2,p3,p4);}}
+\label{API_2headers_2syscall_2syscall_8h_a1c38e2f9301a55ff7bc9abd13782c601}
+
+
+Definition at line 9 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a8f43ece4e4af17d3c1ad559dad050e93}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DECL\_\-SYSCALL5@{DECL\_\-SYSCALL5}}
+\index{DECL\_\-SYSCALL5@{DECL\_\-SYSCALL5}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DECL\_\-SYSCALL5}]{\setlength{\rightskip}{0pt plus 5cm}\#define DECL\_\-SYSCALL5(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{p1, }
+\item[{}]{p2, }
+\item[{}]{p3, }
+\item[{}]{p4, }
+\item[{}]{p5}
+\end{DoxyParamCaption}
+)~MEM\_\-LOC syscall\_\-\#\#fn(p1,p2,p3,p4,p5);}}
+\label{API_2headers_2syscall_2syscall_8h_a8f43ece4e4af17d3c1ad559dad050e93}
+
+
+Definition at line 10 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_ac1decc6f0a704cd3045c1b88fe3e1d0c}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFN\_\-SYSCALL0(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{{\bf num}}
+\end{DoxyParamCaption}
+)}}
+\label{API_2headers_2syscall_2syscall_8h_ac1decc6f0a704cd3045c1b88fe3e1d0c}
+{\bfseries Value:}
+\begin{DoxyCode}
+MEM_LOC syscall_##fn() \
+        { \
+         MEM_LOC a; \
+         asm volatile("int $127" : "=a" (a) : "0" (num)); \
+         return a; \
+        }
+\end{DoxyCode}
+
+
+Definition at line 12 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a762f374846284febb9def5944f32249a}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DEFN\_\-SYSCALL1@{DEFN\_\-SYSCALL1}}
+\index{DEFN\_\-SYSCALL1@{DEFN\_\-SYSCALL1}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DEFN\_\-SYSCALL1}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFN\_\-SYSCALL1(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{{\bf num}, }
+\item[{}]{P1}
+\end{DoxyParamCaption}
+)}}
+\label{API_2headers_2syscall_2syscall_8h_a762f374846284febb9def5944f32249a}
+{\bfseries Value:}
+\begin{DoxyCode}
+MEM_LOC syscall_##fn(P1 p1) \
+        { \
+         MEM_LOC a; \
+         asm volatile("int $127" : "=a" (a) : "0" (num), "b" ((int)p1)); \
+         return a; \
+        }
+\end{DoxyCode}
+
+
+Definition at line 20 of file syscall.h.
+
+\hypertarget{API_2headers_2syscall_2syscall_8h_a02c924e57e44782b0d090ef57a3a330d}{
+\index{API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}!DEFN\_\-SYSCALL2@{DEFN\_\-SYSCALL2}}
+\index{DEFN\_\-SYSCALL2@{DEFN\_\-SYSCALL2}!API/headers/syscall/syscall.h@{API/headers/syscall/syscall.h}}
+\subsubsection[{DEFN\_\-SYSCALL2}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEFN\_\-SYSCALL2(
+\begin{DoxyParamCaption}
+\item[{}]{fn, }
+\item[{}]{{\bf num}, }
+\item[{}]{P1, }
+\item[{}]{P2}
+\end{DoxyParamCaption}
+)}}
+\label{API_2headers_2syscall_2syscall_8h_a02c924e57e44782b0d090ef57a3a330d}
+{\bfseries Value:}
+\begin{DoxyCode}
+MEM_LOC syscall_##fn(P1 p1, P2 p2) \
+        { \
+         MEM_LOC a; \
+         asm volatile("int $127" : "=a" (a) : "0" (num), "b" ((int)p1), "c" ((int
+      )p2)); \
+         return a; \
+        }
+\end{DoxyCode}
+
+
+Definition at line 28 of file syscall.h.
+

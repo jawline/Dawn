@@ -20,8 +20,10 @@ cd ..
 
 
 echo "Copying Line"
+
 #Copy Line to the ramdisk dir
 cp Applications/Line/Build/Line Tools/InitRD/Line.x
+cp Drivers/test_driver/Build/test_driver.driver Tools/InitRD/test_driver.driver
 
 #Make temporary directory
 echo "Recompiling initial RAM disks";

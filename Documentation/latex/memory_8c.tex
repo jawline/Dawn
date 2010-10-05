@@ -1,0 +1,85 @@
+\hypertarget{memory_8c}{
+\section{API/sources/system/memory.c File Reference}
+\label{memory_8c}\index{API/sources/system/memory.c@{API/sources/system/memory.c}}
+}
+{\ttfamily \#include $<$system/memory.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{memory_8c_a7af8f2850120c920bd7ffb3156da77da}{DEFN\_\-SYSCALL0} (num\_\-free\_\-frames, 7)
+\item 
+\hyperlink{memory_8c_a720219f870bd5ce9a843771145d1644b}{DEFN\_\-SYSCALL0} (get\_\-page\_\-size, 8)
+\item 
+MEM\_\-LOC \hyperlink{memory_8c_a22b353657825a764427022e0cf41eceb}{getNumberOfFreeFrames} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of free frames of memory the system has available. \item\end{DoxyCompactList}\item 
+unsigned long \hyperlink{memory_8c_af326675c9337f4c305d86bac0542dab0}{getPageSize} ()
+\begin{DoxyCompactList}\small\item\em Returns the size of each page/frame. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{memory_8c_a7af8f2850120c920bd7ffb3156da77da}{
+\index{memory.c@{memory.c}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!memory.c@{memory.c}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL0 (
+\begin{DoxyParamCaption}
+\item[{num\_\-free\_\-frames}]{, }
+\item[{7}]{}
+\end{DoxyParamCaption}
+)}}
+\label{memory_8c_a7af8f2850120c920bd7ffb3156da77da}
+\hypertarget{memory_8c_a720219f870bd5ce9a843771145d1644b}{
+\index{memory.c@{memory.c}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!memory.c@{memory.c}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL0 (
+\begin{DoxyParamCaption}
+\item[{get\_\-page\_\-size}]{, }
+\item[{8}]{}
+\end{DoxyParamCaption}
+)}}
+\label{memory_8c_a720219f870bd5ce9a843771145d1644b}
+\hypertarget{memory_8c_a22b353657825a764427022e0cf41eceb}{
+\index{memory.c@{memory.c}!getNumberOfFreeFrames@{getNumberOfFreeFrames}}
+\index{getNumberOfFreeFrames@{getNumberOfFreeFrames}!memory.c@{memory.c}}
+\subsubsection[{getNumberOfFreeFrames}]{\setlength{\rightskip}{0pt plus 5cm}MEM\_\-LOC getNumberOfFreeFrames (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{memory_8c_a22b353657825a764427022e0cf41eceb}
+
+
+Returns the number of free frames of memory the system has available. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Integer with the value of the number of free frames available 
+\end{DoxyReturn}
+
+
+Definition at line 6 of file memory.c.
+
+\hypertarget{memory_8c_af326675c9337f4c305d86bac0542dab0}{
+\index{memory.c@{memory.c}!getPageSize@{getPageSize}}
+\index{getPageSize@{getPageSize}!memory.c@{memory.c}}
+\subsubsection[{getPageSize}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long getPageSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{memory_8c_af326675c9337f4c305d86bac0542dab0}
+
+
+Returns the size of each page/frame. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A integer with the value of each page/frame (In bytes) 
+\end{DoxyReturn}
+
+
+Definition at line 11 of file memory.c.
+

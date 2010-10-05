@@ -1,0 +1,100 @@
+\hypertarget{terminal_8h}{
+\section{Shared/headers/terminal/terminal.h File Reference}
+\label{terminal_8h}\index{Shared/headers/terminal/terminal.h@{Shared/headers/terminal/terminal.h}}
+}
+{\ttfamily \#include $<$common.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structabstract__terminal}{abstract\_\-terminal}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{terminal_8h_a6bccfe4a48fc500d6b6c0e18205ca867}{term\_\-updatecursor} )(struct \hyperlink{structabstract__terminal}{abstract\_\-terminal} $\ast$term)
+\item 
+typedef void($\ast$ \hyperlink{terminal_8h_a9090c5151fee9a12c9bd850f32c232da}{term\_\-putc} )(struct \hyperlink{structabstract__terminal}{abstract\_\-terminal} $\ast$term, char c)
+\item 
+typedef void($\ast$ \hyperlink{terminal_8h_a03b02cb5633f9e87b0546ab6a96497ae}{term\_\-setfg} )(struct \hyperlink{structabstract__terminal}{abstract\_\-terminal} $\ast$term, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} col)
+\item 
+typedef void($\ast$ \hyperlink{terminal_8h_a3ee379a2f79f841149100ad1fe952fd9}{term\_\-setbg} )(struct \hyperlink{structabstract__terminal}{abstract\_\-terminal} $\ast$term, \hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} col)
+\item 
+typedef void($\ast$ \hyperlink{terminal_8h_a290c20f21648df272685de95bcc2dd3b}{term\_\-clear} )(struct \hyperlink{structabstract__terminal}{abstract\_\-terminal} $\ast$term)
+\item 
+typedef struct \hyperlink{structabstract__terminal}{abstract\_\-terminal} \hyperlink{terminal_8h_ab48e005c01912c88286ff0aa2f5400a4}{terminal\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structabstract__terminal}{terminal\_\-t} $\ast$ \hyperlink{terminal_8h_ae18af59edf25048efd2aac9a379674ca}{make\_\-terminal} (unsigned int width, unsigned int height)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{terminal_8h_a290c20f21648df272685de95bcc2dd3b}{
+\index{terminal.h@{terminal.h}!term\_\-clear@{term\_\-clear}}
+\index{term\_\-clear@{term\_\-clear}!terminal.h@{terminal.h}}
+\subsubsection[{term\_\-clear}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf term\_\-clear})(struct {\bf abstract\_\-terminal} $\ast$term)}}
+\label{terminal_8h_a290c20f21648df272685de95bcc2dd3b}
+
+
+Definition at line 13 of file terminal.h.
+
+\hypertarget{terminal_8h_a9090c5151fee9a12c9bd850f32c232da}{
+\index{terminal.h@{terminal.h}!term\_\-putc@{term\_\-putc}}
+\index{term\_\-putc@{term\_\-putc}!terminal.h@{terminal.h}}
+\subsubsection[{term\_\-putc}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf term\_\-putc})(struct {\bf abstract\_\-terminal} $\ast$term, char c)}}
+\label{terminal_8h_a9090c5151fee9a12c9bd850f32c232da}
+
+
+Definition at line 8 of file terminal.h.
+
+\hypertarget{terminal_8h_a3ee379a2f79f841149100ad1fe952fd9}{
+\index{terminal.h@{terminal.h}!term\_\-setbg@{term\_\-setbg}}
+\index{term\_\-setbg@{term\_\-setbg}!terminal.h@{terminal.h}}
+\subsubsection[{term\_\-setbg}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf term\_\-setbg})(struct {\bf abstract\_\-terminal} $\ast$term, {\bf uint8} col)}}
+\label{terminal_8h_a3ee379a2f79f841149100ad1fe952fd9}
+
+
+Definition at line 11 of file terminal.h.
+
+\hypertarget{terminal_8h_a03b02cb5633f9e87b0546ab6a96497ae}{
+\index{terminal.h@{terminal.h}!term\_\-setfg@{term\_\-setfg}}
+\index{term\_\-setfg@{term\_\-setfg}!terminal.h@{terminal.h}}
+\subsubsection[{term\_\-setfg}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf term\_\-setfg})(struct {\bf abstract\_\-terminal} $\ast$term, {\bf uint8} col)}}
+\label{terminal_8h_a03b02cb5633f9e87b0546ab6a96497ae}
+
+
+Definition at line 10 of file terminal.h.
+
+\hypertarget{terminal_8h_a6bccfe4a48fc500d6b6c0e18205ca867}{
+\index{terminal.h@{terminal.h}!term\_\-updatecursor@{term\_\-updatecursor}}
+\index{term\_\-updatecursor@{term\_\-updatecursor}!terminal.h@{terminal.h}}
+\subsubsection[{term\_\-updatecursor}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf term\_\-updatecursor})(struct {\bf abstract\_\-terminal} $\ast$term)}}
+\label{terminal_8h_a6bccfe4a48fc500d6b6c0e18205ca867}
+
+
+Definition at line 7 of file terminal.h.
+
+\hypertarget{terminal_8h_ab48e005c01912c88286ff0aa2f5400a4}{
+\index{terminal.h@{terminal.h}!terminal\_\-t@{terminal\_\-t}}
+\index{terminal\_\-t@{terminal\_\-t}!terminal.h@{terminal.h}}
+\subsubsection[{terminal\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf abstract\_\-terminal} {\bf terminal\_\-t}}}
+\label{terminal_8h_ab48e005c01912c88286ff0aa2f5400a4}
+
+
+Definition at line 36 of file terminal.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{terminal_8h_ae18af59edf25048efd2aac9a379674ca}{
+\index{terminal.h@{terminal.h}!make\_\-terminal@{make\_\-terminal}}
+\index{make\_\-terminal@{make\_\-terminal}!terminal.h@{terminal.h}}
+\subsubsection[{make\_\-terminal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf terminal\_\-t}$\ast$ make\_\-terminal (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ width, }
+\item[{unsigned int}]{ height}
+\end{DoxyParamCaption}
+)}}
+\label{terminal_8h_ae18af59edf25048efd2aac9a379674ca}

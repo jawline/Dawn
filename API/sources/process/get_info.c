@@ -8,9 +8,9 @@ DEFN_SYSCALL1(valid_process, 16, unsigned int);
 DEFN_SYSCALL1(get_processing_time, 18, unsigned int);
 DEFN_SYSCALL2(get_process_name, 19, char*, unsigned int);
 
-int getProcessID(unsigned int iter)
+int getProcessID(unsigned int n)
 {
-	int pid = syscall_get_process_id(iter);
+	int pid = syscall_get_process_id(n);
 	return pid;
 }
 

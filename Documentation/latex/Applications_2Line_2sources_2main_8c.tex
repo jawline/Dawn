@@ -1,0 +1,112 @@
+\hypertarget{Applications_2Line_2sources_2main_8c}{
+\section{Applications/Line/sources/main.c File Reference}
+\label{Applications_2Line_2sources_2main_8c}\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+}
+{\ttfamily \#include $<$types/memory.h$>$}\par
+{\ttfamily \#include $<$common.h$>$}\par
+{\ttfamily \#include $<$printf.h$>$}\par
+{\ttfamily \#include $<$system/reboot.h$>$}\par
+{\ttfamily \#include $<$version/kernel\_\-version.h$>$}\par
+{\ttfamily \#include $<$version/os\_\-version.h$>$}\par
+{\ttfamily \#include $<$process/postbox\_\-api.h$>$}\par
+{\ttfamily \#include $<$syscall/syscall.h$>$}\par
+{\ttfamily \#include $<$process/message.h$>$}\par
+{\ttfamily \#include $<$process/events.h$>$}\par
+{\ttfamily \#include $<$process/process\_\-info.h$>$}\par
+{\ttfamily \#include $<$process/cprocess.h$>$}\par
+{\ttfamily \#include $<$messages/messages.h$>$}\par
+{\ttfamily \#include $<$input/devices.h$>$}\par
+{\ttfamily \#include $<$clock/clock.h$>$}\par
+{\ttfamily \#include $<$heap/heap.h$>$}\par
+{\ttfamily \#include $<$process/get\_\-info.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Applications_2Line_2sources_2main_8c_a040b92bdcfb99300fdffa830fc8697af}{list\_\-chunks} (\hyperlink{structheap__t}{heap\_\-t} $\ast$heap)
+\item 
+char \hyperlink{Applications_2Line_2sources_2main_8c_ab79f2f12e3f7af25ee8d68e57f237994}{exec\_\-cmd} ()
+\item 
+int \hyperlink{Applications_2Line_2sources_2main_8c_ac846977f69fcf6e59be102495930be63}{main} (int argc, void $\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{Applications_2Line_2sources_2main_8c_ad77c5e0e7c4501cc9e18f66982ca9091}{Pointer} \mbox{[}1024\mbox{]}
+\item 
+int \hyperlink{Applications_2Line_2sources_2main_8c_a8d47de3dce9519c303cbc660ff504562}{c\_\-ptr} = 0
+\item 
+unsigned long \hyperlink{Applications_2Line_2sources_2main_8c_a0cbac01d43afeb714499fb9a897c2454}{cps} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{Applications_2Line_2sources_2main_8c_ab79f2f12e3f7af25ee8d68e57f237994}{
+\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}!exec\_\-cmd@{exec\_\-cmd}}
+\index{exec\_\-cmd@{exec\_\-cmd}!Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+\subsubsection[{exec\_\-cmd}]{\setlength{\rightskip}{0pt plus 5cm}char exec\_\-cmd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{Applications_2Line_2sources_2main_8c_ab79f2f12e3f7af25ee8d68e57f237994}
+
+
+Definition at line 45 of file main.c.
+
+\hypertarget{Applications_2Line_2sources_2main_8c_a040b92bdcfb99300fdffa830fc8697af}{
+\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}!list\_\-chunks@{list\_\-chunks}}
+\index{list\_\-chunks@{list\_\-chunks}!Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+\subsubsection[{list\_\-chunks}]{\setlength{\rightskip}{0pt plus 5cm}void list\_\-chunks (
+\begin{DoxyParamCaption}
+\item[{{\bf heap\_\-t} $\ast$}]{ heap}
+\end{DoxyParamCaption}
+)}}
+\label{Applications_2Line_2sources_2main_8c_a040b92bdcfb99300fdffa830fc8697af}
+
+
+Definition at line 32 of file main.c.
+
+\hypertarget{Applications_2Line_2sources_2main_8c_ac846977f69fcf6e59be102495930be63}{
+\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}!main@{main}}
+\index{main@{main}!Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{ argc, }
+\item[{void $\ast$}]{ argv}
+\end{DoxyParamCaption}
+)}}
+\label{Applications_2Line_2sources_2main_8c_ac846977f69fcf6e59be102495930be63}
+
+
+Definition at line 147 of file main.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{Applications_2Line_2sources_2main_8c_a8d47de3dce9519c303cbc660ff504562}{
+\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}!c\_\-ptr@{c\_\-ptr}}
+\index{c\_\-ptr@{c\_\-ptr}!Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+\subsubsection[{c\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf c\_\-ptr} = 0}}
+\label{Applications_2Line_2sources_2main_8c_a8d47de3dce9519c303cbc660ff504562}
+
+
+Definition at line 28 of file main.c.
+
+\hypertarget{Applications_2Line_2sources_2main_8c_a0cbac01d43afeb714499fb9a897c2454}{
+\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}!cps@{cps}}
+\index{cps@{cps}!Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+\subsubsection[{cps}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf cps} = 0}}
+\label{Applications_2Line_2sources_2main_8c_a0cbac01d43afeb714499fb9a897c2454}
+
+
+Definition at line 30 of file main.c.
+
+\hypertarget{Applications_2Line_2sources_2main_8c_ad77c5e0e7c4501cc9e18f66982ca9091}{
+\index{Applications/Line/sources/main.c@{Applications/Line/sources/main.c}!Pointer@{Pointer}}
+\index{Pointer@{Pointer}!Applications/Line/sources/main.c@{Applications/Line/sources/main.c}}
+\subsubsection[{Pointer}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf Pointer}\mbox{[}1024\mbox{]}}}
+\label{Applications_2Line_2sources_2main_8c_ad77c5e0e7c4501cc9e18f66982ca9091}
+
+
+Definition at line 27 of file main.c.
+

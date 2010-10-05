@@ -1,0 +1,146 @@
+\hypertarget{ide_8h}{
+\section{Kernel/sources/devices/hdd/ata/ide.h File Reference}
+\label{ide_8h}\index{Kernel/sources/devices/hdd/ata/ide.h@{Kernel/sources/devices/hdd/ata/ide.h}}
+}
+{\ttfamily \#include $<$devices/hdd/disk\_\-device.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ide_8h_ad49dab60c75151f68b336bd7cb332365}{CTRL\_\-PORT}~2
+\item 
+\#define \hyperlink{ide_8h_a51bf649eb4bb2e62b4373eb1ffe22538}{RESET\_\-TIMEOUT}~1000000
+\item 
+\#define \hyperlink{ide_8h_afd31ecf7cb296109237fa31fb226cadf}{FLOATING\_\-BUS}~0xFF
+\item 
+\#define \hyperlink{ide_8h_ae104320823766fe70081aef8fda9cf10}{REG\_\-CYCLE\_\-LO}~4
+\item 
+\#define \hyperlink{ide_8h_a56a7f206cff6d6067bbbfbfeec70f7ad}{REG\_\-CYCLE\_\-HI}~5
+\item 
+\#define \hyperlink{ide_8h_ae4e6117e1da750b210643ba31523ec24}{REG\_\-DEVSEL}~6
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ide_8h_aa5c9da1caa65d7e4972d332bb9fd4501}{ideDriveOutputDiskType} (\hyperlink{structdisk__device}{disk\_\-device} dev)
+\item 
+unsigned char \hyperlink{ide_8h_a5e5db185484e15dcc429410d00339869}{ideSoftReset} (\hyperlink{structdisk__device}{disk\_\-device} dev)
+\item 
+unsigned char \hyperlink{ide_8h_adf7f0f4b2677023e2b706fd973383fa9}{ideDetectDeviceType} (\hyperlink{structdisk__device}{disk\_\-device} dev)
+\item 
+void \hyperlink{ide_8h_a9506f74d6dfb377f588e45afbb7f8c28}{initializeIdeHardDrive} (unsigned int BAR0, unsigned int BAR1, unsigned int BAR2, unsigned int BAR3)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{ide_8h_ad49dab60c75151f68b336bd7cb332365}{
+\index{ide.h@{ide.h}!CTRL\_\-PORT@{CTRL\_\-PORT}}
+\index{CTRL\_\-PORT@{CTRL\_\-PORT}!ide.h@{ide.h}}
+\subsubsection[{CTRL\_\-PORT}]{\setlength{\rightskip}{0pt plus 5cm}\#define CTRL\_\-PORT~2}}
+\label{ide_8h_ad49dab60c75151f68b336bd7cb332365}
+
+
+Definition at line 5 of file ide.h.
+
+\hypertarget{ide_8h_afd31ecf7cb296109237fa31fb226cadf}{
+\index{ide.h@{ide.h}!FLOATING\_\-BUS@{FLOATING\_\-BUS}}
+\index{FLOATING\_\-BUS@{FLOATING\_\-BUS}!ide.h@{ide.h}}
+\subsubsection[{FLOATING\_\-BUS}]{\setlength{\rightskip}{0pt plus 5cm}\#define FLOATING\_\-BUS~0xFF}}
+\label{ide_8h_afd31ecf7cb296109237fa31fb226cadf}
+
+
+Definition at line 8 of file ide.h.
+
+\hypertarget{ide_8h_a56a7f206cff6d6067bbbfbfeec70f7ad}{
+\index{ide.h@{ide.h}!REG\_\-CYCLE\_\-HI@{REG\_\-CYCLE\_\-HI}}
+\index{REG\_\-CYCLE\_\-HI@{REG\_\-CYCLE\_\-HI}!ide.h@{ide.h}}
+\subsubsection[{REG\_\-CYCLE\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-CYCLE\_\-HI~5}}
+\label{ide_8h_a56a7f206cff6d6067bbbfbfeec70f7ad}
+
+
+Definition at line 11 of file ide.h.
+
+\hypertarget{ide_8h_ae104320823766fe70081aef8fda9cf10}{
+\index{ide.h@{ide.h}!REG\_\-CYCLE\_\-LO@{REG\_\-CYCLE\_\-LO}}
+\index{REG\_\-CYCLE\_\-LO@{REG\_\-CYCLE\_\-LO}!ide.h@{ide.h}}
+\subsubsection[{REG\_\-CYCLE\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-CYCLE\_\-LO~4}}
+\label{ide_8h_ae104320823766fe70081aef8fda9cf10}
+
+
+Definition at line 10 of file ide.h.
+
+\hypertarget{ide_8h_ae4e6117e1da750b210643ba31523ec24}{
+\index{ide.h@{ide.h}!REG\_\-DEVSEL@{REG\_\-DEVSEL}}
+\index{REG\_\-DEVSEL@{REG\_\-DEVSEL}!ide.h@{ide.h}}
+\subsubsection[{REG\_\-DEVSEL}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-DEVSEL~6}}
+\label{ide_8h_ae4e6117e1da750b210643ba31523ec24}
+
+
+Definition at line 12 of file ide.h.
+
+\hypertarget{ide_8h_a51bf649eb4bb2e62b4373eb1ffe22538}{
+\index{ide.h@{ide.h}!RESET\_\-TIMEOUT@{RESET\_\-TIMEOUT}}
+\index{RESET\_\-TIMEOUT@{RESET\_\-TIMEOUT}!ide.h@{ide.h}}
+\subsubsection[{RESET\_\-TIMEOUT}]{\setlength{\rightskip}{0pt plus 5cm}\#define RESET\_\-TIMEOUT~1000000}}
+\label{ide_8h_a51bf649eb4bb2e62b4373eb1ffe22538}
+
+
+Definition at line 7 of file ide.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{ide_8h_adf7f0f4b2677023e2b706fd973383fa9}{
+\index{ide.h@{ide.h}!ideDetectDeviceType@{ideDetectDeviceType}}
+\index{ideDetectDeviceType@{ideDetectDeviceType}!ide.h@{ide.h}}
+\subsubsection[{ideDetectDeviceType}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char ideDetectDeviceType (
+\begin{DoxyParamCaption}
+\item[{{\bf disk\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{ide_8h_adf7f0f4b2677023e2b706fd973383fa9}
+
+
+Definition at line 168 of file ide.c.
+
+\hypertarget{ide_8h_aa5c9da1caa65d7e4972d332bb9fd4501}{
+\index{ide.h@{ide.h}!ideDriveOutputDiskType@{ideDriveOutputDiskType}}
+\index{ideDriveOutputDiskType@{ideDriveOutputDiskType}!ide.h@{ide.h}}
+\subsubsection[{ideDriveOutputDiskType}]{\setlength{\rightskip}{0pt plus 5cm}void ideDriveOutputDiskType (
+\begin{DoxyParamCaption}
+\item[{{\bf disk\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{ide_8h_aa5c9da1caa65d7e4972d332bb9fd4501}
+
+
+Definition at line 32 of file ide.c.
+
+\hypertarget{ide_8h_a5e5db185484e15dcc429410d00339869}{
+\index{ide.h@{ide.h}!ideSoftReset@{ideSoftReset}}
+\index{ideSoftReset@{ideSoftReset}!ide.h@{ide.h}}
+\subsubsection[{ideSoftReset}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char ideSoftReset (
+\begin{DoxyParamCaption}
+\item[{{\bf disk\_\-device}}]{ dev}
+\end{DoxyParamCaption}
+)}}
+\label{ide_8h_a5e5db185484e15dcc429410d00339869}
+
+
+Definition at line 134 of file ide.c.
+
+\hypertarget{ide_8h_a9506f74d6dfb377f588e45afbb7f8c28}{
+\index{ide.h@{ide.h}!initializeIdeHardDrive@{initializeIdeHardDrive}}
+\index{initializeIdeHardDrive@{initializeIdeHardDrive}!ide.h@{ide.h}}
+\subsubsection[{initializeIdeHardDrive}]{\setlength{\rightskip}{0pt plus 5cm}void initializeIdeHardDrive (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ BAR0, }
+\item[{unsigned int}]{ BAR1, }
+\item[{unsigned int}]{ BAR2, }
+\item[{unsigned int}]{ BAR3}
+\end{DoxyParamCaption}
+)}}
+\label{ide_8h_a9506f74d6dfb377f588e45afbb7f8c28}
+
+
+Definition at line 7 of file ide.c.
+

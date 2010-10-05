@@ -1,0 +1,224 @@
+\hypertarget{screen_8h}{
+\section{Kernel/headers/screen/screen.h File Reference}
+\label{screen_8h}\index{Kernel/headers/screen/screen.h@{Kernel/headers/screen/screen.h}}
+}
+{\ttfamily \#include $<$types/int\_\-types.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{screen_8h_ad35c0960ad3b4912b208a5aac0d866fe}{MODE\_\-TEXTMODE}~0
+\item 
+\#define \hyperlink{screen_8h_aaa12d7ee5557e57a6d2b0cb747494821}{SCREEN\_\-MODE}~0
+\item 
+\#define \hyperlink{screen_8h_a2cd109632a6dcccaa80b43561b1ab700}{SCREEN\_\-WIDTH}~1
+\item 
+\#define \hyperlink{screen_8h_a6974d08a74da681b3957b2fead2608b8}{SCREEN\_\-HEIGHT}~2
+\item 
+\#define \hyperlink{screen_8h_a87b537f5fa5c109d3c05c13d6b18f382}{WHITE}~15
+\item 
+\#define \hyperlink{screen_8h_a7b3b25cba33b07c303f3060fe41887f6}{BLACK}~0
+\item 
+\#define \hyperlink{screen_8h_a8d23feea868a983c8c2b661e1e16972f}{RED}~4
+\item 
+\#define \hyperlink{screen_8h_ab2baea56ece91306020afd6d77fd19f9}{BROWN}~6
+\item 
+\#define \hyperlink{screen_8h_acfbc006ea433ad708fdee3e82996e721}{GREEN}~2
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{screen_8h_a071199c35946f8bc803698671cefce97}{init\_\-screen} ()
+\item 
+unsigned int \hyperlink{screen_8h_a1ce2ef0dd6a297d5ebd600c165c191c4}{get\_\-attr} (unsigned int ID)
+\item 
+void \hyperlink{screen_8h_a4fe7b28cc711d34d7f29d73190e2f94f}{text\_\-mode\_\-clearscreen} ()
+\item 
+void \hyperlink{screen_8h_a725a0aeb460aedb0e888ce9e52ff4beb}{text\_\-mode\_\-putc} (char Character)
+\item 
+void \hyperlink{screen_8h_a0af8b1fb69527cd0cce92a02a722c303}{text\_\-mode\_\-write} (const char $\ast$Array)
+\item 
+void \hyperlink{screen_8h_a165307c1df8f6193e3b64ff0c518262e}{text\_\-mode\_\-set\_\-fg\_\-color} (\hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} col)
+\item 
+void \hyperlink{screen_8h_ad344d329be9786e4331638c8b20bd4bb}{text\_\-mode\_\-set\_\-x} (\hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} x)
+\item 
+void \hyperlink{screen_8h_adc3127acb9401e198389bc73d779d827}{text\_\-mode\_\-set\_\-y} (\hyperlink{int__types_8h_adde6aaee8457bee49c2a92621fe22b79}{uint8} y)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{screen_8h_a7b3b25cba33b07c303f3060fe41887f6}{
+\index{screen.h@{screen.h}!BLACK@{BLACK}}
+\index{BLACK@{BLACK}!screen.h@{screen.h}}
+\subsubsection[{BLACK}]{\setlength{\rightskip}{0pt plus 5cm}\#define BLACK~0}}
+\label{screen_8h_a7b3b25cba33b07c303f3060fe41887f6}
+
+
+Definition at line 14 of file screen.h.
+
+\hypertarget{screen_8h_ab2baea56ece91306020afd6d77fd19f9}{
+\index{screen.h@{screen.h}!BROWN@{BROWN}}
+\index{BROWN@{BROWN}!screen.h@{screen.h}}
+\subsubsection[{BROWN}]{\setlength{\rightskip}{0pt plus 5cm}\#define BROWN~6}}
+\label{screen_8h_ab2baea56ece91306020afd6d77fd19f9}
+
+
+Definition at line 16 of file screen.h.
+
+\hypertarget{screen_8h_acfbc006ea433ad708fdee3e82996e721}{
+\index{screen.h@{screen.h}!GREEN@{GREEN}}
+\index{GREEN@{GREEN}!screen.h@{screen.h}}
+\subsubsection[{GREEN}]{\setlength{\rightskip}{0pt plus 5cm}\#define GREEN~2}}
+\label{screen_8h_acfbc006ea433ad708fdee3e82996e721}
+
+
+Definition at line 17 of file screen.h.
+
+\hypertarget{screen_8h_ad35c0960ad3b4912b208a5aac0d866fe}{
+\index{screen.h@{screen.h}!MODE\_\-TEXTMODE@{MODE\_\-TEXTMODE}}
+\index{MODE\_\-TEXTMODE@{MODE\_\-TEXTMODE}!screen.h@{screen.h}}
+\subsubsection[{MODE\_\-TEXTMODE}]{\setlength{\rightskip}{0pt plus 5cm}\#define MODE\_\-TEXTMODE~0}}
+\label{screen_8h_ad35c0960ad3b4912b208a5aac0d866fe}
+
+
+Definition at line 6 of file screen.h.
+
+\hypertarget{screen_8h_a8d23feea868a983c8c2b661e1e16972f}{
+\index{screen.h@{screen.h}!RED@{RED}}
+\index{RED@{RED}!screen.h@{screen.h}}
+\subsubsection[{RED}]{\setlength{\rightskip}{0pt plus 5cm}\#define RED~4}}
+\label{screen_8h_a8d23feea868a983c8c2b661e1e16972f}
+
+
+Definition at line 15 of file screen.h.
+
+\hypertarget{screen_8h_a6974d08a74da681b3957b2fead2608b8}{
+\index{screen.h@{screen.h}!SCREEN\_\-HEIGHT@{SCREEN\_\-HEIGHT}}
+\index{SCREEN\_\-HEIGHT@{SCREEN\_\-HEIGHT}!screen.h@{screen.h}}
+\subsubsection[{SCREEN\_\-HEIGHT}]{\setlength{\rightskip}{0pt plus 5cm}\#define SCREEN\_\-HEIGHT~2}}
+\label{screen_8h_a6974d08a74da681b3957b2fead2608b8}
+
+
+Definition at line 11 of file screen.h.
+
+\hypertarget{screen_8h_aaa12d7ee5557e57a6d2b0cb747494821}{
+\index{screen.h@{screen.h}!SCREEN\_\-MODE@{SCREEN\_\-MODE}}
+\index{SCREEN\_\-MODE@{SCREEN\_\-MODE}!screen.h@{screen.h}}
+\subsubsection[{SCREEN\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}\#define SCREEN\_\-MODE~0}}
+\label{screen_8h_aaa12d7ee5557e57a6d2b0cb747494821}
+
+
+Definition at line 9 of file screen.h.
+
+\hypertarget{screen_8h_a2cd109632a6dcccaa80b43561b1ab700}{
+\index{screen.h@{screen.h}!SCREEN\_\-WIDTH@{SCREEN\_\-WIDTH}}
+\index{SCREEN\_\-WIDTH@{SCREEN\_\-WIDTH}!screen.h@{screen.h}}
+\subsubsection[{SCREEN\_\-WIDTH}]{\setlength{\rightskip}{0pt plus 5cm}\#define SCREEN\_\-WIDTH~1}}
+\label{screen_8h_a2cd109632a6dcccaa80b43561b1ab700}
+
+
+Definition at line 10 of file screen.h.
+
+\hypertarget{screen_8h_a87b537f5fa5c109d3c05c13d6b18f382}{
+\index{screen.h@{screen.h}!WHITE@{WHITE}}
+\index{WHITE@{WHITE}!screen.h@{screen.h}}
+\subsubsection[{WHITE}]{\setlength{\rightskip}{0pt plus 5cm}\#define WHITE~15}}
+\label{screen_8h_a87b537f5fa5c109d3c05c13d6b18f382}
+
+
+Definition at line 13 of file screen.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{screen_8h_a1ce2ef0dd6a297d5ebd600c165c191c4}{
+\index{screen.h@{screen.h}!get\_\-attr@{get\_\-attr}}
+\index{get\_\-attr@{get\_\-attr}!screen.h@{screen.h}}
+\subsubsection[{get\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int get\_\-attr (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ ID}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_a1ce2ef0dd6a297d5ebd600c165c191c4}
+\hypertarget{screen_8h_a071199c35946f8bc803698671cefce97}{
+\index{screen.h@{screen.h}!init\_\-screen@{init\_\-screen}}
+\index{init\_\-screen@{init\_\-screen}!screen.h@{screen.h}}
+\subsubsection[{init\_\-screen}]{\setlength{\rightskip}{0pt plus 5cm}void init\_\-screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_a071199c35946f8bc803698671cefce97}
+\hypertarget{screen_8h_a4fe7b28cc711d34d7f29d73190e2f94f}{
+\index{screen.h@{screen.h}!text\_\-mode\_\-clearscreen@{text\_\-mode\_\-clearscreen}}
+\index{text\_\-mode\_\-clearscreen@{text\_\-mode\_\-clearscreen}!screen.h@{screen.h}}
+\subsubsection[{text\_\-mode\_\-clearscreen}]{\setlength{\rightskip}{0pt plus 5cm}void text\_\-mode\_\-clearscreen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_a4fe7b28cc711d34d7f29d73190e2f94f}
+
+
+Definition at line 145 of file screen\_\-textmode.c.
+
+\hypertarget{screen_8h_a725a0aeb460aedb0e888ce9e52ff4beb}{
+\index{screen.h@{screen.h}!text\_\-mode\_\-putc@{text\_\-mode\_\-putc}}
+\index{text\_\-mode\_\-putc@{text\_\-mode\_\-putc}!screen.h@{screen.h}}
+\subsubsection[{text\_\-mode\_\-putc}]{\setlength{\rightskip}{0pt plus 5cm}void text\_\-mode\_\-putc (
+\begin{DoxyParamCaption}
+\item[{char}]{ Character}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_a725a0aeb460aedb0e888ce9e52ff4beb}
+
+
+Definition at line 159 of file screen\_\-textmode.c.
+
+\hypertarget{screen_8h_a165307c1df8f6193e3b64ff0c518262e}{
+\index{screen.h@{screen.h}!text\_\-mode\_\-set\_\-fg\_\-color@{text\_\-mode\_\-set\_\-fg\_\-color}}
+\index{text\_\-mode\_\-set\_\-fg\_\-color@{text\_\-mode\_\-set\_\-fg\_\-color}!screen.h@{screen.h}}
+\subsubsection[{text\_\-mode\_\-set\_\-fg\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}void text\_\-mode\_\-set\_\-fg\_\-color (
+\begin{DoxyParamCaption}
+\item[{{\bf uint8}}]{ col}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_a165307c1df8f6193e3b64ff0c518262e}
+
+
+Definition at line 151 of file screen\_\-textmode.c.
+
+\hypertarget{screen_8h_ad344d329be9786e4331638c8b20bd4bb}{
+\index{screen.h@{screen.h}!text\_\-mode\_\-set\_\-x@{text\_\-mode\_\-set\_\-x}}
+\index{text\_\-mode\_\-set\_\-x@{text\_\-mode\_\-set\_\-x}!screen.h@{screen.h}}
+\subsubsection[{text\_\-mode\_\-set\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}void text\_\-mode\_\-set\_\-x (
+\begin{DoxyParamCaption}
+\item[{{\bf uint8}}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_ad344d329be9786e4331638c8b20bd4bb}
+
+
+Definition at line 14 of file screen\_\-textmode.c.
+
+\hypertarget{screen_8h_adc3127acb9401e198389bc73d779d827}{
+\index{screen.h@{screen.h}!text\_\-mode\_\-set\_\-y@{text\_\-mode\_\-set\_\-y}}
+\index{text\_\-mode\_\-set\_\-y@{text\_\-mode\_\-set\_\-y}!screen.h@{screen.h}}
+\subsubsection[{text\_\-mode\_\-set\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}void text\_\-mode\_\-set\_\-y (
+\begin{DoxyParamCaption}
+\item[{{\bf uint8}}]{ y}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_adc3127acb9401e198389bc73d779d827}
+
+
+Definition at line 21 of file screen\_\-textmode.c.
+
+\hypertarget{screen_8h_a0af8b1fb69527cd0cce92a02a722c303}{
+\index{screen.h@{screen.h}!text\_\-mode\_\-write@{text\_\-mode\_\-write}}
+\index{text\_\-mode\_\-write@{text\_\-mode\_\-write}!screen.h@{screen.h}}
+\subsubsection[{text\_\-mode\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}void text\_\-mode\_\-write (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ Array}
+\end{DoxyParamCaption}
+)}}
+\label{screen_8h_a0af8b1fb69527cd0cce92a02a722c303}

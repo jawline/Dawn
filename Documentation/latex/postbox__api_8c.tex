@@ -1,0 +1,137 @@
+\hypertarget{postbox__api_8c}{
+\section{API/sources/process/postbox\_\-api.c File Reference}
+\label{postbox__api_8c}\index{API/sources/process/postbox\_\-api.c@{API/sources/process/postbox\_\-api.c}}
+}
+{\ttfamily \#include $<$process/postbox\_\-api.h$>$}\par
+{\ttfamily \#include $<$types/int\_\-types.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{postbox__api_8c_aef1a3b91303e29096acc4c2969f03739}{DEFN\_\-SYSCALL1} (postbox\_\-read\_\-top, 1, \hyperlink{structprocess__message}{process\_\-message} $\ast$)
+\item 
+\hyperlink{postbox__api_8c_ad92cb12f8edc7b29fd51135d1b90fa5c}{DEFN\_\-SYSCALL0} (postbox\_\-pop\_\-top, 2)
+\item 
+\hyperlink{postbox__api_8c_a21841d834e61ec6d50788b7944a137eb}{DEFN\_\-SYSCALL0} (postbox\_\-has\_\-next, 3)
+\item 
+\hyperlink{postbox__api_8c_a3a5755a536bc9d9f93350c72a6314294}{DEFN\_\-SYSCALL1} (postbox\_\-set\_\-flags, 6, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32})
+\item 
+unsigned char \hyperlink{postbox__api_8c_ab88f67de56ab20fd05b26a8c242ef6dd}{postboxHasNext} ()
+\begin{DoxyCompactList}\small\item\em This function returns true if the application postbox has data waiting to be read. \item\end{DoxyCompactList}\item 
+\hyperlink{structprocess__message}{process\_\-message} \hyperlink{postbox__api_8c_a40ee40b401dc3b8d335946722ff1881f}{postboxGetNext} ()
+\begin{DoxyCompactList}\small\item\em Read the next message on the postbox. \item\end{DoxyCompactList}\item 
+void \hyperlink{postbox__api_8c_a1e0f82e67d8934bca1cbf470f47b9866}{postboxSetFlags} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{sources_2interrupts_2idt_8h_acd8859336a5cb8a70051c97a438726a1}{flags})
+\begin{DoxyCompactList}\small\item\em This allows the process to set the flags of what it wants to recieve in the kernel as postbox messages. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{postbox__api_8c_ad92cb12f8edc7b29fd51135d1b90fa5c}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL0 (
+\begin{DoxyParamCaption}
+\item[{postbox\_\-pop\_\-top}]{, }
+\item[{2}]{}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_ad92cb12f8edc7b29fd51135d1b90fa5c}
+\hypertarget{postbox__api_8c_a21841d834e61ec6d50788b7944a137eb}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL0 (
+\begin{DoxyParamCaption}
+\item[{postbox\_\-has\_\-next}]{, }
+\item[{3}]{}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_a21841d834e61ec6d50788b7944a137eb}
+\hypertarget{postbox__api_8c_aef1a3b91303e29096acc4c2969f03739}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!DEFN\_\-SYSCALL1@{DEFN\_\-SYSCALL1}}
+\index{DEFN\_\-SYSCALL1@{DEFN\_\-SYSCALL1}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{DEFN\_\-SYSCALL1}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL1 (
+\begin{DoxyParamCaption}
+\item[{postbox\_\-read\_\-top}]{, }
+\item[{1}]{, }
+\item[{{\bf process\_\-message} $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_aef1a3b91303e29096acc4c2969f03739}
+\hypertarget{postbox__api_8c_a3a5755a536bc9d9f93350c72a6314294}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!DEFN\_\-SYSCALL1@{DEFN\_\-SYSCALL1}}
+\index{DEFN\_\-SYSCALL1@{DEFN\_\-SYSCALL1}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{DEFN\_\-SYSCALL1}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL1 (
+\begin{DoxyParamCaption}
+\item[{postbox\_\-set\_\-flags}]{, }
+\item[{6}]{, }
+\item[{{\bf uint32}}]{}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_a3a5755a536bc9d9f93350c72a6314294}
+\hypertarget{postbox__api_8c_a40ee40b401dc3b8d335946722ff1881f}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!postboxGetNext@{postboxGetNext}}
+\index{postboxGetNext@{postboxGetNext}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{postboxGetNext}]{\setlength{\rightskip}{0pt plus 5cm}{\bf process\_\-message} postboxGetNext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_a40ee40b401dc3b8d335946722ff1881f}
+
+
+Read the next message on the postbox. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{structprocess__message}{process\_\-message} with next message if it exists. otherwise blank \hyperlink{structprocess__message}{process\_\-message} structure 
+\end{DoxyReturn}
+
+
+Definition at line 21 of file postbox\_\-api.c.
+
+\hypertarget{postbox__api_8c_ab88f67de56ab20fd05b26a8c242ef6dd}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!postboxHasNext@{postboxHasNext}}
+\index{postboxHasNext@{postboxHasNext}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{postboxHasNext}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char postboxHasNext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_ab88f67de56ab20fd05b26a8c242ef6dd}
+
+
+This function returns true if the application postbox has data waiting to be read. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 if false 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file postbox\_\-api.c.
+
+\hypertarget{postbox__api_8c_a1e0f82e67d8934bca1cbf470f47b9866}{
+\index{postbox\_\-api.c@{postbox\_\-api.c}!postboxSetFlags@{postboxSetFlags}}
+\index{postboxSetFlags@{postboxSetFlags}!postbox_api.c@{postbox\_\-api.c}}
+\subsubsection[{postboxSetFlags}]{\setlength{\rightskip}{0pt plus 5cm}void postboxSetFlags (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ flags}
+\end{DoxyParamCaption}
+)}}
+\label{postbox__api_8c_a1e0f82e67d8934bca1cbf470f47b9866}
+
+
+This allows the process to set the flags of what it wants to recieve in the kernel as postbox messages. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em 32-\/bit}]integer used for bitmask. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line 29 of file postbox\_\-api.c.
+

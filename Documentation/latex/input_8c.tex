@@ -1,0 +1,77 @@
+\hypertarget{input_8c}{
+\section{Kernel/sources/input/input.c File Reference}
+\label{input_8c}\index{Kernel/sources/input/input.c@{Kernel/sources/input/input.c}}
+}
+{\ttfamily \#include $<$input/input.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{input_8c_a4c9c78f4fe43e5a98944c2f8266c2443}{initializeInputCallbacks} ()
+\item 
+void \hyperlink{input_8c_a0f24c1c366692eb15f5a4825a40bda6a}{sendInputMessage} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} device, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} main, void $\ast$additional)
+\item 
+void \hyperlink{input_8c_aa6838adca2d998073d6a8f29f9c7508f}{registerInputListener} (\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} device, \hyperlink{input_8h_a249f249fa5e8b527ea82b0a7b4257691}{input\_\-listener\_\-callback} cb)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structinput__listener__structure}{input\_\-listener\_\-t} $\ast$ \hyperlink{input_8c_a070f4af276c8f8e672931a264ad05abc}{g\_\-listenerList} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{input_8c_a4c9c78f4fe43e5a98944c2f8266c2443}{
+\index{input.c@{input.c}!initializeInputCallbacks@{initializeInputCallbacks}}
+\index{initializeInputCallbacks@{initializeInputCallbacks}!input.c@{input.c}}
+\subsubsection[{initializeInputCallbacks}]{\setlength{\rightskip}{0pt plus 5cm}void initializeInputCallbacks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{input_8c_a4c9c78f4fe43e5a98944c2f8266c2443}
+
+
+Definition at line 6 of file input.c.
+
+\hypertarget{input_8c_aa6838adca2d998073d6a8f29f9c7508f}{
+\index{input.c@{input.c}!registerInputListener@{registerInputListener}}
+\index{registerInputListener@{registerInputListener}!input.c@{input.c}}
+\subsubsection[{registerInputListener}]{\setlength{\rightskip}{0pt plus 5cm}void registerInputListener (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ device, }
+\item[{{\bf input\_\-listener\_\-callback}}]{ cb}
+\end{DoxyParamCaption}
+)}}
+\label{input_8c_aa6838adca2d998073d6a8f29f9c7508f}
+
+
+Definition at line 37 of file input.c.
+
+\hypertarget{input_8c_a0f24c1c366692eb15f5a4825a40bda6a}{
+\index{input.c@{input.c}!sendInputMessage@{sendInputMessage}}
+\index{sendInputMessage@{sendInputMessage}!input.c@{input.c}}
+\subsubsection[{sendInputMessage}]{\setlength{\rightskip}{0pt plus 5cm}void sendInputMessage (
+\begin{DoxyParamCaption}
+\item[{{\bf uint32}}]{ device, }
+\item[{{\bf uint32}}]{ main, }
+\item[{void $\ast$}]{ additional}
+\end{DoxyParamCaption}
+)}}
+\label{input_8c_a0f24c1c366692eb15f5a4825a40bda6a}
+
+
+Definition at line 15 of file input.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{input_8c_a070f4af276c8f8e672931a264ad05abc}{
+\index{input.c@{input.c}!g\_\-listenerList@{g\_\-listenerList}}
+\index{g\_\-listenerList@{g\_\-listenerList}!input.c@{input.c}}
+\subsubsection[{g\_\-listenerList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf input\_\-listener\_\-t}$\ast$ {\bf g\_\-listenerList} = 0}}
+\label{input_8c_a070f4af276c8f8e672931a264ad05abc}
+
+
+Definition at line 4 of file input.c.
+

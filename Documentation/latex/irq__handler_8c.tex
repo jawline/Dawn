@@ -1,0 +1,45 @@
+\hypertarget{irq__handler_8c}{
+\section{Kernel/sources/interrupts/irq\_\-handler.c File Reference}
+\label{irq__handler_8c}\index{Kernel/sources/interrupts/irq\_\-handler.c@{Kernel/sources/interrupts/irq\_\-handler.c}}
+}
+{\ttfamily \#include $<$interrupts/idt.h$>$}\par
+{\ttfamily \#include $<$interrupts/interrupt\_\-handler.h$>$}\par
+{\ttfamily \#include $<$printf.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{irq__handler_8c_ad50f24482fca4163bb965bbda63bc692}{irq\_\-handler} (\hyperlink{structregisters}{idt\_\-call\_\-registers\_\-t} regs)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interrupt__handler_8h_ae8aca7f3b1d644839bdc986ec1f849b9}{isr\_\-t} \hyperlink{irq__handler_8c_aa15ebb2df09c4b116f7eba56e527ac8f}{interrupt\_\-handlers} \mbox{[}256\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{irq__handler_8c_ad50f24482fca4163bb965bbda63bc692}{
+\index{irq\_\-handler.c@{irq\_\-handler.c}!irq\_\-handler@{irq\_\-handler}}
+\index{irq\_\-handler@{irq\_\-handler}!irq_handler.c@{irq\_\-handler.c}}
+\subsubsection[{irq\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}void irq\_\-handler (
+\begin{DoxyParamCaption}
+\item[{{\bf idt\_\-call\_\-registers\_\-t}}]{ regs}
+\end{DoxyParamCaption}
+)}}
+\label{irq__handler_8c_ad50f24482fca4163bb965bbda63bc692}
+
+
+Definition at line 7 of file irq\_\-handler.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{irq__handler_8c_aa15ebb2df09c4b116f7eba56e527ac8f}{
+\index{irq\_\-handler.c@{irq\_\-handler.c}!interrupt\_\-handlers@{interrupt\_\-handlers}}
+\index{interrupt\_\-handlers@{interrupt\_\-handlers}!irq_handler.c@{irq\_\-handler.c}}
+\subsubsection[{interrupt\_\-handlers}]{\setlength{\rightskip}{0pt plus 5cm}{\bf isr\_\-t} {\bf interrupt\_\-handlers}\mbox{[}256\mbox{]}}}
+\label{irq__handler_8c_aa15ebb2df09c4b116f7eba56e527ac8f}
+
+
+Definition at line 3 of file interrupt\_\-handler.c.
+

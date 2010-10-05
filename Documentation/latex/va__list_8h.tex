@@ -1,0 +1,111 @@
+\hypertarget{va__list_8h}{
+\section{Shared/headers/va\_\-list.h File Reference}
+\label{va__list_8h}\index{Shared/headers/va\_\-list.h@{Shared/headers/va\_\-list.h}}
+}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{va__list_8h_a55652336df705aa88fec968ab397ab2b}{\_\-\_\-va\_\-rounded\_\-size}(TYPE)~(((sizeof(TYPE) + sizeof(int) -\/ 1) / sizeof(int)) $\ast$ sizeof(int))
+\item 
+\#define \hyperlink{va__list_8h_a4a41ae753ad859126fe15c0e4655f400}{va\_\-start}(AP, LASTARG)~(AP = ((char $\ast$)\&(LASTARG) + \_\-\_\-va\_\-rounded\_\-size(LASTARG)))
+\item 
+\#define \hyperlink{va__list_8h_a89e547abd2927b21e5398404e68e7f94}{va\_\-end}(AP)
+\item 
+\#define \hyperlink{va__list_8h_a73bff2bd79d774417fcd63f973202dd3}{va\_\-arg}(AP, TYPE)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ \hyperlink{va__list_8h_a8bb1b91285fc43d7f11506e86074741a}{va\_\-list}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{va__list_8h_a5c6d141352390699d74591ec3b6983ff}{va\_\-end} (\hyperlink{va__list_8h_a8bb1b91285fc43d7f11506e86074741a}{va\_\-list})
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{va__list_8h_a55652336df705aa88fec968ab397ab2b}{
+\index{va\_\-list.h@{va\_\-list.h}!\_\-\_\-va\_\-rounded\_\-size@{\_\-\_\-va\_\-rounded\_\-size}}
+\index{\_\-\_\-va\_\-rounded\_\-size@{\_\-\_\-va\_\-rounded\_\-size}!va_list.h@{va\_\-list.h}}
+\subsubsection[{\_\-\_\-va\_\-rounded\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-va\_\-rounded\_\-size(
+\begin{DoxyParamCaption}
+\item[{}]{TYPE}
+\end{DoxyParamCaption}
+)~(((sizeof(TYPE) + sizeof(int) -\/ 1) / sizeof(int)) $\ast$ sizeof(int))}}
+\label{va__list_8h_a55652336df705aa88fec968ab397ab2b}
+
+
+Definition at line 7 of file va\_\-list.h.
+
+\hypertarget{va__list_8h_a73bff2bd79d774417fcd63f973202dd3}{
+\index{va\_\-list.h@{va\_\-list.h}!va\_\-arg@{va\_\-arg}}
+\index{va\_\-arg@{va\_\-arg}!va_list.h@{va\_\-list.h}}
+\subsubsection[{va\_\-arg}]{\setlength{\rightskip}{0pt plus 5cm}\#define va\_\-arg(
+\begin{DoxyParamCaption}
+\item[{}]{AP, }
+\item[{}]{TYPE}
+\end{DoxyParamCaption}
+)}}
+\label{va__list_8h_a73bff2bd79d774417fcd63f973202dd3}
+{\bfseries Value:}
+\begin{DoxyCode}
+(AP += __va_rounded_size(TYPE), \
+   *((TYPE *)(AP - __va_rounded_size(TYPE))))
+\end{DoxyCode}
+
+
+Definition at line 16 of file va\_\-list.h.
+
+\hypertarget{va__list_8h_a89e547abd2927b21e5398404e68e7f94}{
+\index{va\_\-list.h@{va\_\-list.h}!va\_\-end@{va\_\-end}}
+\index{va\_\-end@{va\_\-end}!va_list.h@{va\_\-list.h}}
+\subsubsection[{va\_\-end}]{\setlength{\rightskip}{0pt plus 5cm}\#define va\_\-end(
+\begin{DoxyParamCaption}
+\item[{}]{AP}
+\end{DoxyParamCaption}
+)}}
+\label{va__list_8h_a89e547abd2927b21e5398404e68e7f94}
+
+
+Definition at line 14 of file va\_\-list.h.
+
+\hypertarget{va__list_8h_a4a41ae753ad859126fe15c0e4655f400}{
+\index{va\_\-list.h@{va\_\-list.h}!va\_\-start@{va\_\-start}}
+\index{va\_\-start@{va\_\-start}!va_list.h@{va\_\-list.h}}
+\subsubsection[{va\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}\#define va\_\-start(
+\begin{DoxyParamCaption}
+\item[{}]{AP, }
+\item[{}]{LASTARG}
+\end{DoxyParamCaption}
+)~(AP = ((char $\ast$)\&(LASTARG) + \_\-\_\-va\_\-rounded\_\-size(LASTARG)))}}
+\label{va__list_8h_a4a41ae753ad859126fe15c0e4655f400}
+
+
+Definition at line 10 of file va\_\-list.h.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{va__list_8h_a8bb1b91285fc43d7f11506e86074741a}{
+\index{va\_\-list.h@{va\_\-list.h}!va\_\-list@{va\_\-list}}
+\index{va\_\-list@{va\_\-list}!va_list.h@{va\_\-list.h}}
+\subsubsection[{va\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}typedef void$\ast$ {\bf va\_\-list}}}
+\label{va__list_8h_a8bb1b91285fc43d7f11506e86074741a}
+
+
+Definition at line 5 of file va\_\-list.h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{va__list_8h_a5c6d141352390699d74591ec3b6983ff}{
+\index{va\_\-list.h@{va\_\-list.h}!va\_\-end@{va\_\-end}}
+\index{va\_\-end@{va\_\-end}!va_list.h@{va\_\-list.h}}
+\subsubsection[{va\_\-end}]{\setlength{\rightskip}{0pt plus 5cm}void va\_\-end (
+\begin{DoxyParamCaption}
+\item[{{\bf va\_\-list}}]{}
+\end{DoxyParamCaption}
+)}}
+\label{va__list_8h_a5c6d141352390699d74591ec3b6983ff}

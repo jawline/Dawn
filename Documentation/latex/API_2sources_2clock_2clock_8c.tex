@@ -1,0 +1,85 @@
+\hypertarget{API_2sources_2clock_2clock_8c}{
+\section{API/sources/clock/clock.c File Reference}
+\label{API_2sources_2clock_2clock_8c}\index{API/sources/clock/clock.c@{API/sources/clock/clock.c}}
+}
+{\ttfamily \#include $<$clock/clock.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{API_2sources_2clock_2clock_8c_a889a6ecc085b1d8a36ea26abaae1d528}{DEFN\_\-SYSCALL0} (clocks\_\-per\_\-second, 10)
+\item 
+\hyperlink{API_2sources_2clock_2clock_8c_aa24e07129f51601f55788c95e8ed8f53}{DEFN\_\-SYSCALL0} (get\_\-clock, 11)
+\item 
+unsigned long \hyperlink{API_2sources_2clock_2clock_8c_a66ca6603e03e5f37298c7767d887641d}{getClocksPerSecond} ()
+\begin{DoxyCompactList}\small\item\em This function returns the number of ticks that occur every second. \item\end{DoxyCompactList}\item 
+unsigned long \hyperlink{API_2sources_2clock_2clock_8c_a64751aebe7bbfb0a75d1a44df9f5c3d5}{clock} ()
+\begin{DoxyCompactList}\small\item\em This function returns the number of ticks taht have occured since the system booted. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{API_2sources_2clock_2clock_8c_a64751aebe7bbfb0a75d1a44df9f5c3d5}{
+\index{API/sources/clock/clock.c@{API/sources/clock/clock.c}!clock@{clock}}
+\index{clock@{clock}!API/sources/clock/clock.c@{API/sources/clock/clock.c}}
+\subsubsection[{clock}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{API_2sources_2clock_2clock_8c_a64751aebe7bbfb0a75d1a44df9f5c3d5}
+
+
+This function returns the number of ticks taht have occured since the system booted. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned long with the value of the number of system ticks that have occured since the PIT was initialized 
+\end{DoxyReturn}
+
+
+Definition at line 11 of file clock.c.
+
+\hypertarget{API_2sources_2clock_2clock_8c_aa24e07129f51601f55788c95e8ed8f53}{
+\index{API/sources/clock/clock.c@{API/sources/clock/clock.c}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!API/sources/clock/clock.c@{API/sources/clock/clock.c}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL0 (
+\begin{DoxyParamCaption}
+\item[{get\_\-clock}]{, }
+\item[{11}]{}
+\end{DoxyParamCaption}
+)}}
+\label{API_2sources_2clock_2clock_8c_aa24e07129f51601f55788c95e8ed8f53}
+\hypertarget{API_2sources_2clock_2clock_8c_a889a6ecc085b1d8a36ea26abaae1d528}{
+\index{API/sources/clock/clock.c@{API/sources/clock/clock.c}!DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}}
+\index{DEFN\_\-SYSCALL0@{DEFN\_\-SYSCALL0}!API/sources/clock/clock.c@{API/sources/clock/clock.c}}
+\subsubsection[{DEFN\_\-SYSCALL0}]{\setlength{\rightskip}{0pt plus 5cm}DEFN\_\-SYSCALL0 (
+\begin{DoxyParamCaption}
+\item[{clocks\_\-per\_\-second}]{, }
+\item[{10}]{}
+\end{DoxyParamCaption}
+)}}
+\label{API_2sources_2clock_2clock_8c_a889a6ecc085b1d8a36ea26abaae1d528}
+\hypertarget{API_2sources_2clock_2clock_8c_a66ca6603e03e5f37298c7767d887641d}{
+\index{API/sources/clock/clock.c@{API/sources/clock/clock.c}!getClocksPerSecond@{getClocksPerSecond}}
+\index{getClocksPerSecond@{getClocksPerSecond}!API/sources/clock/clock.c@{API/sources/clock/clock.c}}
+\subsubsection[{getClocksPerSecond}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long getClocksPerSecond (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{API_2sources_2clock_2clock_8c_a66ca6603e03e5f37298c7767d887641d}
+
+
+This function returns the number of ticks that occur every second. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em None}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned long with the value of the number of ticks that occur per second. 
+\end{DoxyReturn}
+
+
+Definition at line 6 of file clock.c.
+

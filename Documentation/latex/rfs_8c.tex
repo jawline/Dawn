@@ -1,0 +1,120 @@
+\hypertarget{rfs_8c}{
+\section{Kernel/sources/fs/rfs.c File Reference}
+\label{rfs_8c}\index{Kernel/sources/fs/rfs.c@{Kernel/sources/fs/rfs.c}}
+}
+{\ttfamily \#include \char`\"{}rfs.h\char`\"{}}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structdirent}{dirent} $\ast$ \hyperlink{rfs_8c_a870cae2177e4211603dbc9c10146b31b}{root\_\-readdir} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, \hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} idx)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{rfs_8c_a440037b6c1183ee9196f5fb23981c832}{root\_\-finddir} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node, char $\ast$\hyperlink{initrd__fent_8h_a93a4209b66c75fd711969ba8dcd926f5}{name})
+\item 
+void \hyperlink{rfs_8c_a56382b1a2c0cc9e2b4dfd1a5d874bcc7}{root\_\-bind\_\-node} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$boundto, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node)
+\item 
+void \hyperlink{rfs_8c_a20b298e9a6fd9876d7d45fc7083e6567}{root\_\-unbind\_\-node} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$boundto, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$node)
+\item 
+\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$ \hyperlink{rfs_8c_afa77e68170541cd7d4c6775f202a56d5}{create\_\-rfs\_\-directory} (char $\ast$\hyperlink{initrd__fent_8h_a93a4209b66c75fd711969ba8dcd926f5}{name}, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$parent)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structrfs__structure}{rfs\_\-t} $\ast$ \hyperlink{rfs_8c_a5d17b8768e618de3042372164eed5d2e}{rfs\_\-entrys\_\-pointer} = 0
+\item 
+\hyperlink{int__types_8h_a1134b580f8da4de94ca6b1de4d37975e}{uint32} \hyperlink{rfs_8c_a251ded64161643c88a57bb3e938253f3}{num\_\-rfs\_\-entrys} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{rfs_8c_afa77e68170541cd7d4c6775f202a56d5}{
+\index{rfs.c@{rfs.c}!create\_\-rfs\_\-directory@{create\_\-rfs\_\-directory}}
+\index{create\_\-rfs\_\-directory@{create\_\-rfs\_\-directory}!rfs.c@{rfs.c}}
+\subsubsection[{create\_\-rfs\_\-directory}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ create\_\-rfs\_\-directory (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{ name, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ parent}
+\end{DoxyParamCaption}
+)}}
+\label{rfs_8c_afa77e68170541cd7d4c6775f202a56d5}
+
+
+Definition at line 100 of file rfs.c.
+
+\hypertarget{rfs_8c_a56382b1a2c0cc9e2b4dfd1a5d874bcc7}{
+\index{rfs.c@{rfs.c}!root\_\-bind\_\-node@{root\_\-bind\_\-node}}
+\index{root\_\-bind\_\-node@{root\_\-bind\_\-node}!rfs.c@{rfs.c}}
+\subsubsection[{root\_\-bind\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void root\_\-bind\_\-node (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ boundto, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node}
+\end{DoxyParamCaption}
+)}}
+\label{rfs_8c_a56382b1a2c0cc9e2b4dfd1a5d874bcc7}
+
+
+Definition at line 39 of file rfs.c.
+
+\hypertarget{rfs_8c_a440037b6c1183ee9196f5fb23981c832}{
+\index{rfs.c@{rfs.c}!root\_\-finddir@{root\_\-finddir}}
+\index{root\_\-finddir@{root\_\-finddir}!rfs.c@{rfs.c}}
+\subsubsection[{root\_\-finddir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fs\_\-node\_\-t}$\ast$ root\_\-finddir (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{char $\ast$}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{rfs_8c_a440037b6c1183ee9196f5fb23981c832}
+
+
+Definition at line 23 of file rfs.c.
+
+\hypertarget{rfs_8c_a870cae2177e4211603dbc9c10146b31b}{
+\index{rfs.c@{rfs.c}!root\_\-readdir@{root\_\-readdir}}
+\index{root\_\-readdir@{root\_\-readdir}!rfs.c@{rfs.c}}
+\subsubsection[{root\_\-readdir}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf dirent}$\ast$ root\_\-readdir (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node, }
+\item[{{\bf uint32}}]{ idx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}read\mbox{]}}}}
+\label{rfs_8c_a870cae2177e4211603dbc9c10146b31b}
+
+
+Definition at line 9 of file rfs.c.
+
+\hypertarget{rfs_8c_a20b298e9a6fd9876d7d45fc7083e6567}{
+\index{rfs.c@{rfs.c}!root\_\-unbind\_\-node@{root\_\-unbind\_\-node}}
+\index{root\_\-unbind\_\-node@{root\_\-unbind\_\-node}!rfs.c@{rfs.c}}
+\subsubsection[{root\_\-unbind\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}void root\_\-unbind\_\-node (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ boundto, }
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ node}
+\end{DoxyParamCaption}
+)}}
+\label{rfs_8c_a20b298e9a6fd9876d7d45fc7083e6567}
+
+
+Definition at line 64 of file rfs.c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{rfs_8c_a251ded64161643c88a57bb3e938253f3}{
+\index{rfs.c@{rfs.c}!num\_\-rfs\_\-entrys@{num\_\-rfs\_\-entrys}}
+\index{num\_\-rfs\_\-entrys@{num\_\-rfs\_\-entrys}!rfs.c@{rfs.c}}
+\subsubsection[{num\_\-rfs\_\-entrys}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32} {\bf num\_\-rfs\_\-entrys} = 0}}
+\label{rfs_8c_a251ded64161643c88a57bb3e938253f3}
+
+
+Definition at line 7 of file rfs.c.
+
+\hypertarget{rfs_8c_a5d17b8768e618de3042372164eed5d2e}{
+\index{rfs.c@{rfs.c}!rfs\_\-entrys\_\-pointer@{rfs\_\-entrys\_\-pointer}}
+\index{rfs\_\-entrys\_\-pointer@{rfs\_\-entrys\_\-pointer}!rfs.c@{rfs.c}}
+\subsubsection[{rfs\_\-entrys\_\-pointer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rfs\_\-t}$\ast$ {\bf rfs\_\-entrys\_\-pointer} = 0}}
+\label{rfs_8c_a5d17b8768e618de3042372164eed5d2e}
+
+
+Definition at line 6 of file rfs.c.
+

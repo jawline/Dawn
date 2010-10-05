@@ -45,6 +45,37 @@ e32_pheader parseElfProgramHeader(fs_node_t* File, e32_header Header, unsigned i
 	return headerStruct;
 }
 
+char* parseStringTableEntry(fs_node_t* File, e32info* info)
+{
+	//Find the section header which contains the string table
+}
+
+e32_sheader parseElfSectionHeader(fs_node_t* File, e32_header Header, unsigned int number)
+{
+	//Create a new section header structure
+	e32_sheader headerStruct;
+
+	//Find the start location in the file of the section headers
+	MEM_LOC start_loc = Header.e_shoff + (Header.e_shentsize * number);
+
+	//If the start_loc is out of bounds return a blank header
+	if (File->length < start_loc) {
+		//Out of bounds. Null the return and then exit the function
+		memset(&headerStruct, 0, sizeof(e32_sheader));
+		return headerStruct;
+	}
+
+	//Try and read, if fail then return a blank header
+	if (read_fs(File, start_loc, Header.e_shentsize, &headerStruct) != Header.e_shentsize)
+	{
+		//Error reading. Null the return and then exit the function
+		memset(&headerStruct, 0, sizeof(e32_sheader));
+	}
+
+	//Return value should equal pointer to the program header structure
+	return headerStruct;
+}
+
 //NOTE: Assumes fs_node_t* is available to readora
 void parseElfFile(e32info* info, fs_node_t* File)
 {
@@ -62,7 +93,15 @@ void parseElfFile(e32info* info, fs_node_t* File)
 		info->m_programHeaders[headerIterator] = parseElfProgramHeader(File, info->m_mainHeader, headerIterator);
 	}
 
-	//TODO: Section headers and other bits of the ELF
+	//Allocate the space for the section headers
+	info->m_sectionHeaders = (e32_sheader*) malloc(sizeof(e32_sheader) * info->m_mainHeader.e_shnum);
+	info->m_numSectionHeaders = info->m_mainHeader.e_shnum;
+
+	//Iterate through and load each section header
+	for (headerIterator = 0; headerIterator < info->m_numSectionHeaders; headerIterator++)
+	{
+		info->m_sectionHeaders[headerIterator] = parseElfSectionHeader(File, info->m_mainHeader, headerIterator);
+	}
 
 }
 

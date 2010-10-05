@@ -4,27 +4,32 @@
 }
 
 
+Dawn data structure for the parsing of 32 bit elf files.  
+
+
+
+
 {\ttfamily \#include $<$header.h$>$}
 
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structelf__32__header}{elf\_\-32\_\-header} \hyperlink{structelf__32__info_afad69f71c04aeaa868d04063781741ea}{m\_\-mainHeader}
-\item 
+\begin{DoxyCompactList}\small\item\em The main elf file header. \item\end{DoxyCompactList}\item 
 struct \hyperlink{structelf__32__section__header}{elf\_\-32\_\-section\_\-header} $\ast$ \hyperlink{structelf__32__info_ab8d46ddc9a0d9ba619b7ab8d296e8b52}{m\_\-sectionHeaders}
-\item 
+\begin{DoxyCompactList}\small\item\em A pointer to a array of section headers. \item\end{DoxyCompactList}\item 
 int \hyperlink{structelf__32__info_a701e263cc9e77c5e031b01faef03ed79}{m\_\-numSectionHeaders}
-\item 
+\begin{DoxyCompactList}\small\item\em The number of section headers in the array pointed to by m\_\-sectionHeaders. \item\end{DoxyCompactList}\item 
 struct \hyperlink{structelf__32__program__header}{elf\_\-32\_\-program\_\-header} $\ast$ \hyperlink{structelf__32__info_a26df4e771f5978aa40f2ddef21370e4b}{m\_\-programHeaders}
-\item 
+\begin{DoxyCompactList}\small\item\em A pointer to a array of program headers. \item\end{DoxyCompactList}\item 
 int \hyperlink{structelf__32__info_a3d0840d804c71febb4e372812f9f5b3e}{m\_\-numProgramHeaders}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The number of program headers in the array pointed to by m\_\-programHeaders. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+Dawn data structure for the parsing of 32 bit elf files. 
 
-
-Definition at line 89 of file header.h.
+Definition at line 180 of file header.h.
 
 
 
@@ -36,7 +41,11 @@ Definition at line 89 of file header.h.
 \label{structelf__32__info_afad69f71c04aeaa868d04063781741ea}
 
 
-Definition at line 91 of file header.h.
+The main elf file header. 
+
+
+
+Definition at line 186 of file header.h.
 
 \hypertarget{structelf__32__info_a3d0840d804c71febb4e372812f9f5b3e}{
 \index{elf\_\-32\_\-info@{elf\_\-32\_\-info}!m\_\-numProgramHeaders@{m\_\-numProgramHeaders}}
@@ -45,7 +54,11 @@ Definition at line 91 of file header.h.
 \label{structelf__32__info_a3d0840d804c71febb4e372812f9f5b3e}
 
 
-Definition at line 97 of file header.h.
+The number of program headers in the array pointed to by m\_\-programHeaders. 
+
+
+
+Definition at line 210 of file header.h.
 
 \hypertarget{structelf__32__info_a701e263cc9e77c5e031b01faef03ed79}{
 \index{elf\_\-32\_\-info@{elf\_\-32\_\-info}!m\_\-numSectionHeaders@{m\_\-numSectionHeaders}}
@@ -54,7 +67,11 @@ Definition at line 97 of file header.h.
 \label{structelf__32__info_a701e263cc9e77c5e031b01faef03ed79}
 
 
-Definition at line 94 of file header.h.
+The number of section headers in the array pointed to by m\_\-sectionHeaders. 
+
+
+
+Definition at line 198 of file header.h.
 
 \hypertarget{structelf__32__info_a26df4e771f5978aa40f2ddef21370e4b}{
 \index{elf\_\-32\_\-info@{elf\_\-32\_\-info}!m\_\-programHeaders@{m\_\-programHeaders}}
@@ -63,7 +80,11 @@ Definition at line 94 of file header.h.
 \label{structelf__32__info_a26df4e771f5978aa40f2ddef21370e4b}
 
 
-Definition at line 96 of file header.h.
+A pointer to a array of program headers. 
+
+
+
+Definition at line 204 of file header.h.
 
 \hypertarget{structelf__32__info_ab8d46ddc9a0d9ba619b7ab8d296e8b52}{
 \index{elf\_\-32\_\-info@{elf\_\-32\_\-info}!m\_\-sectionHeaders@{m\_\-sectionHeaders}}
@@ -72,7 +93,11 @@ Definition at line 96 of file header.h.
 \label{structelf__32__info_ab8d46ddc9a0d9ba619b7ab8d296e8b52}
 
 
-Definition at line 93 of file header.h.
+A pointer to a array of section headers. 
+
+
+
+Definition at line 192 of file header.h.
 
 
 

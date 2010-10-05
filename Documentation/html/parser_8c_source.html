@@ -99,21 +99,21 @@ function toggleVisibility(linkObj) {
 <a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="stdlib_8h.html">stdlib.h</a>&gt;</span>
 <a name="l00003"></a>00003 
 <a name="l00004"></a>00004 <span class="comment">//NOTE: Assumes the fs_node_t* is available to read</span>
-<a name="l00005"></a><a class="code" href="parser_8h.html#a2507911e854773cbdcd1eee6a1bcfdc4">00005</a> <a class="code" href="structelf__32__header.html">e32_header</a> <a class="code" href="parser_8c.html#a2507911e854773cbdcd1eee6a1bcfdc4">parseElfHeader</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* File)
+<a name="l00005"></a><a class="code" href="parser_8h.html#a2507911e854773cbdcd1eee6a1bcfdc4">00005</a> <a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> <a class="code" href="parser_8c.html#a2507911e854773cbdcd1eee6a1bcfdc4">parseElfHeader</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* File)
 <a name="l00006"></a>00006 {
-<a name="l00007"></a>00007         <a class="code" href="structelf__32__header.html">e32_header</a> Ret;
+<a name="l00007"></a>00007         <a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> Ret;
 <a name="l00008"></a>00008         
-<a name="l00009"></a>00009         <span class="keywordflow">if</span> (File-&gt;<a class="code" href="structfilesystem__node.html#a4d273cc3bb51e987b660ec3e5389389a">length</a> &lt; <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html">e32_header</a>))
+<a name="l00009"></a>00009         <span class="keywordflow">if</span> (File-&gt;<a class="code" href="structfilesystem__node.html#a4d273cc3bb51e987b660ec3e5389389a">length</a> &lt; <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a>))
 <a name="l00010"></a>00010         {
 <a name="l00011"></a>00011                 <span class="comment">//Out of bounds. null the return and then memset to 0</span>
-<a name="l00012"></a>00012                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;Ret, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html">e32_header</a>));
+<a name="l00012"></a>00012                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;Ret, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a>));
 <a name="l00013"></a>00013                 <span class="keywordflow">return</span> Ret;
 <a name="l00014"></a>00014         }
 <a name="l00015"></a>00015 
-<a name="l00016"></a>00016         <span class="keywordflow">if</span> (<a class="code" href="vfs_8c.html#a8f1c971d8e4f43f1561f951fdb6d92b2">read_fs</a>(File, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html">e32_header</a>), &amp;Ret) != <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html">e32_header</a>))
+<a name="l00016"></a>00016         <span class="keywordflow">if</span> (<a class="code" href="vfs_8c.html#a8f1c971d8e4f43f1561f951fdb6d92b2">read_fs</a>(File, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a>), &amp;Ret) != <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a>))
 <a name="l00017"></a>00017         {
 <a name="l00018"></a>00018                 <span class="comment">//Error reading, null and exit the function</span>
-<a name="l00019"></a>00019                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;Ret, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html">e32_header</a>));
+<a name="l00019"></a>00019                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;Ret, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a>));
 <a name="l00020"></a>00020                 <span class="keywordflow">return</span> Ret;
 <a name="l00021"></a>00021         }
 <a name="l00022"></a>00022         
@@ -121,81 +121,120 @@ function toggleVisibility(linkObj) {
 <a name="l00024"></a>00024 }
 <a name="l00025"></a>00025 
 <a name="l00026"></a>00026 <span class="comment">//NOTE: Assumes the fs_node_t* is available to read</span>
-<a name="l00027"></a><a class="code" href="parser_8h.html#ac45f19967d2ca8a1092d7f7bcb5c7946">00027</a> <a class="code" href="structelf__32__program__header.html">e32_pheader</a> <a class="code" href="parser_8c.html#ac45f19967d2ca8a1092d7f7bcb5c7946">parseElfProgramHeader</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* File, <a class="code" href="structelf__32__header.html">e32_header</a> Header, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="vsprintf_8c.html#ac2f4c669c6f6aa6caa5ab8adb1b07dd0">number</a>)
+<a name="l00027"></a><a class="code" href="parser_8h.html#ac45f19967d2ca8a1092d7f7bcb5c7946">00027</a> <a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a> <a class="code" href="parser_8c.html#ac45f19967d2ca8a1092d7f7bcb5c7946">parseElfProgramHeader</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* File, <a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> Header, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="vsprintf_8c.html#ac2f4c669c6f6aa6caa5ab8adb1b07dd0">number</a>)
 <a name="l00028"></a>00028 {
-<a name="l00029"></a>00029         <a class="code" href="structelf__32__program__header.html">e32_pheader</a> headerStruct;
+<a name="l00029"></a>00029         <a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a> headerStruct;
 <a name="l00030"></a>00030         <a class="code" href="Shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> start_loc = Header.<a class="code" href="structelf__32__header.html#a3d616010b5daba4da505f8f3ab1f3431">e_phoff</a> + (Header.<a class="code" href="structelf__32__header.html#af679dc989e4b55d4b74806a1d2590187">e_phentsize</a> * number);
 <a name="l00031"></a>00031 
 <a name="l00032"></a>00032         <span class="keywordflow">if</span> (File-&gt;<a class="code" href="structfilesystem__node.html#a4d273cc3bb51e987b660ec3e5389389a">length</a> &lt; start_loc) {
 <a name="l00033"></a>00033                 <span class="comment">//Out of bounds. Null the return and then exit the function</span>
-<a name="l00034"></a>00034                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;headerStruct, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__program__header.html">e32_pheader</a>));
+<a name="l00034"></a>00034                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;headerStruct, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a>));
 <a name="l00035"></a>00035                 <span class="keywordflow">return</span> headerStruct;
 <a name="l00036"></a>00036         }
 <a name="l00037"></a>00037 
 <a name="l00038"></a>00038         <span class="keywordflow">if</span> (<a class="code" href="vfs_8c.html#a8f1c971d8e4f43f1561f951fdb6d92b2">read_fs</a>(File, start_loc, Header.<a class="code" href="structelf__32__header.html#af679dc989e4b55d4b74806a1d2590187">e_phentsize</a>, &amp;headerStruct) != Header.<a class="code" href="structelf__32__header.html#af679dc989e4b55d4b74806a1d2590187">e_phentsize</a>)
 <a name="l00039"></a>00039         {
 <a name="l00040"></a>00040                 <span class="comment">//Error reading. Null the return and then exit the function</span>
-<a name="l00041"></a>00041                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;headerStruct, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__program__header.html">e32_pheader</a>));
+<a name="l00041"></a>00041                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;headerStruct, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a>));
 <a name="l00042"></a>00042         }
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044         <span class="comment">//Return value should equal pointer to the program header structure</span>
 <a name="l00045"></a>00045         <span class="keywordflow">return</span> headerStruct;
 <a name="l00046"></a>00046 }
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048 <span class="comment">//NOTE: Assumes fs_node_t* is available to readora</span>
-<a name="l00049"></a><a class="code" href="parser_8h.html#a5ad5e59604a08596c7c06e5b1770b1bb">00049</a> <span class="keywordtype">void</span> <a class="code" href="parser_8c.html#a5ad5e59604a08596c7c06e5b1770b1bb">parseElfFile</a>(<a class="code" href="structelf__32__info.html">e32info</a>* info, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* File)
-<a name="l00050"></a>00050 {
-<a name="l00051"></a>00051         <span class="comment">//Parse the main header</span>
-<a name="l00052"></a>00052         info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea">m_mainHeader</a> = <a class="code" href="parser_8c.html#a2507911e854773cbdcd1eee6a1bcfdc4">parseElfHeader</a>(File);
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054         <span class="comment">//Allocate the space for the program headers</span>
-<a name="l00055"></a>00055         info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b">m_programHeaders</a> = (<a class="code" href="structelf__32__program__header.html">e32_pheader</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structelf__32__program__header.html">e32_pheader</a>) * info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea">m_mainHeader</a>.<a class="code" href="structelf__32__header.html#af0a0631bd17fedab7907fa3b057a1746">e_phnum</a>);
-<a name="l00056"></a>00056         info-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e">m_numProgramHeaders</a> = info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea">m_mainHeader</a>.<a class="code" href="structelf__32__header.html#af0a0631bd17fedab7907fa3b057a1746">e_phnum</a>;
+<a name="l00048"></a><a class="code" href="parser_8c.html#a23080f74b019e9bf5399832e0ef51862">00048</a> <span class="keywordtype">char</span>* <a class="code" href="parser_8c.html#a23080f74b019e9bf5399832e0ef51862">parseStringTableEntry</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* File, <a class="code" href="structelf__32__info.html" title="Dawn data structure for the parsing of 32 bit elf files.">e32info</a>* info)
+<a name="l00049"></a>00049 {
+<a name="l00050"></a>00050         <span class="comment">//Find the section header which contains the string table</span>
+<a name="l00051"></a>00051 }
+<a name="l00052"></a>00052 
+<a name="l00053"></a><a class="code" href="parser_8c.html#a48f183bce269be3ded2600bec9cde3b8">00053</a> <a class="code" href="structelf__32__section__header.html" title="The structure for a 32 bit elf section header.">e32_sheader</a> <a class="code" href="parser_8c.html#a48f183bce269be3ded2600bec9cde3b8">parseElfSectionHeader</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* File, <a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> Header, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="vsprintf_8c.html#ac2f4c669c6f6aa6caa5ab8adb1b07dd0">number</a>)
+<a name="l00054"></a>00054 {
+<a name="l00055"></a>00055         <span class="comment">//Create a new section header structure</span>
+<a name="l00056"></a>00056         <a class="code" href="structelf__32__section__header.html" title="The structure for a 32 bit elf section header.">e32_sheader</a> headerStruct;
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058         <span class="comment">//Iterate through and load each header</span>
-<a name="l00059"></a>00059         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> headerIterator;
-<a name="l00060"></a>00060         <span class="keywordflow">for</span> (headerIterator = 0; headerIterator &lt; info-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e">m_numProgramHeaders</a>; headerIterator++)
-<a name="l00061"></a>00061         {
-<a name="l00062"></a>00062                 info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b">m_programHeaders</a>[headerIterator] = <a class="code" href="parser_8c.html#ac45f19967d2ca8a1092d7f7bcb5c7946">parseElfProgramHeader</a>(File, info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea">m_mainHeader</a>, headerIterator);
-<a name="l00063"></a>00063         }
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065         <span class="comment">//TODO: Section headers and other bits of the ELF</span>
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 }
-<a name="l00068"></a>00068 
-<a name="l00069"></a><a class="code" href="parser_8h.html#a7853e4ad87f5ae705d324973f09cc8e9">00069</a> <span class="keywordtype">void</span> <a class="code" href="parser_8c.html#a7853e4ad87f5ae705d324973f09cc8e9">freeElfFileInfo</a>(<a class="code" href="structelf__32__info.html">e32info</a>* info)
-<a name="l00070"></a>00070 {
-<a name="l00071"></a>00071         <span class="keywordflow">if</span> (info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b">m_programHeaders</a>)
-<a name="l00072"></a>00072         {
-<a name="l00073"></a>00073                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b">m_programHeaders</a>);
-<a name="l00074"></a>00074         }
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076         <span class="keywordflow">if</span> (info-&gt;<a class="code" href="structelf__32__info.html#ab8d46ddc9a0d9ba619b7ab8d296e8b52">m_sectionHeaders</a>)
-<a name="l00077"></a>00077         {
-<a name="l00078"></a>00078                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(info-&gt;<a class="code" href="structelf__32__info.html#ab8d46ddc9a0d9ba619b7ab8d296e8b52">m_sectionHeaders</a>);
-<a name="l00079"></a>00079         }
-<a name="l00080"></a>00080 }
-<a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="parser_8h.html#a5e19bbfd7571dbe697a8ede42c3fed55">00082</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="parser_8c.html#a158ea82942e2626751c01d7c116634e4">elfHeaderValid</a>(<a class="code" href="structelf__32__header.html">e32_header</a> h)
-<a name="l00083"></a>00083 {
-<a name="l00084"></a>00084         <span class="keywordflow">if</span> ((h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#ab19a56cdedd60a6084f2262ecee91b85">ID_MAG0</a>] == <a class="code" href="header_8h.html#a8d944947af59b67d47a445ae2bef32e3">ELF_MAG0</a>) &amp;&amp; (h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#a301200b6762fafb075ca3a61d3e30d42">ID_MAG1</a>] == <a class="code" href="header_8h.html#abdd5eae694123f4e5e0a5449b3591cc9">ELF_MAG1</a>) &amp;&amp; (h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#ad66904674a2db4443b36601189466306">ID_MAG2</a>] == <a class="code" href="header_8h.html#a60668f0dfd2613d5ccccac355f147726">ELF_MAG2</a>) &amp;&amp; (h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#a42de0067c433d59e585c143728a2e317">ID_MAG3</a>] == <a class="code" href="header_8h.html#a40443fcac019afd6b173b8890fd25e6c">ELF_MAG3</a>)) <span class="keywordflow">return</span> 1;
-<a name="l00085"></a>00085         <span class="keywordflow">return</span> 0;
-<a name="l00086"></a>00086 }
-<a name="l00087"></a>00087 
-<a name="l00088"></a><a class="code" href="parser_8h.html#abe06dbe2fcf1c29d413743ec3af5c0f8">00088</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="parser_8c.html#a575e667d0df7d507f3b116c030363c23">getElfHeaderClass</a>(<a class="code" href="structelf__32__header.html">e32_header</a> h)
-<a name="l00089"></a>00089 {
-<a name="l00090"></a>00090         <span class="keywordflow">return</span> h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[ID_CLASS];
-<a name="l00091"></a>00091 }
-<a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="parser_8h.html#af18d548dbd5acfbdc89dfd112a014515">00093</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="parser_8c.html#af18d548dbd5acfbdc89dfd112a014515">getElfHeaderVersion</a>(<a class="code" href="structelf__32__header.html">e32_header</a> header)
-<a name="l00094"></a>00094 {
-<a name="l00095"></a>00095         <span class="keywordflow">return</span> header.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[ID_VERSION];
-<a name="l00096"></a>00096 }
-<a name="l00097"></a>00097 
-<a name="l00098"></a><a class="code" href="parser_8h.html#a63cf4c065b64b13c806bbb93bc9475e2">00098</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="parser_8c.html#a63cf4c065b64b13c806bbb93bc9475e2">getElfHeaderData</a>(<a class="code" href="structelf__32__header.html">e32_header</a> header)
-<a name="l00099"></a>00099 {
-<a name="l00100"></a>00100         <span class="keywordflow">return</span> header.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[ID_DATA];
-<a name="l00101"></a>00101 }
+<a name="l00058"></a>00058         <span class="comment">//Find the start location in the file of the section headers</span>
+<a name="l00059"></a>00059         <a class="code" href="Shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> start_loc = Header.<a class="code" href="structelf__32__header.html#aeb68c7843a97cbff85af083bbe583ae0">e_shoff</a> + (Header.<a class="code" href="structelf__32__header.html#a8c6553a68b2f6ef39c613381b0dd1700">e_shentsize</a> * number);
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061         <span class="comment">//If the start_loc is out of bounds return a blank header</span>
+<a name="l00062"></a>00062         <span class="keywordflow">if</span> (File-&gt;<a class="code" href="structfilesystem__node.html#a4d273cc3bb51e987b660ec3e5389389a">length</a> &lt; start_loc) {
+<a name="l00063"></a>00063                 <span class="comment">//Out of bounds. Null the return and then exit the function</span>
+<a name="l00064"></a>00064                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;headerStruct, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__section__header.html" title="The structure for a 32 bit elf section header.">e32_sheader</a>));
+<a name="l00065"></a>00065                 <span class="keywordflow">return</span> headerStruct;
+<a name="l00066"></a>00066         }
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068         <span class="comment">//Try and read, if fail then return a blank header</span>
+<a name="l00069"></a>00069         <span class="keywordflow">if</span> (<a class="code" href="vfs_8c.html#a8f1c971d8e4f43f1561f951fdb6d92b2">read_fs</a>(File, start_loc, Header.<a class="code" href="structelf__32__header.html#a8c6553a68b2f6ef39c613381b0dd1700">e_shentsize</a>, &amp;headerStruct) != Header.<a class="code" href="structelf__32__header.html#a8c6553a68b2f6ef39c613381b0dd1700">e_shentsize</a>)
+<a name="l00070"></a>00070         {
+<a name="l00071"></a>00071                 <span class="comment">//Error reading. Null the return and then exit the function</span>
+<a name="l00072"></a>00072                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;headerStruct, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__section__header.html" title="The structure for a 32 bit elf section header.">e32_sheader</a>));
+<a name="l00073"></a>00073         }
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075         <span class="comment">//Return value should equal pointer to the program header structure</span>
+<a name="l00076"></a>00076         <span class="keywordflow">return</span> headerStruct;
+<a name="l00077"></a>00077 }
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="comment">//NOTE: Assumes fs_node_t* is available to readora</span>
+<a name="l00080"></a><a class="code" href="parser_8h.html#a5ad5e59604a08596c7c06e5b1770b1bb">00080</a> <span class="keywordtype">void</span> <a class="code" href="parser_8c.html#a5ad5e59604a08596c7c06e5b1770b1bb">parseElfFile</a>(<a class="code" href="structelf__32__info.html" title="Dawn data structure for the parsing of 32 bit elf files.">e32info</a>* info, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* File)
+<a name="l00081"></a>00081 {
+<a name="l00082"></a>00082         <span class="comment">//Parse the main header</span>
+<a name="l00083"></a>00083         info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a> = <a class="code" href="parser_8c.html#a2507911e854773cbdcd1eee6a1bcfdc4">parseElfHeader</a>(File);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085         <span class="comment">//Allocate the space for the program headers</span>
+<a name="l00086"></a>00086         info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b" title="A pointer to a array of program headers.">m_programHeaders</a> = (<a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a>) * info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>.<a class="code" href="structelf__32__header.html#af0a0631bd17fedab7907fa3b057a1746">e_phnum</a>);
+<a name="l00087"></a>00087         info-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e" title="The number of program headers in the array pointed to by m_programHeaders.">m_numProgramHeaders</a> = info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>.<a class="code" href="structelf__32__header.html#af0a0631bd17fedab7907fa3b057a1746">e_phnum</a>;
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089         <span class="comment">//Iterate through and load each header</span>
+<a name="l00090"></a>00090         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> headerIterator;
+<a name="l00091"></a>00091         <span class="keywordflow">for</span> (headerIterator = 0; headerIterator &lt; info-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e" title="The number of program headers in the array pointed to by m_programHeaders.">m_numProgramHeaders</a>; headerIterator++)
+<a name="l00092"></a>00092         {
+<a name="l00093"></a>00093                 info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b" title="A pointer to a array of program headers.">m_programHeaders</a>[headerIterator] = <a class="code" href="parser_8c.html#ac45f19967d2ca8a1092d7f7bcb5c7946">parseElfProgramHeader</a>(File, info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>, headerIterator);
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096         <span class="comment">//Allocate the space for the section headers</span>
+<a name="l00097"></a>00097         info-&gt;<a class="code" href="structelf__32__info.html#ab8d46ddc9a0d9ba619b7ab8d296e8b52" title="A pointer to a array of section headers.">m_sectionHeaders</a> = (<a class="code" href="structelf__32__section__header.html" title="The structure for a 32 bit elf section header.">e32_sheader</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structelf__32__section__header.html" title="The structure for a 32 bit elf section header.">e32_sheader</a>) * info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>.<a class="code" href="structelf__32__header.html#a0b59b0c17c7d8676611fa95e6478085d">e_shnum</a>);
+<a name="l00098"></a>00098         info-&gt;<a class="code" href="structelf__32__info.html#a701e263cc9e77c5e031b01faef03ed79" title="The number of section headers in the array pointed to by m_sectionHeaders.">m_numSectionHeaders</a> = info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>.<a class="code" href="structelf__32__header.html#a0b59b0c17c7d8676611fa95e6478085d">e_shnum</a>;
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100         <span class="comment">//Iterate through and load each section header</span>
+<a name="l00101"></a>00101         <span class="keywordflow">for</span> (headerIterator = 0; headerIterator &lt; info-&gt;<a class="code" href="structelf__32__info.html#a701e263cc9e77c5e031b01faef03ed79" title="The number of section headers in the array pointed to by m_sectionHeaders.">m_numSectionHeaders</a>; headerIterator++)
+<a name="l00102"></a>00102         {
+<a name="l00103"></a>00103                 info-&gt;<a class="code" href="structelf__32__info.html#ab8d46ddc9a0d9ba619b7ab8d296e8b52" title="A pointer to a array of section headers.">m_sectionHeaders</a>[headerIterator] = <a class="code" href="parser_8c.html#a48f183bce269be3ded2600bec9cde3b8">parseElfSectionHeader</a>(File, info-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>, headerIterator);
+<a name="l00104"></a>00104         }
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 }
+<a name="l00107"></a>00107 
+<a name="l00108"></a><a class="code" href="parser_8h.html#a7853e4ad87f5ae705d324973f09cc8e9">00108</a> <span class="keywordtype">void</span> <a class="code" href="parser_8c.html#a7853e4ad87f5ae705d324973f09cc8e9">freeElfFileInfo</a>(<a class="code" href="structelf__32__info.html" title="Dawn data structure for the parsing of 32 bit elf files.">e32info</a>* info)
+<a name="l00109"></a>00109 {
+<a name="l00110"></a>00110         <span class="keywordflow">if</span> (info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b" title="A pointer to a array of program headers.">m_programHeaders</a>)
+<a name="l00111"></a>00111         {
+<a name="l00112"></a>00112                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(info-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b" title="A pointer to a array of program headers.">m_programHeaders</a>);
+<a name="l00113"></a>00113         }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115         <span class="keywordflow">if</span> (info-&gt;<a class="code" href="structelf__32__info.html#ab8d46ddc9a0d9ba619b7ab8d296e8b52" title="A pointer to a array of section headers.">m_sectionHeaders</a>)
+<a name="l00116"></a>00116         {
+<a name="l00117"></a>00117                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(info-&gt;<a class="code" href="structelf__32__info.html#ab8d46ddc9a0d9ba619b7ab8d296e8b52" title="A pointer to a array of section headers.">m_sectionHeaders</a>);
+<a name="l00118"></a>00118         }
+<a name="l00119"></a>00119 }
+<a name="l00120"></a>00120 
+<a name="l00121"></a><a class="code" href="parser_8h.html#a5e19bbfd7571dbe697a8ede42c3fed55">00121</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="parser_8c.html#a158ea82942e2626751c01d7c116634e4">elfHeaderValid</a>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> h)
+<a name="l00122"></a>00122 {
+<a name="l00123"></a>00123         <span class="keywordflow">if</span> ((h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#ab19a56cdedd60a6084f2262ecee91b85">ID_MAG0</a>] == <a class="code" href="header_8h.html#a8d944947af59b67d47a445ae2bef32e3">ELF_MAG0</a>) &amp;&amp; (h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#a301200b6762fafb075ca3a61d3e30d42">ID_MAG1</a>] == <a class="code" href="header_8h.html#abdd5eae694123f4e5e0a5449b3591cc9">ELF_MAG1</a>) &amp;&amp; (h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#ad66904674a2db4443b36601189466306">ID_MAG2</a>] == <a class="code" href="header_8h.html#a60668f0dfd2613d5ccccac355f147726">ELF_MAG2</a>) &amp;&amp; (h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[<a class="code" href="header_8h.html#a42de0067c433d59e585c143728a2e317">ID_MAG3</a>] == <a class="code" href="header_8h.html#a40443fcac019afd6b173b8890fd25e6c">ELF_MAG3</a>)) <span class="keywordflow">return</span> 1;
+<a name="l00124"></a>00124         <span class="keywordflow">return</span> 0;
+<a name="l00125"></a>00125 }
+<a name="l00126"></a>00126 
+<a name="l00127"></a><a class="code" href="parser_8h.html#abe06dbe2fcf1c29d413743ec3af5c0f8">00127</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="parser_8c.html#a575e667d0df7d507f3b116c030363c23">getElfHeaderClass</a>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> h)
+<a name="l00128"></a>00128 {
+<a name="l00129"></a>00129         <span class="keywordflow">return</span> h.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[ID_CLASS];
+<a name="l00130"></a>00130 }
+<a name="l00131"></a>00131 
+<a name="l00132"></a><a class="code" href="parser_8h.html#af18d548dbd5acfbdc89dfd112a014515">00132</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="parser_8c.html#af18d548dbd5acfbdc89dfd112a014515">getElfHeaderVersion</a>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> header)
+<a name="l00133"></a>00133 {
+<a name="l00134"></a>00134         <span class="keywordflow">return</span> header.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[ID_VERSION];
+<a name="l00135"></a>00135 }
+<a name="l00136"></a>00136 
+<a name="l00137"></a><a class="code" href="parser_8h.html#a63cf4c065b64b13c806bbb93bc9475e2">00137</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="parser_8c.html#a63cf4c065b64b13c806bbb93bc9475e2">getElfHeaderData</a>(<a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> header)
+<a name="l00138"></a>00138 {
+<a name="l00139"></a>00139         <span class="keywordflow">return</span> header.<a class="code" href="structelf__32__header.html#ad6b49380ff71793547a712aa8d24c5fe">elf_ident</a>[ID_DATA];
+<a name="l00140"></a>00140 }
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -212,7 +251,7 @@ function toggleVisibility(linkObj) {
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 13:42:35 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 22:08:48 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

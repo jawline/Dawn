@@ -105,7 +105,7 @@ function toggleVisibility(linkObj) {
 <a name="l00008"></a>00008 
 <a name="l00009"></a><a class="code" href="loader_8c.html#a548b0ceff2c7d3c3b657cfe0d4666f1a">00009</a> <span class="keyword">typedef</span> int (*<a class="code" href="loader_8c.html#a548b0ceff2c7d3c3b657cfe0d4666f1a">entry_point</a>) (<span class="keywordtype">int</span> argc, <span class="keywordtype">void</span>* argv);
 <a name="l00010"></a>00010 
-<a name="l00011"></a><a class="code" href="loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c">00011</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c">mapMemoryUsingHeader</a>(<a class="code" href="structelf__32__program__header.html">e32_pheader</a> program_header)
+<a name="l00011"></a><a class="code" href="loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c">00011</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c">mapMemoryUsingHeader</a>(<a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a> program_header)
 <a name="l00012"></a>00012 {
 <a name="l00013"></a>00013         <a class="code" href="API_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Loaded program header. p_type 0x%x p_offset 0x%x v_addr 0x%x p_addr 0x%x p_filesz 0x%x p_memsz 0x%x p_align 0x%x\n&quot;</span>, program_header.<a class="code" href="structelf__32__program__header.html#af220a98c5b7f9968195246e76afc2c86">p_type</a>, program_header.<a class="code" href="structelf__32__program__header.html#aa3e8460560d072a37656cf4fdf4839f6">p_offset</a>, program_header.<a class="code" href="structelf__32__program__header.html#ab11f74e50c7ef5781fceeb94d729d423">p_vaddr</a>, program_header.<a class="code" href="structelf__32__program__header.html#ac29cb8df1e8341ad6184020d374718b3">p_paddr</a>, program_header.<a class="code" href="structelf__32__program__header.html#adea383271339e61d6dc701a292fd6596">p_filesz</a>, program_header.<a class="code" href="structelf__32__program__header.html#a9b8d565ea2d52584f038a437a7c714c7">p_memsz</a>, program_header.<a class="code" href="structelf__32__program__header.html#a2a8ee61f9995f7be7f3fedf4b7ba12c6">p_align</a>);
 <a name="l00014"></a>00014 
@@ -135,7 +135,7 @@ function toggleVisibility(linkObj) {
 <a name="l00038"></a>00038         <span class="keywordflow">return</span> 1;
 <a name="l00039"></a>00039 }
 <a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="loader_8c.html#a064b5e03c8acc63c917823be362d5474">00041</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="loader_8c.html#a064b5e03c8acc63c917823be362d5474">loadToMemoryUsingHeader</a>(<a class="code" href="structelf__32__program__header.html">e32_pheader</a> program_header, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* Node)
+<a name="l00041"></a><a class="code" href="loader_8c.html#a064b5e03c8acc63c917823be362d5474">00041</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="loader_8c.html#a064b5e03c8acc63c917823be362d5474">loadToMemoryUsingHeader</a>(<a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a> program_header, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* Node)
 <a name="l00042"></a>00042 {
 <a name="l00043"></a>00043         <span class="comment">//If the program header is a loadable object, map it into memory</span>
 <a name="l00044"></a>00044         <span class="keywordflow">if</span> (program_header.<a class="code" href="structelf__32__program__header.html#af220a98c5b7f9968195246e76afc2c86">p_type</a> == <a class="code" href="header_8h.html#a84d7768fd6c6ece599d297090900cf92">PT_LOAD</a>)
@@ -154,13 +154,13 @@ function toggleVisibility(linkObj) {
 <a name="l00057"></a><a class="code" href="loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904">00057</a> <span class="keywordtype">int</span> <a class="code" href="loader_8c.html#a5c44c0aac1ca51f6cc551082962dfe2d">loadAndExecuteElf</a>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>* Node, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> usermode)
 <a name="l00058"></a>00058 {
 <a name="l00059"></a>00059         <span class="comment">//Read the ELF info</span>
-<a name="l00060"></a>00060         <a class="code" href="structelf__32__info.html">e32info</a>* fileInfo = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structelf__32__info.html">e32info</a>));
-<a name="l00061"></a>00061         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(fileInfo, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__info.html">e32info</a>));
+<a name="l00060"></a>00060         <a class="code" href="structelf__32__info.html" title="Dawn data structure for the parsing of 32 bit elf files.">e32info</a>* fileInfo = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structelf__32__info.html" title="Dawn data structure for the parsing of 32 bit elf files.">e32info</a>));
+<a name="l00061"></a>00061         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(fileInfo, 0, <span class="keyword">sizeof</span>(<a class="code" href="structelf__32__info.html" title="Dawn data structure for the parsing of 32 bit elf files.">e32info</a>));
 <a name="l00062"></a>00062 
 <a name="l00063"></a>00063         <a class="code" href="parser_8c.html#a5ad5e59604a08596c7c06e5b1770b1bb">parseElfFile</a>(fileInfo, Node);
 <a name="l00064"></a>00064 
 <a name="l00065"></a>00065         <span class="comment">//Use the header from the parsed file</span>
-<a name="l00066"></a>00066         <a class="code" href="structelf__32__header.html">e32_header</a> head = fileInfo-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea">m_mainHeader</a>;
+<a name="l00066"></a>00066         <a class="code" href="structelf__32__header.html" title="the structure for a 32Bit elf header">e32_header</a> head = fileInfo-&gt;<a class="code" href="structelf__32__info.html#afad69f71c04aeaa868d04063781741ea" title="The main elf file header.">m_mainHeader</a>;
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068         <span class="comment">//Is it a executable?</span>
 <a name="l00069"></a>00069         <span class="keywordflow">if</span> (head.<a class="code" href="structelf__32__header.html#a9b5c0b9a83cd0c472290a81676b4119f">e_type</a> != <a class="code" href="header_8h.html#abc9aa9595c9f0e674a2f3a2f86523e0c">ELF_EXE</a>)
@@ -194,14 +194,14 @@ function toggleVisibility(linkObj) {
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098         <span class="comment">//This segment of code correlates to the loading of the data into virtual memory</span>
 <a name="l00099"></a>00099 
-<a name="l00100"></a>00100         <a class="code" href="API_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Iterating through %i program headers\n&quot;</span>, fileInfo-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e">m_numProgramHeaders</a>);
+<a name="l00100"></a>00100         <a class="code" href="API_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Iterating through %i program headers\n&quot;</span>, fileInfo-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e" title="The number of program headers in the array pointed to by m_programHeaders.">m_numProgramHeaders</a>);
 <a name="l00101"></a>00101 
 <a name="l00102"></a>00102         <span class="comment">//Iterate through every program header</span>
 <a name="l00103"></a>00103         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> header_iter = 0;
-<a name="l00104"></a>00104         <span class="keywordflow">for</span> (header_iter = 0; header_iter &lt; fileInfo-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e">m_numProgramHeaders</a>; header_iter++)
+<a name="l00104"></a>00104         <span class="keywordflow">for</span> (header_iter = 0; header_iter &lt; fileInfo-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e" title="The number of program headers in the array pointed to by m_programHeaders.">m_numProgramHeaders</a>; header_iter++)
 <a name="l00105"></a>00105         {
 <a name="l00106"></a>00106 
-<a name="l00107"></a>00107                 <a class="code" href="structelf__32__program__header.html">e32_pheader</a> program_header = fileInfo-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b">m_programHeaders</a>[header_iter];
+<a name="l00107"></a>00107                 <a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a> program_header = fileInfo-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b" title="A pointer to a array of program headers.">m_programHeaders</a>[header_iter];
 <a name="l00108"></a>00108                 
 <a name="l00109"></a>00109                 <span class="keywordflow">if</span> (<a class="code" href="loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c">mapMemoryUsingHeader</a>(program_header) != 1)
 <a name="l00110"></a>00110                 {
@@ -212,10 +212,10 @@ function toggleVisibility(linkObj) {
 <a name="l00115"></a>00115         }
 <a name="l00116"></a>00116 
 <a name="l00117"></a>00117         <span class="comment">//Load the object blocks that where just mapped</span>
-<a name="l00118"></a>00118         <span class="keywordflow">for</span> (header_iter = 0; header_iter &lt; fileInfo-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e">m_numProgramHeaders</a>; header_iter++)
+<a name="l00118"></a>00118         <span class="keywordflow">for</span> (header_iter = 0; header_iter &lt; fileInfo-&gt;<a class="code" href="structelf__32__info.html#a3d0840d804c71febb4e372812f9f5b3e" title="The number of program headers in the array pointed to by m_programHeaders.">m_numProgramHeaders</a>; header_iter++)
 <a name="l00119"></a>00119         {
 <a name="l00120"></a>00120 
-<a name="l00121"></a>00121                 <a class="code" href="structelf__32__program__header.html">e32_pheader</a> program_header = fileInfo-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b">m_programHeaders</a>[header_iter];
+<a name="l00121"></a>00121                 <a class="code" href="structelf__32__program__header.html" title="The structure for a 32 bit elf program header.">e32_pheader</a> program_header = fileInfo-&gt;<a class="code" href="structelf__32__info.html#a26df4e771f5978aa40f2ddef21370e4b" title="A pointer to a array of program headers.">m_programHeaders</a>[header_iter];
 <a name="l00122"></a>00122                 <span class="keywordflow">if</span> (<a class="code" href="loader_8c.html#a064b5e03c8acc63c917823be362d5474">loadToMemoryUsingHeader</a>(program_header, Node) != 1)
 <a name="l00123"></a>00123                 {
 <a name="l00124"></a>00124                         <a class="code" href="API_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Error unable to load header %i\n&quot;</span>, header_iter);
@@ -258,7 +258,7 @@ function toggleVisibility(linkObj) {
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 13:42:35 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 22:08:48 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

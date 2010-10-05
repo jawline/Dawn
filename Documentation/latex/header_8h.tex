@@ -7,13 +7,13 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structelf__32__header}{elf\_\-32\_\-header}
-\item 
+\begin{DoxyCompactList}\small\item\em the structure for a 32Bit elf header \item\end{DoxyCompactList}\item 
 struct \hyperlink{structelf__32__section__header}{elf\_\-32\_\-section\_\-header}
-\item 
+\begin{DoxyCompactList}\small\item\em The structure for a 32 bit elf section header. \item\end{DoxyCompactList}\item 
 struct \hyperlink{structelf__32__program__header}{elf\_\-32\_\-program\_\-header}
-\item 
+\begin{DoxyCompactList}\small\item\em The structure for a 32 bit elf program header. \item\end{DoxyCompactList}\item 
 struct \hyperlink{structelf__32__info}{elf\_\-32\_\-info}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Dawn data structure for the parsing of 32 bit elf files. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Defines}
 \begin{DoxyCompactItemize}
 \item 
@@ -100,7 +100,7 @@ typedef struct \hyperlink{structelf__32__info}{elf\_\-32\_\-info} \hyperlink{hea
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structelf__32__header}{elf\_\-32\_\-header} \hyperlink{header_8h_acb1c1f61d129a356933cb27e9684c9f0}{\_\-\_\-attribute\_\-\_\-} ((packed))
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em the structure for a 32Bit elf header \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -133,9 +133,9 @@ struct \hyperlink{structelf__32__header}{elf\_\-32\_\-header} \hyperlink{header_
 \hyperlink{header_8h_a36b5c3e0acdf5b2949591cd07480d10b}{Elf32\_\-Half} \hyperlink{header_8h_a8b5c539f8dafe21843640fd4e9b6b4a2}{e\_\-shtrndx}
 \item 
 \hyperlink{header_8h_aaf2adb6079d594afee7de40cee594c34}{Elf32\_\-Word} \hyperlink{header_8h_ade8467fed394a2adebbac57ce1007742}{sh\_\-name}
-\item 
+\begin{DoxyCompactList}\small\item\em String tables index for the section header name. \item\end{DoxyCompactList}\item 
 \hyperlink{header_8h_aaf2adb6079d594afee7de40cee594c34}{Elf32\_\-Word} \hyperlink{header_8h_a2a41bb54bee9e047efbf10185972395b}{sh\_\-type}
-\item 
+\begin{DoxyCompactList}\small\item\em Numeric identified for the section header type. \item\end{DoxyCompactList}\item 
 \hyperlink{header_8h_aaf2adb6079d594afee7de40cee594c34}{Elf32\_\-Word} \hyperlink{header_8h_a23c0c41226f447a73c37d501692e75d7}{sh\_\-flags}
 \item 
 \hyperlink{header_8h_a6041cee195469c34b94c8605b53a98f9}{Elf32\_\-Addr} \hyperlink{header_8h_a18c60e7404cee4ccf1e7a77445764bc4}{sh\_\-addr}
@@ -169,7 +169,7 @@ struct \hyperlink{structelf__32__header}{elf\_\-32\_\-header} \hyperlink{header_
 \hyperlink{header_8h_aaf2adb6079d594afee7de40cee594c34}{Elf32\_\-Word} \hyperlink{header_8h_a66609694ebd2c2235315b7a25b2bae63}{p\_\-align}
 \item 
 struct \hyperlink{structelf__32__info}{elf\_\-32\_\-info} \hyperlink{header_8h_a210a42bd05782ca287cbf6663608a0a8}{\_\-\_\-attribute\_\-\_\-}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Dawn data structure for the parsing of 32 bit elf files. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Define Documentation}
@@ -444,7 +444,7 @@ Definition at line 46 of file header.h.
 \label{header_8h_a84d1e770c0283c74aa443f53b1bd4a84}
 
 
-Definition at line 101 of file header.h.
+Definition at line 214 of file header.h.
 
 \hypertarget{header_8h_a66e7be85cce2ebda32e4423343e6df72}{
 \index{header.h@{header.h}!e32\_\-pheader@{e32\_\-pheader}}
@@ -453,7 +453,7 @@ Definition at line 101 of file header.h.
 \label{header_8h_a66e7be85cce2ebda32e4423343e6df72}
 
 
-Definition at line 103 of file header.h.
+Definition at line 216 of file header.h.
 
 \hypertarget{header_8h_a71a4010c3f55d29b56645e8cf7b517bb}{
 \index{header.h@{header.h}!e32\_\-sheader@{e32\_\-sheader}}
@@ -462,7 +462,7 @@ Definition at line 103 of file header.h.
 \label{header_8h_a71a4010c3f55d29b56645e8cf7b517bb}
 
 
-Definition at line 102 of file header.h.
+Definition at line 215 of file header.h.
 
 \hypertarget{header_8h_af5537b40a468007de404667b9342553e}{
 \index{header.h@{header.h}!e32info@{e32info}}
@@ -471,7 +471,7 @@ Definition at line 102 of file header.h.
 \label{header_8h_af5537b40a468007de404667b9342553e}
 
 
-Definition at line 104 of file header.h.
+Definition at line 217 of file header.h.
 
 \hypertarget{header_8h_a6041cee195469c34b94c8605b53a98f9}{
 \index{header.h@{header.h}!Elf32\_\-Addr@{Elf32\_\-Addr}}
@@ -532,128 +532,138 @@ Definition at line 10 of file header.h.
 \label{header_8h_acb1c1f61d129a356933cb27e9684c9f0}
 
 
+the structure for a 32Bit elf header 
+
+The structure for a 32 bit elf program header.
+
+The structure for a 32 bit elf section header. 
+
 \subsection{Variable Documentation}
 \hypertarget{header_8h_a210a42bd05782ca287cbf6663608a0a8}{
 \index{header.h@{header.h}!\_\-\_\-attribute\_\-\_\-@{\_\-\_\-attribute\_\-\_\-}}
 \index{\_\-\_\-attribute\_\-\_\-@{\_\-\_\-attribute\_\-\_\-}!header.h@{header.h}}
 \subsubsection[{\_\-\_\-attribute\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf elf\_\-32\_\-info}  {\bf \_\-\_\-attribute\_\-\_\-}}}
 \label{header_8h_a210a42bd05782ca287cbf6663608a0a8}
+
+
+Dawn data structure for the parsing of 32 bit elf files. 
+
 \hypertarget{header_8h_aa0fef16d9e9b4c56c6449fe6e5e43571}{
 \index{header.h@{header.h}!e\_\-ehsize@{e\_\-ehsize}}
 \index{e\_\-ehsize@{e\_\-ehsize}!header.h@{header.h}}
 \subsubsection[{e\_\-ehsize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-ehsize}}}
 \label{header_8h_aa0fef16d9e9b4c56c6449fe6e5e43571}
+The size of the elf header 
 
-
-Definition at line 72 of file header.h.
+Definition at line 181 of file header.h.
 
 \hypertarget{header_8h_a146e750d8c5ddfa36d84e83fd43a9828}{
 \index{header.h@{header.h}!e\_\-entry@{e\_\-entry}}
 \index{e\_\-entry@{e\_\-entry}!header.h@{header.h}}
 \subsubsection[{e\_\-entry}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Addr} {\bf e\_\-entry}}}
 \label{header_8h_a146e750d8c5ddfa36d84e83fd43a9828}
+The entry point of the application (Address) 
 
-
-Definition at line 68 of file header.h.
+Definition at line 157 of file header.h.
 
 \hypertarget{header_8h_af4e9f6a9950c02e6378aa0e85aa8bfe3}{
 \index{header.h@{header.h}!e\_\-flags@{e\_\-flags}}
 \index{e\_\-flags@{e\_\-flags}!header.h@{header.h}}
 \subsubsection[{e\_\-flags}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Word} {\bf e\_\-flags}}}
 \label{header_8h_af4e9f6a9950c02e6378aa0e85aa8bfe3}
+Not used 
 
-
-Definition at line 71 of file header.h.
+Definition at line 175 of file header.h.
 
 \hypertarget{header_8h_a334b2b2406970a5d2a0a903dd5ed5745}{
 \index{header.h@{header.h}!e\_\-machine@{e\_\-machine}}
 \index{e\_\-machine@{e\_\-machine}!header.h@{header.h}}
 \subsubsection[{e\_\-machine}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-machine}}}
 \label{header_8h_a334b2b2406970a5d2a0a903dd5ed5745}
+Target architecture 
 
-
-Definition at line 66 of file header.h.
+Definition at line 145 of file header.h.
 
 \hypertarget{header_8h_ad0b31b8c5e1c550d79195f8190650caa}{
 \index{header.h@{header.h}!e\_\-phentsize@{e\_\-phentsize}}
 \index{e\_\-phentsize@{e\_\-phentsize}!header.h@{header.h}}
 \subsubsection[{e\_\-phentsize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-phentsize}}}
 \label{header_8h_ad0b31b8c5e1c550d79195f8190650caa}
+The size in bytes of each program header entry 
 
-
-Definition at line 73 of file header.h.
+Definition at line 187 of file header.h.
 
 \hypertarget{header_8h_a51ddda24560032b209311eb32528a249}{
 \index{header.h@{header.h}!e\_\-phnum@{e\_\-phnum}}
 \index{e\_\-phnum@{e\_\-phnum}!header.h@{header.h}}
 \subsubsection[{e\_\-phnum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-phnum}}}
 \label{header_8h_a51ddda24560032b209311eb32528a249}
+The number of program headers 
 
-
-Definition at line 74 of file header.h.
+Definition at line 193 of file header.h.
 
 \hypertarget{header_8h_ada87533ed3557b687daa8d999461c79b}{
 \index{header.h@{header.h}!e\_\-phoff@{e\_\-phoff}}
 \index{e\_\-phoff@{e\_\-phoff}!header.h@{header.h}}
 \subsubsection[{e\_\-phoff}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Off} {\bf e\_\-phoff}}}
 \label{header_8h_ada87533ed3557b687daa8d999461c79b}
+Program headers offset from start of file 
 
-
-Definition at line 69 of file header.h.
+Definition at line 163 of file header.h.
 
 \hypertarget{header_8h_a8019991b37b5c2f1e1dd599627b07884}{
 \index{header.h@{header.h}!e\_\-shentsize@{e\_\-shentsize}}
 \index{e\_\-shentsize@{e\_\-shentsize}!header.h@{header.h}}
 \subsubsection[{e\_\-shentsize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-shentsize}}}
 \label{header_8h_a8019991b37b5c2f1e1dd599627b07884}
+The size in bytes of each section headerer entry 
 
-
-Definition at line 75 of file header.h.
+Definition at line 198 of file header.h.
 
 \hypertarget{header_8h_a42978053163eaa3a3a6b828ca72a7268}{
 \index{header.h@{header.h}!e\_\-shnum@{e\_\-shnum}}
 \index{e\_\-shnum@{e\_\-shnum}!header.h@{header.h}}
 \subsubsection[{e\_\-shnum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-shnum}}}
 \label{header_8h_a42978053163eaa3a3a6b828ca72a7268}
+The number of section headers 
 
-
-Definition at line 76 of file header.h.
+Definition at line 204 of file header.h.
 
 \hypertarget{header_8h_ad1cb2a7b39b5465b19922fcd2a449ee1}{
 \index{header.h@{header.h}!e\_\-shoff@{e\_\-shoff}}
 \index{e\_\-shoff@{e\_\-shoff}!header.h@{header.h}}
 \subsubsection[{e\_\-shoff}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Off} {\bf e\_\-shoff}}}
 \label{header_8h_ad1cb2a7b39b5465b19922fcd2a449ee1}
+Section headers offset from start of file 
 
-
-Definition at line 70 of file header.h.
+Definition at line 169 of file header.h.
 
 \hypertarget{header_8h_a8b5c539f8dafe21843640fd4e9b6b4a2}{
 \index{header.h@{header.h}!e\_\-shtrndx@{e\_\-shtrndx}}
 \index{e\_\-shtrndx@{e\_\-shtrndx}!header.h@{header.h}}
 \subsubsection[{e\_\-shtrndx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-shtrndx}}}
 \label{header_8h_a8b5c539f8dafe21843640fd4e9b6b4a2}
+The section header index which contains the string table 
 
-
-Definition at line 77 of file header.h.
+Definition at line 210 of file header.h.
 
 \hypertarget{header_8h_a7f0b549920bf4fc78b5ca36a17dc50b3}{
 \index{header.h@{header.h}!e\_\-type@{e\_\-type}}
 \index{e\_\-type@{e\_\-type}!header.h@{header.h}}
 \subsubsection[{e\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Half} {\bf e\_\-type}}}
 \label{header_8h_a7f0b549920bf4fc78b5ca36a17dc50b3}
+The file type (Relocatable, Executable, Etcetera) 
 
-
-Definition at line 65 of file header.h.
+Definition at line 139 of file header.h.
 
 \hypertarget{header_8h_af3c8fac8345400aef61da74b2de320c8}{
 \index{header.h@{header.h}!e\_\-version@{e\_\-version}}
 \index{e\_\-version@{e\_\-version}!header.h@{header.h}}
 \subsubsection[{e\_\-version}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Elf32\_\-Word} {\bf e\_\-version}}}
 \label{header_8h_af3c8fac8345400aef61da74b2de320c8}
+Object file version (Set to 1) 
 
-
-Definition at line 67 of file header.h.
+Definition at line 151 of file header.h.
 
 \hypertarget{header_8h_ad7a884e2c8c790e104981c216dc00d2d}{
 \index{header.h@{header.h}!elf\_\-ident@{elf\_\-ident}}
@@ -662,7 +672,7 @@ Definition at line 67 of file header.h.
 \label{header_8h_ad7a884e2c8c790e104981c216dc00d2d}
 
 
-Definition at line 64 of file header.h.
+Definition at line 133 of file header.h.
 
 \hypertarget{header_8h_a66609694ebd2c2235315b7a25b2bae63}{
 \index{header.h@{header.h}!p\_\-align@{p\_\-align}}
@@ -671,7 +681,7 @@ Definition at line 64 of file header.h.
 \label{header_8h_a66609694ebd2c2235315b7a25b2bae63}
 
 
-Definition at line 95 of file header.h.
+Definition at line 182 of file header.h.
 
 \hypertarget{header_8h_a3b607fe05ae8ac5dbe7b328eb25b9c11}{
 \index{header.h@{header.h}!p\_\-filesz@{p\_\-filesz}}
@@ -680,7 +690,7 @@ Definition at line 95 of file header.h.
 \label{header_8h_a3b607fe05ae8ac5dbe7b328eb25b9c11}
 
 
-Definition at line 92 of file header.h.
+Definition at line 179 of file header.h.
 
 \hypertarget{header_8h_a39014f5cea369c520082e26e9518a697}{
 \index{header.h@{header.h}!p\_\-flags@{p\_\-flags}}
@@ -689,7 +699,7 @@ Definition at line 92 of file header.h.
 \label{header_8h_a39014f5cea369c520082e26e9518a697}
 
 
-Definition at line 94 of file header.h.
+Definition at line 181 of file header.h.
 
 \hypertarget{header_8h_a927f5fb1182d6e414c7ac3573aed393f}{
 \index{header.h@{header.h}!p\_\-memsz@{p\_\-memsz}}
@@ -698,7 +708,7 @@ Definition at line 94 of file header.h.
 \label{header_8h_a927f5fb1182d6e414c7ac3573aed393f}
 
 
-Definition at line 93 of file header.h.
+Definition at line 180 of file header.h.
 
 \hypertarget{header_8h_a8506a191f6eb19d977badcc7b79304da}{
 \index{header.h@{header.h}!p\_\-offset@{p\_\-offset}}
@@ -707,7 +717,7 @@ Definition at line 93 of file header.h.
 \label{header_8h_a8506a191f6eb19d977badcc7b79304da}
 
 
-Definition at line 89 of file header.h.
+Definition at line 176 of file header.h.
 
 \hypertarget{header_8h_a0d8f4187ea1e170564f61f9de0a2e0b4}{
 \index{header.h@{header.h}!p\_\-paddr@{p\_\-paddr}}
@@ -716,7 +726,7 @@ Definition at line 89 of file header.h.
 \label{header_8h_a0d8f4187ea1e170564f61f9de0a2e0b4}
 
 
-Definition at line 91 of file header.h.
+Definition at line 178 of file header.h.
 
 \hypertarget{header_8h_a1b4ed5de6b34c773a4bd176b0b1a486b}{
 \index{header.h@{header.h}!p\_\-type@{p\_\-type}}
@@ -725,7 +735,7 @@ Definition at line 91 of file header.h.
 \label{header_8h_a1b4ed5de6b34c773a4bd176b0b1a486b}
 
 
-Definition at line 88 of file header.h.
+Definition at line 175 of file header.h.
 
 \hypertarget{header_8h_acabdf03daaa792ce4051b6883b0df40d}{
 \index{header.h@{header.h}!p\_\-vaddr@{p\_\-vaddr}}
@@ -734,7 +744,7 @@ Definition at line 88 of file header.h.
 \label{header_8h_acabdf03daaa792ce4051b6883b0df40d}
 
 
-Definition at line 90 of file header.h.
+Definition at line 177 of file header.h.
 
 \hypertarget{header_8h_a18c60e7404cee4ccf1e7a77445764bc4}{
 \index{header.h@{header.h}!sh\_\-addr@{sh\_\-addr}}
@@ -743,7 +753,7 @@ Definition at line 90 of file header.h.
 \label{header_8h_a18c60e7404cee4ccf1e7a77445764bc4}
 
 
-Definition at line 80 of file header.h.
+Definition at line 173 of file header.h.
 
 \hypertarget{header_8h_a63c4e1b5e5601867073efc0ee9d9ede4}{
 \index{header.h@{header.h}!sh\_\-addralign@{sh\_\-addralign}}
@@ -752,7 +762,7 @@ Definition at line 80 of file header.h.
 \label{header_8h_a63c4e1b5e5601867073efc0ee9d9ede4}
 
 
-Definition at line 85 of file header.h.
+Definition at line 178 of file header.h.
 
 \hypertarget{header_8h_ab8925d294ee527ad4d9a5f573cbfb3f8}{
 \index{header.h@{header.h}!sh\_\-entsize@{sh\_\-entsize}}
@@ -761,7 +771,7 @@ Definition at line 85 of file header.h.
 \label{header_8h_ab8925d294ee527ad4d9a5f573cbfb3f8}
 
 
-Definition at line 86 of file header.h.
+Definition at line 179 of file header.h.
 
 \hypertarget{header_8h_a23c0c41226f447a73c37d501692e75d7}{
 \index{header.h@{header.h}!sh\_\-flags@{sh\_\-flags}}
@@ -770,7 +780,7 @@ Definition at line 86 of file header.h.
 \label{header_8h_a23c0c41226f447a73c37d501692e75d7}
 
 
-Definition at line 79 of file header.h.
+Definition at line 172 of file header.h.
 
 \hypertarget{header_8h_a44bff009f8cd38b77854ca666a43cc3b}{
 \index{header.h@{header.h}!sh\_\-info@{sh\_\-info}}
@@ -779,7 +789,7 @@ Definition at line 79 of file header.h.
 \label{header_8h_a44bff009f8cd38b77854ca666a43cc3b}
 
 
-Definition at line 84 of file header.h.
+Definition at line 177 of file header.h.
 
 \hypertarget{header_8h_abc776cd861d04445e42019265581750f}{
 \index{header.h@{header.h}!sh\_\-link@{sh\_\-link}}
@@ -788,7 +798,7 @@ Definition at line 84 of file header.h.
 \label{header_8h_abc776cd861d04445e42019265581750f}
 
 
-Definition at line 83 of file header.h.
+Definition at line 176 of file header.h.
 
 \hypertarget{header_8h_ade8467fed394a2adebbac57ce1007742}{
 \index{header.h@{header.h}!sh\_\-name@{sh\_\-name}}
@@ -797,7 +807,11 @@ Definition at line 83 of file header.h.
 \label{header_8h_ade8467fed394a2adebbac57ce1007742}
 
 
-Definition at line 77 of file header.h.
+String tables index for the section header name. 
+
+
+
+Definition at line 165 of file header.h.
 
 \hypertarget{header_8h_a4fd90cfe25373b4d13599f2c55120dca}{
 \index{header.h@{header.h}!sh\_\-offset@{sh\_\-offset}}
@@ -806,7 +820,7 @@ Definition at line 77 of file header.h.
 \label{header_8h_a4fd90cfe25373b4d13599f2c55120dca}
 
 
-Definition at line 81 of file header.h.
+Definition at line 174 of file header.h.
 
 \hypertarget{header_8h_a22b9e86344a0dff7e25af8e49f77b1e9}{
 \index{header.h@{header.h}!sh\_\-size@{sh\_\-size}}
@@ -815,7 +829,7 @@ Definition at line 81 of file header.h.
 \label{header_8h_a22b9e86344a0dff7e25af8e49f77b1e9}
 
 
-Definition at line 82 of file header.h.
+Definition at line 175 of file header.h.
 
 \hypertarget{header_8h_a2a41bb54bee9e047efbf10185972395b}{
 \index{header.h@{header.h}!sh\_\-type@{sh\_\-type}}
@@ -824,5 +838,9 @@ Definition at line 82 of file header.h.
 \label{header_8h_a2a41bb54bee9e047efbf10185972395b}
 
 
-Definition at line 78 of file header.h.
+Numeric identified for the section header type. 
+
+
+
+Definition at line 171 of file header.h.
 

@@ -14,7 +14,6 @@
 #include <process/message.h>
 #include <process/events.h>
 #include <process/process_info.h>
-#include <process/cprocess.h>
 
 #include <messages/messages.h>
 #include <input/devices.h>

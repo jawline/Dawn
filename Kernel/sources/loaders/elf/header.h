@@ -45,25 +45,108 @@ typedef uint8	Elf32_Char;
 
 #define PT_LOAD 1
 
+/**
+ @brief the structure for a 32Bit elf header
+ */
+
 struct elf_32_header {
 	uint8 elf_ident[ELF_NUMBER_IDENT];
+	
+	/**
+	 * The file type (Relocatable, Executable, Etcetera)
+	 */
+
         Elf32_Half      e_type;
+
+	/**
+	 * Target architecture
+	 */
+
         Elf32_Half      e_machine;
+
+	/**
+	 * Object file version (Set to 1)
+	 */
+
         Elf32_Word      e_version;
+
+	/**
+	 * The entry point of the application (Address)
+	 */
+
         Elf32_Addr      e_entry;
+
+	/**
+	 * Program headers offset from start of file
+	 */
+
         Elf32_Off       e_phoff;
+
+	/**
+	 * Section headers offset from start of file
+	 */
+
         Elf32_Off       e_shoff;
+
+	/**
+	 * Not used
+	 */
+
         Elf32_Word      e_flags;
+
+	/**
+	 * The size of the elf header
+	 */
+
         Elf32_Half      e_ehsize;
+
+	/**
+	 * The size in bytes of each program header entry
+	 */
+
         Elf32_Half      e_phentsize;
+
+	/**
+	 * The number of program headers
+	 */
+
         Elf32_Half      e_phnum;
+
+	/**
+	 * The size in bytes of each section headerer entry
+	 */
         Elf32_Half      e_shentsize;
+
+	/**
+	 * The number of section headers
+	 */
+
         Elf32_Half      e_shnum;
+
+	/**
+	 * The section header index which contains the string table
+	 */
+
         Elf32_Half      e_shtrndx;
+
 } __attribute__((packed));
 
+/**
+ * @brief The structure for a 32 bit elf section header
+ */
+
 struct elf_32_section_header {
+	
+	/**
+	 * @brief String tables index for the section header name
+	 */
+
 	Elf32_Word sh_name;
+
+	/**
+	 * @brief Numeric identified for the section header type
+	 */
+
 	Elf32_Word sh_type;
 	Elf32_Word sh_flags;
 	Elf32_Addr sh_addr;
@@ -74,6 +157,10 @@ struct elf_32_section_header {
 	Elf32_Word sh_addralign;
 	Elf32_Word sh_entsize;
 } __attribute__((packed));
+
+/**
+ * @brief The structure for a 32 bit elf program header
+ */
 
 struct elf_32_program_header {
 	Elf32_Word p_type;
@@ -86,14 +173,40 @@ struct elf_32_program_header {
 	Elf32_Word p_align;
 } __attribute__((packed));
 
+/**
+ * @brief Dawn data structure for the parsing of 32 bit elf files
+ */
+
 struct elf_32_info {
+
+	/**
+	 * @brief The main elf file header
+	 */
 
 	struct elf_32_header m_mainHeader;
 
+	/**
+	 * @brief A pointer to a array of section headers
+	 */
+
 	struct elf_32_section_header* m_sectionHeaders;
+
+	/**
+	 * @brief The number of section headers in the array pointed to by m_sectionHeaders
+	 */
+
 	int m_numSectionHeaders;
 
+	/**
+	 * @brief A pointer to a array of program headers
+	 */
+
 	struct elf_32_program_header* m_programHeaders;
+
+	/**
+	 * @brief The number of program headers in the array pointed to by m_programHeaders
+	 */
+
 	int m_numProgramHeaders;
 };
 

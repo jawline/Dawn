@@ -11,6 +11,10 @@
 \item 
 \hyperlink{structelf__32__program__header}{e32\_\-pheader} \hyperlink{parser_8c_ac45f19967d2ca8a1092d7f7bcb5c7946}{parseElfProgramHeader} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$File, \hyperlink{structelf__32__header}{e32\_\-header} Header, unsigned int number)
 \item 
+char $\ast$ \hyperlink{parser_8c_a23080f74b019e9bf5399832e0ef51862}{parseStringTableEntry} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$File, \hyperlink{structelf__32__info}{e32info} $\ast$info)
+\item 
+\hyperlink{structelf__32__section__header}{e32\_\-sheader} \hyperlink{parser_8c_a48f183bce269be3ded2600bec9cde3b8}{parseElfSectionHeader} (\hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$File, \hyperlink{structelf__32__header}{e32\_\-header} Header, unsigned int number)
+\item 
 void \hyperlink{parser_8c_a5ad5e59604a08596c7c06e5b1770b1bb}{parseElfFile} (\hyperlink{structelf__32__info}{e32info} $\ast$info, \hyperlink{structfilesystem__node}{fs\_\-node\_\-t} $\ast$File)
 \item 
 void \hyperlink{parser_8c_a7853e4ad87f5ae705d324973f09cc8e9}{freeElfFileInfo} (\hyperlink{structelf__32__info}{e32info} $\ast$info)
@@ -37,7 +41,7 @@ unsigned int \hyperlink{parser_8c_a63cf4c065b64b13c806bbb93bc9475e2}{getElfHeade
 \label{parser_8c_a158ea82942e2626751c01d7c116634e4}
 
 
-Definition at line 82 of file parser.c.
+Definition at line 121 of file parser.c.
 
 \hypertarget{parser_8c_a7853e4ad87f5ae705d324973f09cc8e9}{
 \index{parser.c@{parser.c}!freeElfFileInfo@{freeElfFileInfo}}
@@ -50,7 +54,7 @@ Definition at line 82 of file parser.c.
 \label{parser_8c_a7853e4ad87f5ae705d324973f09cc8e9}
 
 
-Definition at line 69 of file parser.c.
+Definition at line 108 of file parser.c.
 
 \hypertarget{parser_8c_a575e667d0df7d507f3b116c030363c23}{
 \index{parser.c@{parser.c}!getElfHeaderClass@{getElfHeaderClass}}
@@ -63,7 +67,7 @@ Definition at line 69 of file parser.c.
 \label{parser_8c_a575e667d0df7d507f3b116c030363c23}
 
 
-Definition at line 88 of file parser.c.
+Definition at line 127 of file parser.c.
 
 \hypertarget{parser_8c_a63cf4c065b64b13c806bbb93bc9475e2}{
 \index{parser.c@{parser.c}!getElfHeaderData@{getElfHeaderData}}
@@ -76,7 +80,7 @@ Definition at line 88 of file parser.c.
 \label{parser_8c_a63cf4c065b64b13c806bbb93bc9475e2}
 
 
-Definition at line 98 of file parser.c.
+Definition at line 137 of file parser.c.
 
 \hypertarget{parser_8c_af18d548dbd5acfbdc89dfd112a014515}{
 \index{parser.c@{parser.c}!getElfHeaderVersion@{getElfHeaderVersion}}
@@ -89,7 +93,7 @@ Definition at line 98 of file parser.c.
 \label{parser_8c_af18d548dbd5acfbdc89dfd112a014515}
 
 
-Definition at line 93 of file parser.c.
+Definition at line 132 of file parser.c.
 
 \hypertarget{parser_8c_a5ad5e59604a08596c7c06e5b1770b1bb}{
 \index{parser.c@{parser.c}!parseElfFile@{parseElfFile}}
@@ -103,7 +107,7 @@ Definition at line 93 of file parser.c.
 \label{parser_8c_a5ad5e59604a08596c7c06e5b1770b1bb}
 
 
-Definition at line 49 of file parser.c.
+Definition at line 80 of file parser.c.
 
 \hypertarget{parser_8c_a2507911e854773cbdcd1eee6a1bcfdc4}{
 \index{parser.c@{parser.c}!parseElfHeader@{parseElfHeader}}
@@ -132,4 +136,33 @@ Definition at line 5 of file parser.c.
 
 
 Definition at line 27 of file parser.c.
+
+\hypertarget{parser_8c_a48f183bce269be3ded2600bec9cde3b8}{
+\index{parser.c@{parser.c}!parseElfSectionHeader@{parseElfSectionHeader}}
+\index{parseElfSectionHeader@{parseElfSectionHeader}!parser.c@{parser.c}}
+\subsubsection[{parseElfSectionHeader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf e32\_\-sheader} parseElfSectionHeader (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ File, }
+\item[{{\bf e32\_\-header}}]{ Header, }
+\item[{unsigned int}]{ number}
+\end{DoxyParamCaption}
+)}}
+\label{parser_8c_a48f183bce269be3ded2600bec9cde3b8}
+
+
+Definition at line 53 of file parser.c.
+
+\hypertarget{parser_8c_a23080f74b019e9bf5399832e0ef51862}{
+\index{parser.c@{parser.c}!parseStringTableEntry@{parseStringTableEntry}}
+\index{parseStringTableEntry@{parseStringTableEntry}!parser.c@{parser.c}}
+\subsubsection[{parseStringTableEntry}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ parseStringTableEntry (
+\begin{DoxyParamCaption}
+\item[{{\bf fs\_\-node\_\-t} $\ast$}]{ File, }
+\item[{{\bf e32info} $\ast$}]{ info}
+\end{DoxyParamCaption}
+)}}
+\label{parser_8c_a23080f74b019e9bf5399832e0ef51862}
+
+
+Definition at line 48 of file parser.c.
 

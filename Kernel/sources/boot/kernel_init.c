@@ -1,6 +1,6 @@
 
 /* The purpose of this file is to initialize the kernel into a standard state with virtual memory, a heap, a virtual file system, a IDT and a GDT if necessary. 
-   Also to initialize any other subsystems such as the timer which may be required for SimpleOS to function properly
+   Also to initialize any other subsystems such as the timer which may be required for Dawn to function properly
 */
 
 #include "kernel_init.h"

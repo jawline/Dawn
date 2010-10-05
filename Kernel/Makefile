@@ -48,6 +48,8 @@ irets:
 	-@for file in $(ALLFILES); do fgrep -H -e iret $$file; done; true
 usermode:
 	-@for file in $(ALLFILES); do fgrep -H -e switchToUserMode $$file; done; true
+simpleosfiles:
+	-@for file in $(ALLFILES); do fgrep -H -e SimpleOS $$file; done; true
 
 
 .s.o:

@@ -8,7 +8,7 @@
 /**
  * @page Roadmap
  * @section ReleaseOne Release 1 codename “Boot”
- * The plans for the first iteration of SimpleOS are simply to have a executable, created by whatever means, that can be loaded by a bootloader and print a basic “hello world” message onto the screen. To do this several aims have to be achieved:
+ * The plans for the first iteration of Dawn are simply to have a executable, created by whatever means, that can be loaded by a bootloader and print a basic “hello world” message onto the screen. To do this several aims have to be achieved:
  *	- A set of tools have to be chosen which would be versatile enough to allow me to achieve all my aims.
  *	- I need to select a format, and the boot loader which I am going to use for the project (at least to begin with, the OS wants to be dynamic so it must be able to run with a variety of boot loaders).
  *	- I need to read the Intel manual, namely the sections referring to the initial state of a monitor and how it is mapped to the address space.
@@ -72,7 +72,7 @@
  *
  * @section Release5 Release 5 “Multitasking”
  * This release is going to be the final step before the project actually starts to look like a operating system. The aim is to implement a set of structures and a scheduler into the kernel which will allow fake multitasking to take place (By giving each process a certain amount of time to process before the next process the illusion of true multi tasking can be achieved)
-* TODO: Wiki notes on true and fake multi tasking, software vs hardware switching and the SimpleOS implementation
+* TODO: Wiki notes on true and fake multi tasking, software vs hardware switching and the Dawn implementation
 * The key things needed for this release are
 *	- Structures and functions to create and manage and switch between tasks within the operating system. These tasks are known as processes
 *	- A scheduler which can keep a list of tasks and manage which process should be active.

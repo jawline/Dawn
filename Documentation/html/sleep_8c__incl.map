@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$sleep_8h.html" title="process/sleep.h" alt="" coords="139,83,261,112"/>
+<area shape="rect" id="node5" href="$_a_p_i_2headers_2clock_2clock_8h.html" title="clock/clock.h" alt="" coords="105,160,207,189"/>
+<area shape="rect" id="node7" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="syscall/syscall.h" alt="" coords="139,237,261,267"/>
+<area shape="rect" id="node9" href="$common_8h.html" title="common.h" alt="" coords="73,315,164,344"/>
+<area shape="rect" id="node13" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="236,315,351,344"/>
+<area shape="rect" id="node11" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="5,392,136,421"/>
+<area shape="rect" id="node17" href="$isr_8h.html" title="isr.h" alt="" coords="331,392,379,421"/>
+<area shape="rect" id="node19" href="$irq_8h.html" title="irq.h" alt="" coords="403,392,453,421"/>
+</map>

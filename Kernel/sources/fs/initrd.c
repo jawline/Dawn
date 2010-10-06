@@ -97,6 +97,10 @@ uint32 write_ird(fs_node_t *node, uint32 offset, uint32 size, uint8 *buffer)
 	return 0; //Can't write to the RAM disk.
 }
 
+/**
+ * @brief Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from (Not written to)
+ * @callgraph
+ */
 fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent) 
 {
 

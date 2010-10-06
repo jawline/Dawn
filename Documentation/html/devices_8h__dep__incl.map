@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="5,83,235,112"/>
+<area shape="rect" id="node5" href="$input_8h.html" title="Kernel/headers/input/input.h" alt="" coords="259,83,459,112"/>
+<area shape="rect" id="node13" href="$mouse__generic__ps2_8c.html" title="Kernel/sources/input/mouse_generic_ps2.c" alt="" coords="483,83,776,112"/>
+<area shape="rect" id="node7" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="20,160,236,189"/>
+<area shape="rect" id="node9" href="$input_8c.html" title="Kernel/sources/input/input.c" alt="" coords="260,160,457,189"/>
+<area shape="rect" id="node11" href="$keyboard__generic__ps2_8c.html" title="Kernel/sources/input/keyboard_generic_ps2.c" alt="" coords="481,160,791,189"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$cpuid__features_8c.html" title="Kernel/sources/cpu/cpuid_features.c" alt="" coords="5,83,256,112"/>
+<area shape="rect" id="node5" href="$cpuid__support_8c.html" title="Kernel/sources/cpu/cpuid_support.c" alt="" coords="280,83,525,112"/>
+<area shape="rect" id="node7" href="$cpuid__vendor_8c.html" title="Kernel/sources/cpu/cpuid_vendor.c" alt="" coords="549,83,789,112"/>
+</map>

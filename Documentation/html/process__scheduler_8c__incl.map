@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$process__scheduler_8h.html" title="process_scheduler.h" alt="" coords="251,83,403,112"/>
+<area shape="rect" id="node13" href="$common_8h.html" title="common.h" alt="" coords="337,315,428,344"/>
+<area shape="rect" id="node24" href="$panic_8h.html" title="panic/panic.h" alt="" coords="529,160,636,189"/>
+<area shape="rect" id="node27" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="580,83,647,112"/>
+<area shape="rect" id="node5" href="$process_8h.html" title="process/process.h" alt="" coords="204,160,343,189"/>
+<area shape="rect" id="node7" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="5,315,115,344"/>
+<area shape="rect" id="node16" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="97,237,236,267"/>
+<area shape="rect" id="node21" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="311,237,455,267"/>
+<area shape="rect" id="node9" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="149,392,275,421"/>
+<area shape="rect" id="node11" href="$int__types_8h.html" title="int_types.h" alt="" coords="233,469,324,499"/>
+<area shape="rect" id="node18" href="$message_8h.html" title="process/message.h" alt="" coords="139,315,285,344"/>
+</map>

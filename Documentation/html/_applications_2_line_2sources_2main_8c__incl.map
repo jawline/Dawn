@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="155,237,280,267"/>
+<area shape="rect" id="node7" href="$common_8h.html" title="common.h" alt="" coords="316,237,407,267"/>
+<area shape="rect" id="node10" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="776,160,843,189"/>
+<area shape="rect" id="node13" href="$_kernel_2headers_2system_2reboot_8h.html" title="system/reboot.h" alt="" coords="851,83,976,112"/>
+<area shape="rect" id="node15" href="$kernel__version_8h.html" title="version/kernel_version.h" alt="" coords="1000,83,1176,112"/>
+<area shape="rect" id="node17" href="$os__version_8h.html" title="version/os_version.h" alt="" coords="1200,83,1352,112"/>
+<area shape="rect" id="node19" href="$postbox__api_8h.html" title="process/postbox_api.h" alt="" coords="171,83,336,112"/>
+<area shape="rect" id="node21" href="$message_8h.html" title="process/message.h" alt="" coords="144,160,291,189"/>
+<area shape="rect" id="node24" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="syscall/syscall.h" alt="" coords="423,160,545,189"/>
+<area shape="rect" id="node37" href="$events_8h.html" title="process/events.h" alt="" coords="1376,83,1507,112"/>
+<area shape="rect" id="node39" href="$process__info_8h.html" title="process/process_info.h" alt="" coords="576,160,744,189"/>
+<area shape="rect" id="node41" href="$messages_8h.html" title="messages/messages.h" alt="" coords="1531,83,1701,112"/>
+<area shape="rect" id="node43" href="$devices_8h.html" title="input/devices.h" alt="" coords="1725,83,1843,112"/>
+<area shape="rect" id="node45" href="$_a_p_i_2headers_2clock_2clock_8h.html" title="clock/clock.h" alt="" coords="461,83,563,112"/>
+<area shape="rect" id="node48" href="$heap_8h.html" title="heap/heap.h" alt="" coords="5,237,107,267"/>
+<area shape="rect" id="node51" href="$get__info_8h.html" title="process/get_info.h" alt="" coords="587,83,725,112"/>
+<area shape="rect" id="node5" href="$int__types_8h.html" title="int_types.h" alt="" coords="224,315,315,344"/>
+<area shape="rect" id="node27" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="481,237,596,267"/>
+<area shape="rect" id="node31" href="$isr_8h.html" title="isr.h" alt="" coords="636,315,684,344"/>
+<area shape="rect" id="node33" href="$irq_8h.html" title="irq.h" alt="" coords="391,315,441,344"/>
+</map>

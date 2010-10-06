@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$process_8h.html" title="Kernel/headers/process/process.h" alt="" coords="2867,83,3104,112"/>
+<area shape="rect" id="node54" href="$postbox__syscalls_8c.html" title="Kernel/sources/syscall/postbox_syscalls.c" alt="" coords="3893,160,4176,189"/>
+<area shape="rect" id="node5" href="$phys__mm_8h.html" title="Kernel/headers/mm/phys_mm.h" alt="" coords="2128,160,2355,189"/>
+<area shape="rect" id="node13" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="2719,237,2932,267"/>
+<area shape="rect" id="node15" href="$virt__mm_8h.html" title="Kernel/headers/mm/virt_mm.h" alt="" coords="1420,160,1636,189"/>
+<area shape="rect" id="node38" href="$procfault_8h.html" title="Kernel/headers/process/procfault.h" alt="" coords="3627,160,3869,189"/>
+<area shape="rect" id="node45" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="2379,160,2595,189"/>
+<area shape="rect" id="node48" href="$used__list_8c.html" title="Kernel/sources/process/used_list.c" alt="" coords="2619,160,2859,189"/>
+<area shape="rect" id="node50" href="$process__scheduler_8h.html" title="Kernel/sources/scheduler/default/process_scheduler.h" alt="" coords="3240,160,3603,189"/>
+<area shape="rect" id="node56" href="$process__syscalls_8c.html" title="Kernel/sources/syscall/process_syscalls.c" alt="" coords="2933,160,3216,189"/>
+<area shape="rect" id="node7" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="1888,315,2115,344"/>
+<area shape="rect" id="node9" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="2376,237,2573,267"/>
+<area shape="rect" id="node11" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="2131,237,2352,267"/>
+<area shape="rect" id="node18" href="$kstack_8h.html" title="Kernel/sources/stack/kstack.h" alt="" coords="1896,237,2107,267"/>
+<area shape="rect" id="node22" href="$kheap_8c.html" title="Kernel/sources/heap/kheap.c" alt="" coords="365,237,571,267"/>
+<area shape="rect" id="node24" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="595,237,832,267"/>
+<area shape="rect" id="node28" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="856,237,1091,267"/>
+<area shape="rect" id="node30" href="$screen__textmode_8c.html" title="Kernel/sources/screen/screen_textmode.c" alt="" coords="1115,237,1403,267"/>
+<area shape="rect" id="node32" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="1427,237,1629,267"/>
+<area shape="rect" id="node34" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1653,237,1872,267"/>
+<area shape="rect" id="node36" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="5,237,291,267"/>
+<area shape="rect" id="node40" href="$gpf_8c.html" title="Kernel/sources/gpf/gpf.c" alt="" coords="3644,237,3817,267"/>
+<area shape="rect" id="node43" href="$procfault_8c.html" title="Kernel/sources/process/procfault.c" alt="" coords="3841,237,4081,267"/>
+<area shape="rect" id="node52" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="3240,237,3603,267"/>
+</map>

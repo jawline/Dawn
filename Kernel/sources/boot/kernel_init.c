@@ -33,7 +33,10 @@ extern terminal_t* getTerminalInContext();
 
 #define iprintf(x) if (visual_output) { printf(x); }
 
-//GDT allows for segmented memory model on x86 processors, outdated. Using paging instead but the system still needs a GDT for things like ring-3 jumps
+/**
+ @brief GDT allows for segmented memory model on x86 processors, outdated. Using paging instead but the system still needs a GDT for things like ring-3 jumps
+ @callgraph
+ */
 void initializeGdt(int visual_output) 
 {
    initialize_gdt();
@@ -41,15 +44,21 @@ void initializeGdt(int visual_output)
    iprintf("GDT [OK]\n");
 }
 
-//IDT = Interrupt descriptor table. Allows interrupt calls to trigger functions int he kernel pointed to by it
+/*
+ @brief IDT = Interrupt descriptor table. Allows interrupt calls to trigger functions int he kernel pointed to by it
+ @callgraph
+ */
 void initializeIdt(int visual_output) 
 {
    Initialize_IDT();
    iprintf("IDT [OK]\n");
 }
 
-//Initialize the physical and virtual memory managers
-//Use the last loaded module (The one after the RAM disk)
+/**
+ @brief Initialize the physical and virtual memory managers
+ uses the last loaded module (The one after the RAM disk)
+ @callgraph
+ */
 void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start, MEM_LOC kernel_end, int visual_output)
 {
 
@@ -63,7 +72,10 @@ void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start,
     iprintf("Memory Managers (PMM, VMM) [OK]\n");
 }
 
-//This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
+/**
+ @brief This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
+ @callgraph
+ */
 void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_node_t * root) 
 {
 
@@ -159,7 +171,10 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 
 extern heap_t kernel_heap;
 
-//Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
+/**
+ @brief Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
+ @callgraph
+ */
 void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
 	//Load the archaic GDT 

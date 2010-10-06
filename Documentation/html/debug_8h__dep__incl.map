@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$debugprint_8h.html" title="Kernel/headers/debug/debugprint.h" alt="" coords="5,83,251,112"/>
+<area shape="rect" id="node6" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="275,83,501,112"/>
+<area shape="rect" id="node8" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="525,83,701,112"/>
+<area shape="rect" id="node10" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="725,83,923,112"/>
+<area shape="rect" id="node12" href="$keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="947,83,1171,112"/>
+<area shape="rect" id="node14" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="1195,83,1416,112"/>
+<area shape="rect" id="node16" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1440,83,1653,112"/>
+<area shape="rect" id="node18" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="1677,83,1880,112"/>
+</map>

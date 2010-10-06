@@ -22,7 +22,7 @@ ASFLAGS=-felf32
 all: $(SOURCES) link
 
 clean:
-	-@rm $(OBJECTS) ./Build/Line
+	-@rm $(OBJECTS) $(OUTPUT_FILE)
 
 sources:
 	@echo $(SSOURCES)

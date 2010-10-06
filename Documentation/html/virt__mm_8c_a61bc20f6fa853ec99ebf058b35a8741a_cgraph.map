@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="316,5,428,35"/>
+<area shape="rect" id="node5" href="$virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="335,59,409,88"/>
+<area shape="rect" id="node7" href="$virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="305,112,439,141"/>
+<area shape="rect" id="node9" href="$virt__mm_8c.html#a9c9f8fbb4b2fa9e442794d9ab986d9f6" title="markPagingEnabled" alt="" coords="299,165,445,195"/>
+<area shape="rect" id="node11" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="335,219,409,248"/>
+<area shape="rect" id="node13" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="328,272,416,301"/>
+<area shape="rect" id="node15" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="279,325,465,355"/>
+<area shape="rect" id="node17" href="$virt__mm_8c.html#adc243c4fc9df032b68c9d68e66979f34" title="startPaging" alt="" coords="325,379,419,408"/>
+<area shape="rect" id="node19" href="$virt__mm_8c.html#a600cb6322d11190bd1baff795ea4bf67" title="switchPageDirectory" alt="" coords="297,432,447,461"/>
+</map>

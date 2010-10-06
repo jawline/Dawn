@@ -1,0 +1,25 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$debugprint_8h.html" title="Kernel/headers/debug/debugprint.h" alt="" coords="605,83,851,112"/>
+<area shape="rect" id="node8" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,237,232,267"/>
+<area shape="rect" id="node23" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="875,83,1091,112"/>
+<area shape="rect" id="node25" href="$devices_8c.html" title="Kernel/sources/devices/devices.c" alt="" coords="1115,83,1344,112"/>
+<area shape="rect" id="node27" href="$pio_8h.html" title="Kernel/sources/devices/hdd/ata/pio.h" alt="" coords="1419,83,1672,112"/>
+<area shape="rect" id="node29" href="$ide_8c.html" title="Kernel/sources/devices/hdd/ata/ide.c" alt="" coords="1141,160,1395,189"/>
+<area shape="rect" id="node38" href="$kerror_8h.html" title="Kernel/sources/panic/kerror.h" alt="" coords="1696,83,1901,112"/>
+<area shape="rect" id="node42" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1925,83,2144,112"/>
+<area shape="rect" id="node44" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2168,83,2453,112"/>
+<area shape="rect" id="node46" href="$kterminal_8c.html" title="Kernel/sources/terminal/kterminal.c" alt="" coords="2477,83,2723,112"/>
+<area shape="rect" id="node48" href="$_tools_2_init_r_d_2_compiler_2main_8c.html" title="Tools/InitRD/Compiler/main.c" alt="" coords="2747,83,2949,112"/>
+<area shape="rect" id="node50" href="$make__kt_8c.html" title="Tools/Keytable/make_kt.c" alt="" coords="2973,83,3155,112"/>
+<area shape="rect" id="node5" href="$debug_8h.html" title="Kernel/headers/debug/debug.h" alt="" coords="620,160,836,189"/>
+<area shape="rect" id="node10" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="256,237,432,267"/>
+<area shape="rect" id="node12" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="456,237,653,267"/>
+<area shape="rect" id="node14" href="$keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="677,237,901,267"/>
+<area shape="rect" id="node16" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="925,237,1147,267"/>
+<area shape="rect" id="node18" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1171,237,1384,267"/>
+<area shape="rect" id="node20" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="1408,237,1611,267"/>
+<area shape="rect" id="node31" href="$pio_8c.html" title="Kernel/sources/devices/hdd/ata/pio.c" alt="" coords="1419,160,1672,189"/>
+<area shape="rect" id="node33" href="$diskio_8h.html" title="Kernel/sources/devices/hdd/diskio.h" alt="" coords="1696,160,1941,189"/>
+<area shape="rect" id="node35" href="$diskio_8c.html" title="Kernel/sources/devices/hdd/diskio.c" alt="" coords="1696,237,1941,267"/>
+<area shape="rect" id="node40" href="$kerror_8c.html" title="Kernel/sources/panic/kerror.c" alt="" coords="1965,160,2171,189"/>
+</map>

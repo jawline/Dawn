@@ -85,29 +85,29 @@ void postInitialization()
 	    get_current_process()->m_pTerminal = m_processTerminal;
 
 	    //Rename it to the file name of the program its gohna run
-	    rename_current_process("Line.x");
+	    rename_current_process("Line");
 
 	    //Find Line.x
 	    fs_node_t* system = finddir_fs(init_vfs(), "system");
 	    fs_node_t* root = finddir_fs(system, "root");
 
-	    fs_node_t* line = finddir_fs(root, "Line.x");
+	    fs_node_t* line = finddir_fs(root, "Line");
 
 	    //Execute Line.x
 	    if (line != 0)
 	    {
-		printf("Found Line.x\n");
-		printf("Line.x returned %i\n", loadAndExecuteElf(line, 1));
+		printf("Found Line\n");
+		loadAndExecuteElf(line, 1);
 	    } else
 	    {
-		printf("Error Line.x not found\n");
+		printf("Error Line not found\n");
 	    }
 
 	    //Set the root console as active
             printf("Reverting back to root console\n");
 
 	    //(Bring it into context)
-	   // setTerminalContext(g_kernelTerminal);
+	    setTerminalContext(g_kernelTerminal);
 
 	    //Just a simple protection in case for some reason the
 	    //processor continues executing down this code path

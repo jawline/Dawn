@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
+<area shape="rect" id="node5" href="$gdt_8c.html" title="Kernel/sources/mm/gdt.c" alt="" coords="256,83,437,112"/>
+</map>

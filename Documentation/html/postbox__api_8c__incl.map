@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$postbox__api_8h.html" title="process/postbox_api.h" alt="" coords="361,83,527,112"/>
+<area shape="rect" id="node9" href="$int__types_8h.html" title="int_types.h" alt="" coords="413,315,504,344"/>
+<area shape="rect" id="node5" href="$message_8h.html" title="process/message.h" alt="" coords="380,160,527,189"/>
+<area shape="rect" id="node11" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="syscall/syscall.h" alt="" coords="233,160,356,189"/>
+<area shape="rect" id="node7" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="396,237,521,267"/>
+<area shape="rect" id="node13" href="$common_8h.html" title="common.h" alt="" coords="281,237,372,267"/>
+<area shape="rect" id="node16" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="143,237,257,267"/>
+<area shape="rect" id="node20" href="$isr_8h.html" title="isr.h" alt="" coords="176,315,224,344"/>
+<area shape="rect" id="node22" href="$irq_8h.html" title="irq.h" alt="" coords="248,315,299,344"/>
+</map>

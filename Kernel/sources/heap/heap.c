@@ -8,7 +8,10 @@
 uint32 alloc_mem(uint32 size, heap_t * heap);
 void free_mem(uint32 address, heap_t * heap);
 
-//Does memory mapping itself, no need to map the first frame of the heap - and if you do you will lose memory to the void.
+/**
+ * @brief Initializes a new heap at address specified and maps memory from free frames for it
+ * @callgraph
+ */
 void initializeHeap(heap_t * heap, uint32 address)
 {
 	//Double check the heap ptr is valid

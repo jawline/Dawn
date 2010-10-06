@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
+<area shape="rect" id="node5" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="256,83,453,112"/>
+<area shape="rect" id="node7" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="477,83,699,112"/>
+<area shape="rect" id="node9" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="723,83,936,112"/>
+</map>

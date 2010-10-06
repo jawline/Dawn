@@ -1,7 +1,5 @@
 #!/bin/sh
-
-#CD To the OS directory
-cd ..
+#Assumes to be run from the root OS directory
 
 echo "Moving to Kernel directory"
 cd Kernel

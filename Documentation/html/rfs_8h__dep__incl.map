@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$devices__fs_8c.html" title="Kernel/sources/devices/devices_fs.c" alt="" coords="5,83,253,112"/>
+<area shape="rect" id="node5" href="$rfs_8c.html" title="Kernel/sources/fs/rfs.c" alt="" coords="277,83,437,112"/>
+<area shape="rect" id="node7" href="$vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="461,83,624,112"/>
+</map>

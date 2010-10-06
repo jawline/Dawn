@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$heap_8h.html" title="heap/heap.h" alt="" coords="5,392,107,421"/>
+<area shape="rect" id="node7" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="57,315,124,344"/>
+<area shape="rect" id="node10" href="$debug_8h.html" title="debug/debug.h" alt="" coords="117,83,235,112"/>
+<area shape="rect" id="node20" href="$panic_8h.html" title="panic/panic.h" alt="" coords="663,160,769,189"/>
+<area shape="rect" id="node25" href="$virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="259,83,376,112"/>
+<area shape="rect" id="node45" href="$phys__mm_8h.html" title="mm/phys_mm.h" alt="" coords="451,83,576,112"/>
+<area shape="rect" id="node5" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="287,469,417,499"/>
+<area shape="rect" id="node12" href="$debugprint_8h.html" title="debugprint.h" alt="" coords="121,160,223,189"/>
+<area shape="rect" id="node14" href="$stdio_8h.html" title="stdio.h" alt="" coords="140,237,204,267"/>
+<area shape="rect" id="node17" href="$va__list_8h.html" title="va_list.h" alt="" coords="148,315,223,344"/>
+<area shape="rect" id="node22" href="$common_8h.html" title="common.h" alt="" coords="675,315,765,344"/>
+<area shape="rect" id="node27" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="297,237,407,267"/>
+<area shape="rect" id="node29" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="289,392,415,421"/>
+<area shape="rect" id="node33" href="$process_8h.html" title="process/process.h" alt="" coords="437,160,576,189"/>
+<area shape="rect" id="node37" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="431,237,569,267"/>
+<area shape="rect" id="node42" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="593,237,737,267"/>
+<area shape="rect" id="node39" href="$message_8h.html" title="process/message.h" alt="" coords="408,315,555,344"/>
+</map>

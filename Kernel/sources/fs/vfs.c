@@ -152,6 +152,9 @@ fs_node_t* finddir_fs (fs_node_t* node, char* name) {
 	return 0;
 }
 
+/**
+ * @brief Binds the specified target node to the node supplied
+ */
 void bindnode_fs(fs_node_t* node, fs_node_t* target) {
 
 	if (node->bindnode != 0)
@@ -160,6 +163,10 @@ void bindnode_fs(fs_node_t* node, fs_node_t* target) {
 	}
 
 }
+
+/**
+ * @brief Unbinds the specified target node from the node supplied
+ */
 
 void unbindnode_fs(fs_node_t* node, fs_node_t* target) 
 {
@@ -171,7 +178,10 @@ void unbindnode_fs(fs_node_t* node, fs_node_t* target)
 
 }
 
-//Find a node given a string
+/**
+ @brief Find a node given a string
+ @bug Not finished!
+ */
 fs_node_t* evaluate_path(const char* path, fs_node_t* start_directory)
 {
 	if (!path) return 0;

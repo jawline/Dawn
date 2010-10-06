@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$keyboard__generic__ps2_8c.html" title="Kernel/sources/input/keyboard_generic_ps2.c" alt="" coords="5,83,315,112"/>
+<area shape="rect" id="node5" href="$mouse__generic__ps2_8c.html" title="Kernel/sources/input/mouse_generic_ps2.c" alt="" coords="339,83,632,112"/>
+<area shape="rect" id="node7" href="$idt_8c.html" title="Kernel/sources/interrupts/idt.c" alt="" coords="656,83,867,112"/>
+<area shape="rect" id="node9" href="$irq__handler_8c.html" title="Kernel/sources/interrupts/irq_handler.c" alt="" coords="891,83,1157,112"/>
+<area shape="rect" id="node11" href="$isr__handler_8c.html" title="Kernel/sources/interrupts/isr_handler.c" alt="" coords="1181,83,1445,112"/>
+<area shape="rect" id="node13" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1469,83,1683,112"/>
+<area shape="rect" id="node15" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="Kernel/sources/syscall/syscall.h" alt="" coords="1707,83,1925,112"/>
+<area shape="rect" id="node53" href="$pit_8c.html" title="Kernel/sources/timers/pit.c" alt="" coords="1949,83,2139,112"/>
+<area shape="rect" id="node17" href="$_a_p_i_2headers_2clock_2clock_8h.html" title="API/headers/clock/clock.h" alt="" coords="963,160,1144,189"/>
+<area shape="rect" id="node19" href="$sleep_8h.html" title="API/headers/process/sleep.h" alt="" coords="732,237,935,267"/>
+<area shape="rect" id="node25" href="$_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="1161,237,1391,267"/>
+<area shape="rect" id="node27" href="$_a_p_i_2headers_2printf_8h.html" title="API/headers/printf.h" alt="" coords="1743,160,1889,189"/>
+<area shape="rect" id="node29" href="$get__info_8h.html" title="API/headers/process/get_info.h" alt="" coords="1231,160,1449,189"/>
+<area shape="rect" id="node34" href="$postbox__api_8h.html" title="API/headers/process/postbox_api.h" alt="" coords="1473,160,1719,189"/>
+<area shape="rect" id="node40" href="$_a_p_i_2headers_2system_2memory_8h.html" title="API/headers/system/memory.h" alt="" coords="1913,160,2129,189"/>
+<area shape="rect" id="node44" href="$_a_p_i_2headers_2system_2reboot_8h.html" title="API/headers/system/reboot.h" alt="" coords="2153,160,2359,189"/>
+<area shape="rect" id="node46" href="$scancodes_8c.html" title="API/sources/scancodes.c" alt="" coords="2383,160,2561,189"/>
+<area shape="rect" id="node49" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="2585,160,2804,189"/>
+<area shape="rect" id="node51" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2828,160,3113,189"/>
+<area shape="rect" id="node23" href="$_a_p_i_2sources_2clock_2clock_8c.html" title="API/sources/clock/clock.c" alt="" coords="959,237,1137,267"/>
+<area shape="rect" id="node21" href="$sleep_8c.html" title="API/sources/process/sleep.c" alt="" coords="735,315,932,344"/>
+<area shape="rect" id="node31" href="$get__info_8c.html" title="API/sources/process/get_info.c" alt="" coords="1415,237,1631,267"/>
+<area shape="rect" id="node36" href="$postbox__api_8c.html" title="API/sources/process/postbox_api.c" alt="" coords="1655,237,1897,267"/>
+<area shape="rect" id="node42" href="$memory_8c.html" title="API/sources/system/memory.c" alt="" coords="1921,237,2135,267"/>
+</map>

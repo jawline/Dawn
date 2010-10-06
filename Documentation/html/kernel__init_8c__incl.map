@@ -1,0 +1,35 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$kernel__init_8h.html" title="kernel_init.h" alt="" coords="5,83,104,112"/>
+<area shape="rect" id="node5" href="$screen_8h.html" title="screen/screen.h" alt="" coords="88,469,211,499"/>
+<area shape="rect" id="node9" href="$multiboot_8h.html" title="multiboot.h" alt="" coords="185,392,279,421"/>
+<area shape="rect" id="node12" href="$stdio_8h.html" title="stdio.h" alt="" coords="325,237,389,267"/>
+<area shape="rect" id="node14" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="229,315,296,344"/>
+<area shape="rect" id="node19" href="$gdt_8h.html" title="mm/gdt.h" alt="" coords="360,469,445,499"/>
+<area shape="rect" id="node22" href="$cmos__time_8h.html" title="time/cmos_time.h" alt="" coords="473,237,612,267"/>
+<area shape="rect" id="node25" href="$cmos_8h.html" title="system/cmos.h" alt="" coords="571,315,691,344"/>
+<area shape="rect" id="node31" href="$panic_8h.html" title="panic/panic.h" alt="" coords="693,160,800,189"/>
+<area shape="rect" id="node36" href="$phys__mm_8h.html" title="mm/phys_mm.h" alt="" coords="883,160,1008,189"/>
+<area shape="rect" id="node52" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="765,315,909,344"/>
+<area shape="rect" id="node55" href="$virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="1059,160,1176,189"/>
+<area shape="rect" id="node60" href="$heap_8h.html" title="heap/heap.h" alt="" coords="1381,392,1483,421"/>
+<area shape="rect" id="node63" href="$kstack_8h.html" title="../stack/kstack.h" alt="" coords="955,83,1080,112"/>
+<area shape="rect" id="node66" href="$initrd_8h.html" title="../fs/initrd.h" alt="" coords="1293,83,1387,112"/>
+<area shape="rect" id="node68" href="$vfs_8h.html" title="fs/vfs.h" alt="" coords="1357,160,1424,189"/>
+<area shape="rect" id="node73" href="$_kernel_2headers_2system_2reboot_8h.html" title="system/reboot.h" alt="" coords="1549,83,1675,112"/>
+<area shape="rect" id="node75" href="$size__t_8h.html" title="types/size_t.h" alt="" coords="1699,83,1808,112"/>
+<area shape="rect" id="node77" href="$debug_8h.html" title="debug/debug.h" alt="" coords="299,83,416,112"/>
+<area shape="rect" id="node83" href="$pci_8h.html" title="devices/pci/pci.h" alt="" coords="1559,469,1684,499"/>
+<area shape="rect" id="node87" href="$initrd__header_8h.html" title="initrd/initrd_header.h" alt="" coords="1832,83,1984,112"/>
+<area shape="rect" id="node90" href="$dir_8h.html" title="fs/dir.h" alt="" coords="1411,83,1475,112"/>
+<area shape="rect" id="node93" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="2008,83,2075,112"/>
+<area shape="rect" id="node7" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="663,547,793,576"/>
+<area shape="rect" id="node17" href="$va__list_8h.html" title="va_list.h" alt="" coords="320,315,395,344"/>
+<area shape="rect" id="node27" href="$common_8h.html" title="common.h" alt="" coords="683,392,773,421"/>
+<area shape="rect" id="node39" href="$process_8h.html" title="process/process.h" alt="" coords="983,237,1121,267"/>
+<area shape="rect" id="node41" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="1197,315,1307,344"/>
+<area shape="rect" id="node47" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="1035,315,1173,344"/>
+<area shape="rect" id="node43" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="1105,469,1231,499"/>
+<area shape="rect" id="node49" href="$message_8h.html" title="process/message.h" alt="" coords="1040,392,1187,421"/>
+<area shape="rect" id="node71" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="1297,237,1484,267"/>
+<area shape="rect" id="node79" href="$debugprint_8h.html" title="debugprint.h" alt="" coords="307,160,408,189"/>
+</map>

@@ -32,12 +32,27 @@
 </div>
 <div class="contents">
 <code>#include &lt;<a class="el" href="vfs_8h_source.html">fs/vfs.h</a>&gt;</code><br/>
+<div class="dynheader">
+Include dependency graph for initrd.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="initrd_8h__incl.png" border="0" usemap="#_kernel_2sources_2fs_2initrd_8h" alt=""/></div>
+<map name="_kernel_2sources_2fs_2initrd_8h" id="_kernel_2sources_2fs_2initrd_8h">
+<area shape="rect" id="node3" href="vfs_8h.html" title="fs/vfs.h" alt="" coords="128,83,195,112"/><area shape="rect" id="node5" href="int__types_8h.html" title="types/int_types.h" alt="" coords="5,160,136,189"/><area shape="rect" id="node7" href="disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="160,160,347,189"/></map>
+</div>
+<div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="initrd_8h__dep__incl.png" border="0" usemap="#_kernel_2sources_2fs_2initrd_8hdep" alt=""/></div>
+<map name="_kernel_2sources_2fs_2initrd_8hdep" id="_kernel_2sources_2fs_2initrd_8hdep">
+<area shape="rect" id="node3" href="kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/><area shape="rect" id="node5" href="initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="256,83,432,112"/></map>
+</div>
 
 <p><a href="initrd_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfilesystem__node.html">fs_node_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="initrd_8h.html#a660bcc4a63d45453aa704d9a108089cb">initialize_initrd</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a292119c57ee24c2a250283318f2c34fd">start</a>, char *<a class="el" href="initrd__fent_8h.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>, <a class="el" href="structfilesystem__node.html">fs_node_t</a> *parent)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from (Not written to).  <a href="#a660bcc4a63d45453aa704d9a108089cb"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a660bcc4a63d45453aa704d9a108089cb"></a><!-- doxytag: member="initrd.h::initialize_initrd" ref="a660bcc4a63d45453aa704d9a108089cb" args="(uint32 start, char *name, fs_node_t *parent)" -->
@@ -71,10 +86,23 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from (Not written to). </p>
+
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00104">104</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="initrd_8h_a660bcc4a63d45453aa704d9a108089cb_cgraph.png" border="0" usemap="#initrd_8h_a660bcc4a63d45453aa704d9a108089cb_cgraph" alt=""/></div>
+<map name="initrd_8h_a660bcc4a63d45453aa704d9a108089cb_cgraph" id="initrd_8h_a660bcc4a63d45453aa704d9a108089cb_cgraph">
+<area shape="rect" id="node3" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="167,5,241,35"/><area shape="rect" id="node5" href="common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="173,59,235,88"/></map>
+</div>
+</p>
+
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 23:20:37 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

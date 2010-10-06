@@ -35,6 +35,15 @@
 <div class="contents">
 <code>#include &lt;<a class="el" href="heap_8h_source.html">heap/heap.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="virt__mm_8h_source.html">mm/virt_mm.h</a>&gt;</code><br/>
+<div class="dynheader">
+Include dependency graph for kheap.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="kheap_8c__incl.png" border="0" usemap="#_kernel_2sources_2heap_2kheap_8c" alt=""/></div>
+<map name="_kernel_2sources_2heap_2kheap_8c" id="_kernel_2sources_2heap_2kheap_8c">
+<area shape="rect" id="node3" href="heap_8h.html" title="heap/heap.h" alt="" coords="5,160,107,189"/><area shape="rect" id="node7" href="virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="141,83,259,112"/><area shape="rect" id="node5" href="int__types_8h.html" title="types/int_types.h" alt="" coords="171,469,301,499"/><area shape="rect" id="node9" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="181,237,291,267"/><area shape="rect" id="node11" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="173,392,299,421"/><area shape="rect" id="node15" href="process_8h.html" title="process/process.h" alt="" coords="315,160,453,189"/><area shape="rect" id="node18" href="common_8h.html" title="common.h" alt="" coords="445,315,536,344"/><area shape="rect" id="node21" href="postbox_8h.html" title="process/postbox.h" alt="" coords="315,237,453,267"/><area shape="rect" id="node26" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="528,237,672,267"/><area shape="rect" id="node23" href="message_8h.html" title="process/message.h" alt="" coords="275,315,421,344"/></map>
+</div>
+
+<p><a href="kheap_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
@@ -42,8 +51,11 @@ Defines</h2></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1">initializeKernelHeap</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes the kernel heap.  <a href="#a68fdcdbbbfffd11307fb5325718b2ce1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994">kmalloc</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> mem)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates x amount of memory from the kernel heap.  <a href="#aeaa749e04a2e7354317df9b286f9e994"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kheap_8c.html#ae4015277190032503df791f56e73d7e9">kfree</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="multiboot_8h.html#aa31b9b932d389c8fd17de866d58dac50">addr</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Free memory at location x on the kernel heap making it available again.  <a href="#ae4015277190032503df791f56e73d7e9"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structheap__t.html">heap_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kheap_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a></td></tr>
@@ -59,6 +71,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="kheap_8c_source.html#l00003">3</a> of file <a class="el" href="kheap_8c_source.html">kheap.c</a>.</p>
 
 </div>
 </div>
@@ -78,6 +92,19 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Initializes the kernel heap. </p>
+
+<p>Definition at line <a class="el" href="kheap_8c_source.html#l00011">11</a> of file <a class="el" href="kheap_8c_source.html">kheap.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="kheap_8c_a68fdcdbbbfffd11307fb5325718b2ce1_cgraph.png" border="0" usemap="#kheap_8c_a68fdcdbbbfffd11307fb5325718b2ce1_cgraph" alt=""/></div>
+<map name="kheap_8c_a68fdcdbbbfffd11307fb5325718b2ce1_cgraph" id="kheap_8c_a68fdcdbbbfffd11307fb5325718b2ce1_cgraph">
+<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="200,59,307,88"/><area shape="rect" id="node5" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="355,5,467,35"/><area shape="rect" id="node7" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="385,59,436,88"/><area shape="rect" id="node9" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="373,112,448,141"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ae4015277190032503df791f56e73d7e9"></a><!-- doxytag: member="kheap.c::kfree" ref="ae4015277190032503df791f56e73d7e9" args="(uint32 addr)" -->
@@ -95,6 +122,10 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Free memory at location x on the kernel heap making it available again. </p>
+
+<p>Definition at line <a class="el" href="kheap_8c_source.html#l00027">27</a> of file <a class="el" href="kheap_8c_source.html">kheap.c</a>.</p>
 
 </div>
 </div>
@@ -114,6 +145,10 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Allocates x amount of memory from the kernel heap. </p>
+
+<p>Definition at line <a class="el" href="kheap_8c_source.html#l00019">19</a> of file <a class="el" href="kheap_8c_source.html">kheap.c</a>.</p>
+
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
@@ -128,10 +163,12 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="kheap_8c_source.html#l00005">5</a> of file <a class="el" href="kheap_8c_source.html">kheap.c</a>.</p>
+
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 23:20:37 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

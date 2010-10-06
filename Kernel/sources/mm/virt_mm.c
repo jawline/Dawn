@@ -204,6 +204,11 @@ void identityMapPages(page_directory_t* pagedir)
 	pagedir[getTable(KERNEL_START)] = pagedir[0];
 }
 
+/**
+ * @brief Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping of logical addresses to physical ones.
+ * @callgraph
+ */
+
 void initializeVirtualMemoryManager(uint32 mem_end) 
 {
 	unsigned int i = 0; //Used as a iterator throughout the function

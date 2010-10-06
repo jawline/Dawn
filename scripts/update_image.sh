@@ -2,47 +2,32 @@
 #update_image.sh
 #SimpleOS ISO Image generator.
 #Updated Tue 23rd, Feb, 2010
+#Updated again Wed 5th, Oct, 2010
+#From wed 5th assumes is run from root OS directory
+#Removed the build steps from this file and placed in rebuildcomponents and buildramdisk.
 
-#cd to the OS directory
-cd ..
+echo "Image Update script"
 
 #Get the hard drive image
 echo "Image name: "
 read image_name
 
-#Build Line
-echo "Rebuilding Line"
-cd Applications/Line
-make clean
-make
-cd ..
-cd ..
-
-
-echo "Copying Line"
-
-#Copy Line to the ramdisk dir
-cp Applications/Line/Build/Line Tools/InitRD/Line.x
-cp Drivers/test_driver/Build/test_driver.driver Tools/InitRD/test_driver.driver
-
-#Make temporary directory
-echo "Recompiling initial RAM disks";
-cd Tools/InitRD
-sh buildrd.sh
-cd ../
-cd ../
 
 sudo losetup /dev/loop0 $image_name
 
+#Mount the virtual directory
 mkdir tmount
 sudo umount ./tmount
 sudo mount /dev/loop0 ./tmount
 
-echo "Copying Kernel"
-sudo cp Kernel/Build/Kernel tmount/boot/Kernel
-sudo cp Tools/InitRD/ramdisk.img tmount/boot/ramdisk
+#Copy over files
+echo "Copying over files to mounted directory"
+sudo cp bin/kernel_elf tmount/boot/Kernel
+sudo cp bin/ramdisk_build tmount/boot/ramdisk
 
+#Unmount it and remove the tmount directory
 sudo umount ./tmount
 rmdir tmount
 
+#Print done
 echo "Done!"

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$cmos__time_8h.html" title="Kernel/headers/time/cmos_time.h" alt="" coords="229,83,467,112"/>
+<area shape="rect" id="node5" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,160,232,189"/>
+<area shape="rect" id="node12" href="$cmos_8c.html" title="Kernel/sources/system/cmos.c" alt="" coords="491,83,707,112"/>
+<area shape="rect" id="node7" href="$cmos__time_8c.html" title="Kernel/sources/time/cmos_time.c" alt="" coords="256,160,491,189"/>
+<area shape="rect" id="node9" href="$timestamp_8c.html" title="Kernel/sources/time/timestamp.c" alt="" coords="515,160,747,189"/>
+</map>

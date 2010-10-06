@@ -40,6 +40,15 @@
 <code>#include &lt;<a class="el" href="stdlib_8h_source.html">stdlib.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="debug_8h_source.html">debug/debug.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="panic_8h_source.html">panic/panic.h</a>&gt;</code><br/>
+<div class="dynheader">
+Include dependency graph for initrd.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="initrd_8c__incl.png" border="0" usemap="#_kernel_2sources_2fs_2initrd_8c" alt=""/></div>
+<map name="_kernel_2sources_2fs_2initrd_8c" id="_kernel_2sources_2fs_2initrd_8c">
+<area shape="rect" id="node3" href="initrd_8h.html" title="initrd.h" alt="" coords="114,83,181,112"/><area shape="rect" id="node7" href="int__types_8h.html" title="types/int_types.h" alt="" coords="341,392,472,421"/><area shape="rect" id="node12" href="initrd__header_8h.html" title="initrd/initrd_header.h" alt="" coords="285,83,437,112"/><area shape="rect" id="node14" href="initrd__dirent_8h.html" title="initrd/initrd_dirent.h" alt="" coords="461,83,608,112"/><area shape="rect" id="node16" href="initrd__fent_8h.html" title="initrd/initrd_fent.h" alt="" coords="632,83,765,112"/><area shape="rect" id="node18" href="stdlib_8h.html" title="stdlib.h" alt="" coords="789,83,856,112"/><area shape="rect" id="node20" href="debug_8h.html" title="debug/debug.h" alt="" coords="880,83,997,112"/><area shape="rect" id="node32" href="panic_8h.html" title="panic/panic.h" alt="" coords="981,160,1088,189"/><area shape="rect" id="node5" href="vfs_8h.html" title="fs/vfs.h" alt="" coords="84,160,150,189"/><area shape="rect" id="node9" href="disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="24,237,210,267"/><area shape="rect" id="node22" href="debugprint_8h.html" title="debugprint.h" alt="" coords="856,160,957,189"/><area shape="rect" id="node24" href="stdio_8h.html" title="stdio.h" alt="" coords="796,237,860,267"/><area shape="rect" id="node26" href="_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="453,315,520,344"/><area shape="rect" id="node29" href="va__list_8h.html" title="va_list.h" alt="" coords="790,315,865,344"/><area shape="rect" id="node34" href="common_8h.html" title="common.h" alt="" coords="937,237,1028,267"/></map>
+</div>
+
+<p><a href="initrd_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -50,6 +59,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="initrd_8c.html#ac88f507804f0cd1c22ef2f8811b10886">read_ird</a> (<a class="el" href="structfilesystem__node.html">fs_node_t</a> *node, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> offset, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="el" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> *buffer)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="initrd_8c.html#af784e9bb5d31ce1fcfab6684792f7576">write_ird</a> (<a class="el" href="structfilesystem__node.html">fs_node_t</a> *node, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> offset, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="el" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> *buffer)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfilesystem__node.html">fs_node_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="initrd_8c.html#a660bcc4a63d45453aa704d9a108089cb">initialize_initrd</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a292119c57ee24c2a250283318f2c34fd">start</a>, char *<a class="el" href="initrd__fent_8h.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>, <a class="el" href="structfilesystem__node.html">fs_node_t</a> *parent)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from (Not written to).  <a href="#a660bcc4a63d45453aa704d9a108089cb"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfilesystem__node.html">fs_node_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="initrd_8c.html#a4584965af9ef4c66e787deaf6260b886">initrd_root_node</a> = 0</td></tr>
@@ -86,6 +96,19 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from (Not written to). </p>
+
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00104">104</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="initrd_8c_a660bcc4a63d45453aa704d9a108089cb_cgraph.png" border="0" usemap="#initrd_8c_a660bcc4a63d45453aa704d9a108089cb_cgraph" alt=""/></div>
+<map name="initrd_8c_a660bcc4a63d45453aa704d9a108089cb_cgraph" id="initrd_8c_a660bcc4a63d45453aa704d9a108089cb_cgraph">
+<area shape="rect" id="node3" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="167,5,241,35"/><area shape="rect" id="node5" href="common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="173,59,235,88"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a8323a1853228aa77cb89e512dee2b114"></a><!-- doxytag: member="initrd.c::ird_dir_finddir" ref="a8323a1853228aa77cb89e512dee2b114" args="(fs_node_t *node, char *name)" -->
@@ -112,6 +135,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00071">71</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
 
 </div>
 </div>
@@ -140,6 +165,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00056">56</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac75b5411098ad82a45642e5d167759eb"></a><!-- doxytag: member="initrd.c::ird_root_finddir" ref="ac75b5411098ad82a45642e5d167759eb" args="(fs_node_t *node, char *name)" -->
@@ -167,6 +194,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00041">41</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a99fc7b58db443ec9724e97f68bb7d097"></a><!-- doxytag: member="initrd.c::ird_root_readdir" ref="a99fc7b58db443ec9724e97f68bb7d097" args="(fs_node_t *node, uint32 idx)" -->
@@ -193,6 +222,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00028">28</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
 
 </div>
 </div>
@@ -233,6 +264,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00087">87</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af784e9bb5d31ce1fcfab6684792f7576"></a><!-- doxytag: member="initrd.c::write_ird" ref="af784e9bb5d31ce1fcfab6684792f7576" args="(fs_node_t *node, uint32 offset, uint32 size, uint8 *buffer)" -->
@@ -272,6 +305,8 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00095">95</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
@@ -286,10 +321,12 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="initrd_8c_source.html#l00026">26</a> of file <a class="el" href="initrd_8c_source.html">initrd.c</a>.</p>
+
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 5 2010 23:20:37 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

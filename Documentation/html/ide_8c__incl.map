@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$ide_8h.html" title="ide.h" alt="" coords="99,83,152,112"/>
+<area shape="rect" id="node7" href="$pio_8h.html" title="pio.h" alt="" coords="203,83,256,112"/>
+<area shape="rect" id="node11" href="$stdio_8h.html" title="stdio.h" alt="" coords="268,160,332,189"/>
+<area shape="rect" id="node5" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="5,160,192,189"/>
+<area shape="rect" id="node9" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="199,315,329,344"/>
+<area shape="rect" id="node13" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="267,237,333,267"/>
+<area shape="rect" id="node16" href="$va__list_8h.html" title="va_list.h" alt="" coords="357,237,432,267"/>
+</map>

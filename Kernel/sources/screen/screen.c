@@ -5,6 +5,10 @@ static unsigned int g_screenMode;
 static unsigned int g_screenWidth;
 static unsigned int g_screenHeight;
 
+/**
+ * @brief Initialize the screen if one exists
+ * @callgraph
+ */
 void initializeScreen()
 {
 	//The screen starts in text mode (The BIOS & GRUB should see to that)

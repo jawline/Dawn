@@ -6,7 +6,10 @@
 #include <common.h>
 #include <stdlib.h>
 
-//Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
+/**
+ @brief Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins the Kernel execution. (Multiboot header defined in multiboot.h)
+ @callgraph
+ */
 int main(struct multiboot* mboot, uint32 stack_ptr /* Pointer to the stack pointer */)
 {
     //The kernel SHOULLDD now init fine, and think its in the magical land of the higher half

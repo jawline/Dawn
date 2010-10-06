@@ -1,0 +1,17 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
+<area shape="rect" id="node5" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="256,83,472,112"/>
+<area shape="rect" id="node7" href="$devices_8c.html" title="Kernel/sources/devices/devices.c" alt="" coords="496,83,725,112"/>
+<area shape="rect" id="node9" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="749,83,925,112"/>
+<area shape="rect" id="node11" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="949,83,1147,112"/>
+<area shape="rect" id="node13" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="1171,83,1408,112"/>
+<area shape="rect" id="node15" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="1432,83,1653,112"/>
+<area shape="rect" id="node17" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1677,83,1891,112"/>
+<area shape="rect" id="node19" href="$panic_8c.html" title="Kernel/sources/panic/panic.c" alt="" coords="1915,83,2117,112"/>
+<area shape="rect" id="node21" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="2141,83,2376,112"/>
+<area shape="rect" id="node23" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="2400,83,2763,112"/>
+<area shape="rect" id="node25" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="2787,83,2989,112"/>
+<area shape="rect" id="node27" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="3013,83,3232,112"/>
+<area shape="rect" id="node29" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="3256,83,3541,112"/>
+<area shape="rect" id="node31" href="$_kernel_2sources_2timers_2clock_8c.html" title="Kernel/sources/timers/clock.c" alt="" coords="3565,83,3771,112"/>
+</map>

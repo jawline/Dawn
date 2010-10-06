@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$vfs_8h.html" title="Kernel/headers/fs/vfs.h" alt="" coords="1640,83,1805,112"/>
+<area shape="rect" id="node37" href="$hdd__fs_8c.html" title="Kernel/sources/devices/hdd_fs.c" alt="" coords="2611,160,2835,189"/>
+<area shape="rect" id="node49" href="$ide_8h.html" title="Kernel/sources/devices/hdd/ata/ide.h" alt="" coords="2859,83,3112,112"/>
+<area shape="rect" id="node55" href="$pio_8h.html" title="Kernel/sources/devices/hdd/ata/pio.h" alt="" coords="3136,83,3389,112"/>
+<area shape="rect" id="node59" href="$diskio_8h.html" title="Kernel/sources/devices/hdd/diskio.h" alt="" coords="3413,160,3659,189"/>
+<area shape="rect" id="node5" href="$dir_8h.html" title="Kernel/headers/fs/dir.h" alt="" coords="883,160,1045,189"/>
+<area shape="rect" id="node7" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="861,237,1088,267"/>
+<area shape="rect" id="node11" href="$initrd_8h.html" title="Kernel/sources/fs/initrd.h" alt="" coords="1120,160,1299,189"/>
+<area shape="rect" id="node17" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="1955,237,2171,267"/>
+<area shape="rect" id="node19" href="$parser_8h.html" title="Kernel/sources/loaders/elf/parser.h" alt="" coords="2083,160,2323,189"/>
+<area shape="rect" id="node26" href="$rfs_8h.html" title="Kernel/sources/fs/rfs.h" alt="" coords="1523,160,1685,189"/>
+<area shape="rect" id="node28" href="$devices__fs_8c.html" title="Kernel/sources/devices/devices_fs.c" alt="" coords="1312,237,1560,267"/>
+<area shape="rect" id="node32" href="$vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="1768,237,1931,267"/>
+<area shape="rect" id="node35" href="$devices__fs_8h.html" title="Kernel/sources/devices/devices_fs.h" alt="" coords="1760,160,2008,189"/>
+<area shape="rect" id="node40" href="$loader_8h.html" title="Kernel/sources/loaders/elf/loader.h" alt="" coords="2347,160,2587,189"/>
+<area shape="rect" id="node43" href="$keyboard_8h.html" title="Shared/headers/input/keyboard.h" alt="" coords="291,160,525,189"/>
+<area shape="rect" id="node9" href="$directory__helper_8c.html" title="Kernel/sources/lib/directory_helper.c" alt="" coords="587,237,837,267"/>
+<area shape="rect" id="node14" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="1112,237,1288,267"/>
+<area shape="rect" id="node22" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="2459,237,2696,267"/>
+<area shape="rect" id="node24" href="$parser_8c.html" title="Kernel/sources/loaders/elf/parser.c" alt="" coords="2195,237,2435,267"/>
+<area shape="rect" id="node30" href="$rfs_8c.html" title="Kernel/sources/fs/rfs.c" alt="" coords="1584,237,1744,267"/>
+<area shape="rect" id="node45" href="$keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="5,237,229,267"/>
+<area shape="rect" id="node47" href="$keyboard__generic__ps2_8c.html" title="Kernel/sources/input/keyboard_generic_ps2.c" alt="" coords="253,237,563,267"/>
+<area shape="rect" id="node51" href="$ide_8c.html" title="Kernel/sources/devices/hdd/ata/ide.c" alt="" coords="3136,160,3389,189"/>
+<area shape="rect" id="node53" href="$pio_8c.html" title="Kernel/sources/devices/hdd/ata/pio.c" alt="" coords="2859,160,3112,189"/>
+<area shape="rect" id="node61" href="$diskio_8c.html" title="Kernel/sources/devices/hdd/diskio.c" alt="" coords="3413,237,3659,267"/>
+</map>

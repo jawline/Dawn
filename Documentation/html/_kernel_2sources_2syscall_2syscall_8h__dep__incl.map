@@ -1,18 +1,20 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_a_p_i_2headers_2clock_2clock_8h.html" title="API/headers/clock/clock.h" alt="" coords="236,83,417,112"/>
+<area shape="rect" id="node3" href="$_a_p_i_2headers_2clock_2clock_8h.html" title="API/headers/clock/clock.h" alt="" coords="241,83,423,112"/>
 <area shape="rect" id="node5" href="$sleep_8h.html" title="API/headers/process/sleep.h" alt="" coords="5,160,208,189"/>
 <area shape="rect" id="node11" href="$_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="435,160,664,189"/>
-<area shape="rect" id="node13" href="$_a_p_i_2headers_2printf_8h.html" title="API/headers/printf.h" alt="" coords="1016,83,1163,112"/>
-<area shape="rect" id="node15" href="$get__info_8h.html" title="API/headers/process/get_info.h" alt="" coords="504,83,723,112"/>
-<area shape="rect" id="node20" href="$postbox__api_8h.html" title="API/headers/process/postbox_api.h" alt="" coords="747,83,992,112"/>
-<area shape="rect" id="node26" href="$_a_p_i_2headers_2system_2memory_8h.html" title="API/headers/system/memory.h" alt="" coords="1187,83,1403,112"/>
-<area shape="rect" id="node30" href="$_a_p_i_2headers_2system_2reboot_8h.html" title="API/headers/system/reboot.h" alt="" coords="1427,83,1632,112"/>
-<area shape="rect" id="node32" href="$scancodes_8c.html" title="API/sources/scancodes.c" alt="" coords="1656,83,1835,112"/>
-<area shape="rect" id="node35" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1859,83,2077,112"/>
-<area shape="rect" id="node37" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2101,83,2387,112"/>
+<area shape="rect" id="node13" href="$_a_p_i_2headers_2printf_8h.html" title="API/headers/printf.h" alt="" coords="1021,83,1168,112"/>
+<area shape="rect" id="node15" href="$end__process_8h.html" title="API/headers/process/end_process.h" alt="" coords="1192,83,1440,112"/>
+<area shape="rect" id="node19" href="$get__info_8h.html" title="API/headers/process/get_info.h" alt="" coords="509,83,728,112"/>
+<area shape="rect" id="node24" href="$postbox__api_8h.html" title="API/headers/process/postbox_api.h" alt="" coords="752,83,997,112"/>
+<area shape="rect" id="node30" href="$_a_p_i_2headers_2system_2memory_8h.html" title="API/headers/system/memory.h" alt="" coords="1464,83,1680,112"/>
+<area shape="rect" id="node34" href="$_a_p_i_2headers_2system_2reboot_8h.html" title="API/headers/system/reboot.h" alt="" coords="1704,83,1909,112"/>
+<area shape="rect" id="node36" href="$scancodes_8c.html" title="API/sources/scancodes.c" alt="" coords="1933,83,2112,112"/>
+<area shape="rect" id="node39" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="2136,83,2355,112"/>
+<area shape="rect" id="node41" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2379,83,2664,112"/>
 <area shape="rect" id="node9" href="$_a_p_i_2sources_2clock_2clock_8c.html" title="API/sources/clock/clock.c" alt="" coords="232,160,411,189"/>
 <area shape="rect" id="node7" href="$sleep_8c.html" title="API/sources/process/sleep.c" alt="" coords="8,237,205,267"/>
-<area shape="rect" id="node17" href="$get__info_8c.html" title="API/sources/process/get_info.c" alt="" coords="688,160,904,189"/>
-<area shape="rect" id="node22" href="$postbox__api_8c.html" title="API/sources/process/postbox_api.c" alt="" coords="928,160,1171,189"/>
-<area shape="rect" id="node28" href="$memory_8c.html" title="API/sources/system/memory.c" alt="" coords="1195,160,1408,189"/>
+<area shape="rect" id="node17" href="$end__process_8c.html" title="API/sources/process/end_process.c" alt="" coords="1195,160,1440,189"/>
+<area shape="rect" id="node21" href="$get__info_8c.html" title="API/sources/process/get_info.c" alt="" coords="688,160,904,189"/>
+<area shape="rect" id="node26" href="$postbox__api_8c.html" title="API/sources/process/postbox_api.c" alt="" coords="928,160,1171,189"/>
+<area shape="rect" id="node32" href="$memory_8c.html" title="API/sources/system/memory.c" alt="" coords="1465,160,1679,189"/>
 </map>

@@ -33,6 +33,9 @@
 </div>
 <div class="contents">
 <!-- doxytag: class="process_structure" -->
+<p>The structure of a process within Dawn.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="process_8h_source.html">process.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for process_structure:</div>
@@ -45,23 +48,34 @@ Collaboration diagram for process_structure:</div>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1">m_ID</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The process ID or pID unique to this process (At this run).  <a href="#a2da274553c1e836f03659120144412e1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15">m_Name</a> [64]</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">64 byte character array to store the processes name  <a href="#ac55babc271bb02f4b5e8f71ff9483d15"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475">m_processingTime</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The number of ticks spent processing this process.  <a href="#a5216b340c8f02704e7970a8344ba7475"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b">m_postboxFlags</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The flags set for what information this process wants to recieve in its postbox.  <a href="#a9e7ff269d93e1772bc706c92e640de7b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprocess__postbox.html">process_postbox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2">m_processPostbox</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The process postbox for this application.  <a href="#a12d44fe2fee8aed7c8c2d6a79b3e80f2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">page_directory_t *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85">m_pageDir</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The physical address of the page directory this process uses.  <a href="#a37efcc38f828227684720848c97cdc85"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">MEM_LOC *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08">m_usedListRoot</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A list of all the frames of memory mapped by this application.  <a href="#a2b445e55ad779145222170ca9d1eca08"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">m_usedListSize</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structabstract__terminal.html">terminal_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c">m_pTerminal</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The terminal that gets written to when this application prints.  <a href="#a48fa0e599e1abb62032d79f82df07c6c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2">m_returnValue</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The return value of this process is stored here when it is set.  <a href="#a48967e0de322441f7272e8de55e6cae2"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>The structure of a process within Dawn. </p>
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00011">11</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00014">14</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 <hr/><h2>Field Documentation</h2>
 <a class="anchor" id="a5a3b0638911ac07327e091dedfbf615c"></a><!-- doxytag: member="process_structure::ebp" ref="a5a3b0638911ac07327e091dedfbf615c" args="" -->
 <div class="memitem">
@@ -74,7 +88,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00016">16</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00026">26</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -89,7 +103,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00016">16</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00026">26</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -104,7 +118,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00016">16</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00026">26</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -119,7 +133,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00013">13</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>The process ID or pID unique to this process (At this run). </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00019">19</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -134,7 +150,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00014">14</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>64 byte character array to store the processes name </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00024">24</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -149,7 +167,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00023">23</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>The physical address of the page directory this process uses. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00048">48</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -164,7 +184,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00020">20</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>The flags set for what information this process wants to recieve in its postbox. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00038">38</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -179,7 +201,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00018">18</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>The number of ticks spent processing this process. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00032">32</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -194,7 +218,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00021">21</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>The process postbox for this application. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00043">43</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -209,7 +235,26 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00031">31</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>The terminal that gets written to when this application prints. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00062">62</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a48967e0de322441f7272e8de55e6cae2"></a><!-- doxytag: member="process_structure::m_returnValue" ref="a48967e0de322441f7272e8de55e6cae2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2">m_returnValue</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The return value of this process is stored here when it is set. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00067">67</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -224,7 +269,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00029">29</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00057">57</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -239,7 +284,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00027">27</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00055">55</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -254,7 +299,9 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00025">25</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>A list of all the frames of memory mapped by this application. </p>
+
+<p>Definition at line <a class="el" href="process_8h_source.html#l00053">53</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -269,7 +316,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8h_source.html#l00026">26</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
+<p>Definition at line <a class="el" href="process_8h_source.html#l00054">54</a> of file <a class="el" href="process_8h_source.html">process.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +324,7 @@ Data Fields</h2></td></tr>
 <li>Kernel/headers/process/<a class="el" href="process_8h_source.html">process.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:36 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -48,7 +48,7 @@ char exec_cmd()
 	if (strcmp("exit", Pointer) == 0)
 	{
 		printf("Exit called\n");
-		exit(3);
+		exit(2);
 	}
 	else if (strcmp("help", Pointer) == 0)
 	{
@@ -143,6 +143,12 @@ char exec_cmd()
 	return 0;
 }
 
+/**
+ * @brief The entry point of the basic shell-style application for Dawn known as Line
+ * @params int Argc and void* Argv are given by the OS and corrospond to the equivilents on other operating systems
+ * @return The result of the application
+ * @callgraph
+ */
 int main(int argc, void* argv)
 {
 	//syscall_setbg(0);
@@ -214,4 +220,10 @@ int main(int argc, void* argv)
 	}
 
 	return 1;
+}
+
+void _start(int argc, void* argv)
+{
+	int result = main(argc, argv);
+	exit(result);
 }

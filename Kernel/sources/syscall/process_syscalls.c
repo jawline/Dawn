@@ -76,5 +76,11 @@ void syscallGetName(char* StrLocation, unsigned int pid)
 
 void syscallKillCurrentProcess()
 {
-	get_current_process()->m_shouldDestroy = 1;
+	scheduler_kill_current_process();
+}
+
+void syscallRequestExit(int returnValue)
+{
+	get_current_process()->m_returnValue = returnValue;
+	scheduler_kill_current_process();
 }

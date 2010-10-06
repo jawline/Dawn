@@ -1,20 +1,20 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_a_p_i_2headers_2printf_8h.html" title="API/headers/printf.h" alt="" coords="3340,160,3487,189"/>
+<area shape="rect" id="node3" href="$_a_p_i_2headers_2printf_8h.html" title="API/headers/printf.h" alt="" coords="3279,160,3425,189"/>
 <area shape="rect" id="node5" href="$stdio_8h.html" title="Kernel/headers/stdio.h" alt="" coords="1885,83,2048,112"/>
-<area shape="rect" id="node56" href="$_kernel_2sources_2lib_2printf_8c.html" title="Kernel/sources/lib/printf.c" alt="" coords="3211,83,3389,112"/>
-<area shape="rect" id="node58" href="$vsprintf_8h.html" title="Shared/headers/vsprintf.h" alt="" coords="3413,83,3600,112"/>
+<area shape="rect" id="node56" href="$_kernel_2sources_2lib_2printf_8c.html" title="Kernel/sources/lib/printf.c" alt="" coords="3149,83,3328,112"/>
+<area shape="rect" id="node58" href="$vsprintf_8h.html" title="Shared/headers/vsprintf.h" alt="" coords="3352,83,3539,112"/>
 <area shape="rect" id="node7" href="$debugprint_8h.html" title="Kernel/headers/debug/debugprint.h" alt="" coords="708,160,953,189"/>
 <area shape="rect" id="node12" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="1384,315,1611,344"/>
 <area shape="rect" id="node27" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="985,160,1201,189"/>
 <area shape="rect" id="node29" href="$devices_8c.html" title="Kernel/sources/devices/devices.c" alt="" coords="1225,160,1455,189"/>
 <area shape="rect" id="node31" href="$pio_8h.html" title="Kernel/sources/devices/hdd/ata/pio.h" alt="" coords="1580,160,1833,189"/>
 <area shape="rect" id="node33" href="$ide_8c.html" title="Kernel/sources/devices/hdd/ata/ide.c" alt="" coords="1529,237,1783,267"/>
-<area shape="rect" id="node42" href="$kerror_8h.html" title="Kernel/sources/panic/kerror.h" alt="" coords="3111,160,3316,189"/>
+<area shape="rect" id="node42" href="$kerror_8h.html" title="Kernel/sources/panic/kerror.h" alt="" coords="3049,160,3255,189"/>
 <area shape="rect" id="node46" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1857,160,2076,189"/>
 <area shape="rect" id="node48" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2100,160,2385,189"/>
 <area shape="rect" id="node50" href="$kterminal_8c.html" title="Kernel/sources/terminal/kterminal.c" alt="" coords="2409,160,2655,189"/>
-<area shape="rect" id="node52" href="$_tools_2_init_r_d_2_compiler_2main_8c.html" title="Tools/InitRD/Compiler/main.c" alt="" coords="2679,160,2881,189"/>
-<area shape="rect" id="node54" href="$make__kt_8c.html" title="Tools/Keytable/make_kt.c" alt="" coords="2905,160,3087,189"/>
+<area shape="rect" id="node52" href="$_tools_2_init_r_d_2main_8c.html" title="Tools/InitRD/main.c" alt="" coords="2679,160,2820,189"/>
+<area shape="rect" id="node54" href="$make__kt_8c.html" title="Tools/Keytable/make_kt.c" alt="" coords="2844,160,3025,189"/>
 <area shape="rect" id="node9" href="$debug_8h.html" title="Kernel/headers/debug/debug.h" alt="" coords="723,237,939,267"/>
 <area shape="rect" id="node14" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="1184,315,1360,344"/>
 <area shape="rect" id="node16" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="5,315,203,344"/>
@@ -25,6 +25,6 @@
 <area shape="rect" id="node35" href="$pio_8c.html" title="Kernel/sources/devices/hdd/ata/pio.c" alt="" coords="1807,237,2060,267"/>
 <area shape="rect" id="node37" href="$diskio_8h.html" title="Kernel/sources/devices/hdd/diskio.h" alt="" coords="2084,237,2329,267"/>
 <area shape="rect" id="node39" href="$diskio_8c.html" title="Kernel/sources/devices/hdd/diskio.c" alt="" coords="2084,315,2329,344"/>
-<area shape="rect" id="node44" href="$kerror_8c.html" title="Kernel/sources/panic/kerror.c" alt="" coords="3111,237,3316,267"/>
-<area shape="rect" id="node61" href="$vsprintf_8c.html" title="Shared/sources/vsprintf.c" alt="" coords="3511,160,3692,189"/>
+<area shape="rect" id="node44" href="$kerror_8c.html" title="Kernel/sources/panic/kerror.c" alt="" coords="3049,237,3255,267"/>
+<area shape="rect" id="node61" href="$vsprintf_8c.html" title="Shared/sources/vsprintf.c" alt="" coords="3449,160,3631,189"/>
 </map>

@@ -38,42 +38,46 @@
 <a name="l00008"></a>00008 
 <a name="l00009"></a><a class="code" href="process_8h.html#af7d2ec1e8ec02ff4ad09ef8cf3062b2e">00009</a> <span class="preprocessor">#define INPUT_BIT 0x1 //First bit = Do I want to hear about input?!?</span>
 <a name="l00010"></a>00010 <span class="preprocessor"></span>
-<a name="l00011"></a><a class="code" href="structprocess__structure.html">00011</a> <span class="keyword">struct </span><a class="code" href="structprocess__structure.html">process_structure</a>
-<a name="l00012"></a>00012 {
-<a name="l00013"></a><a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1">00013</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1">m_ID</a>;
-<a name="l00014"></a><a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15">00014</a>         <span class="keywordtype">char</span> <a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15">m_Name</a>[64];
-<a name="l00015"></a>00015 
-<a name="l00016"></a><a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">00016</a>         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> <span class="comment">/* Stack pointer */</span> , <a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> <span class="comment">/* Base Pointer */</span> , <a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> <span class="comment">/* Instruction Pointer */</span>; <span class="comment">/* The rest is stored by the interrupt  that triggers the switch */</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475">00018</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475">m_processingTime</a>; <span class="comment">//How much time have we spent processing this process?</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a><a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b">00020</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b">m_postboxFlags</a>; <span class="comment">//What does this process want to recieve? Do I want to hear about input events etc?</span>
-<a name="l00021"></a><a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2">00021</a>         <a class="code" href="structprocess__postbox.html">process_postbox</a> <a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2">m_processPostbox</a>;
-<a name="l00022"></a>00022 
-<a name="l00023"></a><a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85">00023</a>         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85">m_pageDir</a>;
-<a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08">00025</a>         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a>* <a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08">m_usedListRoot</a>; <span class="comment">//Root location of the used list</span>
-<a name="l00026"></a><a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">00026</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">m_usedListSize</a>;
-<a name="l00027"></a><a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">00027</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a>; <span class="comment">//Location of the end of the current list irrespect to the root</span>
-<a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">00029</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a>;
-<a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c">00031</a>         <a class="code" href="structabstract__terminal.html">terminal_t</a>* <a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c">m_pTerminal</a>;
-<a name="l00032"></a>00032 };
+<a name="l00014"></a><a class="code" href="structprocess__structure.html">00014</a> <span class="keyword">struct </span><a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_structure</a>
+<a name="l00015"></a>00015 {
+<a name="l00019"></a><a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1">00019</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a>;
+<a name="l00020"></a>00020 
+<a name="l00024"></a><a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15">00024</a>         <span class="keywordtype">char</span> <a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>[64];
+<a name="l00025"></a>00025 
+<a name="l00026"></a><a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">00026</a>         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> <span class="comment">/* Stack pointer */</span> , <a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> <span class="comment">/* Base Pointer */</span> , <a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> <span class="comment">/* Instruction Pointer */</span>; <span class="comment">/* The rest is stored by the interrupt  that triggers the switch */</span>
+<a name="l00027"></a>00027 
+<a name="l00032"></a><a class="code" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475">00032</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475" title="The number of ticks spent processing this process.">m_processingTime</a>; <span class="comment">//How much time have we spent processing this process?</span>
 <a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="process_8h.html#a0c565584d820782f9bfe7940beb264cd">00034</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprocess__structure.html">process_structure</a> <a class="code" href="structprocess__structure.html">process_t</a>;
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69">switch_process</a>(<a class="code" href="structprocess__structure.html">process_t</a>* from, <a class="code" href="structprocess__structure.html">process_t</a>* proc);
-<a name="l00037"></a>00037 <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a4e5d133fb15966cffcf8ca67c3ef084f">set_process_input_buffer</a>(<a class="code" href="structprocess__structure.html">process_t</a>* process,<span class="keywordtype">char</span>* m_Data, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len);
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb);
-<a name="l00040"></a>00040 <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb);
-<a name="l00041"></a>00041 <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb, <a class="code" href="structprocess__message.html">process_message</a> msg);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#endif //_PROCESS_DEF_H_</span>
+<a name="l00038"></a><a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b">00038</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b" title="The flags set for what information this process wants to recieve in its postbox.">m_postboxFlags</a>; <span class="comment">//What does this process want to recieve? Do I want to hear about input events etc?</span>
+<a name="l00039"></a>00039 
+<a name="l00043"></a><a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2">00043</a>         <a class="code" href="structprocess__postbox.html">process_postbox</a> <a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>;
+<a name="l00044"></a>00044 
+<a name="l00048"></a><a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85">00048</a>         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a>;
+<a name="l00049"></a>00049 
+<a name="l00053"></a><a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08">00053</a>         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a>* <a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a>; <span class="comment">//Root location of the used list</span>
+<a name="l00054"></a><a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">00054</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">m_usedListSize</a>;
+<a name="l00055"></a><a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">00055</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a>; <span class="comment">//Location of the end of the current list irrespect to the root</span>
+<a name="l00056"></a>00056 
+<a name="l00057"></a><a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">00057</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a>;
+<a name="l00058"></a>00058 
+<a name="l00062"></a><a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c">00062</a>         <a class="code" href="structabstract__terminal.html">terminal_t</a>* <a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>;
+<a name="l00063"></a>00063 
+<a name="l00067"></a><a class="code" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2">00067</a>         <span class="keywordtype">int</span> <a class="code" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2" title="The return value of this process is stored here when it is set.">m_returnValue</a>;
+<a name="l00068"></a>00068 };
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="process_8h.html#a0c565584d820782f9bfe7940beb264cd">00070</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_structure</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69">switch_process</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* from, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* proc);
+<a name="l00073"></a>00073 <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a4e5d133fb15966cffcf8ca67c3ef084f">set_process_input_buffer</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process,<span class="keywordtype">char</span>* m_Data, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb);
+<a name="l00076"></a>00076 <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb);
+<a name="l00077"></a>00077 <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb, <a class="code" href="structprocess__message.html">process_message</a> msg);
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="preprocessor">#endif //_PROCESS_DEF_H_</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:41 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:35 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -8,9 +8,20 @@
 
 echo "Image Update script"
 
-#Get the hard drive image
-echo "Image name: "
-read image_name
+image_name=
+
+#If the image is given
+if [ $# -eq 0 ];
+then
+	#Get the hard drive image
+	echo "Image name: "
+	read image_name
+else
+
+	image_name = $1;
+	echo "Using supplied image name"
+
+fi
 
 
 sudo losetup /dev/loop0 $image_name
@@ -22,8 +33,10 @@ sudo mount /dev/loop0 ./tmount
 
 #Copy over files
 echo "Copying over files to mounted directory"
+
 sudo cp bin/kernel_elf tmount/boot/Kernel
 sudo cp bin/ramdisk_build tmount/boot/ramdisk
+sudo cp etc/grub.cfg tmount/boot/grub/grub.cfg
 
 #Unmount it and remove the tmount directory
 sudo umount ./tmount

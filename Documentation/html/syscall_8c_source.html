@@ -37,7 +37,7 @@
 <a name="l00007"></a>00007 
 <a name="l00008"></a>00008 <span class="keyword">extern</span> <a class="code" href="structheap__t.html">heap_t</a> <a class="code" href="kernel__init_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a>;
 <a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
+<a name="l00010"></a>00010 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
 <a name="l00011"></a>00011 <span class="keyword">extern</span> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4">calculate_free_frames</a>();
 <a name="l00012"></a>00012 
 <a name="l00013"></a>00013 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="postbox__api_8h.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read.">postboxHasNext</a>();
@@ -45,112 +45,114 @@
 <a name="l00015"></a>00015 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="postbox__syscalls_8c.html#a42d52743f176f73c3dbffdbc23ca1d26">postboxPopTop</a>();
 <a name="l00016"></a>00016 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="postbox__api_8h.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message...">postboxSetFlags</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="_kernel_2sources_2system_2reboot_8c.html#a62fe4f31d7cd6087317744dd800a86c3">bit</a>);
 <a name="l00017"></a>00017 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="process__syscalls_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4">syscallKillCurrentProcess</a>();
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="process__syscalls_8c.html#a91d2c2920932a86be0bb22a4c66fc8da">syscallProcessValid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
-<a name="l00020"></a>00020 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="process__syscalls_8c.html#a81c4c7698075571d907a9cd7e805ea56">syscallGetPid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
-<a name="l00021"></a>00021 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="process__syscalls_8c.html#aba2fe49ca5cf5a905049bb01965f98a1">syscallGetProcessingTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
-<a name="l00022"></a>00022 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="process__syscalls_8c.html#a60552ed52730f54642024304556642b1">syscallGetName</a>(<span class="keywordtype">char</span>* StrLocation, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
-<a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="syscall_8c.html#ac98394f390a30033b7bceeefcb8daab7">00024</a> <span class="keywordtype">char</span> <a class="code" href="syscall_8c.html#ac98394f390a30033b7bceeefcb8daab7">getKeyMapping</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> scancode, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="headers_2interrupts_2idt_8h.html#acd8859336a5cb8a70051c97a438726a1">flags</a>)
-<a name="l00025"></a>00025 {
-<a name="l00026"></a>00026         <span class="keywordflow">return</span> <a class="code" href="keyboard_8c.html#a054eb45d2c716b3f3a5b6fb48cf7ed8c">lookupAsciCharacterFromScancode</a>(scancode, flags);
-<a name="l00027"></a>00027 }
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="clock__syscalls_8c.html#af3c564028b2b295d4e93bc4b0d79bae5">syscallClocksPerSecond</a>();
-<a name="l00030"></a>00030 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="clock__syscalls_8c.html#aa0e1a7df1d7561485e42fb9fbb80f447">syscallGetSystemUptime</a>();
-<a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="syscall_8c.html#a7bd78b0c20c3a1436108085a91a9e164">00032</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="syscall_8c.html#a7bd78b0c20c3a1436108085a91a9e164">get_page_size</a>()
-<a name="l00033"></a>00033 {
-<a name="l00034"></a>00034         <span class="keywordflow">return</span> <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>;
-<a name="l00035"></a>00035 }
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#abb34b362d7f71997c9d47199fcedf78b">syscallRequestReboot</a>();
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#ad3a622baf1a6e09ce69704fad80d9179">syscallPrint_t</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Line);
-<a name="l00040"></a>00040 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#aab274ca82284758b7849abb948a79801">syscallClearscreen</a>();
-<a name="l00041"></a>00041 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#ace004b1bbaff00c359c440b60acf7005">syscallSetFgc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> fgc);
-<a name="l00042"></a>00042 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#a716263cfc2bfff32787a1788a06b0638">syscallSetBgc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> bgc);
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">scheduler_block_me</a>();
-<a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="syscall_8c.html#adeb486fdcdd846d007df681c91356579">00046</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="syscall_8c.html#adeb486fdcdd846d007df681c91356579">num_syscalls</a> = 21;
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048 <span class="keyword">static</span> <span class="keywordtype">void</span> *syscalls[21] = {
-<a name="l00049"></a>00049    &amp;syscallPrint_t, <span class="comment">//Syscall 0 - printf prints to active terminal</span>
-<a name="l00050"></a>00050    &amp;postboxReadTop, <span class="comment">//Syscall 1 - Copys the top of the postbox to location given</span>
-<a name="l00051"></a>00051    &amp;postboxPopTop, <span class="comment">//Syscall 2 -Pops the top of the postbox</span>
-<a name="l00052"></a>00052    &amp;postboxHasNext, <span class="comment">//Syscall 3 - Does the postbox have anything for the process to read?</span>
-<a name="l00053"></a>00053    &amp;getKeyMapping, <span class="comment">//Syscall 4 - Get the key mapping for a scancode</span>
-<a name="l00054"></a>00054    &amp;scheduler_block_me, <span class="comment">//Syscall 5 - Pause the current process forfitting any remaining processing time</span>
-<a name="l00055"></a>00055    &amp;postboxSetFlags, <span class="comment">//Syscall 6 - Set the process message flags (What it wants to know about)</span>
-<a name="l00056"></a>00056    &amp;calculate_free_frames, <span class="comment">//Syscall 7 - Return the number of free frames available</span>
-<a name="l00057"></a>00057    &amp;get_page_size, <span class="comment">//Syscall 8 - Return the size in bytes of each page</span>
-<a name="l00058"></a>00058    &amp;syscallRequestReboot, <span class="comment">//Syscall 9 - Ask the kernel to reboot</span>
-<a name="l00059"></a>00059    &amp;syscallClocksPerSecond, <span class="comment">//Syscall 10 - Get the number of clock cycles that occur every second</span>
-<a name="l00060"></a>00060    &amp;syscallGetSystemUptime, <span class="comment">//Syscall 11 - Get the systems uptime in clocks</span>
-<a name="l00061"></a>00061    &amp;syscallClearscreen, <span class="comment">//Syscall 12 - Clear the current terminal</span>
-<a name="l00062"></a>00062    &amp;syscallSetFgc, <span class="comment">//Syscall 13 - Set the current terminals FGC</span>
-<a name="l00063"></a>00063    &amp;syscallSetBgc, <span class="comment">//Syscall 14 - Set the current terminals BGC</span>
-<a name="l00064"></a>00064    &amp;syscallKillCurrentProcess, <span class="comment">//Syscall 15 - Flag the current process to be destroyed</span>
-<a name="l00065"></a>00065    &amp;syscallProcessValid, <span class="comment">//Syscall 16 - Does the iter given link to a valid process?</span>
-<a name="l00066"></a>00066    &amp;syscallGetPid, <span class="comment">//Syscall 17 - Get the PID of the process linked to the iterator</span>
-<a name="l00067"></a>00067    &amp;syscallGetProcessingTime, <span class="comment">//Syscall 18 - Get the processing time of the process</span>
-<a name="l00068"></a>00068    &amp;<a class="code" href="process__syscalls_8c.html#a60552ed52730f54642024304556642b1">syscallGetName</a> <span class="comment">//Syscall 19 - Get the name of the process linked to the iterator</span>
-<a name="l00069"></a>00069 };
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 <span class="comment">//Function: syscallHandler</span>
-<a name="l00072"></a>00072 <span class="comment">//Arguments: idt_call_registers_t regs</span>
-<a name="l00073"></a>00073 <span class="comment">//Return: idt_call_registers_t with new values of the registers</span>
-<a name="l00074"></a>00074 <span class="comment">//Description: Handles a syscall (Via interrupt 127) and returns a new set of registers</span>
-<a name="l00075"></a><a class="code" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">00075</a> <a class="code" href="structregisters.html">idt_call_registers_t</a> <a class="code" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">syscallHandler</a>(<a class="code" href="structregisters.html">idt_call_registers_t</a> regs)
-<a name="l00076"></a>00076 {
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078    <span class="comment">// Firstly, check if the requested syscall number is valid.</span>
-<a name="l00079"></a>00079    <span class="comment">// The syscall number is found in EAX.</span>
-<a name="l00080"></a>00080    <span class="keywordflow">if</span> (regs.<a class="code" href="structregisters.html#ab09cb2d55adca78788bb4d80624c9933">eax</a> &gt;= <a class="code" href="syscall_8c.html#adeb486fdcdd846d007df681c91356579">num_syscalls</a>)
-<a name="l00081"></a>00081        <span class="keywordflow">return</span>;
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 
+<a name="l00018"></a>00018 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="process__syscalls_8c.html#a4e52c83de7181ae4171d9e68bdacff59">syscallRequestExit</a>(<span class="keywordtype">int</span> returnValue);
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="process__syscalls_8c.html#a91d2c2920932a86be0bb22a4c66fc8da">syscallProcessValid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
+<a name="l00021"></a>00021 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="process__syscalls_8c.html#a81c4c7698075571d907a9cd7e805ea56">syscallGetPid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
+<a name="l00022"></a>00022 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="process__syscalls_8c.html#aba2fe49ca5cf5a905049bb01965f98a1">syscallGetProcessingTime</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
+<a name="l00023"></a>00023 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="process__syscalls_8c.html#a60552ed52730f54642024304556642b1">syscallGetName</a>(<span class="keywordtype">char</span>* StrLocation, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
+<a name="l00024"></a>00024 
+<a name="l00025"></a><a class="code" href="syscall_8c.html#ac98394f390a30033b7bceeefcb8daab7">00025</a> <span class="keywordtype">char</span> <a class="code" href="syscall_8c.html#ac98394f390a30033b7bceeefcb8daab7">getKeyMapping</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> scancode, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="headers_2interrupts_2idt_8h.html#acd8859336a5cb8a70051c97a438726a1">flags</a>)
+<a name="l00026"></a>00026 {
+<a name="l00027"></a>00027         <span class="keywordflow">return</span> <a class="code" href="keyboard_8c.html#a054eb45d2c716b3f3a5b6fb48cf7ed8c">lookupAsciCharacterFromScancode</a>(scancode, flags);
+<a name="l00028"></a>00028 }
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="clock__syscalls_8c.html#af3c564028b2b295d4e93bc4b0d79bae5">syscallClocksPerSecond</a>();
+<a name="l00031"></a>00031 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="clock__syscalls_8c.html#aa0e1a7df1d7561485e42fb9fbb80f447">syscallGetSystemUptime</a>();
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="syscall_8c.html#a7bd78b0c20c3a1436108085a91a9e164">00033</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="syscall_8c.html#a7bd78b0c20c3a1436108085a91a9e164">get_page_size</a>()
+<a name="l00034"></a>00034 {
+<a name="l00035"></a>00035         <span class="keywordflow">return</span> <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>;
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#abb34b362d7f71997c9d47199fcedf78b">syscallRequestReboot</a>();
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#ad3a622baf1a6e09ce69704fad80d9179">syscallPrint_t</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Line);
+<a name="l00041"></a>00041 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#aab274ca82284758b7849abb948a79801">syscallClearscreen</a>();
+<a name="l00042"></a>00042 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#ace004b1bbaff00c359c440b60acf7005">syscallSetFgc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> fgc);
+<a name="l00043"></a>00043 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#a716263cfc2bfff32787a1788a06b0638">syscallSetBgc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> bgc);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">scheduler_block_me</a>();
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_syscalls = 21;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <span class="keyword">static</span> <span class="keywordtype">void</span>* syscalls[21] = {
+<a name="l00050"></a>00050    &amp;syscallPrint_t, <span class="comment">//Syscall 0 - printf prints to active terminal</span>
+<a name="l00051"></a>00051    &amp;postboxReadTop, <span class="comment">//Syscall 1 - Copys the top of the postbox to location given</span>
+<a name="l00052"></a>00052    &amp;postboxPopTop, <span class="comment">//Syscall 2 -Pops the top of the postbox</span>
+<a name="l00053"></a>00053    &amp;postboxHasNext, <span class="comment">//Syscall 3 - Does the postbox have anything for the process to read?</span>
+<a name="l00054"></a>00054    &amp;getKeyMapping, <span class="comment">//Syscall 4 - Get the key mapping for a scancode</span>
+<a name="l00055"></a>00055    &amp;scheduler_block_me, <span class="comment">//Syscall 5 - Pause the current process forfitting any remaining processing time</span>
+<a name="l00056"></a>00056    &amp;postboxSetFlags, <span class="comment">//Syscall 6 - Set the process message flags (What it wants to know about)</span>
+<a name="l00057"></a>00057    &amp;calculate_free_frames, <span class="comment">//Syscall 7 - Return the number of free frames available</span>
+<a name="l00058"></a>00058    &amp;get_page_size, <span class="comment">//Syscall 8 - Return the size in bytes of each page</span>
+<a name="l00059"></a>00059    &amp;syscallRequestReboot, <span class="comment">//Syscall 9 - Ask the kernel to reboot</span>
+<a name="l00060"></a>00060    &amp;syscallClocksPerSecond, <span class="comment">//Syscall 10 - Get the number of clock cycles that occur every second</span>
+<a name="l00061"></a>00061    &amp;syscallGetSystemUptime, <span class="comment">//Syscall 11 - Get the systems uptime in clocks</span>
+<a name="l00062"></a>00062    &amp;syscallClearscreen, <span class="comment">//Syscall 12 - Clear the current terminal</span>
+<a name="l00063"></a>00063    &amp;syscallSetFgc, <span class="comment">//Syscall 13 - Set the current terminals FGC</span>
+<a name="l00064"></a>00064    &amp;syscallSetBgc, <span class="comment">//Syscall 14 - Set the current terminals BGC</span>
+<a name="l00065"></a>00065    &amp;syscallKillCurrentProcess, <span class="comment">//Syscall 15 - Flag the current process to be destroyed</span>
+<a name="l00066"></a>00066    &amp;syscallProcessValid, <span class="comment">//Syscall 16 - Does the iter given link to a valid process?</span>
+<a name="l00067"></a>00067    &amp;syscallGetPid, <span class="comment">//Syscall 17 - Get the PID of the process linked to the iterator</span>
+<a name="l00068"></a>00068    &amp;syscallGetProcessingTime, <span class="comment">//Syscall 18 - Get the processing time of the process</span>
+<a name="l00069"></a>00069    &amp;syscallGetName, <span class="comment">//Syscall 19 - Get the name of the process linked to the iterator</span>
+<a name="l00070"></a>00070    &amp;syscallRequestExit, <span class="comment">//Syscall 20 - Request exit of the current process (Supplied argument is used as the return value)</span>
+<a name="l00071"></a>00071 };
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073 <span class="comment">//Function: syscallHandler</span>
+<a name="l00074"></a>00074 <span class="comment">//Arguments: idt_call_registers_t regs</span>
+<a name="l00075"></a>00075 <span class="comment">//Return: idt_call_registers_t with new values of the registers</span>
+<a name="l00076"></a>00076 <span class="comment">//Description: Handles a syscall (Via interrupt 127) and returns a new set of registers</span>
+<a name="l00077"></a><a class="code" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">00077</a> <a class="code" href="structregisters.html">idt_call_registers_t</a> <a class="code" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">syscallHandler</a>(<a class="code" href="structregisters.html">idt_call_registers_t</a> regs)
+<a name="l00078"></a>00078 {
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080    <span class="comment">// Firstly, check if the requested syscall number is valid.</span>
+<a name="l00081"></a>00081    <span class="comment">// The syscall number is found in EAX.</span>
+<a name="l00082"></a>00082    <span class="keywordflow">if</span> (regs.<a class="code" href="structregisters.html#ab09cb2d55adca78788bb4d80624c9933">eax</a> &gt;= num_syscalls)
+<a name="l00083"></a>00083        <span class="keywordflow">return</span>;
 <a name="l00084"></a>00084 
-<a name="l00085"></a>00085    <span class="comment">// Get the required syscall location.</span>
-<a name="l00086"></a>00086    <span class="keywordtype">void</span> *location = syscalls[regs.<a class="code" href="structregisters.html#ab09cb2d55adca78788bb4d80624c9933">eax</a>];
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088    <span class="comment">// Don&#39;t know how many parameters the function wants, so just</span>
-<a name="l00089"></a>00089    <span class="comment">// push them all onto the stack in the correct order. The function will</span>
-<a name="l00090"></a>00090    <span class="comment">// use all the parameters it wants, pop them all back off afterwards.</span>
-<a name="l00091"></a>00091    <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> ret;
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093    <span class="comment">//TODO: I&#39;m not quite sure, the * might break it. testt</span>
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087    <span class="comment">// Get the required syscall location.</span>
+<a name="l00088"></a>00088    <span class="keywordtype">void</span> *location = syscalls[regs.<a class="code" href="structregisters.html#ab09cb2d55adca78788bb4d80624c9933">eax</a>];
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090    <span class="comment">// Don&#39;t know how many parameters the function wants, so just</span>
+<a name="l00091"></a>00091    <span class="comment">// push them all onto the stack in the correct order. The function will</span>
+<a name="l00092"></a>00092    <span class="comment">// use all the parameters it wants, pop them all back off afterwards.</span>
+<a name="l00093"></a>00093    <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> ret;
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095    <span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot; \</span>
-<a name="l00096"></a>00096 <span class="stringliteral">                   push %1; \</span>
-<a name="l00097"></a>00097 <span class="stringliteral">                   push %2; \</span>
-<a name="l00098"></a>00098 <span class="stringliteral">                   push %3; \</span>
-<a name="l00099"></a>00099 <span class="stringliteral">                   push %4; \</span>
-<a name="l00100"></a>00100 <span class="stringliteral">                   push %5; \</span>
-<a name="l00101"></a>00101 <span class="stringliteral">                   call %6; \</span>
-<a name="l00102"></a>00102 <span class="stringliteral">                   pop %%ebx; \</span>
-<a name="l00103"></a>00103 <span class="stringliteral">                   pop %%ebx; \</span>
+<a name="l00095"></a>00095    <span class="comment">//TODO: I&#39;m not quite sure, the * might break it. testt</span>
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097    <span class="keyword">asm</span> <span class="keyword">volatile</span> (<span class="stringliteral">&quot; \</span>
+<a name="l00098"></a>00098 <span class="stringliteral">                   push %1; \</span>
+<a name="l00099"></a>00099 <span class="stringliteral">                   push %2; \</span>
+<a name="l00100"></a>00100 <span class="stringliteral">                   push %3; \</span>
+<a name="l00101"></a>00101 <span class="stringliteral">                   push %4; \</span>
+<a name="l00102"></a>00102 <span class="stringliteral">                   push %5; \</span>
+<a name="l00103"></a>00103 <span class="stringliteral">                   call %6; \</span>
 <a name="l00104"></a>00104 <span class="stringliteral">                   pop %%ebx; \</span>
 <a name="l00105"></a>00105 <span class="stringliteral">                   pop %%ebx; \</span>
 <a name="l00106"></a>00106 <span class="stringliteral">                   pop %%ebx; \</span>
-<a name="l00107"></a>00107 <span class="stringliteral">                &quot;</span> : <span class="stringliteral">&quot;=a&quot;</span> (ret) : <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a1742971c07d754041c6d76f603b8afd1">edi</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a2309882f43fe88b5ca3f0f0b1e25c5b7">esi</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#ad015a430dab988eeb643aeb2b90e8151">edx</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a15c636a6f616c73e9f3e8db24ea82fea">ecx</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a70c7eb5337e0e9ef89436206612a1c7f">ebx</a>), <span class="stringliteral">&quot;r&quot;</span> (location));
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109    <span class="comment">//Ret the return value of registers_t to ret. Its pushed to eax before the interrupt returns (iret instruction) allowing the process that was executing before the syscall to handle it</span>
-<a name="l00110"></a>00110    regs.<a class="code" href="structregisters.html#ab09cb2d55adca78788bb4d80624c9933">eax</a> = ret;
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112    <span class="keywordflow">return</span> regs;
-<a name="l00113"></a>00113 }
-<a name="l00114"></a>00114 
-<a name="l00115"></a><a class="code" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">00115</a> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">kernelInitializeSyscalls</a>()
-<a name="l00116"></a>00116 {
-<a name="l00117"></a>00117         <a class="code" href="interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3">register_interrupt_handler</a> (127, &amp;<a class="code" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">syscallHandler</a>); <span class="comment">//Syscall = Interrupt 127</span>
-<a name="l00118"></a>00118 
-<a name="l00119"></a>00119         <span class="keywordflow">return</span>;
-<a name="l00120"></a>00120 }
+<a name="l00107"></a>00107 <span class="stringliteral">                   pop %%ebx; \</span>
+<a name="l00108"></a>00108 <span class="stringliteral">                   pop %%ebx; \</span>
+<a name="l00109"></a>00109 <span class="stringliteral">                &quot;</span> : <span class="stringliteral">&quot;=a&quot;</span> (ret) : <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a1742971c07d754041c6d76f603b8afd1">edi</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a2309882f43fe88b5ca3f0f0b1e25c5b7">esi</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#ad015a430dab988eeb643aeb2b90e8151">edx</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a15c636a6f616c73e9f3e8db24ea82fea">ecx</a>), <span class="stringliteral">&quot;r&quot;</span> (regs.<a class="code" href="structregisters.html#a70c7eb5337e0e9ef89436206612a1c7f">ebx</a>), <span class="stringliteral">&quot;r&quot;</span> (location));
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111    <span class="comment">//Ret the return value of registers_t to ret. Its pushed to eax before the interrupt returns (iret instruction) allowing the process that was executing before the syscall to handle it</span>
+<a name="l00112"></a>00112    regs.<a class="code" href="structregisters.html#ab09cb2d55adca78788bb4d80624c9933">eax</a> = ret;
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114    <span class="keywordflow">return</span> regs;
+<a name="l00115"></a>00115 }
+<a name="l00116"></a>00116 
+<a name="l00117"></a><a class="code" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">00117</a> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">kernelInitializeSyscalls</a>()
+<a name="l00118"></a>00118 {
+<a name="l00119"></a>00119         <a class="code" href="interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3">register_interrupt_handler</a> (127, &amp;<a class="code" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">syscallHandler</a>); <span class="comment">//Syscall = Interrupt 127</span>
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121         <span class="keywordflow">return</span>;
+<a name="l00122"></a>00122 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:41 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:35 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

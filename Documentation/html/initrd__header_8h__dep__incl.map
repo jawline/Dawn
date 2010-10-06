@@ -1,5 +1,5 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
 <area shape="rect" id="node5" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="256,83,432,112"/>
-<area shape="rect" id="node7" href="$_tools_2_init_r_d_2_compiler_2main_8c.html" title="Tools/InitRD/Compiler/main.c" alt="" coords="456,83,659,112"/>
+<area shape="rect" id="node7" href="$_tools_2_init_r_d_2main_8c.html" title="Tools/InitRD/main.c" alt="" coords="456,83,597,112"/>
 </map>

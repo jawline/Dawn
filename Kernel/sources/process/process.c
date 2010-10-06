@@ -35,7 +35,7 @@ void freeProcess(process_t* process)
 	//No interrupts ploz
 	disable_interrupts();
 
-	printf("Attempting to free a process\n");
+	printf("Process %i exited with return value %i\n", process->m_ID, process->m_returnValue);
 
 	if (process == kernel_proc) {
 		return; //Don't want to get rid of PID 0
@@ -82,9 +82,6 @@ void freeProcess(process_t* process)
 
 		free(process);
 	}
-
-
-	printf("Free frames at end %x\n", calculate_free_frames());
 
 }
 

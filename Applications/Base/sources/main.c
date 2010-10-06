@@ -1,4 +1,4 @@
-int main(int argc, void* argv)
+int _start(int argc, void* argv)
 {
-	return 1;
+	exit(-1);
 }

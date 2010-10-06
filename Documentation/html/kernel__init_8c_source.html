@@ -188,7 +188,7 @@
 <a name="l00171"></a>00171 
 <a name="l00172"></a>00172 <span class="keyword">extern</span> <a class="code" href="structheap__t.html">heap_t</a> <a class="code" href="kernel__init_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a>;
 <a name="l00173"></a>00173 
-<a name="l00178"></a><a class="code" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b">00178</a> <span class="keywordtype">void</span> <a class="code" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial -one time- kernel initialization routines - once this is called the Kernel assume...">initializeKernel</a>(<span class="keyword">struct</span> <a class="code" href="structmultiboot.html">multiboot</a> * mboot_ptr, <span class="keywordtype">int</span> visual_output, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="exit_8c.html#affd9ed2c146dfe322676a27313e279b6">initial_esp</a>) <span class="comment">//visual_output signals whether or not to call printf</span>
+<a name="l00178"></a><a class="code" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b">00178</a> <span class="keywordtype">void</span> <a class="code" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial -one time- kernel initialization routines - once this is called the Kernel assume...">initializeKernel</a>(<span class="keyword">struct</span> <a class="code" href="structmultiboot.html">multiboot</a> * mboot_ptr, <span class="keywordtype">int</span> visual_output, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> initial_esp) <span class="comment">//visual_output signals whether or not to call printf</span>
 <a name="l00179"></a>00179 {
 <a name="l00180"></a>00180         <span class="comment">//Load the archaic GDT </span>
 <a name="l00181"></a>00181         <a class="code" href="kernel__init_8c.html#a925c14c16c60f11146ba946b4dab12e9" title="GDT allows for segmented memory model on x86 processors, outdated. Using paging instead but the syste...">initializeGdt</a>(visual_output);
@@ -261,7 +261,7 @@
 <a name="l00248"></a>00248 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:41 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:35 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -62,7 +62,7 @@
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033 <span class="keyword">extern</span> <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="phys__mm_8c.html#acca9091afa3d50d887251ff3a57dad34">used_mem_end</a>; <span class="comment">//End of kernel used memory at initialization of paging</span>
 <a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
+<a name="l00035"></a>00035 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
 <a name="l00036"></a>00036 
 <a name="l00037"></a><a class="code" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650">00037</a> <span class="keywordtype">void</span> <a class="code" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650">page_fault</a> (<a class="code" href="structregisters.html">idt_call_registers_t</a> regs)
 <a name="l00038"></a>00038 {
@@ -288,7 +288,7 @@
 <a name="l00263"></a>00263         }
 <a name="l00264"></a>00264 }
 <a name="l00265"></a>00265 
-<a name="l00266"></a><a class="code" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879">00266</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879">copyPage</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> pt, <a class="code" href="structprocess__structure.html">process_t</a>* process)
+<a name="l00266"></a><a class="code" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879">00266</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879">copyPage</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> pt, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process)
 <a name="l00267"></a>00267 {
 <a name="l00268"></a>00268         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> new_page_addr = <a class="code" href="phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c">allocateFrameForProcess</a>(process);
 <a name="l00269"></a>00269 
@@ -306,7 +306,7 @@
 <a name="l00281"></a>00281         <span class="keywordflow">return</span> new_page_addr;
 <a name="l00282"></a>00282 }
 <a name="l00283"></a>00283 
-<a name="l00284"></a><a class="code" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372">00284</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372">copyPageTable</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> pt, <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> copy, <a class="code" href="structprocess__structure.html">process_t</a>* process)
+<a name="l00284"></a><a class="code" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372">00284</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372">copyPageTable</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> pt, <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> copy, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process)
 <a name="l00285"></a>00285 {
 <a name="l00286"></a>00286         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> new_page_table = <a class="code" href="phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c">allocateFrameForProcess</a>(process);
 <a name="l00287"></a>00287 
@@ -347,7 +347,7 @@
 <a name="l00322"></a>00322         <span class="keywordflow">return</span> new_page_table;
 <a name="l00323"></a>00323 }
 <a name="l00324"></a>00324 
-<a name="l00325"></a><a class="code" href="virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9">00325</a> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9">copyPageDir</a>(<a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* pagedir, <a class="code" href="structprocess__structure.html">process_t</a>* process) 
+<a name="l00325"></a><a class="code" href="virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9">00325</a> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9">copyPageDir</a>(<a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* pagedir, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process) 
 <a name="l00326"></a>00326 {
 <a name="l00327"></a>00327         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>(); <span class="comment">//Disable interrupts</span>
 <a name="l00328"></a>00328 
@@ -471,7 +471,7 @@
 <a name="l00446"></a>00446 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:41 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:35 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

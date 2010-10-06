@@ -59,6 +59,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a74a39431e16777a0322dbdfee1e3590d">postboxSetFlags</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> bit)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This allows the process to set the flags of what it wants to recieve in the kernel as postbox messages.  <a href="#a74a39431e16777a0322dbdfee1e3590d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4">syscallKillCurrentProcess</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59">syscallRequestExit</a> (int returnValue)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a0561f60d0b6000eae55ea70554934c0a">syscallProcessValid</a> (unsigned int iter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#aeeca4adac17a030ae9d3c06a6d0f13a1">syscallGetPid</a> (unsigned int iter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a8d549de96ebe133f7fbc859c3c774b0c">syscallGetProcessingTime</a> (unsigned int iter)</td></tr>
@@ -78,7 +79,6 @@ Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structheap__t.html">heap_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#adeb486fdcdd846d007df681c91356579">num_syscalls</a> = 21</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a0e03a277bc469b763ccae6a218306ce4"></a><!-- doxytag: member="syscall.c::calculate_free_frames" ref="a0e03a277bc469b763ccae6a218306ce4" args="()" -->
@@ -134,7 +134,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00032">32</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
+<p>Definition at line <a class="el" href="syscall_8c_source.html#l00033">33</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
 
 </div>
 </div>
@@ -163,7 +163,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00024">24</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
+<p>Definition at line <a class="el" href="syscall_8c_source.html#l00025">25</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00115">115</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
+<p>Definition at line <a class="el" href="syscall_8c_source.html#l00117">117</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
 
 </div>
 </div>
@@ -443,7 +443,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00075">75</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
+<p>Definition at line <a class="el" href="syscall_8c_source.html#l00077">77</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
 
 </div>
 </div>
@@ -503,6 +503,26 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="process__syscalls_8c_source.html#l00007">7</a> of file <a class="el" href="process__syscalls_8c_source.html">process_syscalls.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4e52c83de7181ae4171d9e68bdacff59"></a><!-- doxytag: member="syscall.c::syscallRequestExit" ref="a4e52c83de7181ae4171d9e68bdacff59" args="(int returnValue)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void syscallRequestExit </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>returnValue</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="process__syscalls_8c_source.html#l00082">82</a> of file <a class="el" href="process__syscalls_8c_source.html">process_syscalls.c</a>.</p>
 
 </div>
 </div>
@@ -581,23 +601,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adeb486fdcdd846d007df681c91356579"></a><!-- doxytag: member="syscall.c::num_syscalls" ref="adeb486fdcdd846d007df681c91356579" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int <a class="el" href="syscall_8c.html#adeb486fdcdd846d007df681c91356579">num_syscalls</a> = 21</td>
-        </tr>
-      </table>
 </div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00046">46</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
-
-</div>
-</div>
-</div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:36 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

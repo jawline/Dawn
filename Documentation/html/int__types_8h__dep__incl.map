@@ -24,8 +24,8 @@
 <area shape="rect" id="node117" href="$common_8h.html" title="Shared/headers/common.h" alt="" coords="4845,83,5043,112"/>
 <area shape="rect" id="node125" href="$heap_8h.html" title="Shared/headers/heap/heap.h" alt="" coords="2347,160,2555,189"/>
 <area shape="rect" id="node130" href="$_shared_2headers_2types_2memory_8h.html" title="Shared/headers/types/memory.h" alt="" coords="1345,83,1575,112"/>
-<area shape="rect" id="node135" href="$_tools_2_init_r_d_2_compiler_2main_8c.html" title="Tools/InitRD/Compiler/main.c" alt="" coords="5355,83,5557,112"/>
-<area shape="rect" id="node137" href="$_tools_2_init_r_d_2_compiler_2md5_8h.html" title="Tools/InitRD/Compiler/md5.h" alt="" coords="5581,83,5781,112"/>
+<area shape="rect" id="node135" href="$_tools_2_init_r_d_2main_8c.html" title="Tools/InitRD/main.c" alt="" coords="5355,83,5496,112"/>
+<area shape="rect" id="node137" href="$_tools_2_init_r_d_2md5_8h.html" title="Tools/InitRD/md5.h" alt="" coords="5520,83,5659,112"/>
 <area shape="rect" id="node7" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="2716,237,2943,267"/>
 <area shape="rect" id="node9" href="$devices_8c.html" title="Kernel/sources/devices/devices.c" alt="" coords="251,160,480,189"/>
 <area shape="rect" id="node11" href="$pci_8c.html" title="Kernel/sources/devices/pci/pci.c" alt="" coords="5,160,227,189"/>

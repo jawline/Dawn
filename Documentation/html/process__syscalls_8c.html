@@ -52,6 +52,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__syscalls_8c.html#aba2fe49ca5cf5a905049bb01965f98a1">syscallGetProcessingTime</a> (unsigned int pid)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__syscalls_8c.html#a60552ed52730f54642024304556642b1">syscallGetName</a> (char *StrLocation, unsigned int pid)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__syscalls_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4">syscallKillCurrentProcess</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__syscalls_8c.html#a4e52c83de7181ae4171d9e68bdacff59">syscallRequestExit</a> (int returnValue)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a2d69bf5462cbcb1bddac7b8c4f7b6973"></a><!-- doxytag: member="process_syscalls.c::get_current_process" ref="a2d69bf5462cbcb1bddac7b8c4f7b6973" args="()" -->
@@ -201,8 +202,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4e52c83de7181ae4171d9e68bdacff59"></a><!-- doxytag: member="process_syscalls.c::syscallRequestExit" ref="a4e52c83de7181ae4171d9e68bdacff59" args="(int returnValue)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void syscallRequestExit </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>returnValue</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="process__syscalls_8c_source.html#l00082">82</a> of file <a class="el" href="process__syscalls_8c_source.html">process_syscalls.c</a>.</p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:36 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_a_p_i_2sources_2printf_8c.html#aff4bc17c602603d120756f52e18ebb96" title="clearscreen" alt="" coords="144,5,240,35"/>
+<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="149,59,235,88"/>
+<area shape="rect" id="node7" href="$scancodes_8h.html#aa0ca8aa0c56172690787a8796cf36a1e" title="This function converts a scancode from the keyboard into a ASCI character." alt="" coords="111,112,273,141"/>
+<area shape="rect" id="node9" href="$_a_p_i_2headers_2clock_2clock_8h.html#a66ca6603e03e5f37298c7767d887641d" title="This function returns the number of ticks that occur every second." alt="" coords="116,165,268,195"/>
+<area shape="rect" id="node11" href="$postbox__api_8h.html#a40ee40b401dc3b8d335946722ff1881f" title="Read the next message on the postbox." alt="" coords="129,219,255,248"/>
+<area shape="rect" id="node13" href="$postbox__api_8h.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="128,272,256,301"/>
+<area shape="rect" id="node15" href="$postbox__api_8h.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message..." alt="" coords="128,325,256,355"/>
+<area shape="rect" id="node17" href="$sleep_8h.html#ab847765444359d33ddafb6c493cc3880" title="This function allows a program to pass up any remaining processing time it may have been allocated by..." alt="" coords="139,379,245,408"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$structprocess__structure.html" title="process_structure" alt="" coords="71,293,207,323"/>
+<area shape="rect" id="node2" href="$structprocess__structure.html" title="The structure of a process within Dawn." alt="" coords="71,293,207,323"/>
 <area shape="rect" id="node4" href="$structabstract__terminal.html" title="abstract_terminal" alt="" coords="5,197,139,227"/>
 <area shape="rect" id="node6" href="$structprocess__postbox.html" title="process_postbox" alt="" coords="163,197,293,227"/>
 <area shape="rect" id="node8" href="$structprocess__postbox__message.html" title="process_postbox_message" alt="" coords="131,101,325,131"/>

@@ -15,6 +15,7 @@ extern void postboxReadTop(process_message* Message);
 extern void postboxPopTop();
 extern void postboxSetFlags(uint32 bit);
 extern void syscallKillCurrentProcess();
+extern void syscallRequestExit(int returnValue);
 
 extern unsigned char syscallProcessValid(unsigned int iter);
 extern unsigned int syscallGetPid(unsigned int iter);
@@ -43,9 +44,9 @@ extern void syscallSetBgc(unsigned char bgc);
 
 extern void scheduler_block_me();
 
-unsigned int num_syscalls = 21;
+static const unsigned int num_syscalls = 21;
 
-static void *syscalls[21] = {
+static void* syscalls[21] = {
    &syscallPrint_t, //Syscall 0 - printf prints to active terminal
    &postboxReadTop, //Syscall 1 - Copys the top of the postbox to location given
    &postboxPopTop, //Syscall 2 -Pops the top of the postbox
@@ -65,7 +66,8 @@ static void *syscalls[21] = {
    &syscallProcessValid, //Syscall 16 - Does the iter given link to a valid process?
    &syscallGetPid, //Syscall 17 - Get the PID of the process linked to the iterator
    &syscallGetProcessingTime, //Syscall 18 - Get the processing time of the process
-   &syscallGetName //Syscall 19 - Get the name of the process linked to the iterator
+   &syscallGetName, //Syscall 19 - Get the name of the process linked to the iterator
+   &syscallRequestExit, //Syscall 20 - Request exit of the current process (Supplied argument is used as the return value)
 };
 
 //Function: syscallHandler

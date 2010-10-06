@@ -79,7 +79,7 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialize the physical and virtual memory managers uses the last loaded module (The one after the RAM disk).  <a href="#afc8d3a4beb30d0fbbb6bfd7a416cd26a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1">initializeRamdisk</a> (MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, <a class="el" href="structfilesystem__node.html">fs_node_t</a> *root)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap.  <a href="#adc60a9d707fe7f96fc63f64b39528ef1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b">initializeKernel</a> (struct <a class="el" href="structmultiboot.html">multiboot</a> *mboot_ptr, int visual_output, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="init_8c.html#affd9ed2c146dfe322676a27313e279b6">initial_esp</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b">initializeKernel</a> (struct <a class="el" href="structmultiboot.html">multiboot</a> *mboot_ptr, int visual_output, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> initial_esp)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc.  <a href="#a2f7d149ce9d9c12c2d567d231b81986b"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -338,7 +338,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 00:24:42 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:36 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

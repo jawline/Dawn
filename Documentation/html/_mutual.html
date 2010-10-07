@@ -29,7 +29,7 @@ Ensuring mutual exclusion within the kernel</h2>
 <p>The first simple idea that could be used to try and ensure mutual exclusion would be to set a boolean variable to one when the variables cannot be accessed, and to zero when they can. This approach however doesn’t work using the tradition value = 1; value = 0; methods because two processors may try to set the value at the same time, instead the programmer has to ensure that one processor cannot access the variable while the other can. Luckily GCC provides a set of functions that if used correctly provide this functionality.</p>
 <p>Locks will be used several sections of the Kernel. In the future a few different methods of locking may be used to ensure the best performance whilst maintaining data integrity and the kernels stability. </p>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:36 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 08:20:15 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

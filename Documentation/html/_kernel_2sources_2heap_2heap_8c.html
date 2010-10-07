@@ -54,7 +54,9 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81">initializeHeap</a> (<a class="el" href="structheap__t.html">heap_t</a> *heap, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes a new heap at address specified and maps memory from free frames for it.  <a href="#ade657aeee4e0f8c2b0b4593bcff4af81"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f">heapAllocateMemory</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates x bytes of memory from a heap, expanding it if necessary.  <a href="#a24a780b4e38547b00f955a39a83a466f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f">heapFreeMemory</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Free's the memory at location address on the heap specified. Shrinking if necessary.  <a href="#a26b7c9cdab062506e23b0adad898871f"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ab80d68399dbb045d1b1b821c560ec7df"></a><!-- doxytag: member="heap.c::alloc_mem" ref="ab80d68399dbb045d1b1b821c560ec7df" args="(uint32 size, heap_t *heap)" -->
@@ -136,7 +138,18 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00061">61</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Allocates x bytes of memory from a heap, expanding it if necessary. </p>
+
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00065">65</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph" id="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph">
+<area shape="rect" id="node3" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="211,5,323,35"/><area shape="rect" id="node5" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="241,59,292,88"/><area shape="rect" id="node7" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="229,112,304,141"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -165,7 +178,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00132">132</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Free's the memory at location address on the heap specified. Shrinking if necessary. </p>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000002">Bug:</a></b></dt><dd>Currently does not shrink </dd></dl>
+
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00141">141</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
 
 </div>
 </div>
@@ -210,7 +226,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 6 2010 19:33:35 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 08:20:15 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

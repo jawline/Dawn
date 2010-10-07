@@ -58,6 +58,10 @@ void initializeHeap(heap_t * heap, uint32 address)
 	DEBUG_PRINT("Debug Message: Ptr->next set\n");
 }
 
+/**
+ * @brief Allocates x bytes of memory from a heap, expanding it if necessary
+ * @callgraph
+ */
 uint32 heapAllocateMemory(uint32 size, heap_t* heap) 
 {
 	heap_entry_t* ptr = (heap_entry_t*) heap->heap_location;
@@ -129,6 +133,11 @@ uint32 heapAllocateMemory(uint32 size, heap_t* heap)
 	return 0;
 }
 
+/**
+ * @brief Free's the memory at location address on the heap specified. Shrinking if necessary
+ * @callgraph
+ * @bug Currently does not shrink
+ */
 void heapFreeMemory(uint32 address, heap_t * heap)
 {
 	heap_entry_t * ptr = (heap_entry_t *) (address - sizeof(heap_entry_t));
@@ -189,6 +198,6 @@ void heapFreeMemory(uint32 address, heap_t * heap)
 	//Check if this is the last entry
 	if (ptr->next == 0) 
 	{
-		//TODO: Shrinking the heap!
+		
 	}
 }

@@ -5,15 +5,6 @@
 heap_t kernel_heap;
 
 /**
- * @brief Initializes the kernel heap
- * @callgraph
- */
-void initializeKernelHeap() 
-{
-	initializeHeap(&kernel_heap, KERNEL_HEAP_ADDR);
-}
-
-/**
  * @brief Allocates x amount of memory from the kernel heap
  */
 uint32 kmalloc(uint32 mem) 
@@ -28,3 +19,13 @@ void kfree(uint32 addr)
 {
 	heapFreeMemory(addr, &kernel_heap);
 }
+
+/**
+ * @brief Initializes the kernel heap
+ * @callgraph
+ */
+void initializeKernelHeap() 
+{
+	initializeHeap(&kernel_heap, KERNEL_HEAP_ADDR);
+}
+

@@ -8,18 +8,21 @@
 
 echo "Image Update script"
 
-image_name=
+image_name="Null"
 
 #If the image is given
 if [ $# -eq 0 ];
 then
+
 	#Get the hard drive image
 	echo "Image name: "
 	read image_name
+
 else
 
-	image_name = $1;
+	image_name=$1;
 	echo "Using supplied image name"
+	echo $image_name
 
 fi
 

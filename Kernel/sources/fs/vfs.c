@@ -179,13 +179,33 @@ void unbindnode_fs(fs_node_t* node, fs_node_t* target)
 }
 
 /**
- @brief Find a node given a string
+ @brief Recursive find node given string
  @bug Not finished!
  */
-fs_node_t* evaluate_path(const char* path, fs_node_t* start_directory)
+fs_node_t* evaluatePath(const char* path, fs_node_t* current_node)
 {
-	if (!path) return 0;
-	if (!start_directory) return 0;
+	if (path == 0) return 0;
 
-	unsigned int path_length = strlen(path);
+	char* Buffer = strchr(path, '/');
+
+	if (Buffer == 0)
+	{
+		return finddir_fs(current_node, path);
+	}
+	else
+	{
+		char* split_left = malloc(Buffer - path + 1);
+		memcpy(split_left, path, Buffer - path);
+		split_left[Buffer - path] = '\0';
+
+		fs_node_t* temp = finddir_fs(current_node, split_left);
+		free(split_left);
+
+		if (temp != 0)
+		{
+			return evaluatePath(Buffer + 1, temp);
+		}
+
+		return 0;
+	}
 }

@@ -195,11 +195,11 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	//Interrupts description table
 	initializeIdt(visual_output);
 
-	//Initialize the kernel heap
-        initializeKernelHeap();
-
 	//Self Explanatory
 	initializeScreen();
+
+	//Initialize the kernel heap
+        initializeKernelHeap();
 
 	//System timers
 	initializeSystemClock();
@@ -216,8 +216,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	initializeKernelTerminal();
 	getTerminalInContext()->f_clear(getTerminalInContext());
-
-	DEBUG_PRINT("KTerm Started\n");
 
 	//Map the kernel stack
 	int Frames = KERNEL_STACK_SIZE / PAGE_SIZE;
@@ -243,6 +241,4 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 
 	//Initialize the system scheduler
 	initializeScheduler(initializeKernelProcess());
-
-	print_directory(init_vfs(), 1);
 }

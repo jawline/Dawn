@@ -1,12 +1,13 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$heap_8h.html" title="heap/heap.h" alt="" coords="5,160,107,189"/>
-<area shape="rect" id="node7" href="$virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="141,83,259,112"/>
-<area shape="rect" id="node5" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="171,469,301,499"/>
-<area shape="rect" id="node9" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="181,237,291,267"/>
-<area shape="rect" id="node11" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="173,392,299,421"/>
-<area shape="rect" id="node15" href="$process_8h.html" title="process/process.h" alt="" coords="315,160,453,189"/>
-<area shape="rect" id="node18" href="$common_8h.html" title="common.h" alt="" coords="445,315,536,344"/>
-<area shape="rect" id="node21" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="315,237,453,267"/>
-<area shape="rect" id="node26" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="528,237,672,267"/>
-<area shape="rect" id="node23" href="$message_8h.html" title="process/message.h" alt="" coords="275,315,421,344"/>
+<area shape="rect" id="node3" href="$heap_8h.html" title="heap/heap.h" alt="" coords="101,83,203,112"/>
+<area shape="rect" id="node11" href="$virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="231,83,348,112"/>
+<area shape="rect" id="node5" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="232,392,357,421"/>
+<area shape="rect" id="node9" href="$size__t_8h.html" title="types/size_t.h" alt="" coords="5,160,115,189"/>
+<area shape="rect" id="node7" href="$int__types_8h.html" title="int_types.h" alt="" coords="352,469,443,499"/>
+<area shape="rect" id="node13" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="240,237,349,267"/>
+<area shape="rect" id="node17" href="$process_8h.html" title="process/process.h" alt="" coords="373,160,512,189"/>
+<area shape="rect" id="node20" href="$common_8h.html" title="common.h" alt="" coords="563,315,653,344"/>
+<area shape="rect" id="node23" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="373,237,512,267"/>
+<area shape="rect" id="node28" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="536,237,680,267"/>
+<area shape="rect" id="node25" href="$message_8h.html" title="process/message.h" alt="" coords="351,315,497,344"/>
 </map>

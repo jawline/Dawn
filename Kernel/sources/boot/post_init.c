@@ -71,7 +71,7 @@ void postInitialization()
 
     } else
     {
-	
+
 	    extern terminal_t* g_kernelTerminal;
 
 	    //Give this process its own terminal
@@ -88,10 +88,7 @@ void postInitialization()
 	    rename_current_process("Line");
 
 	    //Find Line.x
-	    fs_node_t* system = finddir_fs(init_vfs(), "system");
-	    fs_node_t* root = finddir_fs(system, "root");
-
-	    fs_node_t* line = finddir_fs(root, "Line");
+	    fs_node_t* line = evaluatePath("./system/root/Line", init_vfs());
 
 	    //Execute Line.x
 	    if (line != 0)

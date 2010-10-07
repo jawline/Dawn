@@ -25,16 +25,21 @@
 <div class="contents">
 <p><a class="anchor" id="_bug000001"></a> </p>
 <dl>
-<dt>Global <a class="el" href="vfs_8c.html#a380cf5d0432538ea59626f48acdc4bb8">evaluate_path</a> (const char *path, fs_node_t *start_directory) </dt>
+<dt>Global <a class="el" href="vfs_8c.html#a084ad57144da37479a99a82afb1d5086">evaluatePath</a> (const char *path, fs_node_t *current_node) </dt>
 <dd>Not finished! </dd>
+</dl>
+<p><a class="anchor" id="_bug000003"></a> </p>
+<dl>
+<dt>Global <a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f">heapFreeMemory</a> (uint32 address, <a class="el" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> *heap) </dt>
+<dd>Currently does not shrink </dd>
 </dl>
 <p><a class="anchor" id="_bug000002"></a> </p>
 <dl>
-<dt>Global <a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f">heapFreeMemory</a> (uint32 address, <a class="el" href="structheap__t.html">heap_t</a> *heap) </dt>
-<dd>Currently does not shrink </dd>
+<dt>Global <a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd">shrinkHeap</a> (<a class="el" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> *heap, heap_entry_t *last_entry) </dt>
+<dd>Pretty sure this doesn't work write. Go ahead and rewrite the whole heap, its shit. </dd>
 </dl>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 08:20:15 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:58 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

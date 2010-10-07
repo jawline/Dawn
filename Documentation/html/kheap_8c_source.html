@@ -32,25 +32,26 @@
 <a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="virt__mm_8h.html">mm/virt_mm.h</a>&gt;</span>
 <a name="l00003"></a><a class="code" href="kheap_8c.html#a35ac8954985f58dfff653f7abf613855">00003</a> <span class="preprocessor">#define KERNEL_HEAP_ADDR KERNEL_START + 0x10000000</span>
 <a name="l00004"></a>00004 <span class="preprocessor"></span>
-<a name="l00005"></a><a class="code" href="syscall_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">00005</a> <a class="code" href="structheap__t.html">heap_t</a> <a class="code" href="kernel__init_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a>;
+<a name="l00005"></a><a class="code" href="syscall_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">00005</a> <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> <a class="code" href="kernel__init_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a>;
 <a name="l00006"></a>00006 
-<a name="l00011"></a><a class="code" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1">00011</a> <span class="keywordtype">void</span> <a class="code" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap.">initializeKernelHeap</a>() 
-<a name="l00012"></a>00012 {
-<a name="l00013"></a>00013         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it.">initializeHeap</a>(&amp;kernel_heap, <a class="code" href="kheap_8c.html#a35ac8954985f58dfff653f7abf613855">KERNEL_HEAP_ADDR</a>);
-<a name="l00014"></a>00014 }
-<a name="l00015"></a>00015 
-<a name="l00019"></a><a class="code" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994">00019</a> <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap.">kmalloc</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> mem) 
-<a name="l00020"></a>00020 {
-<a name="l00021"></a>00021         <span class="keywordflow">return</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(mem, &amp;kernel_heap);
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 
-<a name="l00027"></a><a class="code" href="kheap_8c.html#ae4015277190032503df791f56e73d7e9">00027</a> <span class="keywordtype">void</span> <a class="code" href="kheap_8c.html#ae4015277190032503df791f56e73d7e9" title="Free memory at location x on the kernel heap making it available again.">kfree</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="multiboot_8h.html#aa31b9b932d389c8fd17de866d58dac50">addr</a>)
+<a name="l00010"></a><a class="code" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994">00010</a> <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap.">kmalloc</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> mem) 
+<a name="l00011"></a>00011 {
+<a name="l00012"></a>00012         <span class="keywordflow">return</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(mem, &amp;kernel_heap);
+<a name="l00013"></a>00013 }
+<a name="l00014"></a>00014 
+<a name="l00018"></a><a class="code" href="kheap_8c.html#ae4015277190032503df791f56e73d7e9">00018</a> <span class="keywordtype">void</span> <a class="code" href="kheap_8c.html#ae4015277190032503df791f56e73d7e9" title="Free memory at location x on the kernel heap making it available again.">kfree</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="multiboot_8h.html#aa31b9b932d389c8fd17de866d58dac50">addr</a>)
+<a name="l00019"></a>00019 {
+<a name="l00020"></a>00020         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f" title="Free&amp;#39;s the memory at location address on the heap specified. Shrinking if necessary.">heapFreeMemory</a>(addr, &amp;kernel_heap);
+<a name="l00021"></a>00021 }
+<a name="l00022"></a>00022 
+<a name="l00027"></a><a class="code" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1">00027</a> <span class="keywordtype">void</span> <a class="code" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap.">initializeKernelHeap</a>() 
 <a name="l00028"></a>00028 {
-<a name="l00029"></a>00029         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f" title="Free&amp;#39;s the memory at location address on the heap specified. Shrinking if necessary.">heapFreeMemory</a>(addr, &amp;kernel_heap);
+<a name="l00029"></a>00029         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it.">initializeHeap</a>(&amp;kernel_heap, <a class="code" href="kheap_8c.html#a35ac8954985f58dfff653f7abf613855">KERNEL_HEAP_ADDR</a>);
 <a name="l00030"></a>00030 }
+<a name="l00031"></a>00031 
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 08:20:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -19,7 +19,6 @@
 <area shape="rect" id="node87" href="$_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="223,1335,377,1364"/>
 <area shape="rect" id="node89" href="$syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89" title="kernelInitializeSyscalls" alt="" coords="219,1388,381,1417"/>
 <area shape="rect" id="node92" href="$stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="253,1441,347,1471"/>
-<area shape="rect" id="node94" href="$dir_8h.html#a254dbf0fb5aafe59ab2b31b074a8064b" title="print_directory" alt="" coords="243,1495,357,1524"/>
 <area shape="rect" id="node15" href="$gdt_8h.html#ae576bf193485d90b87c2e2a53f26d3f6" title="initialize_gdt" alt="" coords="544,908,645,937"/>
 <area shape="rect" id="node17" href="$tss_8c.html#a342204a01e4d27c91ec92f836afe3609" title="initializeTss" alt="" coords="549,961,640,991"/>
 <area shape="rect" id="node27" href="$_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="541,379,648,408"/>

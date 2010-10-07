@@ -186,7 +186,7 @@
 <a name="l00169"></a>00169         }
 <a name="l00170"></a>00170 }
 <a name="l00171"></a>00171 
-<a name="l00172"></a>00172 <span class="keyword">extern</span> <a class="code" href="structheap__t.html">heap_t</a> <a class="code" href="kernel__init_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a>;
+<a name="l00172"></a>00172 <span class="keyword">extern</span> <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> <a class="code" href="kernel__init_8c.html#a41df3a8d6d716e7b2689bc21c233fcfc">kernel_heap</a>;
 <a name="l00173"></a>00173 
 <a name="l00178"></a><a class="code" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b">00178</a> <span class="keywordtype">void</span> <a class="code" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial -one time- kernel initialization routines - once this is called the Kernel assume...">initializeKernel</a>(<span class="keyword">struct</span> <a class="code" href="structmultiboot.html">multiboot</a> * mboot_ptr, <span class="keywordtype">int</span> visual_output, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> initial_esp) <span class="comment">//visual_output signals whether or not to call printf</span>
 <a name="l00179"></a>00179 {
@@ -208,11 +208,11 @@
 <a name="l00195"></a>00195         <span class="comment">//Interrupts description table</span>
 <a name="l00196"></a>00196         <a class="code" href="kernel__init_8c.html#a00219ebe071bfd71918cd229bbed0e08">initializeIdt</a>(visual_output);
 <a name="l00197"></a>00197 
-<a name="l00198"></a>00198         <span class="comment">//Initialize the kernel heap</span>
-<a name="l00199"></a>00199         <a class="code" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap.">initializeKernelHeap</a>();
+<a name="l00198"></a>00198         <span class="comment">//Self Explanatory</span>
+<a name="l00199"></a>00199         <a class="code" href="screen_8c.html#ab546fbfc91fd02b1b5713a5ba0c01e4d" title="Initialize the screen if one exists.">initializeScreen</a>();
 <a name="l00200"></a>00200 
-<a name="l00201"></a>00201         <span class="comment">//Self Explanatory</span>
-<a name="l00202"></a>00202         <a class="code" href="screen_8c.html#ab546fbfc91fd02b1b5713a5ba0c01e4d" title="Initialize the screen if one exists.">initializeScreen</a>();
+<a name="l00201"></a>00201         <span class="comment">//Initialize the kernel heap</span>
+<a name="l00202"></a>00202         <a class="code" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap.">initializeKernelHeap</a>();
 <a name="l00203"></a>00203 
 <a name="l00204"></a>00204         <span class="comment">//System timers</span>
 <a name="l00205"></a>00205         <a class="code" href="_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e">initializeSystemClock</a>();
@@ -230,38 +230,34 @@
 <a name="l00217"></a>00217         <a class="code" href="kterminal_8c.html#aa85bbcb7640007f2c337d10226414093">initializeKernelTerminal</a>();
 <a name="l00218"></a>00218         <a class="code" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">getTerminalInContext</a>()-&gt;<a class="code" href="structabstract__terminal.html#a35e80a830c9e517c151e90cf21a69cdf">f_clear</a>(<a class="code" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">getTerminalInContext</a>());
 <a name="l00219"></a>00219 
-<a name="l00220"></a>00220         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;KTerm Started\n&quot;</span>);
-<a name="l00221"></a>00221 
-<a name="l00222"></a>00222         <span class="comment">//Map the kernel stack</span>
-<a name="l00223"></a>00223         <span class="keywordtype">int</span> Frames = <a class="code" href="kstack_8h.html#a77383d4c5311d4c7fe49364766887650">KERNEL_STACK_SIZE</a> / <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>;
-<a name="l00224"></a>00224 
-<a name="l00225"></a>00225         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> iterator;
-<a name="l00226"></a>00226         <span class="keywordflow">for</span> (iterator = <a class="code" href="kstack_8h.html#a70162e7ded659255a8d604b2f09bc13f">KERNEL_STACK_START</a> - <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>; iterator &gt;= <a class="code" href="kstack_8h.html#a70162e7ded659255a8d604b2f09bc13f">KERNEL_STACK_START</a> - KERNEL_STACK_SIZE; iterator -= <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>)
-<a name="l00227"></a>00227         {
-<a name="l00228"></a>00228                 <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> page = <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>();
-<a name="l00229"></a>00229                 <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(iterator, page, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a> | <a class="code" href="virt__mm_8h.html#a559697780e34fd09ba6a2e909f0fe1df">PAGE_WRITE</a>);
-<a name="l00230"></a>00230         }
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232         <span class="comment">//Initialize the system call interface</span>
-<a name="l00233"></a>00233         <a class="code" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">kernelInitializeSyscalls</a>();
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235         <span class="comment">//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)</span>
-<a name="l00236"></a>00236         <a class="code" href="devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc">initializeDevices</a>();
-<a name="l00237"></a>00237 
-<a name="l00238"></a>00238         <span class="keywordflow">if</span> (mboot_ptr-&gt;<a class="code" href="structmultiboot.html#a5ef787141f7ca26152e574fd66f82f74">mods_count</a> == 1)
-<a name="l00239"></a>00239         { 
-<a name="l00240"></a>00240                 <span class="comment">//Load and hook the ramdisk to the root file system</span>
-<a name="l00241"></a>00241                 <a class="code" href="kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory...">initializeRamdisk</a>(*((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a>)(mboot_ptr-&gt;<a class="code" href="structmultiboot.html#ac32e0bacd3b279c6ab9bdfbf18007646">mods_addr</a>)), *((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a>)(mboot_ptr-&gt;<a class="code" href="structmultiboot.html#ac32e0bacd3b279c6ab9bdfbf18007646">mods_addr</a> + 4)), rootfs);
-<a name="l00242"></a>00242         }
-<a name="l00243"></a>00243 
-<a name="l00244"></a>00244         <span class="comment">//Initialize the system scheduler</span>
-<a name="l00245"></a>00245         <a class="code" href="process__scheduler_8c.html#ad102b771d475960e41eb9bdb143fd60c">initializeScheduler</a>(<a class="code" href="process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1">initializeKernelProcess</a>());
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247         <a class="code" href="dir_8h.html#a254dbf0fb5aafe59ab2b31b074a8064b">print_directory</a>(<a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>(), 1);
-<a name="l00248"></a>00248 }
+<a name="l00220"></a>00220         <span class="comment">//Map the kernel stack</span>
+<a name="l00221"></a>00221         <span class="keywordtype">int</span> Frames = <a class="code" href="kstack_8h.html#a77383d4c5311d4c7fe49364766887650">KERNEL_STACK_SIZE</a> / <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>;
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> iterator;
+<a name="l00224"></a>00224         <span class="keywordflow">for</span> (iterator = <a class="code" href="kstack_8h.html#a70162e7ded659255a8d604b2f09bc13f">KERNEL_STACK_START</a> - <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>; iterator &gt;= <a class="code" href="kstack_8h.html#a70162e7ded659255a8d604b2f09bc13f">KERNEL_STACK_START</a> - KERNEL_STACK_SIZE; iterator -= <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>)
+<a name="l00225"></a>00225         {
+<a name="l00226"></a>00226                 <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> page = <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>();
+<a name="l00227"></a>00227                 <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(iterator, page, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a> | <a class="code" href="virt__mm_8h.html#a559697780e34fd09ba6a2e909f0fe1df">PAGE_WRITE</a>);
+<a name="l00228"></a>00228         }
+<a name="l00229"></a>00229 
+<a name="l00230"></a>00230         <span class="comment">//Initialize the system call interface</span>
+<a name="l00231"></a>00231         <a class="code" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">kernelInitializeSyscalls</a>();
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233         <span class="comment">//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)</span>
+<a name="l00234"></a>00234         <a class="code" href="devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc">initializeDevices</a>();
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236         <span class="keywordflow">if</span> (mboot_ptr-&gt;<a class="code" href="structmultiboot.html#a5ef787141f7ca26152e574fd66f82f74">mods_count</a> == 1)
+<a name="l00237"></a>00237         { 
+<a name="l00238"></a>00238                 <span class="comment">//Load and hook the ramdisk to the root file system</span>
+<a name="l00239"></a>00239                 <a class="code" href="kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory...">initializeRamdisk</a>(*((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a>)(mboot_ptr-&gt;<a class="code" href="structmultiboot.html#ac32e0bacd3b279c6ab9bdfbf18007646">mods_addr</a>)), *((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a>)(mboot_ptr-&gt;<a class="code" href="structmultiboot.html#ac32e0bacd3b279c6ab9bdfbf18007646">mods_addr</a> + 4)), rootfs);
+<a name="l00240"></a>00240         }
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242         <span class="comment">//Initialize the system scheduler</span>
+<a name="l00243"></a>00243         <a class="code" href="process__scheduler_8c.html#ad102b771d475960e41eb9bdb143fd60c">initializeScheduler</a>(<a class="code" href="process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1">initializeKernelProcess</a>());
+<a name="l00244"></a>00244 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 08:20:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -25,6 +25,11 @@ void api_printf(const char* fmt, ...)
         syscall_kernel_print_string(buf); //Send the buffer to the kernel for printing
 }
 
+void cls()
+{
+	syscall_cls();
+}
+
 void clearscreen()
 {
 	syscall_cls();

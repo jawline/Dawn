@@ -11,3 +11,9 @@ make clean
 make
 cd ..
 cp ./Line/Build/* ../bin/
+
+cd GameOfLife
+make clean
+make
+cd ..
+cp ./GameOfLife/Build/* ../bin/

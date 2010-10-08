@@ -88,7 +88,7 @@ void postInitialization()
 	    rename_current_process("Line");
 
 	    //Find Line.x
-	    fs_node_t* line = evaluatePath("./system/root/Line", init_vfs());
+	    fs_node_t* line = evaluatePath("./system/root/GameOfLife", init_vfs());
 
 	    //Execute Line.x
 	    if (line != 0)

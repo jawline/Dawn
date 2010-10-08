@@ -124,6 +124,12 @@
 * @section Release9 Release 9 "Name change and documentation"
 * For this release I have decided to rebrand SimpleOS with the title of Dawn. The indavidual sections will still have there specific codenames (Kernel codename and OS version codenames) but the OS as a collective will be known from this point forward as Dawn. this will require some significant changes to the files within the OS, as I have to modify or remove any reference to "SimpleOS"
 *
+*
+*@section Release9Summary Release 9 Summary - 08 October 2010
+* I renamed the repository and removed any references to SimpleOS, replacing them with Dawn.
+* I started using Doxygen to generate documentation which could integrate documentation of the source code with my operating system theory and Dawn implementation specs.
+*
+*
 * @section Release10 Release 10 "Drivers"
 * This release aims to have a simple driver interface which allows the operating system to load and execute highly privileged pieces of code which can be used to provide support for functionality and hardware that the initial release did not contain.
 *

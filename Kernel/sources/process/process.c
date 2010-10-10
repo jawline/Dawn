@@ -21,6 +21,8 @@ process_t* initializeKernelProcess()
 	extern page_directory_t* kernel_pagedir;
 	ret->m_pageDir = kernel_pagedir;
 
+	ret->m_executionDirectory = init_vfs();
+
 	kernel_proc = ret;
 
 	init_used_list(kernel_proc);
@@ -28,6 +30,12 @@ process_t* initializeKernelProcess()
 	ret->m_pTerminal = g_kernelTerminal;
 
 	return ret;
+}
+
+void new_process_entry()
+{
+	printf("New Process\n");
+	for (;;) { }
 }
 
 void freeProcess(process_t* process)
@@ -114,6 +122,9 @@ int kfork()
 
 	//Located in virt_mm.c
 	extern page_directory_t* current_pagedir;
+
+	//Set the root execution directory
+	new_process->m_executionDirectory = parent->m_executionDirectory;
 
 	//Copy the page directory
 	page_directory_t* newprocesspd = copyPageDir(current_pagedir, new_process);

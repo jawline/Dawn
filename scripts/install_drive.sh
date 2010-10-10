@@ -18,6 +18,9 @@ sudo grub-install --root-directory=./tmount/ $root_addr --force
 echo "Copying Kernel"
 
 sudo cp bin/kernel_elf tmount/boot/Kernel
+
+echo "Copying ramdisk"
+
 sudo cp bin/ramdisk_build tmount/boot/ramdisk
 
 sudo cp etc/grub.cfg tmount/boot/grub/grub.cfg

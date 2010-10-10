@@ -85,7 +85,7 @@ void shrinkHeap(heap_t* heap, heap_entry_t* last_entry)
 		{
 			if (nearestPageBoundry > startOfEntry + 1)
 			{
-
+				printf("SHRNK\n");
 				//TODO: Investigate whether -1 is needed?
 				//Set the blocks size to newSize
 				size_t newSize = nearestPageBoundry - startOfEntry;

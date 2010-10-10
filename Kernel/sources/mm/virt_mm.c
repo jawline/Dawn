@@ -387,6 +387,67 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 	return return_location;
 }
 
+/**
+ * @brief create a new page directory with the kernel pages mapped to the pagedir supplied
+ */
+
+page_directory_t* newPageDir(page_directory_t* pagedir, process_t* process) 
+{
+	disable_interrupts(); //Disable interrupts
+
+	page_directory_t* return_location = (page_directory_t*) allocateFrameForProcess(process);
+
+	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
+	map(being_copied, pagedir, PAGE_PRESENT | PAGE_USER);
+
+	LPOINTER copying_to = kernelFirstFreeVirtualAddress();
+	map(copying_to, return_location, PAGE_PRESENT | PAGE_USER);
+	memset(copying_to, 0, PAGE_SIZE);
+
+	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
+	copying_to[0] = being_copied[0];
+
+
+
+	unsigned int i = 0;
+	for (i = 1; i < getTable(KERNEL_START); i++)
+	{
+		copying_to[i] = 0;
+	}
+
+	for (i = getTable(KERNEL_START); i < 1022; i++)
+	{
+		copying_to[i] = being_copied[i];
+	}
+
+
+	// Assign the second-last table and zero it.
+	MEM_LOC frame = allocateFrameForProcess(process);
+	copying_to[1022] = frame | PAGE_PRESENT | PAGE_USER;
+
+	LPOINTER pt = kernelFirstFreeVirtualAddress();
+	map(pt, frame, PAGE_PRESENT | PAGE_USER);
+	memset (pt, 0, PAGE_SIZE);
+
+	LPOINTER opt = kernelFirstFreeVirtualAddress();
+	map(opt, being_copied[1022], PAGE_PRESENT | PAGE_USER);
+
+	memcpy(pt, opt, PAGE_SIZE);
+
+	pt[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //The last entry of table 1022 is the page directory
+
+	unmap(pt);
+	unmap(opt);
+
+	copying_to[1023] = ((MEM_LOC)return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //Loop back address
+
+	unmap(being_copied);
+	unmap(copying_to);
+
+	return return_location;
+}
+
+
 void freePageTable(page_directory_t* pt)
 {
 	LPOINTER being_freed = kernelFirstFreeVirtualAddress();

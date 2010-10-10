@@ -125,6 +125,7 @@ int main(int argc, void* argv)
 
 
 		memcpy(NextBoard, Board, (BOARD_WIDTH * BOARD_HEIGHT) + 1);
+
 		int i = 0;
 		for (i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
 		{

@@ -53,7 +53,7 @@ char exec_cmd()
 	else if (strcmp("help", Pointer) == 0)
 	{
 		printf("Line - Command line tool for SimpleOS\n");
-		printf("Line - Executable compiled for Kernel version %i.%i.%i codename \"%s\"\n", KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION, KVERSION_CODENAME);
+		printf("Line - Executable compiled for Kernel version %i.%i codename \"%s\"\n", KVERSION_WHOLE, KVERSION_FRACTION, KVERSION_CODENAME);
 		printf("Compiled as part of OS version %i.%i.%i codename \"%s\"\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
 		printf("free - list memory information\n");
 		printf("reboot - request the kernel to reboot the system\n");
@@ -162,7 +162,7 @@ int main(int argc, void* argv)
 
 	cps = getClocksPerSecond();
 
-	printf("Line - Executable compiled for Kernel version %i.%i.%i codename \"%s\"\n", KVERSION_MAJOR, KVERSION_MINOR, KVERSION_REVISION, KVERSION_CODENAME);
+	printf("Line - Executable compiled for Kernel version %i.%i codename \"%s\"\n", KVERSION_WHOLE, KVERSION_FRACTION, KVERSION_CODENAME);
 	printf("Compiled as part of OS version %i.%i.%i codename \"%s\"\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
 
 	printf("Line.x:> ");

@@ -5,6 +5,7 @@
 #include <common.h>
 #include <process/postbox.h>
 #include <terminal/terminal.h>
+#include <fs/vfs.h>
 
 #define INPUT_BIT 0x1 //First bit = Do I want to hear about input?!?
 
@@ -46,6 +47,12 @@ struct process_structure
 	 * @brief The physical address of the page directory this process uses
 	 */
 	page_directory_t* m_pageDir;
+
+	/**
+	 * @brief The node directory in which this application is currently executing
+	 */
+
+	fs_node_t* m_executionDirectory;
 
 	/**
 	 * @brief A list of all the frames of memory mapped by this application

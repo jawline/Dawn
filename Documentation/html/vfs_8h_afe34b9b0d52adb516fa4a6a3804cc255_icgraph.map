@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string." alt="" coords="149,5,253,35"/>
+<area shape="rect" id="node7" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="347,135,459,164"/>
+<area shape="rect" id="node11" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="120,109,283,139"/>
+<area shape="rect" id="node14" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="139,163,264,192"/>
+<area shape="rect" id="node17" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="340,201,465,231"/>
+<area shape="rect" id="node5" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="331,5,475,35"/>
+<area shape="rect" id="node9" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="524,168,577,197"/>
+</map>

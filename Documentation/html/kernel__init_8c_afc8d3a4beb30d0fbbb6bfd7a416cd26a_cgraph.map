@@ -1,14 +1,42 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$phys__mm_8h.html#ac6d8a5dacfe69a5d5ea202a7d14b50d6" title="init_phys_mm" alt="" coords="300,165,409,195"/>
-<area shape="rect" id="node5" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="244,219,465,248"/>
-<area shape="rect" id="node25" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="291,272,419,301"/>
-<area shape="rect" id="node7" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="553,5,665,35"/>
-<area shape="rect" id="node9" href="$virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="572,59,647,88"/>
-<area shape="rect" id="node11" href="$virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="543,112,676,141"/>
-<area shape="rect" id="node13" href="$virt__mm_8c.html#a9c9f8fbb4b2fa9e442794d9ab986d9f6" title="markPagingEnabled" alt="" coords="536,165,683,195"/>
-<area shape="rect" id="node15" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="572,219,647,248"/>
-<area shape="rect" id="node17" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="565,272,653,301"/>
-<area shape="rect" id="node19" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="516,325,703,355"/>
-<area shape="rect" id="node21" href="$virt__mm_8c.html#adc243c4fc9df032b68c9d68e66979f34" title="startPaging" alt="" coords="563,379,656,408"/>
-<area shape="rect" id="node23" href="$virt__mm_8c.html#a600cb6322d11190bd1baff795ea4bf67" title="switchPageDirectory" alt="" coords="535,432,684,461"/>
+<area shape="rect" id="node3" href="$phys__mm_8h.html#ac6d8a5dacfe69a5d5ea202a7d14b50d6" title="init_phys_mm" alt="" coords="300,194,409,223"/>
+<area shape="rect" id="node5" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="244,247,465,277"/>
+<area shape="rect" id="node93" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="1279,523,1407,553"/>
+<area shape="rect" id="node7" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="2048,114,2160,143"/>
+<area shape="rect" id="node17" href="$virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="819,63,893,93"/>
+<area shape="rect" id="node19" href="$virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="543,115,676,145"/>
+<area shape="rect" id="node23" href="$virt__mm_8c.html#a9c9f8fbb4b2fa9e442794d9ab986d9f6" title="markPagingEnabled" alt="" coords="536,169,683,198"/>
+<area shape="rect" id="node25" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="819,219,893,249"/>
+<area shape="rect" id="node27" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="565,273,653,302"/>
+<area shape="rect" id="node87" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="516,326,703,355"/>
+<area shape="rect" id="node89" href="$virt__mm_8c.html#adc243c4fc9df032b68c9d68e66979f34" title="startPaging" alt="" coords="563,379,656,409"/>
+<area shape="rect" id="node91" href="$virt__mm_8c.html#a600cb6322d11190bd1baff795ea4bf67" title="switchPageDirectory" alt="" coords="535,433,684,462"/>
+<area shape="rect" id="node9" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="2209,205,2361,234"/>
+<area shape="rect" id="node11" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="2231,127,2340,157"/>
+<area shape="rect" id="node13" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="2432,223,2563,253"/>
+<area shape="rect" id="node15" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="2697,397,2775,426"/>
+<area shape="rect" id="node29" href="$virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="808,273,904,302"/>
+<area shape="rect" id="node31" href="$procfault_8h.html#a6a8812a2522cb2c634a4d4ae05661ffb" title="handleFatalProcessFault" alt="" coords="769,326,943,355"/>
+<area shape="rect" id="node79" href="$_kernel_2sources_2lib_2printf_8c.html#aed81725528a138fd047a2dae7c940e4b" title="printFormattedStringToBuffer" alt="" coords="753,402,959,431"/>
+<area shape="rect" id="node34" href="$process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="1009,298,1225,327"/>
+<area shape="rect" id="node37" href="$process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="1275,359,1411,389"/>
+<area shape="rect" id="node39" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="1481,318,1577,347"/>
+<area shape="rect" id="node71" href="$process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="1460,371,1599,401"/>
+<area shape="rect" id="node73" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="1471,425,1588,454"/>
+<area shape="rect" id="node75" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="1471,478,1588,507"/>
+<area shape="rect" id="node41" href="$phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="1684,269,1769,298"/>
+<area shape="rect" id="node47" href="$used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="1860,373,1993,402"/>
+<area shape="rect" id="node50" href="$kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="1648,373,1805,402"/>
+<area shape="rect" id="node52" href="$process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="1676,426,1777,455"/>
+<area shape="rect" id="node54" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="1855,478,1999,507"/>
+<area shape="rect" id="node69" href="$used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="1673,530,1780,559"/>
+<area shape="rect" id="node44" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1901,269,1952,298"/>
+<area shape="rect" id="node56" href="$screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="2224,478,2347,507"/>
+<area shape="rect" id="node58" href="$screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="2433,474,2561,503"/>
+<area shape="rect" id="node62" href="$screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="2412,527,2583,557"/>
+<area shape="rect" id="node66" href="$screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="2439,581,2556,610"/>
+<area shape="rect" id="node64" href="$screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="2633,527,2839,557"/>
+<area shape="rect" id="node81" href="$va__list_8h.html#a5c6d141352390699d74591ec3b6983ff" title="va_end" alt="" coords="1084,402,1151,431"/>
+<area shape="rect" id="node83" href="$vsprintf_8h.html#aaa83f2a89dae6d03dfe15deae29f383a" title="vsprintf" alt="" coords="1083,455,1152,485"/>
+<area shape="rect" id="node85" href="$common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="1313,455,1372,485"/>
 </map>

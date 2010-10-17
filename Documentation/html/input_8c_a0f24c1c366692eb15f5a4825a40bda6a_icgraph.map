@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$keyboard__generic__ps2_8c.html#a8a4c199263c1e81791215b333c7c02d1" title="keyboardIrqCallback" alt="" coords="199,5,348,35"/>
+<area shape="rect" id="node13" href="$mouse__generic__ps2_8c.html#a1d9774e268480fb3f10fb19951c703e6" title="mouseIrqCallback" alt="" coords="207,59,340,88"/>
+<area shape="rect" id="node5" href="$keyboard__generic__ps2_8c.html#aaba71403c84ae43669b0a6ff5dcf185e" title="initializeKeyboard" alt="" coords="399,5,529,35"/>
+<area shape="rect" id="node7" href="$input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443" title="initializeInputCallbacks" alt="" coords="579,5,744,35"/>
+<area shape="rect" id="node9" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="792,5,904,35"/>
+<area shape="rect" id="node11" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="953,5,1007,35"/>
+<area shape="rect" id="node15" href="$mouse__generic__ps2_8c.html#a3cc293eb4af6e5849a5ceaadb93015a2" title="initializeMouse" alt="" coords="407,59,521,88"/>
+</map>

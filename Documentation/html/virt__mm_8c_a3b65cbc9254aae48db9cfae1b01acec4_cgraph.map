@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="227,27,312,57"/>
+<area shape="rect" id="node7" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="464,81,515,110"/>
+<area shape="rect" id="node16" href="$virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="232,131,307,161"/>
+<area shape="rect" id="node18" href="$virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3" title="kernelFirstFreeVirtualAddress" alt="" coords="167,185,372,214"/>
+<area shape="rect" id="node23" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="236,238,303,267"/>
+<area shape="rect" id="node5" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="767,29,919,58"/>
+<area shape="rect" id="node12" href="$used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="423,27,556,57"/>
+<area shape="rect" id="node9" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="605,81,717,110"/>
+<area shape="rect" id="node14" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="623,27,700,57"/>
+<area shape="rect" id="node20" href="$virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="441,185,537,214"/>
+</map>

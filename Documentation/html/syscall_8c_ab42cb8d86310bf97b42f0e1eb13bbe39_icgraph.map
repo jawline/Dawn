@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89" title="kernelInitializeSyscalls" alt="" coords="168,5,331,35"/>
+<area shape="rect" id="node5" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="379,5,491,35"/>
+<area shape="rect" id="node7" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="540,5,593,35"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="169,59,308,88"/>
+<area shape="rect" id="node11" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="157,112,320,141"/>
+<area shape="rect" id="node16" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="212,165,265,195"/>
+<area shape="rect" id="node5" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="413,5,539,35"/>
+<area shape="rect" id="node9" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="369,59,583,88"/>
+<area shape="rect" id="node7" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="633,59,687,88"/>
+<area shape="rect" id="node13" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="420,112,532,141"/>
+</map>

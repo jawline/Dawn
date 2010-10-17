@@ -62,7 +62,7 @@ void initializeHeap(heap_t * heap, uint32 address)
 
 /**
  * @brief Shink the heap
- * @bug Pretty sure this doesn't work write. Go ahead and rewrite the whole heap, its shit.
+ * @bug Doesn't work properly. rewrite the whole heap its shoddy at best
  */
 
 void shrinkHeap(heap_t* heap, heap_entry_t* last_entry)
@@ -256,6 +256,7 @@ void heapFreeMemory(uint32 address, heap_t* heap)
 	//Check if this is the last entry
 	if (ptr->next == 0) 
 	{
-		shrinkHeap(heap, ptr);
+		
+		//shrinkHeap(heap, ptr);
 	}
 }

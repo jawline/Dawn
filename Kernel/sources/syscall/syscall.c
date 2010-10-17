@@ -21,6 +21,7 @@ extern unsigned char syscallProcessValid(unsigned int iter);
 extern unsigned int syscallGetPid(unsigned int iter);
 extern unsigned long syscallGetProcessingTime(unsigned int iter);
 extern void syscallGetName(char* StrLocation, unsigned int iter);
+extern void syscallRequestRunNewProcess(const char* NewProcess);
 
 char getKeyMapping(unsigned char scancode, unsigned long flags)
 {
@@ -44,9 +45,9 @@ extern void syscallSetBgc(unsigned char bgc);
 
 extern void scheduler_block_me();
 
-static const unsigned int num_syscalls = 21;
+static const unsigned int num_syscalls = 22;
 
-static void* syscalls[21] = {
+static void* syscalls[22] = {
    &syscallPrint_t, //Syscall 0 - printf prints to active terminal
    &postboxReadTop, //Syscall 1 - Copys the top of the postbox to location given
    &postboxPopTop, //Syscall 2 -Pops the top of the postbox
@@ -68,6 +69,7 @@ static void* syscalls[21] = {
    &syscallGetProcessingTime, //Syscall 18 - Get the processing time of the process
    &syscallGetName, //Syscall 19 - Get the name of the process linked to the iterator
    &syscallRequestExit, //Syscall 20 - Request exit of the current process (Supplied argument is used as the return value)
+   &syscallRequestRunNewProcess //Syscall 21 - Requests the execution of a new application (char* filename supplied)
 };
 
 //Function: syscallHandler

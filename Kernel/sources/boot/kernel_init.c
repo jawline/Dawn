@@ -204,9 +204,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	//System timers
 	initializeSystemClock();
 
-	//Input interfaces
-	initializeInputCallbacks();
-
 	//Init the virtual file system
 	fs_node_t * rootfs = init_vfs();
 	
@@ -231,7 +228,10 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	kernelInitializeSyscalls();
 
 	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
-	initializeDevices();
+	/**
+	 * @bug Devices subsystem broken. (On real hardware, ASUS EEE PC 701 with SSD crashes) fix before uncommenting
+	 */
+	//initializeDevices();
 
 	if (mboot_ptr->mods_count == 1)
 	{ 
@@ -241,4 +241,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 
 	//Initialize the system scheduler
 	initializeScheduler(initializeKernelProcess());
+
+	//Input interfaces
+	initializeInputCallbacks();
 }

@@ -8,6 +8,7 @@
 <area shape="rect" id="node48" href="$process__scheduler_8h.html" title="Kernel/sources/scheduler/default/process_scheduler.h" alt="" coords="2339,83,2701,112"/>
 <area shape="rect" id="node52" href="$postbox__syscalls_8c.html" title="Kernel/sources/syscall/postbox_syscalls.c" alt="" coords="2725,83,3008,112"/>
 <area shape="rect" id="node54" href="$process__syscalls_8c.html" title="Kernel/sources/syscall/process_syscalls.c" alt="" coords="3032,83,3315,112"/>
+<area shape="rect" id="node56" href="$startnew_8c.html" title="Kernel/sources/syscall/startnew.c" alt="" coords="3339,83,3568,112"/>
 <area shape="rect" id="node5" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="1660,237,1887,267"/>
 <area shape="rect" id="node7" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="1000,160,1197,189"/>
 <area shape="rect" id="node9" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="755,160,976,189"/>

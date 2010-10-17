@@ -1,6 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$structabstract__terminal.html" title="abstract_terminal" alt="" coords="5,197,139,227"/>
-<area shape="rect" id="node4" href="$structprocess__postbox.html" title="process_postbox" alt="" coords="163,197,293,227"/>
-<area shape="rect" id="node6" href="$structprocess__postbox__message.html" title="process_postbox_message" alt="" coords="131,101,325,131"/>
-<area shape="rect" id="node9" href="$structprocess__message.html" title="process_message" alt="" coords="159,5,297,35"/>
+<area shape="rect" id="node2" href="$structabstract__terminal.html" title="{abstract_terminal\n|+ m_used\l+ m_width\l+ m_height\l+ m_cursorX\l+ m_cursorY\l+ m_backgroundColour\l+ m_foregroundColour\l+ m_backupData\l+ f_updateCursor\l+ f_putchar\l+ f_setForeground\l+ f_setBackground\l+ f_clear\l|}" alt="" coords="5,460,179,753"/>
+<area shape="rect" id="node4" href="$structfilesystem__node.html" title="{filesystem_node\n|+ name\l+ parent\l+ flags\l+ length\l+ inode\l+ device\l+ write\l+ read\l+ open\l+ close\l+ readdir\l+ finddir\l+ bindnode\l+ unbindnode\l|}" alt="" coords="203,451,328,762"/>
+<area shape="rect" id="node6" href="$structdisk__device.html" title="{disk_device\n|+ BAR0\l+ BAR1\l+ BAR2\l+ BAR3\l+ disk\l+ name\l|}" alt="" coords="157,211,251,383"/>
+<area shape="rect" id="node9" href="$structdirent.html" title="{dirent\n|+ name\l+ ino\l|}" alt="" coords="275,246,349,349"/>
+<area shape="rect" id="node11" href="$structprocess__postbox.html" title="{process_postbox\n|+ first\l|}" alt="" coords="452,564,583,649"/>
+<area shape="rect" id="node13" href="$structprocess__postbox__message.html" title="{process_postbox_message\n|+ data\l+ next\l|}" alt="" coords="420,246,615,349"/>
+<area shape="rect" id="node16" href="$structprocess__message.html" title="{process_message\n|+ ID\l+ from_PID\l+ message_data\l+ messageAdditionalData\l|}" alt="" coords="423,6,612,143"/>
 </map>

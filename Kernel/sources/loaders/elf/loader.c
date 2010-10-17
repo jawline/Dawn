@@ -10,29 +10,25 @@ typedef int (*entry_point) (int argc, void* argv);
 
 unsigned char mapMemoryUsingHeader(e32_pheader program_header)
 {
-	printf("Loaded program header. p_type 0x%x p_offset 0x%x v_addr 0x%x p_addr 0x%x p_filesz 0x%x p_memsz 0x%x p_align 0x%x\n", program_header.p_type, program_header.p_offset, program_header.p_vaddr, program_header.p_paddr, program_header.p_filesz, program_header.p_memsz, program_header.p_align);
 
 	//If the program header is a loadable object, map it into memory
 	if (program_header.p_type == PT_LOAD)
 	{
+
 		MEM_LOC v_addr_start = program_header.p_vaddr;
 		MEM_LOC v_addr_end = v_addr_start + program_header.p_memsz;
 
-		printf("Mapping memory between 0x%x and 0x%x\n", v_addr_start, v_addr_end);
+		printf("Mapping header between 0x%x and 0x%x\n", v_addr_start, v_addr_end);
 
 		MEM_LOC iterator = v_addr_start;
 			
 		while (iterator < v_addr_end)
 		{
 			map(iterator, allocateFrame(), PAGE_PRESENT | PAGE_WRITE | PAGE_USER);
-			printf("Mapped from 0x%x to 0x%x\n", iterator, iterator + PAGE_SIZE);
 			iterator += PAGE_SIZE;
 		}
-
-		printf("Done\n");
 	} else
 	{
-		printf("Not to be mapped\n");
 	}
 
 	return 1;
@@ -56,11 +52,15 @@ unsigned char loadToMemoryUsingHeader(e32_pheader program_header, fs_node_t* Nod
 //NOTE: This function relies on Node being readable (read_fs functioning properly)
 int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 {
+	printf("Loading program\n");
+
 	//Read the ELF info
 	e32info* fileInfo = malloc(sizeof(e32info));
 	memset(fileInfo, 0, sizeof(e32info));
 
 	parseElfFile(fileInfo, Node);
+
+	printf("Parsed ELF file\n");
 
 	//Use the header from the parsed file
 	e32_header head = fileInfo->m_mainHeader;
@@ -95,9 +95,9 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
-	//This segment of code correlates to the loading of the data into virtual memory
+	printf("Mapping program headers\n");
 
-	printf("Iterating through %i program headers\n", fileInfo->m_numProgramHeaders);
+	//This segment of code correlates to the loading of the data into virtual memory
 
 	//Iterate through every program header
 	unsigned int header_iter = 0;
@@ -114,6 +114,8 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 
 	}
 
+	printf("Copying program headers\n");
+
 	//Load the object blocks that where just mapped
 	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders; header_iter++)
 	{
@@ -127,8 +129,7 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 
 	}
 
-	printf("Running program\n");
-
+	printf("Entering program\n");
 	//This segment of code correlates to its execution
 	entry_point program_entry_ponter = head.e_entry;
 

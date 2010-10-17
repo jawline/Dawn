@@ -1,10 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$process_8h.html" title="process/process.h" alt="" coords="184,83,323,112"/>
-<area shape="rect" id="node5" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="5,237,115,267"/>
-<area shape="rect" id="node11" href="$common_8h.html" title="common.h" alt="" coords="309,237,400,267"/>
-<area shape="rect" id="node14" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="131,160,269,189"/>
-<area shape="rect" id="node19" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="344,160,488,189"/>
-<area shape="rect" id="node7" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="149,315,275,344"/>
-<area shape="rect" id="node9" href="$int__types_8h.html" title="int_types.h" alt="" coords="227,392,317,421"/>
-<area shape="rect" id="node16" href="$message_8h.html" title="process/message.h" alt="" coords="139,237,285,267"/>
+<area shape="rect" id="node3" href="$process_8h.html" title="process/process.h" alt="" coords="192,83,330,112"/>
+<area shape="rect" id="node5" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="313,237,422,267"/>
+<area shape="rect" id="node11" href="$common_8h.html" title="common.h" alt="" coords="28,237,118,267"/>
+<area shape="rect" id="node14" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="192,160,330,189"/>
+<area shape="rect" id="node19" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="24,160,168,189"/>
+<area shape="rect" id="node22" href="$vfs_8h.html" title="fs/vfs.h" alt="" coords="506,160,573,189"/>
+<area shape="rect" id="node7" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="229,315,354,344"/>
+<area shape="rect" id="node9" href="$int__types_8h.html" title="int_types.h" alt="" coords="246,392,337,421"/>
+<area shape="rect" id="node16" href="$message_8h.html" title="process/message.h" alt="" coords="142,237,289,267"/>
+<area shape="rect" id="node25" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="446,237,633,267"/>
 </map>

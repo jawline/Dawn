@@ -4,6 +4,7 @@
 #include <interrupts/idt.h>
 #include <interrupts/interrupt_handler.h>
 #include <input/devices.h>
+#include <panic/panic.h>
 
 int mouse_cycle=0;     //unsigned char
 char mouse_byte[3];    //signed char
@@ -11,6 +12,7 @@ mouse_input_t istruct;
 
 idt_call_registers_t mouseIrqCallback(idt_call_registers_t regs) 
 {
+
   switch(mouse_cycle)
   {
     case 0:
@@ -23,9 +25,11 @@ idt_call_registers_t mouseIrqCallback(idt_call_registers_t regs)
       break;
     case 2:
       mouse_byte[2]=inb(PORT_1);
+
       istruct.i_byte = mouse_byte[0];
       istruct.mouse_x = mouse_byte[1];
       istruct.mouse_y = mouse_byte[2];
+
       sendInputMessage(DEVICE_MOUSE, 0, &istruct);
       mouse_cycle=0;
       break;
@@ -33,18 +37,15 @@ idt_call_registers_t mouseIrqCallback(idt_call_registers_t regs)
 }
 
 //Wait tell BIT_1 of PORT_1 is not set
-void mouseWaitOutput()
+inline void mouseWaitOutput()
 {
-uint8 readbyte;
+	uint8 readbyte;
 
-	while (1)
+	int timeout = 0x100000;
+
+	while (timeout--)
 	{
-		readbyte = inb(PORT_1);
-		if (readbyte & BIT_1)
-		{
-			//BIT_1 still set
-		}
-		else
+		if ((inb(PORT_2) & BIT_0) == BIT_0)
 		{
 			break;
 		}
@@ -55,28 +56,22 @@ uint8 readbyte;
 
 
 //Wait untill bit 0 of PORT_2 Is set.
-void mouseWaitInput()
+inline void mouseWaitInput()
 {
-uint8 readbyte;
+	uint8 readbyte;
 
-	while (1)
+	int timeout = 0x100000;
+
+	while (timeout--)
 	{
-		readbyte = inb(PORT_2);
-		if (readbyte & BIT_0)
+		if ((inb(PORT_2) & BIT_1) != BIT_1)
 		{
-			//BIT_0 still set
 			break;
 		}
-		else
-		{
-			//0 Not set
-		}
 	}
-
-
 }
 
-void sendMouseCommand(uint8 cmd)
+inline void sendMouseCommand(uint8 cmd)
 {
 	mouseWaitOutput();
 	outb(PORT_2, CMD);
@@ -95,8 +90,6 @@ uint8 readMouseData()
 
 void initializeMouse()
 {
-	register_interrupt_handler(GET_IRQ(12), mouseIrqCallback);
-
 	uint8 _status;
 
 	mouseWaitOutput();
@@ -112,13 +105,6 @@ void initializeMouse()
 	mouseWaitInput();
 	_status = inb(0x60);
 
-	//Check if bit 5 is set
-	if (_status & 0x20 == 0x20)
-	{
-		//XOR 0x5 should leave bit 5 free 
-		_status = _status ^ 0x20;
-	}
-
 	//Set bit 1 to true
 	_status = _status | 0x2;
 	
@@ -131,12 +117,17 @@ void initializeMouse()
 	outb(0x60, _status);
 
 	//May send a ACK or may not
-	readMouseData(); //ACK
+	printf("MD 0x%x\n", readMouseData()); //ACK
 
 	//End of enabling interrupts
 	
 	sendMouseCommand(0xF6);
-	readMouseData(); //ACK
+	printf("MD 0x%x\n", readMouseData()); //ACK
+
 	sendMouseCommand(0xF4);
-	readMouseData(); //ACK
+	printf("MD 0x%x\n", readMouseData()); //ACK
+
+	register_interrupt_handler(GET_IRQ(12), mouseIrqCallback);
+
+	mouse_cycle = 0;
 }

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$vfs_8c.html#a289d28f0a303cb07f04cb12e6853e743" title="finddir_fs" alt="" coords="177,5,255,35"/>
+<area shape="rect" id="node5" href="$common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="317,31,384,60"/>
+<area shape="rect" id="node7" href="$vfs_8h.html#a6fc8944ed830ab2bf9e076768c7001d3" title="is_directory" alt="" coords="169,109,263,139"/>
+<area shape="rect" id="node10" href="$vfs_8c.html#a1a26dd32cbad48de29964755891bf1b6" title="readdir_fs" alt="" coords="173,163,259,192"/>
+<area shape="rect" id="node12" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="313,109,388,139"/>
+<area shape="rect" id="node14" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="320,163,381,192"/>
+</map>

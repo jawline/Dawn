@@ -36,6 +36,8 @@ void initializeScheduler(process_t* kp)
 
 void scheduler_on_tick()
 {
+	if (list_root == 0) return;
+
 	if (list_current->ticks_tell_die < 1)
 	{
 		if (list_current->next->process_pointer->m_shouldDestroy == 1)
@@ -171,11 +173,38 @@ process_t* get_current_process()
 	return list_current->process_pointer;
 }
 
+int scheduler_num_processes()
+{
+	if (list_root == 0) return 0;
+	
+	scheduler_proc* iter = list_root;
+
+	int numTotal = 0;
+
+	while (1)
+	{
+		numTotal++;
+
+		if (iter->next == list_root)
+		{
+			break;
+		}
+		
+		iter = iter->next;
+	}
+
+	return numTotal;
+}
+
 void scheduler_kill_current_process()
 {
 	if (list_current == 0) return 0;
 
-	get_current_process()->m_shouldDestroy = 1;
+	process_t* process = get_current_process();
+
+	printf("Process %i terminated with return value %i\n", process->m_ID, process->m_returnValue);
+
+	process->m_shouldDestroy = 1;
 
 	for (;;)
 	{

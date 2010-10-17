@@ -2,10 +2,94 @@
 #include <panic/panic.h>
 #include <mm/virt_mm.h>
 #include <mm/pagedir.h>
+#include <messages/messages.h>
+#include "../stack/kstack.h"
 
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
 extern terminal_t* g_kernelTerminal;
+extern process_t* get_current_process();
+
+typedef struct {
+
+	/**
+	 * The name of the file to load
+	 */
+
+	char* Filename;
+
+	/**
+	 * From what directory should the search for this file begin
+	 */
+	fs_node_t* fromWhere;
+
+	/**
+	 * Should the application be run in systems software mode (needs access to privilidged instructions) or user mode (Limited access, better control by OS, Safer)
+	 */
+	int user_mode;
+} new_process_orders_t;
+
+new_process_orders_t* make_orders(const char* Where, fs_node_t* fromWhere)
+{
+	new_process_orders_t* nOrders = malloc(sizeof(new_process_orders_t));
+	memset(nOrders, 0, sizeof(new_process_orders_t));
+	nOrders->Filename = malloc(strlen(Where) + 1);
+	strcpy(nOrders->Filename, Where);
+	
+	nOrders->fromWhere = fromWhere;
+}
+
+void free_orders(new_process_orders_t* orders)
+{
+	free(orders->Filename);
+	free(orders);
+}
+
+/**
+ * @brief Acts as a entry point for new applications
+ */
+void new_process_entry()
+{
+	process_message Msg = postbox_top(&get_current_process()->m_processPostbox);
+
+	if (Msg.ID == LOAD_MESSAGE)
+	{
+		int usrMode = 0;
+
+		printf("Valid message. continue to load\n");
+		new_process_orders_t* Orders = (new_process_orders_t*) Msg.messageAdditionalData;
+
+		printf("Telling system to attempt to run %s\n", Orders->Filename);
+
+		fs_node_t* Node = evaluatePath(Orders->Filename, Orders->fromWhere);
+
+		printf("Attempted to evaluate path\n");
+
+		usrMode = Orders->user_mode;
+
+		printf("User mode toggle checked\n");
+
+		free_orders(Orders);
+
+		printf("Orders freed\n");
+
+		if (Node == 0)
+		{
+			printf("Unable to evaluate node. process could not load file specified\n");
+			scheduler_kill_current_process();
+		} else
+		{
+			printf("Passing to executable loader\n");
+			loadAndExecuteElf(Node, usrMode);
+		}
+	}
+	else
+	{
+		printf("Invalid message. Killing self\n");
+	}
+
+	for (;;) { }
+}
 
 process_t* initializeKernelProcess()
 {
@@ -32,20 +116,13 @@ process_t* initializeKernelProcess()
 	return ret;
 }
 
-void new_process_entry()
-{
-	printf("New Process\n");
-	for (;;) { }
-}
-
 void freeProcess(process_t* process)
 {
 	//No interrupts ploz
 	disable_interrupts();
 
-	printf("Process %i exited with return value %i\n", process->m_ID, process->m_returnValue);
-
 	if (process == kernel_proc) {
+		PANIC("Somebody tried to close the kernel process. Oh crap");
 		return; //Don't want to get rid of PID 0
 	}
 	else
@@ -53,14 +130,10 @@ void freeProcess(process_t* process)
 
 		if (process->m_pTerminal != 0)
 		{
+
 			if (getTerminalInContext() == process->m_pTerminal)
 			{
 				setTerminalContext(g_kernelTerminal);
-			}
-
-			if (process->m_pTerminal != g_kernelTerminal) //Don't delete
-			{
-				freeTerminal(process->m_pTerminal);
 			}
 
 			process->m_pTerminal = 0;
@@ -86,10 +159,10 @@ void freeProcess(process_t* process)
 
 		free(process->m_usedListRoot);
 
-		//freePageDir(process->m_pageDir);
-
 		free(process);
 	}
+
+	printf("A process was freed\n");
 
 }
 
@@ -151,6 +224,65 @@ int kfork()
 	{
 		return 1; //Return 1 - Child
 	}
+}
+
+int createNewProcess(const char* Filename, fs_node_t* Where)
+{
+	uint32 esp, ebp;
+	
+	disable_interrupts();
+
+	printf("Free frames at start %x\n", calculate_free_frames());
+
+	//Store this for later use
+	process_t* parent = get_current_process();
+
+	//Create a process space for the new process and null iyt
+	process_t* new_process = malloc(sizeof(process_t));
+	memset(new_process, 0, sizeof(process_t));
+
+	//Give it a generic name fo-now
+	strcpy(new_process->m_Name, "ChildProcess");
+
+	new_process->m_pTerminal = parent->m_pTerminal;
+	init_used_list(new_process);
+
+	//Set the processes unique ID
+	next_pid++;
+	new_process->m_ID = next_pid;
+
+	//Located in virt_mm.c
+	extern page_directory_t* current_pagedir;
+	extern page_directory_t* kernel_pagedir;
+
+	//Set the root execution directory
+	new_process->m_executionDirectory = parent->m_executionDirectory;
+
+	//Copy the page directory
+	page_directory_t* newprocesspd = copyPageDir(kernel_pagedir, new_process);
+
+	//Give it a page directory
+	new_process->m_pageDir = newprocesspd;
+
+	uint32 current_eip = new_process_entry;
+
+	asm volatile("mov %%esp, %0" : "=r"(esp));
+	asm volatile("mov %%ebp, %0" : "=r"(ebp));
+
+	new_process->esp = USER_STACK_START;
+	new_process->ebp = USER_STACK_START;
+	new_process->eip = current_eip;
+
+	process_message InfomaticMessage;
+	InfomaticMessage.from_PID = 0;
+	InfomaticMessage.ID = LOAD_MESSAGE;
+	InfomaticMessage.messageAdditionalData = make_orders(Filename, Where);
+
+	postbox_add(&new_process->m_processPostbox, InfomaticMessage);
+
+	scheduler_add(new_process);
+
+	 return 0; //Return 0 - Parent
 }
 
 void rename_current_process(const char* Str)

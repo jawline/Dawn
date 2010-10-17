@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1207,41,1359,71"/>
+<area shape="rect" id="node5" href="$process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="272,251,408,280"/>
+<area shape="rect" id="node7" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="479,197,575,227"/>
+<area shape="rect" id="node47" href="$process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="457,251,596,280"/>
+<area shape="rect" id="node49" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="468,304,585,333"/>
+<area shape="rect" id="node51" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="468,357,585,387"/>
+<area shape="rect" id="node9" href="$phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="681,93,767,123"/>
+<area shape="rect" id="node23" href="$used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="857,147,991,176"/>
+<area shape="rect" id="node26" href="$kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="645,197,803,227"/>
+<area shape="rect" id="node28" href="$process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="673,251,775,280"/>
+<area shape="rect" id="node30" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="852,303,996,332"/>
+<area shape="rect" id="node45" href="$used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="671,355,777,384"/>
+<area shape="rect" id="node12" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="899,93,949,123"/>
+<area shape="rect" id="node14" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1045,93,1157,123"/>
+<area shape="rect" id="node17" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1228,95,1337,124"/>
+<area shape="rect" id="node19" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1429,95,1560,124"/>
+<area shape="rect" id="node21" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1695,172,1772,201"/>
+<area shape="rect" id="node32" href="$screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="1221,303,1344,332"/>
+<area shape="rect" id="node34" href="$screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="1431,249,1559,279"/>
+<area shape="rect" id="node38" href="$screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="1409,303,1580,332"/>
+<area shape="rect" id="node42" href="$screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="1436,356,1553,385"/>
+<area shape="rect" id="node40" href="$screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="1631,303,1836,332"/>
+</map>

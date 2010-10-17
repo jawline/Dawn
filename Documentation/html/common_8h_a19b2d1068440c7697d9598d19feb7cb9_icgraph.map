@@ -1,0 +1,21 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="136,5,221,35"/>
+<area shape="rect" id="node7" href="$vfs_8c.html#a289d28f0a303cb07f04cb12e6853e743" title="finddir_fs" alt="" coords="140,59,217,88"/>
+<area shape="rect" id="node13" href="$directory__helper_8c.html#a9528dc3f70c8095c2abf6570cf4db278" title="print_directory" alt="" coords="303,133,417,163"/>
+<area shape="rect" id="node16" href="$initrd_8c.html#a8323a1853228aa77cb89e512dee2b114" title="ird_dir_finddir" alt="" coords="125,163,232,192"/>
+<area shape="rect" id="node18" href="$initrd_8c.html#ac75b5411098ad82a45642e5d167759eb" title="ird_root_finddir" alt="" coords="120,216,237,245"/>
+<area shape="rect" id="node21" href="$rfs_8c.html#a440037b6c1183ee9196f5fb23981c832" title="root_finddir" alt="" coords="132,269,225,299"/>
+<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of the basic shell&#45;style application for Dawn known as Line &#160;int Argc and void* Argv ..." alt="" coords="333,5,387,35"/>
+<area shape="rect" id="node9" href="$vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string." alt="" coords="848,59,952,88"/>
+<area shape="rect" id="node11" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1029,59,1173,88"/>
+<area shape="rect" id="node23" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="285,269,435,299"/>
+<area shape="rect" id="node25" href="$devices__fs_8h.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="664,319,771,348"/>
+<area shape="rect" id="node31" href="$hdd__fs_8h.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="483,320,616,349"/>
+<area shape="rect" id="node34" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="504,201,595,231"/>
+<area shape="rect" id="node27" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1045,215,1157,244"/>
+<area shape="rect" id="node29" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1223,176,1276,205"/>
+<area shape="rect" id="node36" href="$vfs_8c.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="684,188,751,217"/>
+<area shape="rect" id="node40" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="819,267,981,296"/>
+<area shape="rect" id="node43" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="837,163,963,192"/>
+<area shape="rect" id="node46" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1039,136,1164,165"/>
+</map>

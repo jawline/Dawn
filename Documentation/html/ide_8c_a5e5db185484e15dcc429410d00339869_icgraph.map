@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$ide_8h.html#adf7f0f4b2677023e2b706fd973383fa9" title="ideDetectDeviceType" alt="" coords="331,57,485,87"/>
+<area shape="rect" id="node16" href="$ide_8c.html#a26cce83788e66341fcb4a98ca5c9ae9f" title="ideSelectDevice" alt="" coords="159,83,281,112"/>
+<area shape="rect" id="node5" href="$ide_8h.html#aa5c9da1caa65d7e4972d332bb9fd4501" title="ideDriveOutputDiskType" alt="" coords="533,5,707,35"/>
+<area shape="rect" id="node7" href="$ide_8h.html#a9506f74d6dfb377f588e45afbb7f8c28" title="initializeIdeHardDrive" alt="" coords="756,32,911,61"/>
+<area shape="rect" id="node14" href="$diskio_8c.html#a4210208086e815b6265f2303c05fc3a1" title="isDeviceUsable" alt="" coords="561,109,679,139"/>
+<area shape="rect" id="node9" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="961,32,1095,61"/>
+<area shape="rect" id="node11" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="1144,32,1267,61"/>
+</map>

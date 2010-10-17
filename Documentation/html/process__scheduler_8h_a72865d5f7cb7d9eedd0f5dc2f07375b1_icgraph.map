@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$post__init_8c.html#a93f4731bfb16e12acb7817e1b82014c4" title="kernelInputCallback" alt="" coords="253,5,400,35"/>
+<area shape="rect" id="node9" href="$post__init_8c.html#ad3545f29858afa6583ff0d4e48e57b00" title="kernelMouseCallback" alt="" coords="249,59,404,88"/>
+<area shape="rect" id="node5" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="453,32,579,61"/>
+<area shape="rect" id="node7" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="628,32,681,61"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$pci_8c.html#af261281312f5a8d0dcb7fd5483a132ec" title="pciConfigReadRegister" alt="" coords="101,367,264,396"/>
+<area shape="rect" id="node5" href="$pci_8c.html#a03f8158cbbb7bc47fad237bf7efc10af" title="pciConfigReadByte" alt="" coords="315,52,453,82"/>
+<area shape="rect" id="node19" href="$pci_8c.html#aa4849db06f7c6d1a34a04a001d066042" title="pciConfigReadWord" alt="" coords="313,210,455,239"/>
+<area shape="rect" id="node30" href="$pci_8c.html#a055e4a1a70cd1bce508ab70d6b15a6e1" title="pciDeviceGetBar0" alt="" coords="517,290,653,319"/>
+<area shape="rect" id="node33" href="$pci_8c.html#a7e7fa83db42bf873e7a529f5cd1f0e3f" title="pciDeviceGetBar1" alt="" coords="517,343,653,372"/>
+<area shape="rect" id="node36" href="$pci_8c.html#a280a106cfd738a094e7fd3f552bac40b" title="pciDeviceGetBar2" alt="" coords="316,392,452,422"/>
+<area shape="rect" id="node39" href="$pci_8c.html#a8d1ee0111ea9f590103c0247f911aee6" title="pciDeviceGetBar3" alt="" coords="316,446,452,475"/>
+<area shape="rect" id="node42" href="$pci_8c.html#a4a59bd5d30880991ac97225ad0604fb7" title="pciDeviceGetBar4" alt="" coords="316,499,452,528"/>
+<area shape="rect" id="node44" href="$pci_8c.html#a26d17b2e401dfcbe854d5e972b925360" title="pciDeviceGetBar5" alt="" coords="316,552,452,582"/>
+<area shape="rect" id="node7" href="$pci_8c.html#abb9c7b476e399b75106afb501298bb0e" title="pciDeviceGetClass" alt="" coords="516,26,655,55"/>
+<area shape="rect" id="node13" href="$pci_8c.html#aacefd4cca07e4d96fee0dfa3e2681cf7" title="pciDeviceGetHeaderType" alt="" coords="715,26,896,55"/>
+<area shape="rect" id="node16" href="$pci_8c.html#aad091be6515d27c5b7ed69484fc215e2" title="pciDeviceGetSubclass" alt="" coords="504,79,667,108"/>
+<area shape="rect" id="node9" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="739,236,872,266"/>
+<area shape="rect" id="node11" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="944,131,1067,160"/>
+<area shape="rect" id="node21" href="$pci_8c.html#a29147cf7af779acdbf9b138c50c388c0" title="pciDeviceExists" alt="" coords="745,131,865,160"/>
+<area shape="rect" id="node24" href="$pci_8c.html#ac19e489d76d9f2d54bc9f201e633ffbd" title="pciDeviceGetDeviceId" alt="" coords="505,236,665,266"/>
+<area shape="rect" id="node27" href="$pci_8c.html#a2fdb9e8acb51a9cafc0aeb63a014163c" title="pciDeviceGetVendor" alt="" coords="511,183,660,212"/>
+</map>

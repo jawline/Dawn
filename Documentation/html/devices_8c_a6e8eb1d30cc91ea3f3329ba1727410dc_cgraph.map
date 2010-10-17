@@ -1,0 +1,32 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="200,370,333,399"/>
+<area shape="rect" id="node74" href="$pci_8c.html#a29147cf7af779acdbf9b138c50c388c0" title="pciDeviceExists" alt="" coords="207,239,327,269"/>
+<area shape="rect" id="node77" href="$pci_8c.html#aacefd4cca07e4d96fee0dfa3e2681cf7" title="pciDeviceGetHeaderType" alt="" coords="176,527,357,557"/>
+<area shape="rect" id="node5" href="$ide_8c.html#a9506f74d6dfb377f588e45afbb7f8c28" title="initializeIdeHardDrive" alt="" coords="409,110,564,139"/>
+<area shape="rect" id="node41" href="$pci_8c.html#a055e4a1a70cd1bce508ab70d6b15a6e1" title="pciDeviceGetBar0" alt="" coords="635,263,771,293"/>
+<area shape="rect" id="node49" href="$pci_8c.html#a7e7fa83db42bf873e7a529f5cd1f0e3f" title="pciDeviceGetBar1" alt="" coords="635,567,771,597"/>
+<area shape="rect" id="node52" href="$pci_8c.html#a280a106cfd738a094e7fd3f552bac40b" title="pciDeviceGetBar2" alt="" coords="635,370,771,399"/>
+<area shape="rect" id="node55" href="$pci_8c.html#a8d1ee0111ea9f590103c0247f911aee6" title="pciDeviceGetBar3" alt="" coords="419,422,555,451"/>
+<area shape="rect" id="node58" href="$pci_8c.html#abb9c7b476e399b75106afb501298bb0e" title="pciDeviceGetClass" alt="" coords="417,529,556,558"/>
+<area shape="rect" id="node63" href="$pci_8c.html#ac19e489d76d9f2d54bc9f201e633ffbd" title="pciDeviceGetDeviceId" alt="" coords="407,265,567,294"/>
+<area shape="rect" id="node68" href="$pci_8c.html#aad091be6515d27c5b7ed69484fc215e2" title="pciDeviceGetSubclass" alt="" coords="405,475,568,505"/>
+<area shape="rect" id="node71" href="$pci_8c.html#a2fdb9e8acb51a9cafc0aeb63a014163c" title="pciDeviceGetVendor" alt="" coords="412,318,561,347"/>
+<area shape="rect" id="node7" href="$ide_8c.html#ac223a8572da2cb187d7b43c387b853a5" title="addToHddFs" alt="" coords="653,181,752,210"/>
+<area shape="rect" id="node15" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="881,115,956,145"/>
+<area shape="rect" id="node19" href="$ide_8c.html#adf7f0f4b2677023e2b706fd973383fa9" title="ideDetectDeviceType" alt="" coords="841,38,996,67"/>
+<area shape="rect" id="node37" href="$ide_8c.html#aa5c9da1caa65d7e4972d332bb9fd4501" title="ideDriveOutputDiskType" alt="" coords="616,26,789,55"/>
+<area shape="rect" id="node9" href="$vfs_8c.html#a45cd72de0b5fe65f00a4436954bf8404" title="Binds the specified target node to the node supplied." alt="" coords="869,329,968,358"/>
+<area shape="rect" id="node11" href="$common_8h.html#a22e98a8cf2e2c79d738830b387cace28" title="itoa" alt="" coords="896,169,941,198"/>
+<area shape="rect" id="node13" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="880,222,957,251"/>
+<area shape="rect" id="node17" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="888,275,949,305"/>
+<area shape="rect" id="node21" href="$ide_8c.html#a26cce83788e66341fcb4a98ca5c9ae9f" title="ideSelectDevice" alt="" coords="1049,90,1172,119"/>
+<area shape="rect" id="node23" href="$ide_8c.html#a5e5db185484e15dcc429410d00339869" title="ideSoftReset" alt="" coords="1223,38,1324,67"/>
+<area shape="rect" id="node27" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="1521,89,1561,118"/>
+<area shape="rect" id="node25" href="$ide_8c.html#ac6d9c9786b6684f47826bec9c48c0f50" title="ideWaitBusy" alt="" coords="1373,141,1472,170"/>
+<area shape="rect" id="node30" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="1397,87,1448,117"/>
+<area shape="rect" id="node43" href="$pci_8c.html#af261281312f5a8d0dcb7fd5483a132ec" title="pciConfigReadRegister" alt="" coords="837,405,1000,434"/>
+<area shape="rect" id="node45" href="$io_8c.html#a15fa9981b09e89e76cd1cbc7fe80d9c4" title="inl" alt="" coords="1092,431,1129,461"/>
+<area shape="rect" id="node47" href="$io_8c.html#a54cd5c8a186f8cac819567a6e6a75b27" title="outl" alt="" coords="1088,378,1133,407"/>
+<area shape="rect" id="node60" href="$pci_8c.html#a03f8158cbbb7bc47fad237bf7efc10af" title="pciConfigReadByte" alt="" coords="633,489,772,518"/>
+<area shape="rect" id="node65" href="$pci_8c.html#aa4849db06f7c6d1a34a04a001d066042" title="pciConfigReadWord" alt="" coords="632,317,773,346"/>
+</map>

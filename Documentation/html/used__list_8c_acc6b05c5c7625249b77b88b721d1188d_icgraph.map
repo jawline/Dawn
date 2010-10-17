@@ -1,0 +1,41 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$phys__mm_8c.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="163,266,275,296"/>
+<area shape="rect" id="node98" href="$phys__mm_8c.html#a7fafda6bc4a98719fbf8965f1c5d697c" title="allocateFrameForProcess" alt="" coords="324,604,505,633"/>
+<area shape="rect" id="node5" href="$_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="597,164,699,193"/>
+<area shape="rect" id="node11" href="$virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="1716,578,1849,608"/>
+<area shape="rect" id="node13" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="1923,552,2144,581"/>
+<area shape="rect" id="node17" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="2453,214,2565,244"/>
+<area shape="rect" id="node21" href="$_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="595,110,701,140"/>
+<area shape="rect" id="node28" href="$virt__mm_8c.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="389,266,440,296"/>
+<area shape="rect" id="node88" href="$loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c" title="mapMemoryUsingHeader" alt="" coords="555,318,741,348"/>
+<area shape="rect" id="node93" href="$stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="601,57,695,86"/>
+<area shape="rect" id="node7" href="$_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="789,164,947,193"/>
+<area shape="rect" id="node9" href="$kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="1031,162,1100,192"/>
+<area shape="rect" id="node15" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="2217,472,2404,501"/>
+<area shape="rect" id="node19" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="2615,344,2668,373"/>
+<area shape="rect" id="node23" href="$kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="2237,110,2384,140"/>
+<area shape="rect" id="node30" href="$virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="607,577,689,606"/>
+<area shape="rect" id="node32" href="$virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="811,628,925,657"/>
+<area shape="rect" id="node34" href="$virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="1015,654,1116,684"/>
+<area shape="rect" id="node48" href="$phys__mm_8c.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="605,372,691,401"/>
+<area shape="rect" id="node85" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="1971,214,2096,244"/>
+<area shape="rect" id="node36" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="1224,782,1363,812"/>
+<area shape="rect" id="node43" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="1267,654,1320,684"/>
+<area shape="rect" id="node38" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="2248,680,2373,709"/>
+<area shape="rect" id="node41" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="1452,782,1665,812"/>
+<area shape="rect" id="node50" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="820,422,916,452"/>
+<area shape="rect" id="node78" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="1719,472,1847,501"/>
+<area shape="rect" id="node81" href="$_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="821,369,915,398"/>
+<area shape="rect" id="node52" href="$process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="997,422,1133,452"/>
+<area shape="rect" id="node54" href="$procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="1472,476,1645,505"/>
+<area shape="rect" id="node64" href="$_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="1248,265,1339,294"/>
+<area shape="rect" id="node69" href="$process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="1185,422,1401,452"/>
+<area shape="rect" id="node56" href="$gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="1737,393,1828,422"/>
+<area shape="rect" id="node61" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="1739,525,1827,554"/>
+<area shape="rect" id="node58" href="$gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="1900,369,2167,398"/>
+<area shape="rect" id="node66" href="$_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="1956,268,2111,297"/>
+<area shape="rect" id="node72" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1487,316,1631,345"/>
+<area shape="rect" id="node74" href="$syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="1469,369,1648,398"/>
+<area shape="rect" id="node76" href="$syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="1489,422,1628,452"/>
+<area shape="rect" id="node90" href="$loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904" title="loadAndExecuteElf" alt="" coords="996,317,1135,346"/>
+</map>

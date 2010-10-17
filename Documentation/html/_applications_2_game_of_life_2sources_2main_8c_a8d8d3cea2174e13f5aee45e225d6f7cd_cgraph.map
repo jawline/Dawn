@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$end__process_8h.html#a3809f7c3c89e9350a245949c2438a3ad" title="Call the exit syscall supplying a return argument &#160;int Return. the return value of the process..." alt="" coords="117,59,163,88"/>
+<area shape="rect" id="node5" href="$_applications_2_game_of_life_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of a text&#45;based remake of the game of life for Dawn &#160;int Argc and void* Argv are give..." alt="" coords="113,112,167,141"/>
+<area shape="rect" id="node7" href="$_a_p_i_2sources_2printf_8c.html#a4826277cc150ddc0f4de4bd464a34909" title="cls" alt="" coords="257,5,295,35"/>
+<area shape="rect" id="node9" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="237,59,315,88"/>
+<area shape="rect" id="node11" href="$_applications_2_game_of_life_2sources_2main_8c.html#a3a0cfdf81c66b296186e787131be6e53" title="setupBoard" alt="" coords="228,112,324,141"/>
+<area shape="rect" id="node13" href="$sleep_8h.html#ac562e96a96667f28b9334caae28e798e" title="This function sleeps untill a number have ticks have passed (Note: Not precise due to the fact that t..." alt="" coords="216,165,336,195"/>
+<area shape="rect" id="node17" href="$_applications_2_game_of_life_2sources_2main_8c.html#a76818698a61c2b2d774c18b2fab1566e" title="updateBlock" alt="" coords="225,219,327,248"/>
+<area shape="rect" id="node15" href="$sleep_8h.html#ab847765444359d33ddafb6c493cc3880" title="This function allows a program to pass up any remaining processing time it may have been allocated by..." alt="" coords="384,165,491,195"/>
+</map>

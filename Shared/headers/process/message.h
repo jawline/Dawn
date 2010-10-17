@@ -5,9 +5,11 @@
 typedef struct {
 
 	int ID;
-	unsigned int from_PID; //Who is the message from (What PID)?
+	int from_PID; //Who is the message from (What PID)?
 
-	unsigned int message_data[4]; //4 unsigned ints for data about the message
+	long message_data[4]; //4 unsigned ints for data about the message
+
+	MEM_LOC messageAdditionalData; //Additional data sent with the process (Can be used as a pointer)
 } process_message;
 
 #endif //_PROCESS_MESSAGE_DEF_H_

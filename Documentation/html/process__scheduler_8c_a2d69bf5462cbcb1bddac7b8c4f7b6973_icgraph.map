@@ -1,0 +1,50 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$phys__mm_8c.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="244,221,356,251"/>
+<area shape="rect" id="node36" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="1213,1044,1352,1073"/>
+<area shape="rect" id="node38" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1485,995,1611,1024"/>
+<area shape="rect" id="node41" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="1441,1072,1655,1101"/>
+<area shape="rect" id="node43" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="1256,696,1309,725"/>
+<area shape="rect" id="node48" href="$phys__mm_8c.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="595,529,680,559"/>
+<area shape="rect" id="node54" href="$procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="1461,529,1635,559"/>
+<area shape="rect" id="node69" href="$process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="1175,889,1391,919"/>
+<area shape="rect" id="node72" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1476,835,1620,864"/>
+<area shape="rect" id="node76" href="$syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="1479,941,1617,971"/>
+<area shape="rect" id="node103" href="$postbox__syscalls_8c.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="236,1199,364,1228"/>
+<area shape="rect" id="node107" href="$syscall_8c.html#a42d52743f176f73c3dbffdbc23ca1d26" title="postboxPopTop" alt="" coords="241,1252,359,1281"/>
+<area shape="rect" id="node109" href="$syscall_8c.html#aead17db7d001bbfc192a381d07236367" title="postboxReadTop" alt="" coords="237,1305,363,1335"/>
+<area shape="rect" id="node111" href="$postbox__syscalls_8c.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message..." alt="" coords="236,1145,364,1175"/>
+<area shape="rect" id="node115" href="$process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82" title="rename_current_process" alt="" coords="209,1359,391,1388"/>
+<area shape="rect" id="node118" href="$terminal__syscalls_8c.html#aab274ca82284758b7849abb948a79801" title="syscallClearscreen" alt="" coords="231,1412,369,1441"/>
+<area shape="rect" id="node120" href="$terminal__syscalls_8c.html#ad3a622baf1a6e09ce69704fad80d9179" title="syscallPrint_t" alt="" coords="248,1465,352,1495"/>
+<area shape="rect" id="node124" href="$terminal__syscalls_8c.html#a716263cfc2bfff32787a1788a06b0638" title="syscallSetBgc" alt="" coords="245,1519,355,1548"/>
+<area shape="rect" id="node126" href="$terminal__syscalls_8c.html#ace004b1bbaff00c359c440b60acf7005" title="syscallSetFgc" alt="" coords="247,1572,353,1601"/>
+<area shape="rect" id="node5" href="$_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="587,273,688,303"/>
+<area shape="rect" id="node11" href="$virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="1705,221,1839,251"/>
+<area shape="rect" id="node13" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="1889,268,2111,297"/>
+<area shape="rect" id="node17" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="2477,295,2589,324"/>
+<area shape="rect" id="node21" href="$_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="584,119,691,148"/>
+<area shape="rect" id="node28" href="$virt__mm_8c.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="443,479,493,508"/>
+<area shape="rect" id="node88" href="$loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c" title="mapMemoryUsingHeader" alt="" coords="544,788,731,817"/>
+<area shape="rect" id="node93" href="$stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="591,65,684,95"/>
+<area shape="rect" id="node7" href="$_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="779,273,936,303"/>
+<area shape="rect" id="node9" href="$kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="1020,273,1089,303"/>
+<area shape="rect" id="node15" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="2201,295,2388,324"/>
+<area shape="rect" id="node19" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="2639,476,2692,505"/>
+<area shape="rect" id="node23" href="$kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="2221,129,2368,159"/>
+<area shape="rect" id="node30" href="$virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="596,583,679,612"/>
+<area shape="rect" id="node32" href="$virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="800,687,915,716"/>
+<area shape="rect" id="node34" href="$virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="1004,709,1105,739"/>
+<area shape="rect" id="node85" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="1709,168,1835,197"/>
+<area shape="rect" id="node50" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="809,529,905,559"/>
+<area shape="rect" id="node78" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="1936,321,2064,351"/>
+<area shape="rect" id="node81" href="$_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="811,583,904,612"/>
+<area shape="rect" id="node52" href="$process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="987,581,1123,611"/>
+<area shape="rect" id="node64" href="$_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="1237,631,1328,660"/>
+<area shape="rect" id="node56" href="$gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="1727,529,1817,559"/>
+<area shape="rect" id="node61" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="1728,425,1816,455"/>
+<area shape="rect" id="node58" href="$gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="2161,457,2428,487"/>
+<area shape="rect" id="node66" href="$_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="1923,541,2077,571"/>
+<area shape="rect" id="node74" href="$syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="1459,888,1637,917"/>
+<area shape="rect" id="node90" href="$loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904" title="loadAndExecuteElf" alt="" coords="985,787,1124,816"/>
+<area shape="rect" id="node105" href="$_applications_2_line_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of the basic shell&#45;style application for Dawn known as Line &#160;int Argc and void* Argv ..." alt="" coords="441,1172,495,1201"/>
+</map>

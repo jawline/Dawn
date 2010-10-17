@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_applications_2_base_2sources_2main_8c.html#ad6a1ccf2136fe4eb685180b729bf5ed7" title="_start" alt="" coords="113,5,172,35"/>
+<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="100,59,185,88"/>
+<area shape="rect" id="node7" href="$_applications_2_line_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of the basic shell&#45;style application for Dawn known as Line &#160;int Argc and void* Argv ..." alt="" coords="236,59,289,88"/>
+</map>

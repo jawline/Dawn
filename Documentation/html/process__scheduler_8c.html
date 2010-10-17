@@ -44,7 +44,7 @@ Include dependency graph for process_scheduler.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="process__scheduler_8c__incl.png" border="0" usemap="#_kernel_2sources_2scheduler_2default_2process__scheduler_8c" alt=""/></div>
 <map name="_kernel_2sources_2scheduler_2default_2process__scheduler_8c" id="_kernel_2sources_2scheduler_2default_2process__scheduler_8c">
-<area shape="rect" id="node3" href="process__scheduler_8h.html" title="process_scheduler.h" alt="" coords="251,83,403,112"/><area shape="rect" id="node13" href="common_8h.html" title="common.h" alt="" coords="337,315,428,344"/><area shape="rect" id="node24" href="panic_8h.html" title="panic/panic.h" alt="" coords="529,160,636,189"/><area shape="rect" id="node27" href="stdlib_8h.html" title="stdlib.h" alt="" coords="580,83,647,112"/><area shape="rect" id="node5" href="process_8h.html" title="process/process.h" alt="" coords="204,160,343,189"/><area shape="rect" id="node7" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="5,315,115,344"/><area shape="rect" id="node16" href="postbox_8h.html" title="process/postbox.h" alt="" coords="97,237,236,267"/><area shape="rect" id="node21" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="311,237,455,267"/><area shape="rect" id="node9" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="149,392,275,421"/><area shape="rect" id="node11" href="int__types_8h.html" title="int_types.h" alt="" coords="233,469,324,499"/><area shape="rect" id="node18" href="message_8h.html" title="process/message.h" alt="" coords="139,315,285,344"/></map>
+<area shape="rect" id="node3" href="process__scheduler_8h.html" title="process_scheduler.h" alt="" coords="114,83,266,112"/><area shape="rect" id="node13" href="common_8h.html" title="common.h" alt="" coords="42,315,132,344"/><area shape="rect" id="node29" href="panic_8h.html" title="panic/panic.h" alt="" coords="23,160,130,189"/><area shape="rect" id="node32" href="stdlib_8h.html" title="stdlib.h" alt="" coords="290,83,356,112"/><area shape="rect" id="node5" href="process_8h.html" title="process/process.h" alt="" coords="223,160,362,189"/><area shape="rect" id="node7" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="370,315,479,344"/><area shape="rect" id="node16" href="postbox_8h.html" title="process/postbox.h" alt="" coords="292,237,431,267"/><area shape="rect" id="node21" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="124,237,268,267"/><area shape="rect" id="node24" href="vfs_8h.html" title="fs/vfs.h" alt="" coords="563,237,630,267"/><area shape="rect" id="node9" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="286,392,411,421"/><area shape="rect" id="node11" href="int__types_8h.html" title="int_types.h" alt="" coords="303,469,394,499"/><area shape="rect" id="node18" href="message_8h.html" title="process/message.h" alt="" coords="199,315,346,344"/><area shape="rect" id="node27" href="disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="503,315,690,344"/></map>
 </div>
 
 <p><a href="process__scheduler_8c_source.html">Go to the source code of this file.</a></p>
@@ -63,6 +63,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a">scheduler_remove</a> (<a class="el" href="structprocess__structure.html">process_t</a> *op)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">scheduler_block_me</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprocess__structure.html">process_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#a7987083a29a7c2ef96d730f7ccb053f7">scheduler_num_processes</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642">scheduler_kill_current_process</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprocess__structure.html">process_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#aa8ea4fc777e94c00f614dfbe4f34df95">scheduler_return_process</a> (unsigned int iter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="process__scheduler_8c.html#a72865d5f7cb7d9eedd0f5dc2f07375b1">scheduler_global_message</a> (<a class="el" href="structprocess__message.html">process_message</a> msg, unsigned int bit)</td></tr>
@@ -103,7 +104,16 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00167">167</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00169">169</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973_icgraph.png" border="0" usemap="#process__scheduler_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973_icgraph" id="process__scheduler_8c_a2d69bf5462cbcb1bddac7b8c4f7b6973_icgraph">
+<area shape="rect" id="node3" href="phys__mm_8c.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="244,221,356,251"/><area shape="rect" id="node36" href="process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="1213,1044,1352,1073"/><area shape="rect" id="node38" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1485,995,1611,1024"/><area shape="rect" id="node41" href="syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="1441,1072,1655,1101"/><area shape="rect" id="node43" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="1256,696,1309,725"/><area shape="rect" id="node48" href="phys__mm_8c.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="595,529,680,559"/><area shape="rect" id="node54" href="procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="1461,529,1635,559"/><area shape="rect" id="node69" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="1175,889,1391,919"/><area shape="rect" id="node72" href="process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1476,835,1620,864"/><area shape="rect" id="node76" href="syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="1479,941,1617,971"/><area shape="rect" id="node103" href="postbox__syscalls_8c.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="236,1199,364,1228"/><area shape="rect" id="node107" href="syscall_8c.html#a42d52743f176f73c3dbffdbc23ca1d26" title="postboxPopTop" alt="" coords="241,1252,359,1281"/><area shape="rect" id="node109" href="syscall_8c.html#aead17db7d001bbfc192a381d07236367" title="postboxReadTop" alt="" coords="237,1305,363,1335"/><area shape="rect" id="node111" href="postbox__syscalls_8c.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message..." alt="" coords="236,1145,364,1175"/><area shape="rect" id="node115" href="process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82" title="rename_current_process" alt="" coords="209,1359,391,1388"/><area shape="rect" id="node118" href="terminal__syscalls_8c.html#aab274ca82284758b7849abb948a79801" title="syscallClearscreen" alt="" coords="231,1412,369,1441"/><area shape="rect" id="node120" href="terminal__syscalls_8c.html#ad3a622baf1a6e09ce69704fad80d9179" title="syscallPrint_t" alt="" coords="248,1465,352,1495"/><area shape="rect" id="node124" href="terminal__syscalls_8c.html#a716263cfc2bfff32787a1788a06b0638" title="syscallSetBgc" alt="" coords="245,1519,355,1548"/><area shape="rect" id="node126" href="terminal__syscalls_8c.html#ace004b1bbaff00c359c440b60acf7005" title="syscallSetFgc" alt="" coords="247,1572,353,1601"/><area shape="rect" id="node5" href="_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="587,273,688,303"/><area shape="rect" id="node11" href="virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="1705,221,1839,251"/><area shape="rect" id="node13" href="virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="1889,268,2111,297"/><area shape="rect" id="node17" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="2477,295,2589,324"/><area shape="rect" id="node21" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="584,119,691,148"/><area shape="rect" id="node28" href="virt__mm_8c.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="443,479,493,508"/><area shape="rect" id="node88" href="loader_8c.html#ae03e89ce9219a91724d063dcfb236d9c" title="mapMemoryUsingHeader" alt="" coords="544,788,731,817"/><area shape="rect" id="node93" href="stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="591,65,684,95"/><area shape="rect" id="node7" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="779,273,936,303"/><area shape="rect" id="node9" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="1020,273,1089,303"/><area shape="rect" id="node15" href="kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="2201,295,2388,324"/><area shape="rect" id="node19" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="2639,476,2692,505"/><area shape="rect" id="node23" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="2221,129,2368,159"/><area shape="rect" id="node30" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="596,583,679,612"/><area shape="rect" id="node32" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="800,687,915,716"/><area shape="rect" id="node34" href="virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="1004,709,1105,739"/><area shape="rect" id="node85" href="kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="1709,168,1835,197"/><area shape="rect" id="node50" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="809,529,905,559"/><area shape="rect" id="node78" href="phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="1936,321,2064,351"/><area shape="rect" id="node81" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="811,583,904,612"/><area shape="rect" id="node52" href="process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="987,581,1123,611"/><area shape="rect" id="node64" href="_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="1237,631,1328,660"/><area shape="rect" id="node56" href="gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="1727,529,1817,559"/><area shape="rect" id="node61" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="1728,425,1816,455"/><area shape="rect" id="node58" href="gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="2161,457,2428,487"/><area shape="rect" id="node66" href="_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="1923,541,2077,571"/><area shape="rect" id="node74" href="syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="1459,888,1637,917"/><area shape="rect" id="node90" href="loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904" title="loadAndExecuteElf" alt="" coords="985,787,1124,816"/><area shape="rect" id="node105" href="_applications_2_line_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of the basic shell&#45;style application for Dawn known as Line &#160;int Argc and void* Argv ..." alt="" coords="441,1172,495,1201"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -125,6 +135,24 @@ Variables</h2></td></tr>
 
 <p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00020">20</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
 
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_cgraph.png" border="0" usemap="#process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_cgraph" alt=""/></div>
+<map name="process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_cgraph" id="process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_cgraph">
+<area shape="rect" id="node3" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="193,5,268,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_icgraph.png" border="0" usemap="#process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_icgraph" id="process__scheduler_8c_ad102b771d475960e41eb9bdb143fd60c_icgraph">
+<area shape="rect" id="node3" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="192,5,304,35"/><area shape="rect" id="node5" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="353,5,407,35"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a1a447c2a3fed5305d23c288b4f641bcc"></a><!-- doxytag: member="process_scheduler.c::scheduler_add" ref="a1a447c2a3fed5305d23c288b4f641bcc" args="(process_t *op)" -->
@@ -143,7 +171,25 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00079">79</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00081">81</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_cgraph.png" border="0" usemap="#process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_cgraph" alt=""/></div>
+<map name="process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_cgraph" id="process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_cgraph">
+<area shape="rect" id="node3" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="169,5,244,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_icgraph.png" border="0" usemap="#process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_icgraph" id="process__scheduler_8c_a1a447c2a3fed5305d23c288b4f641bcc_icgraph">
+<area shape="rect" id="node3" href="process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="169,32,308,61"/><area shape="rect" id="node11" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="212,85,265,115"/><area shape="rect" id="node5" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="403,5,528,35"/><area shape="rect" id="node9" href="syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="359,59,572,88"/><area shape="rect" id="node7" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="623,5,676,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -162,7 +208,16 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00160">160</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00162">162</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph.png" border="0" usemap="#process__scheduler_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph" id="process__scheduler_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph">
+<area shape="rect" id="node3" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="205,5,331,35"/><area shape="rect" id="node5" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="380,5,433,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -191,7 +246,25 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00200">200</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00225">225</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_cgraph.png" border="0" usemap="#process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_cgraph" alt=""/></div>
+<map name="process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_cgraph" id="process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_cgraph">
+<area shape="rect" id="node3" href="process_8h.html#a3de17c849d9de394b95b696739322ac0" title="postbox_add" alt="" coords="248,5,352,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_icgraph.png" border="0" usemap="#process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_icgraph" id="process__scheduler_8c_a72865d5f7cb7d9eedd0f5dc2f07375b1_icgraph">
+<area shape="rect" id="node3" href="post__init_8c.html#a93f4731bfb16e12acb7817e1b82014c4" title="kernelInputCallback" alt="" coords="253,5,400,35"/><area shape="rect" id="node9" href="post__init_8c.html#ad3545f29858afa6583ff0d4e48e57b00" title="kernelMouseCallback" alt="" coords="249,59,404,88"/><area shape="rect" id="node5" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="453,32,579,61"/><area shape="rect" id="node7" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="628,32,681,61"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -210,7 +283,53 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00174">174</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00199">199</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_cgraph.png" border="0" usemap="#process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_cgraph" alt=""/></div>
+<map name="process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_cgraph" id="process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_cgraph">
+<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1207,41,1359,71"/><area shape="rect" id="node5" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="272,251,408,280"/><area shape="rect" id="node7" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="479,197,575,227"/><area shape="rect" id="node47" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="457,251,596,280"/><area shape="rect" id="node49" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="468,304,585,333"/><area shape="rect" id="node51" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="468,357,585,387"/><area shape="rect" id="node9" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="681,93,767,123"/><area shape="rect" id="node23" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="857,147,991,176"/><area shape="rect" id="node26" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="645,197,803,227"/><area shape="rect" id="node28" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="673,251,775,280"/><area shape="rect" id="node30" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="852,303,996,332"/><area shape="rect" id="node45" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="671,355,777,384"/><area shape="rect" id="node12" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="899,93,949,123"/><area shape="rect" id="node14" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1045,93,1157,123"/><area shape="rect" id="node17" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1228,95,1337,124"/><area shape="rect" id="node19" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1429,95,1560,124"/><area shape="rect" id="node21" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1695,172,1772,201"/><area shape="rect" id="node32" href="screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="1221,303,1344,332"/><area shape="rect" id="node34" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="1431,249,1559,279"/><area shape="rect" id="node38" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="1409,303,1580,332"/><area shape="rect" id="node42" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="1436,356,1553,385"/><area shape="rect" id="node40" href="screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="1631,303,1836,332"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_icgraph.png" border="0" usemap="#process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_icgraph" id="process__scheduler_8c_ad1dc14872246fc38ff78f0a41929f642_icgraph">
+<area shape="rect" id="node3" href="procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="275,32,448,61"/><area shape="rect" id="node20" href="process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="289,85,433,115"/><area shape="rect" id="node22" href="syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="272,139,451,168"/><area shape="rect" id="node24" href="syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="292,192,431,221"/><area shape="rect" id="node5" href="gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="500,5,591,35"/><area shape="rect" id="node13" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="501,59,589,88"/><area shape="rect" id="node7" href="gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="913,5,1180,35"/><area shape="rect" id="node9" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1229,32,1341,61"/><area shape="rect" id="node11" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1391,32,1444,61"/><area shape="rect" id="node15" href="virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="641,59,863,88"/><area shape="rect" id="node17" href="kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="953,59,1140,88"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a7987083a29a7c2ef96d730f7ccb053f7"></a><!-- doxytag: member="process_scheduler.c::scheduler_num_processes" ref="a7987083a29a7c2ef96d730f7ccb053f7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int scheduler_num_processes </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00176">176</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a7987083a29a7c2ef96d730f7ccb053f7_icgraph.png" border="0" usemap="#process__scheduler_8c_a7987083a29a7c2ef96d730f7ccb053f7_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_a7987083a29a7c2ef96d730f7ccb053f7_icgraph" id="process__scheduler_8c_a7987083a29a7c2ef96d730f7ccb053f7_icgraph">
+<area shape="rect" id="node3" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="245,5,371,35"/><area shape="rect" id="node5" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="420,5,473,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -231,6 +350,24 @@ Variables</h2></td></tr>
 
 <p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00037">37</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
 
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_cgraph.png" border="0" usemap="#process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_cgraph" alt=""/></div>
+<map name="process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_cgraph" id="process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_cgraph">
+<area shape="rect" id="node3" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="212,188,308,217"/><area shape="rect" id="node44" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="191,241,329,271"/><area shape="rect" id="node46" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="201,295,319,324"/><area shape="rect" id="node48" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="201,348,319,377"/><area shape="rect" id="node5" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="415,57,500,87"/><area shape="rect" id="node20" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="591,111,724,140"/><area shape="rect" id="node23" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="379,161,536,191"/><area shape="rect" id="node25" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="407,215,508,244"/><area shape="rect" id="node27" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="585,267,729,296"/><area shape="rect" id="node42" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="404,319,511,348"/><area shape="rect" id="node7" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="940,5,1092,35"/><area shape="rect" id="node9" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="632,57,683,87"/><area shape="rect" id="node11" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="779,57,891,87"/><area shape="rect" id="node14" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="961,59,1071,88"/><area shape="rect" id="node16" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1163,59,1293,88"/><area shape="rect" id="node18" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1428,136,1505,165"/><area shape="rect" id="node29" href="screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="955,267,1077,296"/><area shape="rect" id="node31" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="1164,213,1292,243"/><area shape="rect" id="node35" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="1143,267,1313,296"/><area shape="rect" id="node39" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="1169,320,1287,349"/><area shape="rect" id="node37" href="screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="1364,267,1569,296"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_icgraph.png" border="0" usemap="#process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_icgraph" id="process__scheduler_8c_a352be131bf4dd6f8a85ea25f379bf06b_icgraph">
+<area shape="rect" id="node3" href="procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="459,57,632,87"/><area shape="rect" id="node20" href="_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="253,5,344,35"/><area shape="rect" id="node25" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="191,111,407,140"/><area shape="rect" id="node5" href="gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="684,57,775,87"/><area shape="rect" id="node13" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="685,111,773,140"/><area shape="rect" id="node7" href="gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="1097,57,1364,87"/><area shape="rect" id="node9" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1413,57,1525,87"/><area shape="rect" id="node11" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1575,57,1628,87"/><area shape="rect" id="node15" href="virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="825,111,1047,140"/><area shape="rect" id="node17" href="kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="1137,111,1324,140"/><area shape="rect" id="node22" href="_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="859,5,1013,35"/><area shape="rect" id="node28" href="process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="473,217,617,247"/><area shape="rect" id="node30" href="syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="456,111,635,140"/><area shape="rect" id="node32" href="syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="476,164,615,193"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a662fcb01227f8ecade9625772428886a"></a><!-- doxytag: member="process_scheduler.c::scheduler_remove" ref="a662fcb01227f8ecade9625772428886a" args="(process_t *op)" -->
@@ -249,7 +386,16 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00113">113</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00115">115</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_a662fcb01227f8ecade9625772428886a_icgraph.png" border="0" usemap="#process__scheduler_8c_a662fcb01227f8ecade9625772428886a_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_a662fcb01227f8ecade9625772428886a_icgraph" id="process__scheduler_8c_a662fcb01227f8ecade9625772428886a_icgraph">
+<area shape="rect" id="node3" href="process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="195,57,331,87"/><area shape="rect" id="node5" href="procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="648,57,821,87"/><area shape="rect" id="node22" href="_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="443,5,533,35"/><area shape="rect" id="node27" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="380,111,596,140"/><area shape="rect" id="node7" href="gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="873,57,964,87"/><area shape="rect" id="node15" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="875,111,963,140"/><area shape="rect" id="node9" href="gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="1287,57,1553,87"/><area shape="rect" id="node11" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1603,57,1715,87"/><area shape="rect" id="node13" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1764,57,1817,87"/><area shape="rect" id="node17" href="virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="1015,111,1236,140"/><area shape="rect" id="node19" href="kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="1327,111,1513,140"/><area shape="rect" id="node24" href="_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="1048,5,1203,35"/><area shape="rect" id="node30" href="process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="663,217,807,247"/><area shape="rect" id="node32" href="syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="645,111,824,140"/><area shape="rect" id="node34" href="syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="665,164,804,193"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -269,7 +415,16 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00186">186</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00211">211</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="process__scheduler_8c_aa8ea4fc777e94c00f614dfbe4f34df95_icgraph.png" border="0" usemap="#process__scheduler_8c_aa8ea4fc777e94c00f614dfbe4f34df95_icgraph" alt=""/></div>
+<map name="process__scheduler_8c_aa8ea4fc777e94c00f614dfbe4f34df95_icgraph" id="process__scheduler_8c_aa8ea4fc777e94c00f614dfbe4f34df95_icgraph">
+<area shape="rect" id="node3" href="syscall_8c.html#a03945431d175dd5183b0540ec4ee7a74" title="syscallGetName" alt="" coords="271,5,396,35"/><area shape="rect" id="node5" href="syscall_8c.html#aeeca4adac17a030ae9d3c06a6d0f13a1" title="syscallGetPid" alt="" coords="280,59,387,88"/><area shape="rect" id="node7" href="syscall_8c.html#a8d549de96ebe133f7fbc859c3c774b0c" title="syscallGetProcessingTime" alt="" coords="240,112,427,141"/><area shape="rect" id="node9" href="syscall_8c.html#a0561f60d0b6000eae55ea70554934c0a" title="syscallProcessValid" alt="" coords="261,165,405,195"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -305,7 +460,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:58 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$hdd__fs_8c.html#ac223a8572da2cb187d7b43c387b853a5" title="addToHddFs" alt="" coords="169,5,268,35"/>
+<area shape="rect" id="node11" href="$devices__fs_8h.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="359,108,465,137"/>
+<area shape="rect" id="node17" href="$hdd__fs_8h.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="152,109,285,139"/>
+<area shape="rect" id="node20" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="349,161,475,191"/>
+<area shape="rect" id="node5" href="$ide_8h.html#a9506f74d6dfb377f588e45afbb7f8c28" title="initializeIdeHardDrive" alt="" coords="335,5,489,35"/>
+<area shape="rect" id="node7" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="540,5,673,35"/>
+<area shape="rect" id="node9" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="723,5,845,35"/>
+<area shape="rect" id="node13" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="551,135,663,164"/>
+<area shape="rect" id="node15" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="757,135,811,164"/>
+</map>

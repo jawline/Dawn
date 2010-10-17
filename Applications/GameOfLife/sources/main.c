@@ -5,6 +5,10 @@
 #define BOARD_WIDTH 80
 #define BOARD_HEIGHT 23
 
+#define NUM_SECONDS_TOTAL 15
+#define NUM_STEPS_SECOND 4
+#define NUM_STEPS_TOTAL NUM_SECONDS_TOTAL * NUM_STEPS_SECOND
+
 char Board[(BOARD_WIDTH * BOARD_HEIGHT) + 1];
 char NextBoard[(BOARD_WIDTH * BOARD_HEIGHT) + 1];
 
@@ -117,6 +121,7 @@ int main(int argc, void* argv)
 {
 	setupBoard();
 	Board[BOARD_WIDTH * BOARD_HEIGHT] = '\0';
+	int step = 0;
 
 	for (;;)
 	{
@@ -142,6 +147,11 @@ int main(int argc, void* argv)
 		cSleep++;
 
 		sleepUnprecise(250);
+		step++;
+		if (step == NUM_STEPS_TOTAL)
+		{
+			break;
+		}
 	}
 	return 1;
 }

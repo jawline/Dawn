@@ -1,7 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$virt__mm_8h.html" title="Kernel/headers/mm/virt_mm.h" alt="" coords="1345,160,1561,189"/>
 <area shape="rect" id="node20" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="5,237,240,267"/>
-<area shape="rect" id="node30" href="$process_8h.html" title="Kernel/headers/process/process.h" alt="" coords="2851,83,3088,112"/>
+<area shape="rect" id="node30" href="$process_8h.html" title="Kernel/headers/process/process.h" alt="" coords="2977,83,3215,112"/>
 <area shape="rect" id="node5" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="307,315,533,344"/>
 <area shape="rect" id="node7" href="$kstack_8h.html" title="Kernel/sources/stack/kstack.h" alt="" coords="315,237,525,267"/>
 <area shape="rect" id="node10" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="2131,237,2328,267"/>
@@ -20,6 +20,7 @@
 <area shape="rect" id="node51" href="$process__scheduler_8h.html" title="Kernel/sources/scheduler/default/process_scheduler.h" alt="" coords="3492,160,3855,189"/>
 <area shape="rect" id="node55" href="$postbox__syscalls_8c.html" title="Kernel/sources/syscall/postbox_syscalls.c" alt="" coords="3879,160,4161,189"/>
 <area shape="rect" id="node57" href="$process__syscalls_8c.html" title="Kernel/sources/syscall/process_syscalls.c" alt="" coords="4185,160,4468,189"/>
+<area shape="rect" id="node59" href="$startnew_8c.html" title="Kernel/sources/syscall/startnew.c" alt="" coords="4492,160,4721,189"/>
 <area shape="rect" id="node41" href="$gpf_8c.html" title="Kernel/sources/gpf/gpf.c" alt="" coords="2885,237,3059,267"/>
 <area shape="rect" id="node44" href="$procfault_8c.html" title="Kernel/sources/process/procfault.c" alt="" coords="3083,237,3323,267"/>
 <area shape="rect" id="node53" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="3492,237,3855,267"/>

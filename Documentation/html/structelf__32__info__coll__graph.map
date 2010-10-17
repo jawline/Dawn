@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$structelf__32__program__header.html" title="The structure for a 32 bit elf program header." alt="" coords="5,5,179,35"/>
-<area shape="rect" id="node4" href="$structelf__32__section__header.html" title="The structure for a 32 bit elf section header." alt="" coords="203,5,368,35"/>
-<area shape="rect" id="node6" href="$structelf__32__header.html" title="the structure for a 32Bit elf header" alt="" coords="392,5,504,35"/>
+<area shape="rect" id="node2" href="$structelf__32__program__header.html" title="The structure for a 32 bit elf program header." alt="" coords="5,58,179,265"/>
+<area shape="rect" id="node4" href="$structelf__32__section__header.html" title="The structure for a 32 bit elf section header." alt="" coords="203,41,368,282"/>
+<area shape="rect" id="node6" href="$structelf__32__header.html" title="the structure for a 32Bit elf header" alt="" coords="392,6,507,317"/>
 </map>

@@ -7,9 +7,9 @@ void initializeInputCallbacks()
 {
 	g_listenerList = 0;
 
-	//init_mouse(); //TODO: Fix mouse driver
-	initializeKeyboard();
 
+	//initializeMouse(); //TODO: Fix mouse driver
+	initializeKeyboard();
 }
 
 void sendInputMessage(uint32 device, uint32 main, void* additional)

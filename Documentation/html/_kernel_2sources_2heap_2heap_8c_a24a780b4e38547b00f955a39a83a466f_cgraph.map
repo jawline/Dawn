@@ -1,3 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="212,5,313,35"/>
+<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="212,57,313,87"/>
+<area shape="rect" id="node5" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="488,32,600,61"/>
+<area shape="rect" id="node15" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="376,57,427,87"/>
+<area shape="rect" id="node18" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="364,111,439,140"/>
+<area shape="rect" id="node7" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="649,5,801,35"/>
+<area shape="rect" id="node9" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="671,59,780,88"/>
+<area shape="rect" id="node11" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="852,59,983,88"/>
+<area shape="rect" id="node13" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1033,59,1111,88"/>
 </map>

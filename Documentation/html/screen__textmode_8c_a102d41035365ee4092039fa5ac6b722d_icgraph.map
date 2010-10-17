@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$kterminal_8c.html#a56a3ec741ca071f5945c5b5d48964286" title="kernel_terminal_putc" alt="" coords="396,5,551,35"/>
+<area shape="rect" id="node5" href="$screen__textmode_8c.html#a1551538704349abf5f6bf2dda7df6733" title="text_mode_putc" alt="" coords="219,84,344,113"/>
+<area shape="rect" id="node13" href="$screen__textmode_8c.html#ad6a26ac2df725649418b2826db437577" title="text_mode_tputc" alt="" coords="216,31,347,60"/>
+<area shape="rect" id="node7" href="$screen__textmode_8c.html#a82d8a1839569ffa9802aa680593eeeda" title="text_mode_hardwrite" alt="" coords="395,84,552,113"/>
+<area shape="rect" id="node9" href="$panic_8c.html#a3478677e9f611ad95b4755ca4eaf79a2" title="panic" alt="" coords="624,57,680,87"/>
+<area shape="rect" id="node11" href="$panic_8c.html#af1be76d59276705bedf813c8e9375bb0" title="panic_assert" alt="" coords="601,111,703,140"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="227,5,352,35"/>
+<area shape="rect" id="node7" href="$process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82" title="rename_current_process" alt="" coords="199,59,380,88"/>
+<area shape="rect" id="node5" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="431,5,484,35"/>
+</map>

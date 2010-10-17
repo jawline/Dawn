@@ -75,9 +75,9 @@
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046                 <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> * stack = (<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *)<a class="code" href="phys__mm_8c.html#adeae1f866fa57bed66b36aac661d9704">phys_mm_slock</a>;
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048                 <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>() != 0)
+<a name="l00048"></a>00048                 <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>() != 0)
 <a name="l00049"></a>00049                 {
-<a name="l00050"></a>00050                         <a class="code" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d">used_list_add</a>(<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>(), *stack);
+<a name="l00050"></a>00050                         <a class="code" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d">used_list_add</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>(), *stack);
 <a name="l00051"></a>00051                 }
 <a name="l00052"></a>00052 
 <a name="l00053"></a>00053                 <span class="keywordflow">return</span> *stack;
@@ -129,9 +129,9 @@
 <a name="l00099"></a>00099                 <span class="keywordflow">return</span>; <span class="comment">//Anything under used_mem_end is identity mapped (Physical Address == Virtual Address) never remap it.</span>
 <a name="l00100"></a>00100         }
 <a name="l00101"></a>00101 
-<a name="l00102"></a>00102         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>() != 0)
+<a name="l00102"></a>00102         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>() != 0)
 <a name="l00103"></a>00103         {
-<a name="l00104"></a>00104                 <a class="code" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb">used_list_remove</a>(<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>(), frame);
+<a name="l00104"></a>00104                 <a class="code" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb">used_list_remove</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>(), frame);
 <a name="l00105"></a>00105         }
 <a name="l00106"></a>00106 
 <a name="l00107"></a>00107         <span class="keywordflow">if</span> (<a class="code" href="phys__mm_8c.html#a06b8488e42f578461de82aa0815caacc">phys_mm_smax</a> &lt;= <a class="code" href="phys__mm_8c.html#adeae1f866fa57bed66b36aac661d9704">phys_mm_slock</a>) <span class="comment">//Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)</span>
@@ -206,7 +206,7 @@
 <a name="l00176"></a>00176 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -38,12 +38,13 @@
 <code>#include &lt;<a class="el" href="sources_2interrupts_2idt_8h_source.html">interrupts/idt.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="interrupt__handler_8h_source.html">interrupts/interrupt_handler.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="devices_8h_source.html">input/devices.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="panic_8h_source.html">panic/panic.h</a>&gt;</code><br/>
 <div class="dynheader">
 Include dependency graph for mouse_generic_ps2.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="mouse__generic__ps2_8c__incl.png" border="0" usemap="#_kernel_2sources_2input_2mouse__generic__ps2_8c" alt=""/></div>
 <map name="_kernel_2sources_2input_2mouse__generic__ps2_8c" id="_kernel_2sources_2input_2mouse__generic__ps2_8c">
-<area shape="rect" id="node3" href="mouse__generic__ps2_8h.html" title="mouse_generic_ps2.h" alt="" coords="43,83,205,112"/><area shape="rect" id="node5" href="common_8h.html" title="common.h" alt="" coords="5,160,96,189"/><area shape="rect" id="node12" href="irq_8h.html" title="interrupts/irq.h" alt="" coords="407,237,521,267"/><area shape="rect" id="node14" href="sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="512,160,627,189"/><area shape="rect" id="node21" href="interrupt__handler_8h.html" title="interrupts/interrupt_handler.h" alt="" coords="229,83,437,112"/><area shape="rect" id="node29" href="devices_8h.html" title="input/devices.h" alt="" coords="563,83,680,112"/><area shape="rect" id="node9" href="mouse_8h.html" title="input/mouse.h" alt="" coords="120,160,235,189"/><area shape="rect" id="node7" href="int__types_8h.html" title="types/int_types.h" alt="" coords="252,237,383,267"/><area shape="rect" id="node18" href="isr_8h.html" title="isr.h" alt="" coords="545,237,593,267"/><area shape="rect" id="node24" href="headers_2interrupts_2idt_8h.html" title="idt.h" alt="" coords="379,160,429,189"/></map>
+<area shape="rect" id="node3" href="mouse__generic__ps2_8h.html" title="mouse_generic_ps2.h" alt="" coords="187,83,349,112"/><area shape="rect" id="node5" href="common_8h.html" title="common.h" alt="" coords="104,160,195,189"/><area shape="rect" id="node12" href="irq_8h.html" title="interrupts/irq.h" alt="" coords="551,237,665,267"/><area shape="rect" id="node14" href="sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="656,160,771,189"/><area shape="rect" id="node21" href="interrupt__handler_8h.html" title="interrupts/interrupt_handler.h" alt="" coords="373,83,581,112"/><area shape="rect" id="node29" href="devices_8h.html" title="input/devices.h" alt="" coords="707,83,824,112"/><area shape="rect" id="node31" href="panic_8h.html" title="panic/panic.h" alt="" coords="5,83,112,112"/><area shape="rect" id="node9" href="mouse_8h.html" title="input/mouse.h" alt="" coords="219,160,333,189"/><area shape="rect" id="node7" href="int__types_8h.html" title="types/int_types.h" alt="" coords="396,237,527,267"/><area shape="rect" id="node18" href="isr_8h.html" title="isr.h" alt="" coords="689,237,737,267"/><area shape="rect" id="node24" href="headers_2interrupts_2idt_8h.html" title="idt.h" alt="" coords="523,160,573,189"/></map>
 </div>
 
 <p><a href="mouse__generic__ps2_8c_source.html">Go to the source code of this file.</a></p>
@@ -78,7 +79,16 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00096">96</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00091">91</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a3cc293eb4af6e5849a5ceaadb93015a2_cgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a3cc293eb4af6e5849a5ceaadb93015a2_cgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a3cc293eb4af6e5849a5ceaadb93015a2_cgraph" id="mouse__generic__ps2_8c_a3cc293eb4af6e5849a5ceaadb93015a2_cgraph">
+<area shape="rect" id="node3" href="io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="599,160,639,189"/><area shape="rect" id="node5" href="mouse__generic__ps2_8c.html#a1d9774e268480fb3f10fb19951c703e6" title="mouseIrqCallback" alt="" coords="196,56,329,85"/><area shape="rect" id="node10" href="mouse__generic__ps2_8c.html#a40a1f685206b89b32eaf066668e00eee" title="mouseWaitInput" alt="" coords="416,160,539,189"/><area shape="rect" id="node13" href="mouse__generic__ps2_8c.html#a7fcd619ab8d4a1d4c0787065f09e7410" title="mouseWaitOutput" alt="" coords="409,264,545,293"/><area shape="rect" id="node16" href="io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="452,368,503,397"/><area shape="rect" id="node18" href="mouse__generic__ps2_8c.html#a216f79f7a15aae7045b9eb9c4f4d49d4" title="readMouseData" alt="" coords="201,109,324,139"/><area shape="rect" id="node22" href="interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="169,368,356,397"/><area shape="rect" id="node24" href="mouse__generic__ps2_8c.html#a4a72269bdec18fa9c622a71a767cfe05" title="sendMouseCommand" alt="" coords="181,315,344,344"/><area shape="rect" id="node8" href="input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a" title="sendInputMessage" alt="" coords="407,5,548,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -98,7 +108,25 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00012">12</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00013">13</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_cgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_cgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_cgraph" id="mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_cgraph">
+<area shape="rect" id="node3" href="io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="241,5,281,35"/><area shape="rect" id="node5" href="input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a" title="sendInputMessage" alt="" coords="191,59,332,88"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_icgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_icgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_icgraph" id="mouse__generic__ps2_8c_a1d9774e268480fb3f10fb19951c703e6_icgraph">
+<area shape="rect" id="node3" href="mouse__generic__ps2_8c.html#a3cc293eb4af6e5849a5ceaadb93015a2" title="initializeMouse" alt="" coords="189,5,304,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -111,13 +139,31 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00058">58</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00059">59</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_cgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_cgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_cgraph" id="mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_cgraph">
+<area shape="rect" id="node3" href="io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="180,5,220,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_icgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_icgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_icgraph" id="mouse__generic__ps2_8c_a40a1f685206b89b32eaf066668e00eee_icgraph">
+<area shape="rect" id="node3" href="mouse__generic__ps2_8c.html#a3cc293eb4af6e5849a5ceaadb93015a2" title="initializeMouse" alt="" coords="352,5,467,35"/><area shape="rect" id="node5" href="mouse__generic__ps2_8c.html#a216f79f7a15aae7045b9eb9c4f4d49d4" title="readMouseData" alt="" coords="180,31,303,60"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -130,13 +176,31 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00036">36</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00040">40</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_cgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_cgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_cgraph" id="mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_cgraph">
+<area shape="rect" id="node3" href="io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="191,5,231,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_icgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_icgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_icgraph" id="mouse__generic__ps2_8c_a7fcd619ab8d4a1d4c0787065f09e7410_icgraph">
+<area shape="rect" id="node3" href="mouse__generic__ps2_8c.html#a3cc293eb4af6e5849a5ceaadb93015a2" title="initializeMouse" alt="" coords="400,5,515,35"/><area shape="rect" id="node5" href="mouse__generic__ps2_8c.html#a4a72269bdec18fa9c622a71a767cfe05" title="sendMouseCommand" alt="" coords="189,31,352,60"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -155,7 +219,25 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00088">88</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00083">83</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_cgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_cgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_cgraph" id="mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_cgraph">
+<area shape="rect" id="node3" href="io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="353,5,393,35"/><area shape="rect" id="node5" href="mouse__generic__ps2_8c.html#a40a1f685206b89b32eaf066668e00eee" title="mouseWaitInput" alt="" coords="180,31,303,60"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_icgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_icgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_icgraph" id="mouse__generic__ps2_8c_a216f79f7a15aae7045b9eb9c4f4d49d4_icgraph">
+<area shape="rect" id="node3" href="mouse__generic__ps2_8c.html#a3cc293eb4af6e5849a5ceaadb93015a2" title="initializeMouse" alt="" coords="179,5,293,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -169,13 +251,31 @@ Variables</h2></td></tr>
           <td class="paramtype"><a class="el" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>&nbsp;</td>
           <td class="paramname"> <em>cmd</em></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00079">79</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00074">74</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_cgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_cgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_cgraph" id="mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_cgraph">
+<area shape="rect" id="node3" href="mouse__generic__ps2_8c.html#a7fcd619ab8d4a1d4c0787065f09e7410" title="mouseWaitOutput" alt="" coords="216,5,352,35"/><area shape="rect" id="node7" href="io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="259,59,309,88"/><area shape="rect" id="node5" href="io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="401,5,441,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_icgraph.png" border="0" usemap="#mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_icgraph" alt=""/></div>
+<map name="mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_icgraph" id="mouse__generic__ps2_8c_a4a72269bdec18fa9c622a71a767cfe05_icgraph">
+<area shape="rect" id="node3" href="mouse__generic__ps2_8c.html#a3cc293eb4af6e5849a5ceaadb93015a2" title="initializeMouse" alt="" coords="216,5,331,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -191,7 +291,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00010">10</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00011">11</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
 
 </div>
 </div>
@@ -206,7 +306,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00009">9</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00010">10</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
 
 </div>
 </div>
@@ -221,12 +321,12 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00008">8</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
+<p>Definition at line <a class="el" href="mouse__generic__ps2_8c_source.html#l00009">9</a> of file <a class="el" href="mouse__generic__ps2_8c_source.html">mouse_generic_ps2.c</a>.</p>
 
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:58 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

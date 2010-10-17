@@ -20,7 +20,7 @@ extern process_t* get_current_process();
 
 //The kernel callback for a keyboard event
 //Registered with the kernel input manager in void post_init(); with a register_input_listener(DEVICE_KEYBOARD) call
-void kernelKeyboardCallback(uint32 device, uint32 main, void* additional)
+void kernelInputCallback(uint32 device, uint32 main, void* additional)
 {
 
 	//Create a new message to send to the all processes
@@ -31,7 +31,30 @@ void kernelKeyboardCallback(uint32 device, uint32 main, void* additional)
 	da.ID = INPUT_MESSAGE;
 	da.message_data[0] = device;
 	da.message_data[1] = main;
-	da.message_data[2] = *((uint32*)additional);
+	da.message_data[2] = *((MEM_LOC*)additional);
+
+	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
+	scheduler_global_message(da, INPUT_BIT);
+}
+
+void kernelMouseCallback(uint32 device, uint32 main, void* additional)
+{
+
+	//Create a new message to send to the all processes
+	process_message da;
+
+	//Initialize the message and set the data
+	memset(&da, 0, sizeof(process_message));
+	da.ID = INPUT_MESSAGE;
+	da.message_data[0] = device;
+
+	//Convert the message data to a fixed size message for the mouse callback
+	mouse_input_t* message_data = additional;
+	da.message_data[1] = message_data->i_byte;
+	da.message_data[2] = message_data->mouse_x;
+	da.message_data[3] = message_data->mouse_y;
+
+	printf("%i %i %i\n", message_data->i_byte, message_data->mouse_x, message_data->mouse_y);
 
 	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
 	scheduler_global_message(da, INPUT_BIT);
@@ -45,69 +68,28 @@ int alive = 0;
 
 void postInitialization() 
 {
-    registerInputListener(DEVICE_KEYBOARD, &kernelKeyboardCallback);
+    registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
+    registerInputListener(DEVICE_MOUSE, &kernelMouseCallback);
 
-    int result = kfork();
+    createNewProcess("./system/root/Base", init_vfs());
 
-    if (result == 0) //Parent
-    	{
-		
-		//System idle halts the processor between interrupts when it is active. This is to slow the processor, lower memory usage & heat etcetera.
-		//TODO: Give system idle a priority within the scheduler so that the processor spends less time idling when other processes want to be powered
+    //Rename the idle process
+    set_process_name(get_current_process(), "System Idle");
+    scheduler_block_me();
+
+    enable_interrupts();
+
+    //Loop and continually halt the processor, this will cause the processor to idle between interrupts
+    for (;;) { 
+
+	if (scheduler_num_processes() == 1)
+	{
+		printf("Creating new instance of Line\n");
+		createNewProcess("./system/root/Line", init_vfs());
 		enable_interrupts();
+	}
 
-		//Rename the idle process
-		set_process_name(get_current_process(), "System Idle");
-		scheduler_block_me();
-
-		enable_interrupts();
-
-		//Loop and continually halt the processor, this will cause the processor to idle between interrupts
-		for (;;) { 
-			asm volatile("hlt"); 
-		} 
-
-    } else
-    {
-
-	    extern terminal_t* g_kernelTerminal;
-
-	    //Give this process its own terminal
-	    terminal_t* m_processTerminal = makeNewTerminal(80, 25);
-
-	    //Set up the new terminals callbacks then bring it into context
-	    setDefaultTerminalCallbacks(m_processTerminal);
-	    setTerminalContext(m_processTerminal);
-
-	    //Set the current processes terminal to the new terminal
-	    get_current_process()->m_pTerminal = m_processTerminal;
-
-	    //Rename it to the file name of the program its gohna run
-	    rename_current_process("Line");
-
-	    //Find Line.x
-	    fs_node_t* line = evaluatePath("./system/root/Line", init_vfs());
-
-	    //Execute Line.x
-	    if (line != 0)
-	    {
-		printf("Found Line\n");
-		loadAndExecuteElf(line, 1);
-	    } else
-	    {
-		printf("Error Line not found\n");
-	    }
-
-	    //Set the root console as active
-            printf("Reverting back to root console\n");
-
-	    //(Bring it into context)
-	    setTerminalContext(g_kernelTerminal);
-
-	    //Just a simple protection in case for some reason the
-	    //processor continues executing down this code path
-            for (;;) {}
+	asm volatile("hlt");
+	scheduler_block_me();
     }
-
-    for (;;) { }
 }

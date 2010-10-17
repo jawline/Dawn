@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="129,5,255,35"/>
+<area shape="rect" id="node9" href="$_tools_2_init_r_d_2main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="165,59,219,88"/>
+<area shape="rect" id="node11" href="$_tools_2_init_r_d_2md5use_8h.html#ad07c8855c27ba6bdd42e0f6f46304833" title="MDString" alt="" coords="152,112,232,141"/>
+<area shape="rect" id="node5" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="304,5,416,35"/>
+<area shape="rect" id="node7" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="465,5,519,35"/>
+</map>

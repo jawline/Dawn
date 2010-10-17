@@ -1,3 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="188,5,281,35"/>
+<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="188,84,281,113"/>
+<area shape="rect" id="node5" href="$phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="337,31,423,60"/>
+<area shape="rect" id="node18" href="$virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="332,84,428,113"/>
+<area shape="rect" id="node20" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="347,137,413,167"/>
+<area shape="rect" id="node7" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="823,5,975,35"/>
+<area shape="rect" id="node9" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="520,31,571,60"/>
+<area shape="rect" id="node14" href="$used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="479,84,612,113"/>
+<area shape="rect" id="node11" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="661,31,773,60"/>
+<area shape="rect" id="node16" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="679,84,756,113"/>
 </map>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$syscall_8c.html#a03945431d175dd5183b0540ec4ee7a74" title="syscallGetName" alt="" coords="271,5,396,35"/>
+<area shape="rect" id="node5" href="$syscall_8c.html#aeeca4adac17a030ae9d3c06a6d0f13a1" title="syscallGetPid" alt="" coords="280,59,387,88"/>
+<area shape="rect" id="node7" href="$syscall_8c.html#a8d549de96ebe133f7fbc859c3c774b0c" title="syscallGetProcessingTime" alt="" coords="240,112,427,141"/>
+<area shape="rect" id="node9" href="$syscall_8c.html#a0561f60d0b6000eae55ea70554934c0a" title="syscallProcessValid" alt="" coords="261,165,405,195"/>
+</map>

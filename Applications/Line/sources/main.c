@@ -2,6 +2,7 @@
 #include <common.h>
 #include <printf.h>
 #include <system/reboot.h>
+#include <system/run.h>
 
 #include <version/kernel_version.h>
 #include <version/os_version.h>
@@ -22,6 +23,8 @@
 
 #include <heap/heap.h>
 #include <process/get_info.h>
+
+#define BIT_0 1
 
 char Pointer[1024];
 int c_ptr = 0;
@@ -64,6 +67,11 @@ char exec_cmd()
 	else if (strcmp("cls", Pointer) == 0)
 	{
 		clearscreen();
+	}
+	else if (strcmp("gameoflife", Pointer) == 0)
+	{
+		systemRunNewProcess("./system/root/GameOfLife");
+		exit(1);
 	}
 	else if (strcmp("uptime", Pointer) == 0)
 	{
@@ -151,12 +159,6 @@ char exec_cmd()
  */
 int main(int argc, void* argv)
 {
-	//syscall_setbg(0);
-	//syscall_setfg(15);
-	//syscall_cls();
-
-	clearscreen();
-
 	c_ptr = 0;
 	postboxSetFlags(INPUT_BIT);
 
@@ -212,6 +214,19 @@ int main(int argc, void* argv)
 						c_ptr++;
 						printf("%c", C);
 					}
+				}
+				else if (message.message_data[0] == DEVICE_MOUSE)
+				{
+
+					cls();
+
+					//Message from a the mouse
+					printf("Message Data: %i %i ", message.message_data[2], message.message_data[3]);
+					if (message.message_data[1] & BIT_0 == 1)
+					{
+						printf("LBTN");
+					}
+					printf("\n");
 				}
 			}
 		}

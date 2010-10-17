@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$ide_8h.html#a9506f74d6dfb377f588e45afbb7f8c28" title="initializeIdeHardDrive" alt="" coords="228,5,383,35"/>
+<area shape="rect" id="node5" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="433,5,567,35"/>
+<area shape="rect" id="node7" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="616,5,739,35"/>
+</map>

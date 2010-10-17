@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f" title="init_used_list" alt="" coords="216,213,320,243"/>
+<area shape="rect" id="node5" href="$vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="235,267,301,296"/>
+<area shape="rect" id="node13" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="896,369,971,399"/>
+<area shape="rect" id="node25" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="903,267,964,296"/>
+<area shape="rect" id="node7" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="369,241,460,271"/>
+<area shape="rect" id="node9" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="509,189,659,219"/>
+<area shape="rect" id="node11" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="895,109,972,139"/>
+<area shape="rect" id="node15" href="$rfs_8c.html#a56382b1a2c0cc9e2b4dfd1a5d874bcc7" title="root_bind_node" alt="" coords="716,109,836,139"/>
+<area shape="rect" id="node18" href="$rfs_8c.html#a440037b6c1183ee9196f5fb23981c832" title="root_finddir" alt="" coords="729,5,823,35"/>
+<area shape="rect" id="node22" href="$rfs_8c.html#a870cae2177e4211603dbc9c10146b31b" title="root_readdir" alt="" coords="727,267,825,296"/>
+<area shape="rect" id="node27" href="$rfs_8c.html#a20b298e9a6fd9876d7d45fc7083e6567" title="root_unbind_node" alt="" coords="708,163,844,192"/>
+<area shape="rect" id="node20" href="$common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="900,5,967,35"/>
+</map>

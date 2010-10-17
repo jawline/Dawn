@@ -33,13 +33,13 @@
 <a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="postbox_8h.html">process/postbox.h</a>&gt;</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="message_8h.html">process/message.h</a>&gt;</span>
 <a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
+<a name="l00006"></a>00006 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
 <a name="l00007"></a>00007 <span class="keyword">extern</span> <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb);
 <a name="l00008"></a>00008 
 <a name="l00009"></a><a class="code" href="postbox__syscalls_8c.html#ab88f67de56ab20fd05b26a8c242ef6dd">00009</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="postbox__api_8h.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read.">postboxHasNext</a>()
 <a name="l00010"></a>00010 {
 <a name="l00011"></a>00011         <a class="code" href="structprocess__message.html">process_message</a> toTest;
-<a name="l00012"></a>00012         toTest = <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(&amp;<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_processPostbox);
+<a name="l00012"></a>00012         toTest = <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(&amp;<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_processPostbox);
 <a name="l00013"></a>00013 
 <a name="l00014"></a>00014         <span class="keywordflow">if</span> (toTest.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> == -1) <span class="keywordflow">return</span> 0;
 <a name="l00015"></a>00015         <span class="keywordflow">return</span> 1;
@@ -48,22 +48,22 @@
 <a name="l00018"></a><a class="code" href="syscall_8c.html#aead17db7d001bbfc192a381d07236367">00018</a> <span class="keywordtype">void</span> <a class="code" href="postbox__syscalls_8c.html#aead17db7d001bbfc192a381d07236367">postboxReadTop</a>(<a class="code" href="structprocess__message.html">process_message</a>* Message)
 <a name="l00019"></a>00019 {
 <a name="l00020"></a>00020         <a class="code" href="structprocess__message.html">process_message</a> toCopy;
-<a name="l00021"></a>00021         toCopy = <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(&amp;<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_processPostbox);
+<a name="l00021"></a>00021         toCopy = <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(&amp;<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_processPostbox);
 <a name="l00022"></a>00022         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(Message, &amp;toCopy, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__message.html">process_message</a>));
 <a name="l00023"></a>00023 }
 <a name="l00024"></a>00024 
 <a name="l00025"></a><a class="code" href="syscall_8c.html#a42d52743f176f73c3dbffdbc23ca1d26">00025</a> <span class="keywordtype">void</span> <a class="code" href="postbox__syscalls_8c.html#a42d52743f176f73c3dbffdbc23ca1d26">postboxPopTop</a>()
 <a name="l00026"></a>00026 {
-<a name="l00027"></a>00027         <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_processPostbox);
+<a name="l00027"></a>00027         <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_processPostbox);
 <a name="l00028"></a>00028 }
 <a name="l00029"></a>00029 
 <a name="l00030"></a><a class="code" href="postbox__syscalls_8c.html#a1e0f82e67d8934bca1cbf470f47b9866">00030</a> <span class="keywordtype">void</span> <a class="code" href="postbox__api_8h.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message...">postboxSetFlags</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="headers_2interrupts_2idt_8h.html#acd8859336a5cb8a70051c97a438726a1">flags</a>)
 <a name="l00031"></a>00031 {
-<a name="l00032"></a>00032         <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b" title="The flags set for what information this process wants to recieve in its postbox.">m_postboxFlags</a> = flags;
+<a name="l00032"></a>00032         <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b" title="The flags set for what information this process wants to recieve in its postbox.">m_postboxFlags</a> = flags;
 <a name="l00033"></a>00033 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

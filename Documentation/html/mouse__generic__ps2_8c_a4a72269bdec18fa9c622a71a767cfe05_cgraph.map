@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$mouse__generic__ps2_8c.html#a7fcd619ab8d4a1d4c0787065f09e7410" title="mouseWaitOutput" alt="" coords="216,5,352,35"/>
+<area shape="rect" id="node7" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="259,59,309,88"/>
+<area shape="rect" id="node5" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="401,5,441,35"/>
+</map>

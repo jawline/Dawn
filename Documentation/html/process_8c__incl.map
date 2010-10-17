@@ -1,13 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="251,83,317,112"/>
-<area shape="rect" id="node5" href="$panic_8h.html" title="panic/panic.h" alt="" coords="13,160,120,189"/>
-<area shape="rect" id="node11" href="$virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="392,83,509,112"/>
-<area shape="rect" id="node13" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="396,237,505,267"/>
-<area shape="rect" id="node7" href="$common_8h.html" title="common.h" alt="" coords="37,315,128,344"/>
-<area shape="rect" id="node9" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="237,469,368,499"/>
-<area shape="rect" id="node15" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="309,392,435,421"/>
-<area shape="rect" id="node19" href="$process_8h.html" title="process/process.h" alt="" coords="233,160,372,189"/>
-<area shape="rect" id="node23" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="233,237,372,267"/>
-<area shape="rect" id="node28" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="65,237,209,267"/>
-<area shape="rect" id="node25" href="$message_8h.html" title="process/message.h" alt="" coords="239,315,385,344"/>
+<area shape="rect" id="node3" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="5,83,72,112"/>
+<area shape="rect" id="node5" href="$panic_8h.html" title="panic/panic.h" alt="" coords="680,160,787,189"/>
+<area shape="rect" id="node11" href="$virt__mm_8h.html" title="mm/virt_mm.h" alt="" coords="155,83,272,112"/>
+<area shape="rect" id="node13" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="187,237,296,267"/>
+<area shape="rect" id="node37" href="$messages_8h.html" title="messages/messages.h" alt="" coords="347,83,517,112"/>
+<area shape="rect" id="node7" href="$common_8h.html" title="common.h" alt="" coords="709,315,800,344"/>
+<area shape="rect" id="node9" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="396,469,527,499"/>
+<area shape="rect" id="node15" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="233,392,359,421"/>
+<area shape="rect" id="node19" href="$process_8h.html" title="process/process.h" alt="" coords="383,160,521,189"/>
+<area shape="rect" id="node23" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="320,237,459,267"/>
+<area shape="rect" id="node28" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="573,237,717,267"/>
+<area shape="rect" id="node31" href="$vfs_8h.html" title="fs/vfs.h" alt="" coords="483,237,549,267"/>
+<area shape="rect" id="node25" href="$message_8h.html" title="process/message.h" alt="" coords="277,315,424,344"/>
+<area shape="rect" id="node34" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="499,315,685,344"/>
 </map>

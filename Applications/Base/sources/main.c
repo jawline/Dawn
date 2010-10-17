@@ -1,4 +1,7 @@
+#include <printf.h>
+
 int _start(int argc, void* argv)
 {
-	exit(-1);
+	printf("BASE: Hello world\n");
+	exit(3);
 }

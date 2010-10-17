@@ -32,12 +32,13 @@
 </div>
 <div class="contents">
 <code>#include &lt;<a class="el" href="procfault_8h_source.html">process/procfault.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="panic_8h_source.html">panic/panic.h</a>&gt;</code><br/>
 <div class="dynheader">
 Include dependency graph for gpf.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="gpf_8c__incl.png" border="0" usemap="#_kernel_2sources_2gpf_2gpf_8c" alt=""/></div>
 <map name="_kernel_2sources_2gpf_2gpf_8c" id="_kernel_2sources_2gpf_2gpf_8c">
-<area shape="rect" id="node3" href="procfault_8h.html" title="process/procfault.h" alt="" coords="181,83,325,112"/><area shape="rect" id="node5" href="process_8h.html" title="process/process.h" alt="" coords="184,160,323,189"/><area shape="rect" id="node7" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="5,315,115,344"/><area shape="rect" id="node13" href="common_8h.html" title="common.h" alt="" coords="309,315,400,344"/><area shape="rect" id="node16" href="postbox_8h.html" title="process/postbox.h" alt="" coords="131,237,269,267"/><area shape="rect" id="node21" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="344,237,488,267"/><area shape="rect" id="node9" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="149,392,275,421"/><area shape="rect" id="node11" href="int__types_8h.html" title="int_types.h" alt="" coords="227,469,317,499"/><area shape="rect" id="node18" href="message_8h.html" title="process/message.h" alt="" coords="139,315,285,344"/></map>
+<area shape="rect" id="node3" href="procfault_8h.html" title="process/procfault.h" alt="" coords="151,83,295,112"/><area shape="rect" id="node29" href="panic_8h.html" title="panic/panic.h" alt="" coords="5,160,112,189"/><area shape="rect" id="node5" href="process_8h.html" title="process/process.h" alt="" coords="172,160,311,189"/><area shape="rect" id="node7" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="173,315,283,344"/><area shape="rect" id="node13" href="common_8h.html" title="common.h" alt="" coords="59,315,149,344"/><area shape="rect" id="node16" href="postbox_8h.html" title="process/postbox.h" alt="" coords="307,237,445,267"/><area shape="rect" id="node21" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="35,237,179,267"/><area shape="rect" id="node24" href="vfs_8h.html" title="fs/vfs.h" alt="" coords="537,237,604,267"/><area shape="rect" id="node9" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="241,392,367,421"/><area shape="rect" id="node11" href="int__types_8h.html" title="int_types.h" alt="" coords="259,469,349,499"/><area shape="rect" id="node18" href="message_8h.html" title="process/message.h" alt="" coords="307,315,453,344"/><area shape="rect" id="node27" href="disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="477,315,664,344"/></map>
 </div>
 
 <p><a href="gpf_8c_source.html">Go to the source code of this file.</a></p>
@@ -63,7 +64,25 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="gpf_8c_source.html#l00003">3</a> of file <a class="el" href="gpf_8c_source.html">gpf.c</a>.</p>
+<p>Definition at line <a class="el" href="gpf_8c_source.html#l00004">4</a> of file <a class="el" href="gpf_8c_source.html">gpf.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_cgraph.png" border="0" usemap="#gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_cgraph" alt=""/></div>
+<map name="gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_cgraph" id="gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_cgraph">
+<area shape="rect" id="node3" href="procfault_8h.html#a6a8812a2522cb2c634a4d4ae05661ffb" title="handleFatalProcessFault" alt="" coords="148,93,321,123"/><area shape="rect" id="node5" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1572,67,1724,96"/><area shape="rect" id="node7" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="372,93,588,123"/><area shape="rect" id="node10" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="637,255,773,284"/><area shape="rect" id="node12" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="844,227,940,256"/><area shape="rect" id="node52" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="823,280,961,309"/><area shape="rect" id="node54" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="833,333,951,363"/><area shape="rect" id="node56" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="833,387,951,416"/><area shape="rect" id="node14" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="1047,136,1132,165"/><area shape="rect" id="node28" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="1223,197,1356,227"/><area shape="rect" id="node31" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="1011,240,1168,269"/><area shape="rect" id="node33" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="1039,293,1140,323"/><area shape="rect" id="node35" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="1217,345,1361,375"/><area shape="rect" id="node50" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="1036,397,1143,427"/><area shape="rect" id="node17" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1264,144,1315,173"/><area shape="rect" id="node19" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1411,144,1523,173"/><area shape="rect" id="node22" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1593,144,1703,173"/><area shape="rect" id="node24" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1795,144,1925,173"/><area shape="rect" id="node26" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="2060,221,2137,251"/><area shape="rect" id="node37" href="screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="1587,345,1709,375"/><area shape="rect" id="node39" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="1796,299,1924,328"/><area shape="rect" id="node43" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="1775,352,1945,381"/><area shape="rect" id="node47" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="1801,405,1919,435"/><area shape="rect" id="node45" href="screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="1996,352,2201,381"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_icgraph.png" border="0" usemap="#gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_icgraph" alt=""/></div>
+<map name="gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_icgraph" id="gpf_8c_a2be4c2c7d4e533f23cef010fc57e8a55_icgraph">
+<area shape="rect" id="node3" href="gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="148,5,415,35"/><area shape="rect" id="node5" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="464,5,576,35"/><area shape="rect" id="node7" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="625,5,679,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -82,12 +101,30 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="gpf_8c_source.html#l00008">8</a> of file <a class="el" href="gpf_8c_source.html">gpf.c</a>.</p>
+<p>Definition at line <a class="el" href="gpf_8c_source.html#l00010">10</a> of file <a class="el" href="gpf_8c_source.html">gpf.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_cgraph.png" border="0" usemap="#gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_cgraph" alt=""/></div>
+<map name="gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_cgraph" id="gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_cgraph">
+<area shape="rect" id="node3" href="gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="372,93,463,123"/><area shape="rect" id="node61" href="interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="324,147,511,176"/><area shape="rect" id="node5" href="procfault_8h.html#a6a8812a2522cb2c634a4d4ae05661ffb" title="handleFatalProcessFault" alt="" coords="561,93,735,123"/><area shape="rect" id="node7" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1985,67,2137,96"/><area shape="rect" id="node9" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="785,93,1001,123"/><area shape="rect" id="node12" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="1051,255,1187,284"/><area shape="rect" id="node14" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="1257,227,1353,256"/><area shape="rect" id="node54" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="1236,280,1375,309"/><area shape="rect" id="node56" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="1247,333,1364,363"/><area shape="rect" id="node58" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="1247,387,1364,416"/><area shape="rect" id="node16" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="1460,136,1545,165"/><area shape="rect" id="node30" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="1636,197,1769,227"/><area shape="rect" id="node33" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="1424,240,1581,269"/><area shape="rect" id="node35" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="1452,293,1553,323"/><area shape="rect" id="node37" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="1631,345,1775,375"/><area shape="rect" id="node52" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="1449,397,1556,427"/><area shape="rect" id="node19" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1677,144,1728,173"/><area shape="rect" id="node21" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1824,144,1936,173"/><area shape="rect" id="node24" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="2007,144,2116,173"/><area shape="rect" id="node26" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="2208,144,2339,173"/><area shape="rect" id="node28" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="2473,221,2551,251"/><area shape="rect" id="node39" href="screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="2000,345,2123,375"/><area shape="rect" id="node41" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="2209,299,2337,328"/><area shape="rect" id="node45" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="2188,352,2359,381"/><area shape="rect" id="node49" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="2215,405,2332,435"/><area shape="rect" id="node47" href="screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="2409,352,2615,381"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_icgraph.png" border="0" usemap="#gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_icgraph" alt=""/></div>
+<map name="gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_icgraph" id="gpf_8c_a0c40c2bb85384d8c85b9e44259c49aeb_icgraph">
+<area shape="rect" id="node3" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="323,5,435,35"/><area shape="rect" id="node5" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="484,5,537,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:58 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -1,0 +1,51 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$hdd__fs_8c.html#ac223a8572da2cb187d7b43c387b853a5" title="addToHddFs" alt="" coords="160,64,259,93"/>
+<area shape="rect" id="node11" href="$screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="145,168,273,197"/>
+<area shape="rect" id="node13" href="$screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="351,217,473,247"/>
+<area shape="rect" id="node27" href="$virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="797,896,880,925"/>
+<area shape="rect" id="node31" href="$virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="1248,819,1349,848"/>
+<area shape="rect" id="node43" href="$cpuid__vendor_8c.html#aca495aa97ccc54e40f4f4d571a1c0a7b" title="cpuidGetVendorReal" alt="" coords="135,948,284,977"/>
+<area shape="rect" id="node47" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="337,373,487,403"/>
+<area shape="rect" id="node59" href="$vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string." alt="" coords="1015,529,1119,559"/>
+<area shape="rect" id="node67" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="1004,271,1129,300"/>
+<area shape="rect" id="node72" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="144,597,275,627"/>
+<area shape="rect" id="node88" href="$stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="792,480,885,509"/>
+<area shape="rect" id="node97" href="$_applications_2_game_of_life_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of a text&#45;based remake of the game of life for Dawn &#160;int Argc and void* Argv are give..." alt="" coords="183,1001,236,1031"/>
+<area shape="rect" id="node102" href="$syscall_8c.html#aead17db7d001bbfc192a381d07236367" title="postboxReadTop" alt="" coords="147,1055,272,1084"/>
+<area shape="rect" id="node104" href="$initrd_8c.html#ac88f507804f0cd1c22ef2f8811b10886" title="read_ird" alt="" coords="172,1108,247,1137"/>
+<area shape="rect" id="node106" href="$rfs_8c.html#a56382b1a2c0cc9e2b4dfd1a5d874bcc7" title="root_bind_node" alt="" coords="149,427,269,456"/>
+<area shape="rect" id="node109" href="$rfs_8c.html#a20b298e9a6fd9876d7d45fc7083e6567" title="root_unbind_node" alt="" coords="141,323,277,352"/>
+<area shape="rect" id="node113" href="$used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="345,116,479,145"/>
+<area shape="rect" id="node5" href="$ide_8h.html#a9506f74d6dfb377f588e45afbb7f8c28" title="initializeIdeHardDrive" alt="" coords="335,61,489,91"/>
+<area shape="rect" id="node7" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="564,33,697,63"/>
+<area shape="rect" id="node9" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="777,5,900,35"/>
+<area shape="rect" id="node15" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="559,217,703,247"/>
+<area shape="rect" id="node17" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="791,165,887,195"/>
+<area shape="rect" id="node21" href="$kterminal_8c.html#aa85bbcb7640007f2c337d10226414093" title="initializeKernelTerminal" alt="" coords="984,217,1149,247"/>
+<area shape="rect" id="node19" href="$process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="999,164,1135,193"/>
+<area shape="rect" id="node23" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1243,387,1355,416"/>
+<area shape="rect" id="node25" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1873,445,1927,475"/>
+<area shape="rect" id="node29" href="$virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="1009,845,1124,875"/>
+<area shape="rect" id="node33" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="1420,819,1559,848"/>
+<area shape="rect" id="node40" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="1463,765,1516,795"/>
+<area shape="rect" id="node35" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1653,477,1779,507"/>
+<area shape="rect" id="node38" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="1609,819,1823,848"/>
+<area shape="rect" id="node45" href="$cpuid__vendor_8c.html#ad6dbc60447f7864e241e045a48b0cb0e" title="cpuidGetVendor" alt="" coords="351,948,473,977"/>
+<area shape="rect" id="node49" href="$devices__fs_8h.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="785,323,892,352"/>
+<area shape="rect" id="node52" href="$hdd__fs_8h.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="564,373,697,403"/>
+<area shape="rect" id="node55" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="585,427,676,456"/>
+<area shape="rect" id="node57" href="$vfs_8c.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="805,376,872,405"/>
+<area shape="rect" id="node64" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="985,425,1148,455"/>
+<area shape="rect" id="node61" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1227,529,1371,559"/>
+<area shape="rect" id="node74" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="357,612,467,641"/>
+<area shape="rect" id="node76" href="$phys__mm_8c.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="575,612,687,641"/>
+<area shape="rect" id="node91" href="$phys__mm_8c.html#a7fafda6bc4a98719fbf8965f1c5d697c" title="allocateFrameForProcess" alt="" coords="540,793,721,823"/>
+<area shape="rect" id="node78" href="$_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="788,533,889,563"/>
+<area shape="rect" id="node80" href="$virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943" title="identityMapPages" alt="" coords="772,637,905,667"/>
+<area shape="rect" id="node82" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="956,636,1177,665"/>
+<area shape="rect" id="node84" href="$_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="785,691,892,720"/>
+<area shape="rect" id="node99" href="$_applications_2_game_of_life_2sources_2main_8c.html#a8d8d3cea2174e13f5aee45e225d6f7cd" title="_start" alt="" coords="383,1001,441,1031"/>
+<area shape="rect" id="node115" href="$phys__mm_8c.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="588,113,673,143"/>
+<area shape="rect" id="node118" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="775,59,903,88"/>
+<area shape="rect" id="node120" href="$_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="792,112,885,141"/>
+</map>

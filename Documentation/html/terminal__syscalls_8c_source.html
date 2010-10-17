@@ -34,15 +34,15 @@
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="heap_8h.html">heap/heap.h</a>&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="panic_8h.html">panic/panic.h</a>&gt;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="virt__mm_8h.html">mm/virt_mm.h</a>&gt;</span>
-<a name="l00007"></a>00007 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
+<a name="l00007"></a>00007 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
 <a name="l00008"></a>00008 
 <a name="l00009"></a><a class="code" href="terminal__syscalls_8c.html#ad3a622baf1a6e09ce69704fad80d9179">00009</a> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#ad3a622baf1a6e09ce69704fad80d9179">syscallPrint_t</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Line)
 <a name="l00010"></a>00010 {
-<a name="l00011"></a>00011         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal != 0)
+<a name="l00011"></a>00011         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal != 0)
 <a name="l00012"></a>00012         {
 <a name="l00013"></a>00013                 <span class="keywordflow">while</span> (*Line)
 <a name="l00014"></a>00014                 {
-<a name="l00015"></a>00015                         <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a622f7354220b48d23c69c9d17bdf7609">f_putchar</a>(<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal, *Line);
+<a name="l00015"></a>00015                         <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a622f7354220b48d23c69c9d17bdf7609">f_putchar</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal, *Line);
 <a name="l00016"></a>00016                         Line++;
 <a name="l00017"></a>00017                 }
 <a name="l00018"></a>00018         }
@@ -50,30 +50,30 @@
 <a name="l00020"></a>00020 
 <a name="l00021"></a><a class="code" href="terminal__syscalls_8c.html#aab274ca82284758b7849abb948a79801">00021</a> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#aab274ca82284758b7849abb948a79801">syscallClearscreen</a>()
 <a name="l00022"></a>00022 {
-<a name="l00023"></a>00023         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal != 0)
+<a name="l00023"></a>00023         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal != 0)
 <a name="l00024"></a>00024         {
-<a name="l00025"></a>00025                 <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a35e80a830c9e517c151e90cf21a69cdf">f_clear</a>(<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal);
+<a name="l00025"></a>00025                 <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a35e80a830c9e517c151e90cf21a69cdf">f_clear</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal);
 <a name="l00026"></a>00026         }
 <a name="l00027"></a>00027 }
 <a name="l00028"></a>00028 
 <a name="l00029"></a><a class="code" href="terminal__syscalls_8c.html#ace004b1bbaff00c359c440b60acf7005">00029</a> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#ace004b1bbaff00c359c440b60acf7005">syscallSetFgc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> fgc)
 <a name="l00030"></a>00030 {
-<a name="l00031"></a>00031         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal != 0)
+<a name="l00031"></a>00031         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal != 0)
 <a name="l00032"></a>00032         {
-<a name="l00033"></a>00033                 <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a32bd95e4ed865507632bb826e9a255a9">f_setForeground</a>(<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal, fgc);
+<a name="l00033"></a>00033                 <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a32bd95e4ed865507632bb826e9a255a9">f_setForeground</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal, fgc);
 <a name="l00034"></a>00034         }       
 <a name="l00035"></a>00035 }
 <a name="l00036"></a>00036 
 <a name="l00037"></a><a class="code" href="terminal__syscalls_8c.html#a716263cfc2bfff32787a1788a06b0638">00037</a> <span class="keywordtype">void</span> <a class="code" href="syscall_8c.html#a716263cfc2bfff32787a1788a06b0638">syscallSetBgc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> bgc)
 <a name="l00038"></a>00038 {
-<a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal != 0)
+<a name="l00039"></a>00039         <span class="keywordflow">if</span> (<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal != 0)
 <a name="l00040"></a>00040         {
-<a name="l00041"></a>00041                 <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a55bd598a0c08580f4114499db737b59d">f_setBackground</a>(<a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>()-&gt;m_pTerminal, bgc);
+<a name="l00041"></a>00041                 <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>-&gt;<a class="code" href="structabstract__terminal.html#a55bd598a0c08580f4114499db737b59d">f_setBackground</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_pTerminal, bgc);
 <a name="l00042"></a>00042         }       
 <a name="l00043"></a>00043 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 7 2010 23:33:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$hdd__fs_8c.html#ac223a8572da2cb187d7b43c387b853a5" title="addToHddFs" alt="" coords="104,5,203,35"/>
+<area shape="rect" id="node11" href="$panic_8c.html#a3478677e9f611ad95b4755ca4eaf79a2" title="panic" alt="" coords="125,59,181,88"/>
+<area shape="rect" id="node13" href="$panic_8c.html#af1be76d59276705bedf813c8e9375bb0" title="panic_assert" alt="" coords="103,112,204,141"/>
+<area shape="rect" id="node15" href="$_kernel_2sources_2lib_2printf_8c.html#a30dea0ae500bf94b2d6c42614925b1db" title="printi" alt="" coords="127,165,180,195"/>
+<area shape="rect" id="node17" href="$_kernel_2sources_2lib_2printf_8c.html#a22a9fd21569d75576c5857efe82e7c77" title="printui" alt="" coords="123,219,184,248"/>
+<area shape="rect" id="node5" href="$ide_8h.html#a9506f74d6dfb377f588e45afbb7f8c28" title="initializeIdeHardDrive" alt="" coords="255,5,409,35"/>
+<area shape="rect" id="node7" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="460,5,593,35"/>
+<area shape="rect" id="node9" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="643,5,765,35"/>
+</map>

@@ -4,9 +4,13 @@
 #include <messages/messages.h>
 
 extern process_t* get_current_process();
+extern process_t* scheduler_return_process();
 
 void system_process()
 {
+    int schedulerIter = 0;
+    process_t* schedulerPtr = 0;
+
     //Loop and continually halt the processor, this will cause the processor to idle between interrupts
     for (;;) {
 
@@ -27,6 +31,33 @@ void system_process()
 			break;
 		}
 
+	}
+
+	schedulerIter = 0;
+	//Shut down all processes that need a-killin
+	while (1)
+	{
+		schedulerPtr = scheduler_return_process(schedulerIter);
+
+		if (schedulerPtr == 0)
+		{
+			break;
+		}
+		else if (schedulerPtr->m_shouldDestroy == 1)
+		{
+			//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
+			disable_interrupts();
+
+			scheduler_remove(schedulerPtr);
+
+			printf("Freeing process %x (%i:%s) current process %i\n", schedulerPtr, schedulerPtr->m_ID, schedulerPtr->m_Name, get_current_process()->m_ID);
+			freeProcess(schedulerPtr);
+
+			//Enable interrupts once the deed is done
+			enable_interrupts();
+		}
+
+		schedulerIter++;
 	}
 
 	//If this is the last process alive?

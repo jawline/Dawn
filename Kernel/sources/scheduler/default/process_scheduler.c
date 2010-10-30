@@ -62,14 +62,7 @@ void scheduler_on_tick()
 	{
 		if (list_current->next->process_pointer->m_shouldDestroy == 1)
 		{
-			printf("Freeing current\n");
-			process_t* current = list_current->next->process_pointer;
-
-			printf("Removing current\n");
-			scheduler_remove(current);
-
-			printf("Freeing process %x (%i:%s) current process %i\n", current, current->m_ID, current->m_Name, get_current_process()->m_ID);
-			freeProcess(current);
+			swapToProcess(list_root);
 		}
 		else
 		{

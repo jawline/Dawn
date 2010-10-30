@@ -78,9 +78,6 @@ void postInitialization()
     //Rename the process System (As thats what it is xD)
     set_process_name(get_current_process(), "System");
 
-    //Create a instance of this application
-    createNewProcess("./system/root/Line", init_vfs());
-
     //Enable interrupts now
     enable_interrupts();
 

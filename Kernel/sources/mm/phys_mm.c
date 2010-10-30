@@ -21,6 +21,34 @@ void init_phys_mm(MEM_LOC start)
 	used_mem_end = (start + 0x1000) & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
 }
 
+MEM_LOC allocateKernelFrame() 
+{
+	if (paging_enabled == 0) 
+	{
+		used_mem_end += 4096; //Add 4096 bytes (4kb) to used_mem_end address
+		return used_mem_end - 4096; //Return the old address
+		//The reason why this works is that all memory up to used_mem_end is identity mapped when paging is enabled
+		//This meens that when paging is enabled the address will be mapped directly to the physical address (0x1000 will still access 0x1000 in memory for example) 
+	} 
+	else 
+	{
+
+		//Paging is enabled	
+		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
+		{
+			DEBUG_PRINT("Out of physical frames of memory\n");
+			return 0; //Frame 0 should never be free
+		}
+
+		// Pop off the stack.
+		phys_mm_slock -= sizeof (uint32);
+
+		uint32 * stack = (uint32 *)phys_mm_slock;
+
+		return *stack;
+	}
+}
+
 MEM_LOC allocateFrame() 
 {
 	if (paging_enabled == 0) 

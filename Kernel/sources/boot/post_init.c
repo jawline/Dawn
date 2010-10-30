@@ -68,28 +68,21 @@ int alive = 0;
 
 void postInitialization() 
 {
+    //Disable interrupts
+    disable_interrupts();
+
+    //Register input listeners for the keyboard and mouse
     registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
     registerInputListener(DEVICE_MOUSE, &kernelMouseCallback);
 
-    createNewProcess("./system/root/Base", init_vfs());
+    //Rename the process System (As thats what it is xD)
+    set_process_name(get_current_process(), "System");
 
-    //Rename the idle process
-    set_process_name(get_current_process(), "System Idle");
-    scheduler_block_me();
+    //Create a instance of this application
+    createNewProcess("./system/root/Line", init_vfs());
 
+    //Enable interrupts now
     enable_interrupts();
 
-    //Loop and continually halt the processor, this will cause the processor to idle between interrupts
-    for (;;) { 
-
-	if (scheduler_num_processes() == 1)
-	{
-		printf("Creating new instance of Line\n");
-		createNewProcess("./system/root/Line", init_vfs());
-		enable_interrupts();
-	}
-
-	asm volatile("hlt");
-	scheduler_block_me();
-    }
+    system_process();
 }

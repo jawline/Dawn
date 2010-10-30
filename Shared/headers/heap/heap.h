@@ -4,12 +4,19 @@
 #include <types/size_t.h>
 
 #define MASK_USED 0x1
+#define HEAP_MAGIC 0xAB
 
 /**
  * @The structure of a single memory entry on the heap
  */
 
 struct heap_entry {
+
+	/**
+	 * @brief A magic variable designed to check that it is a block
+	 */
+
+	unsigned char magic;
 	
 	/**
 	 * @brief Variable to store whether this block of memory is used (boolean)

@@ -17,6 +17,8 @@ typedef struct process_entry_t scheduler_proc;
 scheduler_proc* list_root = 0;
 scheduler_proc* list_current = 0;
 
+process_t* get_current_process();
+
 void initializeScheduler(process_t* kp)
 {
 	//Create and set new_process to all 0's
@@ -34,6 +36,24 @@ void initializeScheduler(process_t* kp)
 	list_current = new_process;
 }
 
+void swapToProcess(scheduler_proc* scheduler_entry)
+{
+	process_t* old_proc = list_current->process_pointer;
+	
+	setKernelStack(KERNEL_STACK_START);
+
+	//Swap to the next process
+	list_current = scheduler_entry;
+
+	process_t* new_proc = list_current->process_pointer;
+
+	//Give me a nano!
+	list_current->ticks_tell_die = _STD_NANO_;
+
+	//Swap to the new process
+	switch_process(old_proc, new_proc);
+}
+
 void scheduler_on_tick()
 {
 	if (list_root == 0) return;
@@ -42,27 +62,18 @@ void scheduler_on_tick()
 	{
 		if (list_current->next->process_pointer->m_shouldDestroy == 1)
 		{
+			printf("Freeing current\n");
 			process_t* current = list_current->next->process_pointer;
 
+			printf("Removing current\n");
 			scheduler_remove(current);
+
+			printf("Freeing process %x (%i:%s) current process %i\n", current, current->m_ID, current->m_Name, get_current_process()->m_ID);
 			freeProcess(current);
 		}
 		else
 		{
-			process_t* proc = list_current->process_pointer;
-
-			setKernelStack(KERNEL_STACK_START);
-
-			//Swap to the next process
-			list_current = list_current->next;
-
-			process_t* oproc = list_current->process_pointer;
-
-			//Give me a nano!
-			list_current->ticks_tell_die = _STD_NANO_;
-
-			//Swap to the new process
-			switch_process(proc, oproc);
+			swapToProcess(list_current->next);
 		}
 
 	} else
@@ -80,8 +91,6 @@ void scheduler_on_tick()
 //To anybody calling this function, remember to re-enable interrupts where applicable
 void scheduler_add(process_t* op)
 {
-	disable_interrupts();
-
 	//Create and set new_process to all 0's
 	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
 	memset(new_process, 0, sizeof(scheduler_proc));
@@ -108,13 +117,11 @@ void scheduler_add(process_t* op)
 	iterator_process->next = new_process;
 
 	new_process->next = list_root;
-
 }
 
 //To anybody calling this, remember to re-enable interrupts
 void scheduler_remove(process_t* op)
 {
-	disable_interrupts();
 
 	//Find the scheduler entry
 	scheduler_proc* iterator_process = list_root;
@@ -130,6 +137,7 @@ void scheduler_remove(process_t* op)
 			//Is the next process the one that needs to be killed
 			if (iterator_process->next->process_pointer == op)
 			{
+				printf("Found process\n");
 				//Process
 				break;
 			}
@@ -140,20 +148,27 @@ void scheduler_remove(process_t* op)
 		}
 	}
 
+
+	printf("Next set\n");
 	//Store the proc
 	scheduler_proc* next = iterator_process->next;
 
 	if (list_current == next)
 	{
-		//If its currently being executed then go ahhhhh
-		list_current = next->next;
+		PANIC("List current = Next. Scheduler cock up\n");
 	}
+
+	printf("Removing it from the list of iterators\n");
 
 	//Remove it from the list
 	iterator_process->next = iterator_process->next->next;
 
+	printf("Freeing it\n");
+
 	//Free it
 	free(next);
+
+	printf("Done\n");
 
 	return;
 }
@@ -202,7 +217,13 @@ void scheduler_kill_current_process()
 
 	process_t* process = get_current_process();
 
-	printf("Process %i terminated with return value %i\n", process->m_ID, process->m_returnValue);
+	if (process->m_ID == 0)
+	{
+		printf("Error will not close system idle\n");
+		return;
+	}
+
+	printf("Process %i (%s) terminated with return value %i\n", process->m_ID, process->m_Name, process->m_returnValue);
 
 	process->m_shouldDestroy = 1;
 
@@ -223,6 +244,28 @@ process_t* scheduler_return_process(unsigned int iter)
 		iterator = iterator->next;
 	}
 
+	return iterator->process_pointer;
+}
+
+process_t* schedulerGetProcessFromPid(unsigned int pid)
+{
+
+	scheduler_proc* iterator = list_root;
+	unsigned int i = 0;
+
+	for (;;)
+	{
+		//If it is the process I'm loooking for break
+		if (iterator->process_pointer->m_ID == pid) break;
+
+		//If its the last entry and not correct then return null
+		if (iterator->next == list_root) return 0;
+
+		//Set the iterator to the next entry
+		iterator = iterator->next;
+	}
+
+	//Return what I got
 	return iterator->process_pointer;
 }
 

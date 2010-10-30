@@ -27,6 +27,7 @@ typedef struct {
 	 * Should the application be run in systems software mode (needs access to privilidged instructions) or user mode (Limited access, better control by OS, Safer)
 	 */
 	int user_mode;
+
 } new_process_orders_t;
 
 new_process_orders_t* make_orders(const char* Where, fs_node_t* fromWhere)
@@ -66,6 +67,9 @@ void new_process_entry()
 		printf("Attempted to evaluate path\n");
 
 		usrMode = Orders->user_mode;
+
+		printf("Renaming process\n");
+		rename_current_process(Orders->Filename);
 
 		printf("User mode toggle checked\n");
 
@@ -118,8 +122,7 @@ process_t* initializeKernelProcess()
 
 void freeProcess(process_t* process)
 {
-	//No interrupts ploz
-	disable_interrupts();
+	printf("Free process called\n");
 
 	if (process == kernel_proc) {
 		PANIC("Somebody tried to close the kernel process. Oh crap");
@@ -128,16 +131,7 @@ void freeProcess(process_t* process)
 	else
 	{
 
-		if (process->m_pTerminal != 0)
-		{
-
-			if (getTerminalInContext() == process->m_pTerminal)
-			{
-				setTerminalContext(g_kernelTerminal);
-			}
-
-			process->m_pTerminal = 0;
-		}
+		printf("Freeing used list\n");
 
 		//This kills the used list and frees every used page
 		while (process->m_usedListLocation != 0)
@@ -149,6 +143,13 @@ void freeProcess(process_t* process)
 
 		}
 
+		if (process->m_usedListRoot != 0)
+		{
+			free(process->m_usedListRoot);
+		}
+
+		printf("Emptying postbox\n");
+
 		//Empty the post box
 		while (process->m_processPostbox.first != 0)
 		{
@@ -157,7 +158,7 @@ void freeProcess(process_t* process)
 
 		}
 
-		free(process->m_usedListRoot);
+		printf("Freeing the process structure\n");
 
 		free(process);
 	}
@@ -235,16 +236,19 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	printf("Free frames at start %x\n", calculate_free_frames());
 
 	//Store this for later use
-	process_t* parent = get_current_process();
+	process_t* parent = schedulerGetProcessFromPid(0);
 
-	//Create a process space for the new process and null iyt
+	//Create a process space for the new process and null it
 	process_t* new_process = malloc(sizeof(process_t));
 	memset(new_process, 0, sizeof(process_t));
 
 	//Give it a generic name fo-now
-	strcpy(new_process->m_Name, "ChildProcess");
+	strcpy(new_process->m_Name, "New Process");
 
+	//Setup terminal bindings
 	new_process->m_pTerminal = parent->m_pTerminal;
+
+	//Initialize the used frames list for the process
 	init_used_list(new_process);
 
 	//Set the processes unique ID

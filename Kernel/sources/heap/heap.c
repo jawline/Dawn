@@ -33,7 +33,7 @@ void initializeHeap(heap_t * heap, uint32 address)
 
 	frame_addr = 0;
 
-	frame_addr = allocateFrame();
+	frame_addr = allocateKernelFrame();
 
 	DEBUG_PRINT("Debug Message: Allocated frame ");
 	DEBUG_PRINTX(frame_addr);
@@ -48,6 +48,7 @@ void initializeHeap(heap_t * heap, uint32 address)
 
 	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
 	memset(ptr, 0, sizeof(heap_entry_t)); //Initialize it.
+	ptr->magic = HEAP_MAGIC;
 	DEBUG_PRINT("Debug Message: Created first heap entry\n");
 
 	ptr->used = 0; //Not used
@@ -116,7 +117,7 @@ void expandHeap(heap_t* heap, heap_entry_t* last_entry)
 	//Map another 4kb onto the heap
 	//This is the last entry on the heap SO if its not used we can just += the size otherwise we have to create a whole new one (More work for mee)
 
-	MEM_LOC frame_addr = allocateFrame();
+	MEM_LOC frame_addr = allocateKernelFrame();
 	MEM_LOC end = last_entry;
 	end += sizeof(heap_entry_t);
 	end += last_entry->size;
@@ -167,6 +168,8 @@ uint32 heapAllocateMemory(uint32 size, heap_t* heap)
 				else 
 				{
 					heap_entry_t* newptr = (heap_entry_t*) (((uint32) ptr) + sizeof(heap_entry_t) + size);
+					memset(newptr, 0, sizeof(heap_entry_t));
+					newptr->magic = HEAP_MAGIC;
 					newptr->used = 0;
 					newptr->size = ptr->size - size - sizeof(heap_entry_t);
 					newptr->next = ptr->next;
@@ -175,7 +178,7 @@ uint32 heapAllocateMemory(uint32 size, heap_t* heap)
 					ptr->size = size;
 				}
 
-				return ((uint32) ptr) + sizeof(heap_entry_t); //Return the location of the actual memory not the header
+				return ((MEM_LOC) ptr) + sizeof(heap_entry_t); //Return the location of the actual memory not the header
 			}
 		}
 
@@ -198,11 +201,20 @@ uint32 heapAllocateMemory(uint32 size, heap_t* heap)
  */
 void heapFreeMemory(uint32 address, heap_t* heap)
 {
+
 	heap_entry_t* ptr = (heap_entry_t*) (address - sizeof(heap_entry_t));
 	heap_entry_t* optr = 0;
 
+	if (ptr->magic != HEAP_MAGIC)
+	{
+		printf("Error at heap entry %x\nMAGIC:0x%x\nUSED:0x%x\nSIZE:0x%x\n", ptr, ptr->magic, ptr->used, ptr->size);
+		PANIC("ERROR: Not a valid heap entry (Set to panic as this is the kernel heap and shouldn't be buggy)");
+		return;
+	}
+
 	if (ptr->used == 0) //If this happens then somethings gone wrong. Wtf moment much?
 	{
+		PANIC("Entry not used!\n");
 		return;
 	}
 

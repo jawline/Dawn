@@ -73,6 +73,11 @@ char exec_cmd()
 		systemRunNewProcess("./system/root/GameOfLife");
 		exit(1);
 	}
+	else if (strcmp("base", Pointer) == 0)
+	{
+		systemRunNewProcess("./system/root/Base");
+		exit(1);
+	}
 	else if (strcmp("uptime", Pointer) == 0)
 	{
 		unsigned long ticks = clock();

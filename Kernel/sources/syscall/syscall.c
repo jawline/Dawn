@@ -43,11 +43,13 @@ extern void syscallClearscreen();
 extern void syscallSetFgc(unsigned char fgc);
 extern void syscallSetBgc(unsigned char bgc);
 
+extern void syscallSetDebugMode(uint8 Mode);
+
 extern void scheduler_block_me();
 
-static const unsigned int num_syscalls = 22;
+static const unsigned int num_syscalls = 23;
 
-static void* syscalls[22] = {
+static void* syscalls[23] = {
    &syscallPrint_t, //Syscall 0 - printf prints to active terminal
    &postboxReadTop, //Syscall 1 - Copys the top of the postbox to location given
    &postboxPopTop, //Syscall 2 -Pops the top of the postbox
@@ -69,7 +71,8 @@ static void* syscalls[22] = {
    &syscallGetProcessingTime, //Syscall 18 - Get the processing time of the process
    &syscallGetName, //Syscall 19 - Get the name of the process linked to the iterator
    &syscallRequestExit, //Syscall 20 - Request exit of the current process (Supplied argument is used as the return value)
-   &syscallRequestRunNewProcess //Syscall 21 - Requests the execution of a new application (char* filename supplied)
+   &syscallRequestRunNewProcess, //Syscall 21 - Requests the execution of a new application (char* filename supplied)
+   &syscallSetDebugMode //Syscall 22 - Requests the kernel change the debug mode to on or off
 };
 
 //Function: syscallHandler
@@ -102,7 +105,7 @@ idt_call_registers_t syscallHandler(idt_call_registers_t regs)
 		   push %3; \
 		   push %4; \
 		   push %5; \
-		   call %6; \
+		   call *%6; \
 		   pop %%ebx; \
 		   pop %%ebx; \
 		   pop %%ebx; \

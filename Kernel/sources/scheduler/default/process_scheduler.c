@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <common.h>
 #include "../../stack/kstack.h"
+#include <debug/debug.h>
 
 struct process_entry_t
 {
@@ -127,10 +128,9 @@ void scheduler_remove(process_t* op)
 		}
 		else
 		{
-			//Is the next process the one that needs to be killed
+			//Is the next process the one that needs to be removed
 			if (iterator_process->next->process_pointer == op)
 			{
-				printf("Found process\n");
 				//Process
 				break;
 			}
@@ -142,26 +142,21 @@ void scheduler_remove(process_t* op)
 	}
 
 
-	printf("Next set\n");
 	//Store the proc
 	scheduler_proc* next = iterator_process->next;
 
 	if (list_current == next)
 	{
-		PANIC("List current = Next. Scheduler cock up\n");
+		PANIC("Scheduler trying to remove currently accessed process, this shouldn't happen... DEBUG!!\n");
 	}
-
-	printf("Removing it from the list of iterators\n");
 
 	//Remove it from the list
 	iterator_process->next = iterator_process->next->next;
 
-	printf("Freeing it\n");
-
 	//Free it
 	free(next);
 
-	printf("Done\n");
+	DEBUG_PRINT("Removed scheduler entry\n");
 
 	return;
 }

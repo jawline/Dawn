@@ -4,6 +4,8 @@
 #include <system/reboot.h>
 #include <system/run.h>
 
+#include <debug/debugmode.h>
+
 #include <version/kernel_version.h>
 #include <version/os_version.h>
 
@@ -47,11 +49,21 @@ char exec_cmd()
 		printf("reboot - request the kernel to reboot the system\n");
 		printf("uptime - Lists the seconds minutes and hours the system has been up for\n");
 		printf("lproc - Lists information about all scheduled processes\n");
+		printf("debug_on - Turns debug mode on\n");
+		printf("debug_off - Turns debug mode off\n");
 		printf("cls - Clear the screen\n");
 	}
 	else if (strcmp("cls", Pointer) == 0)
 	{
 		clearscreen();
+	}
+	else if (strcmp("debug_on", Pointer) == 0)
+	{
+		requestSystemDebugMode();
+	}
+	else if (strcmp("debug_off", Pointer) == 0)
+	{
+		requestDisableSystemDebugMode();
 	}
 	else if (strcmp("gameoflife", Pointer) == 0)
 	{

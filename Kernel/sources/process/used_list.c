@@ -12,16 +12,10 @@ void init_used_list(process_t* process)
 
 void expand_used_list(process_t* process)
 {
-	printf("Expand used list called. MALLOC %i\n", process->m_usedListSize + usedListExpansionSize);
-
 	MEM_LOC* new_loc = (MEM_LOC*) malloc(process->m_usedListSize + usedListExpansionSize);
 
-	printf("Allocated to new_loc 0x%x\n", new_loc);
-
-	printf("Copying to new_loc\n");
 	memcpy(new_loc, process->m_usedListRoot, process->m_usedListSize);
 
-	printf("Freeing previous list\n");
 	free(process->m_usedListRoot);
 
 	process->m_usedListSize += usedListExpansionSize;

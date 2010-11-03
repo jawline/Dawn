@@ -54,7 +54,7 @@ void printuh(uint32 n) {
 }
 
 void printf(const char * fmt, ...) {
-        static char buf [1024]; //Maximum size to be printed is 1024 chars.
+        static char buf [2096]; //Maximum size to be printed is 1024 chars.
         va_list args;
 
         int i;

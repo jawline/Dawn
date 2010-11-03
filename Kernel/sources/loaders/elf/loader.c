@@ -5,6 +5,7 @@
 #include <types/int_types.h>
 #include <types/memory.h>
 #include <panic/panic.h>
+#include <debug/debug.h>
 
 typedef int (*entry_point) (int argc, void* argv);
 
@@ -18,7 +19,7 @@ unsigned char mapMemoryUsingHeader(e32_pheader program_header)
 		MEM_LOC v_addr_start = program_header.p_vaddr;
 		MEM_LOC v_addr_end = v_addr_start + program_header.p_memsz;
 
-		printf("Mapping header between 0x%x and 0x%x\n", v_addr_start, v_addr_end);
+		DEBUG_PRINT("Mapping header between 0x%x and 0x%x\n", v_addr_start, v_addr_end);
 
 		MEM_LOC iterator = v_addr_start;
 			
@@ -41,7 +42,7 @@ unsigned char loadToMemoryUsingHeader(e32_pheader program_header, fs_node_t* Nod
 	{
 		if (read_fs(Node, program_header.p_offset, program_header.p_filesz, program_header.p_vaddr) != program_header.p_filesz)
 		{
-			printf("Error bad read\n");
+			DEBUG_PRINT("Error bad read\n");
 			return 0;
 		}
 	}
@@ -52,7 +53,7 @@ unsigned char loadToMemoryUsingHeader(e32_pheader program_header, fs_node_t* Nod
 //NOTE: This function relies on Node being readable (read_fs functioning properly)
 int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 {
-	printf("Loading program\n");
+	DEBUG_PRINT("Loading program\n");
 
 	//Read the ELF info
 	e32info* fileInfo = malloc(sizeof(e32info));
@@ -60,7 +61,7 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 
 	parseElfFile(fileInfo, Node);
 
-	printf("Parsed ELF file\n");
+	DEBUG_PRINT("Parsed ELF file\n");
 
 	//Use the header from the parsed file
 	e32_header head = fileInfo->m_mainHeader;
@@ -95,7 +96,7 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
-	printf("Mapping program headers\n");
+	DEBUG_PRINT("Mapping program headers\n");
 
 	//This segment of code correlates to the loading of the data into virtual memory
 
@@ -108,13 +109,13 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 		
 		if (mapMemoryUsingHeader(program_header) != 1)
 		{
-			printf("Error mapping program header %i\n", header_iter);
+			DEBUG_PRINT("Error mapping program header %i\n", header_iter);
 			return LOAD_ERROR_BAD_MAP;
 		}
 
 	}
 
-	printf("Copying program headers\n");
+	DEBUG_PRINT("Copying program headers\n");
 
 	//Load the object blocks that where just mapped
 	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders; header_iter++)
@@ -123,13 +124,13 @@ int loadAndExecuteElf(fs_node_t* Node, unsigned char usermode)
 		e32_pheader program_header = fileInfo->m_programHeaders[header_iter];
 		if (loadToMemoryUsingHeader(program_header, Node) != 1)
 		{
-			printf("Error unable to load header %i\n", header_iter);
+			DEBUG_PRINT("Error unable to load header %i\n", header_iter);
 			return LOAD_ERROR_BAD_LOAD;
 		}
 
 	}
 
-	printf("Entering program\n");
+	DEBUG_PRINT("Entering program\n");
 	//This segment of code correlates to its execution
 	entry_point program_entry_ponter = head.e_entry;
 

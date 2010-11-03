@@ -2,6 +2,7 @@
 #include <process/process.h>
 #include <process/message.h>
 #include <messages/messages.h>
+#include <debug/debug.h>
 
 extern process_t* get_current_process();
 extern process_t* scheduler_return_process();
@@ -69,12 +70,12 @@ void systemMainProcess()
 
 				if ((schedulerPtr == systemIdlePtr) || (schedulerPtr == systemProcPtr))
 				{
-					printf("Cannot close SystemIdle or System\n");
+					DEBUG_PRINT("Cannot close SystemIdle or System\n");
 					schedulerPtr->m_shouldDestroy = 0;
 				}
 				else
 				{
-					printf("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
+					DEBUG_PRINT("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
 
 					scheduler_remove(schedulerPtr);
 

@@ -330,8 +330,6 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 
 	page_directory_t* return_location = (page_directory_t*) allocateFrameForProcess(process);
 
-	printf("Allocated directory\n");
-
 	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
 	map(being_copied, pagedir, PAGE_PRESENT | PAGE_USER);
 
@@ -341,8 +339,6 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
 	copying_to[0] = being_copied[0];
-
-	printf("ID mapped the first 4MB\n");
 
 	unsigned int i = 0;
 	for (i = 1; i < getTable(KERNEL_START); i++)
@@ -357,8 +353,6 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 			copying_to[i] = 0;
 		}
 	}
-
-	printf("Copied the non-kernel pages\n");
 
 	for (i = getTable(KERNEL_START); i < 1022; i++)
 	{

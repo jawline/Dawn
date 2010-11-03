@@ -3,6 +3,7 @@
 #include <mm/virt_mm.h>
 #include <mm/pagedir.h>
 #include <messages/messages.h>
+#include <debug/debug.h>
 #include "../stack/kstack.h"
 
 static process_t* kernel_proc = 0;
@@ -57,39 +58,39 @@ void new_process_entry()
 	{
 		int usrMode = 0;
 
-		printf("Valid message. continue to load\n");
+		DEBUG_PRINT("Valid message. continue to load\n");
 		new_process_orders_t* Orders = (new_process_orders_t*) Msg.messageAdditionalData;
 
-		printf("Telling system to attempt to run %s\n", Orders->Filename);
+		DEBUG_PRINT("Telling system to attempt to run %s\n", Orders->Filename);
 
 		fs_node_t* Node = evaluatePath(Orders->Filename, Orders->fromWhere);
 
-		printf("Attempted to evaluate path\n");
+		DEBUG_PRINT("Attempted to evaluate path\n");
 
 		usrMode = Orders->user_mode;
 
-		printf("Renaming process\n");
+		DEBUG_PRINT("Renaming process\n");
 		rename_current_process(Orders->Filename);
 
-		printf("User mode toggle checked\n");
+		DEBUG_PRINT("User mode toggle checked\n");
 
 		free_orders(Orders);
 
-		printf("Orders freed\n");
+		DEBUG_PRINT("Orders freed\n");
 
 		if (Node == 0)
 		{
-			printf("Unable to evaluate node. process could not load file specified\n");
+			DEBUG_PRINT("Unable to evaluate node. process could not load file specified\n");
 			scheduler_kill_current_process();
 		} else
 		{
-			printf("Passing to executable loader\n");
+			DEBUG_PRINT("Passing to executable loader\n");
 			loadAndExecuteElf(Node, usrMode);
 		}
 	}
 	else
 	{
-		printf("Invalid message. Killing self\n");
+		DEBUG_PRINT("Invalid message. Killing self\n");
 	}
 
 	for (;;) { }
@@ -136,8 +137,6 @@ void freeProcess(process_t* process)
 		free(process->m_usedListRoot);
 	}
 
-	printf("Emptying postbox\n");
-
 	//Empty the post box
 	while (process->m_processPostbox.first != 0)
 	{
@@ -146,11 +145,9 @@ void freeProcess(process_t* process)
 
 	}
 
-	printf("Freeing the process structure\n");
-
 	free(process);
 
-	printf("A process was freed\n");
+	DEBUG_PRINT("A process was freed\n");
 
 }
 
@@ -162,7 +159,7 @@ int kfork()
 	
 	disable_interrupts();
 
-	printf("Free frames at start %x\n", calculate_free_frames());
+	DEBUG_PRINT("Free frames at start %x\n", calculate_free_frames());
 
 	//Store this for later use
 	process_t* parent = get_current_process();
@@ -220,7 +217,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	
 	disable_interrupts();
 
-	printf("Free frames at start %x\n", calculate_free_frames());
+	DEBUG_PRINT("Free frames at start %x\n", calculate_free_frames());
 
 	//Store this for later use
 	process_t* parent = schedulerGetProcessFromPid(0);
@@ -232,17 +229,11 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Give it a generic name fo-now
 	strcpy(new_process->m_Name, "New Process");
 
-	printf("Named\n");
-
 	//Setup terminal bindings
 	new_process->m_pTerminal = parent->m_pTerminal;
 
-	printf("Terminal set\n");
-
 	//Initialize the used frames list for the process
 	init_used_list(new_process);
-
-	printf("Used list initialized\n");
 
 	//Set the processes unique ID
 	next_pid++;
@@ -255,12 +246,8 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Set the root execution directory
 	new_process->m_executionDirectory = parent->m_executionDirectory;
 
-	printf("Execution directory set\n");
-
 	//Copy the page directory
 	page_directory_t* newprocesspd = copyPageDir(kernel_pagedir, new_process);
-
-	printf("Page directory copied\n");
 
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
@@ -282,8 +269,6 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	postbox_add(&new_process->m_processPostbox, InfomaticMessage);
 
 	scheduler_add(new_process);
-
-	printf("Returned\n");
 
 	return 0; //Return 0 - Parent
 }

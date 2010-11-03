@@ -30,5 +30,8 @@ link:
 todo:
 	-@for file in $(ALLFILES); do fgrep -H -e TODO -e FIXME $$file; done; true
 
+todso:
+	-@for file in $(ALLFILES); do fgrep -H -e allocateFrame $$file; done; true
+
 .s.o:
 	@nasm $(ASFLAGS) $<

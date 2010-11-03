@@ -14,11 +14,9 @@ extern uint32 paging_enabled;
 
 void init_phys_mm(MEM_LOC start) 
 {
-	DEBUG_PRINT("Debug Message: Used memory end 0x");
-	DEBUG_PRINTX(start);
-	DEBUG_PRINT("\n");
+	DEBUG_PRINT("Debug Message: Used memory end 0x%x\n", start);
 
-	used_mem_end = (start + 0x1000) & PAGE_MASK; //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
+	used_mem_end = (start + 0x1000) & ~(0xFFF); //This ensures that the used_mem_end address is on a page-aligned boundry (Which it has to be if I wish to identity map from 0 to used_mem_end)
 }
 
 MEM_LOC allocateKernelFrame() 
@@ -36,7 +34,7 @@ MEM_LOC allocateKernelFrame()
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
 		{
-			DEBUG_PRINT("Out of physical frames of memory\n");
+			DEBUG_PRINT("Out of physical frames of memory (Allocate kernel frame)\n");
 			return 0; //Frame 0 should never be free
 		}
 
@@ -64,7 +62,7 @@ MEM_LOC allocateFrame()
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
 		{
-			DEBUG_PRINT("Out of physical frames of memory\n");
+			DEBUG_PRINT("Out of physical frames of memory (allocateFrame)\n");
 			return 0; //Frame 0 should never be free
 		}
 
@@ -97,14 +95,14 @@ MEM_LOC allocateFrameForProcess(process_t* req_process)
 		//Paging is enabled	
 		if (phys_mm_slock == PHYS_MM_STACK_ADDR)
 		{
-			DEBUG_PRINT("Out of physical frames of memory\n");
+			DEBUG_PRINT("Out of physical frames of memory (allocateFrameForProcess)\n");
 			return 0; //Frame 0 should never be free
 		}
 
 		// Pop off the stack.
-		phys_mm_slock -= sizeof (uint32);
+		phys_mm_slock -= sizeof (MEM_LOC);
 
-		uint32 * stack = (uint32 *)phys_mm_slock;
+		MEM_LOC* stack = (MEM_LOC*)phys_mm_slock;
 
 		if (req_process != 0)
 		{
@@ -178,26 +176,10 @@ void map_free_pages(struct multiboot * mboot_ptr)
     i += me->size + sizeof (uint32);
   }
 
-  DEBUG_PRINT("Debug Message: Map Free Pages finished with 0x");
-  DEBUG_PRINTX(dbiter);
-  DEBUG_PRINT(" 4096 bytes of mapped memory\n"); 
+  DEBUG_PRINT("Debug Message: Map Free Pages finished with 0x%x pages of free memory (PAGE SIZE: 0x%x)\n", dbiter, PAGE_SIZE);
 }
 
 extern void asm_copy_frame(uint32 src, uint32 dest);
-
-void copy_frame(uint32 phys_addr_src, uint32 phys_addr_dest) 
-{
-	DEBUG_PRINT("Debug Message: Copying 0x");
-	DEBUG_PRINTX(phys_addr_src);
-
-	DEBUG_PRINT(" to 0x");
-	DEBUG_PRINTX(phys_addr_dest);
-
-	DEBUG_PRINT("\n");
-
-	asm_copy_frame(phys_addr_src, phys_addr_dest);
-}
-
 MEM_LOC calculate_free_frames()
 {
 	return ((phys_mm_slock - PHYS_MM_STACK_ADDR) / sizeof(MEM_LOC));

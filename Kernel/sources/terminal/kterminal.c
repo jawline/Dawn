@@ -97,10 +97,13 @@ void kcls()
 //Put a character on the kernel terminals screen
 void kputc(char c)
 {
-	if (!g_kernelTerminal) return;
-	if (!g_kernelTerminal->m_used) return;
-
-	g_kernelTerminal->f_putchar(g_kernelTerminal, c);
+	if (g_kernelTerminal == 0) {
+		text_mode_putc(c);
+	}
+	else
+	{
+		g_kernelTerminal->f_putchar(g_kernelTerminal, c);
+	}
 }
 
 //Move the X cursor on the kernel terminal

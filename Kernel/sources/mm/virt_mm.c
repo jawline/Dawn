@@ -252,9 +252,6 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 	//Nulll it
 	memset((POINTER)frame, 0, PAGE_SIZE);
 
-	//Mark paging enabled (Other areas of the kernel will now consider paging to be active)
-	markPagingEnabled();
-
 	for (i = getTable(KERNEL_START); i < 1022; i++)
 	{
 		if (page_directory[i] == 0) {
@@ -263,6 +260,9 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 			ReloadCR3();
 		}
 	}
+
+	//Mark paging enabled (Other areas of the kernel will now consider paging to be active)
+	markPagingEnabled();
 }
 
 MEM_LOC copyPage(MEM_LOC pt, process_t* process)
@@ -330,6 +330,8 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 
 	page_directory_t* return_location = (page_directory_t*) allocateFrameForProcess(process);
 
+	printf("Allocated directory\n");
+
 	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
 	map(being_copied, pagedir, PAGE_PRESENT | PAGE_USER);
 
@@ -340,14 +342,13 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
 	copying_to[0] = being_copied[0];
 
-
+	printf("ID mapped the first 4MB\n");
 
 	unsigned int i = 0;
 	for (i = 1; i < getTable(KERNEL_START); i++)
 	{
 		if (being_copied[i] != 0)
 		{
-
 			MEM_LOC Location = copyPageTable(being_copied[i] & PAGE_MASK, 1, process);
 			copying_to[i] = Location | PAGE_PRESENT | PAGE_USER | PAGE_WRITE;
 		}
@@ -356,6 +357,8 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 			copying_to[i] = 0;
 		}
 	}
+
+	printf("Copied the non-kernel pages\n");
 
 	for (i = getTable(KERNEL_START); i < 1022; i++)
 	{

@@ -209,20 +209,11 @@ void scheduler_kill_current_process()
 	if (list_current == 0) return 0;
 
 	process_t* process = get_current_process();
-
-	if (process->m_ID == 0)
-	{
-		printf("Error will not close system idle\n");
-		return;
-	}
-
-	printf("Process %i (%s) terminated with return value %i\n", process->m_ID, process->m_Name, process->m_returnValue);
-
 	process->m_shouldDestroy = 1;
 
 	for (;;)
 	{
-		scheduler_on_tick(); //Fake ticks untill the next process is brought into context. Next time this process is handled by the scheduler it will be sent to /dev/null
+		scheduler_on_tick(); //Fake ticks untill the next process is brought into context. Next time this process is handled by the scheduler it will be destroyed
 	}
 }
 

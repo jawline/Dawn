@@ -75,11 +75,8 @@ void postInitialization()
     registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
     registerInputListener(DEVICE_MOUSE, &kernelMouseCallback);
 
-    //Rename the process System (As thats what it is xD)
-    set_process_name(get_current_process(), "System");
-
     //Enable interrupts now
     enable_interrupts();
 
-    system_process();
+    systemProcess();
 }

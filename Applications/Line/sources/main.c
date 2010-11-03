@@ -20,8 +20,6 @@
 #include <input/devices.h>
 
 #include <clock/clock.h>
-
-#include <heap/heap.h>
 #include <process/get_info.h>
 
 #define BIT_0 1
@@ -30,19 +28,6 @@ char Pointer[1024];
 int c_ptr = 0;
 
 unsigned long cps = 0;
-
-void list_chunks(heap_t * heap) //List all active chunks in a heap. 
-{
-	heap_entry_t * ptr = (heap_entry_t *) heap->heap_location;
-
-	printf("Scanning 0x%x\n", ptr);
-
-	while (ptr) 
-	{
-		printf("Chunk %x size %i used %i\n", ptr, ptr->size, ptr->used);
-		ptr = (heap_entry_t *) ptr->next;
-	}
-}
 
 char exec_cmd()
 {

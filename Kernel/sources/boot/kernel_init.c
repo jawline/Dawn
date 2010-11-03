@@ -65,6 +65,7 @@ void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start,
     kernel_end = kernel_end - kernel_start;
 
     init_phys_mm(kernel_end);
+
     initializeVirtualMemoryManager(kernel_end);
 
     map_free_pages(mboot_ptr);
@@ -187,7 +188,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	initializeMemoryManagers(mboot_ptr, KERNEL_START, kEndLocation, visual_output);
 
 	initializeGeneralProtectionFaultHandler();
-
 
 	//Move the stack to a nicer location in memory
 	moveStack(USER_STACK_START, USER_STACK_SIZE, initial_esp);

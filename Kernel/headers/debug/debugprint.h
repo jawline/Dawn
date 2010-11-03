@@ -2,19 +2,7 @@
 #include "debug.h"
 
 #if defined(DEBUG_MODE)
-#define DEBUG_PRINT(x) printf(x)
+#define DEBUG_PRINT printf
 #else
-#define DEBUG_PRINT(x)
-#endif
-
-#if defined(DEBUG_MODE)
-#define DEBUG_PRINTX(v) printf("%x", v)
-#else
-#define DEBUG_PRINTX(v)
-#endif
-
-#if defined(DEBUG_MODE)
-#define DEBUG_PRINTI(v) printf("%i", v)
-#else
-#define DEBUG_PRINTI(v)
+#define DEBUG_PRINT
 #endif

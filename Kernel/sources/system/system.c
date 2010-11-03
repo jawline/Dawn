@@ -6,73 +6,135 @@
 extern process_t* get_current_process();
 extern process_t* scheduler_return_process();
 
-void system_process()
+process_t* systemIdlePtr = 0;
+process_t* systemProcPtr = 0;
+
+void systemIdleProcess()
 {
-    int schedulerIter = 0;
-    process_t* schedulerPtr = 0;
+	systemIdlePtr = get_current_process();
 
-    //Loop and continually halt the processor, this will cause the processor to idle between interrupts
-    for (;;) {
-
-	//Check all messages
-	while (1)
+	for (;;)
 	{
-		//Grab the top message
-		process_message pb_top = postbox_top(&get_current_process()->m_processPostbox);
+		//Halt the processor tell the next interrupt
+		asm volatile("hlt");
+	}
+}
 
-		if (pb_top.ID != -1)
+void systemMainProcess()
+{
+	systemProcPtr = get_current_process();
+
+	int schedulerIter = 0;
+	process_t* schedulerPtr = 0;
+	int numNonSystem = 0;
+
+	//Loop and continually halt the processor, this will cause the processor to idle between interrupts
+	for (;;) {
+
+		//Check all messages
+		while (1)
 		{
-			//Its a message to be handled
+			//Grab the top message
+			process_message pb_top = postbox_top(&get_current_process()->m_processPostbox);
+
+			if (pb_top.ID != -1)
+			{
+				//Its a message to be handled
 
 			
-		}
-		else
-		{
-			break;
+			}
+			else
+			{
+				break;
+			}
+
 		}
 
-	}
+		numNonSystem = 0;
 
-	schedulerIter = 0;
-	//Shut down all processes that need a-killin
-	while (1)
-	{
-		schedulerPtr = scheduler_return_process(schedulerIter);
-
-		if (schedulerPtr == 0)
+		schedulerIter = 0;
+		//Shut down all processes that need a-killin
+		while (1)
 		{
-			break;
+			schedulerPtr = scheduler_return_process(schedulerIter);
+
+			if (schedulerPtr == 0)
+			{
+				break;
+			}
+			else if (schedulerPtr->m_shouldDestroy == 1)
+			{
+				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
+				disable_interrupts();
+
+				if ((schedulerPtr == systemIdlePtr) || (schedulerPtr == systemProcPtr))
+				{
+					printf("Cannot close SystemIdle or System\n");
+					schedulerPtr->m_shouldDestroy = 0;
+				}
+				else
+				{
+					printf("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
+
+					scheduler_remove(schedulerPtr);
+
+					DEBUG_PRINT("Freeing process %x (%i:%s) current process %i\n", schedulerPtr, schedulerPtr->m_ID, schedulerPtr->m_Name, get_current_process()->m_ID);
+					freeProcess(schedulerPtr);
+
+				}
+
+				//Enable interrupts once the deed is done
+				enable_interrupts();
+			}
+			else
+			{
+			}
+
+			//Count up the number of non system processes (To check there is a interface active)
+			if ((schedulerPtr != systemIdlePtr) && (schedulerPtr != systemProcPtr))
+			{
+				numNonSystem++;
+			}
+
+			schedulerIter++;
 		}
-		else if (schedulerPtr->m_shouldDestroy == 1)
+
+		//If this is the last process alive?
+		if (numNonSystem == 0)
 		{
-			//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
 			disable_interrupts();
 
-			scheduler_remove(schedulerPtr);
+			printf("Creating new instance of Line\n");
 
-			printf("Freeing process %x (%i:%s) current process %i\n", schedulerPtr, schedulerPtr->m_ID, schedulerPtr->m_Name, get_current_process()->m_ID);
-			freeProcess(schedulerPtr);
+			createNewProcess("./system/root/Line", init_vfs());
 
-			//Enable interrupts once the deed is done
 			enable_interrupts();
 		}
 
-		schedulerIter++;
+		//Sleep the current process
+		scheduler_block_me();
 	}
+}
 
-	//If this is the last process alive?
-	if (scheduler_num_processes() == 1)
-	{
-		printf("Creating new instance of Line\n");
-		createNewProcess("./system/root/Line", init_vfs());
-		enable_interrupts();
-	}
+void systemProcess()
+{
+    //Disable interrupts while forking
+    disable_interrupts();
 
-	//Halt the processor tell the next interrupt
-	asm volatile("hlt");
+    int forkedID = kfork();
+    
+    //Enable them once the processes are set up
+    enable_interrupts();
 
-	//Sleep the current process
-	scheduler_block_me();
+    if (forkedID == 1)
+    {
+   	set_process_name(get_current_process(), "System");
+	systemMainProcess();
+    }
+    else
+    {
+   	set_process_name(get_current_process(), "SystemIdle");
+	systemIdleProcess();
     }
 
 }

@@ -122,46 +122,33 @@ process_t* initializeKernelProcess()
 
 void freeProcess(process_t* process)
 {
-	printf("Free process called\n");
-
-	if (process == kernel_proc) {
-		PANIC("Somebody tried to close the kernel process. Oh crap");
-		return; //Don't want to get rid of PID 0
-	}
-	else
+	//This kills the used list and frees every used page
+	while (process->m_usedListLocation != 0)
 	{
 
-		printf("Freeing used list\n");
-
-		//This kills the used list and frees every used page
-		while (process->m_usedListLocation != 0)
-		{
-
-			MEM_LOC top = used_list_top(process);
-			freeFrame(top);
-			used_list_remove(process, top);
-
-		}
-
-		if (process->m_usedListRoot != 0)
-		{
-			free(process->m_usedListRoot);
-		}
-
-		printf("Emptying postbox\n");
-
-		//Empty the post box
-		while (process->m_processPostbox.first != 0)
-		{
-		
-			postbox_top(&process->m_processPostbox);
-
-		}
-
-		printf("Freeing the process structure\n");
-
-		free(process);
+		MEM_LOC top = used_list_top(process);
+		freeFrame(top);
+		used_list_remove(process, top);
 	}
+
+	if (process->m_usedListRoot != 0)
+	{
+		free(process->m_usedListRoot);
+	}
+
+	printf("Emptying postbox\n");
+
+	//Empty the post box
+	while (process->m_processPostbox.first != 0)
+	{
+		
+		postbox_top(&process->m_processPostbox);
+
+	}
+
+	printf("Freeing the process structure\n");
+
+	free(process);
 
 	printf("A process was freed\n");
 
@@ -245,11 +232,17 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Give it a generic name fo-now
 	strcpy(new_process->m_Name, "New Process");
 
+	printf("Named\n");
+
 	//Setup terminal bindings
 	new_process->m_pTerminal = parent->m_pTerminal;
 
+	printf("Terminal set\n");
+
 	//Initialize the used frames list for the process
 	init_used_list(new_process);
+
+	printf("Used list initialized\n");
 
 	//Set the processes unique ID
 	next_pid++;
@@ -262,8 +255,12 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Set the root execution directory
 	new_process->m_executionDirectory = parent->m_executionDirectory;
 
+	printf("Execution directory set\n");
+
 	//Copy the page directory
 	page_directory_t* newprocesspd = copyPageDir(kernel_pagedir, new_process);
+
+	printf("Page directory copied\n");
 
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
@@ -286,7 +283,9 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 
 	scheduler_add(new_process);
 
-	 return 0; //Return 0 - Parent
+	printf("Returned\n");
+
+	return 0; //Return 0 - Parent
 }
 
 void rename_current_process(const char* Str)

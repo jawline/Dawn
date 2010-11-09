@@ -74,6 +74,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#aab274ca82284758b7849abb948a79801">syscallClearscreen</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#ace004b1bbaff00c359c440b60acf7005">syscallSetFgc</a> (unsigned char fgc)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a716263cfc2bfff32787a1788a06b0638">syscallSetBgc</a> (unsigned char bgc)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a78399f5b48630ef971a5ade44114efde">syscallSetDebugMode</a> (<a class="el" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> Mode)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">scheduler_block_me</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structregisters.html">idt_call_registers_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#ab42cb8d86310bf97b42f0e1eb13bbe39">syscallHandler</a> (<a class="el" href="structregisters.html">idt_call_registers_t</a> regs)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89">kernelInitializeSyscalls</a> ()</td></tr>
@@ -97,14 +98,14 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="phys__mm_8c_source.html#l00173">173</a> of file <a class="el" href="phys__mm_8c_source.html">phys_mm.c</a>.</p>
+<p>Definition at line <a class="el" href="phys__mm_8c_source.html#l00183">183</a> of file <a class="el" href="phys__mm_8c_source.html">phys_mm.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="syscall_8c_a0e03a277bc469b763ccae6a218306ce4_icgraph.png" border="0" usemap="#syscall_8c_a0e03a277bc469b763ccae6a218306ce4_icgraph" alt=""/></div>
 <map name="syscall_8c_a0e03a277bc469b763ccae6a218306ce4_icgraph" id="syscall_8c_a0e03a277bc469b763ccae6a218306ce4_icgraph">
-<area shape="rect" id="node3" href="process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="217,32,356,61"/><area shape="rect" id="node11" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="260,85,313,115"/><area shape="rect" id="node5" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="451,5,576,35"/><area shape="rect" id="node9" href="syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="407,59,620,88"/><area shape="rect" id="node7" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="671,5,724,35"/></map>
+<area shape="rect" id="node3" href="process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="217,57,356,87"/><area shape="rect" id="node15" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="260,111,313,140"/><area shape="rect" id="node5" href="syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="407,5,620,35"/><area shape="rect" id="node7" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="439,59,588,88"/><area shape="rect" id="node9" href="system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="671,85,788,115"/><area shape="rect" id="node11" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="837,85,963,115"/><area shape="rect" id="node13" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1012,85,1065,115"/></map>
 </div>
 </p>
 
@@ -125,7 +126,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00169">169</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00172">172</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
 
 </div>
 </div>
@@ -201,7 +202,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00119">119</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
+<p>Definition at line <a class="el" href="syscall_8c_source.html#l00122">122</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -370,14 +371,14 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00162">162</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00165">165</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph.png" border="0" usemap="#syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph" alt=""/></div>
 <map name="syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph" id="syscall_8c_aa62ed6bd1fc98f87bc0b6119494095d4_icgraph">
-<area shape="rect" id="node3" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="205,5,331,35"/><area shape="rect" id="node5" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="380,5,433,35"/></map>
+<area shape="rect" id="node3" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="205,5,355,35"/><area shape="rect" id="node5" href="system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="404,5,521,35"/><area shape="rect" id="node7" href="post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="571,5,696,35"/><area shape="rect" id="node9" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="745,5,799,35"/></map>
 </div>
 </p>
 
@@ -570,7 +571,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="syscall_8c_source.html#l00079">79</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
+<p>Definition at line <a class="el" href="syscall_8c_source.html#l00082">82</a> of file <a class="el" href="syscall_8c_source.html">syscall.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -605,7 +606,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4_cgraph.png" border="0" usemap="#syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4_cgraph" alt=""/></div>
 <map name="syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4_cgraph" id="syscall_8c_a6a5aabbdf85de2eafbc3a5a074caffa4_cgraph">
-<area shape="rect" id="node3" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="233,121,449,151"/><area shape="rect" id="node5" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1433,41,1585,71"/><area shape="rect" id="node7" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="499,251,635,280"/><area shape="rect" id="node9" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="705,197,801,227"/><area shape="rect" id="node49" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="684,251,823,280"/><area shape="rect" id="node51" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="695,304,812,333"/><area shape="rect" id="node53" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="695,357,812,387"/><area shape="rect" id="node11" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="908,93,993,123"/><area shape="rect" id="node25" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="1084,147,1217,176"/><area shape="rect" id="node28" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="872,197,1029,227"/><area shape="rect" id="node30" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="900,251,1001,280"/><area shape="rect" id="node32" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="1079,303,1223,332"/><area shape="rect" id="node47" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="897,355,1004,384"/><area shape="rect" id="node14" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1125,93,1176,123"/><area shape="rect" id="node16" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1272,93,1384,123"/><area shape="rect" id="node19" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1455,95,1564,124"/><area shape="rect" id="node21" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1656,95,1787,124"/><area shape="rect" id="node23" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1921,172,1999,201"/><area shape="rect" id="node34" href="screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="1448,303,1571,332"/><area shape="rect" id="node36" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="1657,249,1785,279"/><area shape="rect" id="node40" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="1636,303,1807,332"/><area shape="rect" id="node44" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="1663,356,1780,385"/><area shape="rect" id="node42" href="screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="1857,303,2063,332"/></map>
+<area shape="rect" id="node3" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="233,32,449,61"/><area shape="rect" id="node5" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="500,5,652,35"/><area shape="rect" id="node7" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="508,59,644,88"/><area shape="rect" id="node9" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="701,59,819,88"/><area shape="rect" id="node11" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="868,32,985,61"/><area shape="rect" id="node13" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="868,85,985,115"/></map>
 </div>
 </p>
 
@@ -692,7 +693,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="syscall_8c_a4e52c83de7181ae4171d9e68bdacff59_cgraph.png" border="0" usemap="#syscall_8c_a4e52c83de7181ae4171d9e68bdacff59_cgraph" alt=""/></div>
 <map name="syscall_8c_a4e52c83de7181ae4171d9e68bdacff59_cgraph" id="syscall_8c_a4e52c83de7181ae4171d9e68bdacff59_cgraph">
-<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1393,67,1545,96"/><area shape="rect" id="node5" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="193,43,409,72"/><area shape="rect" id="node8" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="459,301,595,331"/><area shape="rect" id="node10" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="665,248,761,277"/><area shape="rect" id="node50" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a" title="scheduler_remove" alt="" coords="644,301,783,331"/><area shape="rect" id="node52" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="655,355,772,384"/><area shape="rect" id="node54" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="655,408,772,437"/><area shape="rect" id="node12" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="868,144,953,173"/><area shape="rect" id="node26" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="1044,197,1177,227"/><area shape="rect" id="node29" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="832,248,989,277"/><area shape="rect" id="node31" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="860,301,961,331"/><area shape="rect" id="node33" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="1039,353,1183,383"/><area shape="rect" id="node48" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67" title="used_list_top" alt="" coords="857,405,964,435"/><area shape="rect" id="node15" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1085,144,1136,173"/><area shape="rect" id="node17" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1232,144,1344,173"/><area shape="rect" id="node20" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1415,145,1524,175"/><area shape="rect" id="node22" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1616,145,1747,175"/><area shape="rect" id="node24" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1881,223,1959,252"/><area shape="rect" id="node35" href="screen__textmode_8c.html#a11e073019065a6bccfe7b14ad04f8e26" title="text_mode_sett" alt="" coords="1408,353,1531,383"/><area shape="rect" id="node37" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="1617,300,1745,329"/><area shape="rect" id="node41" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="1596,353,1767,383"/><area shape="rect" id="node45" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="1623,407,1740,436"/><area shape="rect" id="node43" href="screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="1817,353,2023,383"/></map>
+<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="460,5,612,35"/><area shape="rect" id="node5" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="193,57,409,87"/><area shape="rect" id="node8" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="468,59,604,88"/><area shape="rect" id="node10" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="661,59,779,88"/><area shape="rect" id="node12" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="828,32,945,61"/><area shape="rect" id="node14" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="828,85,945,115"/></map>
 </div>
 </p>
 
@@ -742,14 +743,14 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="startnew_8c_source.html#l00007">7</a> of file <a class="el" href="startnew_8c_source.html">startnew.c</a>.</p>
+<p>Definition at line <a class="el" href="startnew_8c_source.html#l00008">8</a> of file <a class="el" href="startnew_8c_source.html">startnew.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="syscall_8c_a3172ce9200a8a63b853db9311a8b4fee_cgraph.png" border="0" usemap="#syscall_8c_a3172ce9200a8a63b853db9311a8b4fee_cgraph" alt=""/></div>
 <map name="syscall_8c_a3172ce9200a8a63b853db9311a8b4fee_cgraph" id="syscall_8c_a3172ce9200a8a63b853db9311a8b4fee_cgraph">
-<area shape="rect" id="node3" href="process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="271,448,409,477"/><area shape="rect" id="node31" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1380,41,1532,71"/><area shape="rect" id="node5" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4" title="calculate_free_frames" alt="" coords="459,368,621,397"/><area shape="rect" id="node7" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="489,475,591,504"/><area shape="rect" id="node39" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="836,652,911,681"/><area shape="rect" id="node50" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f" title="init_used_list" alt="" coords="488,315,592,344"/><area shape="rect" id="node52" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6" title="make_orders" alt="" coords="487,756,593,785"/><area shape="rect" id="node55" href="common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="696,861,757,891"/><area shape="rect" id="node60" href="process_8h.html#a3de17c849d9de394b95b696739322ac0" title="postbox_add" alt="" coords="488,421,592,451"/><area shape="rect" id="node62" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc" title="scheduler_add" alt="" coords="669,704,784,733"/><area shape="rect" id="node9" href="phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c" title="allocateFrameForProcess" alt="" coords="976,401,1157,431"/><area shape="rect" id="node15" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1764,361,1841,391"/><area shape="rect" id="node17" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="669,348,784,377"/><area shape="rect" id="node23" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3" title="kernelFirstFreeVirtualAddress" alt="" coords="964,191,1169,220"/><area shape="rect" id="node27" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1041,244,1092,273"/><area shape="rect" id="node35" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="1033,348,1100,377"/><area shape="rect" id="node42" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="689,144,764,173"/><area shape="rect" id="node11" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1401,361,1511,391"/><area shape="rect" id="node13" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1583,361,1713,391"/><area shape="rect" id="node20" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="832,296,915,325"/><area shape="rect" id="node25" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="1227,191,1323,220"/><area shape="rect" id="node29" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1219,244,1331,273"/><area shape="rect" id="node57" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="697,808,756,837"/></map>
+<area shape="rect" id="node3" href="process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="271,527,409,556"/><area shape="rect" id="node31" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1425,92,1577,121"/><area shape="rect" id="node5" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4" title="calculate_free_frames" alt="" coords="481,447,644,476"/><area shape="rect" id="node7" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="512,500,613,529"/><area shape="rect" id="node39" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="881,656,956,685"/><area shape="rect" id="node49" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f" title="init_used_list" alt="" coords="511,340,615,369"/><area shape="rect" id="node51" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6" title="make_orders" alt="" coords="509,773,616,803"/><area shape="rect" id="node54" href="common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="741,864,803,893"/><area shape="rect" id="node59" href="process_8h.html#a3de17c849d9de394b95b696739322ac0" title="postbox_add" alt="" coords="511,393,615,423"/><area shape="rect" id="node61" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc" title="scheduler_add" alt="" coords="715,656,829,685"/><area shape="rect" id="node64" href="process__scheduler_8c.html#a9b79f8f6e29957e150c1dc666334f30c" title="schedulerGetProcessFromPid" alt="" coords="459,553,667,583"/><area shape="rect" id="node9" href="phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c" title="allocateFrameForProcess" alt="" coords="1021,351,1203,380"/><area shape="rect" id="node15" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1809,311,1887,340"/><area shape="rect" id="node17" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="715,297,829,327"/><area shape="rect" id="node23" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3" title="kernelFirstFreeVirtualAddress" alt="" coords="1009,92,1215,121"/><area shape="rect" id="node27" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="1087,193,1137,223"/><area shape="rect" id="node35" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="1079,297,1145,327"/><area shape="rect" id="node42" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="735,552,809,581"/><area shape="rect" id="node11" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1447,311,1556,340"/><area shape="rect" id="node13" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1628,311,1759,340"/><area shape="rect" id="node20" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="877,245,960,275"/><area shape="rect" id="node25" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="1272,92,1368,121"/><area shape="rect" id="node29" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1264,193,1376,223"/><area shape="rect" id="node56" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="743,811,801,840"/></map>
 </div>
 </p>
 
@@ -779,6 +780,35 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="syscall_8c_a716263cfc2bfff32787a1788a06b0638_cgraph.png" border="0" usemap="#syscall_8c_a716263cfc2bfff32787a1788a06b0638_cgraph" alt=""/></div>
 <map name="syscall_8c_a716263cfc2bfff32787a1788a06b0638_cgraph" id="syscall_8c_a716263cfc2bfff32787a1788a06b0638_cgraph">
 <area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="167,5,319,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a78399f5b48630ef971a5ade44114efde"></a><!-- doxytag: member="syscall.c::syscallSetDebugMode" ref="a78399f5b48630ef971a5ade44114efde" args="(uint8 Mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void syscallSetDebugMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>&nbsp;</td>
+          <td class="paramname"> <em>Mode</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="debug__mode_8c_source.html#l00003">3</a> of file <a class="el" href="debug__mode_8c_source.html">debug_mode.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="syscall_8c_a78399f5b48630ef971a5ade44114efde_cgraph.png" border="0" usemap="#syscall_8c_a78399f5b48630ef971a5ade44114efde_cgraph" alt=""/></div>
+<map name="syscall_8c_a78399f5b48630ef971a5ade44114efde_cgraph" id="syscall_8c_a78399f5b48630ef971a5ade44114efde_cgraph">
+<area shape="rect" id="node3" href="debug_8c.html#aac61d937a2a9bbbe953f9fa0764703f2" title="setDebugModeOff" alt="" coords="217,113,353,143"/><area shape="rect" id="node30" href="debug_8c.html#af4d43aa7f12ff39e87ac379ca32b9b1b" title="setDebugModeOn" alt="" coords="217,167,353,196"/><area shape="rect" id="node5" href="settingsmanager_8h.html#ace8ec19da2615d869eec34d5258e151e" title="settingsExecuteLine" alt="" coords="404,140,553,169"/><area shape="rect" id="node7" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="639,7,716,36"/><area shape="rect" id="node9" href="settingsmanager_8c.html#aebced55b49ced709703da6ffa4055234" title="settingsCreateEntry" alt="" coords="603,60,752,89"/><area shape="rect" id="node17" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="849,165,908,195"/><area shape="rect" id="node19" href="settingsmanager_8c.html#a3491dc4e595c2fc1aee61b1c3c6ce60e" title="settingsGetEntry" alt="" coords="613,217,741,247"/><area shape="rect" id="node23" href="settingsmanager_8c.html#a3973b0a973d5fb03e52eedffd66bb5a8" title="settingsModifyEntry" alt="" coords="604,113,751,143"/><area shape="rect" id="node27" href="common_8c.html#a1158ee53a70b66e0208da58ff10bf986" title="strchr" alt="" coords="648,271,707,300"/><area shape="rect" id="node11" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="841,59,916,88"/><area shape="rect" id="node13" href="settingsmanager_8c.html#a0135e45a791cb2afe081e7486b4af2d4" title="settingsGetLastEntry" alt="" coords="801,5,956,35"/><area shape="rect" id="node15" href="common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="848,112,909,141"/><area shape="rect" id="node21" href="common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="845,219,912,248"/></map>
 </div>
 </p>
 
@@ -830,7 +860,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

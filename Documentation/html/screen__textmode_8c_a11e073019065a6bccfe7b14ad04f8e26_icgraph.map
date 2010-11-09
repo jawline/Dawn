@@ -1,20 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="177,211,321,240"/>
-<area shape="rect" id="node5" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="372,183,468,212"/>
-<area shape="rect" id="node40" href="$kterminal_8c.html#aa85bbcb7640007f2c337d10226414093" title="initializeKernelTerminal" alt="" coords="517,244,683,273"/>
-<area shape="rect" id="node7" href="$process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="532,179,668,208"/>
-<area shape="rect" id="node9" href="$procfault_8c.html#a26b0196d4d9ef5164edee59a6d2f559c" title="handleFatalProcessFault" alt="" coords="1000,165,1173,195"/>
-<area shape="rect" id="node26" href="$_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="795,217,885,247"/>
-<area shape="rect" id="node31" href="$process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="732,112,948,141"/>
-<area shape="rect" id="node11" href="$gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="1225,112,1316,141"/>
-<area shape="rect" id="node19" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="1227,165,1315,195"/>
-<area shape="rect" id="node13" href="$gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="1639,112,1905,141"/>
-<area shape="rect" id="node15" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1955,192,2067,221"/>
-<area shape="rect" id="node17" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="2116,192,2169,221"/>
-<area shape="rect" id="node21" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="1367,164,1588,193"/>
-<area shape="rect" id="node23" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="1679,165,1865,195"/>
-<area shape="rect" id="node28" href="$_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="1400,217,1555,247"/>
-<area shape="rect" id="node34" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1015,5,1159,35"/>
-<area shape="rect" id="node36" href="$syscall_8c.html#a6a5aabbdf85de2eafbc3a5a074caffa4" title="syscallKillCurrentProcess" alt="" coords="997,59,1176,88"/>
-<area shape="rect" id="node38" href="$syscall_8c.html#a4e52c83de7181ae4171d9e68bdacff59" title="syscallRequestExit" alt="" coords="1017,112,1156,141"/>
+<area shape="rect" id="node3" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="177,5,321,35"/>
+<area shape="rect" id="node5" href="$kterminal_8c.html#aa85bbcb7640007f2c337d10226414093" title="initializeKernelTerminal" alt="" coords="371,5,536,35"/>
+<area shape="rect" id="node7" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="584,5,696,35"/>
+<area shape="rect" id="node9" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="745,5,799,35"/>
 </map>

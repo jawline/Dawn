@@ -50,29 +50,45 @@ Include dependency graph for heap.c:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a043fa30c22e29037ae22009faf3a59e8">HEAP_SHRINK_SIZE_MINIMUM</a>&nbsp;&nbsp;&nbsp;0x16000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#aab8fa2013fc178b4430b66e6de2f1601">HEAP_BASE_PAGES</a>&nbsp;&nbsp;&nbsp;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a8bb89887c78184fcf57d5240b5c0b6e6">MINIMUM_BLOCK_SIZE</a>&nbsp;&nbsp;&nbsp;100</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#ab80d68399dbb045d1b1b821c560ec7df">alloc_mem</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#adcb6f95229d37c5dbfd89ce01280b178">free_mem</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81">initializeHeap</a> (<a class="el" href="structheap__t.html">heap_t</a> *heap, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes a new heap at address specified and maps memory from free frames for it.  <a href="#ade657aeee4e0f8c2b0b4593bcff4af81"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd">shrinkHeap</a> (<a class="el" href="structheap__t.html">heap_t</a> *heap, <a class="el" href="structheap__entry.html">heap_entry_t</a> *last_entry)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Shink the heap.  <a href="#a50c1f99d9a3df535b17d7233f9f2a3dd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de">expandHeap</a> (<a class="el" href="structheap__t.html">heap_t</a> *heap, <a class="el" href="structheap__entry.html">heap_entry_t</a> *last_entry)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Expand the heap.  <a href="#a1d7f9283ec6ecefe2197351598db24de"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f">heapAllocateMemory</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="el" href="initrd__fent_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates x bytes of memory from a heap, expanding it if necessary.  <a href="#a24a780b4e38547b00f955a39a83a466f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f">heapFreeMemory</a> (<a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Free's the memory at location address on the heap specified. Shrinking if necessary.  <a href="#a26b7c9cdab062506e23b0adad898871f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">MEM_LOC&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b">heapAllocateMemory</a> (<a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="initrd__fent_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates x bytes of memory from a heap, expanding it if necessary.  <a href="#a8688030111e9ecc887826ea4de6b965b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151">mapInitialHeap</a> (MEM_LOC <a class="el" href="initrd__fent_8h.html#a292119c57ee24c2a250283318f2c34fd">start</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#aaa008418c6828946c78f15ed6850cf61">initializeBaseEntry</a> (<a class="el" href="structheap__entry.html">heap_entry_t</a> *base_entry, <a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> heapSizeInBytes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0">initializeHeap</a> (<a class="el" href="structheap__t.html">heap_t</a> *heap, MEM_LOC address)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes a new heap at address specified and maps memory from free frames for it.  <a href="#a8917c35ad599e822ee11ed75eb7acfc0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d">expandHeap</a> (<a class="el" href="structheap__entry.html">heap_entry_t</a> *last_heap_entry, MEM_LOC heap_end, <a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> expansionSize)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Expands the heap by expansionSize pages.  <a href="#a6da71e3b01ced280ee96023e3856479d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167">unifyHeapEntry</a> (<a class="el" href="structheap__entry.html">heap_entry_t</a> *entry)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">If there are 2 unused entrys next to each other, this function turns them into one entry.  <a href="#a7287817a047dcc9b9b943c8c70f88167"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287">heapFreeMemory</a> (MEM_LOC address, <a class="el" href="structheap__t.html">heap_t</a> *heap)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Free's the memory at location address on the heap specified. Shrinking if necessary.  <a href="#a56492c6c5393ae91de16fa33fcc0b287"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a043fa30c22e29037ae22009faf3a59e8"></a><!-- doxytag: member="heap.c::HEAP_SHRINK_SIZE_MINIMUM" ref="a043fa30c22e29037ae22009faf3a59e8" args="" -->
+<a class="anchor" id="aab8fa2013fc178b4430b66e6de2f1601"></a><!-- doxytag: member="heap.c::HEAP_BASE_PAGES" ref="aab8fa2013fc178b4430b66e6de2f1601" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HEAP_SHRINK_SIZE_MINIMUM&nbsp;&nbsp;&nbsp;0x16000</td>
+          <td class="memname">#define HEAP_BASE_PAGES&nbsp;&nbsp;&nbsp;4</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00010">10</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8bb89887c78184fcf57d5240b5c0b6e6"></a><!-- doxytag: member="heap.c::MINIMUM_BLOCK_SIZE" ref="a8bb89887c78184fcf57d5240b5c0b6e6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MINIMUM_BLOCK_SIZE&nbsp;&nbsp;&nbsp;100</td>
         </tr>
       </table>
 </div>
@@ -83,48 +99,27 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ab80d68399dbb045d1b1b821c560ec7df"></a><!-- doxytag: member="heap.c::alloc_mem" ref="ab80d68399dbb045d1b1b821c560ec7df" args="(uint32 size, heap_t *heap)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> alloc_mem </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td>
-          <td class="paramname"> <em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structheap__t.html">heap_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>heap</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1d7f9283ec6ecefe2197351598db24de"></a><!-- doxytag: member="heap.c::expandHeap" ref="a1d7f9283ec6ecefe2197351598db24de" args="(heap_t *heap, heap_entry_t *last_entry)" -->
+<a class="anchor" id="a6da71e3b01ced280ee96023e3856479d"></a><!-- doxytag: member="heap.c::expandHeap" ref="a6da71e3b01ced280ee96023e3856479d" args="(heap_entry_t *last_heap_entry, MEM_LOC heap_end, size_t expansionSize)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void expandHeap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structheap__t.html">heap_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>heap</em>, </td>
+          <td class="paramtype"><a class="el" href="structheap__entry.html">heap_entry_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>last_heap_entry</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structheap__entry.html">heap_entry_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>last_entry</em></td><td>&nbsp;</td>
+          <td class="paramtype">MEM_LOC&nbsp;</td>
+          <td class="paramname"> <em>heap_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&nbsp;</td>
+          <td class="paramname"> <em>expansionSize</em></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -135,65 +130,38 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Expand the heap. </p>
+<p>Expands the heap by expansionSize pages. </p>
 
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00114">114</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00063">63</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_cgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_cgraph" id="_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_cgraph">
-<area shape="rect" id="node3" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="283,32,395,61"/><area shape="rect" id="node13" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="171,57,221,87"/><area shape="rect" id="node16" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="159,111,233,140"/><area shape="rect" id="node5" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="444,5,596,35"/><area shape="rect" id="node7" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="465,59,575,88"/><area shape="rect" id="node9" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="647,59,777,88"/><area shape="rect" id="node11" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="828,59,905,88"/></map>
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_cgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_cgraph" id="_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_cgraph">
+<area shape="rect" id="node3" href="phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8" title="allocateKernelFrame" alt="" coords="159,5,308,35"/><area shape="rect" id="node5" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="208,59,259,88"/><area shape="rect" id="node17" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="196,112,271,141"/><area shape="rect" id="node7" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="357,59,469,88"/><area shape="rect" id="node9" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="519,32,671,61"/><area shape="rect" id="node11" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="540,85,649,115"/><area shape="rect" id="node13" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="721,85,852,115"/><area shape="rect" id="node15" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="903,85,980,115"/></map>
 </div>
 </p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_icgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_icgraph" id="_kernel_2sources_2heap_2heap_8c_a1d7f9283ec6ecefe2197351598db24de_icgraph">
-<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="157,5,315,35"/><area shape="rect" id="node5" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="364,5,433,35"/></map>
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_icgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_icgraph" id="_kernel_2sources_2heap_2heap_8c_a6da71e3b01ced280ee96023e3856479d_icgraph">
+<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="157,5,315,35"/><area shape="rect" id="node5" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="364,5,433,35"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="adcb6f95229d37c5dbfd89ce01280b178"></a><!-- doxytag: member="heap.c::free_mem" ref="adcb6f95229d37c5dbfd89ce01280b178" args="(uint32 address, heap_t *heap)" -->
+<a class="anchor" id="a8688030111e9ecc887826ea4de6b965b"></a><!-- doxytag: member="heap.c::heapAllocateMemory" ref="a8688030111e9ecc887826ea4de6b965b" args="(size_t size, heap_t *heap)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void free_mem </td>
+          <td class="memname">MEM_LOC heapAllocateMemory </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td>
-          <td class="paramname"> <em>address</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structheap__t.html">heap_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>heap</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a24a780b4e38547b00f955a39a83a466f"></a><!-- doxytag: member="heap.c::heapAllocateMemory" ref="a24a780b4e38547b00f955a39a83a466f" args="(uint32 size, heap_t *heap)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> heapAllocateMemory </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&nbsp;</td>
           <td class="paramname"> <em>size</em>, </td>
         </tr>
         <tr>
@@ -212,37 +180,38 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 
 <p>Allocates x bytes of memory from a heap, expanding it if necessary. </p>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000003">Bug:</a></b></dt><dd>Heap never decreases in size </dd></dl>
 
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00149">149</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00099">99</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph" id="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_cgraph">
-<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="212,57,313,87"/><area shape="rect" id="node5" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="488,32,600,61"/><area shape="rect" id="node15" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="376,57,427,87"/><area shape="rect" id="node18" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="364,111,439,140"/><area shape="rect" id="node7" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="649,5,801,35"/><area shape="rect" id="node9" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="671,59,780,88"/><area shape="rect" id="node11" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="852,59,983,88"/><area shape="rect" id="node13" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1033,59,1111,88"/></map>
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_cgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_cgraph" id="_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_cgraph">
+<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d" title="Expands the heap by expansionSize pages." alt="" coords="212,60,313,89"/><area shape="rect" id="node19" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="401,112,476,141"/><area shape="rect" id="node5" href="phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8" title="allocateKernelFrame" alt="" coords="364,5,513,35"/><area shape="rect" id="node7" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="413,59,464,88"/><area shape="rect" id="node9" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="563,59,675,88"/><area shape="rect" id="node11" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="724,32,876,61"/><area shape="rect" id="node13" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="745,85,855,115"/><area shape="rect" id="node15" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="927,85,1057,115"/><area shape="rect" id="node17" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1108,85,1185,115"/></map>
 </div>
 </p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_icgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_icgraph" id="_kernel_2sources_2heap_2heap_8c_a24a780b4e38547b00f955a39a83a466f_icgraph">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_icgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_icgraph" id="_kernel_2sources_2heap_2heap_8c_a8688030111e9ecc887826ea4de6b965b_icgraph">
 <area shape="rect" id="node3" href="kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="212,5,281,35"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a26b7c9cdab062506e23b0adad898871f"></a><!-- doxytag: member="heap.c::heapFreeMemory" ref="a26b7c9cdab062506e23b0adad898871f" args="(uint32 address, heap_t *heap)" -->
+<a class="anchor" id="a56492c6c5393ae91de16fa33fcc0b287"></a><!-- doxytag: member="heap.c::heapFreeMemory" ref="a56492c6c5393ae91de16fa33fcc0b287" args="(MEM_LOC address, heap_t *heap)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void heapFreeMemory </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td>
+          <td class="paramtype">MEM_LOC&nbsp;</td>
           <td class="paramname"> <em>address</em>, </td>
         </tr>
         <tr>
@@ -261,22 +230,68 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 
 <p>Free's the memory at location address on the heap specified. Shrinking if necessary. </p>
-<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000004">Bug:</a></b></dt><dd>Currently does not shrink </dd></dl>
 
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00199">199</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00222">222</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a26b7c9cdab062506e23b0adad898871f_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a26b7c9cdab062506e23b0adad898871f_icgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_a26b7c9cdab062506e23b0adad898871f_icgraph" id="_kernel_2sources_2heap_2heap_8c_a26b7c9cdab062506e23b0adad898871f_icgraph">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a56492c6c5393ae91de16fa33fcc0b287_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a56492c6c5393ae91de16fa33fcc0b287_icgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a56492c6c5393ae91de16fa33fcc0b287_icgraph" id="_kernel_2sources_2heap_2heap_8c_a56492c6c5393ae91de16fa33fcc0b287_icgraph">
 <area shape="rect" id="node3" href="kheap_8c.html#ae4015277190032503df791f56e73d7e9" title="Free memory at location x on the kernel heap making it available again." alt="" coords="188,5,241,35"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ade657aeee4e0f8c2b0b4593bcff4af81"></a><!-- doxytag: member="heap.c::initializeHeap" ref="ade657aeee4e0f8c2b0b4593bcff4af81" args="(heap_t *heap, uint32 address)" -->
+<a class="anchor" id="aaa008418c6828946c78f15ed6850cf61"></a><!-- doxytag: member="heap.c::initializeBaseEntry" ref="aaa008418c6828946c78f15ed6850cf61" args="(heap_entry_t *base_entry, size_t heapSizeInBytes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initializeBaseEntry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structheap__entry.html">heap_entry_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>base_entry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&nbsp;</td>
+          <td class="paramname"> <em>heapSizeInBytes</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00024">24</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_cgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_cgraph" id="_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_cgraph">
+<area shape="rect" id="node3" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="193,5,268,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_icgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_icgraph" id="_kernel_2sources_2heap_2heap_8c_aaa008418c6828946c78f15ed6850cf61_icgraph">
+<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="192,5,299,35"/><area shape="rect" id="node5" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="347,5,493,35"/><area shape="rect" id="node7" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="541,5,653,35"/><area shape="rect" id="node9" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="703,5,756,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a8917c35ad599e822ee11ed75eb7acfc0"></a><!-- doxytag: member="heap.c::initializeHeap" ref="a8917c35ad599e822ee11ed75eb7acfc0" args="(heap_t *heap, MEM_LOC address)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -289,7 +304,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>&nbsp;</td>
+          <td class="paramtype">MEM_LOC&nbsp;</td>
           <td class="paramname"> <em>address</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -303,71 +318,90 @@ Here is the caller graph for this function:</div>
 
 <p>Initializes a new heap at address specified and maps memory from free frames for it. </p>
 
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00017">17</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00037">37</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_cgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_cgraph" id="_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_cgraph">
-<area shape="rect" id="node3" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="285,32,397,61"/><area shape="rect" id="node13" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="173,57,224,87"/><area shape="rect" id="node16" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="161,111,236,140"/><area shape="rect" id="node5" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="447,5,599,35"/><area shape="rect" id="node7" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="468,59,577,88"/><area shape="rect" id="node9" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="649,59,780,88"/><area shape="rect" id="node11" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="831,59,908,88"/></map>
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_cgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_cgraph" id="_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_cgraph">
+<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#aaa008418c6828946c78f15ed6850cf61" title="initializeBaseEntry" alt="" coords="160,5,299,35"/><area shape="rect" id="node7" href="_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151" title="mapInitialHeap" alt="" coords="171,59,288,88"/><area shape="rect" id="node5" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="385,5,460,35"/><area shape="rect" id="node9" href="phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8" title="allocateKernelFrame" alt="" coords="348,59,497,88"/><area shape="rect" id="node11" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="397,112,448,141"/><area shape="rect" id="node13" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="547,112,659,141"/><area shape="rect" id="node15" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="708,85,860,115"/><area shape="rect" id="node17" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="729,139,839,168"/><area shape="rect" id="node19" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="911,139,1041,168"/><area shape="rect" id="node21" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1092,139,1169,168"/></map>
 </div>
 </p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_icgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_icgraph" id="_kernel_2sources_2heap_2heap_8c_ade657aeee4e0f8c2b0b4593bcff4af81_icgraph">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_icgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_icgraph" id="_kernel_2sources_2heap_2heap_8c_a8917c35ad599e822ee11ed75eb7acfc0_icgraph">
 <area shape="rect" id="node3" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="160,5,307,35"/><area shape="rect" id="node5" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="355,5,467,35"/><area shape="rect" id="node7" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="516,5,569,35"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a50c1f99d9a3df535b17d7233f9f2a3dd"></a><!-- doxytag: member="heap.c::shrinkHeap" ref="a50c1f99d9a3df535b17d7233f9f2a3dd" args="(heap_t *heap, heap_entry_t *last_entry)" -->
+<a class="anchor" id="acdff58aaca255a7512ee243e1f3b8151"></a><!-- doxytag: member="heap.c::mapInitialHeap" ref="acdff58aaca255a7512ee243e1f3b8151" args="(MEM_LOC start)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void shrinkHeap </td>
+          <td class="memname"><a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> mapInitialHeap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structheap__t.html">heap_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>heap</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">MEM_LOC&nbsp;</td>
+          <td class="paramname"> <em>start</em></td>
+          <td>&nbsp;)&nbsp;</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structheap__entry.html">heap_entry_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>last_entry</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Shink the heap. </p>
-<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000003">Bug:</a></b></dt><dd>Doesn't work properly. rewrite the whole heap its shoddy at best </dd></dl>
-
-<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00068">68</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00013">13</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_a50c1f99d9a3df535b17d7233f9f2a3dd_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_a50c1f99d9a3df535b17d7233f9f2a3dd_cgraph" alt=""/></div>
-<map name="_kernel_2sources_2heap_2heap_8c_a50c1f99d9a3df535b17d7233f9f2a3dd_cgraph" id="_kernel_2sources_2heap_2heap_8c_a50c1f99d9a3df535b17d7233f9f2a3dd_cgraph">
-<area shape="rect" id="node3" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92" title="freeFrame" alt="" coords="156,57,241,87"/><area shape="rect" id="node21" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="151,111,247,140"/><area shape="rect" id="node23" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="165,164,232,193"/><area shape="rect" id="node5" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="580,5,732,35"/><area shape="rect" id="node7" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="296,57,347,87"/><area shape="rect" id="node18" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb" title="used_list_remove" alt="" coords="396,111,529,140"/><area shape="rect" id="node9" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="407,57,519,87"/><area shape="rect" id="node12" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="601,59,711,88"/><area shape="rect" id="node14" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="783,59,913,88"/><area shape="rect" id="node16" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="964,85,1041,115"/></map>
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_cgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_cgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_cgraph" id="_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_cgraph">
+<area shape="rect" id="node3" href="phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8" title="allocateKernelFrame" alt="" coords="175,5,324,35"/><area shape="rect" id="node5" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="224,59,275,88"/><area shape="rect" id="node7" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="373,59,485,88"/><area shape="rect" id="node9" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="535,32,687,61"/><area shape="rect" id="node11" href="used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="556,85,665,115"/><area shape="rect" id="node13" href="used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="737,85,868,115"/><area shape="rect" id="node15" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="919,85,996,115"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_icgraph.png" border="0" usemap="#_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_icgraph" alt=""/></div>
+<map name="_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_icgraph" id="_kernel_2sources_2heap_2heap_8c_acdff58aaca255a7512ee243e1f3b8151_icgraph">
+<area shape="rect" id="node3" href="_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="173,5,280,35"/><area shape="rect" id="node5" href="kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="328,5,475,35"/><area shape="rect" id="node7" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="523,5,635,35"/><area shape="rect" id="node9" href="boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="684,5,737,35"/></map>
 </div>
 </p>
 
 </div>
 </div>
+<a class="anchor" id="a7287817a047dcc9b9b943c8c70f88167"></a><!-- doxytag: member="heap.c::unifyHeapEntry" ref="a7287817a047dcc9b9b943c8c70f88167" args="(heap_entry_t *entry)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void unifyHeapEntry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structheap__entry.html">heap_entry_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>entry</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:56 for Dawn OS by&nbsp;
+<div class="memdoc">
+
+<p>If there are 2 unused entrys next to each other, this function turns them into one entry. </p>
+
+<p>Definition at line <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html#l00173">173</a> of file <a class="el" href="_kernel_2sources_2heap_2heap_8c_source.html">heap.c</a>.</p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

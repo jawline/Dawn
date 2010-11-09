@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d" title="Expands the heap by expansionSize pages." alt="" coords="215,5,316,35"/>
+<area shape="rect" id="node9" href="$_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151" title="mapInitialHeap" alt="" coords="207,59,324,88"/>
+<area shape="rect" id="node5" href="$_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="373,5,531,35"/>
+<area shape="rect" id="node7" href="$kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="617,5,687,35"/>
+<area shape="rect" id="node11" href="$_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="399,59,505,88"/>
+<area shape="rect" id="node13" href="$kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="579,59,725,88"/>
+<area shape="rect" id="node15" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="773,59,885,88"/>
+<area shape="rect" id="node17" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="935,59,988,88"/>
+</map>

@@ -37,8 +37,7 @@ char exec_cmd()
 
 	if (strcmp("exit", Pointer) == 0)
 	{
-		printf("Exit called\n");
-		exit(2);
+		exit(-1);
 	}
 	else if (strcmp("help", Pointer) == 0)
 	{
@@ -224,6 +223,7 @@ int main(int argc, void* argv)
 
 					//Message from a the mouse
 					printf("Message Data: %i %i ", message.message_data[2], message.message_data[3]);
+
 					if (message.message_data[1] & BIT_0 == 1)
 					{
 						printf("LBTN");

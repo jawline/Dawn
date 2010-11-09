@@ -117,6 +117,7 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 , <a class="el" href="startnew_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">startnew.c</a>
 , <a class="el" href="syscall_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">syscall.c</a>
 , <a class="el" href="terminal__syscalls_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">terminal_syscalls.c</a>
+, <a class="el" href="system_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">system.c</a>
 </li>
 <li>GET_IRQ
 : <a class="el" href="interrupt__handler_8h.html#ae7195207091f74f17876620ac7a910fa">interrupt_handler.h</a>
@@ -128,8 +129,8 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 : <a class="el" href="syscall_8c.html#a7bd78b0c20c3a1436108085a91a9e164">syscall.c</a>
 </li>
 <li>getAsciFromScancode()
-: <a class="el" href="scancodes_8h.html#aa0ca8aa0c56172690787a8796cf36a1e">scancodes.h</a>
-, <a class="el" href="scancodes_8c.html#aa0ca8aa0c56172690787a8796cf36a1e">scancodes.c</a>
+: <a class="el" href="scancodes_8c.html#aa0ca8aa0c56172690787a8796cf36a1e">scancodes.c</a>
+, <a class="el" href="scancodes_8h.html#aa0ca8aa0c56172690787a8796cf36a1e">scancodes.h</a>
 </li>
 <li>getClocksPerSecond()
 : <a class="el" href="_a_p_i_2headers_2clock_2clock_8h.html#a66ca6603e03e5f37298c7767d887641d">clock.h</a>
@@ -137,6 +138,10 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 </li>
 <li>getCpuidFeatures()
 : <a class="el" href="cpuid__features_8c.html#a3ecac8f0f9359ea07582ec1ff09dc184">cpuid_features.c</a>
+</li>
+<li>getDebugMode()
+: <a class="el" href="debug_8h.html#ae703af3f31b954927a7557d53dafef9c">debug.h</a>
+, <a class="el" href="debug_8c.html#ae703af3f31b954927a7557d53dafef9c">debug.c</a>
 </li>
 <li>getElfHeaderClass()
 : <a class="el" href="parser_8c.html#a575e667d0df7d507f3b116c030363c23">parser.c</a>
@@ -147,8 +152,8 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 , <a class="el" href="parser_8h.html#a63cf4c065b64b13c806bbb93bc9475e2">parser.h</a>
 </li>
 <li>getElfHeaderVersion()
-: <a class="el" href="parser_8h.html#af18d548dbd5acfbdc89dfd112a014515">parser.h</a>
-, <a class="el" href="parser_8c.html#af18d548dbd5acfbdc89dfd112a014515">parser.c</a>
+: <a class="el" href="parser_8c.html#af18d548dbd5acfbdc89dfd112a014515">parser.c</a>
+, <a class="el" href="parser_8h.html#af18d548dbd5acfbdc89dfd112a014515">parser.h</a>
 </li>
 <li>getKeyMapping()
 : <a class="el" href="syscall_8c.html#ac98394f390a30033b7bceeefcb8daab7">syscall.c</a>
@@ -164,16 +169,16 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 : <a class="el" href="virt__mm_8c.html#a2a00988c69564fffc86df0e65f0b8bcf">virt_mm.c</a>
 </li>
 <li>getPageSize()
-: <a class="el" href="_a_p_i_2headers_2system_2memory_8h.html#af326675c9337f4c305d86bac0542dab0">memory.h</a>
-, <a class="el" href="memory_8c.html#af326675c9337f4c305d86bac0542dab0">memory.c</a>
+: <a class="el" href="memory_8c.html#af326675c9337f4c305d86bac0542dab0">memory.c</a>
+, <a class="el" href="_a_p_i_2headers_2system_2memory_8h.html#af326675c9337f4c305d86bac0542dab0">memory.h</a>
 </li>
 <li>getProcessID()
 : <a class="el" href="get__info_8h.html#aacde5a071569991e61992c4afe0ef72d">get_info.h</a>
 , <a class="el" href="get__info_8c.html#aa49e954726f05282626c7d28742e61cc">get_info.c</a>
 </li>
 <li>getProcessInfo()
-: <a class="el" href="get__info_8h.html#ad7a2a009578b6e31db819cca1d5a7512">get_info.h</a>
-, <a class="el" href="get__info_8c.html#ad7a2a009578b6e31db819cca1d5a7512">get_info.c</a>
+: <a class="el" href="get__info_8c.html#ad7a2a009578b6e31db819cca1d5a7512">get_info.c</a>
+, <a class="el" href="get__info_8h.html#ad7a2a009578b6e31db819cca1d5a7512">get_info.h</a>
 </li>
 <li>getScreenAttribute()
 : <a class="el" href="screen_8c.html#a95614fbbf3f82f82e5aa26f367bf00b3">screen.c</a>
@@ -185,8 +190,8 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 : <a class="el" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">virt_mm.c</a>
 </li>
 <li>getTerminalInContext()
-: <a class="el" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">kernel_init.c</a>
-, <a class="el" href="kterminal_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">kterminal.c</a>
+: <a class="el" href="kterminal_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">kterminal.c</a>
+, <a class="el" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">kernel_init.c</a>
 </li>
 <li>GG
 : <a class="el" href="_kernel_2sources_2hash_2md5_8c.html#a685f32faa2a66e743850b990a13b8bfa">md5.c</a>
@@ -205,7 +210,7 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 </li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

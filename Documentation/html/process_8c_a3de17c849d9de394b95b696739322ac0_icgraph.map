@@ -1,9 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="185,35,324,64"/>
-<area shape="rect" id="node11" href="$process__scheduler_8h.html#a72865d5f7cb7d9eedd0f5dc2f07375b1" title="scheduler_global_message" alt="" coords="157,88,352,117"/>
-<area shape="rect" id="node5" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="664,88,789,117"/>
-<area shape="rect" id="node9" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="401,35,615,64"/>
-<area shape="rect" id="node7" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="839,88,892,117"/>
-<area shape="rect" id="node13" href="$post__init_8c.html#a93f4731bfb16e12acb7817e1b82014c4" title="kernelInputCallback" alt="" coords="435,88,581,117"/>
-<area shape="rect" id="node16" href="$post__init_8c.html#ad3545f29858afa6583ff0d4e48e57b00" title="kernelMouseCallback" alt="" coords="431,141,585,171"/>
+<area shape="rect" id="node3" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="159,59,297,88"/>
+<area shape="rect" id="node15" href="$process__scheduler_8h.html#a72865d5f7cb7d9eedd0f5dc2f07375b1" title="scheduler_global_message" alt="" coords="357,112,552,141"/>
+<area shape="rect" id="node5" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="348,5,561,35"/>
+<area shape="rect" id="node7" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="380,59,529,88"/>
+<area shape="rect" id="node9" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="631,59,748,88"/>
+<area shape="rect" id="node11" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="816,112,941,141"/>
+<area shape="rect" id="node13" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="991,112,1044,141"/>
+<area shape="rect" id="node17" href="$post__init_8c.html#a93f4731bfb16e12acb7817e1b82014c4" title="kernelInputCallback" alt="" coords="616,112,763,141"/>
+<area shape="rect" id="node20" href="$post__init_8c.html#ad3545f29858afa6583ff0d4e48e57b00" title="kernelMouseCallback" alt="" coords="612,165,767,195"/>
 </map>

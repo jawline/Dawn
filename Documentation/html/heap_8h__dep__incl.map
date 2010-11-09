@@ -1,10 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="5,83,235,112"/>
-<area shape="rect" id="node5" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="259,83,485,112"/>
-<area shape="rect" id="node7" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="509,83,725,112"/>
-<area shape="rect" id="node9" href="$vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="749,83,912,112"/>
-<area shape="rect" id="node11" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="936,83,1133,112"/>
-<area shape="rect" id="node13" href="$kheap_8c.html" title="Kernel/sources/heap/kheap.c" alt="" coords="1157,83,1363,112"/>
-<area shape="rect" id="node15" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1387,83,1605,112"/>
-<area shape="rect" id="node17" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="1629,83,1915,112"/>
+<area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
+<area shape="rect" id="node5" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="256,83,472,112"/>
+<area shape="rect" id="node7" href="$vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="496,83,659,112"/>
+<area shape="rect" id="node9" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="683,83,880,112"/>
+<area shape="rect" id="node11" href="$kheap_8c.html" title="Kernel/sources/heap/kheap.c" alt="" coords="904,83,1109,112"/>
+<area shape="rect" id="node13" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1133,83,1352,112"/>
+<area shape="rect" id="node15" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="1376,83,1661,112"/>
 </map>

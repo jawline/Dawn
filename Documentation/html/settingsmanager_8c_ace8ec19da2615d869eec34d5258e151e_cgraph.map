@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="241,7,319,36"/>
+<area shape="rect" id="node5" href="$settingsmanager_8c.html#aebced55b49ced709703da6ffa4055234" title="settingsCreateEntry" alt="" coords="205,60,355,89"/>
+<area shape="rect" id="node13" href="$common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="452,165,511,195"/>
+<area shape="rect" id="node15" href="$settingsmanager_8c.html#a3491dc4e595c2fc1aee61b1c3c6ce60e" title="settingsGetEntry" alt="" coords="216,217,344,247"/>
+<area shape="rect" id="node19" href="$settingsmanager_8c.html#a3973b0a973d5fb03e52eedffd66bb5a8" title="settingsModifyEntry" alt="" coords="207,113,353,143"/>
+<area shape="rect" id="node23" href="$common_8c.html#a1158ee53a70b66e0208da58ff10bf986" title="strchr" alt="" coords="251,271,309,300"/>
+<area shape="rect" id="node7" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="444,59,519,88"/>
+<area shape="rect" id="node9" href="$settingsmanager_8c.html#a0135e45a791cb2afe081e7486b4af2d4" title="settingsGetLastEntry" alt="" coords="404,5,559,35"/>
+<area shape="rect" id="node11" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="451,112,512,141"/>
+<area shape="rect" id="node17" href="$common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="448,219,515,248"/>
+</map>

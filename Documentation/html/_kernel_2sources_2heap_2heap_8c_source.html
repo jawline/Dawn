@@ -35,243 +35,222 @@
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="virt__mm_8h.html">mm/virt_mm.h</a>&gt;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="phys__mm_8h.html">mm/phys_mm.h</a>&gt;</span>
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#ab80d68399dbb045d1b1b821c560ec7df">alloc_mem</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="multiboot_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> * heap);
-<a name="l00009"></a>00009 <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#adcb6f95229d37c5dbfd89ce01280b178">free_mem</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> * heap);
-<a name="l00010"></a>00010 
-<a name="l00011"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a043fa30c22e29037ae22009faf3a59e8">00011</a> <span class="preprocessor">#define HEAP_SHRINK_SIZE_MINIMUM 0x16000</span>
+<a name="l00008"></a>00008 <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(<span class="keywordtype">size_t</span> <a class="code" href="multiboot_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap);
+<a name="l00009"></a>00009 
+<a name="l00010"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#aab8fa2013fc178b4430b66e6de2f1601">00010</a> <span class="preprocessor">#define HEAP_BASE_PAGES 4</span>
+<a name="l00011"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8bb89887c78184fcf57d5240b5c0b6e6">00011</a> <span class="preprocessor"></span><span class="preprocessor">#define MINIMUM_BLOCK_SIZE 100</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
-<a name="l00017"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81">00017</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it.">initializeHeap</a>(<a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> * heap, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address)
-<a name="l00018"></a>00018 {
-<a name="l00019"></a>00019         <span class="comment">//Double check the heap ptr is valid</span>
-<a name="l00020"></a>00020         <span class="keywordflow">if</span> (heap == 0) <span class="keywordflow">return</span>;
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Creating Heap\n&quot;</span>);
-<a name="l00023"></a>00023         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(heap, 0, <span class="keyword">sizeof</span>(<a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>));
-<a name="l00024"></a>00024         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: 0&#39;ed Heap\n&quot;</span>);
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026         <span class="comment">//Set the heap location to the specified address</span>
-<a name="l00027"></a>00027         heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a> = address &amp; PAGE_MASK; <span class="comment">//Page aligned boundry</span>
-<a name="l00028"></a>00028         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Heap Location &quot;</span>);
-<a name="l00029"></a>00029         <a class="code" href="debugprint_8h.html#ac60b666ea684eb88d4ccd46b08759ca7">DEBUG_PRINTX</a>(heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>);
-<a name="l00030"></a>00030         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;\n&quot;</span>);
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> frame_addr = 0;
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034         frame_addr = 0;
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036         frame_addr = <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>();
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Allocated frame &quot;</span>);
-<a name="l00039"></a>00039         <a class="code" href="debugprint_8h.html#ac60b666ea684eb88d4ccd46b08759ca7">DEBUG_PRINTX</a>(frame_addr);
-<a name="l00040"></a>00040         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;\n&quot;</span>);
+<a name="l00013"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151">00013</a> <span class="keywordtype">size_t</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151">mapInitialHeap</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="initrd__fent_8h.html#a292119c57ee24c2a250283318f2c34fd">start</a>)
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> iter = start;
+<a name="l00016"></a>00016         <span class="keywordflow">for</span> (iter; iter &lt;= start + <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a> * HEAP_BASE_PAGES; iter += <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>)
+<a name="l00017"></a>00017         {
+<a name="l00018"></a>00018                 <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(iter, <a class="code" href="phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8">allocateKernelFrame</a>(), <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a559697780e34fd09ba6a2e909f0fe1df">PAGE_WRITE</a>);
+<a name="l00019"></a>00019         }
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021         <span class="keywordflow">return</span> HEAP_BASE_PAGES * <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>;
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 
+<a name="l00024"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#aaa008418c6828946c78f15ed6850cf61">00024</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#aaa008418c6828946c78f15ed6850cf61">initializeBaseEntry</a>(<a class="code" href="structheap__entry.html">heap_entry_t</a>* base_entry, <span class="keywordtype">size_t</span> heapSizeInBytes)
+<a name="l00025"></a>00025 {
+<a name="l00026"></a>00026         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(base_entry, 0, <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>));
+<a name="l00027"></a>00027         base_entry-&gt;<a class="code" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6" title="A magic variable designed to check that it is a block.">magic</a> = HEAP_MAGIC;
+<a name="l00028"></a>00028         base_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = heapSizeInBytes - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00029"></a>00029         base_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = 0;
+<a name="l00030"></a>00030         base_entry-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> = 0;
+<a name="l00031"></a>00031 }
+<a name="l00032"></a>00032 
+<a name="l00037"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0">00037</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0" title="Initializes a new heap at address specified and maps memory from free frames for it.">initializeHeap</a>(<a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap, <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> address)
+<a name="l00038"></a>00038 {
+<a name="l00039"></a>00039         <span class="comment">//Double check the heap ptr is valid</span>
+<a name="l00040"></a>00040         <span class="keywordflow">if</span> (heap == 0) <span class="keywordflow">return</span>;
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>, frame_addr, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
+<a name="l00042"></a>00042         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Initializing new heap at 0x%x\n&quot;</span>, address);
 <a name="l00043"></a>00043 
-<a name="l00044"></a>00044         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Mapped Heap\n&quot;</span>);
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
-<a name="l00047"></a>00047         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: 0&#39;ed HEAP\n&quot;</span>);
+<a name="l00044"></a>00044         <span class="comment">//Returns the number of bytes the heap allocated on initialization</span>
+<a name="l00045"></a>00045         <span class="keywordtype">size_t</span> heapSizeBytes = <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151">mapInitialHeap</a>(address);
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Assigning base address\n&quot;</span>);        
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049         <a class="code" href="structheap__entry.html">heap_entry_t</a> * ptr = (<a class="code" href="structheap__entry.html">heap_entry_t</a> *) heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>;
-<a name="l00050"></a>00050         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(ptr, 0, <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>)); <span class="comment">//Initialize it.</span>
-<a name="l00051"></a>00051         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Created first heap entry\n&quot;</span>);
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053         ptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0; <span class="comment">//Not used</span>
-<a name="l00054"></a>00054         ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a> - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>); <span class="comment">//One frame has been allocated. 4096 bytes of heap space at the minute. The heap entrys are also in the space so we need to take into account for them</span>
+<a name="l00049"></a>00049         <a class="code" href="structheap__entry.html">heap_entry_t</a>* base_entry = address;
+<a name="l00050"></a>00050         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#aaa008418c6828946c78f15ed6850cf61">initializeBaseEntry</a>(base_entry, heapSizeBytes);
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Setting heap-&gt;heap_location to address\n&quot;</span>);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054         heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a> = address;
 <a name="l00055"></a>00055 
-<a name="l00056"></a>00056         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Set ptr size\n&quot;</span>);
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058         ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = 0; <span class="comment">//ptr-&gt;next = NULL, this tells the heap that this is the last entry on the heap.</span>
-<a name="l00059"></a>00059         ptr-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> = 0;
-<a name="l00060"></a>00060         <a class="code" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Debug Message: Ptr-&gt;next set\n&quot;</span>);
-<a name="l00061"></a>00061 }
-<a name="l00062"></a>00062 
-<a name="l00068"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd">00068</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap.">shrinkHeap</a>(<a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap, <a class="code" href="structheap__entry.html">heap_entry_t</a>* last_entry)
-<a name="l00069"></a>00069 {
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071         <span class="comment">//Calculate the end position and the start position of the memory block</span>
-<a name="l00072"></a>00072         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> startOfEntry = last_entry;
-<a name="l00073"></a>00073         startOfEntry += <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> endOfEntry = startOfEntry;
-<a name="l00076"></a>00076         endOfEntry += last_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a>;
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078         <span class="keywordflow">if</span> (endOfEntry &gt; heap + <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a043fa30c22e29037ae22009faf3a59e8">HEAP_SHRINK_SIZE_MINIMUM</a>)
-<a name="l00079"></a>00079         {
-<a name="l00080"></a>00080                 <span class="comment">//XOR The (PAGE_SIZE - 1) will give the nearest page aligned boundry less than endOfEntry</span>
-<a name="l00081"></a>00081                 <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> nearestPageBoundry = endOfEntry;
-<a name="l00082"></a>00082                 nearestPageBoundry = nearestPageBoundry &amp; (~0xFFF);
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084                 <span class="keywordflow">if</span> (nearestPageBoundry &lt; endOfEntry)
-<a name="l00085"></a>00085                 {
-<a name="l00086"></a>00086                         <span class="keywordflow">if</span> (nearestPageBoundry &gt; startOfEntry + 1)
-<a name="l00087"></a>00087                         {
-<a name="l00088"></a>00088                                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;SHRNK\n&quot;</span>);
-<a name="l00089"></a>00089                                 <span class="comment">//TODO: Investigate whether -1 is needed?</span>
-<a name="l00090"></a>00090                                 <span class="comment">//Set the blocks size to newSize</span>
-<a name="l00091"></a>00091                                 <span class="keywordtype">size_t</span> newSize = nearestPageBoundry - startOfEntry;
-<a name="l00092"></a>00092                                 last_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = newSize;
+<a name="l00056"></a>00056         <span class="keywordflow">return</span>;
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 
+<a name="l00063"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d">00063</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d" title="Expands the heap by expansionSize pages.">expandHeap</a>(<a class="code" href="structheap__entry.html">heap_entry_t</a>* last_heap_entry, <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> heap_end, <span class="keywordtype">size_t</span> expansionSize)
+<a name="l00064"></a>00064 {
+<a name="l00065"></a>00065         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> iter = heap_end;
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067         <span class="keywordflow">for</span> (iter; iter &lt;= heap_end + (<a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a> * expansionSize); iter += <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>)
+<a name="l00068"></a>00068         {
+<a name="l00069"></a>00069                 <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(iter, <a class="code" href="phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8">allocateKernelFrame</a>(), <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a559697780e34fd09ba6a2e909f0fe1df">PAGE_WRITE</a>);
+<a name="l00070"></a>00070         }
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072         <span class="comment">//If the last entry is still free</span>
+<a name="l00073"></a>00073         <span class="keywordflow">if</span> (last_heap_entry-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0)
+<a name="l00074"></a>00074         {
+<a name="l00075"></a>00075                 last_heap_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> += (expansionSize * <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00076"></a>00076         }
+<a name="l00077"></a>00077         <span class="keywordflow">else</span> <span class="comment">//If not. create a new entry and link it too the list</span>
+<a name="l00078"></a>00078         {
+<a name="l00079"></a>00079                 <a class="code" href="structheap__entry.html">heap_entry_t</a>* new_entry = heap_end;
+<a name="l00080"></a>00080                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_entry, 0, <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>));
+<a name="l00081"></a>00081                 
+<a name="l00082"></a>00082                 new_entry-&gt;<a class="code" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6" title="A magic variable designed to check that it is a block.">magic</a> = HEAP_MAGIC;
+<a name="l00083"></a>00083                 new_entry-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0;
+<a name="l00084"></a>00084                 new_entry-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> = last_heap_entry;
+<a name="l00085"></a>00085                 new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = 0;
+<a name="l00086"></a>00086                 new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = (expansionSize * <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>) - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088                 last_heap_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = new_entry;
+<a name="l00089"></a>00089         }
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091         <span class="keywordflow">return</span>;
+<a name="l00092"></a>00092 }
 <a name="l00093"></a>00093 
-<a name="l00094"></a>00094                                 <span class="comment">//Find out what location (Frame) this area is mapped to</span>
-<a name="l00095"></a>00095                                 <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> mappingData = 0;
-<a name="l00096"></a>00096                                 <a class="code" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c">getMapping</a>(nearestPageBoundry, &amp;mappingData);
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098                                 <span class="comment">//Free that frame of memory</span>
-<a name="l00099"></a>00099                                 <a class="code" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92">freeFrame</a>(mappingData);
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101                                 <span class="comment">//Unmap it from the heap</span>
-<a name="l00102"></a>00102                                 <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(mappingData);
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104                                 <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap.">shrinkHeap</a>(heap, last_entry);
-<a name="l00105"></a>00105                         }
-<a name="l00106"></a>00106                 }
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108         }
-<a name="l00109"></a>00109 }
+<a name="l00099"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b">00099</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(<span class="keywordtype">size_t</span> <a class="code" href="multiboot_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap) 
+<a name="l00100"></a>00100 {
+<a name="l00101"></a>00101         <a class="code" href="structheap__entry.html">heap_entry_t</a>* iterator = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>;
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         <span class="comment">//Loop through all heap entrys</span>
+<a name="l00104"></a>00104         while (iterator != 0)
+<a name="l00105"></a>00105         {
+<a name="l00106"></a>00106                 <span class="comment">//If it isn&#39;t used and its bigger then the size requested</span>
+<a name="l00107"></a>00107                 <span class="keywordflow">if</span> ((iterator-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0) &amp;&amp; (iterator-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> &gt;= size))
+<a name="l00108"></a>00108                 {
+<a name="l00109"></a>00109                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* used_block = iterator;
 <a name="l00110"></a>00110 
-<a name="l00114"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de">00114</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap.">expandHeap</a>(<a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap, <a class="code" href="structheap__entry.html">heap_entry_t</a>* last_entry)
-<a name="l00115"></a>00115 {
-<a name="l00116"></a>00116         <span class="comment">//Map another 4kb onto the heap</span>
-<a name="l00117"></a>00117         <span class="comment">//This is the last entry on the heap SO if its not used we can just += the size otherwise we have to create a whole new one (More work for mee)</span>
+<a name="l00111"></a>00111                         used_block-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 1;
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113                         <span class="keywordtype">size_t</span> remainder = used_block-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> - size; <span class="comment">//How much is left over</span>
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115                         <span class="keywordflow">if</span> (remainder &gt; <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>) + MINIMUM_BLOCK_SIZE)
+<a name="l00116"></a>00116                         {
+<a name="l00117"></a>00117                                 <span class="comment">//Create a new entry and reduce the size of the original</span>
 <a name="l00118"></a>00118 
-<a name="l00119"></a>00119         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> frame_addr = <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>();
-<a name="l00120"></a>00120         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> end = last_entry;
-<a name="l00121"></a>00121         end += <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
-<a name="l00122"></a>00122         end += last_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a>;
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(end, frame_addr, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>); <span class="comment">//Mapped now! =)</span>
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(end, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
-<a name="l00127"></a>00127                         
-<a name="l00128"></a>00128         <span class="keywordflow">if</span> (last_entry-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0) 
-<a name="l00129"></a>00129         {
-<a name="l00130"></a>00130                 last_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> += <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>;
-<a name="l00131"></a>00131         } 
-<a name="l00132"></a>00132         <span class="keywordflow">else</span> 
-<a name="l00133"></a>00133         {
-<a name="l00134"></a>00134                 <span class="comment">//Create a new entry at end and link it to the heap</span>
-<a name="l00135"></a>00135                 <a class="code" href="structheap__entry.html">heap_entry_t</a> * nptr = (<a class="code" href="structheap__entry.html">heap_entry_t</a> *) end;
-<a name="l00136"></a>00136                 nptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0;
-<a name="l00137"></a>00137                 nptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a> - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>); <span class="comment">//- the size of the new heap entry</span>
-<a name="l00138"></a>00138                 nptr-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> = last_entry;
-<a name="l00139"></a>00139                 nptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = 0;
-<a name="l00140"></a>00140                 last_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = nptr;
-<a name="l00141"></a>00141         }
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143 }
+<a name="l00119"></a>00119                                 <span class="comment">//The new entry</span>
+<a name="l00120"></a>00120                                 <a class="code" href="structheap__entry.html">heap_entry_t</a>* new_block = ((MEM_LOC) used_block) + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>) + size;
+<a name="l00121"></a>00121                                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_block, 0, <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>));
+<a name="l00122"></a>00122                                 new_block-&gt;<a class="code" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6" title="A magic variable designed to check that it is a block.">magic</a> = HEAP_MAGIC;
+<a name="l00123"></a>00123                                 new_block-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = remainder - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00124"></a>00124                                 new_block-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = used_block-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00125"></a>00125                                 new_block-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> = used_block;
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128                                 <span class="comment">//The used entry</span>
+<a name="l00129"></a>00129                                 used_block-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = size;
+<a name="l00130"></a>00130                                 used_block-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = new_block;
+<a name="l00131"></a>00131                         }
+<a name="l00132"></a>00132                         <span class="keywordflow">else</span>
+<a name="l00133"></a>00133                         {
+<a name="l00134"></a>00134                         }
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136                         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> returnLocation = used_block;
+<a name="l00137"></a>00137                         returnLocation += <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139                         <span class="keywordflow">return</span> returnLocation;
+<a name="l00140"></a>00140                 }
+<a name="l00141"></a>00141                 <span class="keywordflow">else</span>
+<a name="l00142"></a>00142                 {
+<a name="l00143"></a>00143                 }
 <a name="l00144"></a>00144 
-<a name="l00149"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f">00149</a> <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="multiboot_8h.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap) 
-<a name="l00150"></a>00150 {
-<a name="l00151"></a>00151         <a class="code" href="structheap__entry.html">heap_entry_t</a>* ptr = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>;
-<a name="l00152"></a>00152         <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> result = 0;
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154         while (1) 
-<a name="l00155"></a>00155         {
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157                 <span class="keywordflow">if</span> (ptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0) <span class="comment">//Is the chunk in use?</span>
-<a name="l00158"></a>00158                 { 
-<a name="l00159"></a>00159                         <span class="keywordflow">if</span> (ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> &gt; size) <span class="comment">//Is it big enough!?!</span>
-<a name="l00160"></a>00160                         { 
-<a name="l00161"></a>00161                                 ptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 1; <span class="comment">//Yay it fits!</span>
-<a name="l00162"></a>00162                                 
-<a name="l00163"></a>00163                                 <span class="keywordflow">if</span> (ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> &lt; size + (<span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>))) 
-<a name="l00164"></a>00164                                 { <span class="comment">//If another chunk of memory wont fit then just allocate a few more bytes then asked for (Avoid leak)</span>
-<a name="l00165"></a>00165                                         <span class="comment">//Don&#39;t actually need to do anything. The next ptr is still the next pointer</span>
-<a name="l00166"></a>00166                                 } 
-<a name="l00167"></a>00167                                 <span class="keywordflow">else</span> 
-<a name="l00168"></a>00168                                 {
-<a name="l00169"></a>00169                                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* newptr = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) (((<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>) ptr) + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>) + size);
-<a name="l00170"></a>00170                                         newptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0;
-<a name="l00171"></a>00171                                         newptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> - size - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
-<a name="l00172"></a>00172                                         newptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
-<a name="l00173"></a>00173                                         newptr-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> = ptr;
-<a name="l00174"></a>00174                                         ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = newptr;
-<a name="l00175"></a>00175                                         ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = size;
-<a name="l00176"></a>00176                                 }
-<a name="l00177"></a>00177 
-<a name="l00178"></a>00178                                 <span class="keywordflow">return</span> ((<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>) ptr) + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>); <span class="comment">//Return the location of the actual memory not the header</span>
-<a name="l00179"></a>00179                         }
-<a name="l00180"></a>00180                 }
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182                 <span class="keywordflow">if</span> (ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> == 0) 
-<a name="l00183"></a>00183                 {
-<a name="l00184"></a>00184                         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap.">expandHeap</a>(heap, ptr);
-<a name="l00185"></a>00185                         <span class="keywordflow">return</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(size, heap);
-<a name="l00186"></a>00186                 }
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188                 ptr = (<a class="code" href="structheap__entry.html">heap_entry_t</a> *) ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>; <span class="comment">//Move onto the next chunk</span>
-<a name="l00189"></a>00189         }
-<a name="l00190"></a>00190 
-<a name="l00191"></a>00191         <span class="keywordflow">return</span> 0;
-<a name="l00192"></a>00192 }
+<a name="l00145"></a>00145                 iterator = iterator-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00146"></a>00146                 
+<a name="l00147"></a>00147         }
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149         <span class="comment">//This bit of code sets iterator to the last valid entry on the heap</span>
+<a name="l00150"></a>00150         iterator = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) heap-&gt;<a class="code" href="structheap__t.html#a9c3b25233b11fa37baa52194063db338" title="The location of the heap in memory.">heap_location</a>;
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152         for (;;)
+<a name="l00153"></a>00153         {
+<a name="l00154"></a>00154                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> == 0) <span class="keywordflow">break</span>;
+<a name="l00155"></a>00155                 iterator = iterator-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00156"></a>00156         }
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158         <span class="comment">//This bit finds the end of the heap</span>
+<a name="l00159"></a>00159         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> heap_end = iterator;
+<a name="l00160"></a>00160         heap_end += <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>) + iterator-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a>;
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162         <span class="comment">//Expands the heap by x pages</span>
+<a name="l00163"></a>00163         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d" title="Expands the heap by expansionSize pages.">expandHeap</a>(iterator, heap_end, 2);
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165         <span class="comment">//Recall this function</span>
+<a name="l00166"></a>00166         <span class="keywordflow">return</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b" title="Allocates x bytes of memory from a heap, expanding it if necessary.">heapAllocateMemory</a>(size, heap);
+<a name="l00167"></a>00167 }
+<a name="l00168"></a>00168 
+<a name="l00169"></a>00169 
+<a name="l00173"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167">00173</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167" title="If there are 2 unused entrys next to each other, this function turns them into one entry...">unifyHeapEntry</a>(<a class="code" href="structheap__entry.html">heap_entry_t</a>* entry)
+<a name="l00174"></a>00174 {
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176         <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a> != 0)
+<a name="l00177"></a>00177         {
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179                 <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a>-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0)
+<a name="l00180"></a>00180                 {
+<a name="l00181"></a>00181                         <span class="comment">//Can unify left</span>
+<a name="l00182"></a>00182                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* new_entry = entry-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a>;
+<a name="l00183"></a>00183                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* engulfed = entry;
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185                         <span class="comment">//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito</span>
+<a name="l00186"></a>00186                         new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + engulfed-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00187"></a>00187                         new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = engulfed-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189                         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167" title="If there are 2 unused entrys next to each other, this function turns them into one entry...">unifyHeapEntry</a>(new_entry);
+<a name="l00190"></a>00190                         <span class="keywordflow">return</span>;
+<a name="l00191"></a>00191                 
+<a name="l00192"></a>00192                 }
 <a name="l00193"></a>00193 
-<a name="l00199"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f">00199</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f" title="Free&amp;#39;s the memory at location address on the heap specified. Shrinking if necessary.">heapFreeMemory</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap)
-<a name="l00200"></a>00200 {
-<a name="l00201"></a>00201         <a class="code" href="structheap__entry.html">heap_entry_t</a>* ptr = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) (address - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>));
-<a name="l00202"></a>00202         <a class="code" href="structheap__entry.html">heap_entry_t</a>* optr = 0;
-<a name="l00203"></a>00203 
-<a name="l00204"></a>00204         <span class="keywordflow">if</span> (ptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0) <span class="comment">//If this happens then somethings gone wrong. Wtf moment much?</span>
-<a name="l00205"></a>00205         {
-<a name="l00206"></a>00206                 <span class="keywordflow">return</span>;
-<a name="l00207"></a>00207         }
-<a name="l00208"></a>00208 
-<a name="l00209"></a>00209         ptr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0;
-<a name="l00210"></a>00210 
-<a name="l00211"></a>00211         <span class="keywordflow">while</span> (1)
-<a name="l00212"></a>00212         {
-<a name="l00213"></a>00213                 <span class="comment">//UNIFY Left</span>
-<a name="l00214"></a>00214                 optr = ptr-&gt;<a class="code" href="structheap__entry.html#a8bc8f936f7d3b69b921f7339ff6f1cc9" title="Pointer to the previous heap entry.">prev</a>;
-<a name="l00215"></a>00215                 <span class="keywordflow">if</span> (optr != 0) 
-<a name="l00216"></a>00216                 {
-<a name="l00217"></a>00217                         <span class="keywordflow">if</span> (optr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0) <span class="comment">//Can be unified!</span>
-<a name="l00218"></a>00218                         { 
-<a name="l00219"></a>00219                                 optr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = optr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>) + ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a>;
-<a name="l00220"></a>00220                                 optr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
-<a name="l00221"></a>00221                                 ptr = optr;
-<a name="l00222"></a>00222                         }
-<a name="l00223"></a>00223                         <span class="keywordflow">else</span>
-<a name="l00224"></a>00224                         {
-<a name="l00225"></a>00225                                 <span class="keywordflow">break</span>;
-<a name="l00226"></a>00226                         }
-<a name="l00227"></a>00227                 } 
-<a name="l00228"></a>00228                 <span class="keywordflow">else</span> 
-<a name="l00229"></a>00229                 {
-<a name="l00230"></a>00230                         <span class="keywordflow">break</span>;
-<a name="l00231"></a>00231                 }
+<a name="l00194"></a>00194         }
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196         <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> != 0)
+<a name="l00197"></a>00197         {
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199                 <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0)
+<a name="l00200"></a>00200                 {
+<a name="l00201"></a>00201                         <span class="comment">//Can unify right</span>
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* new_entry = entry;
+<a name="l00204"></a>00204                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* engulfed = entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206                         <span class="comment">//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito</span>
+<a name="l00207"></a>00207                         new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + engulfed-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00208"></a>00208                         new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = engulfed-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210                         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167" title="If there are 2 unused entrys next to each other, this function turns them into one entry...">unifyHeapEntry</a>(new_entry);
+<a name="l00211"></a>00211                         <span class="keywordflow">return</span>;
+<a name="l00212"></a>00212                 }
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214         }
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216 }
+<a name="l00217"></a>00217 
+<a name="l00222"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287">00222</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287" title="Free&amp;#39;s the memory at location address on the heap specified. Shrinking if necessary.">heapFreeMemory</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> address, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap)
+<a name="l00223"></a>00223 {
+<a name="l00224"></a>00224         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> entry_address = address - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226         <a class="code" href="structheap__entry.html">heap_entry_t</a>* specificEntry = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) entry_address;
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228         <span class="keywordflow">if</span> (specificEntry-&gt;magic != <a class="code" href="heap_8h.html#a604474f5c0892ea2c6c16b5e45c59f59">HEAP_MAGIC</a>)
+<a name="l00229"></a>00229         {
+<a name="l00230"></a>00230                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Entry magic != Heap magic\n&quot;</span>);
+<a name="l00231"></a>00231                 <a class="code" href="panic_8h.html#ae3c0c6fb5e69bb687e787ec5c487afa1">PANIC</a>(<span class="stringliteral">&quot;AHHHH HEAP_MAGIC error\n&quot;</span>);
 <a name="l00232"></a>00232         }
-<a name="l00233"></a>00233 
-<a name="l00234"></a>00234         <span class="keywordflow">while</span> (1) 
-<a name="l00235"></a>00235         {
-<a name="l00236"></a>00236                 <span class="comment">//UNIFY Right</span>
-<a name="l00237"></a>00237                 optr = ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
-<a name="l00238"></a>00238                 <span class="keywordflow">if</span> (optr != 0) 
-<a name="l00239"></a>00239                 {
-<a name="l00240"></a>00240                         <span class="keywordflow">if</span> (optr-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0) <span class="comment">//Can be unified!</span>
-<a name="l00241"></a>00241                         { 
-<a name="l00242"></a>00242                                 ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = ptr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>) + optr-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a>;
-<a name="l00243"></a>00243                                 ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = optr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
-<a name="l00244"></a>00244                         } 
-<a name="l00245"></a>00245                         <span class="keywordflow">else</span> 
-<a name="l00246"></a>00246                         { 
-<a name="l00247"></a>00247                                 <span class="keywordflow">break</span>; 
-<a name="l00248"></a>00248                         }
-<a name="l00249"></a>00249                 } 
-<a name="l00250"></a>00250                 <span class="keywordflow">else</span> 
-<a name="l00251"></a>00251                 { 
-<a name="l00252"></a>00252                         <span class="keywordflow">break</span>; 
-<a name="l00253"></a>00253                 }
-<a name="l00254"></a>00254         }
-<a name="l00255"></a>00255 
-<a name="l00256"></a>00256         <span class="comment">//Check if this is the last entry</span>
-<a name="l00257"></a>00257         <span class="keywordflow">if</span> (ptr-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> == 0) 
-<a name="l00258"></a>00258         {
-<a name="l00259"></a>00259                 
-<a name="l00260"></a>00260                 <span class="comment">//shrinkHeap(heap, ptr);</span>
-<a name="l00261"></a>00261         }
-<a name="l00262"></a>00262 }
+<a name="l00233"></a>00233         <span class="keywordflow">else</span>
+<a name="l00234"></a>00234         {
+<a name="l00235"></a>00235                 specificEntry-&gt;used = 0;
+<a name="l00236"></a>00236                 <span class="comment">//unifyHeapEntry(specificEntry);</span>
+<a name="l00237"></a>00237         }
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239         <span class="keywordflow">return</span>;
+<a name="l00240"></a>00240 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

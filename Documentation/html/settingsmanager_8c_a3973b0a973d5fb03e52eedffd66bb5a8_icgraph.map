@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$settingsmanager_8c.html#ace8ec19da2615d869eec34d5258e151e" title="settingsExecuteLine" alt="" coords="201,59,351,88"/>
+<area shape="rect" id="node5" href="$settingsmanager_8c.html#a8477e3d6a2fbf5730efa26ae2bf2693d" title="parseConfigFile" alt="" coords="411,5,528,35"/>
+<area shape="rect" id="node13" href="$debug_8c.html#aac61d937a2a9bbbe953f9fa0764703f2" title="setDebugModeOff" alt="" coords="401,59,537,88"/>
+<area shape="rect" id="node17" href="$debug_8c.html#af4d43aa7f12ff39e87ac379ca32b9b1b" title="setDebugModeOn" alt="" coords="401,112,537,141"/>
+<area shape="rect" id="node7" href="$settingsmanager_8c.html#aad44dc767ac3644e5a1444c5aefbaf0f" title="initializeSettingsManager" alt="" coords="588,5,769,35"/>
+<area shape="rect" id="node9" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="819,5,931,35"/>
+<area shape="rect" id="node11" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="980,5,1033,35"/>
+<area shape="rect" id="node15" href="$syscall_8c.html#a78399f5b48630ef971a5ade44114efde" title="syscallSetDebugMode" alt="" coords="597,85,760,115"/>
+</map>

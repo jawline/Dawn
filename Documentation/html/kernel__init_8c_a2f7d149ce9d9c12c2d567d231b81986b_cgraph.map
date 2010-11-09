@@ -1,51 +1,51 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1011,173,1123,202"/>
-<area shape="rect" id="node9" href="$kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="221,1693,379,1722"/>
-<area shape="rect" id="node11" href="$devices__fs_8c.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="247,769,353,798"/>
-<area shape="rect" id="node27" href="$vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="561,640,628,669"/>
-<area shape="rect" id="node32" href="$kernel__init_8c.html#a925c14c16c60f11146ba946b4dab12e9" title="GDT allows for segmented memory model on x86 processors, outdated. Using paging instead but the syste..." alt="" coords="252,1370,348,1400"/>
-<area shape="rect" id="node39" href="$gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="167,1533,433,1562"/>
-<area shape="rect" id="node45" href="$kernel__init_8c.html#a00219ebe071bfd71918cd229bbed0e08" title="initializeIdt" alt="" coords="256,1758,344,1788"/>
-<area shape="rect" id="node49" href="$input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443" title="initializeInputCallbacks" alt="" coords="217,1640,383,1669"/>
-<area shape="rect" id="node54" href="$kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="227,120,373,149"/>
-<area shape="rect" id="node59" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="824,173,875,202"/>
-<area shape="rect" id="node63" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="219,898,381,928"/>
-<area shape="rect" id="node70" href="$kterminal_8c.html#aa85bbcb7640007f2c337d10226414093" title="initializeKernelTerminal" alt="" coords="217,1237,383,1266"/>
-<area shape="rect" id="node79" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="207,1106,393,1136"/>
-<area shape="rect" id="node90" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="237,485,363,514"/>
-<area shape="rect" id="node106" href="$process__scheduler_8c.html#ad102b771d475960e41eb9bdb143fd60c" title="initializeScheduler" alt="" coords="999,1002,1135,1032"/>
-<area shape="rect" id="node109" href="$screen_8c.html#ab546fbfc91fd02b1b5713a5ba0c01e4d" title="Initialize the screen if one exists." alt="" coords="241,1836,359,1865"/>
-<area shape="rect" id="node113" href="$_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="223,1474,377,1504"/>
-<area shape="rect" id="node120" href="$syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89" title="kernelInitializeSyscalls" alt="" coords="219,1586,381,1616"/>
-<area shape="rect" id="node124" href="$stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="548,274,641,304"/>
-<area shape="rect" id="node5" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1191,200,1343,229"/>
-<area shape="rect" id="node7" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1212,146,1321,176"/>
-<area shape="rect" id="node13" href="$vfs_8c.html#a45cd72de0b5fe65f00a4436954bf8404" title="Binds the specified target node to the node supplied." alt="" coords="800,693,899,722"/>
-<area shape="rect" id="node15" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="992,769,1141,798"/>
-<area shape="rect" id="node23" href="$hdd__fs_8c.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="528,744,661,773"/>
-<area shape="rect" id="node17" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1228,326,1305,356"/>
-<area shape="rect" id="node19" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="1229,977,1304,1006"/>
-<area shape="rect" id="node21" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="1236,769,1297,798"/>
-<area shape="rect" id="node29" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="804,640,895,669"/>
-<area shape="rect" id="node34" href="$gdt_8h.html#ae576bf193485d90b87c2e2a53f26d3f6" title="initialize_gdt" alt="" coords="1016,1316,1117,1345"/>
-<area shape="rect" id="node37" href="$tss_8c.html#a342204a01e4d27c91ec92f836afe3609" title="initializeTss" alt="" coords="549,1370,640,1400"/>
-<area shape="rect" id="node41" href="$gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="549,1581,640,1610"/>
-<area shape="rect" id="node43" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="756,1633,943,1662"/>
-<area shape="rect" id="node47" href="$headers_2interrupts_2idt_8h.html#a992b45389c33c7b7335ccd0e1713bf3a" title="Initialize_IDT" alt="" coords="545,1789,644,1818"/>
-<area shape="rect" id="node51" href="$keyboard__generic__ps2_8c.html#aaba71403c84ae43669b0a6ff5dcf185e" title="initializeKeyboard" alt="" coords="529,1736,660,1765"/>
-<area shape="rect" id="node56" href="$_kernel_2sources_2heap_2heap_8c.html#ade657aeee4e0f8c2b0b4593bcff4af81" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="541,120,648,149"/>
-<area shape="rect" id="node65" href="$used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f" title="init_used_list" alt="" coords="543,898,647,928"/>
-<area shape="rect" id="node72" href="$terminal_8c.html#a72cf186df688382e2a547b1937e2a2ed" title="makeNewTerminal" alt="" coords="780,1185,919,1214"/>
-<area shape="rect" id="node75" href="$kterminal_8c.html#acd26283417d3043cc0200a73491c4e31" title="setDefaultTerminalCallbacks" alt="" coords="495,1317,695,1346"/>
-<area shape="rect" id="node77" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="523,1264,667,1293"/>
-<area shape="rect" id="node81" href="$phys__mm_8h.html#ac6d8a5dacfe69a5d5ea202a7d14b50d6" title="init_phys_mm" alt="" coords="540,1106,649,1136"/>
-<area shape="rect" id="node83" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="484,1160,705,1189"/>
-<area shape="rect" id="node88" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="531,1053,659,1082"/>
-<area shape="rect" id="node94" href="$initrd_8c.html#a660bcc4a63d45453aa704d9a108089cb" title="Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from ..." alt="" coords="1011,716,1123,745"/>
-<area shape="rect" id="node99" href="$_kernel_2headers_2hash_2md5use_8h.html#a367fcbbabd1a5fef3d3f49f9d9b620f2" title="MDCompare" alt="" coords="544,378,645,408"/>
-<area shape="rect" id="node101" href="$_kernel_2headers_2hash_2md5use_8h.html#af5f12067aaa887dade4c6f2539bbb989" title="MDData" alt="" coords="557,432,632,461"/>
-<area shape="rect" id="node104" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="561,485,628,514"/>
-<area shape="rect" id="node111" href="$screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="509,1842,680,1872"/>
-<area shape="rect" id="node115" href="$pit_8c.html#a7abdb85fa0638b68205d0dce7347a010" title="initializePit" alt="" coords="551,1474,639,1504"/>
-<area shape="rect" id="node118" href="$_kernel_2sources_2timers_2clock_8c.html#ac0eb566b703d0891a1d93ad1c1c49a8d" title="pitCallback" alt="" coords="549,1528,640,1557"/>
+<area shape="rect" id="node3" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1005,134,1117,163"/>
+<area shape="rect" id="node9" href="$kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50" title="getTerminalInContext" alt="" coords="221,1258,379,1287"/>
+<area shape="rect" id="node11" href="$devices__fs_8c.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="247,652,353,682"/>
+<area shape="rect" id="node27" href="$vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="816,730,883,759"/>
+<area shape="rect" id="node32" href="$kernel__init_8c.html#a925c14c16c60f11146ba946b4dab12e9" title="GDT allows for segmented memory model on x86 processors, outdated. Using paging instead but the syste..." alt="" coords="252,1044,348,1074"/>
+<area shape="rect" id="node39" href="$gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="167,1204,433,1234"/>
+<area shape="rect" id="node45" href="$kernel__init_8c.html#a00219ebe071bfd71918cd229bbed0e08" title="initializeIdt" alt="" coords="256,1311,344,1340"/>
+<area shape="rect" id="node49" href="$input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443" title="initializeInputCallbacks" alt="" coords="217,1098,383,1127"/>
+<area shape="rect" id="node54" href="$kheap_8c.html#a68fdcdbbbfffd11307fb5325718b2ce1" title="Initializes the kernel heap." alt="" coords="227,1364,373,1394"/>
+<area shape="rect" id="node58" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="513,782,676,811"/>
+<area shape="rect" id="node65" href="$kterminal_8c.html#aa85bbcb7640007f2c337d10226414093" title="initializeKernelTerminal" alt="" coords="217,966,383,995"/>
+<area shape="rect" id="node74" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="207,496,393,526"/>
+<area shape="rect" id="node85" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="532,363,657,392"/>
+<area shape="rect" id="node93" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="824,108,875,138"/>
+<area shape="rect" id="node103" href="$process__scheduler_8c.html#ad102b771d475960e41eb9bdb143fd60c" title="initializeScheduler" alt="" coords="993,988,1129,1018"/>
+<area shape="rect" id="node106" href="$screen_8c.html#ab546fbfc91fd02b1b5713a5ba0c01e4d" title="Initialize the screen if one exists." alt="" coords="241,1418,359,1447"/>
+<area shape="rect" id="node110" href="$settingsmanager_8h.html#aad44dc767ac3644e5a1444c5aefbaf0f" title="initializeSettingsManager" alt="" coords="209,835,391,864"/>
+<area shape="rect" id="node116" href="$_kernel_2sources_2timers_2clock_8c.html#aa26c87dcbaf9f1c4b0bd771a814c341e" title="initializeSystemClock" alt="" coords="223,1471,377,1500"/>
+<area shape="rect" id="node118" href="$syscall_8c.html#a1d86f84d33e9e46b2df9d0f9d3b02c89" title="kernelInitializeSyscalls" alt="" coords="219,1151,381,1180"/>
+<area shape="rect" id="node122" href="$stack_8c.html#a41216b339a702af35438b6f73724ce53" title="moveStack" alt="" coords="548,56,641,86"/>
+<area shape="rect" id="node5" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1180,107,1332,136"/>
+<area shape="rect" id="node7" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1201,160,1311,190"/>
+<area shape="rect" id="node13" href="$vfs_8c.html#a45cd72de0b5fe65f00a4436954bf8404" title="Binds the specified target node to the node supplied." alt="" coords="800,575,899,604"/>
+<area shape="rect" id="node15" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="1181,678,1331,707"/>
+<area shape="rect" id="node23" href="$hdd__fs_8c.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="528,627,661,656"/>
+<area shape="rect" id="node17" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1383,264,1460,294"/>
+<area shape="rect" id="node19" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="1384,859,1459,888"/>
+<area shape="rect" id="node21" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="1391,678,1452,707"/>
+<area shape="rect" id="node29" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="1016,730,1107,759"/>
+<area shape="rect" id="node34" href="$gdt_8h.html#ae576bf193485d90b87c2e2a53f26d3f6" title="initialize_gdt" alt="" coords="1011,1135,1112,1164"/>
+<area shape="rect" id="node37" href="$tss_8c.html#a342204a01e4d27c91ec92f836afe3609" title="initializeTss" alt="" coords="549,1096,640,1126"/>
+<area shape="rect" id="node41" href="$gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="549,1304,640,1334"/>
+<area shape="rect" id="node43" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="756,1227,943,1256"/>
+<area shape="rect" id="node47" href="$headers_2interrupts_2idt_8h.html#a992b45389c33c7b7335ccd0e1713bf3a" title="Initialize_IDT" alt="" coords="545,1408,644,1438"/>
+<area shape="rect" id="node51" href="$keyboard__generic__ps2_8c.html#aaba71403c84ae43669b0a6ff5dcf185e" title="initializeKeyboard" alt="" coords="529,1200,660,1230"/>
+<area shape="rect" id="node56" href="$_kernel_2sources_2heap_2heap_8c.html#a8917c35ad599e822ee11ed75eb7acfc0" title="Initializes a new heap at address specified and maps memory from free frames for it." alt="" coords="541,1462,648,1491"/>
+<area shape="rect" id="node60" href="$used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f" title="init_used_list" alt="" coords="797,884,901,914"/>
+<area shape="rect" id="node67" href="$terminal_8c.html#a72cf186df688382e2a547b1937e2a2ed" title="makeNewTerminal" alt="" coords="992,1043,1131,1072"/>
+<area shape="rect" id="node70" href="$kterminal_8c.html#acd26283417d3043cc0200a73491c4e31" title="setDefaultTerminalCallbacks" alt="" coords="495,939,695,968"/>
+<area shape="rect" id="node72" href="$kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907" title="setTerminalContext" alt="" coords="523,992,667,1022"/>
+<area shape="rect" id="node76" href="$phys__mm_8h.html#ac6d8a5dacfe69a5d5ea202a7d14b50d6" title="init_phys_mm" alt="" coords="540,416,649,446"/>
+<area shape="rect" id="node78" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="484,470,705,499"/>
+<area shape="rect" id="node83" href="$phys__mm_8c.html#a9847158d65eed7b7672ede313785d808" title="map_free_pages" alt="" coords="531,523,659,552"/>
+<area shape="rect" id="node89" href="$initrd_8c.html#a660bcc4a63d45453aa704d9a108089cb" title="Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from ..." alt="" coords="1200,471,1312,500"/>
+<area shape="rect" id="node96" href="$_kernel_2headers_2hash_2md5use_8h.html#a367fcbbabd1a5fef3d3f49f9d9b620f2" title="MDCompare" alt="" coords="799,212,900,242"/>
+<area shape="rect" id="node98" href="$_kernel_2headers_2hash_2md5use_8h.html#af5f12067aaa887dade4c6f2539bbb989" title="MDData" alt="" coords="812,367,887,396"/>
+<area shape="rect" id="node101" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="816,420,883,450"/>
+<area shape="rect" id="node108" href="$screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="509,1515,680,1544"/>
+<area shape="rect" id="node112" href="$settingsmanager_8c.html#a8477e3d6a2fbf5730efa26ae2bf2693d" title="parseConfigFile" alt="" coords="536,835,653,864"/>
 </map>

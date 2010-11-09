@@ -1,5 +1,6 @@
 #include <process/process.h>
 #include <stdlib.h>
+#include <debug/debug.h>
 
 const unsigned long usedListExpansionSize = 1024;
 

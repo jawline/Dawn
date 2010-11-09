@@ -75,6 +75,7 @@ void postInitialization()
     registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
     registerInputListener(DEVICE_MOUSE, &kernelMouseCallback);
 
+
     //Enable interrupts now
     enable_interrupts();
 

@@ -28,23 +28,18 @@
 <dt>Global <a class="el" href="vfs_8c.html#a084ad57144da37479a99a82afb1d5086">evaluatePath</a> (const char *path, fs_node_t *current_node) </dt>
 <dd>Not finished! </dd>
 </dl>
-<p><a class="anchor" id="_bug000004"></a> </p>
+<p><a class="anchor" id="_bug000003"></a> </p>
 <dl>
-<dt>Global <a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f">heapFreeMemory</a> (uint32 address, <a class="el" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> *heap) </dt>
-<dd>Currently does not shrink </dd>
+<dt>Global <a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b">heapAllocateMemory</a> (size_t size, <a class="el" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> *heap) </dt>
+<dd>Heap never decreases in size </dd>
 </dl>
 <p><a class="anchor" id="_bug000001"></a> </p>
 <dl>
 <dt>Global <a class="el" href="kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b">initializeKernel</a> (struct multiboot *mboot_ptr, int visual_output, uint32 initial_esp) </dt>
 <dd>Devices subsystem broken. (On real hardware, ASUS EEE PC 701 with SSD crashes) fix before uncommenting </dd>
 </dl>
-<p><a class="anchor" id="_bug000003"></a> </p>
-<dl>
-<dt>Global <a class="el" href="_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd">shrinkHeap</a> (<a class="el" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a> *heap, heap_entry_t *last_entry) </dt>
-<dd>Doesn't work properly. rewrite the whole heap its shoddy at best </dd>
-</dl>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -183,10 +183,13 @@ void unifyHeapEntry(heap_entry_t* entry)
 			heap_entry_t* engulfed = entry;
 
 			//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito
+			new_entry->magic = HEAP_MAGIC;
+			new_entry->used = 0;
+
 			new_entry->size = new_entry->size + engulfed->size + sizeof(heap_entry_t);
 			new_entry->next = engulfed->next;
 
-			unifyHeapEntry(new_entry);
+			//unifyHeapEntry(new_entry);
 			return;
 		
 		}
@@ -204,10 +207,12 @@ void unifyHeapEntry(heap_entry_t* entry)
 			heap_entry_t* engulfed = entry->next;
 
 			//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito
+			new_entry->magic = HEAP_MAGIC;
+			new_entry->used = 0;
 			new_entry->size = new_entry->size + engulfed->size + sizeof(heap_entry_t);
 			new_entry->next = engulfed->next;
 
-			unifyHeapEntry(new_entry);
+			//unifyHeapEntry(new_entry);
 			return;
 		}
 
@@ -218,6 +223,7 @@ void unifyHeapEntry(heap_entry_t* entry)
 /**
  * @brief Free's the memory at location address on the heap specified. Shrinking if necessary
  * @callgraph
+ * @bug Doesn't shrink yet
  */
 void heapFreeMemory(MEM_LOC address, heap_t* heap)
 {

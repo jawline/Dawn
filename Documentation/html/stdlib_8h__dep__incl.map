@@ -14,6 +14,7 @@
 <area shape="rect" id="node29" href="$used__list_8c.html" title="Kernel/sources/process/used_list.c" alt="" coords="2875,83,3115,112"/>
 <area shape="rect" id="node31" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="3139,83,3501,112"/>
 <area shape="rect" id="node33" href="$screen__textmode_8c.html" title="Kernel/sources/screen/screen_textmode.c" alt="" coords="3525,83,3813,112"/>
-<area shape="rect" id="node35" href="$terminal_8c.html" title="Kernel/sources/terminal/terminal.c" alt="" coords="3837,83,4077,112"/>
+<area shape="rect" id="node35" href="$settingsmanager_8c.html" title="Kernel/sources/settings/settingsmanager.c" alt="" coords="3837,83,4131,112"/>
+<area shape="rect" id="node37" href="$terminal_8c.html" title="Kernel/sources/terminal/terminal.c" alt="" coords="4155,83,4395,112"/>
 <area shape="rect" id="node23" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="2089,160,2327,189"/>
 </map>

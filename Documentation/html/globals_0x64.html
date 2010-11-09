@@ -77,17 +77,11 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 <li>DAC_MASK_REGISTER
 : <a class="el" href="vga_8h.html#a1e3ddc5a1ee7a822a3fc012cc889008a">vga.h</a>
 </li>
-<li>DEBUG_MODE
-: <a class="el" href="debug_8h.html#ac80a3592e72fd96b772ee47a7d8e0d0a">debug.h</a>
-</li>
 <li>DEBUG_PRINT
-: <a class="el" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">debugprint.h</a>
+: <a class="el" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">debugprint.h</a>
 </li>
-<li>DEBUG_PRINTI
-: <a class="el" href="debugprint_8h.html#a83ed3dbd65f08a7b3e657b27bdb62c05">debugprint.h</a>
-</li>
-<li>DEBUG_PRINTX
-: <a class="el" href="debugprint_8h.html#ac60b666ea684eb88d4ccd46b08759ca7">debugprint.h</a>
+<li>debugMode
+: <a class="el" href="debug_8c.html#ae3b1c87f1d62d647f115ec0cfc3eac8e">debug.c</a>
 </li>
 <li>DECL_SYSCALL0
 : <a class="el" href="_a_p_i_2headers_2syscall_2syscall_8h.html#a2573f2dee9768e8cea1119fc6675f4c8">syscall.h</a>
@@ -108,28 +102,28 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 : <a class="el" href="_a_p_i_2headers_2syscall_2syscall_8h.html#a8f43ece4e4af17d3c1ad559dad050e93">syscall.h</a>
 </li>
 <li>DEFN_SYSCALL0()
-: <a class="el" href="_a_p_i_2sources_2clock_2clock_8c.html#a889a6ecc085b1d8a36ea26abaae1d528">clock.c</a>
-, <a class="el" href="_a_p_i_2sources_2printf_8c.html#a21900ce3a8832b796fee94c1a4065397">printf.c</a>
+: <a class="el" href="_a_p_i_2sources_2printf_8c.html#a21900ce3a8832b796fee94c1a4065397">printf.c</a>
 , <a class="el" href="end__process_8c.html#abf86a9095429d90b0c1fa09c2e10769b">end_process.c</a>
 , <a class="el" href="postbox__api_8c.html#ad92cb12f8edc7b29fd51135d1b90fa5c">postbox_api.c</a>
 , <a class="el" href="sleep_8c.html#a74612030a12b7e9c74a82ea64cd2edb8">sleep.c</a>
 , <a class="el" href="memory_8c.html#a7af8f2850120c920bd7ffb3156da77da">memory.c</a>
 , <a class="el" href="_a_p_i_2sources_2system_2reboot_8c.html#a9135e49bf8e794bb5c8db2aecc6b01b1">reboot.c</a>
 , <a class="el" href="_a_p_i_2headers_2syscall_2syscall_8h.html#ac1decc6f0a704cd3045c1b88fe3e1d0c">syscall.h</a>
+, <a class="el" href="_a_p_i_2sources_2clock_2clock_8c.html#a889a6ecc085b1d8a36ea26abaae1d528">clock.c</a>
 </li>
 <li>DEFN_SYSCALL1()
 : <a class="el" href="postbox__api_8c.html#aef1a3b91303e29096acc4c2969f03739">postbox_api.c</a>
 , <a class="el" href="run_8c.html#a8bbc743f5159770a6a53b51c9e26cb43">run.c</a>
-, <a class="el" href="get__info_8c.html#af12110698623bd7eb3dc3afe3dc6341d">get_info.c</a>
 , <a class="el" href="_a_p_i_2headers_2syscall_2syscall_8h.html#a762f374846284febb9def5944f32249a">syscall.h</a>
+, <a class="el" href="debugmode_8c.html#aa3d54b0e78952a9394806f4f4eeb0520">debugmode.c</a>
 , <a class="el" href="_a_p_i_2sources_2printf_8c.html#afdf0b97b4e63e1a5a02c91ed5082748c">printf.c</a>
 , <a class="el" href="end__process_8c.html#a12d0ddc0bf275137ae90a14cd0783d9d">end_process.c</a>
 , <a class="el" href="get__info_8c.html#ab9dbd1746ca2668875e4aad12626b453">get_info.c</a>
 </li>
 <li>DEFN_SYSCALL2()
 : <a class="el" href="get__info_8c.html#abb6a4b32868e1123b28e3c8627916154">get_info.c</a>
-, <a class="el" href="scancodes_8c.html#a1668a935c573bce61f6122943ccc6180">scancodes.c</a>
 , <a class="el" href="_a_p_i_2headers_2syscall_2syscall_8h.html#a02c924e57e44782b0d090ef57a3a330d">syscall.h</a>
+, <a class="el" href="scancodes_8c.html#a1668a935c573bce61f6122943ccc6180">scancodes.c</a>
 </li>
 <li>dentrys
 : <a class="el" href="initrd__dirent_8h.html#aa724efc3dcc36fe920647f30c2c5aa13">initrd_dirent.h</a>
@@ -184,7 +178,7 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 </li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

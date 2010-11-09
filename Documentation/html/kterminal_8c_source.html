@@ -127,47 +127,50 @@
 <a name="l00097"></a>00097 <span class="comment">//Put a character on the kernel terminals screen</span>
 <a name="l00098"></a><a class="code" href="kterminal_8c.html#a28dfb037d64e8ddb8e2d7cdda1f8a746">00098</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a28dfb037d64e8ddb8e2d7cdda1f8a746">kputc</a>(<span class="keywordtype">char</span> c)
 <a name="l00099"></a>00099 {
-<a name="l00100"></a>00100         <span class="keywordflow">if</span> (!g_kernelTerminal) <span class="keywordflow">return</span>;
-<a name="l00101"></a>00101         <span class="keywordflow">if</span> (!g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a270aca5f7dd9d20827367855a48c3bdf">m_used</a>) <span class="keywordflow">return</span>;
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a622f7354220b48d23c69c9d17bdf7609">f_putchar</a>(g_kernelTerminal, c);
-<a name="l00104"></a>00104 }
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106 <span class="comment">//Move the X cursor on the kernel terminal</span>
-<a name="l00107"></a><a class="code" href="kterminal_8c.html#a56d7ab9810cf29357499fcbc943ee9d5">00107</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a56d7ab9810cf29357499fcbc943ee9d5">kmovecx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> x)
-<a name="l00108"></a>00108 {
-<a name="l00109"></a>00109         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#aa2a9ee8a857641c26f6c5f2312224049">m_cursorX</a> = x;
-<a name="l00110"></a>00110         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a76e0f4555d9ca9da82fb7983914f8a12">f_updateCursor</a>(g_kernelTerminal);
-<a name="l00111"></a>00111 }
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113 <span class="comment">//Move the Y cursor on the kernel terminal</span>
-<a name="l00114"></a><a class="code" href="kterminal_8c.html#a103987b22681d5bfbb84971f0f65ff4f">00114</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a103987b22681d5bfbb84971f0f65ff4f">kmovecy</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> y)
-<a name="l00115"></a>00115 {
-<a name="l00116"></a>00116         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#afa89efe4eb255fb7c3da30ae4b165b5c">m_cursorY</a> = y;
-<a name="l00117"></a>00117         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a76e0f4555d9ca9da82fb7983914f8a12">f_updateCursor</a>(g_kernelTerminal);
-<a name="l00118"></a>00118 }
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120 <span class="comment">//Get the x cursor on the kernel terminal</span>
-<a name="l00121"></a><a class="code" href="kterminal_8c.html#ab50e8b892eb5ccb5b38653c11a0aabab">00121</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="kterminal_8c.html#ab50e8b892eb5ccb5b38653c11a0aabab">kgetcx</a>()
-<a name="l00122"></a>00122 {
-<a name="l00123"></a>00123         <span class="keywordflow">return</span> g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#aa2a9ee8a857641c26f6c5f2312224049">m_cursorX</a>;
-<a name="l00124"></a>00124 }
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126 <span class="comment">//Get the y cursor on the kernel terminal</span>
-<a name="l00127"></a><a class="code" href="kterminal_8c.html#a840b4387d5c9be1089735bd2155772dc">00127</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="kterminal_8c.html#a840b4387d5c9be1089735bd2155772dc">kgetcy</a>()
-<a name="l00128"></a>00128 {
-<a name="l00129"></a>00129         <span class="keywordflow">return</span> g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#afa89efe4eb255fb7c3da30ae4b165b5c">m_cursorY</a>;
-<a name="l00130"></a>00130 }
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132 <span class="comment">//Put a string to the kernel terminal</span>
-<a name="l00133"></a><a class="code" href="kterminal_8c.html#a48fac3b476fb0dcc12387c0ce1ac4018">00133</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a48fac3b476fb0dcc12387c0ce1ac4018">kputs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* s)
-<a name="l00134"></a>00134 {
-<a name="l00135"></a>00135         <span class="keywordflow">for</span> (; *s != 0; s++)
-<a name="l00136"></a>00136                 <a class="code" href="kterminal_8c.html#a28dfb037d64e8ddb8e2d7cdda1f8a746">kputc</a>(*s);
-<a name="l00137"></a>00137 }
+<a name="l00100"></a>00100         <span class="keywordflow">if</span> (g_kernelTerminal == 0) {
+<a name="l00101"></a>00101                 <a class="code" href="screen_8h.html#a725a0aeb460aedb0e888ce9e52ff4beb">text_mode_putc</a>(c);
+<a name="l00102"></a>00102         }
+<a name="l00103"></a>00103         <span class="keywordflow">else</span>
+<a name="l00104"></a>00104         {
+<a name="l00105"></a>00105                 g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a622f7354220b48d23c69c9d17bdf7609">f_putchar</a>(g_kernelTerminal, c);
+<a name="l00106"></a>00106         }
+<a name="l00107"></a>00107 }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 <span class="comment">//Move the X cursor on the kernel terminal</span>
+<a name="l00110"></a><a class="code" href="kterminal_8c.html#a56d7ab9810cf29357499fcbc943ee9d5">00110</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a56d7ab9810cf29357499fcbc943ee9d5">kmovecx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> x)
+<a name="l00111"></a>00111 {
+<a name="l00112"></a>00112         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#aa2a9ee8a857641c26f6c5f2312224049">m_cursorX</a> = x;
+<a name="l00113"></a>00113         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a76e0f4555d9ca9da82fb7983914f8a12">f_updateCursor</a>(g_kernelTerminal);
+<a name="l00114"></a>00114 }
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116 <span class="comment">//Move the Y cursor on the kernel terminal</span>
+<a name="l00117"></a><a class="code" href="kterminal_8c.html#a103987b22681d5bfbb84971f0f65ff4f">00117</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a103987b22681d5bfbb84971f0f65ff4f">kmovecy</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> y)
+<a name="l00118"></a>00118 {
+<a name="l00119"></a>00119         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#afa89efe4eb255fb7c3da30ae4b165b5c">m_cursorY</a> = y;
+<a name="l00120"></a>00120         g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#a76e0f4555d9ca9da82fb7983914f8a12">f_updateCursor</a>(g_kernelTerminal);
+<a name="l00121"></a>00121 }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 <span class="comment">//Get the x cursor on the kernel terminal</span>
+<a name="l00124"></a><a class="code" href="kterminal_8c.html#ab50e8b892eb5ccb5b38653c11a0aabab">00124</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="kterminal_8c.html#ab50e8b892eb5ccb5b38653c11a0aabab">kgetcx</a>()
+<a name="l00125"></a>00125 {
+<a name="l00126"></a>00126         <span class="keywordflow">return</span> g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#aa2a9ee8a857641c26f6c5f2312224049">m_cursorX</a>;
+<a name="l00127"></a>00127 }
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129 <span class="comment">//Get the y cursor on the kernel terminal</span>
+<a name="l00130"></a><a class="code" href="kterminal_8c.html#a840b4387d5c9be1089735bd2155772dc">00130</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="kterminal_8c.html#a840b4387d5c9be1089735bd2155772dc">kgetcy</a>()
+<a name="l00131"></a>00131 {
+<a name="l00132"></a>00132         <span class="keywordflow">return</span> g_kernelTerminal-&gt;<a class="code" href="structabstract__terminal.html#afa89efe4eb255fb7c3da30ae4b165b5c">m_cursorY</a>;
+<a name="l00133"></a>00133 }
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135 <span class="comment">//Put a string to the kernel terminal</span>
+<a name="l00136"></a><a class="code" href="kterminal_8c.html#a48fac3b476fb0dcc12387c0ce1ac4018">00136</a> <span class="keywordtype">void</span> <a class="code" href="kterminal_8c.html#a48fac3b476fb0dcc12387c0ce1ac4018">kputs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* s)
+<a name="l00137"></a>00137 {
+<a name="l00138"></a>00138         <span class="keywordflow">for</span> (; *s != 0; s++)
+<a name="l00139"></a>00139                 <a class="code" href="kterminal_8c.html#a28dfb037d64e8ddb8e2d7cdda1f8a746">kputc</a>(*s);
+<a name="l00140"></a>00140 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

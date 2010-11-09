@@ -3,4 +3,8 @@
 <area shape="rect" id="node5" href="$syscall_8c.html#aeeca4adac17a030ae9d3c06a6d0f13a1" title="syscallGetPid" alt="" coords="280,59,387,88"/>
 <area shape="rect" id="node7" href="$syscall_8c.html#a8d549de96ebe133f7fbc859c3c774b0c" title="syscallGetProcessingTime" alt="" coords="240,112,427,141"/>
 <area shape="rect" id="node9" href="$syscall_8c.html#a0561f60d0b6000eae55ea70554934c0a" title="syscallProcessValid" alt="" coords="261,165,405,195"/>
+<area shape="rect" id="node11" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="259,219,408,248"/>
+<area shape="rect" id="node13" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="476,219,593,248"/>
+<area shape="rect" id="node15" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="643,219,768,248"/>
+<area shape="rect" id="node17" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="817,219,871,248"/>
 </map>

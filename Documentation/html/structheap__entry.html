@@ -38,10 +38,14 @@
 Collaboration diagram for heap_entry:</div>
 <div class="dyncontent">
 <div class="center"><img src="structheap__entry__coll__graph.png" border="0" usemap="#heap__entry_coll__map" alt="Collaboration graph"/></div>
+<map name="heap__entry_coll__map" id="heap__entry_coll__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6">magic</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A magic variable designed to check that it is a block.  <a href="#a30cb57948d3b95ab0c1c2d523df966b6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493">used</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Variable to store whether this block of memory is used (boolean).  <a href="#a85d4a8099f6e647cb8090614a5049493"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="size__t_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66">size</a></td></tr>
@@ -54,8 +58,25 @@ Data Fields</h2></td></tr>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>structure of a single memory entry on the heap </p>
 
-<p>Definition at line <a class="el" href="heap_8h_source.html#l00012">12</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00013">13</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 <hr/><h2>Field Documentation</h2>
+<a class="anchor" id="a30cb57948d3b95ab0c1c2d523df966b6"></a><!-- doxytag: member="heap_entry::magic" ref="a30cb57948d3b95ab0c1c2d523df966b6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6">magic</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A magic variable designed to check that it is a block. </p>
+
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00019">19</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a90018fa1ca3eed17d857c9a9785a177b"></a><!-- doxytag: member="heap_entry::next" ref="a90018fa1ca3eed17d857c9a9785a177b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -69,7 +90,7 @@ Data Fields</h2></td></tr>
 
 <p>Pointer to the next memory block NULL if last. </p>
 
-<p>Definition at line <a class="el" href="heap_8h_source.html#l00030">30</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00037">37</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 
 </div>
 </div>
@@ -86,7 +107,7 @@ Data Fields</h2></td></tr>
 
 <p>Pointer to the previous heap entry. </p>
 
-<p>Definition at line <a class="el" href="heap_8h_source.html#l00036">36</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00043">43</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 
 </div>
 </div>
@@ -103,7 +124,7 @@ Data Fields</h2></td></tr>
 
 <p>Variable to store the size of the chunk of memory. </p>
 
-<p>Definition at line <a class="el" href="heap_8h_source.html#l00024">24</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00031">31</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 
 </div>
 </div>
@@ -120,15 +141,15 @@ Data Fields</h2></td></tr>
 
 <p>Variable to store whether this block of memory is used (boolean). </p>
 
-<p>Definition at line <a class="el" href="heap_8h_source.html#l00018">18</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00025">25</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>Shared/headers/heap/<a class="el" href="heap_8h_source.html">heap.h</a></li>
+<li>Kernel/headers/heap/<a class="el" href="heap_8h_source.html">heap.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:57 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

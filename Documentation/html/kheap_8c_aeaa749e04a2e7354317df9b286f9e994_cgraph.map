@@ -1,11 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="125,57,283,87"/>
-<area shape="rect" id="node5" href="$_kernel_2sources_2heap_2heap_8c.html#a1d7f9283ec6ecefe2197351598db24de" title="Expand the heap." alt="" coords="332,57,433,87"/>
-<area shape="rect" id="node7" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="608,32,720,61"/>
-<area shape="rect" id="node17" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="496,57,547,87"/>
-<area shape="rect" id="node20" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="484,111,559,140"/>
-<area shape="rect" id="node9" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="769,5,921,35"/>
-<area shape="rect" id="node11" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="791,59,900,88"/>
-<area shape="rect" id="node13" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="972,59,1103,88"/>
-<area shape="rect" id="node15" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1153,59,1231,88"/>
+<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a8688030111e9ecc887826ea4de6b965b" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="125,87,283,116"/>
+<area shape="rect" id="node5" href="$_kernel_2sources_2heap_2heap_8c.html#a6da71e3b01ced280ee96023e3856479d" title="Expands the heap by expansionSize pages." alt="" coords="332,60,433,89"/>
+<area shape="rect" id="node21" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="521,112,596,141"/>
+<area shape="rect" id="node7" href="$phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8" title="allocateKernelFrame" alt="" coords="484,5,633,35"/>
+<area shape="rect" id="node9" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="533,59,584,88"/>
+<area shape="rect" id="node11" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="683,59,795,88"/>
+<area shape="rect" id="node13" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="844,32,996,61"/>
+<area shape="rect" id="node15" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="865,85,975,115"/>
+<area shape="rect" id="node17" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1047,85,1177,115"/>
+<area shape="rect" id="node19" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1228,85,1305,115"/>
 </map>

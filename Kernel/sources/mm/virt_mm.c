@@ -8,6 +8,7 @@
 #include <types/memory.h>
 #include <process/process.h>
 #include <process/procfault.h>
+#include <debug/debug.h>
 
 #define ReloadCR3() \
       __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
@@ -285,6 +286,8 @@ MEM_LOC copyPage(MEM_LOC pt, process_t* process)
 
 MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 {
+	DEBUG_PRINT("COPY TABLE %x\n", pt);
+
 	MEM_LOC new_page_table = allocateFrameForProcess(process);
 
 	LPOINTER temp_read_addr = kernelFirstFreeVirtualAddress();
@@ -294,16 +297,14 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 	map(temp_write_addr, new_page_table, PAGE_PRESENT | PAGE_USER);
 	memset(temp_write_addr, 0, PAGE_SIZE);	
 
-
-	
 	unsigned int i = 0;
 	for (i = 0; i < 1024; i++)
 	{
-		if (temp_read_addr[i] != 0)
+		if ((temp_read_addr[i]) != 0)
 		{
 			if (copy == 1)
 			{
-				MEM_LOC New_Frame = copyPage(temp_read_addr[i], process);
+				MEM_LOC New_Frame = copyPage(temp_read_addr[i] & ~(0xFFF), process);
 				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_USER | PAGE_WRITE;
 			}
 			else
@@ -328,6 +329,8 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 {
 	disable_interrupts(); //Disable interrupts
 
+
+
 	page_directory_t* return_location = (page_directory_t*) allocateFrameForProcess(process);
 
 	LPOINTER being_copied = kernelFirstFreeVirtualAddress();
@@ -340,12 +343,14 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
 	copying_to[0] = being_copied[0];
 
+
+
 	unsigned int i = 0;
 	for (i = 1; i < getTable(KERNEL_START); i++)
 	{
-		if (being_copied[i] != 0)
+		if ((being_copied[i]) != 0)
 		{
-			MEM_LOC Location = copyPageTable(being_copied[i] & PAGE_MASK, 1, process);
+			MEM_LOC Location = copyPageTable(being_copied[i] & ~(0xFFF), 1, process);
 			copying_to[i] = Location | PAGE_PRESENT | PAGE_USER | PAGE_WRITE;
 		}
 		else
@@ -359,6 +364,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 		copying_to[i] = being_copied[i];
 	}
 
+	
 
 	// Assign the second-last table and zero it.
 	MEM_LOC frame = allocateFrameForProcess(process);

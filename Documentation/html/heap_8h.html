@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Dawn OS: Shared/headers/heap/heap.h File Reference</title>
+<title>Dawn OS: Kernel/headers/heap/heap.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -29,10 +29,9 @@
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Defines</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<h1>Shared/headers/heap/heap.h File Reference</h1>  </div>
+<h1>Kernel/headers/heap/heap.h File Reference</h1>  </div>
 </div>
 <div class="contents">
 <code>#include &lt;<a class="el" href="_shared_2headers_2types_2memory_8h_source.html">types/memory.h</a>&gt;</code><br/>
@@ -40,16 +39,16 @@
 <div class="dynheader">
 Include dependency graph for heap.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="heap_8h__incl.png" border="0" usemap="#_shared_2headers_2heap_2heap_8h" alt=""/></div>
-<map name="_shared_2headers_2heap_2heap_8h" id="_shared_2headers_2heap_2heap_8h">
+<div class="center"><img src="heap_8h__incl.png" border="0" usemap="#_kernel_2headers_2heap_2heap_8h" alt=""/></div>
+<map name="_kernel_2headers_2heap_2heap_8h" id="_kernel_2headers_2heap_2heap_8h">
 <area shape="rect" id="node3" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="5,83,131,112"/><area shape="rect" id="node7" href="size__t_8h.html" title="types/size_t.h" alt="" coords="155,83,264,112"/><area shape="rect" id="node5" href="int__types_8h.html" title="int_types.h" alt="" coords="23,160,113,189"/></map>
 </div>
 <div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="heap_8h__dep__incl.png" border="0" usemap="#_shared_2headers_2heap_2heap_8hdep" alt=""/></div>
-<map name="_shared_2headers_2heap_2heap_8hdep" id="_shared_2headers_2heap_2heap_8hdep">
-<area shape="rect" id="node3" href="_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="5,83,235,112"/><area shape="rect" id="node5" href="kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="259,83,485,112"/><area shape="rect" id="node7" href="post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="509,83,725,112"/><area shape="rect" id="node9" href="vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="749,83,912,112"/><area shape="rect" id="node11" href="_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="936,83,1133,112"/><area shape="rect" id="node13" href="kheap_8c.html" title="Kernel/sources/heap/kheap.c" alt="" coords="1157,83,1363,112"/><area shape="rect" id="node15" href="syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1387,83,1605,112"/><area shape="rect" id="node17" href="terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="1629,83,1915,112"/></map>
+<div class="center"><img src="heap_8h__dep__incl.png" border="0" usemap="#_kernel_2headers_2heap_2heap_8hdep" alt=""/></div>
+<map name="_kernel_2headers_2heap_2heap_8hdep" id="_kernel_2headers_2heap_2heap_8hdep">
+<area shape="rect" id="node3" href="kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/><area shape="rect" id="node5" href="post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="256,83,472,112"/><area shape="rect" id="node7" href="vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="496,83,659,112"/><area shape="rect" id="node9" href="_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="683,83,880,112"/><area shape="rect" id="node11" href="kheap_8c.html" title="Kernel/sources/heap/kheap.c" alt="" coords="904,83,1109,112"/><area shape="rect" id="node13" href="syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1133,83,1352,112"/><area shape="rect" id="node15" href="terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="1376,83,1661,112"/></map>
 </div>
 
 <p><a href="heap_8h_source.html">Go to the source code of this file.</a></p>
@@ -62,17 +61,30 @@ Data Structures</h2></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a5f147afa3541e308e9f81cfa7fa122c2">MASK_USED</a>&nbsp;&nbsp;&nbsp;0x1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a604474f5c0892ea2c6c16b5e45c59f59">HEAP_MAGIC</a>&nbsp;&nbsp;&nbsp;0xAB</td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structheap__entry.html">heap_entry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#a146e10575c2bfe858a753614246ea68e">heap_entry_t</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#ac084b538ca98ff89bbbfbe3ec87f2642">init_heap</a> (<a class="el" href="structheap__t.html">heap_t</a> *heap, <a class="el" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> address)</td></tr>
-<tr><td colspan="2"><h2><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structheap__entry.html">heap_entry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="heap_8h.html#af2093ba2b06511610688310f7bace7e3">__attribute__</a></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a604474f5c0892ea2c6c16b5e45c59f59"></a><!-- doxytag: member="heap.h::HEAP_MAGIC" ref="a604474f5c0892ea2c6c16b5e45c59f59" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HEAP_MAGIC&nbsp;&nbsp;&nbsp;0xAB</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00007">7</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a5f147afa3541e308e9f81cfa7fa122c2"></a><!-- doxytag: member="heap.h::MASK_USED" ref="a5f147afa3541e308e9f81cfa7fa122c2" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -100,7 +112,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="heap_8h_source.html#l00039">39</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
+<p>Definition at line <a class="el" href="heap_8h_source.html#l00046">46</a> of file <a class="el" href="heap_8h_source.html">heap.h</a>.</p>
 
 </div>
 </div>
@@ -132,23 +144,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="af2093ba2b06511610688310f7bace7e3"></a><!-- doxytag: member="heap.h::__attribute__" ref="af2093ba2b06511610688310f7bace7e3" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="structheap__entry.html">heap_entry</a>  <a class="el" href="struct____attribute____.html">__attribute__</a></td>
-        </tr>
-      </table>
 </div>
-<div class="memdoc">
-<p>structure of a single memory entry on the heap </p>
-
-</div>
-</div>
-</div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:57 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

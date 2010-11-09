@@ -11,4 +11,5 @@
 <area shape="rect" id="node22" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="2085,83,2288,112"/>
 <area shape="rect" id="node24" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="2312,83,2531,112"/>
 <area shape="rect" id="node26" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2555,83,2840,112"/>
+<area shape="rect" id="node28" href="$system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="2864,83,3091,112"/>
 </map>

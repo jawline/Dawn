@@ -1,18 +1,19 @@
 #include <debug/debug.h>
 
-unsigned char debugMode = 0;
+unsigned char debugMode = 1;
 
 void setDebugModeOn()
 {
-	debugMode = 1;
+	settingsExecuteLine("kernel.debug_state = 1");
 }
 
 void setDebugModeOff()
 {
-	debugMode = 0;
+	settingsExecuteLine("kernel.debug_state = 0");
 }
 
 unsigned char getDebugMode()
 {
-	return debugMode;
+	if (strcmp(settingsReadValue("kernel.debug_state"), "1") == 0) return 1;
+	return 0;
 }

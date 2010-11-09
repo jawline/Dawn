@@ -23,6 +23,9 @@ void systemIdleProcess()
 
 void systemMainProcess()
 {
+	createNewProcess(settingsReadValue("kernel.onstart"), init_vfs());
+	enable_interrupts();
+
 	systemProcPtr = get_current_process();
 
 	int schedulerIter = 0;
@@ -103,13 +106,18 @@ void systemMainProcess()
 		//If this is the last process alive?
 		if (numNonSystem == 0)
 		{
-			disable_interrupts();
+			if (strcmp(settingsReadValue("kernel.restart_onstart"), "yes") == 0)
+			{
 
-			printf("Creating new instance of Line\n");
+				disable_interrupts();
 
-			createNewProcess("./system/root/Line", init_vfs());
+				printf("Creating new instance of %s\n", settingsReadValue("kernel.onstart"));
 
-			enable_interrupts();
+				createNewProcess( settingsReadValue("kernel.onstart"), init_vfs());
+
+				enable_interrupts();
+
+			}
 		}
 
 		//Sleep the current process
@@ -126,6 +134,7 @@ void systemProcess()
     
     //Enable them once the processes are set up
     enable_interrupts();
+
 
     if (forkedID == 1)
     {

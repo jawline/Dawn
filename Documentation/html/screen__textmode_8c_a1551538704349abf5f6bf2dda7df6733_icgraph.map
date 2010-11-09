@@ -1,5 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$screen__textmode_8c.html#a82d8a1839569ffa9802aa680593eeeda" title="text_mode_hardwrite" alt="" coords="181,32,339,61"/>
-<area shape="rect" id="node5" href="$panic_8c.html#a3478677e9f611ad95b4755ca4eaf79a2" title="panic" alt="" coords="411,5,467,35"/>
-<area shape="rect" id="node7" href="$panic_8c.html#af1be76d59276705bedf813c8e9375bb0" title="panic_assert" alt="" coords="388,59,489,88"/>
+<area shape="rect" id="node3" href="$kterminal_8c.html#a28dfb037d64e8ddb8e2d7cdda1f8a746" title="kputc" alt="" coords="232,5,288,35"/>
+<area shape="rect" id="node7" href="$screen__textmode_8c.html#a82d8a1839569ffa9802aa680593eeeda" title="text_mode_hardwrite" alt="" coords="181,59,339,88"/>
+<area shape="rect" id="node5" href="$kterminal_8c.html#a48fac3b476fb0dcc12387c0ce1ac4018" title="kputs" alt="" coords="411,5,467,35"/>
+<area shape="rect" id="node9" href="$panic_8c.html#a3478677e9f611ad95b4755ca4eaf79a2" title="panic" alt="" coords="411,59,467,88"/>
+<area shape="rect" id="node11" href="$panic_8c.html#af1be76d59276705bedf813c8e9375bb0" title="panic_assert" alt="" coords="388,112,489,141"/>
 </map>

@@ -1,0 +1,25 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$vfs_8c.html#af9bb9350e398f1784e00a233b63a0baf" title="close_fs" alt="" coords="191,433,263,463"/>
+<area shape="rect" id="node5" href="$vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string." alt="" coords="175,537,279,567"/>
+<area shape="rect" id="node11" href="$vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="328,460,395,489"/>
+<area shape="rect" id="node19" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="1023,576,1097,605"/>
+<area shape="rect" id="node41" href="$vfs_8c.html#ad841df4edfc706b4dd3e8c6b9dcbda01" title="open_fs" alt="" coords="191,824,263,853"/>
+<area shape="rect" id="node43" href="$vfs_8c.html#a8f1c971d8e4f43f1561f951fdb6d92b2" title="read_fs" alt="" coords="192,877,261,907"/>
+<area shape="rect" id="node45" href="$settingsmanager_8h.html#ace8ec19da2615d869eec34d5258e151e" title="settingsExecuteLine" alt="" coords="585,616,735,645"/>
+<area shape="rect" id="node7" href="$vfs_8c.html#a289d28f0a303cb07f04cb12e6853e743" title="finddir_fs" alt="" coords="451,459,528,488"/>
+<area shape="rect" id="node17" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1021,93,1099,123"/>
+<area shape="rect" id="node37" href="$common_8c.html#a1158ee53a70b66e0208da58ff10bf986" title="strchr" alt="" coords="829,563,888,592"/>
+<area shape="rect" id="node9" href="$common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="1027,303,1093,332"/>
+<area shape="rect" id="node13" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="444,303,535,332"/>
+<area shape="rect" id="node15" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="585,251,735,280"/>
+<area shape="rect" id="node21" href="$rfs_8c.html#a56382b1a2c0cc9e2b4dfd1a5d874bcc7" title="root_bind_node" alt="" coords="799,93,919,123"/>
+<area shape="rect" id="node24" href="$rfs_8c.html#a440037b6c1183ee9196f5fb23981c832" title="root_finddir" alt="" coords="812,251,905,280"/>
+<area shape="rect" id="node27" href="$rfs_8c.html#a870cae2177e4211603dbc9c10146b31b" title="root_readdir" alt="" coords="809,459,908,488"/>
+<area shape="rect" id="node30" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="1029,472,1091,501"/>
+<area shape="rect" id="node32" href="$rfs_8c.html#a20b298e9a6fd9876d7d45fc7083e6567" title="root_unbind_node" alt="" coords="791,147,927,176"/>
+<area shape="rect" id="node48" href="$settingsmanager_8c.html#aebced55b49ced709703da6ffa4055234" title="settingsCreateEntry" alt="" coords="784,669,933,699"/>
+<area shape="rect" id="node54" href="$common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="1031,708,1089,737"/>
+<area shape="rect" id="node56" href="$settingsmanager_8c.html#a3491dc4e595c2fc1aee61b1c3c6ce60e" title="settingsGetEntry" alt="" coords="795,355,923,384"/>
+<area shape="rect" id="node59" href="$settingsmanager_8c.html#a3973b0a973d5fb03e52eedffd66bb5a8" title="settingsModifyEntry" alt="" coords="785,616,932,645"/>
+<area shape="rect" id="node51" href="$settingsmanager_8c.html#a0135e45a791cb2afe081e7486b4af2d4" title="settingsGetLastEntry" alt="" coords="983,655,1137,684"/>
+</map>

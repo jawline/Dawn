@@ -1,13 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="127,5,209,35"/>
-<area shape="rect" id="node5" href="$virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="271,56,385,85"/>
-<area shape="rect" id="node7" href="$virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="445,81,547,111"/>
-<area shape="rect" id="node21" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="265,160,391,189"/>
-<area shape="rect" id="node26" href="$_kernel_2sources_2heap_2heap_8c.html#a50c1f99d9a3df535b17d7233f9f2a3dd" title="Shink the heap." alt="" coords="121,211,215,240"/>
-<area shape="rect" id="node9" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="601,55,740,84"/>
-<area shape="rect" id="node17" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="644,108,697,137"/>
-<area shape="rect" id="node11" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="835,55,960,84"/>
-<area shape="rect" id="node15" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="791,108,1004,137"/>
-<area shape="rect" id="node13" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1055,108,1108,137"/>
-<area shape="rect" id="node23" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="440,160,552,189"/>
+<area shape="rect" id="node3" href="$virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="120,8,203,37"/>
+<area shape="rect" id="node5" href="$virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="257,59,372,88"/>
+<area shape="rect" id="node7" href="$virt__mm_8c.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="432,84,533,113"/>
+<area shape="rect" id="node26" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="252,163,377,192"/>
+<area shape="rect" id="node9" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="588,57,727,87"/>
+<area shape="rect" id="node21" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="631,111,684,140"/>
+<area shape="rect" id="node11" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="777,5,991,35"/>
+<area shape="rect" id="node13" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="809,59,959,88"/>
+<area shape="rect" id="node15" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="1041,111,1159,140"/>
+<area shape="rect" id="node17" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1208,111,1333,140"/>
+<area shape="rect" id="node19" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1383,137,1436,167"/>
+<area shape="rect" id="node28" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="427,163,539,192"/>
 </map>

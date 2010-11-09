@@ -33,431 +33,419 @@
 <a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="virt__mm_8h.html">mm/virt_mm.h</a>&gt;</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="pagedir_8h.html">mm/pagedir.h</a>&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="messages_8h.html">messages/messages.h</a>&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;../stack/kstack.h&quot;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">static</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* kernel_proc = 0;
-<a name="l00009"></a>00009 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> next_pid = 0;
-<a name="l00010"></a>00010 <span class="keyword">extern</span> <a class="code" href="structabstract__terminal.html">terminal_t</a>* <a class="code" href="process_8c.html#af798f7940ca701d8de72623efaefb628">g_kernelTerminal</a>;
-<a name="l00011"></a>00011 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00012"></a>00012 
-<a name="l00013"></a><a class="code" href="structnew__process__orders__t.html">00013</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>{
-<a name="l00014"></a>00014 
-<a name="l00019"></a><a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">00019</a>         <span class="keywordtype">char</span>* Filename;
-<a name="l00020"></a>00020 
-<a name="l00024"></a><a class="code" href="structnew__process__orders__t.html#a2b7fab7560cdd66a6473f85771acfbfc">00024</a>         <a class="code" href="structfilesystem__node.html">fs_node_t</a>* fromWhere;
-<a name="l00025"></a>00025 
-<a name="l00029"></a><a class="code" href="structnew__process__orders__t.html#a962d5746d2761fb3a8ecffda9d6fe29b">00029</a>         <span class="keywordtype">int</span> user_mode;
-<a name="l00030"></a>00030 } <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>;
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="debug_8h.html">debug/debug.h</a>&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;../stack/kstack.h&quot;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="keyword">static</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* kernel_proc = 0;
+<a name="l00010"></a>00010 <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> next_pid = 0;
+<a name="l00011"></a>00011 <span class="keyword">extern</span> <a class="code" href="structabstract__terminal.html">terminal_t</a>* <a class="code" href="process_8c.html#af798f7940ca701d8de72623efaefb628">g_kernelTerminal</a>;
+<a name="l00012"></a>00012 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="structnew__process__orders__t.html">00014</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>{
+<a name="l00015"></a>00015 
+<a name="l00020"></a><a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">00020</a>         <span class="keywordtype">char</span>* Filename;
+<a name="l00021"></a>00021 
+<a name="l00025"></a><a class="code" href="structnew__process__orders__t.html#a2b7fab7560cdd66a6473f85771acfbfc">00025</a>         <a class="code" href="structfilesystem__node.html">fs_node_t</a>* fromWhere;
+<a name="l00026"></a>00026 
+<a name="l00030"></a><a class="code" href="structnew__process__orders__t.html#a962d5746d2761fb3a8ecffda9d6fe29b">00030</a>         <span class="keywordtype">int</span> user_mode;
 <a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6">00032</a> <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* <a class="code" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6">make_orders</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Where, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* fromWhere)
-<a name="l00033"></a>00033 {
-<a name="l00034"></a>00034         <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* nOrders = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>));
-<a name="l00035"></a>00035         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(nOrders, 0, <span class="keyword">sizeof</span>(<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>));
-<a name="l00036"></a>00036         nOrders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(Where) + 1);
-<a name="l00037"></a>00037         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(nOrders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>, Where);
-<a name="l00038"></a>00038         
-<a name="l00039"></a>00039         nOrders-&gt;<a class="code" href="structnew__process__orders__t.html#a2b7fab7560cdd66a6473f85771acfbfc">fromWhere</a> = fromWhere;
-<a name="l00040"></a>00040 }
-<a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="process_8c.html#accbb940deeefe2ef9a1597a9a4f519e4">00042</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#accbb940deeefe2ef9a1597a9a4f519e4">free_orders</a>(<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* orders)
-<a name="l00043"></a>00043 {
-<a name="l00044"></a>00044         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>);
-<a name="l00045"></a>00045         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(orders);
-<a name="l00046"></a>00046 }
-<a name="l00047"></a>00047 
-<a name="l00051"></a><a class="code" href="process_8c.html#a3f16568d609a026b0a08796175f20244">00051</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications.">new_process_entry</a>()
-<a name="l00052"></a>00052 {
-<a name="l00053"></a>00053         <a class="code" href="structprocess__message.html">process_message</a> Msg = <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_processPostbox);
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055         <span class="keywordflow">if</span> (Msg.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> == <a class="code" href="messages_8h.html#ad55dc6efe4ccb4710a2017965f33f902">LOAD_MESSAGE</a>)
-<a name="l00056"></a>00056         {
-<a name="l00057"></a>00057                 <span class="keywordtype">int</span> usrMode = 0;
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Valid message. continue to load\n&quot;</span>);
-<a name="l00060"></a>00060                 <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* Orders = (<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>*) Msg.<a class="code" href="structprocess__message.html#ae76986cdc91e82883b140e41796a8be2">messageAdditionalData</a>;
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Telling system to attempt to run %s\n&quot;</span>, Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>);
+<a name="l00032"></a>00032 } <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>;
+<a name="l00033"></a>00033 
+<a name="l00034"></a><a class="code" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6">00034</a> <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* <a class="code" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6">make_orders</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Where, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* fromWhere)
+<a name="l00035"></a>00035 {
+<a name="l00036"></a>00036         <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* nOrders = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>));
+<a name="l00037"></a>00037         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(nOrders, 0, <span class="keyword">sizeof</span>(<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>));
+<a name="l00038"></a>00038         nOrders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(Where) + 1);
+<a name="l00039"></a>00039         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(nOrders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>, Where);
+<a name="l00040"></a>00040         
+<a name="l00041"></a>00041         nOrders-&gt;<a class="code" href="structnew__process__orders__t.html#a2b7fab7560cdd66a6473f85771acfbfc">fromWhere</a> = fromWhere;
+<a name="l00042"></a>00042 }
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="process_8c.html#accbb940deeefe2ef9a1597a9a4f519e4">00044</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#accbb940deeefe2ef9a1597a9a4f519e4">free_orders</a>(<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* orders)
+<a name="l00045"></a>00045 {
+<a name="l00046"></a>00046         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>);
+<a name="l00047"></a>00047         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(orders);
+<a name="l00048"></a>00048 }
+<a name="l00049"></a>00049 
+<a name="l00053"></a><a class="code" href="process_8c.html#a3f16568d609a026b0a08796175f20244">00053</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications.">new_process_entry</a>()
+<a name="l00054"></a>00054 {
+<a name="l00055"></a>00055         <a class="code" href="structprocess__message.html">process_message</a> Msg = <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_processPostbox);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057         <span class="keywordflow">if</span> (Msg.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> == <a class="code" href="messages_8h.html#ad55dc6efe4ccb4710a2017965f33f902">LOAD_MESSAGE</a>)
+<a name="l00058"></a>00058         {
+<a name="l00059"></a>00059                 <span class="keywordtype">int</span> usrMode = 0;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Valid message. continue to load\n&quot;</span>);
+<a name="l00062"></a>00062                 <a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>* Orders = (<a class="code" href="structnew__process__orders__t.html">new_process_orders_t</a>*) Msg.<a class="code" href="structprocess__message.html#ae76986cdc91e82883b140e41796a8be2">messageAdditionalData</a>;
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064                 <a class="code" href="structfilesystem__node.html">fs_node_t</a>* Node = <a class="code" href="vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string.">evaluatePath</a>(Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>, Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a2b7fab7560cdd66a6473f85771acfbfc">fromWhere</a>);
+<a name="l00064"></a>00064                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Telling system to attempt to run %s\n&quot;</span>, Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>);
 <a name="l00065"></a>00065 
-<a name="l00066"></a>00066                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Attempted to evaluate path\n&quot;</span>);
+<a name="l00066"></a>00066                 <a class="code" href="structfilesystem__node.html">fs_node_t</a>* Node = <a class="code" href="vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string.">evaluatePath</a>(Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>, Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a2b7fab7560cdd66a6473f85771acfbfc">fromWhere</a>);
 <a name="l00067"></a>00067 
-<a name="l00068"></a>00068                 usrMode = Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a962d5746d2761fb3a8ecffda9d6fe29b">user_mode</a>;
+<a name="l00068"></a>00068                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Attempted to evaluate path\n&quot;</span>);
 <a name="l00069"></a>00069 
-<a name="l00070"></a>00070                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;User mode toggle checked\n&quot;</span>);
+<a name="l00070"></a>00070                 usrMode = Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a962d5746d2761fb3a8ecffda9d6fe29b">user_mode</a>;
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072                 <a class="code" href="process_8c.html#accbb940deeefe2ef9a1597a9a4f519e4">free_orders</a>(Orders);
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Orders freed\n&quot;</span>);
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076                 <span class="keywordflow">if</span> (Node == 0)
-<a name="l00077"></a>00077                 {
-<a name="l00078"></a>00078                         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Unable to evaluate node. process could not load file specified\n&quot;</span>);
-<a name="l00079"></a>00079                         <a class="code" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642">scheduler_kill_current_process</a>();
-<a name="l00080"></a>00080                 } <span class="keywordflow">else</span>
-<a name="l00081"></a>00081                 {
-<a name="l00082"></a>00082                         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Passing to executable loader\n&quot;</span>);
-<a name="l00083"></a>00083                         <a class="code" href="loader_8c.html#a5c44c0aac1ca51f6cc551082962dfe2d">loadAndExecuteElf</a>(Node, usrMode);
-<a name="l00084"></a>00084                 }
-<a name="l00085"></a>00085         }
-<a name="l00086"></a>00086         <span class="keywordflow">else</span>
-<a name="l00087"></a>00087         {
-<a name="l00088"></a>00088                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Invalid message. Killing self\n&quot;</span>);
-<a name="l00089"></a>00089         }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091         <span class="keywordflow">for</span> (;;) { }
-<a name="l00092"></a>00092 }
-<a name="l00093"></a>00093 
-<a name="l00094"></a><a class="code" href="process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1">00094</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1">initializeKernelProcess</a>()
-<a name="l00095"></a>00095 {
-<a name="l00096"></a>00096         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
-<a name="l00097"></a>00097         <span class="keywordflow">if</span> (kernel_proc != 0) <span class="keywordflow">return</span> kernel_proc;
+<a name="l00072"></a>00072                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Renaming process\n&quot;</span>);
+<a name="l00073"></a>00073                 <a class="code" href="process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82">rename_current_process</a>(Orders-&gt;<a class="code" href="structnew__process__orders__t.html#a8f91fce8713dd601ee00a5fcef69c9c7">Filename</a>);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;User mode toggle checked\n&quot;</span>);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077                 <a class="code" href="process_8c.html#accbb940deeefe2ef9a1597a9a4f519e4">free_orders</a>(Orders);
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Orders freed\n&quot;</span>);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081                 <span class="keywordflow">if</span> (Node == 0)
+<a name="l00082"></a>00082                 {
+<a name="l00083"></a>00083                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Unable to evaluate node. process could not load file specified\n&quot;</span>);
+<a name="l00084"></a>00084                         <a class="code" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642">scheduler_kill_current_process</a>();
+<a name="l00085"></a>00085                 } <span class="keywordflow">else</span>
+<a name="l00086"></a>00086                 {
+<a name="l00087"></a>00087                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Passing to executable loader\n&quot;</span>);
+<a name="l00088"></a>00088                         <a class="code" href="loader_8c.html#a5c44c0aac1ca51f6cc551082962dfe2d">loadAndExecuteElf</a>(Node, usrMode);
+<a name="l00089"></a>00089                 }
+<a name="l00090"></a>00090         }
+<a name="l00091"></a>00091         <span class="keywordflow">else</span>
+<a name="l00092"></a>00092         {
+<a name="l00093"></a>00093                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Invalid message. Killing self\n&quot;</span>);
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096         <span class="keywordflow">for</span> (;;) { }
+<a name="l00097"></a>00097 }
 <a name="l00098"></a>00098 
-<a name="l00099"></a>00099         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* ret = (<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
-<a name="l00100"></a>00100         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
-<a name="l00101"></a>00101         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(ret-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <span class="stringliteral">&quot;KernelProcess&quot;</span>);
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103         ret-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> = 0;
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="post__init_8c.html#a77513e4ba92e2c955e944c32dbc50ff4">kernel_pagedir</a>;
-<a name="l00106"></a>00106         ret-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a> = kernel_pagedir;
+<a name="l00099"></a><a class="code" href="process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1">00099</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1">initializeKernelProcess</a>()
+<a name="l00100"></a>00100 {
+<a name="l00101"></a>00101         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00102"></a>00102         <span class="keywordflow">if</span> (kernel_proc != 0) <span class="keywordflow">return</span> kernel_proc;
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* ret = (<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
+<a name="l00105"></a>00105         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
+<a name="l00106"></a>00106         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(ret-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <span class="stringliteral">&quot;KernelProcess&quot;</span>);
 <a name="l00107"></a>00107 
-<a name="l00108"></a>00108         ret-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a> = <a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>();
+<a name="l00108"></a>00108         ret-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> = 0;
 <a name="l00109"></a>00109 
-<a name="l00110"></a>00110         kernel_proc = ret;
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112         <a class="code" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f">init_used_list</a>(kernel_proc);
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114         ret-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = g_kernelTerminal;
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116         <span class="keywordflow">return</span> ret;
-<a name="l00117"></a>00117 }
+<a name="l00110"></a>00110         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="post__init_8c.html#a77513e4ba92e2c955e944c32dbc50ff4">kernel_pagedir</a>;
+<a name="l00111"></a>00111         ret-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a> = kernel_pagedir;
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113         ret-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a> = <a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>();
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115         kernel_proc = ret;
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117         <a class="code" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f">init_used_list</a>(kernel_proc);
 <a name="l00118"></a>00118 
-<a name="l00119"></a><a class="code" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f">00119</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f">freeProcess</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process)
-<a name="l00120"></a>00120 {
-<a name="l00121"></a>00121         <span class="comment">//No interrupts ploz</span>
-<a name="l00122"></a>00122         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00119"></a>00119         ret-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = g_kernelTerminal;
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121         <span class="keywordflow">return</span> ret;
+<a name="l00122"></a>00122 }
 <a name="l00123"></a>00123 
-<a name="l00124"></a>00124         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Process %i exited with return value %i\n&quot;</span>, process-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a>, process-&gt;<a class="code" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2" title="The return value of this process is stored here when it is set.">m_returnValue</a>);
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126         <span class="keywordflow">if</span> (process == kernel_proc) {
-<a name="l00127"></a>00127                 <a class="code" href="panic_8h.html#ae3c0c6fb5e69bb687e787ec5c487afa1">PANIC</a>(<span class="stringliteral">&quot;Somebody tried to close the kernel process. Oh crap\n&quot;</span>);
-<a name="l00128"></a>00128                 <span class="keywordflow">return</span>; <span class="comment">//Don&#39;t want to get rid of PID 0</span>
-<a name="l00129"></a>00129         }
-<a name="l00130"></a>00130         <span class="keywordflow">else</span>
-<a name="l00131"></a>00131         {
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133                 <span class="keywordflow">if</span> (process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> != 0)
-<a name="l00134"></a>00134                 {
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136                         <span class="keywordflow">if</span> (<a class="code" href="kernel__init_8c.html#a6d63b9eb87f7d9a2cd3034fc5f829f50">getTerminalInContext</a>() == process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>)
-<a name="l00137"></a>00137                         {
-<a name="l00138"></a>00138                                 <a class="code" href="kterminal_8c.html#a24f3231c2a2a86fc964212f2271ff907">setTerminalContext</a>(g_kernelTerminal);
-<a name="l00139"></a>00139                         }
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141                         process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = 0;
-<a name="l00142"></a>00142                 }
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144                 <span class="comment">//This kills the used list and frees every used page</span>
-<a name="l00145"></a>00145                 <span class="keywordflow">while</span> (process-&gt;<a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a> != 0)
-<a name="l00146"></a>00146                 {
+<a name="l00124"></a><a class="code" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f">00124</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f">freeProcess</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process)
+<a name="l00125"></a>00125 {
+<a name="l00126"></a>00126         <span class="comment">//This kills the used list and frees every used page</span>
+<a name="l00127"></a>00127         <span class="keywordflow">while</span> (process-&gt;<a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a> != 0)
+<a name="l00128"></a>00128         {
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130                 <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> top = <a class="code" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67">used_list_top</a>(process);
+<a name="l00131"></a>00131                 <a class="code" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92">freeFrame</a>(top);
+<a name="l00132"></a>00132                 <a class="code" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb">used_list_remove</a>(process, top);
+<a name="l00133"></a>00133         }
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135         <span class="keywordflow">if</span> (process-&gt;<a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a> != 0)
+<a name="l00136"></a>00136         {
+<a name="l00137"></a>00137                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(process-&gt;<a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a>);
+<a name="l00138"></a>00138         }
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140         <span class="comment">//Empty the post box</span>
+<a name="l00141"></a>00141         <span class="keywordflow">while</span> (process-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>.<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> != 0)
+<a name="l00142"></a>00142         {
+<a name="l00143"></a>00143                 
+<a name="l00144"></a>00144                 <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;process-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>);
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146         }
 <a name="l00147"></a>00147 
-<a name="l00148"></a>00148                         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> top = <a class="code" href="used__list_8c.html#a5faf733ace69421d25e06486b0d29f67">used_list_top</a>(process);
-<a name="l00149"></a>00149                         <a class="code" href="phys__mm_8h.html#a7c4bfb18afd69f5377e1ec8264becf92">freeFrame</a>(top);
-<a name="l00150"></a>00150                         <a class="code" href="used__list_8c.html#ab0bc57ca0ba57c32fa3196091387c1bb">used_list_remove</a>(process, top);
+<a name="l00148"></a>00148         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(process);
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;A process was freed\n&quot;</span>);
 <a name="l00151"></a>00151 
-<a name="l00152"></a>00152                 }
+<a name="l00152"></a>00152 }
 <a name="l00153"></a>00153 
-<a name="l00154"></a>00154                 <span class="comment">//Empty the post box</span>
-<a name="l00155"></a>00155                 <span class="keywordflow">while</span> (process-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>.<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> != 0)
-<a name="l00156"></a>00156                 {
-<a name="l00157"></a>00157                 
-<a name="l00158"></a>00158                         <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;process-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>);
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160                 }
+<a name="l00154"></a>00154 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
+<a name="l00155"></a>00155 
+<a name="l00156"></a><a class="code" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6">00156</a> <span class="keywordtype">int</span> <a class="code" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6">kfork</a>()
+<a name="l00157"></a>00157 {
+<a name="l00158"></a>00158         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
+<a name="l00159"></a>00159         
+<a name="l00160"></a>00160         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
 <a name="l00161"></a>00161 
-<a name="l00162"></a>00162                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(process-&gt;<a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a>);
+<a name="l00162"></a>00162         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Free frames at start %x\n&quot;</span>, <a class="code" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4">calculate_free_frames</a>());
 <a name="l00163"></a>00163 
-<a name="l00164"></a>00164                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(process);
-<a name="l00165"></a>00165         }
+<a name="l00164"></a>00164         <span class="comment">//Store this for later use</span>
+<a name="l00165"></a>00165         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* parent = <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
 <a name="l00166"></a>00166 
-<a name="l00167"></a>00167 }
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
+<a name="l00167"></a>00167         <span class="comment">//Create a process space for the new process and null iyt</span>
+<a name="l00168"></a>00168         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
+<a name="l00169"></a>00169         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
 <a name="l00170"></a>00170 
-<a name="l00171"></a><a class="code" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6">00171</a> <span class="keywordtype">int</span> <a class="code" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6">kfork</a>()
-<a name="l00172"></a>00172 {
-<a name="l00173"></a>00173         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
-<a name="l00174"></a>00174         
-<a name="l00175"></a>00175         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00171"></a>00171         <span class="comment">//Give it a generic name fo-now</span>
+<a name="l00172"></a>00172         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(new_process-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <span class="stringliteral">&quot;ChildProcess&quot;</span>);
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174         new_process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>;
+<a name="l00175"></a>00175         <a class="code" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f">init_used_list</a>(new_process);
 <a name="l00176"></a>00176 
-<a name="l00177"></a>00177         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Free frames at start %x\n&quot;</span>, <a class="code" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4">calculate_free_frames</a>());
-<a name="l00178"></a>00178 
-<a name="l00179"></a>00179         <span class="comment">//Store this for later use</span>
-<a name="l00180"></a>00180         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* parent = <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182         <span class="comment">//Create a process space for the new process and null iyt</span>
-<a name="l00183"></a>00183         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
-<a name="l00184"></a>00184         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186         <span class="comment">//Give it a generic name fo-now</span>
-<a name="l00187"></a>00187         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(new_process-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <span class="stringliteral">&quot;ChildProcess&quot;</span>);
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189         new_process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>;
-<a name="l00190"></a>00190         <a class="code" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f">init_used_list</a>(new_process);
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192         <span class="comment">//Set the processes unique ID</span>
-<a name="l00193"></a>00193         next_pid++;
-<a name="l00194"></a>00194         new_process-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> = next_pid;
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196         <span class="comment">//Located in virt_mm.c</span>
-<a name="l00197"></a>00197         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199         <span class="comment">//Set the root execution directory</span>
-<a name="l00200"></a>00200         new_process-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a>;
-<a name="l00201"></a>00201 
-<a name="l00202"></a>00202         <span class="comment">//Copy the page directory</span>
-<a name="l00203"></a>00203         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* newprocesspd = <a class="code" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9">copyPageDir</a>(current_pagedir, new_process);
-<a name="l00204"></a>00204 
-<a name="l00205"></a>00205         <span class="comment">//Give it a page directory</span>
-<a name="l00206"></a>00206         new_process-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a> = newprocesspd;
-<a name="l00207"></a>00207 
-<a name="l00208"></a>00208         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> current_eip = read_eip();
-<a name="l00209"></a>00209 
-<a name="l00210"></a>00210         <span class="keywordflow">if</span> (parent-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> == <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_ID)
-<a name="l00211"></a>00211         {
-<a name="l00212"></a>00212                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%esp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(esp));
-<a name="l00213"></a>00213                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%ebp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(ebp));
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215                 new_process-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> = esp;
-<a name="l00216"></a>00216                 new_process-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> = ebp;
-<a name="l00217"></a>00217                 new_process-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> = current_eip;
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219                 <a class="code" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc">scheduler_add</a>(new_process);
-<a name="l00220"></a>00220 
-<a name="l00221"></a>00221                 <span class="keywordflow">return</span> 0; <span class="comment">//Return 0 - Parent</span>
-<a name="l00222"></a>00222         }
-<a name="l00223"></a>00223         <span class="keywordflow">else</span>
-<a name="l00224"></a>00224         {
-<a name="l00225"></a>00225                 <span class="keywordflow">return</span> 1; <span class="comment">//Return 1 - Child</span>
-<a name="l00226"></a>00226         }
-<a name="l00227"></a>00227 }
+<a name="l00177"></a>00177         <span class="comment">//Set the processes unique ID</span>
+<a name="l00178"></a>00178         next_pid++;
+<a name="l00179"></a>00179         new_process-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> = next_pid;
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181         <span class="comment">//Located in virt_mm.c</span>
+<a name="l00182"></a>00182         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184         <span class="comment">//Set the root execution directory</span>
+<a name="l00185"></a>00185         new_process-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a>;
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187         <span class="comment">//Copy the page directory</span>
+<a name="l00188"></a>00188         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* newprocesspd = <a class="code" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9">copyPageDir</a>(current_pagedir, new_process);
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190         <span class="comment">//Give it a page directory</span>
+<a name="l00191"></a>00191         new_process-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a> = newprocesspd;
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> current_eip = read_eip();
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195         <span class="keywordflow">if</span> (parent-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> == <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_ID)
+<a name="l00196"></a>00196         {
+<a name="l00197"></a>00197                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%esp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(esp));
+<a name="l00198"></a>00198                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%ebp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(ebp));
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200                 new_process-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> = esp;
+<a name="l00201"></a>00201                 new_process-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> = ebp;
+<a name="l00202"></a>00202                 new_process-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> = current_eip;
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204                 <a class="code" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc">scheduler_add</a>(new_process);
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206                 <span class="keywordflow">return</span> 0; <span class="comment">//Return 0 - Parent</span>
+<a name="l00207"></a>00207         }
+<a name="l00208"></a>00208         <span class="keywordflow">else</span>
+<a name="l00209"></a>00209         {
+<a name="l00210"></a>00210                 <span class="keywordflow">return</span> 1; <span class="comment">//Return 1 - Child</span>
+<a name="l00211"></a>00211         }
+<a name="l00212"></a>00212 }
+<a name="l00213"></a>00213 
+<a name="l00214"></a><a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">00214</a> <span class="keywordtype">int</span> <a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">createNewProcess</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Filename, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* Where)
+<a name="l00215"></a>00215 {
+<a name="l00216"></a>00216         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
+<a name="l00217"></a>00217         
+<a name="l00218"></a>00218         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Free frames at start %x\n&quot;</span>, <a class="code" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4">calculate_free_frames</a>());
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222         <span class="comment">//Store this for later use</span>
+<a name="l00223"></a>00223         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* parent = <a class="code" href="process__scheduler_8c.html#a9b79f8f6e29957e150c1dc666334f30c">schedulerGetProcessFromPid</a>(0);
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225         <span class="comment">//Create a process space for the new process and null it</span>
+<a name="l00226"></a>00226         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
+<a name="l00227"></a>00227         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
 <a name="l00228"></a>00228 
-<a name="l00229"></a><a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">00229</a> <span class="keywordtype">int</span> <a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">createNewProcess</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Filename, <a class="code" href="structfilesystem__node.html">fs_node_t</a>* Where)
-<a name="l00230"></a>00230 {
-<a name="l00231"></a>00231         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
-<a name="l00232"></a>00232         
-<a name="l00233"></a>00233         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00229"></a>00229         <span class="comment">//Give it a generic name fo-now</span>
+<a name="l00230"></a>00230         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(new_process-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <span class="stringliteral">&quot;New Process&quot;</span>);
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232         <span class="comment">//Setup terminal bindings</span>
+<a name="l00233"></a>00233         new_process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>;
 <a name="l00234"></a>00234 
-<a name="l00235"></a>00235         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Free frames at start %x\n&quot;</span>, <a class="code" href="phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4">calculate_free_frames</a>());
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237         <span class="comment">//Store this for later use</span>
-<a name="l00238"></a>00238         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* parent = <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240         <span class="comment">//Create a process space for the new process and null iyt</span>
-<a name="l00241"></a>00241         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
-<a name="l00242"></a>00242         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>));
-<a name="l00243"></a>00243 
-<a name="l00244"></a>00244         <span class="comment">//Give it a generic name fo-now</span>
-<a name="l00245"></a>00245         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(new_process-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <span class="stringliteral">&quot;ChildProcess&quot;</span>);
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247         new_process-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a48fa0e599e1abb62032d79f82df07c6c" title="The terminal that gets written to when this application prints.">m_pTerminal</a>;
-<a name="l00248"></a>00248         <a class="code" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f">init_used_list</a>(new_process);
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250         <span class="comment">//Set the processes unique ID</span>
-<a name="l00251"></a>00251         next_pid++;
-<a name="l00252"></a>00252         new_process-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> = next_pid;
-<a name="l00253"></a>00253 
-<a name="l00254"></a>00254         <span class="comment">//Located in virt_mm.c</span>
-<a name="l00255"></a>00255         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
-<a name="l00256"></a>00256         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="post__init_8c.html#a77513e4ba92e2c955e944c32dbc50ff4">kernel_pagedir</a>;
-<a name="l00257"></a>00257 
-<a name="l00258"></a>00258         <span class="comment">//Set the root execution directory</span>
-<a name="l00259"></a>00259         new_process-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a>;
-<a name="l00260"></a>00260 
-<a name="l00261"></a>00261         <span class="comment">//Copy the page directory</span>
-<a name="l00262"></a>00262         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* newprocesspd = <a class="code" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9">copyPageDir</a>(kernel_pagedir, new_process);
+<a name="l00235"></a>00235         <span class="comment">//Initialize the used frames list for the process</span>
+<a name="l00236"></a>00236         <a class="code" href="used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f">init_used_list</a>(new_process);
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238         <span class="comment">//Set the processes unique ID</span>
+<a name="l00239"></a>00239         next_pid++;
+<a name="l00240"></a>00240         new_process-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> = next_pid;
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242         <span class="comment">//Located in virt_mm.c</span>
+<a name="l00243"></a>00243         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
+<a name="l00244"></a>00244         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="post__init_8c.html#a77513e4ba92e2c955e944c32dbc50ff4">kernel_pagedir</a>;
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246         <span class="comment">//Set the root execution directory</span>
+<a name="l00247"></a>00247         new_process-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a> = parent-&gt;<a class="code" href="structprocess__structure.html#a07c797fe6d052657442915d54f314836" title="The node directory in which this application is currently executing.">m_executionDirectory</a>;
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249         <span class="comment">//Copy the page directory</span>
+<a name="l00250"></a>00250         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* newprocesspd = <a class="code" href="virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9">copyPageDir</a>(kernel_pagedir, new_process);
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252         <span class="comment">//Give it a page directory</span>
+<a name="l00253"></a>00253         new_process-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a> = newprocesspd;
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> current_eip = new_process_entry;
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%esp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(esp));
+<a name="l00258"></a>00258         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%ebp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(ebp));
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260         new_process-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> = USER_STACK_START;
+<a name="l00261"></a>00261         new_process-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> = USER_STACK_START;
+<a name="l00262"></a>00262         new_process-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> = current_eip;
 <a name="l00263"></a>00263 
-<a name="l00264"></a>00264         <span class="comment">//Give it a page directory</span>
-<a name="l00265"></a>00265         new_process-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a> = newprocesspd;
-<a name="l00266"></a>00266 
-<a name="l00267"></a>00267         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> current_eip = new_process_entry;
+<a name="l00264"></a>00264         <a class="code" href="structprocess__message.html">process_message</a> InfomaticMessage;
+<a name="l00265"></a>00265         InfomaticMessage.<a class="code" href="structprocess__message.html#af279578897e47350c1e8bc4188e7c022">from_PID</a> = 0;
+<a name="l00266"></a>00266         InfomaticMessage.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = LOAD_MESSAGE;
+<a name="l00267"></a>00267         InfomaticMessage.<a class="code" href="structprocess__message.html#ae76986cdc91e82883b140e41796a8be2">messageAdditionalData</a> = <a class="code" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6">make_orders</a>(Filename, Where);
 <a name="l00268"></a>00268 
-<a name="l00269"></a>00269         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%esp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(esp));
-<a name="l00270"></a>00270         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%ebp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(ebp));
-<a name="l00271"></a>00271 
-<a name="l00272"></a>00272         new_process-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> = USER_STACK_START;
-<a name="l00273"></a>00273         new_process-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> = USER_STACK_START;
-<a name="l00274"></a>00274         new_process-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> = current_eip;
+<a name="l00269"></a>00269         <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(&amp;new_process-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>, InfomaticMessage);
+<a name="l00270"></a>00270 
+<a name="l00271"></a>00271         <a class="code" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc">scheduler_add</a>(new_process);
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273         <span class="keywordflow">return</span> 0; <span class="comment">//Return 0 - Parent</span>
+<a name="l00274"></a>00274 }
 <a name="l00275"></a>00275 
-<a name="l00276"></a>00276         <a class="code" href="structprocess__message.html">process_message</a> InfomaticMessage;
-<a name="l00277"></a>00277         InfomaticMessage.<a class="code" href="structprocess__message.html#af279578897e47350c1e8bc4188e7c022">from_PID</a> = 0;
-<a name="l00278"></a>00278         InfomaticMessage.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = LOAD_MESSAGE;
-<a name="l00279"></a>00279         InfomaticMessage.<a class="code" href="structprocess__message.html#ae76986cdc91e82883b140e41796a8be2">messageAdditionalData</a> = <a class="code" href="process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6">make_orders</a>(Filename, Where);
+<a name="l00276"></a><a class="code" href="process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82">00276</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82">rename_current_process</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Str)
+<a name="l00277"></a>00277 {
+<a name="l00278"></a>00278         <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>(), Str);
+<a name="l00279"></a>00279 }
 <a name="l00280"></a>00280 
-<a name="l00281"></a>00281         <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(&amp;new_process-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>, InfomaticMessage);
-<a name="l00282"></a>00282 
-<a name="l00283"></a>00283         <a class="code" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc">scheduler_add</a>(new_process);
-<a name="l00284"></a>00284 
-<a name="l00285"></a>00285          <span class="keywordflow">return</span> 0; <span class="comment">//Return 0 - Parent</span>
-<a name="l00286"></a>00286 }
+<a name="l00281"></a><a class="code" href="process_8c.html#ab286609d2a60286f28d939e3c0f94c4e">00281</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69">switch_process</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* from, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* to)
+<a name="l00282"></a>00282 {
+<a name="l00283"></a>00283         <span class="keywordflow">if</span> (!from || !to) <span class="keywordflow">return</span>; <span class="comment">//Invalid ptrs?</span>
+<a name="l00284"></a>00284         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>, <a class="code" href="tss_8h.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
 <a name="l00287"></a>00287 
-<a name="l00288"></a><a class="code" href="process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82">00288</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#aa6a2d7b8f7d0ad74a46c3baf98a87c82">rename_current_process</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* Str)
-<a name="l00289"></a>00289 {
-<a name="l00290"></a>00290         <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>(), Str);
-<a name="l00291"></a>00291 }
+<a name="l00288"></a>00288         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%esp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(esp));
+<a name="l00289"></a>00289         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%ebp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(ebp));
+<a name="l00290"></a>00290 
+<a name="l00291"></a>00291         eip = read_eip();
 <a name="l00292"></a>00292 
-<a name="l00293"></a><a class="code" href="process_8c.html#ab286609d2a60286f28d939e3c0f94c4e">00293</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69">switch_process</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* from, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* to)
-<a name="l00294"></a>00294 {
-<a name="l00295"></a>00295         <span class="keywordflow">if</span> (!from || !to) <span class="keywordflow">return</span>; <span class="comment">//Invalid ptrs?</span>
-<a name="l00296"></a>00296         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00293"></a>00293         <span class="keywordflow">if</span> (eip == 0x12345) <span class="comment">//Just switched tasks?</span>
+<a name="l00294"></a>00294         {
+<a name="l00295"></a>00295                 <span class="keywordflow">return</span>; <span class="comment">//Return to whence you came!</span>
+<a name="l00296"></a>00296         }
 <a name="l00297"></a>00297 
-<a name="l00298"></a>00298         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>, <a class="code" href="tss_8h.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
-<a name="l00299"></a>00299 
-<a name="l00300"></a>00300         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%esp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(esp));
-<a name="l00301"></a>00301         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;mov %%ebp, %0&quot;</span> : <span class="stringliteral">&quot;=r&quot;</span>(ebp));
-<a name="l00302"></a>00302 
-<a name="l00303"></a>00303         eip = read_eip();
-<a name="l00304"></a>00304 
-<a name="l00305"></a>00305         <span class="keywordflow">if</span> (eip == 0x12345) <span class="comment">//Just switched tasks?</span>
-<a name="l00306"></a>00306         {
-<a name="l00307"></a>00307                 <span class="keywordflow">return</span>; <span class="comment">//Return to whence you came!</span>
-<a name="l00308"></a>00308         }
+<a name="l00298"></a>00298         from-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> = eip;
+<a name="l00299"></a>00299         from-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> = esp;
+<a name="l00300"></a>00300         from-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> = ebp;
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302         eip = to-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
+<a name="l00303"></a>00303         esp = to-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>;
+<a name="l00304"></a>00304         ebp = to-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
+<a name="l00305"></a>00305         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* pagedir = to-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a>;
+<a name="l00306"></a>00306 
+<a name="l00307"></a>00307         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
+<a name="l00308"></a>00308         current_pagedir = pagedir;
 <a name="l00309"></a>00309 
-<a name="l00310"></a>00310         from-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a> = eip;
-<a name="l00311"></a>00311         from-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a> = esp;
-<a name="l00312"></a>00312         from-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a> = ebp;
-<a name="l00313"></a>00313 
-<a name="l00314"></a>00314         eip = to-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
-<a name="l00315"></a>00315         esp = to-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>;
-<a name="l00316"></a>00316         ebp = to-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
-<a name="l00317"></a>00317         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* pagedir = to-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a>;
+<a name="l00310"></a>00310         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;cli; \</span>
+<a name="l00311"></a>00311 <span class="stringliteral">                      mov %1, %%esp; \</span>
+<a name="l00312"></a>00312 <span class="stringliteral">                      mov %2, %%ebp; \</span>
+<a name="l00313"></a>00313 <span class="stringliteral">                      mov %0, %%ecx; \</span>
+<a name="l00314"></a>00314 <span class="stringliteral">                      mov %3, %%cr3; \</span>
+<a name="l00315"></a>00315 <span class="stringliteral">                      mov $0x12345, %%eax; \</span>
+<a name="l00316"></a>00316 <span class="stringliteral">                      sti; \</span>
+<a name="l00317"></a>00317 <span class="stringliteral">                      jmp *%%ecx;&quot;</span> :: <span class="stringliteral">&quot;r&quot;</span> (eip), <span class="stringliteral">&quot;r&quot;</span> (esp), <span class="stringliteral">&quot;r&quot;</span> (ebp), <span class="stringliteral">&quot;r&quot;</span> (pagedir));
 <a name="l00318"></a>00318 
-<a name="l00319"></a>00319         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
-<a name="l00320"></a>00320         current_pagedir = pagedir;
+<a name="l00319"></a>00319         <span class="keywordflow">return</span>;
+<a name="l00320"></a>00320 }
 <a name="l00321"></a>00321 
-<a name="l00322"></a>00322         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;cli; \</span>
-<a name="l00323"></a>00323 <span class="stringliteral">                      mov %1, %%esp; \</span>
-<a name="l00324"></a>00324 <span class="stringliteral">                      mov %2, %%ebp; \</span>
-<a name="l00325"></a>00325 <span class="stringliteral">                      mov %0, %%ecx; \</span>
-<a name="l00326"></a>00326 <span class="stringliteral">                      mov %3, %%cr3; \</span>
-<a name="l00327"></a>00327 <span class="stringliteral">                      mov $0x12345, %%eax; \</span>
-<a name="l00328"></a>00328 <span class="stringliteral">                      sti; \</span>
-<a name="l00329"></a>00329 <span class="stringliteral">                      jmp *%%ecx;&quot;</span> :: <span class="stringliteral">&quot;r&quot;</span> (eip), <span class="stringliteral">&quot;r&quot;</span> (esp), <span class="stringliteral">&quot;r&quot;</span> (ebp), <span class="stringliteral">&quot;r&quot;</span> (pagedir));
-<a name="l00330"></a>00330 
-<a name="l00331"></a>00331         <span class="keywordflow">return</span>;
-<a name="l00332"></a>00332 }
+<a name="l00322"></a>00322 <span class="comment">//Jump to the next process</span>
+<a name="l00323"></a><a class="code" href="process_8c.html#a2e9fcac3364dedcb7ad55816ee8867fa">00323</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#a2e9fcac3364dedcb7ad55816ee8867fa">jump_process</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* to)
+<a name="l00324"></a>00324 {
+<a name="l00325"></a>00325         <span class="keywordflow">if</span> (!to) <span class="keywordflow">return</span>; <span class="comment">//Invalid ptrs?</span>
+<a name="l00326"></a>00326         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00327"></a>00327 
+<a name="l00328"></a>00328         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>, <a class="code" href="tss_8h.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
+<a name="l00329"></a>00329 
+<a name="l00330"></a>00330         eip = to-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
+<a name="l00331"></a>00331         esp = to-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>;
+<a name="l00332"></a>00332         ebp = to-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
 <a name="l00333"></a>00333 
-<a name="l00334"></a>00334 <span class="comment">//Jump to the next process</span>
-<a name="l00335"></a><a class="code" href="process_8c.html#a2e9fcac3364dedcb7ad55816ee8867fa">00335</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#a2e9fcac3364dedcb7ad55816ee8867fa">jump_process</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* to)
-<a name="l00336"></a>00336 {
-<a name="l00337"></a>00337         <span class="keywordflow">if</span> (!to) <span class="keywordflow">return</span>; <span class="comment">//Invalid ptrs?</span>
-<a name="l00338"></a>00338         <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
-<a name="l00339"></a>00339 
-<a name="l00340"></a>00340         <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="tss_8h.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>, <a class="code" href="tss_8h.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>, <a class="code" href="tss_8h.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
-<a name="l00341"></a>00341 
-<a name="l00342"></a>00342         eip = to-&gt;<a class="code" href="structprocess__structure.html#ad7b2885e013c41755b24e326443e4454">eip</a>;
-<a name="l00343"></a>00343         esp = to-&gt;<a class="code" href="structprocess__structure.html#a4c99077c3c3b1828cda58e79dad02ded">esp</a>;
-<a name="l00344"></a>00344         ebp = to-&gt;<a class="code" href="structprocess__structure.html#a5a3b0638911ac07327e091dedfbf615c">ebp</a>;
-<a name="l00345"></a>00345 
-<a name="l00346"></a>00346         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* pagedir = to-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a>;
+<a name="l00334"></a>00334         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* pagedir = to-&gt;<a class="code" href="structprocess__structure.html#a37efcc38f828227684720848c97cdc85" title="The physical address of the page directory this process uses.">m_pageDir</a>;
+<a name="l00335"></a>00335 
+<a name="l00336"></a>00336         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
+<a name="l00337"></a>00337         current_pagedir = pagedir;
+<a name="l00338"></a>00338 
+<a name="l00339"></a>00339         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;cli; \</span>
+<a name="l00340"></a>00340 <span class="stringliteral">                      mov %1, %%esp; \</span>
+<a name="l00341"></a>00341 <span class="stringliteral">                      mov %2, %%ebp; \</span>
+<a name="l00342"></a>00342 <span class="stringliteral">                      mov %0, %%ecx; \</span>
+<a name="l00343"></a>00343 <span class="stringliteral">                      mov %3, %%cr3; \</span>
+<a name="l00344"></a>00344 <span class="stringliteral">                      mov $0x12345, %%eax; \</span>
+<a name="l00345"></a>00345 <span class="stringliteral">                      sti; \</span>
+<a name="l00346"></a>00346 <span class="stringliteral">                      jmp *%%ecx;&quot;</span> :: <span class="stringliteral">&quot;r&quot;</span> (eip), <span class="stringliteral">&quot;r&quot;</span> (esp), <span class="stringliteral">&quot;r&quot;</span> (ebp), <span class="stringliteral">&quot;r&quot;</span> (pagedir));
 <a name="l00347"></a>00347 
-<a name="l00348"></a>00348         <span class="keyword">extern</span> <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a>* <a class="code" href="virt__mm_8c.html#ae2cbb2a3465bc62e62a3b428864218ba">current_pagedir</a>;
-<a name="l00349"></a>00349         current_pagedir = pagedir;
+<a name="l00348"></a>00348         <span class="keywordflow">return</span>;
+<a name="l00349"></a>00349 }
 <a name="l00350"></a>00350 
-<a name="l00351"></a>00351         <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;cli; \</span>
-<a name="l00352"></a>00352 <span class="stringliteral">                      mov %1, %%esp; \</span>
-<a name="l00353"></a>00353 <span class="stringliteral">                      mov %2, %%ebp; \</span>
-<a name="l00354"></a>00354 <span class="stringliteral">                      mov %0, %%ecx; \</span>
-<a name="l00355"></a>00355 <span class="stringliteral">                      mov %3, %%cr3; \</span>
-<a name="l00356"></a>00356 <span class="stringliteral">                      mov $0x12345, %%eax; \</span>
-<a name="l00357"></a>00357 <span class="stringliteral">                      sti; \</span>
-<a name="l00358"></a>00358 <span class="stringliteral">                      jmp *%%ecx;&quot;</span> :: <span class="stringliteral">&quot;r&quot;</span> (eip), <span class="stringliteral">&quot;r&quot;</span> (esp), <span class="stringliteral">&quot;r&quot;</span> (ebp), <span class="stringliteral">&quot;r&quot;</span> (pagedir));
+<a name="l00351"></a><a class="code" href="process_8c.html#abb0ab623082f9b1bedd7747cc9ce9de5">00351</a> <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb)
+<a name="l00352"></a>00352 {
+<a name="l00353"></a>00353         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> == 0)
+<a name="l00354"></a>00354         {
+<a name="l00355"></a>00355                 <a class="code" href="structprocess__message.html">process_message</a> ret;
+<a name="l00356"></a>00356                 ret.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = -1; <span class="comment">//-1 = No messages left to read</span>
+<a name="l00357"></a>00357                 <span class="keywordflow">return</span> ret;
+<a name="l00358"></a>00358         }
 <a name="l00359"></a>00359 
-<a name="l00360"></a>00360         <span class="keywordflow">return</span>;
-<a name="l00361"></a>00361 }
-<a name="l00362"></a>00362 
-<a name="l00363"></a><a class="code" href="process_8c.html#abb0ab623082f9b1bedd7747cc9ce9de5">00363</a> <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb)
-<a name="l00364"></a>00364 {
-<a name="l00365"></a>00365         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> == 0)
+<a name="l00360"></a>00360         <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* message = pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>;
+<a name="l00361"></a>00361 
+<a name="l00362"></a>00362         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> != 0)
+<a name="l00363"></a>00363         {
+<a name="l00364"></a>00364                 pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> = message-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a>;
+<a name="l00365"></a>00365         } <span class="keywordflow">else</span>
 <a name="l00366"></a>00366         {
-<a name="l00367"></a>00367                 <a class="code" href="structprocess__message.html">process_message</a> ret;
-<a name="l00368"></a>00368                 ret.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = -1; <span class="comment">//-1 = No messages left to read</span>
-<a name="l00369"></a>00369                 <span class="keywordflow">return</span> ret;
-<a name="l00370"></a>00370         }
-<a name="l00371"></a>00371 
-<a name="l00372"></a>00372         <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* message = pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>;
-<a name="l00373"></a>00373 
-<a name="l00374"></a>00374         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> != 0)
-<a name="l00375"></a>00375         {
-<a name="l00376"></a>00376                 pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> = message-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a>;
-<a name="l00377"></a>00377         } <span class="keywordflow">else</span>
-<a name="l00378"></a>00378         {
-<a name="l00379"></a>00379                 pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> = 0;
-<a name="l00380"></a>00380         }
-<a name="l00381"></a>00381 
-<a name="l00382"></a>00382         <a class="code" href="structprocess__message.html">process_message</a> ret = message-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a>;
-<a name="l00383"></a>00383         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(message);
-<a name="l00384"></a>00384 
-<a name="l00385"></a>00385         <span class="keywordflow">return</span> ret;
-<a name="l00386"></a>00386 }
-<a name="l00387"></a>00387 
-<a name="l00388"></a>00388 <span class="comment">//Get the top message without removing it</span>
-<a name="l00389"></a><a class="code" href="postbox__syscalls_8c.html#ab332071042eeee6f1557cedf3be58921">00389</a> <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb)
+<a name="l00367"></a>00367                 pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> = 0;
+<a name="l00368"></a>00368         }
+<a name="l00369"></a>00369 
+<a name="l00370"></a>00370         <a class="code" href="structprocess__message.html">process_message</a> ret = message-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a>;
+<a name="l00371"></a>00371         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(message);
+<a name="l00372"></a>00372 
+<a name="l00373"></a>00373         <span class="keywordflow">return</span> ret;
+<a name="l00374"></a>00374 }
+<a name="l00375"></a>00375 
+<a name="l00376"></a>00376 <span class="comment">//Get the top message without removing it</span>
+<a name="l00377"></a><a class="code" href="postbox__syscalls_8c.html#ab332071042eeee6f1557cedf3be58921">00377</a> <a class="code" href="structprocess__message.html">process_message</a> <a class="code" href="process_8h.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb)
+<a name="l00378"></a>00378 {
+<a name="l00379"></a>00379         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> == 0)
+<a name="l00380"></a>00380         {
+<a name="l00381"></a>00381                 <a class="code" href="structprocess__message.html">process_message</a> ret;
+<a name="l00382"></a>00382                 ret.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = -1; <span class="comment">//-1 = No messages left to read</span>
+<a name="l00383"></a>00383                 <span class="keywordflow">return</span> ret;
+<a name="l00384"></a>00384         }
+<a name="l00385"></a>00385 
+<a name="l00386"></a>00386         <span class="keywordflow">return</span> pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a>;
+<a name="l00387"></a>00387 }
+<a name="l00388"></a>00388 
+<a name="l00389"></a><a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">00389</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* proc, <span class="keyword">const</span> <span class="keywordtype">char</span>* Name)
 <a name="l00390"></a>00390 {
-<a name="l00391"></a>00391         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> == 0)
-<a name="l00392"></a>00392         {
-<a name="l00393"></a>00393                 <a class="code" href="structprocess__message.html">process_message</a> ret;
-<a name="l00394"></a>00394                 ret.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = -1; <span class="comment">//-1 = No messages left to read</span>
-<a name="l00395"></a>00395                 <span class="keywordflow">return</span> ret;
-<a name="l00396"></a>00396         }
-<a name="l00397"></a>00397 
-<a name="l00398"></a>00398         <span class="keywordflow">return</span> pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a>;
-<a name="l00399"></a>00399 }
-<a name="l00400"></a>00400 
-<a name="l00401"></a><a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">00401</a> <span class="keywordtype">void</span> <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* proc, <span class="keyword">const</span> <span class="keywordtype">char</span>* Name)
-<a name="l00402"></a>00402 {
-<a name="l00403"></a>00403         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(proc-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, Name);
-<a name="l00404"></a>00404 }
-<a name="l00405"></a>00405 
-<a name="l00406"></a><a class="code" href="process_8c.html#a3de17c849d9de394b95b696739322ac0">00406</a> <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb, <a class="code" href="structprocess__message.html">process_message</a> msg)
-<a name="l00407"></a>00407 {
-<a name="l00408"></a>00408         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> == 0)
-<a name="l00409"></a>00409         {
-<a name="l00410"></a>00410                 <span class="comment">//Create pb-&gt;first</span>
-<a name="l00411"></a>00411                 <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* new_entry = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>));
-<a name="l00412"></a>00412                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a> = msg;
-<a name="l00413"></a>00413                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> = 0;
-<a name="l00414"></a>00414 
-<a name="l00415"></a>00415                 pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> = new_entry;
-<a name="l00416"></a>00416         }
-<a name="l00417"></a>00417         <span class="keywordflow">else</span>
-<a name="l00418"></a>00418         {
-<a name="l00419"></a>00419                 <span class="comment">//Add to the end of the list</span>
-<a name="l00420"></a>00420                 <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* last = pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>;
+<a name="l00391"></a>00391         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(proc-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, Name);
+<a name="l00392"></a>00392 }
+<a name="l00393"></a>00393 
+<a name="l00394"></a><a class="code" href="process_8c.html#a3de17c849d9de394b95b696739322ac0">00394</a> <span class="keywordtype">void</span> <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(<a class="code" href="structprocess__postbox.html">process_postbox</a>* pb, <a class="code" href="structprocess__message.html">process_message</a> msg)
+<a name="l00395"></a>00395 {
+<a name="l00396"></a>00396         <span class="keywordflow">if</span> (pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> == 0)
+<a name="l00397"></a>00397         {
+<a name="l00398"></a>00398                 <span class="comment">//Create pb-&gt;first</span>
+<a name="l00399"></a>00399                 <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* new_entry = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>));
+<a name="l00400"></a>00400                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a> = msg;
+<a name="l00401"></a>00401                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> = 0;
+<a name="l00402"></a>00402 
+<a name="l00403"></a>00403                 pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a> = new_entry;
+<a name="l00404"></a>00404         }
+<a name="l00405"></a>00405         <span class="keywordflow">else</span>
+<a name="l00406"></a>00406         {
+<a name="l00407"></a>00407                 <span class="comment">//Add to the end of the list</span>
+<a name="l00408"></a>00408                 <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* last = pb-&gt;<a class="code" href="structprocess__postbox.html#a69090d180ae2e895bf0bb1b38554c494">first</a>;
+<a name="l00409"></a>00409 
+<a name="l00410"></a>00410                 <span class="comment">//Find the last entry</span>
+<a name="l00411"></a>00411                 <span class="keywordflow">while</span> (1)
+<a name="l00412"></a>00412                 {
+<a name="l00413"></a>00413                         <span class="keywordflow">if</span> (last-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> == 0)
+<a name="l00414"></a>00414                         {
+<a name="l00415"></a>00415                                 <span class="keywordflow">break</span>;
+<a name="l00416"></a>00416                         } <span class="keywordflow">else</span>
+<a name="l00417"></a>00417                         {
+<a name="l00418"></a>00418                                 last = last-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a>;
+<a name="l00419"></a>00419                         }
+<a name="l00420"></a>00420                 }
 <a name="l00421"></a>00421 
-<a name="l00422"></a>00422                 <span class="comment">//Find the last entry</span>
-<a name="l00423"></a>00423                 <span class="keywordflow">while</span> (1)
-<a name="l00424"></a>00424                 {
-<a name="l00425"></a>00425                         <span class="keywordflow">if</span> (last-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> == 0)
-<a name="l00426"></a>00426                         {
-<a name="l00427"></a>00427                                 <span class="keywordflow">break</span>;
-<a name="l00428"></a>00428                         } <span class="keywordflow">else</span>
-<a name="l00429"></a>00429                         {
-<a name="l00430"></a>00430                                 last = last-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a>;
-<a name="l00431"></a>00431                         }
-<a name="l00432"></a>00432                 }
-<a name="l00433"></a>00433 
-<a name="l00434"></a>00434                 <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* new_entry = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>));
-<a name="l00435"></a>00435                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a> = msg;
-<a name="l00436"></a>00436                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> = 0;
-<a name="l00437"></a>00437 
-<a name="l00438"></a>00438                 last-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> = new_entry;         
-<a name="l00439"></a>00439         }
-<a name="l00440"></a>00440 }
+<a name="l00422"></a>00422                 <a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>* new_entry = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__postbox__message.html">postbox_message_entry</a>));
+<a name="l00423"></a>00423                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#acbf8b5317bb879ec42e8b6dfda999048">data</a> = msg;
+<a name="l00424"></a>00424                 new_entry-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> = 0;
+<a name="l00425"></a>00425 
+<a name="l00426"></a>00426                 last-&gt;<a class="code" href="structprocess__postbox__message.html#a78e0744fa59e2153854dfa319c39ffaa">next</a> = new_entry;         
+<a name="l00427"></a>00427         }
+<a name="l00428"></a>00428 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -8,10 +8,11 @@
 <area shape="rect" id="node24" href="$postbox__api_8h.html" title="API/headers/process/postbox_api.h" alt="" coords="752,83,997,112"/>
 <area shape="rect" id="node30" href="$_a_p_i_2headers_2system_2memory_8h.html" title="API/headers/system/memory.h" alt="" coords="1464,83,1680,112"/>
 <area shape="rect" id="node34" href="$_a_p_i_2headers_2system_2reboot_8h.html" title="API/headers/system/reboot.h" alt="" coords="1704,83,1909,112"/>
-<area shape="rect" id="node36" href="$scancodes_8c.html" title="API/sources/scancodes.c" alt="" coords="1933,83,2112,112"/>
-<area shape="rect" id="node38" href="$run_8c.html" title="API/sources/system/run.c" alt="" coords="2136,83,2317,112"/>
-<area shape="rect" id="node41" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="2341,83,2560,112"/>
-<area shape="rect" id="node43" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2584,83,2869,112"/>
+<area shape="rect" id="node36" href="$debugmode_8c.html" title="API/sources/debug/debugmode.c" alt="" coords="1933,83,2165,112"/>
+<area shape="rect" id="node38" href="$scancodes_8c.html" title="API/sources/scancodes.c" alt="" coords="2189,83,2368,112"/>
+<area shape="rect" id="node40" href="$run_8c.html" title="API/sources/system/run.c" alt="" coords="2392,83,2573,112"/>
+<area shape="rect" id="node43" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="2597,83,2816,112"/>
+<area shape="rect" id="node45" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="2840,83,3125,112"/>
 <area shape="rect" id="node9" href="$_a_p_i_2sources_2clock_2clock_8c.html" title="API/sources/clock/clock.c" alt="" coords="232,160,411,189"/>
 <area shape="rect" id="node7" href="$sleep_8c.html" title="API/sources/process/sleep.c" alt="" coords="8,237,205,267"/>
 <area shape="rect" id="node17" href="$end__process_8c.html" title="API/sources/process/end_process.c" alt="" coords="1195,160,1440,189"/>

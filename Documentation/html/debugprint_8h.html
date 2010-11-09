@@ -26,7 +26,8 @@
 </div>
 <div class="header">
   <div class="summary">
-<a href="#define-members">Defines</a>  </div>
+<a href="#define-members">Defines</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <h1>Kernel/headers/debug/debugprint.h File Reference</h1>  </div>
 </div>
@@ -45,80 +46,75 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="debugprint_8h__dep__incl.png" border="0" usemap="#_kernel_2headers_2debug_2debugprint_8hdep" alt=""/></div>
 <map name="_kernel_2headers_2debug_2debugprint_8hdep" id="_kernel_2headers_2debug_2debugprint_8hdep">
-<area shape="rect" id="node3" href="debug_8h.html" title="Kernel/headers/debug/debug.h" alt="" coords="681,83,897,112"/><area shape="rect" id="node6" href="kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,160,232,189"/><area shape="rect" id="node8" href="initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="256,160,432,189"/><area shape="rect" id="node10" href="_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="456,160,653,189"/><area shape="rect" id="node12" href="keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="677,160,901,189"/><area shape="rect" id="node14" href="phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="925,160,1147,189"/><area shape="rect" id="node16" href="virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1171,160,1384,189"/><area shape="rect" id="node18" href="stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="1408,160,1611,189"/></map>
+<area shape="rect" id="node3" href="debug_8h.html" title="Kernel/headers/debug/debug.h" alt="" coords="1427,83,1643,112"/><area shape="rect" id="node32" href="debugprint_8c.html" title="Kernel/sources/debug/debugprint.c" alt="" coords="1667,83,1909,112"/><area shape="rect" id="node6" href="kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,160,232,189"/><area shape="rect" id="node8" href="debug_8c.html" title="Kernel/sources/debug/debug.c" alt="" coords="256,160,469,189"/><area shape="rect" id="node10" href="initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="493,160,669,189"/><area shape="rect" id="node12" href="_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="693,160,891,189"/><area shape="rect" id="node14" href="keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="915,160,1139,189"/><area shape="rect" id="node16" href="loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="1163,160,1400,189"/><area shape="rect" id="node18" href="phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="1424,160,1645,189"/><area shape="rect" id="node20" href="virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1669,160,1883,189"/><area shape="rect" id="node22" href="process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="1907,160,2141,189"/><area shape="rect" id="node24" href="process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="2165,160,2528,189"/><area shape="rect" id="node26" href="settingsmanager_8c.html" title="Kernel/sources/settings/settingsmanager.c" alt="" coords="2552,160,2845,189"/><area shape="rect" id="node28" href="stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="2869,160,3072,189"/><area shape="rect" id="node30" href="system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="3096,160,3323,189"/></map>
 </div>
 
 <p><a href="debugprint_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="debugprint_8h.html#af6551f0b4c3964c3128f808e7bf987c7">DEBUG_PRINT</a>(x)&nbsp;&nbsp;&nbsp;printf(x)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="debugprint_8h.html#ac60b666ea684eb88d4ccd46b08759ca7">DEBUG_PRINTX</a>(v)&nbsp;&nbsp;&nbsp;printf(&quot;%x&quot;, v)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="debugprint_8h.html#a83ed3dbd65f08a7b3e657b27bdb62c05">DEBUG_PRINTI</a>(v)&nbsp;&nbsp;&nbsp;printf(&quot;%i&quot;, v)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>&nbsp;&nbsp;&nbsp;printDebugMessage</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="debugprint_8h.html#a20558db3a41135c15d3c30ca27a037a0">printDebugMessage</a> (char *fmt,...)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="af6551f0b4c3964c3128f808e7bf987c7"></a><!-- doxytag: member="debugprint.h::DEBUG_PRINT" ref="af6551f0b4c3964c3128f808e7bf987c7" args="(x)" -->
+<a class="anchor" id="ad5aeca1a1a793c8ba18f85cbac89e768"></a><!-- doxytag: member="debugprint.h::DEBUG_PRINT" ref="ad5aeca1a1a793c8ba18f85cbac89e768" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG_PRINT</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">x</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;printf(x)</td>
+          <td class="memname">#define DEBUG_PRINT&nbsp;&nbsp;&nbsp;printDebugMessage</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="debugprint_8h_source.html#l00005">5</a> of file <a class="el" href="debugprint_8h_source.html">debugprint.h</a>.</p>
+<p>Definition at line <a class="el" href="debugprint_8h_source.html#l00004">4</a> of file <a class="el" href="debugprint_8h_source.html">debugprint.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a83ed3dbd65f08a7b3e657b27bdb62c05"></a><!-- doxytag: member="debugprint.h::DEBUG_PRINTI" ref="a83ed3dbd65f08a7b3e657b27bdb62c05" args="(v)" -->
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a20558db3a41135c15d3c30ca27a037a0"></a><!-- doxytag: member="debugprint.h::printDebugMessage" ref="a20558db3a41135c15d3c30ca27a037a0" args="(char *fmt,...)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG_PRINTI</td>
+          <td class="memname">void printDebugMessage </td>
           <td>(</td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">&nbsp;</td>
-          <td class="paramname">v</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;printf(&quot;%i&quot;, v)</td>
+          <td class="paramname"> <em>...</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="debugprint_8h_source.html#l00017">17</a> of file <a class="el" href="debugprint_8h_source.html">debugprint.h</a>.</p>
+<p>Definition at line <a class="el" href="debugprint_8c_source.html#l00003">3</a> of file <a class="el" href="debugprint_8c_source.html">debugprint.c</a>.</p>
 
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="debugprint_8h_a20558db3a41135c15d3c30ca27a037a0_cgraph.png" border="0" usemap="#debugprint_8h_a20558db3a41135c15d3c30ca27a037a0_cgraph" alt=""/></div>
+<map name="debugprint_8h_a20558db3a41135c15d3c30ca27a037a0_cgraph" id="debugprint_8h_a20558db3a41135c15d3c30ca27a037a0_cgraph">
+<area shape="rect" id="node3" href="debug_8h.html#ae703af3f31b954927a7557d53dafef9c" title="getDebugMode" alt="" coords="205,31,325,60"/><area shape="rect" id="node12" href="va__list_8h.html#a5c6d141352390699d74591ec3b6983ff" title="va_end" alt="" coords="232,84,299,113"/><area shape="rect" id="node14" href="vsprintf_8h.html#aaa83f2a89dae6d03dfe15deae29f383a" title="vsprintf" alt="" coords="231,137,300,167"/><area shape="rect" id="node5" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5" title="settingsReadValue" alt="" coords="373,5,512,35"/><area shape="rect" id="node9" href="common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="739,32,805,61"/><area shape="rect" id="node7" href="settingsmanager_8c.html#a3491dc4e595c2fc1aee61b1c3c6ce60e" title="settingsGetEntry" alt="" coords="561,5,689,35"/><area shape="rect" id="node16" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="413,137,472,167"/></map>
 </div>
-</div>
-<a class="anchor" id="ac60b666ea684eb88d4ccd46b08759ca7"></a><!-- doxytag: member="debugprint.h::DEBUG_PRINTX" ref="ac60b666ea684eb88d4ccd46b08759ca7" args="(v)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DEBUG_PRINTX</td>
-          <td>(</td>
-          <td class="paramtype">&nbsp;</td>
-          <td class="paramname">v</td>
-          <td>&nbsp;)&nbsp;</td>
-          <td>&nbsp;&nbsp;&nbsp;printf(&quot;%x&quot;, v)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="debugprint_8h_source.html#l00011">11</a> of file <a class="el" href="debugprint_8h_source.html">debugprint.h</a>.</p>
+</p>
 
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:56 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

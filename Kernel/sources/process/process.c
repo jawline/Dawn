@@ -246,8 +246,12 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Set the root execution directory
 	new_process->m_executionDirectory = parent->m_executionDirectory;
 
+	DEBUG_PRINT("PROCESS: CREATING PAGE DIR\n");
+
 	//Copy the page directory
 	page_directory_t* newprocesspd = copyPageDir(kernel_pagedir, new_process);
+
+	DEBUG_PRINT("PROCESS: PAGE DIR CREATED\n");
 
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
@@ -269,6 +273,8 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	postbox_add(&new_process->m_processPostbox, InfomaticMessage);
 
 	scheduler_add(new_process);
+
+	DEBUG_PRINT("RETURN\n");
 
 	return 0; //Return 0 - Parent
 }

@@ -244,4 +244,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 
 	//Input interfaces
 	initializeInputCallbacks();
+
+	//Initialize the settings manager
+	initializeSettingsManager();
 }

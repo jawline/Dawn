@@ -1,20 +1,22 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_a_p_i_2sources_2printf_8c.html#a4826277cc150ddc0f4de4bd464a34909" title="cls" alt="" coords="173,165,211,195"/>
-<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="149,219,235,248"/>
-<area shape="rect" id="node27" href="$scancodes_8h.html#aa0ca8aa0c56172690787a8796cf36a1e" title="This function converts a scancode from the keyboard into a ASCI character." alt="" coords="111,272,273,301"/>
-<area shape="rect" id="node29" href="$_a_p_i_2headers_2clock_2clock_8h.html#a66ca6603e03e5f37298c7767d887641d" title="This function returns the number of ticks that occur every second." alt="" coords="116,325,268,355"/>
-<area shape="rect" id="node31" href="$postbox__api_8h.html#a40ee40b401dc3b8d335946722ff1881f" title="Read the next message on the postbox." alt="" coords="129,379,255,408"/>
-<area shape="rect" id="node33" href="$postbox__api_8h.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="128,432,256,461"/>
-<area shape="rect" id="node35" href="$postbox__api_8h.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message..." alt="" coords="128,485,256,515"/>
-<area shape="rect" id="node37" href="$sleep_8h.html#ab847765444359d33ddafb6c493cc3880" title="This function allows a program to pass up any remaining processing time it may have been allocated by..." alt="" coords="139,539,245,568"/>
-<area shape="rect" id="node7" href="$_a_p_i_2sources_2printf_8c.html#aff4bc17c602603d120756f52e18ebb96" title="clearscreen" alt="" coords="367,5,463,35"/>
-<area shape="rect" id="node9" href="$end__process_8h.html#a3809f7c3c89e9350a245949c2438a3ad" title="Call the exit syscall supplying a return argument &#160;int Return. the return value of the process..." alt="" coords="392,59,437,88"/>
-<area shape="rect" id="node11" href="$_a_p_i_2headers_2system_2memory_8h.html#a22b353657825a764427022e0cf41eceb" title="Returns the number of free frames of memory the system has available." alt="" coords="324,112,505,141"/>
-<area shape="rect" id="node13" href="$_a_p_i_2headers_2system_2memory_8h.html#af326675c9337f4c305d86bac0542dab0" title="Returns the size of each page/frame." alt="" coords="364,165,465,195"/>
-<area shape="rect" id="node15" href="$get__info_8h.html#aacde5a071569991e61992c4afe0ef72d" title="This function allows a program to request the ID of the program at position n on the scheduler..." alt="" coords="361,219,468,248"/>
-<area shape="rect" id="node17" href="$get__info_8h.html#ad7a2a009578b6e31db819cca1d5a7512" title="This function allows a program to request information on a another process. The information is return..." alt="" coords="357,272,472,301"/>
-<area shape="rect" id="node21" href="$_a_p_i_2headers_2system_2reboot_8h.html#abc52ddf25174e19b78bd4c4cdb7dd3ca" title="This function requests that the kernel reboot. likely to be rejected unless the application is given ..." alt="" coords="357,325,472,355"/>
-<area shape="rect" id="node23" href="$common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="381,379,448,408"/>
-<area shape="rect" id="node25" href="$run_8h.html#a502d346da525dd2a6ff1abc2100e5d1f" title="systemRunNewProcess" alt="" coords="331,432,499,461"/>
-<area shape="rect" id="node19" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="556,272,631,301"/>
+<area shape="rect" id="node3" href="$_a_p_i_2sources_2printf_8c.html#a4826277cc150ddc0f4de4bd464a34909" title="cls" alt="" coords="173,219,211,248"/>
+<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="149,272,235,301"/>
+<area shape="rect" id="node31" href="$scancodes_8h.html#aa0ca8aa0c56172690787a8796cf36a1e" title="This function converts a scancode from the keyboard into a ASCI character." alt="" coords="111,325,273,355"/>
+<area shape="rect" id="node33" href="$_a_p_i_2headers_2clock_2clock_8h.html#a66ca6603e03e5f37298c7767d887641d" title="This function returns the number of ticks that occur every second." alt="" coords="116,379,268,408"/>
+<area shape="rect" id="node35" href="$postbox__api_8h.html#a40ee40b401dc3b8d335946722ff1881f" title="Read the next message on the postbox." alt="" coords="129,432,255,461"/>
+<area shape="rect" id="node37" href="$postbox__api_8h.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="128,485,256,515"/>
+<area shape="rect" id="node39" href="$postbox__api_8h.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message..." alt="" coords="128,539,256,568"/>
+<area shape="rect" id="node41" href="$sleep_8h.html#ab847765444359d33ddafb6c493cc3880" title="This function allows a program to pass up any remaining processing time it may have been allocated by..." alt="" coords="139,592,245,621"/>
+<area shape="rect" id="node7" href="$_a_p_i_2sources_2printf_8c.html#aff4bc17c602603d120756f52e18ebb96" title="clearscreen" alt="" coords="397,5,493,35"/>
+<area shape="rect" id="node9" href="$end__process_8h.html#a3809f7c3c89e9350a245949c2438a3ad" title="Call the exit syscall supplying a return argument &#160;int Return. the return value of the process..." alt="" coords="423,59,468,88"/>
+<area shape="rect" id="node11" href="$_a_p_i_2headers_2system_2memory_8h.html#a22b353657825a764427022e0cf41eceb" title="Returns the number of free frames of memory the system has available." alt="" coords="355,112,536,141"/>
+<area shape="rect" id="node13" href="$_a_p_i_2headers_2system_2memory_8h.html#af326675c9337f4c305d86bac0542dab0" title="Returns the size of each page/frame." alt="" coords="395,165,496,195"/>
+<area shape="rect" id="node15" href="$get__info_8h.html#aacde5a071569991e61992c4afe0ef72d" title="This function allows a program to request the ID of the program at position n on the scheduler..." alt="" coords="392,219,499,248"/>
+<area shape="rect" id="node17" href="$get__info_8h.html#ad7a2a009578b6e31db819cca1d5a7512" title="This function allows a program to request information on a another process. The information is return..." alt="" coords="388,272,503,301"/>
+<area shape="rect" id="node21" href="$debugmode_8h.html#ac780910cb57f50ad89dc2868a33ce221" title="requestDisableSystemDebugMode" alt="" coords="324,325,567,355"/>
+<area shape="rect" id="node23" href="$_a_p_i_2headers_2system_2reboot_8h.html#abc52ddf25174e19b78bd4c4cdb7dd3ca" title="This function requests that the kernel reboot. likely to be rejected unless the application is given ..." alt="" coords="388,379,503,408"/>
+<area shape="rect" id="node25" href="$debugmode_8h.html#ae5cf4bb6982df20eb7a554ed16172b9a" title="requestSystemDebugMode" alt="" coords="347,432,544,461"/>
+<area shape="rect" id="node27" href="$common_8h.html#a19b2d1068440c7697d9598d19feb7cb9" title="strcmp" alt="" coords="412,485,479,515"/>
+<area shape="rect" id="node29" href="$run_8h.html#a502d346da525dd2a6ff1abc2100e5d1f" title="systemRunNewProcess" alt="" coords="361,539,529,568"/>
+<area shape="rect" id="node19" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="617,272,692,301"/>
 </map>

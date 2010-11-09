@@ -1,5 +1,6 @@
 #include <input/input.h>
 #include <stdlib.h>
+#include <debug/debug.h>
 
 input_listener_t* g_listenerList = 0;
 
@@ -34,8 +35,9 @@ void sendInputMessage(uint32 device, uint32 main, void* additional)
 return;
 }
 
-void registerInputListener(uint32 device, input_listener_callback cb)
+void registerInputListener(unsigned int device, input_listener_callback cb)
 {
+
 	if (g_listenerList)
 	{
 		//Add a new entry to the end of the listener list
@@ -46,7 +48,8 @@ void registerInputListener(uint32 device, input_listener_callback cb)
 
 		//Make the new entry
 		input_listener_t* new_listener = (input_listener_t*) malloc(sizeof(input_listener_t));
-		memset((void*)new_listener, 0, sizeof(input_listener_t));
+		memset(new_listener, 0, sizeof(input_listener_t));
+
 		new_listener->m_deviceid = device;
 		new_listener->m_callback = cb;
 		
@@ -56,7 +59,8 @@ void registerInputListener(uint32 device, input_listener_callback cb)
 	else //No existing listeners yet
 	{
 		g_listenerList = (input_listener_t*) malloc(sizeof(input_listener_t));
-		memset((void*)g_listenerList, 0, sizeof(g_listenerList));
+		memset(g_listenerList, 0, sizeof(input_listener_t));
+
 		g_listenerList->m_deviceid = device;
 		g_listenerList->m_callback = cb;
 	}

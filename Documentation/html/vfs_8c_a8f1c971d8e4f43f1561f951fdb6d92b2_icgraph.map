@@ -1,10 +1,14 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$keyboard_8c.html#a7f4a40d55ffa000b3f0678d755f902bf" title="loadAsciKeytable" alt="" coords="147,5,275,35"/>
-<area shape="rect" id="node5" href="$loader_8c.html#a064b5e03c8acc63c917823be362d5474" title="loadToMemoryUsingHeader" alt="" coords="347,71,544,100"/>
-<area shape="rect" id="node11" href="$parser_8h.html#a2507911e854773cbdcd1eee6a1bcfdc4" title="parseElfHeader" alt="" coords="151,109,271,139"/>
-<area shape="rect" id="node16" href="$parser_8h.html#ac45f19967d2ca8a1092d7f7bcb5c7946" title="parseElfProgramHeader" alt="" coords="124,163,297,192"/>
-<area shape="rect" id="node19" href="$parser_8c.html#a48f183bce269be3ded2600bec9cde3b8" title="parseElfSectionHeader" alt="" coords="127,216,295,245"/>
-<area shape="rect" id="node7" href="$loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904" title="loadAndExecuteElf" alt="" coords="593,111,732,140"/>
-<area shape="rect" id="node9" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="781,111,925,140"/>
-<area shape="rect" id="node13" href="$parser_8h.html#a5ad5e59604a08596c7c06e5b1770b1bb" title="parseElfFile" alt="" coords="399,149,492,179"/>
+<area shape="rect" id="node5" href="$loader_8c.html#a064b5e03c8acc63c917823be362d5474" title="loadToMemoryUsingHeader" alt="" coords="347,204,544,233"/>
+<area shape="rect" id="node11" href="$settingsmanager_8c.html#a8477e3d6a2fbf5730efa26ae2bf2693d" title="parseConfigFile" alt="" coords="152,269,269,299"/>
+<area shape="rect" id="node19" href="$parser_8h.html#a2507911e854773cbdcd1eee6a1bcfdc4" title="parseElfHeader" alt="" coords="151,59,271,88"/>
+<area shape="rect" id="node24" href="$parser_8h.html#ac45f19967d2ca8a1092d7f7bcb5c7946" title="parseElfProgramHeader" alt="" coords="124,112,297,141"/>
+<area shape="rect" id="node27" href="$parser_8c.html#a48f183bce269be3ded2600bec9cde3b8" title="parseElfSectionHeader" alt="" coords="127,165,295,195"/>
+<area shape="rect" id="node7" href="$loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904" title="loadAndExecuteElf" alt="" coords="593,177,732,207"/>
+<area shape="rect" id="node9" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="781,177,925,207"/>
+<area shape="rect" id="node13" href="$settingsmanager_8c.html#aad44dc767ac3644e5a1444c5aefbaf0f" title="initializeSettingsManager" alt="" coords="355,269,536,299"/>
+<area shape="rect" id="node15" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="607,269,719,299"/>
+<area shape="rect" id="node17" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="827,269,880,299"/>
+<area shape="rect" id="node21" href="$parser_8h.html#a5ad5e59604a08596c7c06e5b1770b1bb" title="parseElfFile" alt="" coords="399,125,492,155"/>
 </map>

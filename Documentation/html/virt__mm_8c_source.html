@@ -277,17 +277,17 @@
 <a name="l00252"></a>00252         <span class="comment">//Nulll it</span>
 <a name="l00253"></a>00253         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a>)frame, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00254"></a>00254 
-<a name="l00255"></a>00255         <span class="comment">//Mark paging enabled (Other areas of the kernel will now consider paging to be active)</span>
-<a name="l00256"></a>00256         <a class="code" href="virt__mm_8c.html#a9c9f8fbb4b2fa9e442794d9ab986d9f6">markPagingEnabled</a>();
-<a name="l00257"></a>00257 
-<a name="l00258"></a>00258         <span class="keywordflow">for</span> (i = <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i &lt; 1022; i++)
-<a name="l00259"></a>00259         {
-<a name="l00260"></a>00260                 <span class="keywordflow">if</span> (<a class="code" href="virt__mm_8c.html#aced5fad793f13e4c2362b88dc1e51ef9">page_directory</a>[i] == 0) {
-<a name="l00261"></a>00261                         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> address = <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>();
-<a name="l00262"></a>00262                         <a class="code" href="virt__mm_8c.html#aced5fad793f13e4c2362b88dc1e51ef9">page_directory</a>[i] = (address &amp; PAGE_MASK) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>;
-<a name="l00263"></a>00263                         <a class="code" href="virt__mm_8c.html#aebc1a3bed677a282beba8551270a9bc3">ReloadCR3</a>();
-<a name="l00264"></a>00264                 }
-<a name="l00265"></a>00265         }
+<a name="l00255"></a>00255         <span class="keywordflow">for</span> (i = <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i &lt; 1022; i++)
+<a name="l00256"></a>00256         {
+<a name="l00257"></a>00257                 <span class="keywordflow">if</span> (<a class="code" href="virt__mm_8c.html#aced5fad793f13e4c2362b88dc1e51ef9">page_directory</a>[i] == 0) {
+<a name="l00258"></a>00258                         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> address = <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>();
+<a name="l00259"></a>00259                         <a class="code" href="virt__mm_8c.html#aced5fad793f13e4c2362b88dc1e51ef9">page_directory</a>[i] = (address &amp; PAGE_MASK) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>;
+<a name="l00260"></a>00260                         <a class="code" href="virt__mm_8c.html#aebc1a3bed677a282beba8551270a9bc3">ReloadCR3</a>();
+<a name="l00261"></a>00261                 }
+<a name="l00262"></a>00262         }
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264         <span class="comment">//Mark paging enabled (Other areas of the kernel will now consider paging to be active)</span>
+<a name="l00265"></a>00265         <a class="code" href="virt__mm_8c.html#a9c9f8fbb4b2fa9e442794d9ab986d9f6">markPagingEnabled</a>();
 <a name="l00266"></a>00266 }
 <a name="l00267"></a>00267 
 <a name="l00268"></a><a class="code" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879">00268</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> <a class="code" href="virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879">copyPage</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> pt, <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process)
@@ -365,73 +365,70 @@
 <a name="l00340"></a>00340         <span class="comment">//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied</span>
 <a name="l00341"></a>00341         copying_to[0] = being_copied[0];
 <a name="l00342"></a>00342 
-<a name="l00343"></a>00343 
-<a name="l00344"></a>00344 
-<a name="l00345"></a>00345         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
-<a name="l00346"></a>00346         <span class="keywordflow">for</span> (i = 1; i &lt; <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i++)
-<a name="l00347"></a>00347         {
-<a name="l00348"></a>00348                 <span class="keywordflow">if</span> (being_copied[i] != 0)
-<a name="l00349"></a>00349                 {
-<a name="l00350"></a>00350 
-<a name="l00351"></a>00351                         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> Location = <a class="code" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372">copyPageTable</a>(being_copied[i] &amp; <a class="code" href="virt__mm_8h.html#ae4aa620ce57c7c3171b916de2c5f09f2">PAGE_MASK</a>, 1, process);
-<a name="l00352"></a>00352                         copying_to[i] = Location | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a> | PAGE_WRITE;
-<a name="l00353"></a>00353                 }
-<a name="l00354"></a>00354                 <span class="keywordflow">else</span>
-<a name="l00355"></a>00355                 {
-<a name="l00356"></a>00356                         copying_to[i] = 0;
-<a name="l00357"></a>00357                 }
-<a name="l00358"></a>00358         }
-<a name="l00359"></a>00359 
-<a name="l00360"></a>00360         <span class="keywordflow">for</span> (i = <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i &lt; 1022; i++)
-<a name="l00361"></a>00361         {
-<a name="l00362"></a>00362                 copying_to[i] = being_copied[i];
-<a name="l00363"></a>00363         }
-<a name="l00364"></a>00364 
-<a name="l00365"></a>00365 
-<a name="l00366"></a>00366         <span class="comment">// Assign the second-last table and zero it.</span>
-<a name="l00367"></a>00367         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> frame = <a class="code" href="phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c">allocateFrameForProcess</a>(process);
-<a name="l00368"></a>00368         copying_to[1022] = frame | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER;
-<a name="l00369"></a>00369 
-<a name="l00370"></a>00370         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> pt = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
-<a name="l00371"></a>00371         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(pt, frame, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
-<a name="l00372"></a>00372         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a> (pt, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00343"></a>00343         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
+<a name="l00344"></a>00344         <span class="keywordflow">for</span> (i = 1; i &lt; <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i++)
+<a name="l00345"></a>00345         {
+<a name="l00346"></a>00346                 <span class="keywordflow">if</span> (being_copied[i] != 0)
+<a name="l00347"></a>00347                 {
+<a name="l00348"></a>00348                         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> Location = <a class="code" href="virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372">copyPageTable</a>(being_copied[i] &amp; <a class="code" href="virt__mm_8h.html#ae4aa620ce57c7c3171b916de2c5f09f2">PAGE_MASK</a>, 1, process);
+<a name="l00349"></a>00349                         copying_to[i] = Location | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a> | PAGE_WRITE;
+<a name="l00350"></a>00350                 }
+<a name="l00351"></a>00351                 <span class="keywordflow">else</span>
+<a name="l00352"></a>00352                 {
+<a name="l00353"></a>00353                         copying_to[i] = 0;
+<a name="l00354"></a>00354                 }
+<a name="l00355"></a>00355         }
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357         <span class="keywordflow">for</span> (i = <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i &lt; 1022; i++)
+<a name="l00358"></a>00358         {
+<a name="l00359"></a>00359                 copying_to[i] = being_copied[i];
+<a name="l00360"></a>00360         }
+<a name="l00361"></a>00361 
+<a name="l00362"></a>00362 
+<a name="l00363"></a>00363         <span class="comment">// Assign the second-last table and zero it.</span>
+<a name="l00364"></a>00364         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> frame = <a class="code" href="phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c">allocateFrameForProcess</a>(process);
+<a name="l00365"></a>00365         copying_to[1022] = frame | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER;
+<a name="l00366"></a>00366 
+<a name="l00367"></a>00367         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> pt = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
+<a name="l00368"></a>00368         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(pt, frame, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
+<a name="l00369"></a>00369         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a> (pt, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> opt = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
+<a name="l00372"></a>00372         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(opt, being_copied[1022], <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
 <a name="l00373"></a>00373 
-<a name="l00374"></a>00374         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> opt = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
-<a name="l00375"></a>00375         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(opt, being_copied[1022], <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
-<a name="l00376"></a>00376 
-<a name="l00377"></a>00377         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(pt, opt, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
-<a name="l00378"></a>00378 
-<a name="l00379"></a>00379         pt[1023] = ((MEM_LOC)return_location &amp; <a class="code" href="virt__mm_8h.html#ae4aa620ce57c7c3171b916de2c5f09f2">PAGE_MASK</a>) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER; <span class="comment">//The last entry of table 1022 is the page directory</span>
+<a name="l00374"></a>00374         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(pt, opt, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00375"></a>00375 
+<a name="l00376"></a>00376         pt[1023] = ((MEM_LOC)return_location &amp; <a class="code" href="virt__mm_8h.html#ae4aa620ce57c7c3171b916de2c5f09f2">PAGE_MASK</a>) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER; <span class="comment">//The last entry of table 1022 is the page directory</span>
+<a name="l00377"></a>00377 
+<a name="l00378"></a>00378         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(pt);
+<a name="l00379"></a>00379         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(opt);
 <a name="l00380"></a>00380 
-<a name="l00381"></a>00381         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(pt);
-<a name="l00382"></a>00382         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(opt);
-<a name="l00383"></a>00383 
-<a name="l00384"></a>00384         copying_to[1023] = ((MEM_LOC)return_location &amp; PAGE_MASK) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER; <span class="comment">//Loop back address</span>
+<a name="l00381"></a>00381         copying_to[1023] = ((MEM_LOC)return_location &amp; PAGE_MASK) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER; <span class="comment">//Loop back address</span>
+<a name="l00382"></a>00382 
+<a name="l00383"></a>00383         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(being_copied);
+<a name="l00384"></a>00384         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(copying_to);
 <a name="l00385"></a>00385 
-<a name="l00386"></a>00386         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(being_copied);
-<a name="l00387"></a>00387         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(copying_to);
+<a name="l00386"></a>00386         <span class="keywordflow">return</span> return_location;
+<a name="l00387"></a>00387 }
 <a name="l00388"></a>00388 
-<a name="l00389"></a>00389         <span class="keywordflow">return</span> return_location;
-<a name="l00390"></a>00390 }
-<a name="l00391"></a>00391 
-<a name="l00392"></a>00392 <span class="comment">//Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process</span>
-<a name="l00393"></a><a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">00393</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a> <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>()
-<a name="l00394"></a>00394 {
-<a name="l00395"></a>00395         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = KERNEL_RESERVED_START; <span class="comment">//Start after the IDMapped region</span>
-<a name="l00396"></a>00396 
-<a name="l00397"></a>00397         <span class="keywordflow">for</span> (i; i &lt; KERNEL_MEMORY_END; i += <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>)
-<a name="l00398"></a>00398         {
-<a name="l00399"></a>00399                 <span class="keywordflow">if</span> (<a class="code" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c">getMapping</a>(i, 0) == 0)
-<a name="l00400"></a>00400                 {
-<a name="l00401"></a>00401                         <span class="keywordflow">return</span> i;
-<a name="l00402"></a>00402                 }
-<a name="l00403"></a>00403         }
-<a name="l00404"></a>00404 
-<a name="l00405"></a>00405         <span class="keywordflow">return</span> 0; <span class="comment">//NullPtr = FAIL</span>
-<a name="l00406"></a>00406 }
+<a name="l00389"></a>00389 <span class="comment">//Search through the kernel reserved memory find a unmapped page and map it so it can be used by the kernel for some temp process</span>
+<a name="l00390"></a><a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">00390</a> <a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a> <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>()
+<a name="l00391"></a>00391 {
+<a name="l00392"></a>00392         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = KERNEL_RESERVED_START; <span class="comment">//Start after the IDMapped region</span>
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394         <span class="keywordflow">for</span> (i; i &lt; KERNEL_MEMORY_END; i += <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>)
+<a name="l00395"></a>00395         {
+<a name="l00396"></a>00396                 <span class="keywordflow">if</span> (<a class="code" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c">getMapping</a>(i, 0) == 0)
+<a name="l00397"></a>00397                 {
+<a name="l00398"></a>00398                         <span class="keywordflow">return</span> i;
+<a name="l00399"></a>00399                 }
+<a name="l00400"></a>00400         }
+<a name="l00401"></a>00401 
+<a name="l00402"></a>00402         <span class="keywordflow">return</span> 0; <span class="comment">//NullPtr = FAIL</span>
+<a name="l00403"></a>00403 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 17 2010 23:37:55 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

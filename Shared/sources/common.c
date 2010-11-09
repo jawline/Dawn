@@ -153,7 +153,7 @@ char *strcpy(char *dest, const char *src)
    return save;
 }
 
-char * strchr (register const char* s, int c)
+char* strchr (register const char* s, int c)
 {
   do {
     if (*s == c)

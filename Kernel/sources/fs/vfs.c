@@ -2,6 +2,7 @@
 #include <heap/heap.h>
 #include <fs/vfs.h>
 #include "rfs.h"
+#include <debug/debug.h>
 
 /*
    The intent of this file is to create a set of functions providing the kernel with easy manipulation of the virtual file system.
@@ -72,6 +73,7 @@ void open_fs(fs_node_t* node) {
 	
 	if (node->open != 0)
         {
+		DEBUG_PRINT("Opening file %s\n", node->name);
 		node->open(node);
 	}
 
@@ -82,6 +84,7 @@ void close_fs(fs_node_t* node) {
 
 	if (node->close != 0)
  	{
+		DEBUG_PRINT("Closing file %s\n", node->name);
 		node->close(node);
 	}
 

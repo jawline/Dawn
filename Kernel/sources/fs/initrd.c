@@ -183,6 +183,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 
 		start_list[iter] = (start + fe_ptr->start) - 1;
 
+		memset(&file_list[iter], 0, sizeof(fs_node_t));
 		strcpy(file_list[iter].name, fe_ptr->name);
 		file_list[iter].inode = iter;
 		file_list[iter].length = fe_ptr->size;

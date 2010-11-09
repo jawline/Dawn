@@ -1,6 +1,13 @@
 #include <types/memory.h>
 #include <common.h>
 #include <printf.h>
+#include <messages/messages.h>
+#include <input/devices.h>
+#include <process/message.h>
+#include <process/events.h>
+#include <process/process_info.h>
+#include <process/postbox_api.h>
+
 
 #define BOARD_WIDTH 80
 #define BOARD_HEIGHT 23
@@ -12,73 +19,80 @@
 char Board[(BOARD_WIDTH * BOARD_HEIGHT) + 1];
 char NextBoard[(BOARD_WIDTH * BOARD_HEIGHT) + 1];
 
+uint8 running = 0;
+
+unsigned int cursor_tile = 0;
+
 void updateBlock(int i)
 {
-
-	int numberNearMe = 0;
-
-	if (Board[i + 1] == '#')
+	if (running)
 	{
-		numberNearMe++;
-	}
 
-	if (Board[i - 1] == '#')
-	{
-		numberNearMe++;
-	}
+		int numberNearMe = 0;
 
-	if (i - BOARD_WIDTH > 0)
-	{
-		if (Board[i - BOARD_WIDTH] == '#')
+		if (Board[i + 1] == '#')
 		{
 			numberNearMe++;
 		}
 
-		if (Board[i - BOARD_WIDTH - 1] == '#')
+		if (Board[i - 1] == '#')
 		{
 			numberNearMe++;
 		}
 
-		if (Board[i - BOARD_WIDTH + 1] == '#')
+		if (i - BOARD_WIDTH > 0)
 		{
-			numberNearMe++;
-		}
-	}
+			if (Board[i - BOARD_WIDTH] == '#')
+			{
+				numberNearMe++;
+			}
 
-	if (i + BOARD_WIDTH < BOARD_WIDTH * BOARD_HEIGHT)
-	{
-		if (Board[i + BOARD_WIDTH] == '#')
-		{
-			numberNearMe++;
+			if (Board[i - BOARD_WIDTH - 1] == '#')
+			{
+				numberNearMe++;
+			}
+
+			if (Board[i - BOARD_WIDTH + 1] == '#')
+			{
+				numberNearMe++;
+			}
 		}
 
-		if (Board[i + BOARD_WIDTH + 1] == '#')
+		if (i + BOARD_WIDTH < BOARD_WIDTH * BOARD_HEIGHT)
 		{
-			numberNearMe++;
+			if (Board[i + BOARD_WIDTH] == '#')
+			{
+				numberNearMe++;
+			}
+
+			if (Board[i + BOARD_WIDTH + 1] == '#')
+			{
+				numberNearMe++;
+			}
+
+			if (Board[i + BOARD_WIDTH - 1] == '#')
+			{
+				numberNearMe++;
+			}
 		}
 
-		if (Board[i + BOARD_WIDTH - 1] == '#')
+		if (Board[i] == ' ')
 		{
-			numberNearMe++;
+			if (numberNearMe == 3)
+			{
+				NextBoard[i] = '#';
+			}
 		}
-	}
-
-	if (Board[i] == ' ')
-	{
-		if (numberNearMe == 3)
+		else
 		{
-			NextBoard[i] = '#';
-		}
-	}
-	else
-	{
-		if (numberNearMe < 2)
-		{
-			NextBoard[i] = ' '; //KILL MEE
-		}
-		if (numberNearMe > 3)
-		{
-			NextBoard[i] = ' ';
+			if (numberNearMe < 2)
+			{
+				NextBoard[i] = ' '; //KILL MEE
+			}
+			if (numberNearMe > 3)
+			{
+				NextBoard[i] = ' ';
+			}
 		}
 	}
 
@@ -109,6 +123,52 @@ void setupBoard()
 	Board[213] = '#';
 }
 
+void redraw()
+{
+	cls();
+	printf("GAME OF LIFE: State ");
+
+	if (running) 
+		printf("running");
+	else
+		printf("not running");
+	printf("\n");
+
+	unsigned int i = 0;
+	for (i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
+	{
+
+		if (!running)
+		{
+
+			if (i == cursor_tile)
+				printf("@");
+			else
+				printf("%c", Board[i]);
+
+		}
+		else
+		{
+			printf("%c", Board[i]);
+		}
+	}
+
+}
+
+void updateLogic()
+{
+	memcpy(NextBoard, Board, (BOARD_WIDTH * BOARD_HEIGHT) + 1);
+	
+	unsigned int i = 0;
+
+	for (i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
+	{
+		updateBlock(i);
+	}
+
+	memcpy(Board, NextBoard, (BOARD_WIDTH * BOARD_HEIGHT) + 1);
+}
+
 int cSleep = 0;
 
 /**
@@ -119,40 +179,98 @@ int cSleep = 0;
  */
 int main(int argc, void* argv)
 {
+	postboxSetFlags(INPUT_BIT);
+
+	cursor_tile = 0;
+
+	running = 0;
+
 	setupBoard();
 	Board[BOARD_WIDTH * BOARD_HEIGHT] = '\0';
-	int step = 0;
+	redraw();
 
 	for (;;)
 	{
-		cls();
-		printf("GAME OF LIFE: Remake\n");
 
-
-		memcpy(NextBoard, Board, (BOARD_WIDTH * BOARD_HEIGHT) + 1);
-
-		int i = 0;
-		for (i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
+		if (postboxHasNext() == 1)
 		{
-			updateBlock(i);
+			process_message message;
+			message = postboxGetNext();
+			
+			if (message.ID == INPUT_MESSAGE)
+			{
+				//Its a input message alright
+				if (message.message_data[0] == DEVICE_KEYBOARD)
+				{
+					//its a keyboard message even!
+					char C = getAsciFromScancode(message.message_data[1], message.message_data[2]);
+
+					if (C == 'e')
+					{	
+						exit(0);
+					}
+					else if (C == 'w')
+					{
+						if (cursor_tile > BOARD_WIDTH)
+						{
+							cursor_tile -= BOARD_WIDTH;
+						}
+					}
+					else if (C == 's')
+					{
+						if ((cursor_tile + BOARD_WIDTH) < (BOARD_WIDTH * BOARD_HEIGHT))
+						{
+							cursor_tile += BOARD_WIDTH;
+						}
+					}
+					else if (C == 'a')
+					{
+						if (cursor_tile > 0)
+						{
+							cursor_tile -= 1;
+						}
+					}
+					else if (C == 'd')
+					{
+						if (cursor_tile < (BOARD_WIDTH * BOARD_HEIGHT) - 1)
+						{
+							cursor_tile += 1;
+						}
+					}
+					else if (C == 'r')
+					{
+						if (running) running = 0;
+						else
+							running = 1;
+					}
+					else if (C == 'f')
+					{
+						if (Board[cursor_tile] == ' ')
+						{
+							Board[cursor_tile] = '#'; 
+						}
+						else
+						{
+							Board[cursor_tile] = ' ';
+						}
+					}
+					redraw();
+				}
+			}
 		}
 
-		memcpy(Board, NextBoard, (BOARD_WIDTH * BOARD_HEIGHT) + 1);
-
-		for (i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
-		{
-			printf("%c", Board[i]);
-		}
 
 		cSleep++;
 
-		sleepUnprecise(250);
-		step++;
-		if (step == NUM_STEPS_TOTAL)
+		if (running)
 		{
-			break;
+			updateLogic();
+			redraw();
+			sleepUnprecise(125);
 		}
+
 	}
+
 	return 1;
 }
 

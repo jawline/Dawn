@@ -286,7 +286,6 @@ MEM_LOC copyPage(MEM_LOC pt, process_t* process)
 
 MEM_LOC copyPageTable(MEM_LOC pt, uint8 copy, process_t* process)
 {
-	DEBUG_PRINT("COPY TABLE %x\n", pt);
 
 	MEM_LOC new_page_table = allocateFrameForProcess(process);
 

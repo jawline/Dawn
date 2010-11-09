@@ -148,7 +148,9 @@ void parseConfigFile(const char* Filename)
 	size_t current = 0;
 	size_t iter = 0;
 
+
 	open_fs(cfgNode);
+
 
 	while (1)
 	{
@@ -156,6 +158,7 @@ void parseConfigFile(const char* Filename)
 			break;
 
 		read_fs(cfgNode, current, 1, cfgBuffer + iter);
+
 		if (*(cfgBuffer + iter) == '\n')
 		{
 			*(cfgBuffer + iter) = '\0';
@@ -163,7 +166,8 @@ void parseConfigFile(const char* Filename)
 
 			DEBUG_PRINT("SETTINGS: PARSE LINE %s\n", cfgBuffer);
 			settingsExecuteLine(cfgBuffer);
-			DEBUG_PRINT("Here\n");
+
+			memset(cfgBuffer, 0, 1024);
 		}
 		else
 		{

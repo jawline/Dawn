@@ -217,7 +217,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	
 	disable_interrupts();
 
-	DEBUG_PRINT("Free frames at start %x\n", calculate_free_frames());
+	DEBUG_PRINT("PROCESS: FREE FRAMES AT START 0x%x\n", calculate_free_frames());
 
 	//Store this for later use
 	process_t* parent = schedulerGetProcessFromPid(0);

@@ -78,7 +78,7 @@ void systemMainProcess()
 				}
 				else
 				{
-					DEBUG_PRINT("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
+					printf("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
 
 					scheduler_remove(schedulerPtr);
 

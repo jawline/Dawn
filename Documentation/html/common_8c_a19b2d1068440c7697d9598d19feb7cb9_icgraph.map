@@ -1,33 +1,33 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="143,208,228,238"/>
-<area shape="rect" id="node7" href="$vfs_8c.html#a289d28f0a303cb07f04cb12e6853e743" title="finddir_fs" alt="" coords="147,342,224,371"/>
-<area shape="rect" id="node21" href="$directory__helper_8c.html#a9528dc3f70c8095c2abf6570cf4db278" title="print_directory" alt="" coords="317,364,432,394"/>
-<area shape="rect" id="node24" href="$debug_8c.html#ae703af3f31b954927a7557d53dafef9c" title="getDebugMode" alt="" coords="508,532,628,562"/>
-<area shape="rect" id="node28" href="$initrd_8c.html#a8323a1853228aa77cb89e512dee2b114" title="ird_dir_finddir" alt="" coords="132,582,239,611"/>
-<area shape="rect" id="node30" href="$initrd_8c.html#ac75b5411098ad82a45642e5d167759eb" title="ird_root_finddir" alt="" coords="127,635,244,664"/>
-<area shape="rect" id="node33" href="$rfs_8c.html#a440037b6c1183ee9196f5fb23981c832" title="root_finddir" alt="" coords="139,271,232,300"/>
-<area shape="rect" id="node63" href="$settingsmanager_8c.html#a3491dc4e595c2fc1aee61b1c3c6ce60e" title="settingsGetEntry" alt="" coords="121,446,249,475"/>
-<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of the basic shell&#45;style application for Dawn known as Line &#160;int Argc and void* Argv ..." alt="" coords="348,168,401,198"/>
-<area shape="rect" id="node9" href="$vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string." alt="" coords="908,271,1012,300"/>
-<area shape="rect" id="node11" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1075,272,1219,302"/>
-<area shape="rect" id="node13" href="$settingsmanager_8c.html#a8477e3d6a2fbf5730efa26ae2bf2693d" title="parseConfigFile" alt="" coords="1088,326,1205,355"/>
-<area shape="rect" id="node15" href="$settingsmanager_8c.html#aad44dc767ac3644e5a1444c5aefbaf0f" title="initializeSettingsManager" alt="" coords="1271,299,1452,328"/>
-<area shape="rect" id="node17" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1508,128,1620,158"/>
-<area shape="rect" id="node19" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1676,168,1729,198"/>
-<area shape="rect" id="node26" href="$debugprint_8c.html#a20558db3a41135c15d3c30ca27a037a0" title="printDebugMessage" alt="" coords="692,532,841,562"/>
-<area shape="rect" id="node35" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="300,222,449,251"/>
-<area shape="rect" id="node37" href="$devices__fs_8h.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="713,118,820,147"/>
-<area shape="rect" id="node40" href="$hdd__fs_8h.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="501,118,635,147"/>
-<area shape="rect" id="node43" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="523,222,613,251"/>
-<area shape="rect" id="node45" href="$vfs_8c.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="733,219,800,248"/>
-<area shape="rect" id="node49" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="1280,115,1443,144"/>
-<area shape="rect" id="node52" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="897,167,1023,196"/>
-<area shape="rect" id="node56" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="1072,219,1221,248"/>
-<area shape="rect" id="node58" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="1303,219,1420,248"/>
-<area shape="rect" id="node60" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1501,207,1627,236"/>
-<area shape="rect" id="node65" href="$settingsmanager_8c.html#ace8ec19da2615d869eec34d5258e151e" title="settingsExecuteLine" alt="" coords="300,424,449,454"/>
-<area shape="rect" id="node75" href="$settingsmanager_8c.html#aaa2a8aa38c907e668739b24e40a68af5" title="settingsReadValue" alt="" coords="305,478,444,507"/>
-<area shape="rect" id="node68" href="$debug_8c.html#aac61d937a2a9bbbe953f9fa0764703f2" title="setDebugModeOff" alt="" coords="500,426,636,455"/>
-<area shape="rect" id="node72" href="$debug_8c.html#af4d43aa7f12ff39e87ac379ca32b9b1b" title="setDebugModeOn" alt="" coords="500,479,636,508"/>
-<area shape="rect" id="node70" href="$syscall_8c.html#a78399f5b48630ef971a5ade44114efde" title="syscallSetDebugMode" alt="" coords="685,452,848,482"/>
+<area shape="rect" id="node3" href="$_applications_2_line_2sources_2main_8c.html#ab79f2f12e3f7af25ee8d68e57f237994" title="exec_cmd" alt="" coords="143,12,228,41"/>
+<area shape="rect" id="node7" href="$vfs_8c.html#a289d28f0a303cb07f04cb12e6853e743" title="finddir_fs" alt="" coords="147,188,224,217"/>
+<area shape="rect" id="node21" href="$directory__helper_8c.html#a9528dc3f70c8095c2abf6570cf4db278" title="print_directory" alt="" coords="317,136,432,165"/>
+<area shape="rect" id="node24" href="$debug_8c.html#ae703af3f31b954927a7557d53dafef9c" title="getDebugMode" alt="" coords="508,424,628,453"/>
+<area shape="rect" id="node28" href="$initrd_8c.html#a8323a1853228aa77cb89e512dee2b114" title="ird_dir_finddir" alt="" coords="132,528,239,557"/>
+<area shape="rect" id="node30" href="$initrd_8c.html#ac75b5411098ad82a45642e5d167759eb" title="ird_root_finddir" alt="" coords="127,581,244,611"/>
+<area shape="rect" id="node33" href="$rfs_8c.html#a440037b6c1183ee9196f5fb23981c832" title="root_finddir" alt="" coords="139,72,232,101"/>
+<area shape="rect" id="node56" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="896,471,1045,500"/>
+<area shape="rect" id="node63" href="$settingsmanager_8c.html#a3491dc4e595c2fc1aee61b1c3c6ce60e" title="settingsGetEntry" alt="" coords="121,333,249,363"/>
+<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of the basic shell&#45;style application for Dawn known as Line &#160;int Argc and void* Argv ..." alt="" coords="348,5,401,35"/>
+<area shape="rect" id="node9" href="$vfs_8c.html#a084ad57144da37479a99a82afb1d5086" title="Recursive find node given string." alt="" coords="919,163,1023,192"/>
+<area shape="rect" id="node11" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="1103,163,1247,192"/>
+<area shape="rect" id="node13" href="$settingsmanager_8c.html#a8477e3d6a2fbf5730efa26ae2bf2693d" title="parseConfigFile" alt="" coords="1116,239,1233,268"/>
+<area shape="rect" id="node15" href="$settingsmanager_8c.html#aad44dc767ac3644e5a1444c5aefbaf0f" title="initializeSettingsManager" alt="" coords="1305,251,1487,280"/>
+<area shape="rect" id="node17" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="1543,340,1655,369"/>
+<area shape="rect" id="node19" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1711,393,1764,423"/>
+<area shape="rect" id="node26" href="$debugprint_8c.html#a20558db3a41135c15d3c30ca27a037a0" title="printDebugMessage" alt="" coords="692,424,841,453"/>
+<area shape="rect" id="node35" href="$rfs_8c.html#afa77e68170541cd7d4c6775f202a56d5" title="create_rfs_directory" alt="" coords="300,59,449,88"/>
+<area shape="rect" id="node37" href="$devices__fs_8h.html#aa0cb897c72dc8733e3933af15982ae64" title="init_device_fs" alt="" coords="713,59,820,88"/>
+<area shape="rect" id="node40" href="$hdd__fs_8h.html#a73e43ac0f36123c42ccb4c9f745fc476" title="init_hard_drive_fs" alt="" coords="501,59,635,88"/>
+<area shape="rect" id="node43" href="$vfs_8c.html#a822fdeb7af96807041033a14c5f7518f" title="init_root_fs" alt="" coords="523,112,613,141"/>
+<area shape="rect" id="node45" href="$vfs_8c.html#afe34b9b0d52adb516fa4a6a3804cc255" title="init_vfs" alt="" coords="733,267,800,296"/>
+<area shape="rect" id="node49" href="$process_8c.html#ac027b9ad3da1710cc3e8d037e3dda0d1" title="initializeKernelProcess" alt="" coords="1093,367,1256,396"/>
+<area shape="rect" id="node52" href="$kernel__init_8c.html#adc60a9d707fe7f96fc63f64b39528ef1" title="This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory..." alt="" coords="1333,417,1459,447"/>
+<area shape="rect" id="node58" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="1337,471,1455,500"/>
+<area shape="rect" id="node60" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="1536,445,1661,475"/>
+<area shape="rect" id="node65" href="$settingsmanager_8c.html#ace8ec19da2615d869eec34d5258e151e" title="settingsExecuteLine" alt="" coords="300,293,449,323"/>
+<area shape="rect" id="node75" href="$settingsmanager_8c.html#aaa2a8aa38c907e668739b24e40a68af5" title="settingsReadValue" alt="" coords="305,372,444,401"/>
+<area shape="rect" id="node68" href="$debug_8c.html#aac61d937a2a9bbbe953f9fa0764703f2" title="setDebugModeOff" alt="" coords="500,320,636,349"/>
+<area shape="rect" id="node72" href="$debug_8c.html#af4d43aa7f12ff39e87ac379ca32b9b1b" title="setDebugModeOn" alt="" coords="500,267,636,296"/>
+<area shape="rect" id="node70" href="$syscall_8c.html#a78399f5b48630ef971a5ade44114efde" title="syscallSetDebugMode" alt="" coords="685,320,848,349"/>
 </map>

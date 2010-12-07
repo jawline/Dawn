@@ -197,60 +197,65 @@
 <a name="l00183"></a>00183                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* engulfed = entry;
 <a name="l00184"></a>00184 
 <a name="l00185"></a>00185                         <span class="comment">//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito</span>
-<a name="l00186"></a>00186                         new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + engulfed-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
-<a name="l00187"></a>00187                         new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = engulfed-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00186"></a>00186                         new_entry-&gt;<a class="code" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6" title="A magic variable designed to check that it is a block.">magic</a> = HEAP_MAGIC;
+<a name="l00187"></a>00187                         new_entry-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0;
 <a name="l00188"></a>00188 
-<a name="l00189"></a>00189                         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167" title="If there are 2 unused entrys next to each other, this function turns them into one entry...">unifyHeapEntry</a>(new_entry);
-<a name="l00190"></a>00190                         <span class="keywordflow">return</span>;
-<a name="l00191"></a>00191                 
-<a name="l00192"></a>00192                 }
-<a name="l00193"></a>00193 
-<a name="l00194"></a>00194         }
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196         <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> != 0)
-<a name="l00197"></a>00197         {
+<a name="l00189"></a>00189                         new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + engulfed-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00190"></a>00190                         new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = engulfed-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192                         <span class="comment">//unifyHeapEntry(new_entry);</span>
+<a name="l00193"></a>00193                         <span class="keywordflow">return</span>;
+<a name="l00194"></a>00194                 
+<a name="l00195"></a>00195                 }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197         }
 <a name="l00198"></a>00198 
-<a name="l00199"></a>00199                 <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0)
-<a name="l00200"></a>00200                 {
-<a name="l00201"></a>00201                         <span class="comment">//Can unify right</span>
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* new_entry = entry;
-<a name="l00204"></a>00204                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* engulfed = entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00199"></a>00199         <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> != 0)
+<a name="l00200"></a>00200         {
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202                 <span class="keywordflow">if</span> (entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> == 0)
+<a name="l00203"></a>00203                 {
+<a name="l00204"></a>00204                         <span class="comment">//Can unify right</span>
 <a name="l00205"></a>00205 
-<a name="l00206"></a>00206                         <span class="comment">//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito</span>
-<a name="l00207"></a>00207                         new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + engulfed-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
-<a name="l00208"></a>00208                         new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = engulfed-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
-<a name="l00209"></a>00209 
-<a name="l00210"></a>00210                         <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a7287817a047dcc9b9b943c8c70f88167" title="If there are 2 unused entrys next to each other, this function turns them into one entry...">unifyHeapEntry</a>(new_entry);
-<a name="l00211"></a>00211                         <span class="keywordflow">return</span>;
-<a name="l00212"></a>00212                 }
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214         }
-<a name="l00215"></a>00215 
-<a name="l00216"></a>00216 }
-<a name="l00217"></a>00217 
-<a name="l00222"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287">00222</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287" title="Free&amp;#39;s the memory at location address on the heap specified. Shrinking if necessary.">heapFreeMemory</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> address, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap)
-<a name="l00223"></a>00223 {
-<a name="l00224"></a>00224         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> entry_address = address - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
-<a name="l00225"></a>00225 
-<a name="l00226"></a>00226         <a class="code" href="structheap__entry.html">heap_entry_t</a>* specificEntry = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) entry_address;
-<a name="l00227"></a>00227 
-<a name="l00228"></a>00228         <span class="keywordflow">if</span> (specificEntry-&gt;magic != <a class="code" href="heap_8h.html#a604474f5c0892ea2c6c16b5e45c59f59">HEAP_MAGIC</a>)
-<a name="l00229"></a>00229         {
-<a name="l00230"></a>00230                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Entry magic != Heap magic\n&quot;</span>);
-<a name="l00231"></a>00231                 <a class="code" href="panic_8h.html#ae3c0c6fb5e69bb687e787ec5c487afa1">PANIC</a>(<span class="stringliteral">&quot;AHHHH HEAP_MAGIC error\n&quot;</span>);
-<a name="l00232"></a>00232         }
-<a name="l00233"></a>00233         <span class="keywordflow">else</span>
-<a name="l00234"></a>00234         {
-<a name="l00235"></a>00235                 specificEntry-&gt;used = 0;
-<a name="l00236"></a>00236                 <span class="comment">//unifyHeapEntry(specificEntry);</span>
-<a name="l00237"></a>00237         }
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239         <span class="keywordflow">return</span>;
-<a name="l00240"></a>00240 }
+<a name="l00206"></a>00206                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* new_entry = entry;
+<a name="l00207"></a>00207                         <a class="code" href="structheap__entry.html">heap_entry_t</a>* engulfed = entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00208"></a>00208 
+<a name="l00209"></a>00209                         <span class="comment">//Add the two sizes and we regain one heap_entry_t size of bytes as one header is finito</span>
+<a name="l00210"></a>00210                         new_entry-&gt;<a class="code" href="structheap__entry.html#a30cb57948d3b95ab0c1c2d523df966b6" title="A magic variable designed to check that it is a block.">magic</a> = HEAP_MAGIC;
+<a name="l00211"></a>00211                         new_entry-&gt;<a class="code" href="structheap__entry.html#a85d4a8099f6e647cb8090614a5049493" title="Variable to store whether this block of memory is used (boolean).">used</a> = 0;
+<a name="l00212"></a>00212                         new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> = new_entry-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + engulfed-&gt;<a class="code" href="structheap__entry.html#a854352f53b148adc24983a58a1866d66" title="Variable to store the size of the chunk of memory.">size</a> + <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00213"></a>00213                         new_entry-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a> = engulfed-&gt;<a class="code" href="structheap__entry.html#a90018fa1ca3eed17d857c9a9785a177b" title="Pointer to the next memory block NULL if last.">next</a>;
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215                         <span class="comment">//unifyHeapEntry(new_entry);</span>
+<a name="l00216"></a>00216                         <span class="keywordflow">return</span>;
+<a name="l00217"></a>00217                 }
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219         }
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221 }
+<a name="l00222"></a>00222 
+<a name="l00228"></a><a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287">00228</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2sources_2heap_2heap_8c.html#a56492c6c5393ae91de16fa33fcc0b287" title="Free&amp;#39;s the memory at location address on the heap specified. Shrinking if necessary.">heapFreeMemory</a>(<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> address, <a class="code" href="structheap__t.html" title="A structure to hold information about a heap in memory.">heap_t</a>* heap)
+<a name="l00229"></a>00229 {
+<a name="l00230"></a>00230         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a> entry_address = address - <span class="keyword">sizeof</span>(<a class="code" href="structheap__entry.html">heap_entry_t</a>);
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232         <a class="code" href="structheap__entry.html">heap_entry_t</a>* specificEntry = (<a class="code" href="structheap__entry.html">heap_entry_t</a>*) entry_address;
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234         <span class="keywordflow">if</span> (specificEntry-&gt;magic != <a class="code" href="heap_8h.html#a604474f5c0892ea2c6c16b5e45c59f59">HEAP_MAGIC</a>)
+<a name="l00235"></a>00235         {
+<a name="l00236"></a>00236                 <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Entry magic != Heap magic\n&quot;</span>);
+<a name="l00237"></a>00237                 <a class="code" href="panic_8h.html#ae3c0c6fb5e69bb687e787ec5c487afa1">PANIC</a>(<span class="stringliteral">&quot;AHHHH HEAP_MAGIC error\n&quot;</span>);
+<a name="l00238"></a>00238         }
+<a name="l00239"></a>00239         <span class="keywordflow">else</span>
+<a name="l00240"></a>00240         {
+<a name="l00241"></a>00241                 specificEntry-&gt;used = 0;
+<a name="l00242"></a>00242                 <span class="comment">//unifyHeapEntry(specificEntry);</span>
+<a name="l00243"></a>00243         }
+<a name="l00244"></a>00244 
+<a name="l00245"></a>00245         <span class="keywordflow">return</span>;
+<a name="l00246"></a>00246 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Dec 7 2010 22:58:13 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

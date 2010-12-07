@@ -1,7 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$input_8h.html" title="input/input.h" alt="" coords="84,83,185,112"/>
-<area shape="rect" id="node11" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="209,83,276,112"/>
-<area shape="rect" id="node5" href="$common_8h.html" title="common.h" alt="" coords="25,160,116,189"/>
-<area shape="rect" id="node9" href="$devices_8h.html" title="input/devices.h" alt="" coords="140,160,257,189"/>
-<area shape="rect" id="node7" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="5,237,136,267"/>
+<area shape="rect" id="node3" href="$input_8h.html" title="input/input.h" alt="" coords="5,83,107,112"/>
+<area shape="rect" id="node11" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="131,83,197,112"/>
+<area shape="rect" id="node13" href="$debug_8h.html" title="debug/debug.h" alt="" coords="221,83,339,112"/>
+<area shape="rect" id="node5" href="$common_8h.html" title="common.h" alt="" coords="37,237,128,267"/>
+<area shape="rect" id="node9" href="$devices_8h.html" title="input/devices.h" alt="" coords="88,160,205,189"/>
+<area shape="rect" id="node7" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="72,392,203,421"/>
+<area shape="rect" id="node15" href="$debugprint_8h.html" title="debugprint.h" alt="" coords="229,160,331,189"/>
+<area shape="rect" id="node17" href="$stdio_8h.html" title="stdio.h" alt="" coords="244,237,308,267"/>
+<area shape="rect" id="node19" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="144,315,211,344"/>
+<area shape="rect" id="node22" href="$va__list_8h.html" title="va_list.h" alt="" coords="239,315,313,344"/>
 </map>

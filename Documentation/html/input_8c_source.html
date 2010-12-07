@@ -30,70 +30,74 @@
 <div class="contents">
 <a href="input_8c.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="input_8h.html">input/input.h</a>&gt;</span>
 <a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="stdlib_8h.html">stdlib.h</a>&gt;</span>
-<a name="l00003"></a>00003 
-<a name="l00004"></a><a class="code" href="input_8c.html#a070f4af276c8f8e672931a264ad05abc">00004</a> <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* <a class="code" href="input_8c.html#a070f4af276c8f8e672931a264ad05abc">g_listenerList</a> = 0;
-<a name="l00005"></a>00005 
-<a name="l00006"></a><a class="code" href="input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443">00006</a> <span class="keywordtype">void</span> <a class="code" href="input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443">initializeInputCallbacks</a>()
-<a name="l00007"></a>00007 {
-<a name="l00008"></a>00008         g_listenerList = 0;
-<a name="l00009"></a>00009 
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="debug_8h.html">debug/debug.h</a>&gt;</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a><a class="code" href="input_8c.html#a070f4af276c8f8e672931a264ad05abc">00005</a> <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* <a class="code" href="input_8c.html#a070f4af276c8f8e672931a264ad05abc">g_listenerList</a> = 0;
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443">00007</a> <span class="keywordtype">void</span> <a class="code" href="input_8c.html#a4c9c78f4fe43e5a98944c2f8266c2443">initializeInputCallbacks</a>()
+<a name="l00008"></a>00008 {
+<a name="l00009"></a>00009         g_listenerList = 0;
 <a name="l00010"></a>00010 
-<a name="l00011"></a>00011         <span class="comment">//initializeMouse(); //TODO: Fix mouse driver</span>
-<a name="l00012"></a>00012         <a class="code" href="keyboard__generic__ps2_8c.html#aaba71403c84ae43669b0a6ff5dcf185e">initializeKeyboard</a>();
-<a name="l00013"></a>00013 }
-<a name="l00014"></a>00014 
-<a name="l00015"></a><a class="code" href="input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a">00015</a> <span class="keywordtype">void</span> <a class="code" href="input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a">sendInputMessage</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> device, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="_applications_2_game_of_life_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of a text-based remake of the game of life for Dawn  int Argc and void* Argv are give...">main</a>, <span class="keywordtype">void</span>* additional)
-<a name="l00016"></a>00016 {
-<a name="l00017"></a>00017         <span class="keywordflow">if</span> (g_listenerList)
-<a name="l00018"></a>00018         {
-<a name="l00019"></a>00019                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* iterator = g_listenerList;
-<a name="l00020"></a>00020                 
-<a name="l00021"></a>00021                 <span class="comment">//Loop through the callbacks            </span>
-<a name="l00022"></a>00022                 <span class="keywordflow">while</span> (iterator != 0)
-<a name="l00023"></a>00023                 {
-<a name="l00024"></a>00024                         <span class="keywordflow">if</span> ((iterator-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> == -1) || (iterator-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> == device)) <span class="comment">//If this callback should be triggered</span>
-<a name="l00025"></a>00025                         {
-<a name="l00026"></a>00026                                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a>)
-<a name="l00027"></a>00027                                         iterator-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a>(device, main, additional); <span class="comment">//Call it.</span>
-<a name="l00028"></a>00028                         }
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030                         iterator = iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a>;
-<a name="l00031"></a>00031                 }
-<a name="l00032"></a>00032         }
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="keywordflow">return</span>;
-<a name="l00035"></a>00035 }
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="input_8c.html#aa6838adca2d998073d6a8f29f9c7508f">00037</a> <span class="keywordtype">void</span> <a class="code" href="input_8c.html#aa6838adca2d998073d6a8f29f9c7508f">registerInputListener</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> device, <a class="code" href="input_8h.html#a249f249fa5e8b527ea82b0a7b4257691">input_listener_callback</a> cb)
-<a name="l00038"></a>00038 {
-<a name="l00039"></a>00039         <span class="keywordflow">if</span> (g_listenerList)
-<a name="l00040"></a>00040         {
-<a name="l00041"></a>00041                 <span class="comment">//Add a new entry to the end of the listener list</span>
-<a name="l00042"></a>00042                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* iterator = g_listenerList;
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044                 <span class="comment">//Find the last entry on the list</span>
-<a name="l00045"></a>00045                 <span class="keywordflow">while</span> (iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a> != 0) { iterator = iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a>; }
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047                 <span class="comment">//Make the new entry</span>
-<a name="l00048"></a>00048                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* new_listener = (<a class="code" href="structinput__listener__structure.html">input_listener_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
-<a name="l00049"></a>00049                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>((<span class="keywordtype">void</span>*)new_listener, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
-<a name="l00050"></a>00050                 new_listener-&gt;m_deviceid = device;
-<a name="l00051"></a>00051                 new_listener-&gt;m_callback = cb;
-<a name="l00052"></a>00052                 
-<a name="l00053"></a>00053                 <span class="comment">//Set iterators next to new_listener</span>
-<a name="l00054"></a>00054                 iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a> = new_listener;
-<a name="l00055"></a>00055         }
-<a name="l00056"></a>00056         <span class="keywordflow">else</span> <span class="comment">//No existing listeners yet</span>
-<a name="l00057"></a>00057         {
-<a name="l00058"></a>00058                 g_listenerList = (<a class="code" href="structinput__listener__structure.html">input_listener_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
-<a name="l00059"></a>00059                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>((<span class="keywordtype">void</span>*)g_listenerList, 0, <span class="keyword">sizeof</span>(g_listenerList));
-<a name="l00060"></a>00060                 g_listenerList-&gt;m_deviceid = device;
-<a name="l00061"></a>00061                 g_listenerList-&gt;m_callback = cb;
-<a name="l00062"></a>00062         }
-<a name="l00063"></a>00063 }
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012         <span class="comment">//initializeMouse(); //TODO: Fix mouse driver</span>
+<a name="l00013"></a>00013         <a class="code" href="keyboard__generic__ps2_8c.html#aaba71403c84ae43669b0a6ff5dcf185e">initializeKeyboard</a>();
+<a name="l00014"></a>00014 }
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a">00016</a> <span class="keywordtype">void</span> <a class="code" href="input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a">sendInputMessage</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> device, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="_applications_2_game_of_life_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of a text-based remake of the game of life for Dawn  int Argc and void* Argv are give...">main</a>, <span class="keywordtype">void</span>* additional)
+<a name="l00017"></a>00017 {
+<a name="l00018"></a>00018         <span class="keywordflow">if</span> (g_listenerList)
+<a name="l00019"></a>00019         {
+<a name="l00020"></a>00020                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* iterator = g_listenerList;
+<a name="l00021"></a>00021                 
+<a name="l00022"></a>00022                 <span class="comment">//Loop through the callbacks            </span>
+<a name="l00023"></a>00023                 <span class="keywordflow">while</span> (iterator != 0)
+<a name="l00024"></a>00024                 {
+<a name="l00025"></a>00025                         <span class="keywordflow">if</span> ((iterator-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> == -1) || (iterator-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> == device)) <span class="comment">//If this callback should be triggered</span>
+<a name="l00026"></a>00026                         {
+<a name="l00027"></a>00027                                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a>)
+<a name="l00028"></a>00028                                         iterator-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a>(device, main, additional); <span class="comment">//Call it.</span>
+<a name="l00029"></a>00029                         }
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031                         iterator = iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a>;
+<a name="l00032"></a>00032                 }
+<a name="l00033"></a>00033         }
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="keywordflow">return</span>;
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="input_8c.html#a536684b1e3b7f0f2edf44b77786dce7f">00038</a> <span class="keywordtype">void</span> <a class="code" href="input_8c.html#a536684b1e3b7f0f2edf44b77786dce7f">registerInputListener</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> device, <a class="code" href="input_8h.html#a249f249fa5e8b527ea82b0a7b4257691">input_listener_callback</a> cb)
+<a name="l00039"></a>00039 {
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041         <span class="keywordflow">if</span> (g_listenerList)
+<a name="l00042"></a>00042         {
+<a name="l00043"></a>00043                 <span class="comment">//Add a new entry to the end of the listener list</span>
+<a name="l00044"></a>00044                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* iterator = g_listenerList;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046                 <span class="comment">//Find the last entry on the list</span>
+<a name="l00047"></a>00047                 <span class="keywordflow">while</span> (iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a> != 0) { iterator = iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a>; }
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049                 <span class="comment">//Make the new entry</span>
+<a name="l00050"></a>00050                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* new_listener = (<a class="code" href="structinput__listener__structure.html">input_listener_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
+<a name="l00051"></a>00051                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_listener, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053                 new_listener-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> = device;
+<a name="l00054"></a>00054                 new_listener-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a> = cb;
+<a name="l00055"></a>00055                 
+<a name="l00056"></a>00056                 <span class="comment">//Set iterators next to new_listener</span>
+<a name="l00057"></a>00057                 iterator-&gt;<a class="code" href="structinput__listener__structure.html#a03717b8732e97eac8b04fcfa85791150">m_next</a> = new_listener;
+<a name="l00058"></a>00058         }
+<a name="l00059"></a>00059         <span class="keywordflow">else</span> <span class="comment">//No existing listeners yet</span>
+<a name="l00060"></a>00060         {
+<a name="l00061"></a>00061                 g_listenerList = (<a class="code" href="structinput__listener__structure.html">input_listener_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
+<a name="l00062"></a>00062                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(g_listenerList, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064                 g_listenerList-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> = device;
+<a name="l00065"></a>00065                 g_listenerList-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a> = cb;
+<a name="l00066"></a>00066         }
+<a name="l00067"></a>00067 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 9 2010 11:15:56 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Dec 7 2010 22:58:13 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

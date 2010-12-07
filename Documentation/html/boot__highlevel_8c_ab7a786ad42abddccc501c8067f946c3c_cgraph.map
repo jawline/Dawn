@@ -46,6 +46,6 @@
 <area shape="rect" id="node89" href="$initrd_8c.html#a660bcc4a63d45453aa704d9a108089cb" title="Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from ..." alt="" coords="1119,431,1231,461"/>
 <area shape="rect" id="node115" href="$post__init_8c.html#a93f4731bfb16e12acb7817e1b82014c4" title="kernelInputCallback" alt="" coords="1101,1253,1248,1282"/>
 <area shape="rect" id="node118" href="$post__init_8c.html#ad3545f29858afa6583ff0d4e48e57b00" title="kernelMouseCallback" alt="" coords="1097,1306,1252,1335"/>
-<area shape="rect" id="node121" href="$input_8c.html#aa6838adca2d998073d6a8f29f9c7508f" title="registerInputListener" alt="" coords="1097,1199,1252,1229"/>
+<area shape="rect" id="node121" href="$input_8c.html#a536684b1e3b7f0f2edf44b77786dce7f" title="registerInputListener" alt="" coords="1097,1199,1252,1229"/>
 <area shape="rect" id="node124" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="1116,1359,1233,1389"/>
 </map>

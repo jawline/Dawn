@@ -1,4 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$debug_8c.html#ae703af3f31b954927a7557d53dafef9c" title="getDebugMode" alt="" coords="192,5,312,35"/>
-<area shape="rect" id="node5" href="$debugprint_8c.html#a20558db3a41135c15d3c30ca27a037a0" title="printDebugMessage" alt="" coords="361,5,511,35"/>
+<area shape="rect" id="node3" href="$debug_8c.html#ae703af3f31b954927a7557d53dafef9c" title="getDebugMode" alt="" coords="207,5,327,35"/>
+<area shape="rect" id="node7" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="192,59,341,88"/>
+<area shape="rect" id="node5" href="$debugprint_8c.html#a20558db3a41135c15d3c30ca27a037a0" title="printDebugMessage" alt="" coords="391,5,540,35"/>
+<area shape="rect" id="node9" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="407,59,524,88"/>
+<area shape="rect" id="node11" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="589,59,715,88"/>
+<area shape="rect" id="node13" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="764,59,817,88"/>
 </map>

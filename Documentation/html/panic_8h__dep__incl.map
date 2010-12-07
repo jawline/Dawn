@@ -11,9 +11,10 @@
 <area shape="rect" id="node21" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="2192,83,2405,112"/>
 <area shape="rect" id="node23" href="$panic_8c.html" title="Kernel/sources/panic/panic.c" alt="" coords="2429,83,2632,112"/>
 <area shape="rect" id="node25" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="2656,83,2891,112"/>
-<area shape="rect" id="node27" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="2915,83,3277,112"/>
-<area shape="rect" id="node29" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="3301,83,3504,112"/>
-<area shape="rect" id="node31" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="3528,83,3747,112"/>
-<area shape="rect" id="node33" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="3771,83,4056,112"/>
-<area shape="rect" id="node35" href="$_kernel_2sources_2timers_2clock_8c.html" title="Kernel/sources/timers/clock.c" alt="" coords="4080,83,4285,112"/>
+<area shape="rect" id="node27" href="$procfault_8c.html" title="Kernel/sources/process/procfault.c" alt="" coords="2915,83,3155,112"/>
+<area shape="rect" id="node29" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="3179,83,3541,112"/>
+<area shape="rect" id="node31" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="3565,83,3768,112"/>
+<area shape="rect" id="node33" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="3792,83,4011,112"/>
+<area shape="rect" id="node35" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="4035,83,4320,112"/>
+<area shape="rect" id="node37" href="$_kernel_2sources_2timers_2clock_8c.html" title="Kernel/sources/timers/clock.c" alt="" coords="4344,83,4549,112"/>
 </map>

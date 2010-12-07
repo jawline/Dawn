@@ -1,8 +1,15 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_a_p_i_2sources_2printf_8c.html#a4826277cc150ddc0f4de4bd464a34909" title="cls" alt="" coords="151,5,188,35"/>
-<area shape="rect" id="node5" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="131,59,208,88"/>
-<area shape="rect" id="node7" href="$_applications_2_game_of_life_2sources_2main_8c.html#a3a0cfdf81c66b296186e787131be6e53" title="setupBoard" alt="" coords="121,112,217,141"/>
-<area shape="rect" id="node9" href="$sleep_8h.html#ac562e96a96667f28b9334caae28e798e" title="This function sleeps untill a number have ticks have passed (Note: Not precise due to the fact that t..." alt="" coords="109,165,229,195"/>
-<area shape="rect" id="node13" href="$_applications_2_game_of_life_2sources_2main_8c.html#a76818698a61c2b2d774c18b2fab1566e" title="updateBlock" alt="" coords="119,219,220,248"/>
-<area shape="rect" id="node11" href="$sleep_8h.html#ab847765444359d33ddafb6c493cc3880" title="This function allows a program to pass up any remaining processing time it may have been allocated by..." alt="" coords="277,165,384,195"/>
+<area shape="rect" id="node3" href="$end__process_8h.html#a3809f7c3c89e9350a245949c2438a3ad" title="Call the exit syscall supplying a return argument &#160;int Return. the return value of the process..." alt="" coords="169,5,215,35"/>
+<area shape="rect" id="node5" href="$scancodes_8h.html#aa0ca8aa0c56172690787a8796cf36a1e" title="This function converts a scancode from the keyboard into a ASCI character." alt="" coords="111,59,273,88"/>
+<area shape="rect" id="node7" href="$postbox__api_8h.html#a40ee40b401dc3b8d335946722ff1881f" title="Read the next message on the postbox." alt="" coords="129,112,255,141"/>
+<area shape="rect" id="node9" href="$postbox__api_8h.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="128,165,256,195"/>
+<area shape="rect" id="node11" href="$postbox__api_8h.html#a1e0f82e67d8934bca1cbf470f47b9866" title="This allows the process to set the flags of what it wants to recieve in the kernel as postbox message..." alt="" coords="128,219,256,248"/>
+<area shape="rect" id="node13" href="$_applications_2_game_of_life_2sources_2main_8c.html#ab396718daaebb64c60262944a5e28755" title="redraw" alt="" coords="160,272,224,301"/>
+<area shape="rect" id="node17" href="$_applications_2_game_of_life_2sources_2main_8c.html#a3a0cfdf81c66b296186e787131be6e53" title="setupBoard" alt="" coords="144,325,240,355"/>
+<area shape="rect" id="node19" href="$sleep_8h.html#ac562e96a96667f28b9334caae28e798e" title="This function sleeps untill a number have ticks have passed (Note: Not precise due to the fact that t..." alt="" coords="132,379,252,408"/>
+<area shape="rect" id="node23" href="$_applications_2_game_of_life_2sources_2main_8c.html#a78e727670238c378b8fd712c32f23698" title="updateLogic" alt="" coords="143,432,241,461"/>
+<area shape="rect" id="node15" href="$_a_p_i_2sources_2printf_8c.html#a4826277cc150ddc0f4de4bd464a34909" title="cls" alt="" coords="357,272,395,301"/>
+<area shape="rect" id="node21" href="$sleep_8h.html#ab847765444359d33ddafb6c493cc3880" title="This function allows a program to pass up any remaining processing time it may have been allocated by..." alt="" coords="323,379,429,408"/>
+<area shape="rect" id="node25" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="337,432,415,461"/>
+<area shape="rect" id="node27" href="$_applications_2_game_of_life_2sources_2main_8c.html#a76818698a61c2b2d774c18b2fab1566e" title="updateBlock" alt="" coords="325,485,427,515"/>
 </map>

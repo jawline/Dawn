@@ -1,17 +1,20 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$debug_8h.html" title="Kernel/headers/debug/debug.h" alt="" coords="1427,83,1643,112"/>
-<area shape="rect" id="node32" href="$debugprint_8c.html" title="Kernel/sources/debug/debugprint.c" alt="" coords="1667,83,1909,112"/>
+<area shape="rect" id="node3" href="$debug_8h.html" title="Kernel/headers/debug/debug.h" alt="" coords="1708,83,1924,112"/>
+<area shape="rect" id="node38" href="$debugprint_8c.html" title="Kernel/sources/debug/debugprint.c" alt="" coords="1948,83,2191,112"/>
 <area shape="rect" id="node6" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,160,232,189"/>
 <area shape="rect" id="node8" href="$debug_8c.html" title="Kernel/sources/debug/debug.c" alt="" coords="256,160,469,189"/>
 <area shape="rect" id="node10" href="$initrd_8c.html" title="Kernel/sources/fs/initrd.c" alt="" coords="493,160,669,189"/>
-<area shape="rect" id="node12" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="693,160,891,189"/>
-<area shape="rect" id="node14" href="$keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="915,160,1139,189"/>
-<area shape="rect" id="node16" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="1163,160,1400,189"/>
-<area shape="rect" id="node18" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="1424,160,1645,189"/>
-<area shape="rect" id="node20" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="1669,160,1883,189"/>
-<area shape="rect" id="node22" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="1907,160,2141,189"/>
-<area shape="rect" id="node24" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="2165,160,2528,189"/>
-<area shape="rect" id="node26" href="$settingsmanager_8c.html" title="Kernel/sources/settings/settingsmanager.c" alt="" coords="2552,160,2845,189"/>
-<area shape="rect" id="node28" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="2869,160,3072,189"/>
-<area shape="rect" id="node30" href="$system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="3096,160,3323,189"/>
+<area shape="rect" id="node12" href="$vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="693,160,856,189"/>
+<area shape="rect" id="node14" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="880,160,1077,189"/>
+<area shape="rect" id="node16" href="$input_8c.html" title="Kernel/sources/input/input.c" alt="" coords="1101,160,1299,189"/>
+<area shape="rect" id="node18" href="$keyboard_8c.html" title="Kernel/sources/input/keyboard.c" alt="" coords="1323,160,1547,189"/>
+<area shape="rect" id="node20" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="1571,160,1808,189"/>
+<area shape="rect" id="node22" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="1832,160,2053,189"/>
+<area shape="rect" id="node24" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="2077,160,2291,189"/>
+<area shape="rect" id="node26" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="2315,160,2549,189"/>
+<area shape="rect" id="node28" href="$used__list_8c.html" title="Kernel/sources/process/used_list.c" alt="" coords="2573,160,2813,189"/>
+<area shape="rect" id="node30" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="2837,160,3200,189"/>
+<area shape="rect" id="node32" href="$settingsmanager_8c.html" title="Kernel/sources/settings/settingsmanager.c" alt="" coords="3224,160,3517,189"/>
+<area shape="rect" id="node34" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="3541,160,3744,189"/>
+<area shape="rect" id="node36" href="$system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="3768,160,3995,189"/>
 </map>

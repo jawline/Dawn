@@ -1,6 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="5,83,131,112"/>
-<area shape="rect" id="node7" href="$common_8h.html" title="common.h" alt="" coords="155,83,245,112"/>
-<area shape="rect" id="node10" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="269,83,336,112"/>
-<area shape="rect" id="node5" href="$int__types_8h.html" title="int_types.h" alt="" coords="155,160,245,189"/>
+<area shape="rect" id="node3" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="32,237,158,267"/>
+<area shape="rect" id="node7" href="$common_8h.html" title="common.h" alt="" coords="208,237,299,267"/>
+<area shape="rect" id="node10" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="390,160,456,189"/>
+<area shape="rect" id="node13" href="$messages_8h.html" title="messages/messages.h" alt="" coords="440,83,611,112"/>
+<area shape="rect" id="node15" href="$devices_8h.html" title="input/devices.h" alt="" coords="635,83,752,112"/>
+<area shape="rect" id="node17" href="$message_8h.html" title="process/message.h" alt="" coords="22,160,168,189"/>
+<area shape="rect" id="node20" href="$events_8h.html" title="process/events.h" alt="" coords="776,83,907,112"/>
+<area shape="rect" id="node22" href="$process__info_8h.html" title="process/process_info.h" alt="" coords="931,83,1099,112"/>
+<area shape="rect" id="node24" href="$postbox__api_8h.html" title="process/postbox_api.h" alt="" coords="150,83,315,112"/>
+<area shape="rect" id="node5" href="$int__types_8h.html" title="int_types.h" alt="" coords="203,315,294,344"/>
+<area shape="rect" id="node27" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="syscall/syscall.h" alt="" coords="192,160,315,189"/>
+<area shape="rect" id="node30" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="403,237,518,267"/>
+<area shape="rect" id="node34" href="$isr_8h.html" title="isr.h" alt="" coords="563,315,611,344"/>
+<area shape="rect" id="node36" href="$irq_8h.html" title="irq.h" alt="" coords="318,315,368,344"/>
 </map>

@@ -2,7 +2,7 @@
 /**
  * @page Installation
  * @section InstallOnLinux On Linux platforms
- * To install Dawn onto a drive from a linux platform follow this set of instructions [TODO: Explain usage of scripts to install to drive]
+ * To install Dawn onto a drive from a linux platform follow this set of instructions
  */
 
 /**
@@ -57,7 +57,6 @@
  *
  * @section Release4 Release 4 “Files”
  * The aim of this release is to have a virtual file system setup within the kernel and a initial ram disk with which to utilize this new functionality
- * TODO: Ramdisk and Virtual file system sections in the Wiki
  *	- The virtual file system, a set of structures and methods within the kernel that allow for the concept of files and directories to be used.
  *	- The ram disk, a initial ram disk that gets loaded by the boot loader and passed to the kernel, this will act as a base file system within which all core executables and files can be stored where they will be accessible on boot
  *
@@ -72,7 +71,6 @@
  *
  * @section Release5 Release 5 “Multitasking”
  * This release is going to be the final step before the project actually starts to look like a operating system. The aim is to implement a set of structures and a scheduler into the kernel which will allow fake multitasking to take place (By giving each process a certain amount of time to process before the next process the illusion of true multi tasking can be achieved)
-* TODO: Wiki notes on true and fake multi tasking, software vs hardware switching and the Dawn implementation
 * The key things needed for this release are
 *	- Structures and functions to create and manage and switch between tasks within the operating system. These tasks are known as processes
 *	- A scheduler which can keep a list of tasks and manage which process should be active.
@@ -88,8 +86,6 @@
 *
 *
 * @section Release6 Release 6 “Applications”
-* //TODO: Differences between a process and a application
-* //TODO: ELF Format
 * This release is going to focus on getting a executable loaded into physical and virtual memory from the virtual file system setup in release 4 and executing it. The key aims being:
 *	- Selecting a executable format which the kernel should initially be able to parse, load and execute
 *	- Writing a abstracted loader for that format

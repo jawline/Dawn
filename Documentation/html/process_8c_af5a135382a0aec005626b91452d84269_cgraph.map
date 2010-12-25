@@ -1,25 +1,25 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$phys__mm_8c.html#a0e03a277bc469b763ccae6a218306ce4" title="calculate_free_frames" alt="" coords="217,320,380,349"/>
 <area shape="rect" id="node5" href="$virt__mm_8h.html#aa3fe076bc9b516ca8f48ccb7542012c9" title="copyPageDir" alt="" coords="248,373,349,403"/>
-<area shape="rect" id="node37" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="617,553,692,583"/>
+<area shape="rect" id="node37" href="$common_8h.html#a1352f6ab5222470fd3d6df50a3102125" title="memset" alt="" coords="617,553,692,583"/>
 <area shape="rect" id="node47" href="$used__list_8c.html#a3fbe882094cf775474484ea7efe8d44f" title="init_used_list" alt="" coords="247,761,351,791"/>
 <area shape="rect" id="node49" href="$process_8c.html#a6f17038ba2510ac9a43a97e37467c5a6" title="make_orders" alt="" coords="245,657,352,687"/>
 <area shape="rect" id="node52" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="477,763,539,792"/>
 <area shape="rect" id="node57" href="$process_8h.html#a3de17c849d9de394b95b696739322ac0" title="postbox_add" alt="" coords="247,815,351,844"/>
-<area shape="rect" id="node59" href="$process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc" title="scheduler_add" alt="" coords="451,605,565,635"/>
-<area shape="rect" id="node62" href="$process__scheduler_8c.html#a9b79f8f6e29957e150c1dc666334f30c" title="schedulerGetProcessFromPid" alt="" coords="195,868,403,897"/>
+<area shape="rect" id="node59" href="$process__scheduler_8h.html#aa982ffeba70f9ed3267838103f847f7c" title="schedulerAdd" alt="" coords="453,605,563,635"/>
+<area shape="rect" id="node62" href="$process__scheduler_8h.html#a9b79f8f6e29957e150c1dc666334f30c" title="schedulerGetProcessFromPid" alt="" coords="195,868,403,897"/>
 <area shape="rect" id="node7" href="$phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c" title="allocateFrameForProcess" alt="" coords="757,95,939,124"/>
-<area shape="rect" id="node13" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1545,109,1623,139"/>
+<area shape="rect" id="node13" href="$common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="1532,109,1609,139"/>
 <area shape="rect" id="node15" href="$virt__mm_8c.html#ad69ac6cde7ed4f7a0d4f39037ab35372" title="copyPageTable" alt="" coords="451,296,565,325"/>
 <area shape="rect" id="node21" href="$virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3" title="kernelFirstFreeVirtualAddress" alt="" coords="745,297,951,327"/>
 <area shape="rect" id="node25" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="823,180,873,209"/>
 <area shape="rect" id="node33" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="815,399,881,428"/>
 <area shape="rect" id="node40" href="$virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7" title="getTable" alt="" coords="471,501,545,531"/>
-<area shape="rect" id="node9" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1183,109,1292,139"/>
-<area shape="rect" id="node11" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1364,109,1495,139"/>
+<area shape="rect" id="node9" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="1176,109,1285,139"/>
+<area shape="rect" id="node11" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="1351,109,1481,139"/>
 <area shape="rect" id="node18" href="$virt__mm_8c.html#a981dc19f3bcfcdfe34c29bdfccdb2879" title="copyPage" alt="" coords="613,245,696,275"/>
 <area shape="rect" id="node23" href="$virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="1008,297,1104,327"/>
 <area shape="rect" id="node27" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="1000,168,1112,197"/>
-<area shape="rect" id="node29" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="1161,168,1313,197"/>
-<area shape="rect" id="node54" href="$common_8h.html#aea470ec184e4cac48bd6bdf543c757ef" title="strlen" alt="" coords="479,709,537,739"/>
+<area shape="rect" id="node29" href="$process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="1160,168,1301,197"/>
+<area shape="rect" id="node54" href="$common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921" title="strlen" alt="" coords="479,709,537,739"/>
 </map>

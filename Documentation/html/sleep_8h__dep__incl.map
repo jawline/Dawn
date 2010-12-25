@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$sleep_8c.html" title="API/sources/process/sleep.c" alt="" coords="8,83,205,112"/>
+<area shape="rect" id="node3" href="$sleep_8c.html" title="API/sources/process/sleep.c" alt="" coords="5,83,203,112"/>
+<area shape="rect" id="node5" href="$_applications_2_game_of_life_2sources_2main_8c.html" title="Applications/GameOfLife/sources/main.c" alt="" coords="227,83,504,112"/>
+<area shape="rect" id="node7" href="$_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="528,83,757,112"/>
 </map>

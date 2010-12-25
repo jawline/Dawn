@@ -128,7 +128,7 @@
 <a name="l00098"></a>00098                 <span class="keywordflow">if</span> (idx == 0)
 <a name="l00099"></a>00099                 {
 <a name="l00100"></a>00100                         <span class="keyword">struct </span><a class="code" href="structdirent.html">dirent</a>* ret = (<span class="keyword">struct </span><a class="code" href="structdirent.html">dirent</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
-<a name="l00101"></a>00101                         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
+<a name="l00101"></a>00101                         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
 <a name="l00102"></a>00102                         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(ret-&gt;<a class="code" href="structdirent.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>, <span class="stringliteral">&quot;.&quot;</span>);
 <a name="l00103"></a>00103                         <span class="keywordflow">return</span> ret;
 <a name="l00104"></a>00104                 }
@@ -142,14 +142,14 @@
 <a name="l00112"></a>00112                 <span class="keywordflow">if</span> (idx == 0)
 <a name="l00113"></a>00113                 {
 <a name="l00114"></a>00114                         <span class="keyword">struct </span><a class="code" href="structdirent.html">dirent</a>* ret = (<span class="keyword">struct </span><a class="code" href="structdirent.html">dirent</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
-<a name="l00115"></a>00115                         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
+<a name="l00115"></a>00115                         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
 <a name="l00116"></a>00116                         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(ret-&gt;<a class="code" href="structdirent.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>, <span class="stringliteral">&quot;.&quot;</span>);
 <a name="l00117"></a>00117                         <span class="keywordflow">return</span> ret;
 <a name="l00118"></a>00118                 }
 <a name="l00119"></a>00119                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idx == 1)
 <a name="l00120"></a>00120                 {
 <a name="l00121"></a>00121                         <span class="keyword">struct </span><a class="code" href="structdirent.html">dirent</a>* ret = (<span class="keyword">struct </span><a class="code" href="structdirent.html">dirent</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
-<a name="l00122"></a>00122                         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
+<a name="l00122"></a>00122                         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(ret, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structdirent.html">dirent</a>));
 <a name="l00123"></a>00123                         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(ret-&gt;<a class="code" href="structdirent.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>, <span class="stringliteral">&quot;..&quot;</span>);
 <a name="l00124"></a>00124                         <span class="keywordflow">return</span> ret;
 <a name="l00125"></a>00125                 }
@@ -222,7 +222,7 @@
 <a name="l00203"></a>00203         <span class="keywordflow">else</span>
 <a name="l00204"></a>00204         {
 <a name="l00205"></a>00205                 <span class="keywordtype">char</span>* split_left = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(Buffer - path + 1);
-<a name="l00206"></a>00206                 <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(split_left, path, Buffer - path);
+<a name="l00206"></a>00206                 <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(split_left, path, Buffer - path);
 <a name="l00207"></a>00207                 split_left[Buffer - path] = <span class="charliteral">&#39;\0&#39;</span>;
 <a name="l00208"></a>00208 
 <a name="l00209"></a>00209                 <a class="code" href="structfilesystem__node.html">fs_node_t</a>* temp = <a class="code" href="vfs_8c.html#a289d28f0a303cb07f04cb12e6853e743">finddir_fs</a>(current_node, split_left);
@@ -238,7 +238,7 @@
 <a name="l00219"></a>00219 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:13 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -204,7 +204,7 @@
 <a name="l00174"></a>00174 
 <a name="l00175"></a><a class="code" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343">00175</a> <span class="keywordtype">void</span> <a class="code" href="screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343">backup_terminal</a>(<a class="code" href="structabstract__terminal.html">terminal_t</a>* term)
 <a name="l00176"></a>00176 {
-<a name="l00177"></a>00177         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(term-&gt;<a class="code" href="structabstract__terminal.html#aaa6aac48ba00e329539226b203c73bd1">m_backupData</a>, video_memory_location, <span class="keyword">sizeof</span>(<a class="code" href="int__types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>) * term-&gt;<a class="code" href="structabstract__terminal.html#a98a65bd5ac557f62edc3eea977aab7e0">m_width</a> * term-&gt;<a class="code" href="structabstract__terminal.html#ac0616013fa367eca97233c8fe852989c">m_height</a>);
+<a name="l00177"></a>00177         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(term-&gt;<a class="code" href="structabstract__terminal.html#aaa6aac48ba00e329539226b203c73bd1">m_backupData</a>, video_memory_location, <span class="keyword">sizeof</span>(<a class="code" href="int__types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>) * term-&gt;<a class="code" href="structabstract__terminal.html#a98a65bd5ac557f62edc3eea977aab7e0">m_width</a> * term-&gt;<a class="code" href="structabstract__terminal.html#ac0616013fa367eca97233c8fe852989c">m_height</a>);
 <a name="l00178"></a>00178 }
 <a name="l00179"></a>00179 
 <a name="l00180"></a><a class="code" href="screen__textmode_8c.html#ad6a26ac2df725649418b2826db437577">00180</a> <span class="keywordtype">void</span> <a class="code" href="screen__textmode_8c.html#ad6a26ac2df725649418b2826db437577">text_mode_tputc</a>(<a class="code" href="structabstract__terminal.html">terminal_t</a>* term, <span class="keywordtype">char</span> c)
@@ -259,7 +259,7 @@
 <a name="l00229"></a>00229         <a class="code" href="screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f">text_mode_clearscreen</a>();
 <a name="l00230"></a>00230         
 <a name="l00231"></a>00231         <span class="comment">//Restore from backed up data</span>
-<a name="l00232"></a>00232         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(video_memory_location, term-&gt;<a class="code" href="structabstract__terminal.html#aaa6aac48ba00e329539226b203c73bd1">m_backupData</a>, <span class="keyword">sizeof</span>(<a class="code" href="int__types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>) * term-&gt;<a class="code" href="structabstract__terminal.html#a98a65bd5ac557f62edc3eea977aab7e0">m_width</a> * term-&gt;<a class="code" href="structabstract__terminal.html#ac0616013fa367eca97233c8fe852989c">m_height</a>);
+<a name="l00232"></a>00232         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(video_memory_location, term-&gt;<a class="code" href="structabstract__terminal.html#aaa6aac48ba00e329539226b203c73bd1">m_backupData</a>, <span class="keyword">sizeof</span>(<a class="code" href="int__types_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>) * term-&gt;<a class="code" href="structabstract__terminal.html#a98a65bd5ac557f62edc3eea977aab7e0">m_width</a> * term-&gt;<a class="code" href="structabstract__terminal.html#ac0616013fa367eca97233c8fe852989c">m_height</a>);
 <a name="l00233"></a>00233 
 <a name="l00234"></a>00234         <a class="code" href="screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb">text_mode_tup</a>(term);
 <a name="l00235"></a>00235 
@@ -267,7 +267,7 @@
 <a name="l00237"></a>00237 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

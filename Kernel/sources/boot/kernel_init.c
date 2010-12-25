@@ -23,6 +23,7 @@
 #include <devices/pci/pci.h>
 #include <terminal/terminal.h>
 #include <initrd/initrd_header.h>
+#include <scheduler/process_scheduler.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -240,7 +241,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	}
 
 	//Initialize the system scheduler
-	initializeScheduler(initializeKernelProcess());
+	schedulerInitialize(initializeKernelProcess());
 
 	//Input interfaces
 	initializeInputCallbacks();

@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642" title="scheduler_kill_current_process" alt="" coords="233,32,449,61"/>
-<area shape="rect" id="node5" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="500,5,652,35"/>
-<area shape="rect" id="node7" href="$process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="508,59,644,88"/>
-<area shape="rect" id="node9" href="$process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="701,59,819,88"/>
-<area shape="rect" id="node11" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="868,32,985,61"/>
-<area shape="rect" id="node13" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="868,85,985,115"/>
+<area shape="rect" id="node3" href="$process__scheduler_8h.html#a8cc87c20578219a25c90c2cc9bc115ea" title="schedulerKillCurrentProcess" alt="" coords="233,32,431,61"/>
+<area shape="rect" id="node5" href="$process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="480,5,621,35"/>
+<area shape="rect" id="node7" href="$process__scheduler_8h.html#a0d52bfc1f92b42f597654084ce9b5c67" title="schedulerOnTick" alt="" coords="488,59,613,88"/>
+<area shape="rect" id="node9" href="$process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="669,59,787,88"/>
+<area shape="rect" id="node11" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="836,32,953,61"/>
+<area shape="rect" id="node13" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="836,85,953,115"/>
 </map>

@@ -1,8 +1,6 @@
 #include <types/memory.h>
 #include <process/process.h>
-
-extern process_t* get_current_process();
-extern process_t* scheduler_return_process(unsigned int iter);
+#include <scheduler/process_scheduler.h>
 
 unsigned char syscallProcessValid(unsigned int pid)
 {
@@ -12,7 +10,7 @@ unsigned char syscallProcessValid(unsigned int pid)
 
 	for (;;)
 	{
-		iterator = scheduler_return_process(number);
+		iterator = schedulerReturnProcess(number);
 
 		if (iterator == 0) return 0;
 		if (iterator->m_ID == pid) break;
@@ -25,8 +23,8 @@ unsigned char syscallProcessValid(unsigned int pid)
 
 int syscallGetPid(unsigned int iter)
 {
-	if (scheduler_return_process(iter) == 0) return -1;
-	return scheduler_return_process(iter)->m_ID;
+	if (schedulerReturnProcess(iter) == 0) return -1;
+	return schedulerReturnProcess(iter)->m_ID;
 }
 
 unsigned long syscallGetProcessingTime(unsigned int pid)
@@ -38,7 +36,7 @@ unsigned long syscallGetProcessingTime(unsigned int pid)
 
 	for (;;)
 	{
-		iterator = scheduler_return_process(number);
+		iterator = schedulerReturnProcess(number);
 
 		if (iterator == 0) return 0;
 		if (iterator->m_ID == pid) break;
@@ -58,7 +56,7 @@ void syscallGetName(char* StrLocation, unsigned int pid)
 
 	for (;;)
 	{
-		iterator = scheduler_return_process(number);
+		iterator = schedulerReturnProcess(number);
 
 		if (iterator == 0)
 		{
@@ -76,11 +74,11 @@ void syscallGetName(char* StrLocation, unsigned int pid)
 
 void syscallKillCurrentProcess()
 {
-	scheduler_kill_current_process();
+	schedulerKillCurrentProcess();
 }
 
 void syscallRequestExit(int returnValue)
 {
-	get_current_process()->m_returnValue = returnValue;
-	scheduler_kill_current_process();
+	getCurrentProcess()->m_returnValue = returnValue;
+	schedulerKillCurrentProcess();
 }

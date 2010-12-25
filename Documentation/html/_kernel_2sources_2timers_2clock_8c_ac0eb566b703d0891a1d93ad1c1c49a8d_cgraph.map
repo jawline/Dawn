@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="144,32,280,61"/>
-<area shape="rect" id="node5" href="$process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="328,32,445,61"/>
-<area shape="rect" id="node7" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="495,5,612,35"/>
-<area shape="rect" id="node9" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="495,59,612,88"/>
+<area shape="rect" id="node3" href="$process__scheduler_8h.html#a0d52bfc1f92b42f597654084ce9b5c67" title="schedulerOnTick" alt="" coords="145,32,271,61"/>
+<area shape="rect" id="node5" href="$process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="320,32,437,61"/>
+<area shape="rect" id="node7" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="487,5,604,35"/>
+<area shape="rect" id="node9" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="487,59,604,88"/>
 </map>

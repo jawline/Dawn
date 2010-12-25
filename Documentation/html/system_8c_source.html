@@ -33,154 +33,152 @@
 <a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="message_8h.html">process/message.h</a>&gt;</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="messages_8h.html">messages/messages.h</a>&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="debug_8h.html">debug/debug.h</a>&gt;</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00008"></a>00008 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8c.html#aa8ea4fc777e94c00f614dfbe4f34df95">scheduler_return_process</a>();
-<a name="l00009"></a>00009 
-<a name="l00010"></a><a class="code" href="system_8c.html#a74d51691f08178dded34b150cfa31ff9">00010</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="system_8c.html#a74d51691f08178dded34b150cfa31ff9">systemIdlePtr</a> = 0;
-<a name="l00011"></a><a class="code" href="system_8c.html#a536e0d863105daa44fd25e5ef6fbd6c3">00011</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="system_8c.html#a536e0d863105daa44fd25e5ef6fbd6c3">systemProcPtr</a> = 0;
-<a name="l00012"></a>00012 
-<a name="l00013"></a><a class="code" href="system_8c.html#ac05c9ca5f1a12e114a8d78fb88123047">00013</a> <span class="keywordtype">void</span> <a class="code" href="system_8c.html#ac05c9ca5f1a12e114a8d78fb88123047">systemIdleProcess</a>()
-<a name="l00014"></a>00014 {
-<a name="l00015"></a>00015         systemIdlePtr = <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017         <span class="keywordflow">for</span> (;;)
-<a name="l00018"></a>00018         {
-<a name="l00019"></a>00019                 <span class="comment">//Halt the processor tell the next interrupt</span>
-<a name="l00020"></a>00020                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;hlt&quot;</span>);
-<a name="l00021"></a>00021         }
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5">00024</a> <span class="keywordtype">void</span> <a class="code" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5">systemMainProcess</a>()
-<a name="l00025"></a>00025 {
-<a name="l00026"></a>00026         <a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">createNewProcess</a>(<a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.onstart&quot;</span>), <a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>());
-<a name="l00027"></a>00027         <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="process__scheduler_8h.html">scheduler/process_scheduler.h</a>&gt;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="system_8c.html#a74d51691f08178dded34b150cfa31ff9">00008</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="system_8c.html#a74d51691f08178dded34b150cfa31ff9">systemIdlePtr</a> = 0;
+<a name="l00009"></a><a class="code" href="system_8c.html#a536e0d863105daa44fd25e5ef6fbd6c3">00009</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="system_8c.html#a536e0d863105daa44fd25e5ef6fbd6c3">systemProcPtr</a> = 0;
+<a name="l00010"></a>00010 
+<a name="l00011"></a><a class="code" href="system_8c.html#ac05c9ca5f1a12e114a8d78fb88123047">00011</a> <span class="keywordtype">void</span> <a class="code" href="system_8c.html#ac05c9ca5f1a12e114a8d78fb88123047">systemIdleProcess</a>()
+<a name="l00012"></a>00012 {
+<a name="l00013"></a>00013         systemIdlePtr = <a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>();
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015         <span class="keywordflow">for</span> (;;)
+<a name="l00016"></a>00016         {
+<a name="l00017"></a>00017                 <span class="comment">//Halt the processor tell the next interrupt</span>
+<a name="l00018"></a>00018                 <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;hlt&quot;</span>);
+<a name="l00019"></a>00019         }
+<a name="l00020"></a>00020 }
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5">00022</a> <span class="keywordtype">void</span> <a class="code" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5">systemMainProcess</a>()
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024         <a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">createNewProcess</a>(<a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.onstart&quot;</span>), <a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>());
+<a name="l00025"></a>00025         <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027         systemProcPtr = <a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>();
 <a name="l00028"></a>00028 
-<a name="l00029"></a>00029         systemProcPtr = <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031         <span class="keywordtype">int</span> schedulerIter = 0;
-<a name="l00032"></a>00032         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* schedulerPtr = 0;
-<a name="l00033"></a>00033         <span class="keywordtype">int</span> numNonSystem = 0;
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035         <span class="comment">//Loop and continually halt the processor, this will cause the processor to idle between interrupts</span>
-<a name="l00036"></a>00036         <span class="keywordflow">for</span> (;;) {
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038                 <span class="comment">//Check all messages</span>
-<a name="l00039"></a>00039                 <span class="keywordflow">while</span> (1)
-<a name="l00040"></a>00040                 {
-<a name="l00041"></a>00041                         <span class="comment">//Grab the top message</span>
-<a name="l00042"></a>00042                         <a class="code" href="structprocess__message.html">process_message</a> pb_top = <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_processPostbox);
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044                         <span class="keywordflow">if</span> (pb_top.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> != -1)
-<a name="l00045"></a>00045                         {
-<a name="l00046"></a>00046                                 <span class="comment">//Its a message to be handled</span>
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048                         
-<a name="l00049"></a>00049                         }
-<a name="l00050"></a>00050                         <span class="keywordflow">else</span>
-<a name="l00051"></a>00051                         {
-<a name="l00052"></a>00052                                 <span class="keywordflow">break</span>;
-<a name="l00053"></a>00053                         }
+<a name="l00029"></a>00029         <span class="keywordtype">int</span> schedulerIter = 0;
+<a name="l00030"></a>00030         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* schedulerPtr = 0;
+<a name="l00031"></a>00031         <span class="keywordtype">int</span> numNonSystem = 0;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033         <span class="comment">//Loop and continually halt the processor, this will cause the processor to idle between interrupts</span>
+<a name="l00034"></a>00034         <span class="keywordflow">for</span> (;;) {
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036                 <span class="comment">//Check all messages</span>
+<a name="l00037"></a>00037                 <span class="keywordflow">while</span> (1)
+<a name="l00038"></a>00038                 {
+<a name="l00039"></a>00039                         <span class="comment">//Grab the top message</span>
+<a name="l00040"></a>00040                         <a class="code" href="structprocess__message.html">process_message</a> pb_top = <a class="code" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5">postbox_top</a>(&amp;<a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>()-&gt;m_processPostbox);
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042                         <span class="keywordflow">if</span> (pb_top.<a class="code" href="structprocess__message.html#af180e926633cde08a05ccbc3af397ee4">ID</a> != -1)
+<a name="l00043"></a>00043                         {
+<a name="l00044"></a>00044                                 <span class="comment">//Its a message to be handled</span>
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046                         
+<a name="l00047"></a>00047                         }
+<a name="l00048"></a>00048                         <span class="keywordflow">else</span>
+<a name="l00049"></a>00049                         {
+<a name="l00050"></a>00050                                 <span class="keywordflow">break</span>;
+<a name="l00051"></a>00051                         }
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053                 }
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055                 }
+<a name="l00055"></a>00055                 numNonSystem = 0;
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057                 numNonSystem = 0;
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059                 schedulerIter = 0;
-<a name="l00060"></a>00060                 <span class="comment">//Shut down all processes that need a-killin</span>
-<a name="l00061"></a>00061                 <span class="keywordflow">while</span> (1)
-<a name="l00062"></a>00062                 {
-<a name="l00063"></a>00063                         schedulerPtr = <a class="code" href="process__scheduler_8c.html#aa8ea4fc777e94c00f614dfbe4f34df95">scheduler_return_process</a>(schedulerIter);
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065                         <span class="keywordflow">if</span> (schedulerPtr == 0)
-<a name="l00066"></a>00066                         {
-<a name="l00067"></a>00067                                 <span class="keywordflow">break</span>;
-<a name="l00068"></a>00068                         }
-<a name="l00069"></a>00069                         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> == 1)
-<a name="l00070"></a>00070                         {
-<a name="l00071"></a>00071                                 <span class="comment">//Must remove this process and kill it! so disable interrupts don&#39;t wanna be interrupted</span>
-<a name="l00072"></a>00072                                 <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074                                 <span class="keywordflow">if</span> ((schedulerPtr == systemIdlePtr) || (schedulerPtr == systemProcPtr))
-<a name="l00075"></a>00075                                 {
-<a name="l00076"></a>00076                                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Cannot close SystemIdle or System\n&quot;</span>);
-<a name="l00077"></a>00077                                         schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> = 0;
-<a name="l00078"></a>00078                                 }
-<a name="l00079"></a>00079                                 <span class="keywordflow">else</span>
-<a name="l00080"></a>00080                                 {
-<a name="l00081"></a>00081                                         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Process %i (%s) terminated with return value %i\n&quot;</span>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2" title="The return value of this process is stored here when it is set.">m_returnValue</a>);
+<a name="l00057"></a>00057                 schedulerIter = 0;
+<a name="l00058"></a>00058                 <span class="comment">//Shut down all processes that need a-killin</span>
+<a name="l00059"></a>00059                 <span class="keywordflow">while</span> (1)
+<a name="l00060"></a>00060                 {
+<a name="l00061"></a>00061                         schedulerPtr = <a class="code" href="process__scheduler_8h.html#aba849c409aa98d231cc3f33d32728d22">schedulerReturnProcess</a>(schedulerIter);
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063                         <span class="keywordflow">if</span> (schedulerPtr == 0)
+<a name="l00064"></a>00064                         {
+<a name="l00065"></a>00065                                 <span class="keywordflow">break</span>;
+<a name="l00066"></a>00066                         }
+<a name="l00067"></a>00067                         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> == 1)
+<a name="l00068"></a>00068                         {
+<a name="l00069"></a>00069                                 <span class="comment">//Must remove this process and kill it! so disable interrupts don&#39;t wanna be interrupted</span>
+<a name="l00070"></a>00070                                 <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072                                 <span class="keywordflow">if</span> ((schedulerPtr == systemIdlePtr) || (schedulerPtr == systemProcPtr))
+<a name="l00073"></a>00073                                 {
+<a name="l00074"></a>00074                                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Cannot close SystemIdle or System\n&quot;</span>);
+<a name="l00075"></a>00075                                         schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> = 0;
+<a name="l00076"></a>00076                                 }
+<a name="l00077"></a>00077                                 <span class="keywordflow">else</span>
+<a name="l00078"></a>00078                                 {
+<a name="l00079"></a>00079                                         <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Process %i (%s) terminated with return value %i\n&quot;</span>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a48967e0de322441f7272e8de55e6cae2" title="The return value of this process is stored here when it is set.">m_returnValue</a>);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081                                         <a class="code" href="process__scheduler_8h.html#a6b043f195b9f7130a20ab71185538706">schedulerRemove</a>(schedulerPtr);
 <a name="l00082"></a>00082 
-<a name="l00083"></a>00083                                         <a class="code" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a">scheduler_remove</a>(schedulerPtr);
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085                                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Freeing process %x (%i:%s) current process %i\n&quot;</span>, schedulerPtr, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()-&gt;m_ID);
-<a name="l00086"></a>00086                                         <a class="code" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f">freeProcess</a>(schedulerPtr);
+<a name="l00083"></a>00083                                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Freeing process %x (%i:%s) current process %i\n&quot;</span>, schedulerPtr, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a>, schedulerPtr-&gt;<a class="code" href="structprocess__structure.html#ac55babc271bb02f4b5e8f71ff9483d15" title="64 byte character array to store the processes name">m_Name</a>, <a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>()-&gt;m_ID);
+<a name="l00084"></a>00084                                         <a class="code" href="process_8c.html#abe7c11b22c98c24e107f6d09868f463f">freeProcess</a>(schedulerPtr);
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086                                 }
 <a name="l00087"></a>00087 
-<a name="l00088"></a>00088                                 }
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090                                 <span class="comment">//Enable interrupts once the deed is done</span>
-<a name="l00091"></a>00091                                 <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
-<a name="l00092"></a>00092                         }
-<a name="l00093"></a>00093                         <span class="keywordflow">else</span>
-<a name="l00094"></a>00094                         {
-<a name="l00095"></a>00095                         }
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097                         <span class="comment">//Count up the number of non system processes (To check there is a interface active)</span>
-<a name="l00098"></a>00098                         <span class="keywordflow">if</span> ((schedulerPtr != systemIdlePtr) &amp;&amp; (schedulerPtr != systemProcPtr))
-<a name="l00099"></a>00099                         {
-<a name="l00100"></a>00100                                 numNonSystem++;
-<a name="l00101"></a>00101                         }
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103                         schedulerIter++;
-<a name="l00104"></a>00104                 }
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106                 <span class="comment">//If this is the last process alive?</span>
-<a name="l00107"></a>00107                 <span class="keywordflow">if</span> (numNonSystem == 0)
-<a name="l00108"></a>00108                 {
-<a name="l00109"></a>00109                         <span class="keywordflow">if</span> (<a class="code" href="common_8h.html#a19b2d1068440c7697d9598d19feb7cb9">strcmp</a>(<a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.restart_onstart&quot;</span>), <span class="stringliteral">&quot;yes&quot;</span>) == 0)
-<a name="l00110"></a>00110                         {
+<a name="l00088"></a>00088                                 <span class="comment">//Enable interrupts once the deed is done</span>
+<a name="l00089"></a>00089                                 <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
+<a name="l00090"></a>00090                         }
+<a name="l00091"></a>00091                         <span class="keywordflow">else</span>
+<a name="l00092"></a>00092                         {
+<a name="l00093"></a>00093                         }
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095                         <span class="comment">//Count up the number of non system processes (To check there is a interface active)</span>
+<a name="l00096"></a>00096                         <span class="keywordflow">if</span> ((schedulerPtr != systemIdlePtr) &amp;&amp; (schedulerPtr != systemProcPtr))
+<a name="l00097"></a>00097                         {
+<a name="l00098"></a>00098                                 numNonSystem++;
+<a name="l00099"></a>00099                         }
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101                         schedulerIter++;
+<a name="l00102"></a>00102                 }
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104                 <span class="comment">//If this is the last process alive?</span>
+<a name="l00105"></a>00105                 <span class="keywordflow">if</span> (numNonSystem == 0)
+<a name="l00106"></a>00106                 {
+<a name="l00107"></a>00107                         <span class="keywordflow">if</span> (<a class="code" href="common_8h.html#a19b2d1068440c7697d9598d19feb7cb9">strcmp</a>(<a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.restart_onstart&quot;</span>), <span class="stringliteral">&quot;yes&quot;</span>) == 0)
+<a name="l00108"></a>00108                         {
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110                                 <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
 <a name="l00111"></a>00111 
-<a name="l00112"></a>00112                                 <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00112"></a>00112                                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Creating new instance of %s\n&quot;</span>, <a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.onstart&quot;</span>));
 <a name="l00113"></a>00113 
-<a name="l00114"></a>00114                                 <a class="code" href="_a_p_i_2headers_2printf_8h.html#a3cb9f0894fab1c8fbb0753c9c7c2a8d9">printf</a>(<span class="stringliteral">&quot;Creating new instance of %s\n&quot;</span>, <a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.onstart&quot;</span>));
+<a name="l00114"></a>00114                                 <a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">createNewProcess</a>( <a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.onstart&quot;</span>), <a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>());
 <a name="l00115"></a>00115 
-<a name="l00116"></a>00116                                 <a class="code" href="process_8c.html#af5a135382a0aec005626b91452d84269">createNewProcess</a>( <a class="code" href="settingsmanager_8h.html#aaa2a8aa38c907e668739b24e40a68af5">settingsReadValue</a>(<span class="stringliteral">&quot;kernel.onstart&quot;</span>), <a class="code" href="vfs_8h.html#afe34b9b0d52adb516fa4a6a3804cc255">init_vfs</a>());
+<a name="l00116"></a>00116                                 <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
 <a name="l00117"></a>00117 
-<a name="l00118"></a>00118                                 <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120                         }
-<a name="l00121"></a>00121                 }
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123                 <span class="comment">//Sleep the current process</span>
-<a name="l00124"></a>00124                 <a class="code" href="process__scheduler_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">scheduler_block_me</a>();
-<a name="l00125"></a>00125         }
-<a name="l00126"></a>00126 }
-<a name="l00127"></a>00127 
-<a name="l00128"></a><a class="code" href="system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f">00128</a> <span class="keywordtype">void</span> <a class="code" href="system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f">systemProcess</a>()
-<a name="l00129"></a>00129 {
-<a name="l00130"></a>00130     <span class="comment">//Disable interrupts while forking</span>
-<a name="l00131"></a>00131     <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133     <span class="keywordtype">int</span> forkedID = <a class="code" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6">kfork</a>();
-<a name="l00134"></a>00134     
-<a name="l00135"></a>00135     <span class="comment">//Enable them once the processes are set up</span>
-<a name="l00136"></a>00136     <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139     <span class="keywordflow">if</span> (forkedID == 1)
-<a name="l00140"></a>00140     {
-<a name="l00141"></a>00141         <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>(), <span class="stringliteral">&quot;System&quot;</span>);
-<a name="l00142"></a>00142         <a class="code" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5">systemMainProcess</a>();
-<a name="l00143"></a>00143     }
-<a name="l00144"></a>00144     <span class="keywordflow">else</span>
-<a name="l00145"></a>00145     {
-<a name="l00146"></a>00146         <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>(), <span class="stringliteral">&quot;SystemIdle&quot;</span>);
-<a name="l00147"></a>00147         <a class="code" href="system_8c.html#ac05c9ca5f1a12e114a8d78fb88123047">systemIdleProcess</a>();
-<a name="l00148"></a>00148     }
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150 }
+<a name="l00118"></a>00118                         }
+<a name="l00119"></a>00119                 }
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121                 <span class="comment">//Sleep the current process</span>
+<a name="l00122"></a>00122                 <a class="code" href="process__scheduler_8h.html#af2e6cfa7c88c3a97524cb2d856ec318a">schedulerBlockMe</a>();
+<a name="l00123"></a>00123         }
+<a name="l00124"></a>00124 }
+<a name="l00125"></a>00125 
+<a name="l00126"></a><a class="code" href="system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f">00126</a> <span class="keywordtype">void</span> <a class="code" href="system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f">systemProcess</a>()
+<a name="l00127"></a>00127 {
+<a name="l00128"></a>00128     <span class="comment">//Disable interrupts while forking</span>
+<a name="l00129"></a>00129     <a class="code" href="common_8h.html#a751a098252e8dab11ba872b3e159ed78">disable_interrupts</a>();
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131     <span class="keywordtype">int</span> forkedID = <a class="code" href="process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6">kfork</a>();
+<a name="l00132"></a>00132     
+<a name="l00133"></a>00133     <span class="comment">//Enable them once the processes are set up</span>
+<a name="l00134"></a>00134     <a class="code" href="common_8h.html#a84a8aedd91cb437ccc0f039df3e9ffc4">enable_interrupts</a>();
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137     <span class="keywordflow">if</span> (forkedID == 1)
+<a name="l00138"></a>00138     {
+<a name="l00139"></a>00139         <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>(), <span class="stringliteral">&quot;System&quot;</span>);
+<a name="l00140"></a>00140         <a class="code" href="system_8c.html#a219b8fbd0c077a8573900da5ffea94a5">systemMainProcess</a>();
+<a name="l00141"></a>00141     }
+<a name="l00142"></a>00142     <span class="keywordflow">else</span>
+<a name="l00143"></a>00143     {
+<a name="l00144"></a>00144         <a class="code" href="process_8c.html#a8ec9c160458364df27a5f682251cbe74">set_process_name</a>(<a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>(), <span class="stringliteral">&quot;SystemIdle&quot;</span>);
+<a name="l00145"></a>00145         <a class="code" href="system_8c.html#ac05c9ca5f1a12e114a8d78fb88123047">systemIdleProcess</a>();
+<a name="l00146"></a>00146     }
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

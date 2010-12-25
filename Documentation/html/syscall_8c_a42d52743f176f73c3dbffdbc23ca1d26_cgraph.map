@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="175,5,327,35"/>
-<area shape="rect" id="node5" href="$process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="200,59,301,88"/>
+<area shape="rect" id="node3" href="$process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="173,5,315,35"/>
+<area shape="rect" id="node5" href="$process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="193,59,295,88"/>
 </map>

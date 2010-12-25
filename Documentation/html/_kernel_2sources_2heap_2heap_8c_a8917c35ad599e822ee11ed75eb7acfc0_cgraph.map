@@ -1,12 +1,12 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#aaa008418c6828946c78f15ed6850cf61" title="initializeBaseEntry" alt="" coords="160,5,299,35"/>
 <area shape="rect" id="node7" href="$_kernel_2sources_2heap_2heap_8c.html#acdff58aaca255a7512ee243e1f3b8151" title="mapInitialHeap" alt="" coords="171,59,288,88"/>
-<area shape="rect" id="node5" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="385,5,460,35"/>
+<area shape="rect" id="node5" href="$common_8h.html#a1352f6ab5222470fd3d6df50a3102125" title="memset" alt="" coords="385,5,460,35"/>
 <area shape="rect" id="node9" href="$phys__mm_8c.html#ababd86c0f8a75f47b499785ccbde00d8" title="allocateKernelFrame" alt="" coords="348,59,497,88"/>
 <area shape="rect" id="node11" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="397,112,448,141"/>
 <area shape="rect" id="node13" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="547,112,659,141"/>
-<area shape="rect" id="node15" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="708,85,860,115"/>
-<area shape="rect" id="node17" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="729,139,839,168"/>
-<area shape="rect" id="node19" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="911,139,1041,168"/>
-<area shape="rect" id="node21" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1092,139,1169,168"/>
+<area shape="rect" id="node15" href="$process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="707,85,848,115"/>
+<area shape="rect" id="node17" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="723,139,832,168"/>
+<area shape="rect" id="node19" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="897,139,1028,168"/>
+<area shape="rect" id="node21" href="$common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="1079,139,1156,168"/>
 </map>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Dawn OS: Kernel/sources/scheduler/default/process_scheduler.h Source File</title>
+<title>Dawn OS: Kernel/headers/scheduler/process_scheduler.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -25,7 +25,7 @@
   </div>
 <div class="header">
   <div class="headertitle">
-<h1>Kernel/sources/scheduler/default/process_scheduler.h</h1>  </div>
+<h1>Kernel/headers/scheduler/process_scheduler.h</h1>  </div>
 </div>
 <div class="contents">
 <a href="process__scheduler_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef _PROCESS_SCHEDULER_DEF_H_</span>
@@ -33,20 +33,27 @@
 <a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="process_8h.html">process/process.h</a>&gt;</span>
 <a name="l00004"></a><a class="code" href="process__scheduler_8h.html#a6f93d8691b80cdf6332675294025176e">00004</a> <span class="preprocessor">#define _STD_NANO_ 5</span>
 <a name="l00005"></a>00005 <span class="preprocessor"></span>
-<a name="l00006"></a>00006 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a28b6bd393b13f91cc5e6d373e0d1cb6e">scheduler_init</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* kproc);
+<a name="l00006"></a>00006 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a0953f981271afac847c98a06a847c1f4">schedulerInitialize</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* kproc);
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc">scheduler_add</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_process);
-<a name="l00009"></a>00009 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a">scheduler_remove</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* old_process);
+<a name="l00008"></a>00008 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#aa982ffeba70f9ed3267838103f847f7c">schedulerAdd</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_process);
+<a name="l00009"></a>00009 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a6b043f195b9f7130a20ab71185538706">schedulerRemove</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* old_process);
 <a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b">scheduler_on_tick</a>();
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 <span class="comment">//Send a message to all processes</span>
-<a name="l00014"></a>00014 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a72865d5f7cb7d9eedd0f5dc2f07375b1">scheduler_global_message</a>(<a class="code" href="structprocess__message.html">process_message</a> msg, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_kernel_2sources_2system_2reboot_8c.html#a62fe4f31d7cd6087317744dd800a86c3">bit</a>);
-<a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="preprocessor">#endif //_PROCESS_SCHEDULER_DEF_H_</span>
+<a name="l00011"></a>00011 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a0d52bfc1f92b42f597654084ce9b5c67">schedulerOnTick</a>();
+<a name="l00012"></a>00012 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#af2e6cfa7c88c3a97524cb2d856ec318a">schedulerBlockMe</a>();
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>();
+<a name="l00015"></a>00015 <span class="keywordtype">int</span> <a class="code" href="process__scheduler_8h.html#aed31f6d71f706cf539123e205efcbc8b">schedulerNumProcesses</a>();
+<a name="l00016"></a>00016 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a8cc87c20578219a25c90c2cc9bc115ea">schedulerKillCurrentProcess</a>();
+<a name="l00017"></a>00017 <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8h.html#aba849c409aa98d231cc3f33d32728d22">schedulerReturnProcess</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter);
+<a name="l00018"></a>00018 <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8h.html#a9b79f8f6e29957e150c1dc666334f30c">schedulerGetProcessFromPid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pid);
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="comment">//Send a message to all processes</span>
+<a name="l00021"></a>00021 <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#ad37900679d23d982c52c094026b656a8">schedulerGlobalMessage</a>(<a class="code" href="structprocess__message.html">process_message</a> msg, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_kernel_2sources_2system_2reboot_8c.html#a62fe4f31d7cd6087317744dd800a86c3">bit</a>);
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="preprocessor">#endif //_PROCESS_SCHEDULER_DEF_H_</span>
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

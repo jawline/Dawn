@@ -11,6 +11,7 @@
 #include <process/process.h>
 #include <panic/panic.h>
 #include <messages/messages.h>
+#include <scheduler/process_scheduler.h>
 #include <fs/vfs.h>
 #include "../loaders/elf/parser.h"
 #include "../stack/kstack.h"
@@ -34,7 +35,7 @@ void kernelInputCallback(uint32 device, uint32 main, void* additional)
 	da.message_data[2] = *((MEM_LOC*)additional);
 
 	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
-	scheduler_global_message(da, INPUT_BIT);
+	schedulerGlobalMessage(da, INPUT_BIT);
 }
 
 void kernelMouseCallback(uint32 device, uint32 main, void* additional)
@@ -57,7 +58,7 @@ void kernelMouseCallback(uint32 device, uint32 main, void* additional)
 	printf("%i %i %i\n", message_data->i_byte, message_data->mouse_x, message_data->mouse_y);
 
 	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
-	scheduler_global_message(da, INPUT_BIT);
+	schedulerGlobalMessage(da, INPUT_BIT);
 }
 
 //External links to the kernel page directory and kernel heap

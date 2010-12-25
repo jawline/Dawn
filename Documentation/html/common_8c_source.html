@@ -112,9 +112,9 @@
 <a name="l00082"></a>00082         <span class="keywordflow">return</span> result;
 <a name="l00083"></a>00083 }
 <a name="l00084"></a>00084 
-<a name="l00085"></a><a class="code" href="common_8c.html#ab0985f366b55a4fd2d24cefe66340bc0">00085</a> <span class="keywordtype">void</span> <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> *dest, <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> val, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> len)
+<a name="l00085"></a><a class="code" href="common_8c.html#a1352f6ab5222470fd3d6df50a3102125">00085</a> <span class="keywordtype">void</span> <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(<span class="keywordtype">void</span>* dest, <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> val, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> len)
 <a name="l00086"></a>00086 {
-<a name="l00087"></a>00087     <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> *temp = (<a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> *)dest;
+<a name="l00087"></a>00087     <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>* temp = (<a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>*) dest;
 <a name="l00088"></a>00088     
 <a name="l00089"></a>00089     <span class="keywordflow">for</span> ( ; len != 0; len--)
 <a name="l00090"></a>00090     { 
@@ -122,81 +122,89 @@
 <a name="l00092"></a>00092     }
 <a name="l00093"></a>00093 }
 <a name="l00094"></a>00094 
-<a name="l00095"></a><a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">00095</a> <span class="keywordtype">void</span> <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(<a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> * dest, <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a> * src, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> len) 
+<a name="l00095"></a><a class="code" href="common_8c.html#a69c5cef4ad95f487c4a223ff0104efbc">00095</a> <span class="keywordtype">void</span> <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(<span class="keywordtype">void</span>* dest, <span class="keywordtype">void</span>* src,<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> len) 
 <a name="l00096"></a>00096 {
 <a name="l00097"></a>00097         <span class="keywordtype">int</span> iter = 0;
-<a name="l00098"></a>00098         
-<a name="l00099"></a>00099         <span class="keywordflow">for</span> (iter = 0; iter &lt; len; iter++) 
-<a name="l00100"></a>00100         {
-<a name="l00101"></a>00101                 *dest = *src;
-<a name="l00102"></a>00102                 dest++; src++;  
-<a name="l00103"></a>00103         }
-<a name="l00104"></a>00104 }
-<a name="l00105"></a>00105 
-<a name="l00106"></a><a class="code" href="common_8c.html#aaee99c583b04ddf8621f93063e92e767">00106</a> <a class="code" href="int__types_8h.html#a2834615d491c11fba337095447f25886">uint64</a> <a class="code" href="common_8c.html#aaee99c583b04ddf8621f93063e92e767">__div_64_32</a>(<a class="code" href="int__types_8h.html#a2834615d491c11fba337095447f25886">uint64</a>* dividend, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> divisor)
-<a name="l00107"></a>00107 {
-<a name="l00108"></a>00108    <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> dividendLow, dividendLow2, dividendHigh, remainder;
-<a name="l00109"></a>00109    dividendLow = (uint32)(*dividend &amp; 0xFFFFFFFF);
-<a name="l00110"></a>00110    dividendHigh = (uint32)(*dividend &gt;&gt; 32);
-<a name="l00111"></a>00111    remainder = dividendHigh % divisor;
-<a name="l00112"></a>00112    dividendHigh = dividendHigh / divisor;
-<a name="l00113"></a>00113    dividendLow2 = dividendLow &gt;&gt; 16;
-<a name="l00114"></a>00114    dividendLow2+= remainder &lt;&lt; 16;
-<a name="l00115"></a>00115    remainder = dividendLow2 % divisor;
-<a name="l00116"></a>00116    dividendLow2 = dividendLow2 / divisor;
-<a name="l00117"></a>00117    dividendLow = dividendLow &amp; 0xFFFF;
-<a name="l00118"></a>00118    dividendLow+= remainder &lt;&lt; 16;
-<a name="l00119"></a>00119    remainder = dividendLow % divisor;
-<a name="l00120"></a>00120    dividendLow = dividendLow / divisor;
-<a name="l00121"></a>00121    *dividend = dividendLow + ((uint64)dividendLow2 &lt;&lt; 16) + ((uint64)dividendHigh &lt;&lt; 32);
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123    <span class="keywordflow">return</span>(remainder);
-<a name="l00124"></a>00124 }
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126 <span class="comment">//FreeBSD&#39;s implementation of strlen.</span>
-<a name="l00127"></a><a class="code" href="common_8c.html#aea470ec184e4cac48bd6bdf543c757ef">00127</a> <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * str)
-<a name="l00128"></a>00128 {
-<a name="l00129"></a>00129     <span class="keyword">const</span> <span class="keywordtype">char</span> *s;
-<a name="l00130"></a>00130     <span class="keywordflow">for</span> (s = str; *s; ++s);
-<a name="l00131"></a>00131     <span class="keywordflow">return</span>(s - str);
-<a name="l00132"></a>00132 }
-<a name="l00133"></a>00133 
-<a name="l00134"></a><a class="code" href="common_8c.html#a19b2d1068440c7697d9598d19feb7cb9">00134</a> <span class="keywordtype">int</span> <a class="code" href="common_8h.html#a19b2d1068440c7697d9598d19feb7cb9">strcmp</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> * src, <span class="keyword">const</span> <span class="keywordtype">char</span> * dst)
-<a name="l00135"></a>00135 {
-<a name="l00136"></a>00136         <span class="keywordtype">int</span> ret = 0 ;
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099         <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>* dbuffer = (<a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>*) dest;
+<a name="l00100"></a>00100         <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>* sbuffer = (<a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>*) src;
+<a name="l00101"></a>00101         
+<a name="l00102"></a>00102         <span class="keywordflow">for</span> (iter = 0; iter &lt; len; iter++) 
+<a name="l00103"></a>00103         {
+<a name="l00104"></a>00104                 *dbuffer = *sbuffer;
+<a name="l00105"></a>00105                 dbuffer++;
+<a name="l00106"></a>00106                 sbuffer++;
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108 }
+<a name="l00109"></a>00109 
+<a name="l00110"></a><a class="code" href="common_8c.html#aaee99c583b04ddf8621f93063e92e767">00110</a> <a class="code" href="int__types_8h.html#a2834615d491c11fba337095447f25886">uint64</a> <a class="code" href="common_8c.html#aaee99c583b04ddf8621f93063e92e767">__div_64_32</a>(<a class="code" href="int__types_8h.html#a2834615d491c11fba337095447f25886">uint64</a>* dividend, <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> divisor)
+<a name="l00111"></a>00111 {
+<a name="l00112"></a>00112    <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> dividendLow, dividendLow2, dividendHigh, remainder;
+<a name="l00113"></a>00113    dividendLow = (uint32)(*dividend &amp; 0xFFFFFFFF);
+<a name="l00114"></a>00114    dividendHigh = (uint32)(*dividend &gt;&gt; 32);
+<a name="l00115"></a>00115    remainder = dividendHigh % divisor;
+<a name="l00116"></a>00116    dividendHigh = dividendHigh / divisor;
+<a name="l00117"></a>00117    dividendLow2 = dividendLow &gt;&gt; 16;
+<a name="l00118"></a>00118    dividendLow2+= remainder &lt;&lt; 16;
+<a name="l00119"></a>00119    remainder = dividendLow2 % divisor;
+<a name="l00120"></a>00120    dividendLow2 = dividendLow2 / divisor;
+<a name="l00121"></a>00121    dividendLow = dividendLow &amp; 0xFFFF;
+<a name="l00122"></a>00122    dividendLow+= remainder &lt;&lt; 16;
+<a name="l00123"></a>00123    remainder = dividendLow % divisor;
+<a name="l00124"></a>00124    dividendLow = dividendLow / divisor;
+<a name="l00125"></a>00125    *dividend = dividendLow + ((uint64)dividendLow2 &lt;&lt; 16) + ((uint64)dividendHigh &lt;&lt; 32);
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127    <span class="keywordflow">return</span>(remainder);
+<a name="l00128"></a>00128 }
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130 <span class="comment">//FreeBSD&#39;s implementation of strlen.</span>
+<a name="l00131"></a><a class="code" href="common_8c.html#ab6d82ea1bcf2827a207a17fd090c5921">00131</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921">strlen</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str)
+<a name="l00132"></a>00132 {
+<a name="l00133"></a>00133     <span class="keyword">const</span> <span class="keywordtype">char</span> *s;
+<a name="l00134"></a>00134     <span class="keywordflow">for</span> (s = str; *s; ++s);
+<a name="l00135"></a>00135     <span class="keywordflow">return</span>(s - str);
+<a name="l00136"></a>00136 }
 <a name="l00137"></a>00137 
-<a name="l00138"></a>00138         <span class="keywordflow">while</span>( ! (ret = *(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)src - *(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)dst) &amp;&amp; *dst)
-<a name="l00139"></a>00139                 ++src, ++dst;
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141         <span class="keywordflow">if</span> ( ret &lt; 0 )
-<a name="l00142"></a>00142                 ret = -1 ;
-<a name="l00143"></a>00143         <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ret &gt; 0 )
-<a name="l00144"></a>00144                 ret = 1 ;
-<a name="l00145"></a>00145 
-<a name="l00146"></a>00146         <span class="keywordflow">return</span>( ret );
-<a name="l00147"></a>00147 }
-<a name="l00148"></a>00148 
-<a name="l00149"></a><a class="code" href="common_8c.html#a7a82515b5d377be04817715c5465b647">00149</a> <span class="keywordtype">char</span> *<a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(<span class="keywordtype">char</span> *dest, <span class="keyword">const</span> <span class="keywordtype">char</span> *src)
-<a name="l00150"></a>00150 {
-<a name="l00151"></a>00151    <span class="keywordtype">char</span> *save = dest;
-<a name="l00152"></a>00152    <span class="keywordflow">while</span>(*dest++ = *src++);
-<a name="l00153"></a>00153    <span class="keywordflow">return</span> save;
-<a name="l00154"></a>00154 }
-<a name="l00155"></a>00155 
-<a name="l00156"></a><a class="code" href="common_8c.html#a1158ee53a70b66e0208da58ff10bf986">00156</a> <span class="keywordtype">char</span>* <a class="code" href="common_8c.html#a1158ee53a70b66e0208da58ff10bf986">strchr</a> (<span class="keyword">register</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* s, <span class="keywordtype">int</span> c)
-<a name="l00157"></a>00157 {
-<a name="l00158"></a>00158   <span class="keywordflow">do</span> {
-<a name="l00159"></a>00159     <span class="keywordflow">if</span> (*s == c)
-<a name="l00160"></a>00160       {
-<a name="l00161"></a>00161         <span class="keywordflow">return</span> (<span class="keywordtype">char</span>*)s;
-<a name="l00162"></a>00162       }
-<a name="l00163"></a>00163   } <span class="keywordflow">while</span> (*s++);
-<a name="l00164"></a>00164   <span class="keywordflow">return</span> (0);
-<a name="l00165"></a>00165 }
-<a name="l00166"></a>00166 
+<a name="l00138"></a><a class="code" href="common_8c.html#a19b2d1068440c7697d9598d19feb7cb9">00138</a> <span class="keywordtype">int</span> <a class="code" href="common_8h.html#a19b2d1068440c7697d9598d19feb7cb9">strcmp</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> * src, <span class="keyword">const</span> <span class="keywordtype">char</span> * dst)
+<a name="l00139"></a>00139 {
+<a name="l00140"></a>00140         <span class="keywordtype">int</span> ret = 0 ;
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142         <span class="keywordflow">while</span>( ! (ret = *(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)src - *(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)dst) &amp;&amp; *dst)
+<a name="l00143"></a>00143                 ++src, ++dst;
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145         <span class="keywordflow">if</span> ( ret &lt; 0 )
+<a name="l00146"></a>00146                 ret = -1 ;
+<a name="l00147"></a>00147         <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ret &gt; 0 )
+<a name="l00148"></a>00148                 ret = 1 ;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150         <span class="keywordflow">return</span>( ret );
+<a name="l00151"></a>00151 }
+<a name="l00152"></a>00152 
+<a name="l00153"></a><a class="code" href="common_8c.html#a7a82515b5d377be04817715c5465b647">00153</a> <span class="keywordtype">char</span> *<a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(<span class="keywordtype">char</span> *dest, <span class="keyword">const</span> <span class="keywordtype">char</span> *src)
+<a name="l00154"></a>00154 {
+<a name="l00155"></a>00155    <span class="keywordtype">char</span> *save = dest;
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157    <span class="keywordflow">while</span>((*dest++ = *src++))
+<a name="l00158"></a>00158    {
+<a name="l00159"></a>00159    }
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161    <span class="keywordflow">return</span> save;
+<a name="l00162"></a>00162 }
+<a name="l00163"></a>00163 
+<a name="l00164"></a><a class="code" href="common_8c.html#a1158ee53a70b66e0208da58ff10bf986">00164</a> <span class="keywordtype">char</span>* <a class="code" href="common_8c.html#a1158ee53a70b66e0208da58ff10bf986">strchr</a> (<span class="keyword">register</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* s, <span class="keywordtype">int</span> c)
+<a name="l00165"></a>00165 {
+<a name="l00166"></a>00166   <span class="keywordflow">do</span> {
+<a name="l00167"></a>00167     <span class="keywordflow">if</span> (*s == c)
+<a name="l00168"></a>00168       {
+<a name="l00169"></a>00169         <span class="keywordflow">return</span> (<span class="keywordtype">char</span>*)s;
+<a name="l00170"></a>00170       }
+<a name="l00171"></a>00171   } <span class="keywordflow">while</span> (*s++);
+<a name="l00172"></a>00172   <span class="keywordflow">return</span> (0);
+<a name="l00173"></a>00173 }
+<a name="l00174"></a>00174 
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

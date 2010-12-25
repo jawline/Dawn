@@ -1,12 +1,12 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$phys__mm_8h.html#a7fafda6bc4a98719fbf8965f1c5d697c" title="allocateFrameForProcess" alt="" coords="393,43,575,72"/>
-<area shape="rect" id="node9" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1009,18,1087,47"/>
+<area shape="rect" id="node9" href="$common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="996,18,1073,47"/>
 <area shape="rect" id="node11" href="$virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3" title="kernelFirstFreeVirtualAddress" alt="" coords="137,95,343,124"/>
 <area shape="rect" id="node15" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="215,148,265,178"/>
 <area shape="rect" id="node23" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="207,202,273,231"/>
-<area shape="rect" id="node5" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="647,43,756,72"/>
-<area shape="rect" id="node7" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="828,43,959,72"/>
+<area shape="rect" id="node5" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="640,43,749,72"/>
+<area shape="rect" id="node7" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="815,43,945,72"/>
 <area shape="rect" id="node13" href="$virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="436,96,532,126"/>
 <area shape="rect" id="node17" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="428,150,540,179"/>
-<area shape="rect" id="node19" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="625,150,777,179"/>
+<area shape="rect" id="node19" href="$process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="624,150,765,179"/>
 </map>

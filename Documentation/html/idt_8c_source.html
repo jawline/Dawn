@@ -39,7 +39,7 @@
 <a name="l00009"></a>00009 <span class="comment">//This loads the IDT</span>
 <a name="l00010"></a><a class="code" href="sources_2interrupts_2idt_8h.html#a992b45389c33c7b7335ccd0e1713bf3a">00010</a> <span class="keywordtype">void</span> <a class="code" href="headers_2interrupts_2idt_8h.html#a992b45389c33c7b7335ccd0e1713bf3a">Initialize_IDT</a>() 
 <a name="l00011"></a>00011 {
-<a name="l00012"></a>00012         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;<a class="code" href="idt_8c.html#af69381381a1a2d28954b19bf08ae3b1a">idt</a>, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structidt__entry.html">idt_entry</a>) * 256);
+<a name="l00012"></a>00012         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(&amp;<a class="code" href="idt_8c.html#af69381381a1a2d28954b19bf08ae3b1a">idt</a>, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structidt__entry.html">idt_entry</a>) * 256);
 <a name="l00013"></a>00013         <a class="code" href="structidt__ptr.html">idt_ptr</a>.limit = <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structidt__entry.html">idt_entry</a>) * 256 -1;
 <a name="l00014"></a>00014         <a class="code" href="structidt__ptr.html">idt_ptr</a>.base  = (uint32)&amp;<a class="code" href="idt_8c.html#af69381381a1a2d28954b19bf08ae3b1a">idt</a>;
 <a name="l00015"></a>00015 
@@ -124,7 +124,7 @@
 <a name="l00094"></a>00094 } 
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:13 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

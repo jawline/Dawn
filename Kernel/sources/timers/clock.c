@@ -1,5 +1,6 @@
 #include <timers/clock.h>
 #include <panic/panic.h>
+#include <scheduler/process_scheduler.h>
 #include "pit.h"
 
 unsigned long clock_ticks;
@@ -9,7 +10,7 @@ void pitCallback()
 {
 	clock_ticks++;
 
-	scheduler_on_tick();
+	schedulerOnTick();
 }
 
 void initializeSystemClock()

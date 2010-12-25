@@ -4,7 +4,7 @@
 <area shape="rect" id="node19" href="$pit_8c.html#ab55e809346b8773b708b6315911b48e4" title="setPitCallback" alt="" coords="212,165,321,195"/>
 <area shape="rect" id="node5" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="440,5,491,35"/>
 <area shape="rect" id="node7" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="372,59,559,88"/>
-<area shape="rect" id="node11" href="$process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b" title="scheduler_on_tick" alt="" coords="397,112,533,141"/>
+<area shape="rect" id="node11" href="$process__scheduler_8h.html#a0d52bfc1f92b42f597654084ce9b5c67" title="schedulerOnTick" alt="" coords="403,112,528,141"/>
 <area shape="rect" id="node13" href="$process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09" title="swapToProcess" alt="" coords="608,112,725,141"/>
 <area shape="rect" id="node15" href="$tss_8c.html#aa5e711ad212301792cb4b980158be99b" title="setKernelStack" alt="" coords="775,85,892,115"/>
 <area shape="rect" id="node17" href="$process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69" title="switch_process" alt="" coords="775,139,892,168"/>

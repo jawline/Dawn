@@ -1,4 +1,5 @@
 #include <process/get_info.h>
+#include <common.h>
 
 //This returns the PID of a process given by the scheduler at iter i or -1 if out of the schedulers range
 DEFN_SYSCALL1(get_process_id, 17, unsigned int);
@@ -17,7 +18,7 @@ int getProcessID(unsigned int n)
 process_info_t getProcessInfo(int pid)
 {
 	process_info_t info;
-	memset(&info, 0, sizeof(process_info_t));
+	memset((void*)&info, 0, sizeof(process_info_t));
 
 	if (syscall_valid_process(pid) == 1)
 	{

@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$screen__textmode_8c.html#ae0201053e7b900cde62167b17726e343" title="backup_terminal" alt="" coords="199,5,327,35"/>
-<area shape="rect" id="node5" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="463,31,540,60"/>
+<area shape="rect" id="node5" href="$common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="463,31,540,60"/>
 <area shape="rect" id="node8" href="$screen_8h.html#a4fe7b28cc711d34d7f29d73190e2f94f" title="text_mode_clearscreen" alt="" coords="177,109,348,139"/>
 <area shape="rect" id="node12" href="$screen__textmode_8c.html#aca9780ac466c44e0584aa24e1f24d6eb" title="text_mode_tup" alt="" coords="204,163,321,192"/>
 <area shape="rect" id="node10" href="$screen__textmode_8c.html#ae6e9f4165d17cd81c3ee4b564da0a8d2" title="text_mode_clearscreen_prec" alt="" coords="399,109,604,139"/>

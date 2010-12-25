@@ -43,7 +43,7 @@
 <a name="l00013"></a>00013    <a class="code" href="gdt_8c.html#ad57e976b13f592834eae0c9e07f71bd5">gdt_set_gate</a>(num, base, limit, 0xE9, 0x00);
 <a name="l00014"></a>00014 
 <a name="l00015"></a>00015    <span class="comment">//Null the TSS</span>
-<a name="l00016"></a>00016    <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;tss_entry, 0, <span class="keyword">sizeof</span>(tss_entry));
+<a name="l00016"></a>00016    <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(&amp;tss_entry, 0, <span class="keyword">sizeof</span>(tss_entry));
 <a name="l00017"></a>00017 
 <a name="l00018"></a>00018    tss_entry.<a class="code" href="structtss__entry__struct.html#aa2a88c77e0a18aaf93e22bc84fd6b6d7">ss0</a>  = ss0;  <span class="comment">// Set the kernel stack segment.</span>
 <a name="l00019"></a>00019    tss_entry.<a class="code" href="structtss__entry__struct.html#a5beedbc15b6c9be0d78ded4db6eb061e">esp0</a> = esp0; <span class="comment">// Set the kernel stack pointer.</span>
@@ -72,7 +72,7 @@
 <a name="l00042"></a>00042 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Dawn OS: Kernel/sources/scheduler/default/process_scheduler.c Source File</title>
+<title>Dawn OS: Kernel/sources/scheduler/process_scheduler.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -25,22 +25,22 @@
   </div>
 <div class="header">
   <div class="headertitle">
-<h1>Kernel/sources/scheduler/default/process_scheduler.c</h1>  </div>
+<h1>Kernel/sources/scheduler/process_scheduler.c</h1>  </div>
 </div>
 <div class="contents">
-<a href="process__scheduler_8c.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &quot;<a class="code" href="process__scheduler_8h.html">process_scheduler.h</a>&quot;</span>
+<a href="process__scheduler_8c.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;<a class="code" href="process__scheduler_8h.html">scheduler/process_scheduler.h</a>&gt;</span>
 <a name="l00002"></a>00002 <span class="preprocessor">#include &lt;<a class="code" href="panic_8h.html">panic/panic.h</a>&gt;</span>
-<a name="l00003"></a><a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">00003</a> <span class="preprocessor">#include &lt;<a class="code" href="stdlib_8h.html">stdlib.h</a>&gt;</span>
-<a name="l00004"></a><a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">00004</a> <span class="preprocessor">#include &lt;<a class="code" href="common_8h.html">common.h</a>&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;../../stack/kstack.h&quot;</span>
-<a name="l00006"></a><a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">00006</a> <span class="preprocessor">#include &lt;<a class="code" href="debug_8h.html">debug/debug.h</a>&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;<a class="code" href="stdlib_8h.html">stdlib.h</a>&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;<a class="code" href="common_8h.html">common.h</a>&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;../stack/kstack.h&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;<a class="code" href="debug_8h.html">debug/debug.h</a>&gt;</span>
 <a name="l00007"></a>00007 
 <a name="l00008"></a><a class="code" href="structprocess__entry__t.html">00008</a> <span class="keyword">struct </span><a class="code" href="structprocess__entry__t.html">process_entry_t</a>
 <a name="l00009"></a>00009 {
-<a name="l00010"></a>00010         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
-<a name="l00011"></a>00011         <span class="keywordtype">int</span> <a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a>;
+<a name="l00010"></a><a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">00010</a>         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
+<a name="l00011"></a><a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">00011</a>         <span class="keywordtype">int</span> <a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a>;
 <a name="l00012"></a>00012 
-<a name="l00013"></a>00013         <span class="keyword">struct </span><a class="code" href="structprocess__entry__t.html">process_entry_t</a>* <a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00013"></a><a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">00013</a>         <span class="keyword">struct </span><a class="code" href="structprocess__entry__t.html">process_entry_t</a>* <a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
 <a name="l00014"></a>00014 };
 <a name="l00015"></a>00015 
 <a name="l00016"></a><a class="code" href="process__scheduler_8c.html#a9a10d3414b5537853f15185878a01342">00016</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structprocess__entry__t.html">process_entry_t</a> <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>;
@@ -48,259 +48,257 @@
 <a name="l00018"></a><a class="code" href="process__scheduler_8c.html#a642bd184b3be9cde01b3df2c0de92e9c">00018</a> <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* <a class="code" href="process__scheduler_8c.html#a642bd184b3be9cde01b3df2c0de92e9c">list_root</a> = 0;
 <a name="l00019"></a><a class="code" href="process__scheduler_8c.html#a1d6d526e8bde24a07738286c559453c8">00019</a> <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* <a class="code" href="process__scheduler_8c.html#a1d6d526e8bde24a07738286c559453c8">list_current</a> = 0;
 <a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00022"></a>00022 
-<a name="l00023"></a><a class="code" href="process__scheduler_8c.html#ad102b771d475960e41eb9bdb143fd60c">00023</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#ad102b771d475960e41eb9bdb143fd60c">initializeScheduler</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* kp)
-<a name="l00024"></a>00024 {
-<a name="l00025"></a>00025         <span class="comment">//Create and set new_process to all 0&#39;s</span>
-<a name="l00026"></a>00026         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
-<a name="l00027"></a>00027         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029         <span class="comment">//Set its process pointer to the kernels processing path</span>
-<a name="l00030"></a>00030         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a> = kp;
-<a name="l00031"></a>00031         
-<a name="l00032"></a>00032         <span class="comment">//Loop backs</span>
-<a name="l00033"></a>00033         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = new_process;
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035         <span class="comment">//Set the root and current set of the list to new_process</span>
-<a name="l00036"></a>00036         list_root = new_process;
-<a name="l00037"></a>00037         list_current = new_process;
-<a name="l00038"></a>00038 }
-<a name="l00039"></a>00039 
-<a name="l00040"></a><a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">00040</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">swapToProcess</a>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* scheduler_entry)
-<a name="l00041"></a>00041 {
-<a name="l00042"></a>00042         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* old_proc = list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
-<a name="l00043"></a>00043         
-<a name="l00044"></a>00044         <a class="code" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b">setKernelStack</a>(<a class="code" href="kstack_8h.html#a70162e7ded659255a8d604b2f09bc13f">KERNEL_STACK_START</a>);
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046         <span class="comment">//Swap to the next process</span>
-<a name="l00047"></a>00047         list_current = scheduler_entry;
+<a name="l00021"></a><a class="code" href="process__scheduler_8c.html#a9d3cbc623e02c7961cc925acb36b033a">00021</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a0953f981271afac847c98a06a847c1f4">schedulerInitialize</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* kp)
+<a name="l00022"></a>00022 {
+<a name="l00023"></a>00023         <span class="comment">//Create and set new_process to all 0&#39;s</span>
+<a name="l00024"></a>00024         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
+<a name="l00025"></a>00025         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027         <span class="comment">//Set its process pointer to the kernels processing path</span>
+<a name="l00028"></a>00028         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a> = kp;
+<a name="l00029"></a>00029         
+<a name="l00030"></a>00030         <span class="comment">//Loop backs</span>
+<a name="l00031"></a>00031         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = new_process;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033         <span class="comment">//Set the root and current set of the list to new_process</span>
+<a name="l00034"></a>00034         list_root = new_process;
+<a name="l00035"></a>00035         list_current = new_process;
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">00038</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">swapToProcess</a>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* scheduler_entry)
+<a name="l00039"></a>00039 {
+<a name="l00040"></a>00040         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* old_proc = list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
+<a name="l00041"></a>00041         
+<a name="l00042"></a>00042         <a class="code" href="tss_8c.html#aa5e711ad212301792cb4b980158be99b">setKernelStack</a>(<a class="code" href="kstack_8h.html#a70162e7ded659255a8d604b2f09bc13f">KERNEL_STACK_START</a>);
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044         <span class="comment">//Swap to the next process</span>
+<a name="l00045"></a>00045         list_current = scheduler_entry;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_proc = list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* new_proc = list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051         <span class="comment">//Give me a nano!</span>
-<a name="l00052"></a>00052         list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a> = _STD_NANO_;
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054         <span class="comment">//Swap to the new process</span>
-<a name="l00055"></a>00055         <a class="code" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69">switch_process</a>(old_proc, new_proc);
-<a name="l00056"></a>00056 }
-<a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="process__scheduler_8h.html#a352be131bf4dd6f8a85ea25f379bf06b">00058</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b">scheduler_on_tick</a>()
-<a name="l00059"></a>00059 {
-<a name="l00060"></a>00060         <span class="keywordflow">if</span> (list_root == 0) <span class="keywordflow">return</span>;
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062         <span class="keywordflow">if</span> (list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a> &lt; 1)
-<a name="l00063"></a>00063         {
-<a name="l00064"></a>00064                 <span class="keywordflow">if</span> (list_current-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> == 1)
-<a name="l00065"></a>00065                 {
-<a name="l00066"></a>00066                         <a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">swapToProcess</a>(list_root);
-<a name="l00067"></a>00067                 }
-<a name="l00068"></a>00068                 <span class="keywordflow">else</span>
-<a name="l00069"></a>00069                 {
-<a name="l00070"></a>00070                         <a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">swapToProcess</a>(list_current-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>);
-<a name="l00071"></a>00071                 }
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073         } <span class="keywordflow">else</span>
-<a name="l00074"></a>00074         {
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076                 <span class="comment">//increment the counter of the time spent on this process</span>
-<a name="l00077"></a>00077                 list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475" title="The number of ticks spent processing this process.">m_processingTime</a>++;
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079                 <span class="comment">//One tick closer to being context switched</span>
-<a name="l00080"></a>00080                 list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a>--;
-<a name="l00081"></a>00081         }
-<a name="l00082"></a>00082 }
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <span class="comment">//To anybody calling this function, remember to re-enable interrupts where applicable</span>
-<a name="l00086"></a><a class="code" href="process__scheduler_8h.html#a9c89da0f7ec43940de9e285837ab0884">00086</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a1a447c2a3fed5305d23c288b4f641bcc">scheduler_add</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* op)
-<a name="l00087"></a>00087 {
-<a name="l00088"></a>00088         <span class="comment">//Create and set new_process to all 0&#39;s</span>
-<a name="l00089"></a>00089         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
-<a name="l00090"></a>00090         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
+<a name="l00049"></a>00049         <span class="comment">//Give me a nano!</span>
+<a name="l00050"></a>00050         list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a> = _STD_NANO_;
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052         <span class="comment">//Swap to the new process</span>
+<a name="l00053"></a>00053         <a class="code" href="process_8h.html#a4918dd8331c1ddcc48b4416149c9ee69">switch_process</a>(old_proc, new_proc);
+<a name="l00054"></a>00054 }
+<a name="l00055"></a>00055 
+<a name="l00056"></a><a class="code" href="process__scheduler_8c.html#a0d52bfc1f92b42f597654084ce9b5c67">00056</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a0d52bfc1f92b42f597654084ce9b5c67">schedulerOnTick</a>()
+<a name="l00057"></a>00057 {
+<a name="l00058"></a>00058         <span class="keywordflow">if</span> (list_root == 0) <span class="keywordflow">return</span>;
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060         <span class="keywordflow">if</span> (list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a> &lt; 1)
+<a name="l00061"></a>00061         {
+<a name="l00062"></a>00062                 <span class="keywordflow">if</span> (list_current-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> == 1)
+<a name="l00063"></a>00063                 {
+<a name="l00064"></a>00064                         <a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">swapToProcess</a>(list_root);
+<a name="l00065"></a>00065                 }
+<a name="l00066"></a>00066                 <span class="keywordflow">else</span>
+<a name="l00067"></a>00067                 {
+<a name="l00068"></a>00068                         <a class="code" href="process__scheduler_8c.html#a95ff736f47095e3ed110fb204731ea09">swapToProcess</a>(list_current-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>);
+<a name="l00069"></a>00069                 }
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071         } <span class="keywordflow">else</span>
+<a name="l00072"></a>00072         {
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074                 <span class="comment">//increment the counter of the time spent on this process</span>
+<a name="l00075"></a>00075                 list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a5216b340c8f02704e7970a8344ba7475" title="The number of ticks spent processing this process.">m_processingTime</a>++;
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077                 <span class="comment">//One tick closer to being context switched</span>
+<a name="l00078"></a>00078                 list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a>--;
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080 }
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="comment">//To anybody calling this function, remember to re-enable interrupts where applicable</span>
+<a name="l00084"></a><a class="code" href="process__scheduler_8c.html#a74006376e04cb1900c5282d62d4af846">00084</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#aa982ffeba70f9ed3267838103f847f7c">schedulerAdd</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* op)
+<a name="l00085"></a>00085 {
+<a name="l00086"></a>00086         <span class="comment">//Create and set new_process to all 0&#39;s</span>
+<a name="l00087"></a>00087         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* new_process = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
+<a name="l00088"></a>00088         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(new_process, 0, <span class="keyword">sizeof</span>(<a class="code" href="structprocess__entry__t.html">scheduler_proc</a>));
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a> = op;
 <a name="l00091"></a>00091 
-<a name="l00092"></a>00092         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a> = op;
+<a name="l00092"></a>00092         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iterator = 0;
 <a name="l00093"></a>00093 
-<a name="l00094"></a>00094         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iterator = 0;
+<a name="l00094"></a>00094         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator_process = list_root;
 <a name="l00095"></a>00095 
-<a name="l00096"></a>00096         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator_process = list_root;
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098         <span class="comment">//Loop to find the last entry in the list</span>
-<a name="l00099"></a>00099         <span class="keywordflow">for</span>(;;)
-<a name="l00100"></a>00100         {
-<a name="l00101"></a>00101                 <span class="keywordflow">if</span> (iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root)
-<a name="l00102"></a>00102                 {
-<a name="l00103"></a>00103                         <span class="keywordflow">break</span>;
-<a name="l00104"></a>00104                 }
-<a name="l00105"></a>00105                 <span class="keywordflow">else</span>
-<a name="l00106"></a>00106                 {
-<a name="l00107"></a>00107                         iterator_process = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00108"></a>00108                 }
-<a name="l00109"></a>00109         }
+<a name="l00096"></a>00096         <span class="comment">//Loop to find the last entry in the list</span>
+<a name="l00097"></a>00097         <span class="keywordflow">for</span>(;;)
+<a name="l00098"></a>00098         {
+<a name="l00099"></a>00099                 <span class="keywordflow">if</span> (iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root)
+<a name="l00100"></a>00100                 {
+<a name="l00101"></a>00101                         <span class="keywordflow">break</span>;
+<a name="l00102"></a>00102                 }
+<a name="l00103"></a>00103                 <span class="keywordflow">else</span>
+<a name="l00104"></a>00104                 {
+<a name="l00105"></a>00105                         iterator_process = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00106"></a>00106                 }
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109         iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = new_process;
 <a name="l00110"></a>00110 
-<a name="l00111"></a>00111         iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = new_process;
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = list_root;
-<a name="l00114"></a>00114 }
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116 <span class="comment">//To anybody calling this, remember to re-enable interrupts</span>
-<a name="l00117"></a><a class="code" href="process__scheduler_8h.html#ad27804d90f9798cb34d181e7e9bf8404">00117</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a662fcb01227f8ecade9625772428886a">scheduler_remove</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* op)
-<a name="l00118"></a>00118 {
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120         <span class="comment">//Find the scheduler entry</span>
-<a name="l00121"></a>00121         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator_process = list_root;
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123         <span class="keywordflow">for</span> (;;)
-<a name="l00124"></a>00124         {
-<a name="l00125"></a>00125                 <span class="keywordflow">if</span> (iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root)
-<a name="l00126"></a>00126                 {
-<a name="l00127"></a>00127                         <span class="keywordflow">return</span>; <span class="comment">//Cannot find the right proc</span>
-<a name="l00128"></a>00128                 }
-<a name="l00129"></a>00129                 <span class="keywordflow">else</span>
-<a name="l00130"></a>00130                 {
-<a name="l00131"></a>00131                         <span class="comment">//Is the next process the one that needs to be removed</span>
-<a name="l00132"></a>00132                         <span class="keywordflow">if</span> (iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a> == op)
-<a name="l00133"></a>00133                         {
-<a name="l00134"></a>00134                                 <span class="comment">//Process</span>
-<a name="l00135"></a>00135                                 <span class="keywordflow">break</span>;
-<a name="l00136"></a>00136                         }
-<a name="l00137"></a>00137                         <span class="keywordflow">else</span>
-<a name="l00138"></a>00138                         {
-<a name="l00139"></a>00139                                 iterator_process = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00140"></a>00140                         }
-<a name="l00141"></a>00141                 }
-<a name="l00142"></a>00142         }
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144 
-<a name="l00145"></a>00145         <span class="comment">//Store the proc</span>
-<a name="l00146"></a>00146         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* <a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148         <span class="keywordflow">if</span> (list_current == next)
-<a name="l00149"></a>00149         {
-<a name="l00150"></a>00150                 <a class="code" href="panic_8h.html#ae3c0c6fb5e69bb687e787ec5c487afa1">PANIC</a>(<span class="stringliteral">&quot;Scheduler trying to remove currently accessed process, this shouldn&#39;t happen... DEBUG!!\n&quot;</span>);
-<a name="l00151"></a>00151         }
-<a name="l00152"></a>00152 
-<a name="l00153"></a>00153         <span class="comment">//Remove it from the list</span>
-<a name="l00154"></a>00154         iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00155"></a>00155 
-<a name="l00156"></a>00156         <span class="comment">//Free it</span>
-<a name="l00157"></a>00157         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(next);
+<a name="l00111"></a>00111         new_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = list_root;
+<a name="l00112"></a>00112 }
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 <span class="comment">//To anybody calling this, remember to re-enable interrupts</span>
+<a name="l00115"></a><a class="code" href="process__scheduler_8c.html#a926a62b0cadb218d8e38f68ee3b3abaa">00115</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a6b043f195b9f7130a20ab71185538706">schedulerRemove</a>(<a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* op)
+<a name="l00116"></a>00116 {
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118         <span class="comment">//Find the scheduler entry</span>
+<a name="l00119"></a>00119         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator_process = list_root;
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121         <span class="keywordflow">for</span> (;;)
+<a name="l00122"></a>00122         {
+<a name="l00123"></a>00123                 <span class="keywordflow">if</span> (iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root)
+<a name="l00124"></a>00124                 {
+<a name="l00125"></a>00125                         <span class="keywordflow">return</span>; <span class="comment">//Cannot find the right proc</span>
+<a name="l00126"></a>00126                 }
+<a name="l00127"></a>00127                 <span class="keywordflow">else</span>
+<a name="l00128"></a>00128                 {
+<a name="l00129"></a>00129                         <span class="comment">//Is the next process the one that needs to be removed</span>
+<a name="l00130"></a>00130                         <span class="keywordflow">if</span> (iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a> == op)
+<a name="l00131"></a>00131                         {
+<a name="l00132"></a>00132                                 <span class="comment">//Process</span>
+<a name="l00133"></a>00133                                 <span class="keywordflow">break</span>;
+<a name="l00134"></a>00134                         }
+<a name="l00135"></a>00135                         <span class="keywordflow">else</span>
+<a name="l00136"></a>00136                         {
+<a name="l00137"></a>00137                                 iterator_process = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00138"></a>00138                         }
+<a name="l00139"></a>00139                 }
+<a name="l00140"></a>00140         }
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143         <span class="comment">//Store the proc</span>
+<a name="l00144"></a>00144         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* <a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146         <span class="keywordflow">if</span> (list_current == next)
+<a name="l00147"></a>00147         {
+<a name="l00148"></a>00148                 <a class="code" href="panic_8h.html#ae3c0c6fb5e69bb687e787ec5c487afa1">PANIC</a>(<span class="stringliteral">&quot;Scheduler trying to remove currently accessed process, this shouldn&#39;t happen... DEBUG!!\n&quot;</span>);
+<a name="l00149"></a>00149         }
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151         <span class="comment">//Remove it from the list</span>
+<a name="l00152"></a>00152         iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> = iterator_process-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154         <span class="comment">//Free it</span>
+<a name="l00155"></a>00155         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(next);
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Removed scheduler entry\n&quot;</span>);
 <a name="l00158"></a>00158 
-<a name="l00159"></a>00159         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;Removed scheduler entry\n&quot;</span>);
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161         <span class="keywordflow">return</span>;
-<a name="l00162"></a>00162 }
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164 <span class="comment">//Sleeps the current process on the next tick</span>
-<a name="l00165"></a><a class="code" href="syscall_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">00165</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#aa62ed6bd1fc98f87bc0b6119494095d4">scheduler_block_me</a>()
-<a name="l00166"></a>00166 {
-<a name="l00167"></a>00167         <span class="keywordflow">if</span> (list_current == 0) <span class="keywordflow">return</span>;
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169         list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a> = 0;
-<a name="l00170"></a>00170 }
-<a name="l00171"></a>00171 
-<a name="l00172"></a><a class="code" href="system_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">00172</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>()
-<a name="l00173"></a>00173 {
-<a name="l00174"></a>00174         <span class="keywordflow">if</span> (list_current == 0) <span class="keywordflow">return</span> 0;
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176         <span class="keywordflow">return</span> list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
-<a name="l00177"></a>00177 }
-<a name="l00178"></a>00178 
-<a name="l00179"></a><a class="code" href="process__scheduler_8c.html#a7987083a29a7c2ef96d730f7ccb053f7">00179</a> <span class="keywordtype">int</span> <a class="code" href="process__scheduler_8c.html#a7987083a29a7c2ef96d730f7ccb053f7">scheduler_num_processes</a>()
-<a name="l00180"></a>00180 {
-<a name="l00181"></a>00181         <span class="keywordflow">if</span> (list_root == 0) <span class="keywordflow">return</span> 0;
-<a name="l00182"></a>00182         
-<a name="l00183"></a>00183         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iter = list_root;
+<a name="l00159"></a>00159         <span class="keywordflow">return</span>;
+<a name="l00160"></a>00160 }
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 <span class="comment">//Sleeps the current process on the next tick</span>
+<a name="l00163"></a><a class="code" href="process__scheduler_8c.html#af2e6cfa7c88c3a97524cb2d856ec318a">00163</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#af2e6cfa7c88c3a97524cb2d856ec318a">schedulerBlockMe</a>()
+<a name="l00164"></a>00164 {
+<a name="l00165"></a>00165         <span class="keywordflow">if</span> (list_current == 0) <span class="keywordflow">return</span>;
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167         list_current-&gt;<a class="code" href="structprocess__entry__t.html#a30978bd7476cfcbb08eaaf3639977848">ticks_tell_die</a> = 0;
+<a name="l00168"></a>00168 }
+<a name="l00169"></a>00169 
+<a name="l00170"></a><a class="code" href="process__scheduler_8c.html#a9e5dc93aac0f1d8282e99c94cf124ba2">00170</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>()
+<a name="l00171"></a>00171 {
+<a name="l00172"></a>00172         <span class="keywordflow">if</span> (list_current == 0) <span class="keywordflow">return</span> 0;
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174         <span class="keywordflow">return</span> list_current-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
+<a name="l00175"></a>00175 }
+<a name="l00176"></a>00176 
+<a name="l00177"></a><a class="code" href="process__scheduler_8c.html#aed31f6d71f706cf539123e205efcbc8b">00177</a> <span class="keywordtype">int</span> <a class="code" href="process__scheduler_8h.html#aed31f6d71f706cf539123e205efcbc8b">schedulerNumProcesses</a>()
+<a name="l00178"></a>00178 {
+<a name="l00179"></a>00179         <span class="keywordflow">if</span> (list_root == 0) <span class="keywordflow">return</span> 0;
+<a name="l00180"></a>00180         
+<a name="l00181"></a>00181         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iter = list_root;
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183         <span class="keywordtype">int</span> numTotal = 0;
 <a name="l00184"></a>00184 
-<a name="l00185"></a>00185         <span class="keywordtype">int</span> numTotal = 0;
-<a name="l00186"></a>00186 
-<a name="l00187"></a>00187         <span class="keywordflow">while</span> (1)
-<a name="l00188"></a>00188         {
-<a name="l00189"></a>00189                 numTotal++;
-<a name="l00190"></a>00190 
-<a name="l00191"></a>00191                 <span class="keywordflow">if</span> (iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root)
-<a name="l00192"></a>00192                 {
-<a name="l00193"></a>00193                         <span class="keywordflow">break</span>;
-<a name="l00194"></a>00194                 }
-<a name="l00195"></a>00195                 
-<a name="l00196"></a>00196                 iter = iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00197"></a>00197         }
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199         <span class="keywordflow">return</span> numTotal;
-<a name="l00200"></a>00200 }
-<a name="l00201"></a>00201 
-<a name="l00202"></a><a class="code" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642">00202</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#ad1dc14872246fc38ff78f0a41929f642">scheduler_kill_current_process</a>()
-<a name="l00203"></a>00203 {
-<a name="l00204"></a>00204         <span class="keywordflow">if</span> (list_current == 0) <span class="keywordflow">return</span> 0;
-<a name="l00205"></a>00205 
-<a name="l00206"></a>00206         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process = <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
-<a name="l00207"></a>00207         process-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> = 1;
-<a name="l00208"></a>00208 
-<a name="l00209"></a>00209         <span class="keywordflow">for</span> (;;)
-<a name="l00210"></a>00210         {
-<a name="l00211"></a>00211                 <a class="code" href="process__scheduler_8c.html#a352be131bf4dd6f8a85ea25f379bf06b">scheduler_on_tick</a>(); <span class="comment">//Fake ticks untill the next process is brought into context. Next time this process is handled by the scheduler it will be destroyed</span>
-<a name="l00212"></a>00212         }
-<a name="l00213"></a>00213 }
-<a name="l00214"></a>00214 
-<a name="l00215"></a><a class="code" href="startnew_8c.html#aa8ea4fc777e94c00f614dfbe4f34df95">00215</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8c.html#aa8ea4fc777e94c00f614dfbe4f34df95">scheduler_return_process</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter)
-<a name="l00216"></a>00216 {
-<a name="l00217"></a>00217         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator = list_root;
-<a name="l00218"></a>00218         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
-<a name="l00219"></a>00219 
-<a name="l00220"></a>00220         <span class="keywordflow">for</span> (i = 0; i &lt; iter; i++)
-<a name="l00221"></a>00221         {
-<a name="l00222"></a>00222                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root) <span class="keywordflow">return</span> 0;
-<a name="l00223"></a>00223                 iterator = iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00224"></a>00224         }
-<a name="l00225"></a>00225 
-<a name="l00226"></a>00226         <span class="keywordflow">return</span> iterator-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
-<a name="l00227"></a>00227 }
-<a name="l00228"></a>00228 
-<a name="l00229"></a><a class="code" href="process__scheduler_8c.html#a9b79f8f6e29957e150c1dc666334f30c">00229</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8c.html#a9b79f8f6e29957e150c1dc666334f30c">schedulerGetProcessFromPid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pid)
-<a name="l00230"></a>00230 {
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator = list_root;
-<a name="l00233"></a>00233         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235         <span class="keywordflow">for</span> (;;)
-<a name="l00236"></a>00236         {
-<a name="l00237"></a>00237                 <span class="comment">//If it is the process I&#39;m loooking for break</span>
-<a name="l00238"></a>00238                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> == pid) <span class="keywordflow">break</span>;
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240                 <span class="comment">//If its the last entry and not correct then return null</span>
-<a name="l00241"></a>00241                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root) <span class="keywordflow">return</span> 0;
-<a name="l00242"></a>00242 
-<a name="l00243"></a>00243                 <span class="comment">//Set the iterator to the next entry</span>
-<a name="l00244"></a>00244                 iterator = iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
-<a name="l00245"></a>00245         }
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247         <span class="comment">//Return what I got</span>
-<a name="l00248"></a>00248         <span class="keywordflow">return</span> iterator-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
-<a name="l00249"></a>00249 }
-<a name="l00250"></a>00250 
-<a name="l00251"></a><a class="code" href="process__scheduler_8h.html#a72865d5f7cb7d9eedd0f5dc2f07375b1">00251</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8c.html#a72865d5f7cb7d9eedd0f5dc2f07375b1">scheduler_global_message</a>(<a class="code" href="structprocess__message.html">process_message</a> msg, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_kernel_2sources_2system_2reboot_8c.html#a62fe4f31d7cd6087317744dd800a86c3">bit</a>)
-<a name="l00252"></a>00252 {
-<a name="l00253"></a>00253         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iter = list_root;
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255         <span class="keywordflow">while</span> (1)
-<a name="l00256"></a>00256         {
-<a name="l00257"></a>00257                 <span class="comment">//Test if this process wants to hear about this event</span>
-<a name="l00258"></a>00258                 <span class="keywordflow">if</span> (iter-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b" title="The flags set for what information this process wants to recieve in its postbox.">m_postboxFlags</a> &amp; bit == bit)
-<a name="l00259"></a>00259                 {
-<a name="l00260"></a>00260                         <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(&amp;iter-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>, msg);
+<a name="l00185"></a>00185         <span class="keywordflow">while</span> (1)
+<a name="l00186"></a>00186         {
+<a name="l00187"></a>00187                 numTotal++;
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189                 <span class="keywordflow">if</span> (iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root)
+<a name="l00190"></a>00190                 {
+<a name="l00191"></a>00191                         <span class="keywordflow">break</span>;
+<a name="l00192"></a>00192                 }
+<a name="l00193"></a>00193                 
+<a name="l00194"></a>00194                 iter = iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00195"></a>00195         }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197         <span class="keywordflow">return</span> numTotal;
+<a name="l00198"></a>00198 }
+<a name="l00199"></a>00199 
+<a name="l00200"></a><a class="code" href="process__scheduler_8c.html#a8cc87c20578219a25c90c2cc9bc115ea">00200</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#a8cc87c20578219a25c90c2cc9bc115ea">schedulerKillCurrentProcess</a>()
+<a name="l00201"></a>00201 {
+<a name="l00202"></a>00202         <span class="keywordflow">if</span> (list_current == 0) <span class="keywordflow">return</span> 0;
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204         <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* process = <a class="code" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2">getCurrentProcess</a>();
+<a name="l00205"></a>00205         process-&gt;<a class="code" href="structprocess__structure.html#a8a4c60e168cd52a36b03549f24c8db67">m_shouldDestroy</a> = 1;
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207         <span class="keywordflow">for</span> (;;)
+<a name="l00208"></a>00208         {
+<a name="l00209"></a>00209                 <a class="code" href="process__scheduler_8h.html#a0d52bfc1f92b42f597654084ce9b5c67">schedulerOnTick</a>(); <span class="comment">//Fake ticks untill the next process is brought into context. Next time this process is handled by the scheduler it will be destroyed</span>
+<a name="l00210"></a>00210         }
+<a name="l00211"></a>00211 }
+<a name="l00212"></a>00212 
+<a name="l00213"></a><a class="code" href="process__scheduler_8c.html#aba849c409aa98d231cc3f33d32728d22">00213</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8h.html#aba849c409aa98d231cc3f33d32728d22">schedulerReturnProcess</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iter)
+<a name="l00214"></a>00214 {
+<a name="l00215"></a>00215         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator = list_root;
+<a name="l00216"></a>00216         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218         <span class="keywordflow">for</span> (i = 0; i &lt; iter; i++)
+<a name="l00219"></a>00219         {
+<a name="l00220"></a>00220                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root) <span class="keywordflow">return</span> 0;
+<a name="l00221"></a>00221                 iterator = iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00222"></a>00222         }
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224         <span class="keywordflow">return</span> iterator-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
+<a name="l00225"></a>00225 }
+<a name="l00226"></a>00226 
+<a name="l00227"></a><a class="code" href="process__scheduler_8c.html#a9b79f8f6e29957e150c1dc666334f30c">00227</a> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="process__scheduler_8h.html#a9b79f8f6e29957e150c1dc666334f30c">schedulerGetProcessFromPid</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pid)
+<a name="l00228"></a>00228 {
+<a name="l00229"></a>00229 
+<a name="l00230"></a>00230         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iterator = list_root;
+<a name="l00231"></a>00231         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233         <span class="keywordflow">for</span> (;;)
+<a name="l00234"></a>00234         {
+<a name="l00235"></a>00235                 <span class="comment">//If it is the process I&#39;m loooking for break</span>
+<a name="l00236"></a>00236                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a2da274553c1e836f03659120144412e1" title="The process ID or pID unique to this process (At this run).">m_ID</a> == pid) <span class="keywordflow">break</span>;
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238                 <span class="comment">//If its the last entry and not correct then return null</span>
+<a name="l00239"></a>00239                 <span class="keywordflow">if</span> (iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root) <span class="keywordflow">return</span> 0;
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241                 <span class="comment">//Set the iterator to the next entry</span>
+<a name="l00242"></a>00242                 iterator = iterator-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00243"></a>00243         }
+<a name="l00244"></a>00244 
+<a name="l00245"></a>00245         <span class="comment">//Return what I got</span>
+<a name="l00246"></a>00246         <span class="keywordflow">return</span> iterator-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>;
+<a name="l00247"></a>00247 }
+<a name="l00248"></a>00248 
+<a name="l00249"></a><a class="code" href="process__scheduler_8c.html#ad37900679d23d982c52c094026b656a8">00249</a> <span class="keywordtype">void</span> <a class="code" href="process__scheduler_8h.html#ad37900679d23d982c52c094026b656a8">schedulerGlobalMessage</a>(<a class="code" href="structprocess__message.html">process_message</a> msg, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_kernel_2sources_2system_2reboot_8c.html#a62fe4f31d7cd6087317744dd800a86c3">bit</a>)
+<a name="l00250"></a>00250 {
+<a name="l00251"></a>00251         <a class="code" href="structprocess__entry__t.html">scheduler_proc</a>* iter = list_root;
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253         <span class="keywordflow">while</span> (1)
+<a name="l00254"></a>00254         {
+<a name="l00255"></a>00255                 <span class="comment">//Test if this process wants to hear about this event</span>
+<a name="l00256"></a>00256                 <span class="keywordflow">if</span> (iter-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a9e7ff269d93e1772bc706c92e640de7b" title="The flags set for what information this process wants to recieve in its postbox.">m_postboxFlags</a> &amp; bit == bit)
+<a name="l00257"></a>00257                 {
+<a name="l00258"></a>00258                         <a class="code" href="process_8h.html#a3de17c849d9de394b95b696739322ac0">postbox_add</a>(&amp;iter-&gt;<a class="code" href="structprocess__entry__t.html#a0b9a0c45e43981ef98af8fa5a2e602c9">process_pointer</a>-&gt;<a class="code" href="structprocess__structure.html#a12d44fe2fee8aed7c8c2d6a79b3e80f2" title="The process postbox for this application.">m_processPostbox</a>, msg);
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260                 }
 <a name="l00261"></a>00261 
-<a name="l00262"></a>00262                 }
+<a name="l00262"></a>00262                 <span class="keywordflow">if</span> (iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root) <span class="keywordflow">break</span>;
 <a name="l00263"></a>00263 
-<a name="l00264"></a>00264                 <span class="keywordflow">if</span> (iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a> == list_root) <span class="keywordflow">break</span>;
+<a name="l00264"></a>00264                 iter = iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
 <a name="l00265"></a>00265 
-<a name="l00266"></a>00266                 iter = iter-&gt;<a class="code" href="structprocess__entry__t.html#a85028549a3457695ea6be5896b8dcb27">next</a>;
+<a name="l00266"></a>00266         }
 <a name="l00267"></a>00267 
-<a name="l00268"></a>00268         }
-<a name="l00269"></a>00269 
-<a name="l00270"></a>00270 }
+<a name="l00268"></a>00268 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

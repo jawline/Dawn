@@ -45,7 +45,7 @@
 <a name="l00015"></a>00015 {
 <a name="l00016"></a>00016         <a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a>* new_loc = (<a class="code" href="_shared_2headers_2types_2memory_8h.html#af5a6cd192e8fdcae26bb23ed0d700063">MEM_LOC</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(process-&gt;<a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">m_usedListSize</a> + <a class="code" href="used__list_8c.html#ad07159cd15672f443d91ec71edd1f5a6">usedListExpansionSize</a>);
 <a name="l00017"></a>00017 
-<a name="l00018"></a>00018         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(new_loc, process-&gt;<a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a>, process-&gt;<a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">m_usedListSize</a>);
+<a name="l00018"></a>00018         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(new_loc, process-&gt;<a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a>, process-&gt;<a class="code" href="structprocess__structure.html#a7babf616118836bd274871a65490e1dc">m_usedListSize</a>);
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020         <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(process-&gt;<a class="code" href="structprocess__structure.html#a2b445e55ad779145222170ca9d1eca08" title="A list of all the frames of memory mapped by this application.">m_usedListRoot</a>);
 <a name="l00021"></a>00021 
@@ -90,7 +90,7 @@
 <a name="l00060"></a>00060                 <span class="keywordflow">if</span> (*ulocation == location)
 <a name="l00061"></a>00061                 {
 <a name="l00062"></a>00062                         <span class="comment">//Fouuund it</span>
-<a name="l00063"></a>00063                         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(ulocation, ulocation + 1, process-&gt;<a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a> - iter);
+<a name="l00063"></a>00063                         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(ulocation, ulocation + 1, process-&gt;<a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a> - iter);
 <a name="l00064"></a>00064 
 <a name="l00065"></a>00065                         process-&gt;<a class="code" href="structprocess__structure.html#a50f75a9de6cde9b7e1d1c48c5b0bc276">m_usedListLocation</a> -= <span class="keyword">sizeof</span>(MEM_LOC);
 <a name="l00066"></a>00066 
@@ -102,7 +102,7 @@
 <a name="l00072"></a>00072 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

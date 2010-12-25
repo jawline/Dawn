@@ -82,9 +82,9 @@ char* itoa_64(uint64 value, char* result, int base)
 	return result;
 }
 
-void memset(uint32 *dest, uint8 val, uint32 len)
+void memset(void* dest, uint8 val, unsigned long len)
 {
-    uint8 *temp = (uint8 *)dest;
+    uint8* temp = (uint8*) dest;
     
     for ( ; len != 0; len--)
     { 
@@ -92,14 +92,18 @@ void memset(uint32 *dest, uint8 val, uint32 len)
     }
 }
 
-void memcpy(uint8 * dest, uint8 * src, uint32 len) 
+void memcpy(void* dest, void* src,unsigned long len) 
 {
 	int iter = 0;
+
+	uint8* dbuffer = (uint8*) dest;
+	uint8* sbuffer = (uint8*) src;
 	
 	for (iter = 0; iter < len; iter++) 
 	{
-		*dest = *src;
-		dest++; src++;	
+		*dbuffer = *sbuffer;
+		dbuffer++;
+		sbuffer++;
 	}
 }
 
@@ -124,7 +128,7 @@ uint64 __div_64_32(uint64* dividend, uint32 divisor)
 }
 
 //FreeBSD's implementation of strlen.
-uint32 strlen(const char * str)
+unsigned int strlen(const char* str)
 {
     const char *s;
     for (s = str; *s; ++s);
@@ -149,7 +153,11 @@ int strcmp (const char * src, const char * dst)
 char *strcpy(char *dest, const char *src)
 {
    char *save = dest;
-   while(*dest++ = *src++);
+
+   while((*dest++ = *src++))
+   {
+   }
+
    return save;
 }
 

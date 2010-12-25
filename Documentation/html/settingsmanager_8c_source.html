@@ -64,7 +64,7 @@
 <a name="l00042"></a>00042         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;SETTINGS: EXECUTE %s\n&quot;</span>, Line);
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045         <span class="keywordtype">size_t</span> length = <a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(Line);
+<a name="l00045"></a>00045         <span class="keywordtype">size_t</span> length = <a class="code" href="common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921">strlen</a>(Line);
 <a name="l00046"></a>00046 
 <a name="l00047"></a>00047         <span class="keyword">const</span> <span class="keywordtype">char</span>* FirstSpace = <a class="code" href="common_8c.html#a1158ee53a70b66e0208da58ff10bf986">strchr</a>(Line, <span class="charliteral">&#39; &#39;</span>);
 <a name="l00048"></a>00048 
@@ -104,14 +104,14 @@
 <a name="l00082"></a>00082         }
 <a name="l00083"></a>00083 
 <a name="l00084"></a>00084         <span class="keywordtype">char</span>* Name = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(length + 2);
-<a name="l00085"></a>00085         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(Name, Line, FirstSpace - Line);
+<a name="l00085"></a>00085         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(Name, Line, FirstSpace - Line);
 <a name="l00086"></a>00086         Name[FirstSpace - Line] = <span class="charliteral">&#39;\0&#39;</span>;
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;SETTINGS: *%s*\n&quot;</span>, Name);
 <a name="l00089"></a>00089 
 <a name="l00090"></a>00090         
 <a name="l00091"></a>00091         <span class="keywordtype">char</span>* Data = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(length + 2);
-<a name="l00092"></a>00092         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(Data, SecondSpace + 1, End - SecondSpace - 1);
+<a name="l00092"></a>00092         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(Data, SecondSpace + 1, End - SecondSpace - 1);
 <a name="l00093"></a>00093         Data[End - SecondSpace - 1] = <span class="charliteral">&#39;\0&#39;</span>;
 <a name="l00094"></a>00094 
 <a name="l00095"></a>00095         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;SETTINGS: *%s*\n&quot;</span>, Data);
@@ -160,7 +160,7 @@
 <a name="l00142"></a>00142         <span class="keywordflow">if</span> (cfgNode == 0) <span class="keywordflow">return</span>;
 <a name="l00143"></a>00143 
 <a name="l00144"></a>00144         <span class="keywordtype">char</span> cfgBuffer[1024];
-<a name="l00145"></a>00145         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(cfgBuffer, 0, 1024);
+<a name="l00145"></a>00145         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(cfgBuffer, 0, 1024);
 <a name="l00146"></a>00146 
 <a name="l00147"></a>00147         <span class="keywordtype">size_t</span> length = cfgNode-&gt;<a class="code" href="structfilesystem__node.html#a9ee64c7b918513891b3834b93ad0e501">length</a>;
 <a name="l00148"></a>00148         <span class="keywordtype">size_t</span> current = 0;
@@ -185,7 +185,7 @@
 <a name="l00167"></a>00167                         <a class="code" href="debugprint_8h.html#ad5aeca1a1a793c8ba18f85cbac89e768">DEBUG_PRINT</a>(<span class="stringliteral">&quot;SETTINGS: PARSE LINE %s\n&quot;</span>, cfgBuffer);
 <a name="l00168"></a>00168                         <a class="code" href="settingsmanager_8h.html#ace8ec19da2615d869eec34d5258e151e">settingsExecuteLine</a>(cfgBuffer);
 <a name="l00169"></a>00169 
-<a name="l00170"></a>00170                         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(cfgBuffer, 0, 1024);
+<a name="l00170"></a>00170                         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(cfgBuffer, 0, 1024);
 <a name="l00171"></a>00171                 }
 <a name="l00172"></a>00172                 <span class="keywordflow">else</span>
 <a name="l00173"></a>00173                 {
@@ -253,7 +253,7 @@
 <a name="l00235"></a>00235                 <a class="code" href="stdlib_8h.html#af709c400d0f4471dcb9b0cd62e21701c">free</a>(Entry-&gt;<a class="code" href="structsettings__manager__entry.html#a0aba9b5bf6ab83aff8549148a736a878">Data</a>);
 <a name="l00236"></a>00236         }
 <a name="l00237"></a>00237 
-<a name="l00238"></a>00238         Entry-&gt;<a class="code" href="structsettings__manager__entry.html#a0aba9b5bf6ab83aff8549148a736a878">Data</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(newData) + 1);
+<a name="l00238"></a>00238         Entry-&gt;<a class="code" href="structsettings__manager__entry.html#a0aba9b5bf6ab83aff8549148a736a878">Data</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921">strlen</a>(newData) + 1);
 <a name="l00239"></a>00239         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(Entry-&gt;<a class="code" href="structsettings__manager__entry.html#a0aba9b5bf6ab83aff8549148a736a878">Data</a>, newData);
 <a name="l00240"></a>00240 
 <a name="l00241"></a>00241         <span class="keywordflow">return</span>;
@@ -264,11 +264,11 @@
 <a name="l00246"></a>00246 
 <a name="l00247"></a>00247         <span class="comment">//Allocate the settings entry</span>
 <a name="l00248"></a>00248         <a class="code" href="structsettings__manager__entry.html">settingsEntry</a>* newEntry = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structsettings__manager__entry.html">settingsEntry</a>));
-<a name="l00249"></a>00249         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(newEntry, 0, <span class="keyword">sizeof</span>(<a class="code" href="structsettings__manager__entry.html">settingsEntry</a>));
+<a name="l00249"></a>00249         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(newEntry, 0, <span class="keyword">sizeof</span>(<a class="code" href="structsettings__manager__entry.html">settingsEntry</a>));
 <a name="l00250"></a>00250         
 <a name="l00251"></a>00251         <span class="comment">//Allocate memory for the settings entry name and data</span>
-<a name="l00252"></a>00252         newEntry-&gt;<a class="code" href="structsettings__manager__entry.html#a5e6182c030324511dd82e9fa1a0ab071">Name</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(Name) + 1);
-<a name="l00253"></a>00253         newEntry-&gt;<a class="code" href="structsettings__manager__entry.html#a0aba9b5bf6ab83aff8549148a736a878">Data</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(Data) + 1);
+<a name="l00252"></a>00252         newEntry-&gt;<a class="code" href="structsettings__manager__entry.html#a5e6182c030324511dd82e9fa1a0ab071">Name</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921">strlen</a>(Name) + 1);
+<a name="l00253"></a>00253         newEntry-&gt;<a class="code" href="structsettings__manager__entry.html#a0aba9b5bf6ab83aff8549148a736a878">Data</a> = <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<a class="code" href="common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921">strlen</a>(Data) + 1);
 <a name="l00254"></a>00254 
 <a name="l00255"></a>00255         <span class="comment">//Copy the name and data</span>
 <a name="l00256"></a>00256         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(newEntry-&gt;<a class="code" href="structsettings__manager__entry.html#a5e6182c030324511dd82e9fa1a0ab071">Name</a>, Name);
@@ -297,7 +297,7 @@
 <a name="l00279"></a>00279 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

@@ -1,22 +1,22 @@
 #include <process/procfault.h>
 #include <panic/panic.h>
-
-extern process_t* get_current_process();
+#include <scheduler/process_scheduler.h>
+#include <printf.h>
 
 void handleFatalProcessFault(FAULT_ID id, FAULT_MSG msg)
 {
-	printf("Error, process %i faulted with id %i error message %s. Forced to exit from memory\n", get_current_process()->m_ID, id, msg);
+	printf("Error, process %i faulted with id %i error message %s. Forced to exit from memory\n", getCurrentProcess()->m_ID, id, msg);
 
-	if (get_current_process()->m_ID == 0 || get_current_process()->m_ID == 1)
+	if (getCurrentProcess()->m_ID == 0 || getCurrentProcess()->m_ID == 1)
 	{
 		PANIC("FATAL KERNEL FAULT");
 	}
 
-	scheduler_kill_current_process();
+	schedulerKillCurrentProcess();
 
 	for (;;)
 	{
-		scheduler_on_tick();
+		schedulerOnTick();
 	}
 
 	return;

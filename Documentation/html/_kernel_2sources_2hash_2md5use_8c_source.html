@@ -33,7 +33,7 @@
 <a name="l00003"></a><a class="code" href="_tools_2_init_r_d_2md5use_8h.html#af5f12067aaa887dade4c6f2539bbb989">00003</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2headers_2hash_2md5use_8h.html#af5f12067aaa887dade4c6f2539bbb989">MDData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* m_Data, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> len, <span class="keywordtype">char</span>* Digest)
 <a name="l00004"></a>00004 {
 <a name="l00005"></a>00005   <a class="code" href="struct_m_d5___c_t_x.html">MD5_CTX</a> mdContext;
-<a name="l00006"></a>00006   <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;mdContext, 0, <span class="keyword">sizeof</span>(<a class="code" href="struct_m_d5___c_t_x.html">MD5_CTX</a>));
+<a name="l00006"></a>00006   <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(&amp;mdContext, 0, <span class="keyword">sizeof</span>(<a class="code" href="struct_m_d5___c_t_x.html">MD5_CTX</a>));
 <a name="l00007"></a>00007 
 <a name="l00008"></a>00008   <a class="code" href="_kernel_2headers_2hash_2md5_8h.html#a9105f17e24aa3cd5dd48e7b5e045caa6">MD5Init</a> (&amp;mdContext);
 <a name="l00009"></a>00009   <a class="code" href="_kernel_2headers_2hash_2md5_8h.html#a14327f23c04b2ba9526920d67fbcc5af">MD5Update</a> (&amp;mdContext, m_Data, len);
@@ -48,7 +48,7 @@
 <a name="l00018"></a>00018 
 <a name="l00019"></a><a class="code" href="_tools_2_init_r_d_2md5use_8h.html#ad07c8855c27ba6bdd42e0f6f46304833">00019</a> <span class="keywordtype">void</span> <a class="code" href="_kernel_2headers_2hash_2md5use_8h.html#ad07c8855c27ba6bdd42e0f6f46304833">MDString</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* Input, <span class="keywordtype">char</span>* Digest)
 <a name="l00020"></a>00020 {
-<a name="l00021"></a>00021   <a class="code" href="_kernel_2headers_2hash_2md5use_8h.html#af5f12067aaa887dade4c6f2539bbb989">MDData</a>(Input, <a class="code" href="common_8h.html#aea470ec184e4cac48bd6bdf543c757ef">strlen</a>(Input), Digest);
+<a name="l00021"></a>00021   <a class="code" href="_kernel_2headers_2hash_2md5use_8h.html#af5f12067aaa887dade4c6f2539bbb989">MDData</a>(Input, <a class="code" href="common_8h.html#ab6d82ea1bcf2827a207a17fd090c5921">strlen</a>(Input), Digest);
 <a name="l00022"></a>00022   <span class="keywordflow">return</span>;
 <a name="l00023"></a>00023 }
 <a name="l00024"></a>00024 
@@ -65,7 +65,7 @@
 <a name="l00035"></a>00035 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:13 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

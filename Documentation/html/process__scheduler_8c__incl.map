@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$process__scheduler_8h.html" title="process_scheduler.h" alt="" coords="347,83,499,112"/>
+<area shape="rect" id="node3" href="$process__scheduler_8h.html" title="scheduler/process_scheduler.h" alt="" coords="297,83,516,112"/>
 <area shape="rect" id="node13" href="$common_8h.html" title="common.h" alt="" coords="572,315,663,344"/>
 <area shape="rect" id="node29" href="$panic_8h.html" title="panic/panic.h" alt="" coords="661,160,768,189"/>
 <area shape="rect" id="node32" href="$stdlib_8h.html" title="stdlib.h" alt="" coords="712,83,779,112"/>
-<area shape="rect" id="node37" href="$debug_8h.html" title="debug/debug.h" alt="" coords="963,83,1080,112"/>
-<area shape="rect" id="node5" href="$process_8h.html" title="process/process.h" alt="" coords="309,160,448,189"/>
+<area shape="rect" id="node37" href="$debug_8h.html" title="debug/debug.h" alt="" coords="952,83,1069,112"/>
+<area shape="rect" id="node5" href="$process_8h.html" title="process/process.h" alt="" coords="301,160,440,189"/>
 <area shape="rect" id="node7" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="5,237,115,267"/>
 <area shape="rect" id="node16" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="139,237,277,267"/>
 <area shape="rect" id="node21" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="392,237,536,267"/>
@@ -13,8 +13,8 @@
 <area shape="rect" id="node11" href="$int__types_8h.html" title="int_types.h" alt="" coords="364,469,455,499"/>
 <area shape="rect" id="node18" href="$message_8h.html" title="process/message.h" alt="" coords="135,315,281,344"/>
 <area shape="rect" id="node27" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="361,315,548,344"/>
-<area shape="rect" id="node39" href="$debugprint_8h.html" title="debugprint.h" alt="" coords="971,160,1072,189"/>
-<area shape="rect" id="node41" href="$stdio_8h.html" title="stdio.h" alt="" coords="879,237,943,267"/>
-<area shape="rect" id="node43" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="705,392,772,421"/>
-<area shape="rect" id="node46" href="$va__list_8h.html" title="va_list.h" alt="" coords="799,315,873,344"/>
+<area shape="rect" id="node39" href="$debugprint_8h.html" title="debugprint.h" alt="" coords="960,160,1061,189"/>
+<area shape="rect" id="node41" href="$stdio_8h.html" title="stdio.h" alt="" coords="873,237,937,267"/>
+<area shape="rect" id="node43" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="703,392,769,421"/>
+<area shape="rect" id="node46" href="$va__list_8h.html" title="va_list.h" alt="" coords="793,315,868,344"/>
 </map>

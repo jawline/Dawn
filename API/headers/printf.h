@@ -15,5 +15,7 @@
  */
 
 void api_printf(const char* fmt, ...);
+void cls();
+void clearscreen();
 
 #endif //_FORMATTED_PRINT_FUNCTION_DEF_H_

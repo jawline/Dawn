@@ -1,8 +1,13 @@
 #include <printf.h>
+#include <process/end_process.h>
 
-int _start(int argc, void* argv)
-{
-	printf("BASE: Hello world\n");
+extern "C" {
 
-	exit(3);
+	int _start(int argc, void* argv)
+	{
+		printf("BASE: Hello world\n");
+
+		exit(3);
+	}
+
 }

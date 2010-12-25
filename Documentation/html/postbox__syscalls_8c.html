@@ -35,19 +35,19 @@
 <code>#include &lt;<a class="el" href="process_8h_source.html">process/process.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="postbox_8h_source.html">process/postbox.h</a>&gt;</code><br/>
 <code>#include &lt;<a class="el" href="message_8h_source.html">process/message.h</a>&gt;</code><br/>
+<code>#include &lt;<a class="el" href="process__scheduler_8h_source.html">scheduler/process_scheduler.h</a>&gt;</code><br/>
 <div class="dynheader">
 Include dependency graph for postbox_syscalls.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="postbox__syscalls_8c__incl.png" border="0" usemap="#_kernel_2sources_2syscall_2postbox__syscalls_8c" alt=""/></div>
 <map name="_kernel_2sources_2syscall_2postbox__syscalls_8c" id="_kernel_2sources_2syscall_2postbox__syscalls_8c">
-<area shape="rect" id="node3" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="181,315,307,344"/><area shape="rect" id="node7" href="process_8h.html" title="process/process.h" alt="" coords="271,83,409,112"/><area shape="rect" id="node15" href="postbox_8h.html" title="process/postbox.h" alt="" coords="21,160,160,189"/><area shape="rect" id="node17" href="message_8h.html" title="process/message.h" alt="" coords="13,237,160,267"/><area shape="rect" id="node5" href="int__types_8h.html" title="int_types.h" alt="" coords="368,392,459,421"/><area shape="rect" id="node9" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="235,237,344,267"/><area shape="rect" id="node12" href="common_8h.html" title="common.h" alt="" coords="368,237,459,267"/><area shape="rect" id="node20" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="305,160,449,189"/><area shape="rect" id="node23" href="vfs_8h.html" title="fs/vfs.h" alt="" coords="543,160,609,189"/><area shape="rect" id="node26" href="disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="483,237,669,267"/></map>
+<area shape="rect" id="node3" href="_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="385,392,511,421"/><area shape="rect" id="node7" href="process_8h.html" title="process/process.h" alt="" coords="228,160,367,189"/><area shape="rect" id="node15" href="postbox_8h.html" title="process/postbox.h" alt="" coords="532,237,671,267"/><area shape="rect" id="node17" href="message_8h.html" title="process/message.h" alt="" coords="532,315,679,344"/><area shape="rect" id="node30" href="process__scheduler_8h.html" title="scheduler/process_scheduler.h" alt="" coords="188,83,407,112"/><area shape="rect" id="node5" href="int__types_8h.html" title="int_types.h" alt="" coords="233,469,324,499"/><area shape="rect" id="node9" href="pagedir_8h.html" title="mm/pagedir.h" alt="" coords="348,315,457,344"/><area shape="rect" id="node12" href="common_8h.html" title="common.h" alt="" coords="233,315,324,344"/><area shape="rect" id="node20" href="terminal_8h.html" title="terminal/terminal.h" alt="" coords="224,237,368,267"/><area shape="rect" id="node23" href="vfs_8h.html" title="fs/vfs.h" alt="" coords="83,237,149,267"/><area shape="rect" id="node26" href="disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="23,315,209,344"/></map>
 </div>
 
 <p><a href="postbox__syscalls_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprocess__structure.html">process_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="postbox__syscalls_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprocess__message.html">process_message</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="postbox__syscalls_8c.html#ab332071042eeee6f1557cedf3be58921">postbox_peek</a> (<a class="el" href="structprocess__postbox.html">process_postbox</a> *pb)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="postbox__syscalls_8c.html#ab88f67de56ab20fd05b26a8c242ef6dd">postboxHasNext</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This function returns true if the application postbox has data waiting to be read.  <a href="#ab88f67de56ab20fd05b26a8c242ef6dd"></a><br/></td></tr>
@@ -57,25 +57,6 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">This allows the process to set the flags of what it wants to recieve in the kernel as postbox messages.  <a href="#a1e0f82e67d8934bca1cbf470f47b9866"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a2d69bf5462cbcb1bddac7b8c4f7b6973"></a><!-- doxytag: member="postbox_syscalls.c::get_current_process" ref="a2d69bf5462cbcb1bddac7b8c4f7b6973" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structprocess__structure.html">process_t</a>* get_current_process </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="process__scheduler_8c_source.html#l00172">172</a> of file <a class="el" href="process__scheduler_8c_source.html">process_scheduler.c</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ab332071042eeee6f1557cedf3be58921"></a><!-- doxytag: member="postbox_syscalls.c::postbox_peek" ref="ab332071042eeee6f1557cedf3be58921" args="(process_postbox *pb)" -->
 <div class="memitem">
 <div class="memproto">
@@ -92,7 +73,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="process_8c_source.html#l00383">383</a> of file <a class="el" href="process_8c_source.html">process.c</a>.</p>
+<p>Definition at line <a class="el" href="process_8c_source.html#l00381">381</a> of file <a class="el" href="process_8c_source.html">process.c</a>.</p>
 
 </div>
 </div>
@@ -127,7 +108,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="postbox__syscalls_8c_ab88f67de56ab20fd05b26a8c242ef6dd_cgraph.png" border="0" usemap="#postbox__syscalls_8c_ab88f67de56ab20fd05b26a8c242ef6dd_cgraph" alt=""/></div>
 <map name="postbox__syscalls_8c_ab88f67de56ab20fd05b26a8c242ef6dd_cgraph" id="postbox__syscalls_8c_ab88f67de56ab20fd05b26a8c242ef6dd_cgraph">
-<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="183,5,335,35"/><area shape="rect" id="node5" href="process_8h.html#ab332071042eeee6f1557cedf3be58921" title="postbox_peek" alt="" coords="204,59,313,88"/></map>
+<area shape="rect" id="node3" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="181,5,323,35"/><area shape="rect" id="node5" href="process_8h.html#ab332071042eeee6f1557cedf3be58921" title="postbox_peek" alt="" coords="197,59,307,88"/></map>
 </div>
 </p>
 
@@ -164,7 +145,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="postbox__syscalls_8c_a42d52743f176f73c3dbffdbc23ca1d26_cgraph.png" border="0" usemap="#postbox__syscalls_8c_a42d52743f176f73c3dbffdbc23ca1d26_cgraph" alt=""/></div>
 <map name="postbox__syscalls_8c_a42d52743f176f73c3dbffdbc23ca1d26_cgraph" id="postbox__syscalls_8c_a42d52743f176f73c3dbffdbc23ca1d26_cgraph">
-<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="175,5,327,35"/><area shape="rect" id="node5" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="200,59,301,88"/></map>
+<area shape="rect" id="node3" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="173,5,315,35"/><area shape="rect" id="node5" href="process_8h.html#abb0ab623082f9b1bedd7747cc9ce9de5" title="postbox_top" alt="" coords="193,59,295,88"/></map>
 </div>
 </p>
 
@@ -193,7 +174,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="postbox__syscalls_8c_aead17db7d001bbfc192a381d07236367_cgraph.png" border="0" usemap="#postbox__syscalls_8c_aead17db7d001bbfc192a381d07236367_cgraph" alt=""/></div>
 <map name="postbox__syscalls_8c_aead17db7d001bbfc192a381d07236367_cgraph" id="postbox__syscalls_8c_aead17db7d001bbfc192a381d07236367_cgraph">
-<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="180,5,332,35"/><area shape="rect" id="node5" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="217,59,295,88"/><area shape="rect" id="node7" href="process_8h.html#ab332071042eeee6f1557cedf3be58921" title="postbox_peek" alt="" coords="201,112,311,141"/></map>
+<area shape="rect" id="node3" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="179,5,320,35"/><area shape="rect" id="node5" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="211,59,288,88"/><area shape="rect" id="node7" href="process_8h.html#ab332071042eeee6f1557cedf3be58921" title="postbox_peek" alt="" coords="195,112,304,141"/></map>
 </div>
 </p>
 
@@ -231,7 +212,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="postbox__syscalls_8c_a1e0f82e67d8934bca1cbf470f47b9866_cgraph.png" border="0" usemap="#postbox__syscalls_8c_a1e0f82e67d8934bca1cbf470f47b9866_cgraph" alt=""/></div>
 <map name="postbox__syscalls_8c_a1e0f82e67d8934bca1cbf470f47b9866_cgraph" id="postbox__syscalls_8c_a1e0f82e67d8934bca1cbf470f47b9866_cgraph">
-<area shape="rect" id="node3" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="183,5,335,35"/></map>
+<area shape="rect" id="node3" href="process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="181,5,323,35"/></map>
 </div>
 </p>
 
@@ -247,7 +228,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:16 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:19 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

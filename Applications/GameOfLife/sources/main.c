@@ -7,6 +7,9 @@
 #include <process/events.h>
 #include <process/process_info.h>
 #include <process/postbox_api.h>
+#include <process/end_process.h>
+#include <process/sleep.h>
+#include <scancodes.h>
 
 
 #define BOARD_WIDTH 80
@@ -177,6 +180,7 @@ int cSleep = 0;
  * @return The result of the application
  * @callgraph
  */
+
 int main(int argc, void* argv)
 {
 	postboxSetFlags(INPUT_BIT);
@@ -274,8 +278,12 @@ int main(int argc, void* argv)
 	return 1;
 }
 
-void _start(int argc, void* argv)
-{
-	int result = main(argc, argv);
-	exit(result);
+extern "C" {
+
+	void _start(int argc, void* argv)
+	{
+		int result = main(argc, argv);
+		exit(result);
+	}
+
 }

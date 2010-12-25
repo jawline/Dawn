@@ -13,8 +13,8 @@
 <area shape="rect" id="node24" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="2077,160,2291,189"/>
 <area shape="rect" id="node26" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="2315,160,2549,189"/>
 <area shape="rect" id="node28" href="$used__list_8c.html" title="Kernel/sources/process/used_list.c" alt="" coords="2573,160,2813,189"/>
-<area shape="rect" id="node30" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/default/process_scheduler.c" alt="" coords="2837,160,3200,189"/>
-<area shape="rect" id="node32" href="$settingsmanager_8c.html" title="Kernel/sources/settings/settingsmanager.c" alt="" coords="3224,160,3517,189"/>
-<area shape="rect" id="node34" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="3541,160,3744,189"/>
-<area shape="rect" id="node36" href="$system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="3768,160,3995,189"/>
+<area shape="rect" id="node30" href="$process__scheduler_8c.html" title="Kernel/sources/scheduler/process_scheduler.c" alt="" coords="2837,160,3152,189"/>
+<area shape="rect" id="node32" href="$settingsmanager_8c.html" title="Kernel/sources/settings/settingsmanager.c" alt="" coords="3176,160,3469,189"/>
+<area shape="rect" id="node34" href="$stack_8c.html" title="Kernel/sources/stack/stack.c" alt="" coords="3493,160,3696,189"/>
+<area shape="rect" id="node36" href="$system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="3720,160,3947,189"/>
 </map>

@@ -1,12 +1,13 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="181,315,307,344"/>
-<area shape="rect" id="node7" href="$process_8h.html" title="process/process.h" alt="" coords="271,83,409,112"/>
-<area shape="rect" id="node15" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="21,160,160,189"/>
-<area shape="rect" id="node17" href="$message_8h.html" title="process/message.h" alt="" coords="13,237,160,267"/>
-<area shape="rect" id="node5" href="$int__types_8h.html" title="int_types.h" alt="" coords="368,392,459,421"/>
-<area shape="rect" id="node9" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="235,237,344,267"/>
-<area shape="rect" id="node12" href="$common_8h.html" title="common.h" alt="" coords="368,237,459,267"/>
-<area shape="rect" id="node20" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="305,160,449,189"/>
-<area shape="rect" id="node23" href="$vfs_8h.html" title="fs/vfs.h" alt="" coords="543,160,609,189"/>
-<area shape="rect" id="node26" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="483,237,669,267"/>
+<area shape="rect" id="node3" href="$_shared_2headers_2types_2memory_8h.html" title="types/memory.h" alt="" coords="385,392,511,421"/>
+<area shape="rect" id="node7" href="$process_8h.html" title="process/process.h" alt="" coords="228,160,367,189"/>
+<area shape="rect" id="node15" href="$postbox_8h.html" title="process/postbox.h" alt="" coords="532,237,671,267"/>
+<area shape="rect" id="node17" href="$message_8h.html" title="process/message.h" alt="" coords="532,315,679,344"/>
+<area shape="rect" id="node30" href="$process__scheduler_8h.html" title="scheduler/process_scheduler.h" alt="" coords="188,83,407,112"/>
+<area shape="rect" id="node5" href="$int__types_8h.html" title="int_types.h" alt="" coords="233,469,324,499"/>
+<area shape="rect" id="node9" href="$pagedir_8h.html" title="mm/pagedir.h" alt="" coords="348,315,457,344"/>
+<area shape="rect" id="node12" href="$common_8h.html" title="common.h" alt="" coords="233,315,324,344"/>
+<area shape="rect" id="node20" href="$terminal_8h.html" title="terminal/terminal.h" alt="" coords="224,237,368,267"/>
+<area shape="rect" id="node23" href="$vfs_8h.html" title="fs/vfs.h" alt="" coords="83,237,149,267"/>
+<area shape="rect" id="node26" href="$disk__device_8h.html" title="devices/hdd/disk_device.h" alt="" coords="23,315,209,344"/>
 </map>

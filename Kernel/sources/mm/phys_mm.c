@@ -4,6 +4,7 @@
 #include <multiboot.h>
 #include <panic/panic.h>
 #include <types/memory.h>
+#include <scheduler/process_scheduler.h>
 
 MEM_LOC used_mem_end = 0;
 
@@ -71,9 +72,9 @@ MEM_LOC allocateFrame()
 
 		uint32 * stack = (uint32 *)phys_mm_slock;
 
-		if (get_current_process() != 0)
+		if (getCurrentProcess() != 0)
 		{
-			used_list_add(get_current_process(), *stack);
+			used_list_add(getCurrentProcess(), *stack);
 		}
 
 		return *stack;
@@ -125,9 +126,9 @@ void freeFrame(MEM_LOC frame)
 		return; //Anything under used_mem_end is identity mapped (Physical Address == Virtual Address) never remap it.
 	}
 
-	if (get_current_process() != 0)
+	if (getCurrentProcess() != 0)
 	{
-		used_list_remove(get_current_process(), frame);
+		used_list_remove(getCurrentProcess(), frame);
 	}
 
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)

@@ -1,4 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="89,83,156,112"/>
-<area shape="rect" id="node5" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="57,160,188,189"/>
+<area shape="rect" id="node3" href="$_kernel_2headers_2printf_8h.html" title="printf.h" alt="" coords="37,160,104,189"/>
+<area shape="rect" id="node7" href="$end__process_8h.html" title="process/end_process.h" alt="" coords="108,83,276,112"/>
+<area shape="rect" id="node5" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="5,315,136,344"/>
+<area shape="rect" id="node9" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="syscall/syscall.h" alt="" coords="131,160,253,189"/>
+<area shape="rect" id="node11" href="$common_8h.html" title="common.h" alt="" coords="127,237,217,267"/>
+<area shape="rect" id="node14" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="269,237,384,267"/>
+<area shape="rect" id="node18" href="$isr_8h.html" title="isr.h" alt="" coords="331,315,379,344"/>
+<area shape="rect" id="node20" href="$irq_8h.html" title="irq.h" alt="" coords="403,315,453,344"/>
 </map>

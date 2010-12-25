@@ -1,7 +1,9 @@
-#include "process_scheduler.h"
+#include <scheduler/process_scheduler.h>
 #include <panic/panic.h>
 #include <stdlib.h>
 #include <common.h>
+#include "../stack/kstack.h"
+#include <debug/debug.h>
 
 struct process_entry_t
 {
@@ -16,7 +18,7 @@ typedef struct process_entry_t scheduler_proc;
 scheduler_proc* list_root = 0;
 scheduler_proc* list_current = 0;
 
-void scheduler_init(process_t* kp)
+void schedulerInitialize(process_t* kp)
 {
 	//Create and set new_process to all 0's
 	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
@@ -33,31 +35,37 @@ void scheduler_init(process_t* kp)
 	list_current = new_process;
 }
 
-void scheduler_on_tick()
+void swapToProcess(scheduler_proc* scheduler_entry)
 {
+	process_t* old_proc = list_current->process_pointer;
+	
+	setKernelStack(KERNEL_STACK_START);
+
+	//Swap to the next process
+	list_current = scheduler_entry;
+
+	process_t* new_proc = list_current->process_pointer;
+
+	//Give me a nano!
+	list_current->ticks_tell_die = _STD_NANO_;
+
+	//Swap to the new process
+	switch_process(old_proc, new_proc);
+}
+
+void schedulerOnTick()
+{
+	if (list_root == 0) return;
+
 	if (list_current->ticks_tell_die < 1)
 	{
 		if (list_current->next->process_pointer->m_shouldDestroy == 1)
 		{
-			process_t* current = list_current->next->process_pointer;
-
-			scheduler_remove(current);
-			freeProcess(current);
+			swapToProcess(list_root);
 		}
 		else
 		{
-			process_t* proc = list_current->process_pointer;
-
-			//Swap to the next process
-			list_current = list_current->next;
-
-			process_t* oproc = list_current->process_pointer;
-
-			//Give me a nano!
-			list_current->ticks_tell_die = _STD_NANO_;
-
-			//Swap to the new process
-			switch_process(proc, oproc);
+			swapToProcess(list_current->next);
 		}
 
 	} else
@@ -73,10 +81,8 @@ void scheduler_on_tick()
 
 
 //To anybody calling this function, remember to re-enable interrupts where applicable
-void scheduler_add(process_t* op)
+void schedulerAdd(process_t* op)
 {
-	disable_interrupts();
-
 	//Create and set new_process to all 0's
 	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
 	memset(new_process, 0, sizeof(scheduler_proc));
@@ -103,13 +109,11 @@ void scheduler_add(process_t* op)
 	iterator_process->next = new_process;
 
 	new_process->next = list_root;
-
 }
 
 //To anybody calling this, remember to re-enable interrupts
-void scheduler_remove(process_t* op)
+void schedulerRemove(process_t* op)
 {
-	disable_interrupts();
 
 	//Find the scheduler entry
 	scheduler_proc* iterator_process = list_root;
@@ -122,7 +126,7 @@ void scheduler_remove(process_t* op)
 		}
 		else
 		{
-			//Is the next process the one that needs to be killed
+			//Is the next process the one that needs to be removed
 			if (iterator_process->next->process_pointer == op)
 			{
 				//Process
@@ -135,13 +139,13 @@ void scheduler_remove(process_t* op)
 		}
 	}
 
+
 	//Store the proc
 	scheduler_proc* next = iterator_process->next;
 
 	if (list_current == next)
 	{
-		//If its currently being executed then go ahhhhh
-		list_current = next->next;
+		PANIC("Scheduler trying to remove currently accessed process, this shouldn't happen... DEBUG!!\n");
 	}
 
 	//Remove it from the list
@@ -150,37 +154,63 @@ void scheduler_remove(process_t* op)
 	//Free it
 	free(next);
 
+	DEBUG_PRINT("Removed scheduler entry\n");
+
 	return;
 }
 
 //Sleeps the current process on the next tick
-void scheduler_block_me()
+void schedulerBlockMe()
 {
 	if (list_current == 0) return;
 
 	list_current->ticks_tell_die = 0;
 }
 
-process_t* get_current_process()
+process_t* getCurrentProcess()
 {
 	if (list_current == 0) return 0;
 
 	return list_current->process_pointer;
 }
 
-void scheduler_kill_current_process()
+int schedulerNumProcesses()
+{
+	if (list_root == 0) return 0;
+	
+	scheduler_proc* iter = list_root;
+
+	int numTotal = 0;
+
+	while (1)
+	{
+		numTotal++;
+
+		if (iter->next == list_root)
+		{
+			break;
+		}
+		
+		iter = iter->next;
+	}
+
+	return numTotal;
+}
+
+void schedulerKillCurrentProcess()
 {
 	if (list_current == 0) return 0;
 
-	get_current_process()->m_shouldDestroy = 1;
+	process_t* process = getCurrentProcess();
+	process->m_shouldDestroy = 1;
 
 	for (;;)
 	{
-		scheduler_block_me();
+		schedulerOnTick(); //Fake ticks untill the next process is brought into context. Next time this process is handled by the scheduler it will be destroyed
 	}
 }
 
-process_t* scheduler_return_process(unsigned int iter)
+process_t* schedulerReturnProcess(unsigned int iter)
 {
 	scheduler_proc* iterator = list_root;
 	unsigned int i = 0;
@@ -194,7 +224,29 @@ process_t* scheduler_return_process(unsigned int iter)
 	return iterator->process_pointer;
 }
 
-void scheduler_global_message(process_message msg, unsigned int bit)
+process_t* schedulerGetProcessFromPid(unsigned int pid)
+{
+
+	scheduler_proc* iterator = list_root;
+	unsigned int i = 0;
+
+	for (;;)
+	{
+		//If it is the process I'm loooking for break
+		if (iterator->process_pointer->m_ID == pid) break;
+
+		//If its the last entry and not correct then return null
+		if (iterator->next == list_root) return 0;
+
+		//Set the iterator to the next entry
+		iterator = iterator->next;
+	}
+
+	//Return what I got
+	return iterator->process_pointer;
+}
+
+void schedulerGlobalMessage(process_message msg, unsigned int bit)
 {
 	scheduler_proc* iter = list_root;
 
@@ -203,7 +255,6 @@ void scheduler_global_message(process_message msg, unsigned int bit)
 		//Test if this process wants to hear about this event
 		if (iter->process_pointer->m_postboxFlags & bit == bit)
 		{
-
 			postbox_add(&iter->process_pointer->m_processPostbox, msg);
 
 		}

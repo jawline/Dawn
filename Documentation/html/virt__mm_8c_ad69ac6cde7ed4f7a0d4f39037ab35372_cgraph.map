@@ -4,11 +4,11 @@
 <area shape="rect" id="node14" href="$virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3" title="kernelFirstFreeVirtualAddress" alt="" coords="300,163,505,192"/>
 <area shape="rect" id="node18" href="$virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705" title="map" alt="" coords="377,59,428,88"/>
 <area shape="rect" id="node26" href="$virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3" title="unmap" alt="" coords="369,216,436,245"/>
-<area shape="rect" id="node30" href="$common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0" title="memset" alt="" coords="172,265,247,295"/>
-<area shape="rect" id="node5" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="737,5,847,35"/>
-<area shape="rect" id="node7" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="919,32,1049,61"/>
-<area shape="rect" id="node9" href="$common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a" title="memcpy" alt="" coords="1100,72,1177,101"/>
+<area shape="rect" id="node30" href="$common_8h.html#a1352f6ab5222470fd3d6df50a3102125" title="memset" alt="" coords="172,265,247,295"/>
+<area shape="rect" id="node5" href="$used__list_8c.html#acc6b05c5c7625249b77b88b721d1188d" title="used_list_add" alt="" coords="731,5,840,35"/>
+<area shape="rect" id="node7" href="$used__list_8c.html#a612f2be7a32d07fcf1f77bcabc0d5e36" title="expand_used_list" alt="" coords="905,32,1036,61"/>
+<area shape="rect" id="node9" href="$common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="1087,72,1164,101"/>
 <area shape="rect" id="node16" href="$virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c" title="getMapping" alt="" coords="563,163,659,192"/>
 <area shape="rect" id="node20" href="$phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4" title="allocateFrame" alt="" coords="555,59,667,88"/>
-<area shape="rect" id="node22" href="$post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281" title="get_current_process" alt="" coords="716,59,868,88"/>
+<area shape="rect" id="node22" href="$process__scheduler_8h.html#a9e5dc93aac0f1d8282e99c94cf124ba2" title="getCurrentProcess" alt="" coords="715,59,856,88"/>
 </map>

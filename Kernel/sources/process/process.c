@@ -5,11 +5,11 @@
 #include <messages/messages.h>
 #include <debug/debug.h>
 #include "../stack/kstack.h"
+#include <scheduler/process_scheduler.h>
 
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
 extern terminal_t* g_kernelTerminal;
-extern process_t* get_current_process();
 
 typedef struct {
 
@@ -52,7 +52,7 @@ void free_orders(new_process_orders_t* orders)
  */
 void new_process_entry()
 {
-	process_message Msg = postbox_top(&get_current_process()->m_processPostbox);
+	process_message Msg = postbox_top(&getCurrentProcess()->m_processPostbox);
 
 	if (Msg.ID == LOAD_MESSAGE)
 	{
@@ -81,7 +81,7 @@ void new_process_entry()
 		if (Node == 0)
 		{
 			DEBUG_PRINT("Unable to evaluate node. process could not load file specified\n");
-			scheduler_kill_current_process();
+			schedulerKillCurrentProcess();
 		} else
 		{
 			DEBUG_PRINT("Passing to executable loader\n");
@@ -151,8 +151,6 @@ void freeProcess(process_t* process)
 
 }
 
-extern process_t* get_current_process();
-
 int kfork()
 {
 	uint32 esp, ebp;
@@ -162,7 +160,7 @@ int kfork()
 	DEBUG_PRINT("Free frames at start %x\n", calculate_free_frames());
 
 	//Store this for later use
-	process_t* parent = get_current_process();
+	process_t* parent = getCurrentProcess();
 
 	//Create a process space for the new process and null iyt
 	process_t* new_process = malloc(sizeof(process_t));
@@ -192,7 +190,7 @@ int kfork()
 
 	uint32 current_eip = read_eip();
 
-	if (parent->m_ID == get_current_process()->m_ID)
+	if (parent->m_ID == getCurrentProcess()->m_ID)
 	{
 		asm volatile("mov %%esp, %0" : "=r"(esp));
 		asm volatile("mov %%ebp, %0" : "=r"(ebp));
@@ -201,7 +199,7 @@ int kfork()
 		new_process->ebp = ebp;
 		new_process->eip = current_eip;
 
-		scheduler_add(new_process);
+		schedulerAdd(new_process);
 
 		return 0; //Return 0 - Parent
 	}
@@ -272,7 +270,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 
 	postbox_add(&new_process->m_processPostbox, InfomaticMessage);
 
-	scheduler_add(new_process);
+	schedulerAdd(new_process);
 
 	DEBUG_PRINT("RETURN\n");
 
@@ -281,7 +279,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 
 void rename_current_process(const char* Str)
 {
-	set_process_name(get_current_process(), Str);
+	set_process_name(getCurrentProcess(), Str);
 }
 
 inline void switch_process(process_t* from, process_t* to)

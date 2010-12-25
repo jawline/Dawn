@@ -118,7 +118,7 @@
 <a name="l00088"></a>00088 {
 <a name="l00089"></a>00089         <span class="keywordflow">if</span> (offset + size &gt; node-&gt;<a class="code" href="structfilesystem__node.html#a9ee64c7b918513891b3834b93ad0e501">length</a>) <span class="keywordflow">return</span> 0;
 <a name="l00090"></a>00090         <a class="code" href="int__types_8h.html#adde6aaee8457bee49c2a92621fe22b79">uint8</a>* loc = start_list[node-&gt;<a class="code" href="structfilesystem__node.html#a13cbc9896e1d3f0eec635b88f810a27e">inode</a>];
-<a name="l00091"></a>00091         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(buffer, ((<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>)loc + (<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>)offset), size); <span class="comment">//Copy the mem mems</span>
+<a name="l00091"></a>00091         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(buffer, ((<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>)loc + (<a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a>)offset), size); <span class="comment">//Copy the mem mems</span>
 <a name="l00092"></a>00092         <span class="keywordflow">return</span> size; <span class="comment">//Not much error checking we can do. If a page fault occurs somethings gone wrong =)</span>
 <a name="l00093"></a>00093 }
 <a name="l00094"></a>00094 
@@ -209,7 +209,7 @@
 <a name="l00183"></a>00183 
 <a name="l00184"></a>00184                 start_list[iter] = (start + fe_ptr-&gt;<a class="code" href="structinitrd__fent.html#a292119c57ee24c2a250283318f2c34fd">start</a>) - 1;
 <a name="l00185"></a>00185 
-<a name="l00186"></a>00186                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;file_list[iter], 0, <span class="keyword">sizeof</span>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>));
+<a name="l00186"></a>00186                 <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(&amp;file_list[iter], 0, <span class="keyword">sizeof</span>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>));
 <a name="l00187"></a>00187                 <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(file_list[iter].name, fe_ptr-&gt;<a class="code" href="structinitrd__fent.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>);
 <a name="l00188"></a>00188                 file_list[iter].<a class="code" href="structfilesystem__node.html#a13cbc9896e1d3f0eec635b88f810a27e">inode</a> = iter;
 <a name="l00189"></a>00189                 file_list[iter].<a class="code" href="structfilesystem__node.html#a9ee64c7b918513891b3834b93ad0e501">length</a> = fe_ptr-&gt;<a class="code" href="structinitrd__fent.html#a0d40f1591c12f359c3fa3f982f9a221d">size</a>;
@@ -221,7 +221,7 @@
 <a name="l00195"></a>00195 
 <a name="l00196"></a>00196 
 <a name="l00197"></a>00197         <span class="comment">//Initialize the initrd node</span>
-<a name="l00198"></a>00198         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(initrd_root_node, 0, <span class="keyword">sizeof</span>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>));
+<a name="l00198"></a>00198         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(initrd_root_node, 0, <span class="keyword">sizeof</span>(<a class="code" href="structfilesystem__node.html">fs_node_t</a>));
 <a name="l00199"></a>00199         <a class="code" href="common_8h.html#a7a82515b5d377be04817715c5465b647">strcpy</a>(initrd_root_node-&gt;<a class="code" href="structfilesystem__node.html#a93a4209b66c75fd711969ba8dcd926f5">name</a>, name);
 <a name="l00200"></a>00200         initrd_root_node-&gt;<a class="code" href="structfilesystem__node.html#a81a27ce50e78368b0d0de1e8767fd32d">flags</a> = FS_DIR;
 <a name="l00201"></a>00201         initrd_root_node-&gt;<a class="code" href="structfilesystem__node.html#a673ad3524f32fef903dfff776ea27018">readdir</a> = ird_root_readdir;
@@ -234,7 +234,7 @@
 <a name="l00208"></a>00208 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:13 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

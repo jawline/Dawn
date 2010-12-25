@@ -11,7 +11,7 @@ OBJECTS := $(shell find $(PROJDIRS) -name "*.o")
 SOURCES := $(patsubst %.s,%.o,$(SSOURCES)) $(patsubst %.c,%.o,$(CSOURCES))
 
 CC=gcc
-CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I ../Shared/headers -fno-stack-protector -m32
+CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I ../Shared/headers -fno-stack-protector -m32 -Wall
 LDFLAGS=-Tlink.ld -melf_i386
 ASFLAGS=-felf32
 

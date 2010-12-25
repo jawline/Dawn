@@ -1,6 +1,6 @@
 #include "syscall.h"
 #include <stdio.h>
-#include "../scheduler/default/process_scheduler.h"
+#include <scheduler/process_scheduler.h>
 #include <heap/heap.h>
 #include <panic/panic.h>
 #include <mm/virt_mm.h>
@@ -55,7 +55,7 @@ static void* syscalls[23] = {
    &postboxPopTop, //Syscall 2 -Pops the top of the postbox
    &postboxHasNext, //Syscall 3 - Does the postbox have anything for the process to read?
    &getKeyMapping, //Syscall 4 - Get the key mapping for a scancode
-   &scheduler_block_me, //Syscall 5 - Pause the current process forfitting any remaining processing time
+   &schedulerBlockMe, //Syscall 5 - Pause the current process forfitting any remaining processing time
    &postboxSetFlags, //Syscall 6 - Set the process message flags (What it wants to know about)
    &calculate_free_frames, //Syscall 7 - Return the number of free frames available
    &get_page_size, //Syscall 8 - Return the size in bytes of each page

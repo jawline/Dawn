@@ -3,16 +3,14 @@
 #include <process/message.h>
 #include <messages/messages.h>
 #include <debug/debug.h>
-
-extern process_t* get_current_process();
-extern process_t* scheduler_return_process();
+#include <scheduler/process_scheduler.h>
 
 process_t* systemIdlePtr = 0;
 process_t* systemProcPtr = 0;
 
 void systemIdleProcess()
 {
-	systemIdlePtr = get_current_process();
+	systemIdlePtr = getCurrentProcess();
 
 	for (;;)
 	{
@@ -26,7 +24,7 @@ void systemMainProcess()
 	createNewProcess(settingsReadValue("kernel.onstart"), init_vfs());
 	enable_interrupts();
 
-	systemProcPtr = get_current_process();
+	systemProcPtr = getCurrentProcess();
 
 	int schedulerIter = 0;
 	process_t* schedulerPtr = 0;
@@ -39,7 +37,7 @@ void systemMainProcess()
 		while (1)
 		{
 			//Grab the top message
-			process_message pb_top = postbox_top(&get_current_process()->m_processPostbox);
+			process_message pb_top = postbox_top(&getCurrentProcess()->m_processPostbox);
 
 			if (pb_top.ID != -1)
 			{
@@ -60,7 +58,7 @@ void systemMainProcess()
 		//Shut down all processes that need a-killin
 		while (1)
 		{
-			schedulerPtr = scheduler_return_process(schedulerIter);
+			schedulerPtr = schedulerReturnProcess(schedulerIter);
 
 			if (schedulerPtr == 0)
 			{
@@ -80,9 +78,9 @@ void systemMainProcess()
 				{
 					printf("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
 
-					scheduler_remove(schedulerPtr);
+					schedulerRemove(schedulerPtr);
 
-					DEBUG_PRINT("Freeing process %x (%i:%s) current process %i\n", schedulerPtr, schedulerPtr->m_ID, schedulerPtr->m_Name, get_current_process()->m_ID);
+					DEBUG_PRINT("Freeing process %x (%i:%s) current process %i\n", schedulerPtr, schedulerPtr->m_ID, schedulerPtr->m_Name, getCurrentProcess()->m_ID);
 					freeProcess(schedulerPtr);
 
 				}
@@ -121,7 +119,7 @@ void systemMainProcess()
 		}
 
 		//Sleep the current process
-		scheduler_block_me();
+		schedulerBlockMe();
 	}
 }
 
@@ -138,12 +136,12 @@ void systemProcess()
 
     if (forkedID == 1)
     {
-   	set_process_name(get_current_process(), "System");
+   	set_process_name(getCurrentProcess(), "System");
 	systemMainProcess();
     }
     else
     {
-   	set_process_name(get_current_process(), "SystemIdle");
+   	set_process_name(getCurrentProcess(), "SystemIdle");
 	systemIdleProcess();
     }
 

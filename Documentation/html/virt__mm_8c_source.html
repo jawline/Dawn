@@ -63,7 +63,7 @@
 <a name="l00033"></a>00033 
 <a name="l00034"></a>00034 <span class="keyword">extern</span> <a class="code" href="int__types_8h.html#a1134b580f8da4de94ca6b1de4d37975e">uint32</a> <a class="code" href="phys__mm_8c.html#acca9091afa3d50d887251ff3a57dad34">used_mem_end</a>; <span class="comment">//End of kernel used memory at initialization of paging</span>
 <a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a1d66e5c5bb521fef258bbaa6556cd281">get_current_process</a>();
+<a name="l00036"></a>00036 <span class="keyword">extern</span> <a class="code" href="structprocess__structure.html" title="The structure of a process within Dawn.">process_t</a>* <a class="code" href="post__init_8c.html#a2d69bf5462cbcb1bddac7b8c4f7b6973">get_current_process</a>();
 <a name="l00037"></a>00037 
 <a name="l00038"></a><a class="code" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650">00038</a> <span class="keywordtype">void</span> <a class="code" href="virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650">page_fault</a> (<a class="code" href="structregisters.html">idt_call_registers_t</a> regs)
 <a name="l00039"></a>00039 {
@@ -86,7 +86,7 @@
 <a name="l00056"></a>00056         <span class="keywordtype">int</span> mapping = <a class="code" href="virt__mm_8c.html#aa76806fb66045b9e5abf0ff1bcc7db7c">getMapping</a>(faulting_address, 0);
 <a name="l00057"></a>00057 
 <a name="l00058"></a>00058         <span class="keywordtype">char</span> Buffer[1024];
-<a name="l00059"></a>00059         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(Buffer, 0, 1024);
+<a name="l00059"></a>00059         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(Buffer, 0, 1024);
 <a name="l00060"></a>00060 
 <a name="l00061"></a>00061         <a class="code" href="_kernel_2sources_2lib_2printf_8c.html#aed81725528a138fd047a2dae7c940e4b">printFormattedStringToBuffer</a>(Buffer, <span class="stringliteral">&quot;Page fault at location 0x%x (present: %i write: %i us: %i reserved: %i instr: %i mapping: %i)&quot;</span>, faulting_address, present, rw, us, reserved, <span class="keywordtype">id</span>, mapping);
 <a name="l00062"></a>00062 
@@ -247,7 +247,7 @@
 <a name="l00222"></a>00222         <a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a> * pagedir = (<a class="code" href="pagedir_8h.html#a05526f8042ac09fe5d8514dc480a3978">page_directory_t</a> *) <a class="code" href="phys__mm_8h.html#ae86135800d71ebffbb2785b058373cd4">allocateFrame</a>(); <span class="comment">//Paging isn&#39;t enabled so this should just give us 4kb at the end of used memory.</span>
 <a name="l00223"></a>00223 
 <a name="l00224"></a>00224         <span class="comment">//Null it all!!! (Clear the page directory)</span>
-<a name="l00225"></a>00225         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(pagedir, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00225"></a>00225         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(pagedir, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00226"></a>00226 
 <a name="l00227"></a>00227         <span class="comment">//Identity map the first 4MBs of memory to KERNEL_START and 0x0</span>
 <a name="l00228"></a>00228         <a class="code" href="virt__mm_8c.html#a84bbed814b7fbbf6886f0dc3b6a78943">identityMapPages</a>(pagedir);
@@ -257,7 +257,7 @@
 <a name="l00232"></a>00232         pagedir[1022] = (frame &amp; PAGE_MASK) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>; <span class="comment">//Set the 1022nd page table to the new frame address</span>
 <a name="l00233"></a>00233 
 <a name="l00234"></a>00234         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> pt = (POINTER) frame; <span class="comment">//Pointer to the new frame</span>
-<a name="l00235"></a>00235         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a> (pt, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>); <span class="comment">//Null the frame</span>
+<a name="l00235"></a>00235         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a> (pt, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>); <span class="comment">//Null the frame</span>
 <a name="l00236"></a>00236 
 <a name="l00237"></a>00237         pt[1023] = ((MEM_LOC)pagedir &amp; <a class="code" href="virt__mm_8h.html#ae4aa620ce57c7c3171b916de2c5f09f2">PAGE_MASK</a>) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER; <span class="comment">//The last entry of table 1022 is the page directory. So when paging is active PAGE_DIR_VIRTUAL_ADDR = the page directory</span>
 <a name="l00238"></a>00238 
@@ -276,7 +276,7 @@
 <a name="l00251"></a>00251         <a class="code" href="virt__mm_8c.html#aced5fad793f13e4c2362b88dc1e51ef9">page_directory</a>[pt_idx] = (frame &amp; PAGE_MASK) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>;
 <a name="l00252"></a>00252 
 <a name="l00253"></a>00253         <span class="comment">//Nulll it</span>
-<a name="l00254"></a>00254         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a>)frame, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00254"></a>00254         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>((<a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a>)frame, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00255"></a>00255 
 <a name="l00256"></a>00256         <span class="keywordflow">for</span> (i = <a class="code" href="virt__mm_8c.html#afad55fb29d42d8c605ddf8e867e94ff7">getTable</a>(<a class="code" href="virt__mm_8h.html#a0195e9a61160d8c05ab820dbb4854ac3">KERNEL_START</a>); i &lt; 1022; i++)
 <a name="l00257"></a>00257         {
@@ -301,7 +301,7 @@
 <a name="l00276"></a>00276         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a> temp_write_addr = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
 <a name="l00277"></a>00277         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(temp_write_addr, (<a class="code" href="_shared_2headers_2types_2memory_8h.html#a84def408d1c5413e2c1d7fe9eeb18f09">POINTER</a>) new_page_addr, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
 <a name="l00278"></a>00278 
-<a name="l00279"></a>00279         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(temp_write_addr, temp_read_addr, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00279"></a>00279         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(temp_write_addr, temp_read_addr, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00280"></a>00280 
 <a name="l00281"></a>00281         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(temp_read_addr);
 <a name="l00282"></a>00282         <a class="code" href="virt__mm_8h.html#ae8479a4b0677f11d8086559ec0e65ab3">unmap</a>(temp_write_addr);
@@ -319,7 +319,7 @@
 <a name="l00294"></a>00294 
 <a name="l00295"></a>00295         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> temp_write_addr = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
 <a name="l00296"></a>00296         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(temp_write_addr, new_page_table, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
-<a name="l00297"></a>00297         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(temp_write_addr, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);  
+<a name="l00297"></a>00297         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(temp_write_addr, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);  
 <a name="l00298"></a>00298 
 <a name="l00299"></a>00299         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0;
 <a name="l00300"></a>00300         <span class="keywordflow">for</span> (i = 0; i &lt; 1024; i++)
@@ -362,7 +362,7 @@
 <a name="l00337"></a>00337 
 <a name="l00338"></a>00338         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> copying_to = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
 <a name="l00339"></a>00339         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(copying_to, return_location, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
-<a name="l00340"></a>00340         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(copying_to, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00340"></a>00340         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(copying_to, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00341"></a>00341 
 <a name="l00342"></a>00342         <span class="comment">//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied</span>
 <a name="l00343"></a>00343         copying_to[0] = being_copied[0];
@@ -396,12 +396,12 @@
 <a name="l00371"></a>00371 
 <a name="l00372"></a>00372         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> pt = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
 <a name="l00373"></a>00373         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(pt, frame, <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
-<a name="l00374"></a>00374         <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a> (pt, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00374"></a>00374         <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a> (pt, 0, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00375"></a>00375 
 <a name="l00376"></a>00376         <a class="code" href="_shared_2headers_2types_2memory_8h.html#a8cb0dd0f9fa963b75ad3eb5926169d51">LPOINTER</a> opt = <a class="code" href="virt__mm_8c.html#aba6c4fcc1a17256b5115374985a80cc3">kernelFirstFreeVirtualAddress</a>();
 <a name="l00377"></a>00377         <a class="code" href="virt__mm_8h.html#a8aa47a82f681426ba335dd779424f705">map</a>(opt, being_copied[1022], <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | <a class="code" href="virt__mm_8h.html#a2d0253527ea5080d6befe0ee3bde473f">PAGE_USER</a>);
 <a name="l00378"></a>00378 
-<a name="l00379"></a>00379         <a class="code" href="common_8c.html#a284df4af5c9ac6f61dc77ef2ad47324a">memcpy</a>(pt, opt, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
+<a name="l00379"></a>00379         <a class="code" href="common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc">memcpy</a>(pt, opt, <a class="code" href="virt__mm_8h.html#a6223bf065444cd678be8eb78bebaa5ba">PAGE_SIZE</a>);
 <a name="l00380"></a>00380 
 <a name="l00381"></a>00381         pt[1023] = ((MEM_LOC)return_location &amp; <a class="code" href="virt__mm_8h.html#ae4aa620ce57c7c3171b916de2c5f09f2">PAGE_MASK</a>) | <a class="code" href="virt__mm_8h.html#a122dfc414a40e260fd35dbe9743db26f">PAGE_PRESENT</a> | PAGE_USER; <span class="comment">//The last entry of table 1022 is the page directory</span>
 <a name="l00382"></a>00382 
@@ -433,7 +433,7 @@
 <a name="l00408"></a>00408 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

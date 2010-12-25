@@ -23,6 +23,10 @@
 
 #include <clock/clock.h>
 #include <process/get_info.h>
+#include <scancodes.h>
+#include <process/end_process.h>
+#include <system/memory.h>
+#include <process/sleep.h>
 
 #define BIT_0 1
 
@@ -239,8 +243,12 @@ int main(int argc, void* argv)
 	return 1;
 }
 
-void _start(int argc, void* argv)
-{
-	int result = main(argc, argv);
-	exit(result);
+extern "C" {
+
+	void _start(int argc, void* argv)
+	{
+		int result = main(argc, argv);
+		exit(result);
+	}
+
 }

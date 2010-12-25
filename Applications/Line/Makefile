@@ -14,8 +14,8 @@ OBJECTS := $(shell find $(PROJDIRS) -name "*.o")
 
 SOURCES := $(patsubst %.s,%.o,$(SSOURCES)) $(patsubst %.c,%.o,$(CSOURCES))
 
-CC=gcc
-CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I $(API_DIR)/headers -I $(SHARED_DIR)/headers/ -fno-stack-protector -m32
+CC=g++
+CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./headers -I $(API_DIR)/headers -I $(SHARED_DIR)/headers/ -fno-stack-protector -m32 -fno-exceptions
 LDFLAGS=-melf_i386
 ASFLAGS=-felf32
 

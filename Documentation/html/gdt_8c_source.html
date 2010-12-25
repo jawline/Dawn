@@ -40,7 +40,7 @@
 <a name="l00010"></a>00010 <span class="comment">//Global descriptor table setup</span>
 <a name="l00011"></a><a class="code" href="gdt_8c.html#ae576bf193485d90b87c2e2a53f26d3f6">00011</a> <span class="keywordtype">void</span> <a class="code" href="gdt_8h.html#ae576bf193485d90b87c2e2a53f26d3f6">initialize_gdt</a>() 
 <a name="l00012"></a>00012 {
-<a name="l00013"></a>00013    <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(&amp;gdt_entries, 0, <span class="keyword">sizeof</span>(<a class="code" href="structgdt__entry__struct.html">gdt_entry_t</a>) * <a class="code" href="gdt_8c.html#a0ebf207b20b0edc73df4dbb5dba3a4dc">NUM_GDT_ENTRIES</a>);
+<a name="l00013"></a>00013    <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(&amp;gdt_entries, 0, <span class="keyword">sizeof</span>(<a class="code" href="structgdt__entry__struct.html">gdt_entry_t</a>) * <a class="code" href="gdt_8c.html#a0ebf207b20b0edc73df4dbb5dba3a4dc">NUM_GDT_ENTRIES</a>);
 <a name="l00014"></a>00014 
 <a name="l00015"></a>00015    gdt_ptr.<a class="code" href="structgdt__ptr__struct.html#ae21930f85a08ddbbd2d2ea56dd6d4c1b">limit</a> = (<span class="keyword">sizeof</span>(<a class="code" href="structgdt__entry__struct.html">gdt_entry_t</a>) * NUM_GDT_ENTRIES) - 1;
 <a name="l00016"></a>00016    gdt_ptr.<a class="code" href="structgdt__ptr__struct.html#a30a070db63a9082b005dc4347f1851b3">base</a>  = (uint32)&amp;gdt_entries;
@@ -73,7 +73,7 @@
 <a name="l00043"></a>00043 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:14 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

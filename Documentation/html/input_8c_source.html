@@ -78,7 +78,7 @@
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049                 <span class="comment">//Make the new entry</span>
 <a name="l00050"></a>00050                 <a class="code" href="structinput__listener__structure.html">input_listener_t</a>* new_listener = (<a class="code" href="structinput__listener__structure.html">input_listener_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
-<a name="l00051"></a>00051                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(new_listener, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
+<a name="l00051"></a>00051                 <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(new_listener, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
 <a name="l00052"></a>00052 
 <a name="l00053"></a>00053                 new_listener-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> = device;
 <a name="l00054"></a>00054                 new_listener-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a> = cb;
@@ -89,7 +89,7 @@
 <a name="l00059"></a>00059         <span class="keywordflow">else</span> <span class="comment">//No existing listeners yet</span>
 <a name="l00060"></a>00060         {
 <a name="l00061"></a>00061                 g_listenerList = (<a class="code" href="structinput__listener__structure.html">input_listener_t</a>*) <a class="code" href="stdlib_8h.html#a1a13006bc4f3fb901f72eaa90670bb57">malloc</a>(<span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
-<a name="l00062"></a>00062                 <a class="code" href="common_8h.html#ab0985f366b55a4fd2d24cefe66340bc0">memset</a>(g_listenerList, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
+<a name="l00062"></a>00062                 <a class="code" href="common_8h.html#a1352f6ab5222470fd3d6df50a3102125">memset</a>(g_listenerList, 0, <span class="keyword">sizeof</span>(<a class="code" href="structinput__listener__structure.html">input_listener_t</a>));
 <a name="l00063"></a>00063 
 <a name="l00064"></a>00064                 g_listenerList-&gt;<a class="code" href="structinput__listener__structure.html#afd9df33ce928fa95b8dda95cbe37c29c">m_deviceid</a> = device;
 <a name="l00065"></a>00065                 g_listenerList-&gt;<a class="code" href="structinput__listener__structure.html#a53ecebbda3156a24dca6e18c0813f6f6">m_callback</a> = cb;
@@ -97,7 +97,7 @@
 <a name="l00067"></a>00067 }
 </pre></div></div>
 </div>
-<hr class="footer"/><address class="footer"><small>Generated on Wed Dec 15 2010 11:40:13 for Dawn OS by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:02:18 for Dawn OS by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

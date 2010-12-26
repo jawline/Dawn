@@ -5,6 +5,7 @@
 #include <types/int_types.h>
 #include <input/keyboard.h>
 #include <input/input.h>
+#include <interrupts/interrupt_handler.h>
 
 static uint32 flags = 0;
 
@@ -60,7 +61,7 @@ idt_call_registers_t keyboardIrqCallback(idt_call_registers_t regs)
 
 void initializeKeyboard() 
 {
-	register_interrupt_handler(GET_IRQ(1), &keyboardIrqCallback);
+	registerInterruptHandler(GET_IRQ(1), &keyboardIrqCallback);
 	
 	//Clear the existing keyboard buffer after the keyboard IRQ has been registered. Makes sure that the keyboard controller will trigger a IRQ
 	uint8 temp, t2;

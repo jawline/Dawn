@@ -9,10 +9,10 @@
 #define FLAG_CAPS_LOCK 4
 
 //Lookup a asci character from the keyboard lookup table (If it cannot be done return 0)
-char keyboard_chlookup_asci(uint8 scancode,uint32 flags);
+char lookupAsciCharacterFromScancode(uint8 scancode,uint32 flags);
 
 //Load a keytable from a asci text file
 //Return 0 if fail, 1 if succeed
-uint8 load_keytable_asci(fs_node_t* node);
+unsigned char loadAsciKeytable(fs_node_t* node);
 
 #endif //_KEYBOARD_DEF_H_

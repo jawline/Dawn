@@ -1,5 +1,6 @@
 #include "pit.h"
 #include <interrupts/idt.h>
+#include <lib/io.h>
 
 static clock_callback on_pit_tick = 0;
 
@@ -9,12 +10,14 @@ static idt_call_registers_t pitOnTickCallback(idt_call_registers_t regs)
 	{
 		on_pit_tick(); //Call the pit callback
 	}
+
+	return regs;
 }
 
-void initializePit(uint32 frequency)
+void initializePit(unsigned int frequency)
 {
    // Firstly, register our timer callback.
-   register_interrupt_handler(GET_IRQ(0), &pitOnTickCallback);
+   registerInterruptHandler(GET_IRQ(0), &pitOnTickCallback);
 
    // The value we send to the PIT is the value to divide it's input clock
    // (1193180 Hz) by, to get our required frequency. Important to note is

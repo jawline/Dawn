@@ -4,4 +4,7 @@
 #define malloc(mem) kmalloc(mem)
 #define free(mem) kfree(mem)
 
+void* kmalloc(unsigned long);
+void kfree(void*);
+
 #endif

@@ -23,5 +23,6 @@ int strcmp (const char * src, const char * dst);
 
 //A implementation of Strlen from Wikipedia (Lifted from a FreeBSD implementation)
 unsigned int strlen(const char * str);
+char* strchr (register const char* s, int c);
 
 #endif

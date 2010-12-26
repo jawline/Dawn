@@ -1,5 +1,6 @@
 #include "rfs.h"
 #include <stdlib.h>
+#include <common.h>
 
 /* The intent of this file is to create a set of functions that allow for the "Root" volatile region of the virtual file system to be easly implemented */
 
@@ -97,7 +98,7 @@ void root_unbind_node(fs_node_t* boundto, fs_node_t* node) {
 	return;	
 }
 
-fs_node_t* create_rfs_directory(char * name, fs_node_t* parent) 
+fs_node_t* createRfsDirectory(char * name, fs_node_t* parent) 
 {
 	num_rfs_entrys++;
 

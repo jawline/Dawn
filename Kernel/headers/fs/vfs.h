@@ -14,13 +14,13 @@ struct dirent // One of these is returned by the readdir call, according to POSI
 
 struct filesystem_node;
 
-typedef uint32 (*io_operation) (struct filesystem_node* node, uint32* offset, uint32 size, uint8* ptr);
+typedef unsigned long (*io_operation) (struct filesystem_node* node, unsigned long offset, unsigned long size, uint8* ptr);
 
 typedef void (*cmd_operation) (struct filesystem_node* node);
 
 typedef struct dirent* (*read_directory_t) (struct filesystem_node* node, uint32 idx);
 
-typedef struct fs_node* (*find_directory_t) (struct filesystem_node* node,char* name);
+typedef struct fs_node* (*find_directory_t) (struct filesystem_node* node, const char* name);
 
 typedef struct fs_node_t* (*bind_node_t) (struct filesystem_node* boundto, struct filesystem_node* tobind);
 
@@ -51,5 +51,17 @@ typedef struct filesystem_node fs_node_t;
 fs_node_t* init_vfs();
 
 int is_directory(fs_node_t* node);
+
+fs_node_t* evaluatePath(const char* path, fs_node_t* current_node);
+
+
+unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8* buffer);
+unsigned long write_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8* buffer);
+void open_fs(fs_node_t* node);
+void close_fs(fs_node_t* node);
+struct dirent* readdir_fs (fs_node_t* node, uint32 idx);
+fs_node_t* finddir_fs (fs_node_t* node, const char* name);
+void bindnode_fs(fs_node_t* node, fs_node_t* target);
+void unbindnode_fs(fs_node_t* node, fs_node_t* target);
 
 #endif

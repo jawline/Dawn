@@ -127,7 +127,7 @@ void initializeMouse()
 	sendMouseCommand(0xF4);
 	printf("MD 0x%x\n", readMouseData()); //ACK
 
-	register_interrupt_handler(GET_IRQ(12), mouseIrqCallback);
+	registerInterruptHandler(GET_IRQ(12), mouseIrqCallback);
 
 	mouse_cycle = 0;
 }

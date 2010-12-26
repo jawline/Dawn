@@ -1,5 +1,6 @@
 #include <process/procfault.h>
 #include <panic/panic.h>
+#include <interrupts/interrupt_handler.h>
 
 void gpfHandler()
 {
@@ -9,5 +10,5 @@ void gpfHandler()
 
 void initializeGeneralProtectionFaultHandler()
 {
-	register_interrupt_handler (13 , &gpfHandler);
+	registerInterruptHandler (13 , &gpfHandler);
 }

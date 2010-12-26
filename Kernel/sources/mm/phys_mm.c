@@ -5,6 +5,7 @@
 #include <panic/panic.h>
 #include <types/memory.h>
 #include <scheduler/process_scheduler.h>
+#include <process/used_list.h>
 
 MEM_LOC used_mem_end = 0;
 
@@ -74,7 +75,7 @@ MEM_LOC allocateFrame()
 
 		if (getCurrentProcess() != 0)
 		{
-			used_list_add(getCurrentProcess(), *stack);
+			usedListAdd(getCurrentProcess(), *stack);
 		}
 
 		return *stack;
@@ -107,7 +108,7 @@ MEM_LOC allocateFrameForProcess(process_t* req_process)
 
 		if (req_process != 0)
 		{
-			used_list_add(req_process, *stack);
+			usedListAdd(req_process, *stack);
 		}
 
 		return *stack;
@@ -128,7 +129,7 @@ void freeFrame(MEM_LOC frame)
 
 	if (getCurrentProcess() != 0)
 	{
-		used_list_remove(getCurrentProcess(), frame);
+		usedListRemove(getCurrentProcess(), frame);
 	}
 
 	if (phys_mm_smax <= phys_mm_slock) //Run out of stack space *Shock Horror* Allocate this frame to the end of the stack (Giving another 4kb (4096 bytes) of stack space)
@@ -180,8 +181,7 @@ void map_free_pages(struct multiboot * mboot_ptr)
   DEBUG_PRINT("Debug Message: Map Free Pages finished with 0x%x pages of free memory (PAGE SIZE: 0x%x)\n", dbiter, PAGE_SIZE);
 }
 
-extern void asm_copy_frame(uint32 src, uint32 dest);
-MEM_LOC calculate_free_frames()
+unsigned long calculateFreeFrames()
 {
 	return ((phys_mm_slock - PHYS_MM_STACK_ADDR) / sizeof(MEM_LOC));
 }

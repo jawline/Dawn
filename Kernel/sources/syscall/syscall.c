@@ -4,6 +4,9 @@
 #include <heap/heap.h>
 #include <panic/panic.h>
 #include <mm/virt_mm.h>
+#include <mm/phys_mm.h>
+#include <interrupts/interrupt_handler.h>
+#include <input/keyboard.h>
 
 extern heap_t kernel_heap;
 
@@ -57,7 +60,7 @@ static void* syscalls[23] = {
    &getKeyMapping, //Syscall 4 - Get the key mapping for a scancode
    &schedulerBlockMe, //Syscall 5 - Pause the current process forfitting any remaining processing time
    &postboxSetFlags, //Syscall 6 - Set the process message flags (What it wants to know about)
-   &calculate_free_frames, //Syscall 7 - Return the number of free frames available
+   &calculateFreeFrames, //Syscall 7 - Return the number of free frames available
    &get_page_size, //Syscall 8 - Return the size in bytes of each page
    &syscallRequestReboot, //Syscall 9 - Ask the kernel to reboot
    &syscallClocksPerSecond, //Syscall 10 - Get the number of clock cycles that occur every second
@@ -85,7 +88,7 @@ idt_call_registers_t syscallHandler(idt_call_registers_t regs)
    // Firstly, check if the requested syscall number is valid.
    // The syscall number is found in EAX.
    if (regs.eax >= num_syscalls)
-       return;
+       return regs;
 
 
 
@@ -121,7 +124,7 @@ idt_call_registers_t syscallHandler(idt_call_registers_t regs)
 
 void kernelInitializeSyscalls()
 {
-	register_interrupt_handler (127, &syscallHandler); //Syscall = Interrupt 127
+	registerInterruptHandler (127, &syscallHandler); //Syscall = Interrupt 127
 
 	return;
 }

@@ -13,7 +13,6 @@
 #include <messages/messages.h>
 #include <scheduler/process_scheduler.h>
 #include <fs/vfs.h>
-#include "../loaders/elf/parser.h"
 #include "../stack/kstack.h"
 
 extern heap_t kernel_heap;

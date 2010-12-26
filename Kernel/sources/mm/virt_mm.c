@@ -9,6 +9,7 @@
 #include <process/process.h>
 #include <process/procfault.h>
 #include <debug/debug.h>
+#include <interrupts/interrupt_handler.h>
 
 #define ReloadCR3() \
       __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
@@ -216,7 +217,7 @@ void initializeVirtualMemoryManager(uint32 mem_end)
 {
 	unsigned int i = 0; //Used as a iterator throughout the function
 
-	register_interrupt_handler (14, &page_fault); //Register the page fault handler.
+	registerInterruptHandler (14, &page_fault); //Register the page fault handler.
 					              //Called when bad little processes try to access memory they can't (Doesn't exist or not available to them)
 
 	page_directory_t * pagedir = (page_directory_t *) allocateFrame(); //Paging isn't enabled so this should just give us 4kb at the end of used memory.

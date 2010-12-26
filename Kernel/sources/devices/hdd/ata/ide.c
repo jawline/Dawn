@@ -24,7 +24,6 @@ void initializeIdeHardDrive(unsigned int BAR0, unsigned int BAR1, unsigned int B
 	if (ideDetectDeviceType(dev) != T_UNKNOWN)
 	{
 		//Its it not unknown then use it
-		addToHddFs(dev);
 	}
 }
 

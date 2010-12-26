@@ -16,4 +16,6 @@ struct rfs_structure
 
 typedef struct rfs_structure rfs_t;
 
+fs_node_t* createRfsDirectory(char * name, fs_node_t* parent);
+
 #endif //_RFS_DEFINITION_H_

@@ -6,7 +6,7 @@
 
 typedef void (*clock_callback)(); //Call one of these on each tick if setup.
 
-void init_pit(uint32 frequency);
-void set_pit_callback(clock_callback cb);
+void initializePit(unsigned int frequency);
+void setPitCallback(clock_callback cb);
 
 #endif //_PROGRAMMABLE_INTERRUPT_TIMER_DEF_H_

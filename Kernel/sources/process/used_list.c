@@ -4,14 +4,14 @@
 
 const unsigned long usedListExpansionSize = 1024;
 
-void init_used_list(process_t* process)
+void initializeUsedList(process_t* process)
 {
 	process->m_usedListRoot = (MEM_LOC*) malloc(1024);
 	process->m_usedListSize = 1024;
 	process->m_usedListLocation = 0;
 }
 
-void expand_used_list(process_t* process)
+void expandUsedList(process_t* process)
 {
 	MEM_LOC* new_loc = (MEM_LOC*) malloc(process->m_usedListSize + usedListExpansionSize);
 
@@ -24,20 +24,19 @@ void expand_used_list(process_t* process)
 }
 
 //TODO: Used list shrinking
-int fzero = 0;
 
-MEM_LOC used_list_top(process_t* process)
+MEM_LOC usedListTop(process_t* process)
 {
 	MEM_LOC* ulocation = process->m_usedListRoot;
 	return *ulocation;
 }
 
-void used_list_add(process_t* process, MEM_LOC location)
+void usedListAdd(process_t* process, MEM_LOC location)
 {
 	if (process->m_usedListSize == process->m_usedListLocation)
 	{
 		//Gotta expand the used list
-		expand_used_list(process);
+		expandUsedList(process);
 	}
 
 	MEM_LOC* ulocation = process->m_usedListRoot;
@@ -49,7 +48,7 @@ void used_list_add(process_t* process, MEM_LOC location)
 	process->m_usedListLocation += sizeof(MEM_LOC);
 }
 
-void used_list_remove(process_t* process, MEM_LOC location)
+void usedListRemove(process_t* process, MEM_LOC location)
 {
 	MEM_LOC* ulocation = process->m_usedListRoot;
 	

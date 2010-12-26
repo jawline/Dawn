@@ -2,6 +2,7 @@
 #include <terminal/terminal.h>
 #include <stdlib.h>
 #include <mm/virt_mm.h>
+#include <lib/io.h>
 
 //The VGA Frame buffer starts at 0xB8000
 static uint16* video_memory_location = (uint16*) (KERNEL_START + 0xB8000);

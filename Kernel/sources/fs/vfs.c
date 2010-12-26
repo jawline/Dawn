@@ -3,6 +3,8 @@
 #include <fs/vfs.h>
 #include "rfs.h"
 #include <debug/debug.h>
+#include <common.h>
+#include "rfs.h"
 
 /*
    The intent of this file is to create a set of functions providing the kernel with easy manipulation of the virtual file system.
@@ -15,7 +17,7 @@ fs_node_t* root_fs = 0;
 
 void init_root_fs() 
 {
-	root_fs = create_rfs_directory("root", 0);
+	root_fs = createRfsDirectory("root", 0);
 }
 
 fs_node_t* init_vfs() 
@@ -38,7 +40,7 @@ int is_directory(fs_node_t* node)
 	return 0;
 }
 
-uint32 read_fs(fs_node_t* node, uint32 offset, uint32 size, uint8* buffer)
+unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8* buffer)
 {
 
   // Has the node got a read callback?
@@ -53,7 +55,7 @@ uint32 read_fs(fs_node_t* node, uint32 offset, uint32 size, uint8* buffer)
 
 }
 
-uint32 write_fs(fs_node_t* node, uint32 offset, uint32 size, uint8* buffer)
+unsigned long write_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8* buffer)
 {
 
   // Has the node got a read callback?
@@ -137,7 +139,7 @@ struct dirent* readdir_fs (fs_node_t* node, uint32 idx) {
 	return 0;
 }
 
-fs_node_t* finddir_fs (fs_node_t* node, char* name) {
+fs_node_t* finddir_fs (fs_node_t* node, const char* name) {
 
 	if (strcmp(name, "..") == 0)
 	{
@@ -149,7 +151,7 @@ fs_node_t* finddir_fs (fs_node_t* node, char* name) {
 
 	if (node->finddir != 0) 
 	{
-		return node->finddir(node, name);
+		return (fs_node_t*) node->finddir(node, name);
 	}
 
 	return 0;
@@ -203,7 +205,7 @@ fs_node_t* evaluatePath(const char* path, fs_node_t* current_node)
 	else
 	{
 		char* split_left = malloc(Buffer - path + 1);
-		memcpy(split_left, path, Buffer - path);
+		memcpy((void*) split_left, (void*) path, Buffer - path);
 		split_left[Buffer - path] = '\0';
 
 		fs_node_t* temp = finddir_fs(current_node, split_left);

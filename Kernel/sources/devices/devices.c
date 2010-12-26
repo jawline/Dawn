@@ -45,7 +45,7 @@ void initializePciDevice(pci_device active_dev)
 						secondary_channel_ctrl = 0x37F;
 					}
 
-					initializeIdeHardDrive(primary_channel_io, primary_channel_ctrl, secondary_channel_io, secondary_channel_ctrl);	
+					//initializeIdeHardDrive(primary_channel_io, primary_channel_ctrl, secondary_channel_io, secondary_channel_ctrl);	
 
 					break;
 				};

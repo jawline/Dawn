@@ -1,5 +1,7 @@
 #include <panic/panic.h>
 
+void text_mode_hardwrite(const char*);
+
 //Function: panic
 //Arguments, message (What error message to give), file (The filename of the file where the error occured), line (The line no. of where the error occured)
 //Return: None

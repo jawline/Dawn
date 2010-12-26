@@ -78,9 +78,14 @@ typedef struct process_structure process_t;
 
 void switch_process(process_t* from, process_t* proc);
 void set_process_input_buffer(process_t* process,char* m_Data, unsigned int len);
+void setProcessName(process_t* proc, const char* Name);
+void renameCurrentProcess(const char* Str);
 
 process_message postbox_peek(process_postbox* pb);
 process_message postbox_top(process_postbox* pb);
 void postbox_add(process_postbox* pb, process_message msg);
+int createNewProcess(const char* Filename, fs_node_t* Where);
+
+extern MEM_LOC read_eip();
 
 #endif //_PROCESS_DEF_H_

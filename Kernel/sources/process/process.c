@@ -6,6 +6,10 @@
 #include <debug/debug.h>
 #include "../stack/kstack.h"
 #include <scheduler/process_scheduler.h>
+#include <process/used_list.h>
+#include <mm/phys_mm.h>
+#include <loaders/executable_loader.h>
+#include <fs/vfs.h>
 
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
@@ -39,6 +43,8 @@ new_process_orders_t* make_orders(const char* Where, fs_node_t* fromWhere)
 	strcpy(nOrders->Filename, Where);
 	
 	nOrders->fromWhere = fromWhere;
+
+	return nOrders;
 }
 
 void free_orders(new_process_orders_t* orders)
@@ -70,7 +76,7 @@ void new_process_entry()
 		usrMode = Orders->user_mode;
 
 		DEBUG_PRINT("Renaming process\n");
-		rename_current_process(Orders->Filename);
+		renameCurrentProcess(Orders->Filename);
 
 		DEBUG_PRINT("User mode toggle checked\n");
 
@@ -85,7 +91,7 @@ void new_process_entry()
 		} else
 		{
 			DEBUG_PRINT("Passing to executable loader\n");
-			loadAndExecuteElf(Node, usrMode);
+			loadAndExecuteProgram(Node, usrMode);
 		}
 	}
 	else
@@ -114,7 +120,7 @@ process_t* initializeKernelProcess()
 
 	kernel_proc = ret;
 
-	init_used_list(kernel_proc);
+	initializeUsedList(kernel_proc);
 
 	ret->m_pTerminal = g_kernelTerminal;
 
@@ -127,9 +133,9 @@ void freeProcess(process_t* process)
 	while (process->m_usedListLocation != 0)
 	{
 
-		MEM_LOC top = used_list_top(process);
+		MEM_LOC top = usedListTop(process);
 		freeFrame(top);
-		used_list_remove(process, top);
+		usedListRemove(process, top);
 	}
 
 	if (process->m_usedListRoot != 0)
@@ -157,7 +163,7 @@ int kfork()
 	
 	disable_interrupts();
 
-	DEBUG_PRINT("Free frames at start %x\n", calculate_free_frames());
+	DEBUG_PRINT("Free frames at start %x\n", calculateFreeFrames());
 
 	//Store this for later use
 	process_t* parent = getCurrentProcess();
@@ -170,7 +176,7 @@ int kfork()
 	strcpy(new_process->m_Name, "ChildProcess");
 
 	new_process->m_pTerminal = parent->m_pTerminal;
-	init_used_list(new_process);
+	initializeUsedList(new_process);
 
 	//Set the processes unique ID
 	next_pid++;
@@ -188,7 +194,7 @@ int kfork()
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
 
-	uint32 current_eip = read_eip();
+	MEM_LOC current_eip = (MEM_LOC) read_eip();
 
 	if (parent->m_ID == getCurrentProcess()->m_ID)
 	{
@@ -215,7 +221,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	
 	disable_interrupts();
 
-	DEBUG_PRINT("PROCESS: FREE FRAMES AT START 0x%x\n", calculate_free_frames());
+	DEBUG_PRINT("PROCESS: FREE FRAMES AT START 0x%x\n", calculateFreeFrames());
 
 	//Store this for later use
 	process_t* parent = schedulerGetProcessFromPid(0);
@@ -231,7 +237,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	new_process->m_pTerminal = parent->m_pTerminal;
 
 	//Initialize the used frames list for the process
-	init_used_list(new_process);
+	initializeUsedList(new_process);
 
 	//Set the processes unique ID
 	next_pid++;
@@ -254,7 +260,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
 
-	uint32 current_eip = new_process_entry;
+	MEM_LOC current_eip = (MEM_LOC) new_process_entry;
 
 	asm volatile("mov %%esp, %0" : "=r"(esp));
 	asm volatile("mov %%ebp, %0" : "=r"(ebp));
@@ -266,7 +272,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	process_message InfomaticMessage;
 	InfomaticMessage.from_PID = 0;
 	InfomaticMessage.ID = LOAD_MESSAGE;
-	InfomaticMessage.messageAdditionalData = make_orders(Filename, Where);
+	InfomaticMessage.messageAdditionalData = (MEM_LOC) make_orders(Filename, Where);
 
 	postbox_add(&new_process->m_processPostbox, InfomaticMessage);
 
@@ -277,9 +283,9 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	return 0; //Return 0 - Parent
 }
 
-void rename_current_process(const char* Str)
+void renameCurrentProcess(const char* Str)
 {
-	set_process_name(getCurrentProcess(), Str);
+	setProcessName(getCurrentProcess(), Str);
 }
 
 inline void switch_process(process_t* from, process_t* to)
@@ -390,7 +396,7 @@ process_message postbox_peek(process_postbox* pb)
 	return pb->first->data;
 }
 
-void set_process_name(process_t* proc, const char* Name)
+void setProcessName(process_t* proc, const char* Name)
 {
 	strcpy(proc->m_Name, Name);
 }

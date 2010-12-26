@@ -7,7 +7,7 @@ heap_t kernel_heap;
 /**
  * @brief Allocates x amount of memory from the kernel heap
  */
-uint32 kmalloc(uint32 mem) 
+void* kmalloc(unsigned long mem) 
 {
 	return heapAllocateMemory(mem, &kernel_heap);
 }
@@ -15,7 +15,7 @@ uint32 kmalloc(uint32 mem)
 /**
  * @brief Free memory at location x on the kernel heap making it available again
  */
-void kfree(uint32 addr)
+void kfree(void* addr)
 {
 	heapFreeMemory(addr, &kernel_heap);
 }

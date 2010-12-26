@@ -11,5 +11,6 @@ MEM_LOC allocateFrame();
 MEM_LOC allocateFrameForProcess(process_t* req_process);
 
 void freeFrame(MEM_LOC frame);
+unsigned long calculateFreeFrames();
 
 #endif //PHYSICAL_MEMORY_MANAGER_DEF_H_

@@ -136,12 +136,12 @@ void systemProcess()
 
     if (forkedID == 1)
     {
-   	set_process_name(getCurrentProcess(), "System");
+   	setProcessName(getCurrentProcess(), "System");
 	systemMainProcess();
     }
     else
     {
-   	set_process_name(getCurrentProcess(), "SystemIdle");
+   	setProcessName(getCurrentProcess(), "SystemIdle");
 	systemIdleProcess();
     }
 

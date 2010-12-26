@@ -207,9 +207,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 
 	//Init the virtual file system
 	fs_node_t * rootfs = init_vfs();
-	
-	//Initialize the devices file system
-	init_device_fs(init_vfs());
 
 	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	initializeKernelTerminal();
@@ -232,7 +229,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	/**
 	 * @bug Devices subsystem broken. (On real hardware, ASUS EEE PC 701 with SSD crashes) fix before uncommenting
 	 */
-	//initializeDevices();
+	initializeDevices();
 
 	if (mboot_ptr->mods_count == 1)
 	{ 

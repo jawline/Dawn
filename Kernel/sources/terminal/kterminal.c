@@ -1,6 +1,7 @@
 //Kernel Terminal
 #include <terminal/terminal.h>
 #include <stdio.h>
+
 terminal_t* g_kernelTerminal = 0;
 terminal_t* g_terminalInContext = 0;
 
@@ -97,12 +98,17 @@ void kcls()
 //Put a character on the kernel terminals screen
 void kputc(char c)
 {
-	if (g_kernelTerminal == 0) {
-		text_mode_putc(c);
-	}
-	else
+	if (g_kernelTerminal == 0) 
 	{
+
+		text_mode_putc(c);
+
+	}
+	else 
+	{
+
 		g_kernelTerminal->f_putchar(g_kernelTerminal, c);
+
 	}
 }
 

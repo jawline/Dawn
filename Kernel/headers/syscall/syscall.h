@@ -3,6 +3,6 @@
 #include <common.h>
 #include <interrupts/idt.h>
 
-void kernel_initialise_syscalls();
+void kernelInitializeSyscalls();
 
 #endif //_SYSTEM_CALL_DEF_H_

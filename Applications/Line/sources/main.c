@@ -68,16 +68,6 @@ char exec_cmd()
 	{
 		requestDisableSystemDebugMode();
 	}
-	else if (strcmp("gameoflife", Pointer) == 0)
-	{
-		systemRunNewProcess("./system/root/GameOfLife");
-		exit(1);
-	}
-	else if (strcmp("base", Pointer) == 0)
-	{
-		systemRunNewProcess("./system/root/Base");
-		exit(1);
-	}
 	else if (strcmp("uptime", Pointer) == 0)
 	{
 		unsigned long ticks = clock();
@@ -118,27 +108,6 @@ char exec_cmd()
 		}
 
 		printf("Hah, just kidding\n");
-	}
-	else if (strcmp("lproc", Pointer) == 0)
-	{
-		printf("Listing active processes\n");
-
-		unsigned int iterator = 0;
-
-		while (1)
-		{
-			int pid = getProcessID(iterator);
-
-			if (pid == -1) break;
-
-			process_info_t info = getProcessInfo(pid);
-			printf("Process %i Name %s Time %i\n", info.pID, info.Name, info.processingTime);
-
-			iterator++;
-		}
-
-		printf("Done listing %i processes\n", iterator);
-
 	} else if (strcmp("free", Pointer) == 0) {
 		printf("Free memory information\n");
 		MEM_LOC free_frames = getNumberOfFreeFrames();
@@ -150,7 +119,8 @@ char exec_cmd()
 	} else if (strcmp("reboot", Pointer) == 0) {
 		requestReboot();
 	} else {
-		printf("Command %s not found\n", Pointer);
+		systemRunNewProcess(Pointer);
+		exit(1);
 	}
 
 	return 0;
@@ -168,9 +138,6 @@ int main(int argc, void* argv)
 	postboxSetFlags(INPUT_BIT);
 
 	cps = getClocksPerSecond();
-
-	printf("Line - Executable compiled for Kernel version %i.%i codename \"%s\"\n", KVERSION_WHOLE, KVERSION_FRACTION, KVERSION_CODENAME);
-	printf("Compiled as part of OS version %i.%i.%i codename \"%s\"\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
 
 	printf("Line.x:> ");
 	Pointer[0] = '\0';

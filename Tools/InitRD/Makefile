@@ -1,4 +1,4 @@
-CC=gcc 
+CC=gcc
 CFLAGS= -w  -I ../../Shared/headers -m32
 LDFLAGS=-melf_i386
 

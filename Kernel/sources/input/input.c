@@ -4,7 +4,7 @@
 
 input_listener_t* g_listenerList = 0;
 
-void initializeInputCallbacks()
+void inputInitialize()
 {
 	g_listenerList = 0;
 
@@ -13,7 +13,7 @@ void initializeInputCallbacks()
 	initializeKeyboard();
 }
 
-void sendInputMessage(uint32 device, uint32 main, void* additional)
+void sendInputMessage(unsigned int device, unsigned long main, void* additional)
 {
 	if (g_listenerList)
 	{
@@ -35,7 +35,7 @@ void sendInputMessage(uint32 device, uint32 main, void* additional)
 return;
 }
 
-void registerInputListener(unsigned int device, input_listener_callback cb)
+void registerInputListener(unsigned int device /* If -1 respond to all */, input_listener_callback cb)
 {
 
 	if (g_listenerList)

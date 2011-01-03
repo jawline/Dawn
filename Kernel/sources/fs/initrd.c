@@ -189,6 +189,7 @@ fs_node_t* initialize_initrd(uint32 start, char* name, fs_node_t* parent)
 		file_list[iter].length = fe_ptr->size;
 		file_list[iter].write = (io_operation) write_ird;
 		file_list[iter].read = (io_operation) read_ird;
+		file_list[iter].parent = &dir_list[0];
 
 		fe_ptr++;
 	}

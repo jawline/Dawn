@@ -35,6 +35,8 @@ struct abstract_terminal {
 
 typedef struct abstract_terminal terminal_t;
 
-terminal_t* make_terminal(unsigned int width, unsigned int height);
+terminal_t* makeNewTerminal(unsigned int width, unsigned int height);
+terminal_t* getTerminalInContext();
+void setDefaultTerminalCallbacks(terminal_t* term);
 
 #endif //_TERMINAL_DEFINITION_H_

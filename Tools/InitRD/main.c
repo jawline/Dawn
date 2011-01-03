@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <dirent.h>
 
 #include <types/int_types.h>
 #include <initrd/initrd_dirent.h>
@@ -9,7 +10,7 @@
 
 #define VER_MAJOR 0
 #define VER_MINOR 2
-#define VER_REV 7
+#define VER_REV 8
 
 typedef struct {
 	struct initrd_fent st; //File header structure
@@ -18,21 +19,86 @@ typedef struct {
 	uint32 mlen; //Memory length
 } file_helper;
 
+struct file_list_entry
+{
+	char* name;
+	struct file_list_entry* next;
+};
+
 file_helper* helper_list;
+
+struct file_list_entry file_list;
+
+unsigned int num_files;
 
 int main(int argc, char **argv)
 {
+	file_list.name = 0;
+	file_list.next = 0;
+
+	num_files = 0;
+
 	printf("Compiler Version %i.%i.%i\n", VER_MAJOR, VER_MINOR, VER_REV);
 
-	if (argc < 2) {
-		printf("Error, Expected Argc greater then 2\n");
-		printf("Usage: Outputfile Input Input Input ...\n");	
+	if (argc != 3) {
+		printf("Usage: RamdiskCompiler Directory OutputFile ...\n");	
 		return 0;
 	}
 
-	helper_list = malloc(sizeof(file_helper) * argc - 2);
+	DIR           *d;
+	struct dirent *dir;
+	d = opendir(argv[1]);
+
+	if (d)
+	{
+	  while ((dir = readdir(d)) != NULL)
+	  {
+
+		if (dir->d_type != DT_DIR)
+		{
+
+			struct file_list_entry* iter = &file_list;
+
+			while (1)
+			{
+
+				if (iter->name == 0)
+				{
+
+					iter->name = malloc(strlen(argv[1]) + strlen(dir->d_name));	
+					strcpy(iter->name, argv[1]);
+					strcpy(iter->name + strlen(argv[1]), dir->d_name);
+
+					num_files++;
+
+					break;
+				}
+				else
+				{
+
+					if (iter->next == 0)
+					{
+						iter->next = (struct file_list_entry*) malloc(sizeof(struct file_list_entry));
+						iter->next->name = 0;
+						iter->next->next = 0;
+					}
+			
+					iter = iter->next;
+				}
+
+			}
+
+		}
+
+	  }
+
+	  closedir(d);
+	}
+
+	helper_list = malloc(sizeof(file_helper) * num_files);
+
 	FILE * fout = 0;
-	fout = fopen(argv[1], "wb");
+	fout = fopen(argv[2], "wb");
 
 	if (fout == 0) {
 		printf("Unable to open output file\n");
@@ -63,7 +129,7 @@ int main(int argc, char **argv)
 	struct initrd_dirent direntry;
 	strcpy(direntry.name, "root");
         direntry.dentrys = 0;
-	direntry.fentrys = argc - 2;
+	direntry.fentrys = num_files;
 
 	if (fwrite(&direntry, sizeof(struct initrd_dirent), 1, fout) != 1) {
 		printf("Unable to write a directory chunk\n");
@@ -77,7 +143,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	uint32 nmfiles = argc - 2;
+	uint32 nmfiles = num_files;
 
 	if (fwrite(&nmfiles, sizeof(uint32), 1, fout) != 1) {
 		printf("Unable to write File chunk header\n");
@@ -86,18 +152,20 @@ int main(int argc, char **argv)
 
 	struct initrd_fent ent;
 
-	for (i = 0; i < nmfiles; i++) {
+	struct file_list_entry* fiter = &file_list;
+
+	for (i = 0; i < num_files; i++) {
 
 		//Strip the name from the entity
-		char* lastString = strrchr(argv[i + 2], '/');
+		char* lastString = strrchr(fiter->name, '/');
 		if (lastString == 0)
 		{
 			printf("lastString null\n");
-			lastString = strchr(argv[i + 2], '\\');
+			lastString = strchr(fiter->name, '\\');
 			if (lastString == 0)
 			{
 				printf("lastString still null\n");
-				lastString = argv[i + 2];
+				lastString = fiter->name;
 			}
 			else
 			{
@@ -110,22 +178,28 @@ int main(int argc, char **argv)
 
 		strcpy(ent.name, lastString);
 
-		printf("Given name %s\n", ent.name);
-
 		helper_list[i].st = ent;
 		helper_list[i].loc = ftell(fout);
+
 		if (fwrite(&ent, sizeof(struct initrd_fent), 1, fout) != 1) {
+
 			printf("Unable to write a file chunk\n");
 			return 0;	
+
 		}
+
+		fiter = fiter->next;
 	}
 
 	FILE * fin = 0;
 	size_t end;
 
-	for (i = 0; i < nmfiles; i++) {
+	fiter = &file_list;
+
+	for (i = 0; i < num_files; i++) {
+
 		helper_list[i].mloc = ftell(fout) + 1;
-		fin = fopen(argv[i + 2], "rb");
+		fin = fopen(fiter->name, "rb");
 		
 		if (fin == 0) {
 			printf("Unable to open helper file\nAbort\n"); return 0;		
@@ -135,7 +209,7 @@ int main(int argc, char **argv)
 		end = ftell(fin);
 		helper_list[i].mlen = end;
 		fseek(fin, 0, SEEK_SET);
-		printf("File Size (Bytes): %i\n", end);
+		printf("File %s File Size (Bytes): %i\n", helper_list[i].st.name, end);
 
 		void * mem = malloc(end);
 		
@@ -150,6 +224,8 @@ int main(int argc, char **argv)
 		free(mem);
 		
 		fclose(fin);
+
+		fiter = fiter->next;
 	}
 
 	fseek(fout, 0, SEEK_END);
@@ -174,7 +250,7 @@ int main(int argc, char **argv)
 
 	fclose(fout);
 
-	fout = fopen(argv[1], "rb");
+	fout = fopen(argv[2], "rb");
 	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);	
 
 	void* Data = malloc(end - sizeof(struct initial_ramdisk_header));
@@ -190,32 +266,26 @@ int main(int argc, char **argv)
 	unsigned char digest[16];
 	MDData(Data, end - sizeof(struct initial_ramdisk_header), digest);
 
-	printf("Computing checksum\n");
-
 	unsigned int iter = 0;
 	for (iter = 0; iter < 16; iter++)
 	{
 		printf("%x", digest[iter]);
 		head.ramdisk_checksum[iter] = digest[iter];
 	}
-
-	printf("\nEnd of digest\n");
+	
+	printf("\n");
 
 	free(Data);
 
 	fclose(fout);
 
-	fout = fopen(argv[1], "r+b");
+	fout = fopen(argv[2], "r+b");
 
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
 		printf("Unable to write the initial RAM disk header\n");	
 	}	
 
-	printf("RAM disk written. %d bytes\n", head.ramdisk_size);
-
 	fclose(fout);
-
-	printf("Compiled\n");
 
 	return 0;
 }

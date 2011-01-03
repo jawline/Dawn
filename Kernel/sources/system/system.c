@@ -76,7 +76,7 @@ void systemMainProcess()
 				}
 				else
 				{
-					printf("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
+					DEBUG_PRINT("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
 
 					schedulerRemove(schedulerPtr);
 
@@ -109,7 +109,7 @@ void systemMainProcess()
 
 				disable_interrupts();
 
-				printf("Creating new instance of %s\n", settingsReadValue("kernel.onstart"));
+				DEBUG_PRINT("Creating new instance of %s\n", settingsReadValue("kernel.onstart"));
 
 				createNewProcess( settingsReadValue("kernel.onstart"), init_vfs());
 

@@ -1,4 +1,4 @@
-#include "syscall.h"
+#include <syscall/syscall.h>
 #include <stdio.h>
 #include <scheduler/process_scheduler.h>
 #include <heap/heap.h>

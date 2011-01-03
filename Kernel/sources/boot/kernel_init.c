@@ -24,6 +24,16 @@
 #include <terminal/terminal.h>
 #include <initrd/initrd_header.h>
 #include <scheduler/process_scheduler.h>
+#include <input/input.h>
+#include <syscall/syscall.h>
+#include <settings/settingsmanager.h>
+#include <devices/devices.h>
+#include <terminal/kterminal.h>
+#include <timers/clock.h>
+#include <screen/screen.h>
+#include <heap/kheap.h>
+#include <gpf/gpf.h>
+#include <stack/stack.h>
 
 #include <fs/vfs.h>
 #include <fs/dir.h>
@@ -32,27 +42,25 @@
 
 extern terminal_t* getTerminalInContext();
 
-#define iprintf(x) if (visual_output) { printf(x); }
-
 /**
  @brief GDT allows for segmented memory model on x86 processors, outdated. Using paging instead but the system still needs a GDT for things like ring-3 jumps
  @callgraph
  */
-void initializeGdt(int visual_output) 
+void initializeGdt() 
 {
    initialize_gdt();
    initializeTss();
-   iprintf("GDT [OK]\n");
+   printf("GDT [OK]\n");
 }
 
 /*
  @brief IDT = Interrupt descriptor table. Allows interrupt calls to trigger functions int he kernel pointed to by it
  @callgraph
  */
-void initializeIdt(int visual_output) 
+void initializeIdt() 
 {
    Initialize_IDT();
-   iprintf("IDT [OK]\n");
+   printf("IDT [OK]\n");
 }
 
 /**
@@ -60,7 +68,7 @@ void initializeIdt(int visual_output)
  uses the last loaded module (The one after the RAM disk)
  @callgraph
  */
-void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start, MEM_LOC kernel_end, int visual_output)
+void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start, MEM_LOC kernel_end)
 {
 
     kernel_end = kernel_end - kernel_start;
@@ -71,7 +79,7 @@ void initializeMemoryManagers(struct multiboot* mboot_ptr, MEM_LOC kernel_start,
 
     map_free_pages(mboot_ptr);
 
-    iprintf("Memory Managers (PMM, VMM) [OK]\n");
+    printf("Memory Managers (PMM, VMM) [OK]\n");
 }
 
 /**
@@ -177,16 +185,16 @@ extern heap_t kernel_heap;
  @brief Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
  @callgraph
  */
-void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 initial_esp) //visual_output signals whether or not to call printf
+void initializeKernel(struct multiboot* mboot_ptr, uint32 initial_esp) //visual_output signals whether or not to call printf
 {
 	//Load the archaic GDT 
-	initializeGdt(visual_output);
+	initializeGdt();
 
 	extern void k_end;
 	MEM_LOC kEndLocation = (POINTER)&k_end;
 
 	//Initialize the PMM and VMM
-	initializeMemoryManagers(mboot_ptr, KERNEL_START, kEndLocation, visual_output);
+	initializeMemoryManagers(mboot_ptr, KERNEL_START, kEndLocation);
 
 	initializeGeneralProtectionFaultHandler();
 
@@ -194,7 +202,7 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	moveStack(USER_STACK_START, USER_STACK_SIZE, initial_esp);
 
 	//Interrupts description table
-	initializeIdt(visual_output);
+	initializeIdt();
 
 	//Self Explanatory
 	initializeScreen();
@@ -213,7 +221,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	getTerminalInContext()->f_clear(getTerminalInContext());
 
 	//Map the kernel stack
-	int Frames = KERNEL_STACK_SIZE / PAGE_SIZE;
 
 	MEM_LOC iterator;
 	for (iterator = KERNEL_STACK_START - PAGE_SIZE; iterator >= KERNEL_STACK_START - KERNEL_STACK_SIZE; iterator -= PAGE_SIZE)
@@ -225,11 +232,6 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	//Initialize the system call interface
 	kernelInitializeSyscalls();
 
-	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
-	/**
-	 * @bug Devices subsystem broken. (On real hardware, ASUS EEE PC 701 with SSD crashes) fix before uncommenting
-	 */
-	initializeDevices();
 
 	if (mboot_ptr->mods_count == 1)
 	{ 
@@ -241,7 +243,10 @@ void initializeKernel(struct multiboot * mboot_ptr, int visual_output, uint32 in
 	schedulerInitialize(initializeKernelProcess());
 
 	//Input interfaces
-	initializeInputCallbacks();
+	inputInitialize();
+
+	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
+	initializeDevices();
 
 	//Initialize the settings manager
 	initializeSettingsManager();

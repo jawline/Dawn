@@ -16,7 +16,7 @@
 #define BROWN 6
 #define GREEN 2
 
-void init_screen();
+void initializeScreen();
 unsigned int get_attr(unsigned int ID);
 
 void text_mode_clearscreen();

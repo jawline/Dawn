@@ -1,3 +1,4 @@
+rm ./bin/RamdiskFolder/*
 sh scripts/rebuild_kernel.sh
 sh scripts/rebuild_components.sh
 sh scripts/create_ramdisk.sh

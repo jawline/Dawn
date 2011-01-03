@@ -193,7 +193,7 @@ fs_node_t* evaluatePath(const char* path, fs_node_t* current_node)
 
 	if (path[0] == '/')
 	{
-		evaluatePath(path + 1, init_vfs());
+		return evaluatePath(path + 1, init_vfs());
 	}
 
 	char* Buffer = strchr(path, '/');

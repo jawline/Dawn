@@ -13,6 +13,7 @@
 #include <messages/messages.h>
 #include <scheduler/process_scheduler.h>
 #include <fs/vfs.h>
+#include <system/system.h>
 #include "../stack/kstack.h"
 
 extern heap_t kernel_heap;

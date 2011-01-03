@@ -71,7 +71,7 @@ void new_process_entry()
 
 		fs_node_t* Node = evaluatePath(Orders->Filename, Orders->fromWhere);
 
-		DEBUG_PRINT("Attempted to evaluate path\n");
+		DEBUG_PRINT("Attempted to evaluate path from node %s\n", Orders->fromWhere->name);
 
 		usrMode = Orders->user_mode;
 
@@ -90,6 +90,14 @@ void new_process_entry()
 			schedulerKillCurrentProcess();
 		} else
 		{
+			setProcessExecutionDirectory(getCurrentProcess(), Node->parent);
+
+			if (Node->parent == 0)
+			{
+				DEBUG_PRINT("Node parent->Null\n");
+				for (;;) {}
+			}
+
 			DEBUG_PRINT("Passing to executable loader\n");
 			loadAndExecuteProgram(Node, usrMode);
 		}
@@ -155,6 +163,11 @@ void freeProcess(process_t* process)
 
 	DEBUG_PRINT("A process was freed\n");
 
+}
+
+void setProcessExecutionDirectory(process_t* proc, fs_node_t* node)
+{
+	proc->m_executionDirectory = node;
 }
 
 int kfork()

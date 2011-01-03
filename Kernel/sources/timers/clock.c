@@ -20,7 +20,7 @@ void initializeSystemClock()
 	initializePit(1000);
 }
 
-unsigned long get_clock_ticks()
+unsigned long getClockTicks()
 {
 	return clock_ticks;
 }

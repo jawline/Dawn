@@ -7,6 +7,6 @@ unsigned int syscallClocksPerSecond()
 
 unsigned long syscallGetSystemUptime()
 {
-	return get_clock_ticks();
+	return getClockTicks();
 }
 

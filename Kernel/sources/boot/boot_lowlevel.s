@@ -43,7 +43,7 @@ mboot:
     dd  start                  ; Kernel entry point (initial EIP).
 
 [GLOBAL start]                  ; Kernel entry point.
-[EXTERN main]                   ; This is the entry point of our C code
+[EXTERN entry_point]                   ; This is the entry point of our C code
 
 start:
 	mov ecx, boot_pagedir - KERNEL_VIRTUAL_BASE
@@ -70,7 +70,7 @@ higherhalf:
 	push sys_stack_start
 	push ebx
 
-	call main
+	call entry_point
 
 	jmp $
 

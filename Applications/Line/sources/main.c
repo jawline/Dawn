@@ -39,22 +39,12 @@ char exec_cmd()
 {
 	printf("\n");
 
-	if (strcmp("exit", Pointer) == 0)
-	{
-		exit(-1);
-	}
-	else if (strcmp("help", Pointer) == 0)
+	if (strcmp("help", Pointer) == 0)
 	{
 		printf("Line - Command line tool for SimpleOS\n");
 		printf("Line - Executable compiled for Kernel version %i.%i codename \"%s\"\n", KVERSION_WHOLE, KVERSION_FRACTION, KVERSION_CODENAME);
 		printf("Compiled as part of OS version %i.%i.%i codename \"%s\"\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
-		printf("free - list memory information\n");
-		printf("reboot - request the kernel to reboot the system\n");
-		printf("uptime - Lists the seconds minutes and hours the system has been up for\n");
-		printf("lproc - Lists information about all scheduled processes\n");
-		printf("debug_on - Turns debug mode on\n");
-		printf("debug_off - Turns debug mode off\n");
-		printf("cls - Clear the screen\n");
+		printf("Commands, debug_on, debug_off, cls. any other entry will try to start a program of that name\n");
 	}
 	else if (strcmp("cls", Pointer) == 0)
 	{
@@ -68,57 +58,7 @@ char exec_cmd()
 	{
 		requestDisableSystemDebugMode();
 	}
-	else if (strcmp("uptime", Pointer) == 0)
-	{
-		unsigned long ticks = clock();
-		unsigned long ticks_per_second = cps;
-
-		unsigned int seconds = 0;
-		unsigned int minutes = 0;
-		unsigned int hours = 0;
-
-		seconds = ticks / ticks_per_second; //Use this temporarely
-
-		hours = (seconds / (60 * 60));
-		
-		unsigned int remainder = seconds % (60 * 60);
-
-		minutes = remainder / 60;
-
-		seconds = remainder % 60;
-
-		printf("The system has been alive for %i hours %i minutes and %i seconds\n", hours, minutes, seconds);
-	}
-	else if (strcmp("armageddon", Pointer) == 0)
-	{
-		printf("Self-Destruct sequence activated\n");
-
-		unsigned int tdeath = 16;
-
-		while (1)
-		{
-			unsigned long time_for_splode = clock() + cps;
-			while (time_for_splode > clock()) {}
-			tdeath--;
-
-			printf("%i Seconds remaining\n", tdeath);
-
-			if (tdeath == 0)
-				break;
-		}
-
-		printf("Hah, just kidding\n");
-	} else if (strcmp("free", Pointer) == 0) {
-		printf("Free memory information\n");
-		MEM_LOC free_frames = getNumberOfFreeFrames();
-		MEM_LOC page_size = getPageSize();
-		printf("%i free frames of memory\n", free_frames);
-		printf("Each frame is %i bytes of memory\n", page_size);
-		printf("Therefore there are %i MBs of memory left\n", (free_frames * page_size) / 1024 / 1024);
-
-	} else if (strcmp("reboot", Pointer) == 0) {
-		requestReboot();
-	} else {
+	else {
 		systemRunNewProcess(Pointer);
 		exit(1);
 	}

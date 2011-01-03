@@ -29,3 +29,22 @@ make clean
 make
 cd ..
 cp ./free/Build/* ../bin/RamdiskFolder/
+
+cd uptime
+make clean
+make
+cd ..
+cp ./uptime/Build/* ../bin/RamdiskFolder/
+
+cd armageddon
+make clean
+make
+cd ..
+cp ./armageddon/Build/* ../bin/RamdiskFolder/
+
+
+cd reboot
+make clean
+make
+cd ..
+cp ./reboot/Build/* ../bin/RamdiskFolder/

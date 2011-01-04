@@ -64,6 +64,7 @@ void page_fault (idt_call_registers_t regs)
 	handleFatalProcessFault(FAULT_ID_PAGEFAULT, Buffer);
 
 	PANIC("Ahhh (Virtual memory manager set to crash on pagefault)\n");
+
   for (;;);
 }
 

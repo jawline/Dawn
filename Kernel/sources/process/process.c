@@ -67,7 +67,7 @@ void new_process_entry()
 		DEBUG_PRINT("Valid message. continue to load\n");
 		new_process_orders_t* Orders = (new_process_orders_t*) Msg.messageAdditionalData;
 
-		DEBUG_PRINT("Telling system to attempt to run %s\n", Orders->Filename);
+		DEBUG_PRINT("Telling system to attempt to run %s fromWhere %s\n", Orders->Filename, Orders->fromWhere->name);
 
 		fs_node_t* Node = evaluatePath(Orders->Filename, Orders->fromWhere);
 

@@ -1,50 +1,19 @@
-rm ../bin/Line ../bin/Base
+Dirlist=$(find . -maxdepth 1 -type d)
 
-cd Base
-make clean
-make
-cd ..
-cp ./Base/Build/* ../bin/RamdiskFolder/
+for direc in $Dirlist ; do
+	    
+	    if [ "$direc" = "." ]; then
+               echo Not evaluating .
+	    else
+		echo Compiing $direc
+		cd $direc
 
-cd Line
-make clean
-make
-cd ..
-cp ./Line/Build/* ../bin/RamdiskFolder/
+		make clean
+		make
 
-cd GameOfLife
-make clean
-make
-cd ..
-cp ./GameOfLife/Build/* ../bin/RamdiskFolder/
+		cd ..
+		cp $direc/Build/* ../bin/RamdiskFolder
 
-cd lproc
-make clean
-make
-cd ..
-cp ./lproc/Build/* ../bin/RamdiskFolder/
-
-cd free
-make clean
-make
-cd ..
-cp ./free/Build/* ../bin/RamdiskFolder/
-
-cd uptime
-make clean
-make
-cd ..
-cp ./uptime/Build/* ../bin/RamdiskFolder/
-
-cd armageddon
-make clean
-make
-cd ..
-cp ./armageddon/Build/* ../bin/RamdiskFolder/
-
-
-cd reboot
-make clean
-make
-cd ..
-cp ./reboot/Build/* ../bin/RamdiskFolder/
+            fi
+            
+done

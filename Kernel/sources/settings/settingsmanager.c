@@ -30,7 +30,7 @@ void initializeSettingsManager()
 	DEBUG_PRINT("Initialized settings manager\n");
 	settingsListStart = 0;
 
-	parseConfigFile("./system/root/kernel.config");
+	parseConfigFile("./system/kernel.config");
 }
 
 /**

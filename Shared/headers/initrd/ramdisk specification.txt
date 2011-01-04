@@ -1,0 +1,17 @@
+The structure of a RAM disk is as follows
+
+RAM Disk Header - A single RAM disk header at the start of the disk containing the size in bytes of the disk
+{
+	uint32, ramdisk_magic constant set to 0x453ABCDF
+	uint8, ramdisk_checksum array of 16. MD5 hash of the files data
+	uint32, ramdisk_size, size in bytes of the ramdisk
+}
+
+uint32 num_files, the number of files in the ramdisk
+
+File Entrys
+{
+	char [128] Name, 128 character name for the file
+	uint32 start, the start of the ramdisk from the start
+	uint32 size, the size of the file on the ramdisk
+}

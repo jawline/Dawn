@@ -2,7 +2,6 @@
 #include <dirent.h>
 
 #include <types/int_types.h>
-#include <initrd/initrd_dirent.h>
 #include <initrd/initrd_fent.h>
 #include <initrd/initrd_header.h>
 
@@ -13,10 +12,12 @@
 #define VER_REV 8
 
 typedef struct {
+
 	struct initrd_fent st; //File header structure
 	uint32 loc; //Header location
 	uint32 mloc; //Memory location
 	uint32 mlen; //Memory length
+
 } file_helper;
 
 struct file_list_entry
@@ -30,6 +31,7 @@ file_helper* helper_list;
 struct file_list_entry file_list;
 
 unsigned int num_files;
+unsigned int i;
 
 int main(int argc, char **argv)
 {
@@ -118,29 +120,6 @@ int main(int argc, char **argv)
 	
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
 		printf("Unable to write the initial RAM disk header\n");	
-	}
-
-	uint32 nmdirs = 1;
-	if (fwrite(&nmdirs, sizeof(uint32), 1, fout) != 1) {
-		printf("Unable to write Directory chunk header\n");	
-		return 0;
-	}
-
-	struct initrd_dirent direntry;
-	strcpy(direntry.name, "root");
-        direntry.dentrys = 0;
-	direntry.fentrys = num_files;
-
-	if (fwrite(&direntry, sizeof(struct initrd_dirent), 1, fout) != 1) {
-		printf("Unable to write a directory chunk\n");
-		return 0;	
-	}
-	
-	uint32 i = 0;
-	for (i = 0; i < direntry.fentrys; i++) {
-		if (fwrite(&i, sizeof(uint32), 1, fout) != 1) {
-			printf("Unable to write dentry fentry\n");		
-		}
 	}
 
 	uint32 nmfiles = num_files;

@@ -3,4 +3,4 @@
 #Assumes build steps completed
 
 cp ./Config/* ./bin/RamdiskFolder/
-./bin/RamdiskCompiler ./bin/RamdiskFolder/ ./bin/ramdisk_build
+./bin/Tools/RamdiskCompiler ./bin/RamdiskFolder/ ./bin/ramdisk_build

@@ -7,18 +7,22 @@
 rfs_t* rfs_entrys_pointer = 0;
 uint32 num_rfs_entrys = 0;
 
-struct dirent* root_readdir (fs_node_t* node, uint32 idx) {
+struct dirent root_readdir (fs_node_t* node, uint32 idx) {
 	rfs_t* rfs_struct = &rfs_entrys_pointer[node->inode];
 
 	if (rfs_struct->num_directory_entrys > idx) 
 	{
-		struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
-		memset(ret, 0, sizeof(struct dirent));
-		strcpy(ret->name, rfs_struct->directory_entrys[idx]->name);
+		struct dirent ret;
+		memset(&ret, 0, sizeof(struct dirent));
+		strcpy(ret.name, rfs_struct->directory_entrys[idx]->name);
 		return ret;
 	}
 
-	return 0;
+	struct dirent ret;
+	memset(&ret, 0, sizeof(struct dirent));
+	strcpy(ret.name, "");
+
+	return ret;
 }
 
 fs_node_t* root_finddir (fs_node_t* node, char* name) {

@@ -93,15 +93,15 @@ void close_fs(fs_node_t* node) {
 	return;
 }
 
-struct dirent* readdir_fs (fs_node_t* node, uint32 idx) {
+struct dirent readdir_fs (fs_node_t* node, uint32 idx) {
 
 	if (node->parent == 0)
 	{
 		if (idx == 0)
 		{
-			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
-			memset(ret, 0, sizeof(struct dirent));
-			strcpy(ret->name, ".");
+			struct dirent ret;
+			memset(&ret, 0, sizeof(struct dirent));
+			strcpy(ret.name, ".");
 			return ret;
 		}
 		else
@@ -113,16 +113,16 @@ struct dirent* readdir_fs (fs_node_t* node, uint32 idx) {
 	{
 		if (idx == 0)
 		{
-			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
-			memset(ret, 0, sizeof(struct dirent));
-			strcpy(ret->name, ".");
+			struct dirent ret;
+			memset(&ret, 0, sizeof(struct dirent));
+			strcpy(ret.name, ".");
 			return ret;
 		}
 		else if (idx == 1)
 		{
-			struct dirent* ret = (struct dirent*) malloc(sizeof(struct dirent));
-			memset(ret, 0, sizeof(struct dirent));
-			strcpy(ret->name, "..");
+			struct dirent ret;
+			memset(&ret, 0, sizeof(struct dirent));
+			strcpy(ret.name, "..");
 			return ret;
 		}
 		else
@@ -136,7 +136,10 @@ struct dirent* readdir_fs (fs_node_t* node, uint32 idx) {
 		return node->readdir(node, idx);
 	}
 
-	return 0;
+	struct dirent ret;
+	memset(&ret, 0, sizeof(struct dirent));
+	strcpy(ret.name, "");
+	return ret;
 }
 
 fs_node_t* finddir_fs (fs_node_t* node, const char* name) {
@@ -200,6 +203,11 @@ fs_node_t* evaluatePath(const char* path, fs_node_t* current_node)
 
 	if (Buffer == 0)
 	{
+		if (strcmp(path, "") == 0)
+		{
+			return current_node;
+		}
+
 		return finddir_fs(current_node, path);
 	}
 	else

@@ -8,7 +8,7 @@
 
 struct dirent // One of these is returned by the readdir call, according to POSIX.
 {
-  char name[128]; // Filename.
+  char name[512]; // Filename.
   uint32 ino;     // Inode number. Required by POSIX.
 };
 
@@ -18,14 +18,14 @@ typedef unsigned long (*io_operation) (struct filesystem_node* node, unsigned lo
 
 typedef void (*cmd_operation) (struct filesystem_node* node);
 
-typedef struct dirent* (*read_directory_t) (struct filesystem_node* node, uint32 idx);
+typedef struct dirent (*read_directory_t) (struct filesystem_node* node, uint32 idx);
 
 typedef struct fs_node* (*find_directory_t) (struct filesystem_node* node, const char* name);
 
 typedef struct fs_node_t* (*bind_node_t) (struct filesystem_node* boundto, struct filesystem_node* tobind);
 
 struct filesystem_node {
-	char name[128]; //Character array, name
+	char name[512]; //Character array, name
 	struct filesystem_node* parent; //Pointer to the parent
 
 	uint32 flags; //32 bit bitmask for flags
@@ -59,7 +59,7 @@ unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size,
 unsigned long write_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8* buffer);
 void open_fs(fs_node_t* node);
 void close_fs(fs_node_t* node);
-struct dirent* readdir_fs (fs_node_t* node, uint32 idx);
+struct dirent readdir_fs (fs_node_t* node, uint32 idx);
 fs_node_t* finddir_fs (fs_node_t* node, const char* name);
 void bindnode_fs(fs_node_t* node, fs_node_t* target);
 void unbindnode_fs(fs_node_t* node, fs_node_t* target);

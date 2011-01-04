@@ -20,16 +20,20 @@ static uint32 num_files = 0;
 
 fs_node_t* initrd_root_node = 0;
 
-struct dirent* ird_root_readdir (fs_node_t* node, uint32 idx) 
+struct dirent ird_root_readdir (fs_node_t* node, uint32 idx) 
 {
 	if (num_files > idx)
 	{
-		struct dirent* ret = malloc(sizeof(struct dirent));
-		strcpy(ret->name, file_list[idx].name);
+		struct dirent ret;
+		memset(&ret, 0, sizeof(struct dirent));
+		strcpy(ret.name, file_list[idx].name);
 		return ret;
 	}
 
-	return 0;
+	struct dirent ret;
+	memset(&ret, 0, sizeof(struct dirent));
+	strcpy(ret.name, "");
+	return ret;
 }
 
 fs_node_t* ird_root_finddir (fs_node_t* node, char* name) 

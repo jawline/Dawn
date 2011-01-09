@@ -22,7 +22,7 @@
 char Board[(BOARD_WIDTH * BOARD_HEIGHT) + 1];
 char NextBoard[(BOARD_WIDTH * BOARD_HEIGHT) + 1];
 
-uint8 running = 0;
+uint8_t running = 0;
 
 unsigned int cursor_tile = 0;
 
@@ -131,7 +131,7 @@ void redraw()
 	cls();
 	printf("GAME OF LIFE: State ");
 
-	if (running) 
+	if (running)
 		printf("running");
 	else
 		printf("not running");
@@ -161,7 +161,7 @@ void redraw()
 void updateLogic()
 {
 	memcpy(NextBoard, Board, (BOARD_WIDTH * BOARD_HEIGHT) + 1);
-	
+
 	unsigned int i = 0;
 
 	for (i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
@@ -200,7 +200,7 @@ int main(int argc, void* argv)
 		{
 			process_message message;
 			message = postboxGetNext();
-			
+
 			if (message.ID == INPUT_MESSAGE)
 			{
 				//Its a input message alright
@@ -210,7 +210,7 @@ int main(int argc, void* argv)
 					char C = getAsciFromScancode(message.message_data[1], message.message_data[2]);
 
 					if (C == 'e')
-					{	
+					{
 						exit(0);
 					}
 					else if (C == 'w')
@@ -251,7 +251,7 @@ int main(int argc, void* argv)
 					{
 						if (Board[cursor_tile] == ' ')
 						{
-							Board[cursor_tile] = '#'; 
+							Board[cursor_tile] = '#';
 						}
 						else
 						{

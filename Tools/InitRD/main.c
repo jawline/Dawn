@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <dirent.h>
 
-#include <types/int_types.h>
+#include <types/stdint.h>
 #include <initrd/initrd_fent.h>
 #include <initrd/initrd_header.h>
 
@@ -14,9 +14,9 @@
 typedef struct {
 
 	struct initrd_fent st; //File header structure
-	uint32 loc; //Header location
-	uint32 mloc; //Memory location
-	uint32 mlen; //Memory length
+	uint32_t loc; //Header location
+	uint32_t mloc; //Memory location
+	uint32_t mlen; //Memory length
 
 } file_helper;
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	printf("Compiler Version %i.%i.%i\n", VER_MAJOR, VER_MINOR, VER_REV);
 
 	if (argc != 3) {
-		printf("Usage: RamdiskCompiler Directory OutputFile ...\n");	
+		printf("Usage: RamdiskCompiler Directory OutputFile ...\n");
 		return 0;
 	}
 
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 				if (iter->name == 0)
 				{
 
-					iter->name = malloc(strlen(argv[1]) + strlen(dir->d_name));	
+					iter->name = malloc(strlen(argv[1]) + strlen(dir->d_name));
 					strcpy(iter->name, argv[1]);
 					strcpy(iter->name + strlen(argv[1]), dir->d_name);
 
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 						iter->next->name = 0;
 						iter->next->next = 0;
 					}
-			
+
 					iter = iter->next;
 				}
 
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 
 	if (fout == 0) {
 		printf("Unable to open output file\n");
-		return 0;	
+		return 0;
 	}
 
 	struct initial_ramdisk_header head;
@@ -117,14 +117,14 @@ int main(int argc, char **argv)
 
 	head.ramdisk_magic = RAMMAGIC;
 	head.ramdisk_size = sizeof(struct initial_ramdisk_header);
-	
+
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
-		printf("Unable to write the initial RAM disk header\n");	
+		printf("Unable to write the initial RAM disk header\n");
 	}
 
-	uint32 nmfiles = num_files;
+	uint32_t nmfiles = num_files;
 
-	if (fwrite(&nmfiles, sizeof(uint32), 1, fout) != 1) {
+	if (fwrite(&nmfiles, sizeof(uint32_t), 1, fout) != 1) {
 		printf("Unable to write File chunk header\n");
 		return 0;
 	}
@@ -163,7 +163,7 @@ int main(int argc, char **argv)
 		if (fwrite(&ent, sizeof(struct initrd_fent), 1, fout) != 1) {
 
 			printf("Unable to write a file chunk\n");
-			return 0;	
+			return 0;
 
 		}
 
@@ -179,9 +179,9 @@ int main(int argc, char **argv)
 
 		helper_list[i].mloc = ftell(fout) + 1;
 		fin = fopen(fiter->name, "rb");
-		
+
 		if (fin == 0) {
-			printf("Unable to open helper file\nAbort\n"); return 0;		
+			printf("Unable to open helper file\nAbort\n"); return 0;
 		}
 
 		fseek(fin, 0, SEEK_END);
@@ -191,17 +191,17 @@ int main(int argc, char **argv)
 		printf("File %s File Size (Bytes): %i\n", helper_list[i].st.name, end);
 
 		void * mem = malloc(end);
-		
+
 		if (fread(mem, end, 1, fin) != 1) {
-			printf("Read Error\n");	return 0;		
+			printf("Read Error\n");	return 0;
 		}
 
 		if (fwrite(mem, end, 1, fout) != 1) {
-			printf("Write Error\n"); return 0;		
+			printf("Write Error\n"); return 0;
 		}
 
 		free(mem);
-		
+
 		fclose(fin);
 
 		fiter = fiter->next;
@@ -211,10 +211,10 @@ int main(int argc, char **argv)
 	end = ftell(fout);
 	fseek(fout, 0, SEEK_SET);
 	head.ramdisk_size = end;
-	
+
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
-		printf("Unable to write the initial RAM disk header\n");	
-	}	
+		printf("Unable to write the initial RAM disk header\n");
+	}
 
 	for (i = 0; i < nmfiles; i++) { //Third file pass.
 		fseek(fout, helper_list[i].loc, SEEK_SET); //Seek to the start of the header
@@ -223,14 +223,14 @@ int main(int argc, char **argv)
 
 		if (fwrite(&helper_list[i].st, sizeof(struct initrd_fent), 1, fout) != 1) {
 			printf("Unable to write a file chunk\n");
-			return 0;	
+			return 0;
 		}
 	}
 
 	fclose(fout);
 
 	fout = fopen(argv[2], "rb");
-	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);	
+	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);
 
 	void* Data = malloc(end - sizeof(struct initial_ramdisk_header));
 	size_t Read = fread(Data, end - sizeof(struct initial_ramdisk_header), 1, fout);
@@ -251,7 +251,7 @@ int main(int argc, char **argv)
 		printf("%x", digest[iter]);
 		head.ramdisk_checksum[iter] = digest[iter];
 	}
-	
+
 	printf("\n");
 
 	free(Data);
@@ -261,8 +261,8 @@ int main(int argc, char **argv)
 	fout = fopen(argv[2], "r+b");
 
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
-		printf("Unable to write the initial RAM disk header\n");	
-	}	
+		printf("Unable to write the initial RAM disk header\n");
+	}
 
 	fclose(fout);
 

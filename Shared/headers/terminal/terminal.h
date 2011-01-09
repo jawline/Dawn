@@ -7,13 +7,13 @@ struct abstract_terminal;
 typedef void (*term_updatecursor)(struct abstract_terminal* term);
 typedef void (*term_putc)(struct abstract_terminal* term, char c);
 
-typedef void (*term_setfg)(struct abstract_terminal* term, uint8 col);
-typedef void (*term_setbg)(struct abstract_terminal* term, uint8 col);
+typedef void (*term_setfg)(struct abstract_terminal* term, uint8_t col);
+typedef void (*term_setbg)(struct abstract_terminal* term, uint8_t col);
 
 typedef void (*term_clear)(struct abstract_terminal* term);
 
 struct abstract_terminal {
-	uint8 m_used;
+	uint8_t m_used;
 
 	unsigned int m_width;
 	unsigned int m_height;

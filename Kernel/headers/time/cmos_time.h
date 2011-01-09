@@ -1,12 +1,12 @@
 #ifndef _CMOS_TIME_DEF_H_
 #define _CMOS_TIME_DEF_H_
-#include <types/int_types.h>
+#include <types/stdint.h>
 #include <system/cmos.h>
 #include "common.h"
 
-typedef struct 
+typedef struct
 {
-	uint8 seconds, minutes, hours, dayofweek, day, month, year, century;
+	uint8_t seconds, minutes, hours, dayofweek, day, month, year, century;
 } cmos_time_struct;
 
 void fill_cmos_tstruct(cmos_time_struct* tstruct);

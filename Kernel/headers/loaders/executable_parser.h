@@ -12,6 +12,7 @@ unsigned int getElfHeaderData(e32_header header);
 
 e32_pheader parseElfProgramHeader(fs_node_t* File, e32_header Header, unsigned int number);
 e32_header parseElfHeader(fs_node_t* File);
+void parseStringTableEntry(char* CharBuffer, unsigned int max_length, unsigned int idx, fs_node_t* File, e32info* info);
 
 void parseElfFile(e32info* info, fs_node_t* File);
 void freeElfFileInfo(e32info* info);

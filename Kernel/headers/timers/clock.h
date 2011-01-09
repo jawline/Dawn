@@ -1,12 +1,13 @@
 #ifndef _CLOCK_DEF_H_
 #define _CLOCK_DEF_H_
+#include <clock/rate.h>
 
 #define CLOCKS_PER_SECOND 1000
 #define clock get_clock_ticks
 
-//Export initialize_system_clock sets up the correct timer and callbacks
-void initializeSystemClock();
+unsigned long getClockTicks(); //Number of time the clock has "ticked" since boot
 
-unsigned long getClockTicks(); //Number of time the clock has "ticked"
+//Function defined in the architecture specific clock folder - so each architecture can handle its clock initialization differently
+void initializeSystemClock();
 
 #endif //_CLOCK_DEF_H_

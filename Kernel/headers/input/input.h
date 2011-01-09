@@ -9,11 +9,11 @@
 */
 
 //Callback when a input listener is triggered
-typedef void (*input_listener_callback)(uint32 device, uint32 main, void* additional);
+typedef void (*input_listener_callback)(uint32_t device, uint32_t main, void* additional);
 
 //Input listeners in a linked list
 struct input_listener_structure {
-	uint32 m_deviceid; //If -1 responds to all input devices
+	uint32_t m_deviceid; //If -1 responds to all input devices
 	input_listener_callback m_callback;
 	struct input_listener_structure* m_next;
 };
@@ -25,7 +25,7 @@ void inputInitialize();
 
 //Export - Send a input message to the manager from a device driver (Or emulating a input message)
 //Arguments: Device - Options defined in devices.h Main - The main data from the input event additional - Additional data that needs to be sent about the input event
-void sendInputMessage(unsigned int device, unsigned long main, void* additional);
+void sendInputMessage(unsigned int device, uint32_t main, void* additional);
 
 //Export - Register a input listener
 void registerInputListener(unsigned int device /* If -1 respond to all */, input_listener_callback cb);

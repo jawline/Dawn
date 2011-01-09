@@ -24,7 +24,7 @@ struct process_structure
 	 */
 	char m_Name[64];
 
-	uint32 esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */; /* The rest is stored by the interrupt  that triggers the switch */
+	uint32_t esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */; /* The rest is stored by the interrupt  that triggers the switch */
 
 	/**
 	 * @brief The number of ticks spent processing this process
@@ -35,7 +35,7 @@ struct process_structure
 	/**
 	 * @brief The flags set for what information this process wants to recieve in its postbox
 	 */
-	
+
 	unsigned int m_postboxFlags; //What does this process want to recieve? Do I want to hear about input events etc?
 
 	/**

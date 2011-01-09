@@ -1,5 +1,5 @@
 #include <process/postbox_api.h>
-#include <types/int_types.h>
+#include <types/stdint.h>
 
 //Read top reads a message from the top of the postbox
 DEFN_SYSCALL1(postbox_read_top, 1, process_message*);
@@ -11,7 +11,7 @@ DEFN_SYSCALL0(postbox_pop_top, 2);
 DEFN_SYSCALL0(postbox_has_next, 3);
 
 //Sets the flags on this process's postbox
-DEFN_SYSCALL1(postbox_set_flags, 6, uint32);
+DEFN_SYSCALL1(postbox_set_flags, 6, uint32_t);
 
 unsigned char postboxHasNext()
 {
@@ -26,7 +26,7 @@ process_message postboxGetNext()
 	return Msg;
 }
 
-void postboxSetFlags(uint32 flags)
+void postboxSetFlags(uint32_t flags)
 {
 	syscall_postbox_set_flags(flags);
 }

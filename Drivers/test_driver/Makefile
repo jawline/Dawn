@@ -1,6 +1,6 @@
 # Makefile for SimpleOS Driver
 
-OUTPUT_FILENAME := ./Build/test_driver.driver
+OUTPUT_FILENAME := ./Build/test_driver
 
 PROJDIRS := ./sources
 CSOURCES := $(shell find $(PROJDIRS) -name "*.c")

@@ -1,9 +1,9 @@
 #ifndef _INPUT_OUTPUT_DEF_H_
 #define _INPUT_OUTPUT_DEF_H_
-#include <types/int_types.h>
+#include <types/stdint.h>
 
-void outb(uint16 port, uint8 value);
-uint8 inb(uint16 port);
-uint16 inw(uint16 port);
+void outb(uint16_t port, uint8_t value);
+uint8_t inb(uint16_t port);
+uint16_t inw(uint16_t port);
 
 #endif

@@ -17,7 +17,7 @@ struct heap_entry {
 	 */
 
 	unsigned char magic;
-	
+
 	/**
 	 * @brief Variable to store whether this block of memory is used (boolean)
 	 */
@@ -50,7 +50,7 @@ typedef struct heap_entry heap_entry_t;
  */
 
 typedef struct {
-	
+
 	/**
 	 * @brief The location of the heap in memory
 	 */
@@ -58,6 +58,6 @@ typedef struct {
 	MEM_LOC heap_location; //Heaps location (In virtual memory)
 } heap_t;
 
-void init_heap(heap_t* heap, uint32 address);
+void init_heap(heap_t* heap, uint32_t address);
 
 #endif

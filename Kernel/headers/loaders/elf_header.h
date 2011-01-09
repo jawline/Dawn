@@ -1,14 +1,14 @@
 #ifndef _ELF_HEADER_DEF_H_
 #define _ELF_HEADER_DEF_H_
-#include <types/int_types.h>
+#include <types/stdint.h>
 
 #define ELF_NUMBER_IDENT 16
 
-typedef uint32	Elf32_Addr;
-typedef uint32	Elf32_Off;
-typedef uint16	Elf32_Half;
-typedef uint32	Elf32_Word;
-typedef uint8	Elf32_Char;
+typedef uint32_t	Elf32_Addr;
+typedef uint32_t	Elf32_Off;
+typedef uint16_t	Elf32_Half;
+typedef uint32_t	Elf32_Word;
+typedef uint8_t	Elf32_Char;
 
 #define ELF_NONE 0
 #define ELF_RELOC 1
@@ -50,8 +50,8 @@ typedef uint8	Elf32_Char;
  */
 
 struct elf_32_header {
-	uint8 elf_ident[ELF_NUMBER_IDENT];
-	
+	uint8_t elf_ident[ELF_NUMBER_IDENT];
+
 	/**
 	 * The file type (Relocatable, Executable, Etcetera)
 	 */
@@ -136,7 +136,7 @@ struct elf_32_header {
  */
 
 struct elf_32_section_header {
-	
+
 	/**
 	 * @brief String tables index for the section header name
 	 */

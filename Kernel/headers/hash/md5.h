@@ -26,14 +26,14 @@ documentation and/or software.
 #define _MD5_HASH_ALG_
 
 
-#include <types/int_types.h>
+#include <types/stdint.h>
 
 /* MD5 context. */
 typedef struct {
-  uint32 i[2];                   /* number of _bits_ handled mod 2^64 */
-  uint32 buf[4];                                    /* scratch buffer */
-  uint8 in[64];                              /* input buffer */
-  uint8 digest[16];     /* actual digest after MD5Final call */
+  uint32_t i[2];                   /* number of _bits_ handled mod 2^64 */
+  uint32_t buf[4];                                    /* scratch buffer */
+  uint8_t in[64];                              /* input buffer */
+  uint8_t digest[16];     /* actual digest after MD5Final call */
 } MD5_CTX;
 
 void MD5Init (MD5_CTX * Context);

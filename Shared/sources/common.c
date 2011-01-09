@@ -1,28 +1,26 @@
 #include "common.h"
 
-uint64 __div_64_32(uint64* dividend, uint32 divisor);
-
-char* itoa(int value, char* result, int base) 
+char* itoa(int value, char* result, int base)
 {
 	// check that the base if valid
-	if (base < 2 || base > 36) 
-	{ 
+	if (base < 2 || base > 36)
+	{
 		*result = '\0';
-		return result; 
+		return result;
 	}
-	
+
 	char* ptr = result, *ptr1 = result, tmp_char;
 	int tmp_value;
-	
-	do 
+
+	do
 	{
 		tmp_value = value;
 		value /= base;
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
 	} while ( value );
-	
+
 	// Apply negative sign
-	if (tmp_value < 0) 
+	if (tmp_value < 0)
 	{
 
 		*ptr++ = '-';
@@ -31,7 +29,7 @@ char* itoa(int value, char* result, int base)
 
 	*ptr-- = '\0';
 
-	while(ptr1 < ptr) 
+	while(ptr1 < ptr)
 	{
 
 		tmp_char = *ptr;
@@ -43,88 +41,29 @@ char* itoa(int value, char* result, int base)
 	return result;
 }
 
-char* itoa_64(uint64 value, char* result, int base) 
+void memset(void* dest, uint8_t val, unsigned long len)
 {
-	// check that the base if valid
-	if (base < 2 || base > 36)
-	{ 
-		*result = '\0'; 
-		return result;
-	}
-	
-	char* ptr = result, *ptr1 = result, tmp_char;
-	int tmp_value;
-	
-	do 
-	{
-		tmp_value = value;
-		__div_64_32(&value, base);
-		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
-	} while ( value );
-	
-	// Apply negative sign
-	if (tmp_value < 0) 
-	{
-	
-		*ptr++ = '-';
+    uint8_t* temp = (uint8_t*) dest;
 
-	}
-
-	*ptr-- = '\0';
-
-	while(ptr1 < ptr) 
-	{
-		tmp_char = *ptr;
-		*ptr--= *ptr1;
-		*ptr1++ = tmp_char;
-	}
-
-	return result;
-}
-
-void memset(void* dest, uint8 val, unsigned long len)
-{
-    uint8* temp = (uint8*) dest;
-    
     for ( ; len != 0; len--)
-    { 
+    {
 	*temp++ = val;
     }
 }
 
-void memcpy(void* dest, void* src,unsigned long len) 
+void memcpy(void* dest, void* src, unsigned long len)
 {
 	int iter = 0;
 
-	uint8* dbuffer = (uint8*) dest;
-	uint8* sbuffer = (uint8*) src;
-	
-	for (iter = 0; iter < len; iter++) 
+	uint8_t* dbuffer = (uint8_t*) dest;
+	uint8_t* sbuffer = (uint8_t*) src;
+
+	for (iter = 0; iter < len; iter++)
 	{
 		*dbuffer = *sbuffer;
 		dbuffer++;
 		sbuffer++;
 	}
-}
-
-uint64 __div_64_32(uint64* dividend, uint32 divisor)
-{
-   uint32 dividendLow, dividendLow2, dividendHigh, remainder;
-   dividendLow = (uint32)(*dividend & 0xFFFFFFFF);
-   dividendHigh = (uint32)(*dividend >> 32);
-   remainder = dividendHigh % divisor;
-   dividendHigh = dividendHigh / divisor;
-   dividendLow2 = dividendLow >> 16;
-   dividendLow2+= remainder << 16;
-   remainder = dividendLow2 % divisor;
-   dividendLow2 = dividendLow2 / divisor;
-   dividendLow = dividendLow & 0xFFFF;
-   dividendLow+= remainder << 16;
-   remainder = dividendLow % divisor;
-   dividendLow = dividendLow / divisor;
-   *dividend = dividendLow + ((uint64)dividendLow2 << 16) + ((uint64)dividendHigh << 32);
-
-   return(remainder);
 }
 
 //FreeBSD's implementation of strlen.

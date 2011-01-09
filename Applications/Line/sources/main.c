@@ -44,11 +44,7 @@ char exec_cmd()
 		printf("Line - Command line tool for SimpleOS\n");
 		printf("Line - Executable compiled for Kernel version %i.%i codename \"%s\"\n", KVERSION_WHOLE, KVERSION_FRACTION, KVERSION_CODENAME);
 		printf("Compiled as part of OS version %i.%i.%i codename \"%s\"\n", OS_VERSION_MAJOR, OS_VERSION_MINOR, OS_VERSION_REVISION, OS_VERSION_CODENAME);
-		printf("Commands, debug_on, debug_off, cls. any other entry will try to start a program of that name\n");
-	}
-	else if (strcmp("cls", Pointer) == 0)
-	{
-		clearscreen();
+		printf("Any line typed will attempt to open a program of that name and feed it the arguments, e.g. program -arg arg\n");
 	}
 	else if (strcmp("debug_on", Pointer) == 0)
 	{
@@ -58,9 +54,12 @@ char exec_cmd()
 	{
 		requestDisableSystemDebugMode();
 	}
-	else {
+	else
+	{
+
 		systemRunNewProcess(Pointer);
-		exit(1);
+
+		exit(0);
 	}
 
 	return 0;

@@ -1,7 +1,7 @@
 #include <debug/debugmode.h>
 #include <syscall/syscall.h>
 
-DEFN_SYSCALL1(request_debug_level, 22, uint8);
+DEFN_SYSCALL1(request_debug_level, 22, uint8_t);
 
 void requestSystemDebugMode()
 {

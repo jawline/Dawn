@@ -5,7 +5,7 @@
 //Return: 1 if true 0 if false
 //Description: Inline ASM to check whether CPUID is supported
 
-inline unsigned char checkCpuidInline()
+unsigned char checkCpuid()
 {
 	unsigned long eax_reg_value = 0;
 	unsigned char return_value = 0;
@@ -23,7 +23,7 @@ inline unsigned char checkCpuidInline()
 	//SHR Shifts the register 21 bits to the right
 	//The AND test the value of eax
 	//The mov sets the return value to the value of EAX
-	asm volatile("pushfl;\n \
+	__asm__ volatile("pushfl;\n \
 		      popl %%eax;\n \
 		      movl %%eax, %%ecx;\n \
 		      xor $0x200000, %%eax; \n \
@@ -48,5 +48,5 @@ inline unsigned char checkCpuidInline()
 //Description: Check if the CPUID function is supported
 unsigned char cpuidSupported()
 {
-	return checkCpuidInline();
+	return checkCpuid();
 }

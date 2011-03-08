@@ -192,6 +192,7 @@ void unbindnode_fs(fs_node_t* node, fs_node_t* target)
  */
 fs_node_t* evaluatePath(const char* path, fs_node_t* current_node)
 {
+
 	if (path == 0) return 0;
 
 	if (path[0] == '/')
@@ -212,12 +213,11 @@ fs_node_t* evaluatePath(const char* path, fs_node_t* current_node)
 	}
 	else
 	{
-		char* split_left = malloc(Buffer - path + 1);
-		memcpy((void*) split_left, (void*) path, Buffer - path);
-		split_left[Buffer - path] = '\0';
+		char splitLeftBuffer[Buffer - path + 1];
+		memcpy((void*) splitLeftBuffer, (void*) path, Buffer - path);
+		splitLeftBuffer[Buffer - path] = '\0';
 
-		fs_node_t* temp = finddir_fs(current_node, split_left);
-		free(split_left);
+		fs_node_t* temp = finddir_fs(current_node, splitLeftBuffer);
 
 		if (temp != 0)
 		{

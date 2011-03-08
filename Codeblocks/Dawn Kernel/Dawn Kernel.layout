@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="../../Kernel/arch/ia32/headers/clock/pit.h" open="0" top="0" tabpos="11">
+		<Cursor position="45" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/headers/interrupts/interrupt_handler.h" open="0" top="0" tabpos="27">
+		<Cursor position="193" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/headers/interrupts/interrupts.h" open="0" top="0" tabpos="17">
+		<Cursor position="205" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/headers/mm/virt_mm.h" open="0" top="0" tabpos="7">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/boot/kernel_init.c" open="1" top="0" tabpos="2">
+		<Cursor position="3057" topLine="100" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/boot/post_init.c" open="1" top="0" tabpos="5">
+		<Cursor position="446" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/cpu/cpuid_features.c" open="1" top="0" tabpos="6">
+		<Cursor position="293" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/cpu/cpuid_support.c" open="1" top="0" tabpos="7">
+		<Cursor position="1440" topLine="8" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/cpu/cpuid_vendor.c" open="0" top="0" tabpos="33">
+		<Cursor position="410" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/gpf/gpf.c" open="0" top="0" tabpos="31">
+		<Cursor position="268" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/loaders/executable_loader.c" open="0" top="0" tabpos="35">
+		<Cursor position="300" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/mm/virt_mm.c" open="1" top="0" tabpos="4">
+		<Cursor position="5058" topLine="162" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/process/process.c" open="1" top="0" tabpos="8">
+		<Cursor position="1633" topLine="50" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/stack/stack.c" open="0" top="0" tabpos="30">
+		<Cursor position="2511" topLine="17" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/syscall/ia32_syscall.c" open="0" top="0" tabpos="36">
+		<Cursor position="1044" topLine="2" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/tss/tss.c" open="0" top="0" tabpos="29">
+		<Cursor position="711" topLine="0" />
+	</File>
+	<File name="../../Kernel/arch/ia32/sources/usermode/usermode.c" open="0" top="0" tabpos="25">
+		<Cursor position="324" topLine="0" />
+	</File>
+	<File name="../../Kernel/generic_sources/devices/hdd/diskio.c" open="1" top="0" tabpos="9">
+		<Cursor position="1070" topLine="6" />
+	</File>
+	<File name="../../Kernel/generic_sources/fs/vfs.c" open="1" top="1" tabpos="14">
+		<Cursor position="3107" topLine="182" />
+	</File>
+	<File name="../../Kernel/generic_sources/hash/md5use.c" open="1" top="0" tabpos="10">
+		<Cursor position="505" topLine="0" />
+	</File>
+	<File name="../../Kernel/generic_sources/heap/heap.c" open="1" top="0" tabpos="12">
+		<Cursor position="3653" topLine="100" />
+	</File>
+	<File name="../../Kernel/generic_sources/input/input.c" open="0" top="0" tabpos="18">
+		<Cursor position="205" topLine="0" />
+	</File>
+	<File name="../../Kernel/generic_sources/lib/io.c" open="0" top="0" tabpos="21">
+		<Cursor position="673" topLine="0" />
+	</File>
+	<File name="../../Kernel/generic_sources/loaders/executable_parser.c" open="0" top="0" tabpos="24">
+		<Cursor position="1582" topLine="28" />
+	</File>
+	<File name="../../Kernel/generic_sources/panic/panic.c" open="1" top="0" tabpos="3">
+		<Cursor position="608" topLine="0" />
+	</File>
+	<File name="../../Kernel/generic_sources/settings/settingsmanager.c" open="1" top="0" tabpos="13">
+		<Cursor position="2614" topLine="121" />
+	</File>
+	<File name="../../Kernel/generic_sources/system/reboot.c" open="0" top="0" tabpos="16">
+		<Cursor position="1012" topLine="0" />
+	</File>
+	<File name="../../Kernel/generic_sources/system/system.c" open="1" top="0" tabpos="1">
+		<Cursor position="3369" topLine="120" />
+	</File>
+	<File name="../../Kernel/generic_sources/terminal/kterminal.c" open="0" top="0" tabpos="28">
+		<Cursor position="183" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/fs/vfs.h" open="0" top="0" tabpos="20">
+		<Cursor position="1549" topLine="15" />
+	</File>
+	<File name="../../Kernel/headers/hash/md5.h" open="0" top="0" tabpos="3">
+		<Cursor position="1353" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/hash/md5use.h" open="1" top="0" tabpos="11">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/interrupts/interrupts.h" open="0" top="0" tabpos="0">
+		<Cursor position="253" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/mm/general.h" open="0" top="0" tabpos="10">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/mm/physical.h" open="0" top="0" tabpos="9">
+		<Cursor position="165" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/mm/virtual.h" open="0" top="0" tabpos="8">
+		<Cursor position="271" topLine="0" />
+	</File>
+	<File name="../../Kernel/headers/process/process.h" open="0" top="0" tabpos="1">
+		<Cursor position="1211" topLine="47" />
+	</File>
+	<File name="../../Kernel/headers/time/cmos_time.h" open="0" top="0" tabpos="0">
+		<Cursor position="77" topLine="0" />
+	</File>
+	<File name="../../Shared/headers/common.h" open="0" top="0" tabpos="14">
+		<Cursor position="164" topLine="0" />
+	</File>
+	<File name="../../Shared/sources/common.c" open="0" top="0" tabpos="0">
+		<Cursor position="609" topLine="21" />
+	</File>
+</CodeBlocks_layout_file>

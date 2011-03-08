@@ -4,6 +4,8 @@
 #include <types/size_t.h>
 #include <fs/vfs.h>
 
+///TODO: Rewrite the line evaluator so its more robust
+
 /*
 	GLOBAL VARIABLES
 */
@@ -16,6 +18,8 @@ settingsEntry* settingsListStart = 0;
 
 settingsEntry* settingsGetEntry(const char* Name);
 void settingsCreateEntry(const char* Name, const char* Data);
+void parseConfigFile(const char* Filename);
+void settingsModifyEntry(settingsEntry* Entry, const char* newData);
 
 /*
 	PUBLIC FUNCTIONS
@@ -28,9 +32,11 @@ void settingsCreateEntry(const char* Name, const char* Data);
 void initializeSettingsManager()
 {
 	DEBUG_PRINT("Initialized settings manager\n");
+
 	settingsListStart = 0;
 
-	parseConfigFile("./system/kernel.config");
+	parseConfigFile("/system/system.config");
+	parseConfigFile("/system/kconf.config");
 }
 
 /**
@@ -39,8 +45,6 @@ void initializeSettingsManager()
 
 const char* settingsExecuteLine(const char* Line)
 {
-	DEBUG_PRINT("SETTINGS: EXECUTE %s\n", Line);
-
 
 	size_t length = strlen(Line);
 
@@ -85,14 +89,9 @@ const char* settingsExecuteLine(const char* Line)
 	memcpy(Name, Line, FirstSpace - Line);
 	Name[FirstSpace - Line] = '\0';
 
-	DEBUG_PRINT("SETTINGS: *%s*\n", Name);
-
-	
 	char* Data = malloc(length + 2);
 	memcpy(Data, SecondSpace + 1, End - SecondSpace - 1);
 	Data[End - SecondSpace - 1] = '\0';
-
-	DEBUG_PRINT("SETTINGS: *%s*\n", Data);
 
 	settingsEntry* oldEntry = settingsGetEntry(Name);
 
@@ -137,6 +136,8 @@ const char* settingsReadValue(const char* Name)
 
 void parseConfigFile(const char* Filename)
 {
+    DEBUG_PRINT("Parsing configuration file %s\n", Filename);
+
 	fs_node_t* cfgNode = evaluatePath(Filename, init_vfs());
 
 	if (cfgNode == 0) return;
@@ -157,14 +158,13 @@ void parseConfigFile(const char* Filename)
 		if (current >= cfgNode->length)
 			break;
 
-		read_fs(cfgNode, current, 1, cfgBuffer + iter);
+		read_fs(cfgNode, current, 1, (uint8_t*) cfgBuffer + iter);
 
 		if (*(cfgBuffer + iter) == '\n')
 		{
 			*(cfgBuffer + iter) = '\0';
 			iter = 0;
 
-			DEBUG_PRINT("SETTINGS: PARSE LINE %s\n", cfgBuffer);
 			settingsExecuteLine(cfgBuffer);
 
 			memset(cfgBuffer, 0, 1024);
@@ -173,7 +173,7 @@ void parseConfigFile(const char* Filename)
 		{
 			iter++;
 		}
-	
+
 		current++;
 	}
 
@@ -243,11 +243,18 @@ void settingsModifyEntry(settingsEntry* Entry, const char* newData)
 
 void settingsCreateEntry(const char* Name, const char* Data)
 {
+	settingsEntry* entryCheck = settingsGetEntry(Name);
+
+	if (entryCheck != 0)
+	{
+		settingsModifyEntry(entryCheck, Data);
+		return;
+	}
 
 	//Allocate the settings entry
 	settingsEntry* newEntry = malloc(sizeof(settingsEntry));
 	memset(newEntry, 0, sizeof(settingsEntry));
-	
+
 	//Allocate memory for the settings entry name and data
 	newEntry->Name = malloc(strlen(Name) + 1);
 	newEntry->Data = malloc(strlen(Data) + 1);
@@ -272,8 +279,6 @@ void settingsCreateEntry(const char* Name, const char* Data)
 		//Set settingsListStart to this new entry
 		settingsListStart = newEntry;
 	}
-
-	DEBUG_PRINT("SETTINGS: Added new settings entry %s initialized to %s\n", Name, Data);
 
 	return;
 }

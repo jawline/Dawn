@@ -23,14 +23,14 @@ stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp)
 	{
 		MEM_LOC frame = allocateFrame(); //Allocate the frame
 
-		map(iter, (POINTER) frame, 0); //Map it to the virtual address
+		map( (MEM_LOC) iter, (MEM_LOC) frame, 0); //Map it to the virtual address
 	}
 
 	stack_t old_stack_pointer = 0;
-	asm volatile("mov %%esp, %0" : "=r" (old_stack_pointer)); //The old stack & base pointers = the esp & ebp registers respectivally
+	__asm__ volatile("mov %%esp, %0" : "=r" (old_stack_pointer)); //The old stack & base pointers = the esp & ebp registers respectivally
 
 	stack_t old_base_pointer = 0;
-	asm volatile("mov %%ebp, %0" : "=r" (old_base_pointer));
+	__asm__ volatile("mov %%ebp, %0" : "=r" (old_base_pointer));
 
 	//Use a big int because the stack may be moving backwards in memory (Needs to be possible positive or negative)
 	sint64_t offset = ((size_t)new_start) - initial_esp;
@@ -62,8 +62,8 @@ stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp)
 	}
 
 	//Set the ESP and EBP to the new stack.
-	asm volatile("mov %0, %%esp" : : "r" (new_stack_pointer));
-	asm volatile("mov %0, %%ebp" : : "r" (new_base_pointer));
+	__asm__ volatile("mov %0, %%esp" : : "r" (new_stack_pointer));
+	__asm__ volatile("mov %0, %%ebp" : : "r" (new_base_pointer));
 
 	return new_start;
 }

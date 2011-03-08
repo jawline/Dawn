@@ -43,7 +43,7 @@ MEM_LOC allocateKernelFrame()
 		// Pop off the stack.
 		phys_mm_slock -= sizeof (uint32_t);
 
-		uint32_t * stack = (uint32_t *)phys_mm_slock;
+		uint32_t* stack = (uint32_t*)phys_mm_slock;
 
 		return *stack;
 	}

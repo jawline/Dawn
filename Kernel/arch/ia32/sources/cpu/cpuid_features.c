@@ -9,7 +9,7 @@ unsigned long getCpuidFeatures()
 	unsigned long input = 0x1;
 	unsigned long cpuid_features_result = 0;
 
-	asm volatile("movl %1, %%eax; \n \
+	__asm__ volatile("movl %1, %%eax; \n \
 		      cpuid; \n \
 		      movl %%eax, %0;" : "=r" (cpuid_features_result) : "r" (input));
 

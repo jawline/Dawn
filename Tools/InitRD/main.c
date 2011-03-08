@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 				if (iter->name == 0)
 				{
 
-					iter->name = malloc(strlen(argv[1]) + strlen(dir->d_name));
+					iter->name = malloc(strlen(argv[1]) + strlen(dir->d_name) + 1);
 					strcpy(iter->name, argv[1]);
 					strcpy(iter->name + strlen(argv[1]), dir->d_name);
 
@@ -181,7 +181,7 @@ int main(int argc, char **argv)
 		fin = fopen(fiter->name, "rb");
 
 		if (fin == 0) {
-			printf("Unable to open helper file\nAbort\n"); return 0;
+			printf("Unable to open helper file %s\nAbort\n", fiter->name); return 0;
 		}
 
 		fseek(fin, 0, SEEK_END);
@@ -244,6 +244,8 @@ int main(int argc, char **argv)
 
 	unsigned char digest[16];
 	MDData(Data, end - sizeof(struct initial_ramdisk_header), digest);
+
+	printf("CHECKSUM ");
 
 	unsigned int iter = 0;
 	for (iter = 0; iter < 16; iter++)

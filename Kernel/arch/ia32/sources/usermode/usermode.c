@@ -7,7 +7,7 @@ void switchToUserMode()
 
     setKernelStack(KERNEL_STACK_START);
 
-    asm volatile("  \
+    __asm__ volatile("  \
       cli; \
       mov $0x23, %ax; \
       mov %ax, %ds; \
@@ -27,5 +27,5 @@ void switchToUserMode()
       push $1f; \
       iret; \
     1: \
-      "); 
+      ");
 }

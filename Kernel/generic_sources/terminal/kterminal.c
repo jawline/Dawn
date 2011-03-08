@@ -5,6 +5,8 @@
 terminal_t* g_kernelTerminal = 0;
 terminal_t* g_terminalInContext = 0;
 
+void setTerminalContext(terminal_t* term);
+
 terminal_t* getTerminalInContext()
 {
 	return g_terminalInContext;

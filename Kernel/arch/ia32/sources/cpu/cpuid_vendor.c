@@ -16,7 +16,7 @@ void cpuidGetVendorReal(char* Buffer)
 	unsigned long edx = 0;
 	unsigned long ecx = 0;
 
-	asm volatile("movl %3, %%eax; \
+	__asm__ volatile("movl %3, %%eax; \
 		      cpuid; \
 		      movl %%ecx, %2; \
 		      movl %%ebx, %0; \

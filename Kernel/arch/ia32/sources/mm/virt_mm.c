@@ -10,6 +10,7 @@
 #include <process/procfault.h>
 #include <debug/debug.h>
 #include <interrupts/interrupt_handler.h>
+#include <interrupts/interrupts.h>
 #include <mm/virtual.h>
 
 #define ReloadCR3() \
@@ -36,6 +37,8 @@ unsigned int PAGE_SIZE = 4096;
 extern uint32_t used_mem_end; //End of kernel used memory at initialization of paging
 
 extern process_t* get_current_process();
+void switchPageDirectory (page_directory_t * nd);
+void startPaging();
 
 void page_fault (idt_call_registers_t regs)
 {
@@ -52,8 +55,9 @@ void page_fault (idt_call_registers_t regs)
 	int id = regs.err_code & 0x10;          // Caused by an instruction fetch?
 	if (id = 0x10) id = 1;
 
+    //Read the address at which the fault occured from CR2 (Where the page fault handler puts it)
 	uint32_t faulting_address;
-	asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
+	__asm__ volatile("mov %%cr2, %0" : "=r" (faulting_address));
 
 	int mapping = getMapping(faulting_address, 0);
 
@@ -157,18 +161,18 @@ char getPageEntry (MEM_LOC va, MEM_LOC *pa)
 inline void switchPageDirectory (page_directory_t * nd)
 {
   current_pagedir = nd;
-  asm volatile ("mov %0, %%cr3" : : "r" (nd));
+  __asm__ volatile ("mov %0, %%cr3" : : "r" (nd));
 }
 
 inline void startPaging()
 {
   uint32_t cr0;
 
-  asm volatile ("mov %%cr0, %0" : "=r" (cr0)); //Get the current value of cr0
+  __asm__ volatile ("mov %%cr0, %0" : "=r" (cr0)); //Get the current value of cr0
 
   cr0 |= 0x80000000; //Bitwise or
 
-  asm volatile ("mov %0, %%cr0" : : "r" (cr0)); //Set the value of cr0 to the new desired value
+  __asm__ volatile ("mov %0, %%cr0" : : "r" (cr0)); //Set the value of cr0 to the new desired value
 }
 
 void markPagingEnabled()
@@ -176,10 +180,6 @@ void markPagingEnabled()
 	paging_setup = 1;
 	paging_enabled = 1;
 }
-
-//Declared in virt_mm_asm.s
-extern void asm_disable_paging();
-extern void asm_enable_paging();
 
 uint32_t getTable(uint32_t address)
 {
@@ -219,7 +219,7 @@ void initializeVirtualMemoryManager(MEM_LOC mem_end)
 {
 	unsigned int i = 0; //Used as a iterator throughout the function
 
-	registerInterruptHandler (14, &page_fault); //Register the page fault handler.
+	registerInterruptHandler (14, (isr_t) &page_fault); //Register the page fault handler.
 					              //Called when bad little processes try to access memory they can't (Doesn't exist or not available to them)
 
 	page_directory_t * pagedir = (page_directory_t *) allocateFrame(); //Paging isn't enabled so this should just give us 4kb at the end of used memory.
@@ -273,11 +273,11 @@ MEM_LOC copyPage(MEM_LOC pt, process_t* process)
 {
 	MEM_LOC new_page_addr = allocateFrameForProcess(process);
 
-	POINTER temp_read_addr = kernelFirstFreeVirtualAddress();
-	map(temp_read_addr, (POINTER) pt, MEMORY_RESTRICTED_ACCESS);
+	MEM_LOC temp_read_addr = kernelFirstFreeVirtualAddress();
+	map( (MEM_LOC) temp_read_addr, (MEM_LOC) pt, MEMORY_RESTRICTED_ACCESS);
 
-	POINTER temp_write_addr = kernelFirstFreeVirtualAddress();
-	map(temp_write_addr, (POINTER) new_page_addr, MEMORY_RESTRICTED_ACCESS);
+	MEM_LOC temp_write_addr = kernelFirstFreeVirtualAddress();
+	map( (MEM_LOC)temp_write_addr, (MEM_LOC) new_page_addr, MEMORY_RESTRICTED_ACCESS);
 
 	memcpy(temp_write_addr, temp_read_addr, PAGE_SIZE);
 
@@ -329,7 +329,7 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8_t copy, process_t* process)
 
 page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process)
 {
-	disable_interrupts(); //Disable interrupts
+	disableInterrupts(); //Disable interrupts
 
 
 

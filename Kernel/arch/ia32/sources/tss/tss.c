@@ -29,7 +29,7 @@ void setKernelStack(uint32_t reg)
 
 void flushTss()
 {
-	asm volatile("mov $0x2B, %ax; \
+	__asm__ volatile("mov $0x2B, %ax; \
 		      ltr %ax; \
 		     ");
 }

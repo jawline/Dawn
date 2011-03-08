@@ -75,7 +75,7 @@ higherhalf:
 	jmp $
 
 [SECTION .data]
-align 0x1000
+align 4096
 boot_pagedir:
 	dd 0x83
 	times (KERNEL_PAGE_NUMBER - 1) dd 0                 ; Pages before kernel space.

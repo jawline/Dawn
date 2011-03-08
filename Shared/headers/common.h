@@ -2,12 +2,8 @@
 #define _COMMON_DEF_H_
 #include <types/stdint.h>
 
-#define disable_interrupts() asm volatile("cli");
-#define enable_interrupts() asm volatile("sti");
-
-#define push_eflags() asm volatile("pushf");
-#define pop_eflags() asm volatile("popf");
-
+//#define push_eflags() asm volatile("pushf");
+//#define pop_eflags() asm volatile("popf");
 
 //The itoa implementation found at http://www.jb.man.ac.uk/~slowe/cpp/itoa.html
 //Converts integer to a character array using the specified base

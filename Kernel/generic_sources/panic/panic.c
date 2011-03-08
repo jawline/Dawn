@@ -1,4 +1,5 @@
 #include <panic/panic.h>
+#include <interrupts/interrupts.h>
 
 void text_mode_hardwrite(const char*);
 
@@ -9,28 +10,27 @@ void text_mode_hardwrite(const char*);
 void panic(const char *message, const char *file, uint32_t line)
 {
     // We encountered a massive problem and have to stop.
-    asm volatile("cli"); // Disable interrupts.
+    disableInterrupts();
+
     char TBuffer[128];
     itoa(line, TBuffer, 10);
-    text_mode_hardwrite("PANIC(");
-    text_mode_hardwrite(message);
-    text_mode_hardwrite(") at ");
-    text_mode_hardwrite(file);
-    text_mode_hardwrite(":");
-    text_mode_hardwrite(TBuffer);
-    text_mode_hardwrite("\n");
 
-    // Halt by going into an infinite loop.
+    printf("SYSTEM PANIC (%s) (%s at line %i)\n", message, file, line);
+
+    // Halt the processor with interrupts off meens it'l never wake
     for(;;)
     {
-	asm volatile("hlt");
+
+        haltTillNextInterrupt();
+
     }
 }
 
 void panic_assert(const char *file, uint32_t line, const char *desc)
 {
     // An assertion failed, and we have to panic.
-    asm volatile("cli"); // Disable interrupts.
+    disableInterrupts(); // Disable interrupts.
+
     char TBuffer[128];
     itoa(line, TBuffer, 10);
 
@@ -41,9 +41,15 @@ void panic_assert(const char *file, uint32_t line, const char *desc)
     text_mode_hardwrite(":");
     text_mode_hardwrite(TBuffer);
     text_mode_hardwrite("\n");
-    // Halt by going into an infinite loop.
+
+    printf("SYSTEM PANIC (ASSERT FAILED) (%s) (%s at line %i)", desc, file, line);
+
+    // Halt the processor with interrupts off meens it'l never wake
     for(;;)
     {
-	asm volatile("hlt");
+
+        haltTillNextInterrupt();
+
     }
+
 }

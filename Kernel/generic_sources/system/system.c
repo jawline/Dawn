@@ -4,6 +4,8 @@
 #include <messages/messages.h>
 #include <debug/debug.h>
 #include <scheduler/process_scheduler.h>
+#include <settings/settingsmanager.h>
+#include <interrupts/interrupts.h>
 
 process_t* systemIdlePtr = 0;
 process_t* systemProcPtr = 0;
@@ -15,15 +17,19 @@ void systemIdleProcess()
 	for (;;)
 	{
 		//Halt the processor tell the next interrupt
-		asm volatile("hlt");
+		__asm__ volatile("hlt");
 	}
 }
 
 void systemMainProcess()
 {
-	createNewProcess(settingsReadValue("kernel.onstart"), init_vfs());
-	enable_interrupts();
+	//Create the process set as onstart in the global settings
+	createNewProcess(settingsReadValue("system.on_boot"), init_vfs());
 
+	//Enable interrupts
+	enableInterrupts();
+
+	//Store a pointer to the current process to be used when checking close requests
 	systemProcPtr = getCurrentProcess();
 
 	int schedulerIter = 0;
@@ -43,10 +49,12 @@ void systemMainProcess()
 			{
 				//Its a message to be handled
 
-			
+
 			}
 			else
 			{
+
+
 				break;
 			}
 
@@ -67,7 +75,7 @@ void systemMainProcess()
 			else if (schedulerPtr->m_shouldDestroy == 1)
 			{
 				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
-				disable_interrupts();
+				disableInterrupts();
 
 				if ((schedulerPtr == systemIdlePtr) || (schedulerPtr == systemProcPtr))
 				{
@@ -86,7 +94,7 @@ void systemMainProcess()
 				}
 
 				//Enable interrupts once the deed is done
-				enable_interrupts();
+				enableInterrupts();
 			}
 			else
 			{
@@ -104,18 +112,24 @@ void systemMainProcess()
 		//If this is the last process alive?
 		if (numNonSystem == 0)
 		{
-			if (strcmp(settingsReadValue("kernel.restart_onstart"), "yes") == 0)
+
+		    //Is the system set to restart the boot program when there are no other active programs
+			if (strcmp(settingsReadValue("system.boot_program_keep_alive"), "yes") == 0)
 			{
 
-				disable_interrupts();
+                //Disable interrupts while the new process is being created
+				disableInterrupts();
 
-				DEBUG_PRINT("Creating new instance of %s\n", settingsReadValue("kernel.onstart"));
+				DEBUG_PRINT("Creating new instance of %s\n", settingsReadValue("system.on_boot"));
 
-				createNewProcess( settingsReadValue("kernel.onstart"), init_vfs());
+                //Create the new process with the program set as system.on_boot
+				createNewProcess( settingsReadValue("system.on_boot"), init_vfs());
 
-				enable_interrupts();
+                //Re enable them once your done
+				enableInterrupts();
 
 			}
+
 		}
 
 		//Sleep the current process
@@ -126,23 +140,34 @@ void systemMainProcess()
 void systemProcess()
 {
     //Disable interrupts while forking
-    disable_interrupts();
+    disableInterrupts();
 
+    //Fork the current process
     int forkedID = kfork();
-    
+
     //Enable them once the processes are set up
-    enable_interrupts();
+    enableInterrupts();
 
 
     if (forkedID == 1)
     {
-   	setProcessName(getCurrentProcess(), "System");
-	systemMainProcess();
+
+        //Create the main system process
+        setProcessName(getCurrentProcess(), "System");
+
+        //And run it
+        systemMainProcess();
+
     }
     else
     {
-   	setProcessName(getCurrentProcess(), "SystemIdle");
-	systemIdleProcess();
+
+        //Create the idle process
+        setProcessName(getCurrentProcess(), "SystemIdle");
+
+        //And jump into the idle loop
+        systemIdleProcess();
+
     }
 
 }

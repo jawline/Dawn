@@ -70,11 +70,15 @@ void parseStringTableEntry(char* CharBuffer, unsigned int max_length, unsigned i
 	//While Buffer isn't a null terminator
 	while (Buffer != '\0')
 	{
+
 		if (iter > max_length) break;
+
 		//Read a character from the file
-		read_fs(File, read_loc, 1, &Buffer);
+		read_fs(File, read_loc, 1, (uint8_t*) &Buffer);
+
 		//Move that character to the characterbuffer supplied
 		CharBuffer[iter] = Buffer;
+
 		//Increment both of the iterators
 		iter++; read_loc++;
 	}
@@ -135,18 +139,9 @@ void parseElfFile(e32info* info, fs_node_t* File)
 		info->m_sectionHeaders[headerIterator] = parseElfSectionHeader(File, info->m_mainHeader, headerIterator);
 	}
 
-
-	char Buffer[512];
-
-	printf("Printing section headers\n");
-	for (headerIterator = 0; headerIterator < info->m_numSectionHeaders; headerIterator++)
-	{
-		parseStringTableEntry(Buffer, 512, info->m_sectionHeaders[headerIterator].sh_name, File, info);
-		printf("Entry: %s\n", Buffer);
-	}
-
 }
 
+//Free the ELF file info
 void freeElfFileInfo(e32info* info)
 {
 	if (info->m_programHeaders)
@@ -160,6 +155,7 @@ void freeElfFileInfo(e32info* info)
 	}
 }
 
+//Check if a elf header is valid
 unsigned char elfHeaderValid(e32_header h)
 {
 	if ((h.elf_ident[ID_MAG0] == ELF_MAG0) && (h.elf_ident[ID_MAG1] == ELF_MAG1) && (h.elf_ident[ID_MAG2] == ELF_MAG2) && (h.elf_ident[ID_MAG3] == ELF_MAG3)) return 1;

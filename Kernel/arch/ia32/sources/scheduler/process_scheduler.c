@@ -154,8 +154,6 @@ void schedulerRemove(process_t* op)
 	//Free it
 	free(next);
 
-	DEBUG_PRINT("Removed scheduler entry\n");
-
 	return;
 }
 

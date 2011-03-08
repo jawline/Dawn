@@ -1,4 +1,5 @@
 #include <system/reboot.h>
+#include <interrupts/interrupts.h>
 
 typedef unsigned char uchar;
 typedef uchar byte;
@@ -26,7 +27,7 @@ void kernelReboot()
 
     byte temp;
 
-    asm volatile ("cli"); /* disable all interrupts */
+    disableInterrupts(); /* disable all interrupts */
 
     /* Clear all keyboard buffers (output and command buffers) */
     do
@@ -38,5 +39,5 @@ void kernelReboot()
 
     outb(KBRD_INTRFC, KBRD_RESET); /* pulse CPU reset line */
 
-    asm volatile ("hlt"); /* if that didn't work, halt the CPU */
+    haltTillNextInterrupt(); /* if that didn't work, halt the CPU */
 }

@@ -16,7 +16,7 @@ uint8_t isDeviceUsable(disk_device dev)
 //Returns 1 if success 0 if fail
 uint8_t diskRead(uint16_t* dest, uint32_t offset_sectors, uint32_t num_sectors, disk_device device)
 {
-	if (num_sectors == 0) return;
+	if (num_sectors == 0) return 0;
 
 	for (;;)
 	{

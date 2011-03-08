@@ -5,6 +5,7 @@
 #include <common.h>
 #include <process/postbox.h>
 #include <terminal/terminal.h>
+#include <heap/heap.h>
 #include <fs/vfs.h>
 
 #define INPUT_BIT 0x1 //First bit = Do I want to hear about input?!?
@@ -24,7 +25,7 @@ struct process_structure
 	 */
 	char m_Name[64];
 
-	uint32_t esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */; /* The rest is stored by the interrupt  that triggers the switch */
+	MEM_LOC esp /* Stack pointer */ , ebp /* Base Pointer */ , eip /* Instruction Pointer */; /* The rest is stored by the interrupt  that triggers the switch */
 
 	/**
 	 * @brief The number of ticks spent processing this process
@@ -72,6 +73,11 @@ struct process_structure
 	 * @brief The return value of this process is stored here when it is set
 	 */
 	int m_returnValue;
+
+	/**
+	 * The heap created for the process
+	 */
+	heap_t m_processHeap;
 };
 
 typedef struct process_structure process_t;

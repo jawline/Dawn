@@ -4,6 +4,7 @@
 #include <panic/panic.h>
 #include <mm/virtual.h>
 #include <mm/phys_mm.h>
+#include <scheduler/process_scheduler.h>
 
 MEM_LOC heapAllocateMemory(size_t size, heap_t* heap);
 
@@ -13,9 +14,12 @@ MEM_LOC heapAllocateMemory(size_t size, heap_t* heap);
 size_t mapInitialHeap(MEM_LOC start)
 {
 	MEM_LOC iter = start;
+
 	for (iter; iter <= start + PAGE_SIZE * HEAP_BASE_PAGES; iter += PAGE_SIZE)
 	{
-		map(iter, allocateKernelFrame(), MEMORY_RESTRICTED_ACCESS);
+
+		map(iter, allocateFrameForProcess(getCurrentProcess()), MEMORY_RESTRICTED_ACCESS);
+
 	}
 
 	return HEAP_BASE_PAGES * PAGE_SIZE;
@@ -44,12 +48,8 @@ void initializeHeap(heap_t* heap, MEM_LOC address)
 	//Returns the number of bytes the heap allocated on initialization
 	size_t heapSizeBytes = mapInitialHeap(address);
 
-	DEBUG_PRINT("Assigning base address\n");	
-
 	heap_entry_t* base_entry = address;
 	initializeBaseEntry(base_entry, heapSizeBytes);
-
-	DEBUG_PRINT("Setting heap->heap_location to address\n");
 
 	heap->heap_location = address;
 
@@ -66,7 +66,7 @@ void expandHeap(heap_entry_t* last_heap_entry, MEM_LOC heap_end, size_t expansio
 
 	for (iter; iter <= heap_end + (PAGE_SIZE * expansionSize); iter += PAGE_SIZE)
 	{
-		map(iter, allocateKernelFrame(), MEMORY_RESTRICTED_ACCESS);
+		map(iter, allocateFrameForProcess(getCurrentProcess()), MEMORY_RESTRICTED_ACCESS);
 	}
 
 	//If the last entry is still free
@@ -78,7 +78,7 @@ void expandHeap(heap_entry_t* last_heap_entry, MEM_LOC heap_end, size_t expansio
 	{
 		heap_entry_t* new_entry = heap_end;
 		memset(new_entry, 0, sizeof(heap_entry_t));
-		
+
 		new_entry->magic = HEAP_MAGIC;
 		new_entry->used = 0;
 		new_entry->prev = last_heap_entry;
@@ -96,8 +96,9 @@ void expandHeap(heap_entry_t* last_heap_entry, MEM_LOC heap_end, size_t expansio
  * @callgraph
  * @bug Heap never decreases in size
  */
-MEM_LOC heapAllocateMemory(size_t size, heap_t* heap) 
+MEM_LOC heapAllocateMemory(size_t size, heap_t* heap)
 {
+
 	heap_entry_t* iterator = (heap_entry_t*) heap->heap_location;
 
 	//Loop through all heap entrys
@@ -143,7 +144,7 @@ MEM_LOC heapAllocateMemory(size_t size, heap_t* heap)
 		}
 
 		iterator = iterator->next;
-		
+
 	}
 
 	//This bit of code sets iterator to the last valid entry on the heap
@@ -214,7 +215,7 @@ void unifyHeapEntry(heap_entry_t* entry)
 
 			//unifyHeapEntry(tochange);
 			return;
-		
+
 		}
 
 	}
@@ -243,6 +244,7 @@ void printHeap(heap_t* heap)
  */
 void heapFreeMemory(MEM_LOC address, heap_t* heap)
 {
+
 	MEM_LOC entry_address = address - sizeof(heap_entry_t);
 
 	heap_entry_t* specificEntry = (heap_entry_t*) entry_address;
@@ -255,7 +257,7 @@ void heapFreeMemory(MEM_LOC address, heap_t* heap)
 	else
 	{
 		specificEntry->used = 0;
-		unifyHeapEntry(specificEntry);
+		//unifyHeapEntry(specificEntry);
 		//printHeap(heap);
 	}
 

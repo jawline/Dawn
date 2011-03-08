@@ -14,6 +14,7 @@
 #include <scheduler/process_scheduler.h>
 #include <fs/vfs.h>
 #include <system/system.h>
+#include <interrupts/interrupts.h>
 
 extern heap_t kernel_heap;
 extern process_t* get_current_process();
@@ -69,7 +70,7 @@ int alive = 0;
 void postInitialization()
 {
     //Disable interrupts
-    disable_interrupts();
+    disableInterrupts();
 
     //Register input listeners for the keyboard and mouse
     registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
@@ -77,7 +78,7 @@ void postInitialization()
 
 
     //Enable interrupts now
-    enable_interrupts();
+    enableInterrupts();
 
     systemProcess();
 }

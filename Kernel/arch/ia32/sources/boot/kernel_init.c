@@ -8,9 +8,7 @@
 #include <multiboot.h>
 #include <stdio.h>
 #include <mm/gdt.h>
-#include <time/cmos_time.h>
 #include <panic/panic.h>
-#include <system/cmos.h>
 #include <printf.h>
 #include <mm/phys_mm.h>
 #include <mm/virtual.h>
@@ -94,8 +92,6 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 		end_mapping_location -= PAGE_SIZE;
 	}
 
-	printf("Computing consistency check: ");
-
 	struct initial_ramdisk_header* head = ramdisk_new_location;
 
 	unsigned char digest[16];
@@ -103,6 +99,8 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 	DLOC += sizeof(struct initial_ramdisk_header);
 
 	MDData(DLOC, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
+
+    printf("Digest on our side: ");
 
 	unsigned int iter = 0;
 	for (iter = 0; iter < 16; iter++)
@@ -112,29 +110,19 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 
 	printf("\n");
 
+    printf("Digest on their side: ");
+
+    iter = 0;
+    for (iter = 0; iter < 16; iter++)
+    {
+        printf("%x", head->ramdisk_checksum[iter]);
+    }
+
+    printf("\n");
+
 	if (MDCompare(head->ramdisk_checksum, digest) == 0)
 	{
-		printf("Error: CHECKSUM Incorrect ");
-
-		iter = 0;
-		for (iter = 0; iter < 16; iter++)
-		{
-			printf("%x", head->ramdisk_checksum[iter]);
-		}
-
-		printf("\n");
-
-		MEM_LOC dloc = ramdisk_new_location;
-		dloc += head->ramdisk_size - 10;
-
-		for (iter = 0; iter < 10; iter++)
-		{
-			unsigned char* byte = dloc;
-			printf("%x ", *byte);
-			dloc++;
-		}
-
-		free(ramdisk_new_location);
+		PANIC("Ramdisk CHECKSUM bad");
 
 	}
 	else

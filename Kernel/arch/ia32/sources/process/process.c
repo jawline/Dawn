@@ -9,11 +9,14 @@
 #include <process/used_list.h>
 #include <mm/phys_mm.h>
 #include <loaders/executable_loader.h>
+#include <interrupts/interrupts.h>
 #include <fs/vfs.h>
 
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
 extern terminal_t* g_kernelTerminal;
+
+#define PROCESS_HEAP_START 0xA0000000
 
 typedef struct {
 
@@ -39,6 +42,7 @@ new_process_orders_t* make_orders(const char* Where, fs_node_t* fromWhere)
 {
 	new_process_orders_t* nOrders = malloc(sizeof(new_process_orders_t));
 	memset(nOrders, 0, sizeof(new_process_orders_t));
+
 	nOrders->Filename = malloc(strlen(Where) + 1);
 	strcpy(nOrders->Filename, Where);
 
@@ -64,25 +68,16 @@ void new_process_entry()
 	{
 		int usrMode = 0;
 
-		DEBUG_PRINT("Valid message. continue to load\n");
 		new_process_orders_t* Orders = (new_process_orders_t*) Msg.messageAdditionalData;
 
-		DEBUG_PRINT("Telling system to attempt to run %s fromWhere %s\n", Orders->Filename, Orders->fromWhere->name);
-
 		fs_node_t* Node = evaluatePath(Orders->Filename, Orders->fromWhere);
-
-		DEBUG_PRINT("Attempted to evaluate path from node %s\n", Orders->fromWhere->name);
-
 		usrMode = Orders->user_mode;
 
-		DEBUG_PRINT("Renaming process\n");
 		renameCurrentProcess(Orders->Filename);
-
-		DEBUG_PRINT("User mode toggle checked\n");
 
 		free_orders(Orders);
 
-		DEBUG_PRINT("Orders freed\n");
+		initializeHeap(&getCurrentProcess()->m_processHeap, PROCESS_HEAP_START);
 
 		if (Node == 0)
 		{
@@ -95,10 +90,10 @@ void new_process_entry()
 			if (Node->parent == 0)
 			{
 				DEBUG_PRINT("Node parent->Null\n");
+				DEBUG_PRINT("FAIL\n");
 				for (;;) {}
 			}
 
-			DEBUG_PRINT("Passing to executable loader\n");
 			loadAndExecuteProgram(Node, usrMode);
 		}
 
@@ -114,7 +109,7 @@ void new_process_entry()
 
 process_t* initializeKernelProcess()
 {
-	disable_interrupts();
+	disableInterrupts();
 	if (kernel_proc != 0) return kernel_proc;
 
 	process_t* ret = (process_t*) malloc(sizeof(process_t));
@@ -162,9 +157,6 @@ void freeProcess(process_t* process)
 	}
 
 	free(process);
-
-	DEBUG_PRINT("A process was freed\n");
-
 }
 
 void setProcessExecutionDirectory(process_t* proc, fs_node_t* node)
@@ -176,7 +168,7 @@ int kfork()
 {
 	uint32_t esp, ebp;
 
-	disable_interrupts();
+	disableInterrupts();
 
 	DEBUG_PRINT("Free frames at start %x\n", calculateFreeFrames());
 
@@ -213,8 +205,8 @@ int kfork()
 
 	if (parent->m_ID == getCurrentProcess()->m_ID)
 	{
-		asm volatile("mov %%esp, %0" : "=r"(esp));
-		asm volatile("mov %%ebp, %0" : "=r"(ebp));
+		__asm__ volatile("mov %%esp, %0" : "=r"(esp));
+		__asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
 
 		new_process->esp = esp;
 		new_process->ebp = ebp;
@@ -234,9 +226,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 {
 	uint32_t esp, ebp;
 
-	disable_interrupts();
-
-	DEBUG_PRINT("PROCESS: FREE FRAMES AT START 0x%x\n", calculateFreeFrames());
+	disableInterrupts();
 
 	//Store this for later use
 	process_t* parent = schedulerGetProcessFromPid(0);
@@ -265,35 +255,29 @@ int createNewProcess(const char* Filename, fs_node_t* Where)
 	//Set the root execution directory
 	new_process->m_executionDirectory = parent->m_executionDirectory;
 
-	DEBUG_PRINT("PROCESS: CREATING PAGE DIR\n");
-
 	//Copy the page directory
 	page_directory_t* newprocesspd = copyPageDir(kernel_pagedir, new_process);
-
-	DEBUG_PRINT("PROCESS: PAGE DIR CREATED\n");
 
 	//Give it a page directory
 	new_process->m_pageDir = newprocesspd;
 
 	MEM_LOC current_eip = (MEM_LOC) new_process_entry;
 
-	asm volatile("mov %%esp, %0" : "=r"(esp));
-	asm volatile("mov %%ebp, %0" : "=r"(ebp));
+	__asm__ volatile("mov %%esp, %0" : "=r"(esp));
+	__asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
 
 	new_process->esp = USER_STACK_START;
 	new_process->ebp = USER_STACK_START;
 	new_process->eip = current_eip;
 
 	process_message InfomaticMessage;
-	InfomaticMessage.from_PID = 0;
+	InfomaticMessage.from_PID = getCurrentProcess()->m_ID;
 	InfomaticMessage.ID = LOAD_MESSAGE;
 	InfomaticMessage.messageAdditionalData = (MEM_LOC) make_orders(Filename, Where);
 
 	postbox_add(&new_process->m_processPostbox, InfomaticMessage);
 
 	schedulerAdd(new_process);
-
-	DEBUG_PRINT("RETURN\n");
 
 	return 0; //Return 0 - Parent
 }
@@ -306,12 +290,12 @@ void renameCurrentProcess(const char* Str)
 inline void switch_process(process_t* from, process_t* to)
 {
 	if (!from || !to) return; //Invalid ptrs?
-	disable_interrupts();
+	disableInterrupts();
 
 	uint32_t esp, ebp, eip;
 
-	asm volatile("mov %%esp, %0" : "=r"(esp));
-	asm volatile("mov %%ebp, %0" : "=r"(ebp));
+	__asm__ volatile("mov %%esp, %0" : "=r"(esp));
+	__asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
 
 	eip = read_eip();
 
@@ -332,7 +316,7 @@ inline void switch_process(process_t* from, process_t* to)
 	extern page_directory_t* current_pagedir;
 	current_pagedir = pagedir;
 
-	asm volatile("cli; \
+	__asm__ volatile("cli; \
 		      mov %1, %%esp; \
 		      mov %2, %%ebp; \
 		      mov %0, %%ecx; \
@@ -348,7 +332,7 @@ inline void switch_process(process_t* from, process_t* to)
 inline void jump_process(process_t* to)
 {
 	if (!to) return; //Invalid ptrs?
-	disable_interrupts();
+	disableInterrupts();
 
 	uint32_t esp, ebp, eip;
 
@@ -361,7 +345,7 @@ inline void jump_process(process_t* to)
 	extern page_directory_t* current_pagedir;
 	current_pagedir = pagedir;
 
-	asm volatile("cli; \
+	__asm__ volatile("cli; \
 		      mov %1, %%esp; \
 		      mov %2, %%ebp; \
 		      mov %0, %%ecx; \

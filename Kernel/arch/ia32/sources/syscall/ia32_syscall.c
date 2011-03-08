@@ -26,9 +26,7 @@ idt_call_registers_t syscallHandler(idt_call_registers_t regs)
    // use all the parameters it wants, pop them all back off afterwards.
    MEM_LOC ret;
 
-   //TODO: I'm not quite sure, the * might break it. testt
-
-   asm volatile (" \
+   __asm__ volatile (" \
 		   push %1; \
 		   push %2; \
 		   push %3; \

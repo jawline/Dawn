@@ -21,8 +21,7 @@ extern process_t* get_current_process();
 
 //The kernel callback for a keyboard event
 //Registered with the kernel input manager in void post_init(); with a register_input_listener(DEVICE_KEYBOARD) call
-void kernelInputCallback(uint32_t device, uint32_t main, void* additional)
-{
+void kernelInputCallback(uint32_t device, uint32_t main, void* additional) {
 
 	//Create a new message to send to the all processes
 	process_message da;
@@ -32,14 +31,13 @@ void kernelInputCallback(uint32_t device, uint32_t main, void* additional)
 	da.ID = INPUT_MESSAGE;
 	da.message_data[0] = device;
 	da.message_data[1] = main;
-	da.message_data[2] = *((MEM_LOC*)additional);
+	da.message_data[2] = *((MEM_LOC*) additional);
 
 	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
 	schedulerGlobalMessage(da, INPUT_BIT);
 }
 
-void kernelMouseCallback(uint32_t device, uint32_t main, void* additional)
-{
+void kernelMouseCallback(uint32_t device, uint32_t main, void* additional) {
 
 	//Create a new message to send to the all processes
 	process_message da;
@@ -55,7 +53,8 @@ void kernelMouseCallback(uint32_t device, uint32_t main, void* additional)
 	da.message_data[2] = message_data->mouse_x;
 	da.message_data[3] = message_data->mouse_y;
 
-	printf("%i %i %i\n", message_data->i_byte, message_data->mouse_x, message_data->mouse_y);
+	printf("%i %i %i\n", message_data->i_byte, message_data->mouse_x,
+			message_data->mouse_y);
 
 	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
 	schedulerGlobalMessage(da, INPUT_BIT);
@@ -67,18 +66,16 @@ extern heap_t kernel_heap;
 
 int alive = 0;
 
-void postInitialization()
-{
-    //Disable interrupts
-    disableInterrupts();
+void postInitialization() {
+	//Disable interrupts
+	disableInterrupts();
 
-    //Register input listeners for the keyboard and mouse
-    registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
-    registerInputListener(DEVICE_MOUSE, &kernelMouseCallback);
+	//Register input listeners for the keyboard and mouse
+	registerInputListener(DEVICE_KEYBOARD, &kernelInputCallback);
+	registerInputListener(DEVICE_MOUSE, &kernelMouseCallback);
 
+	//Enable interrupts now
+	enableInterrupts();
 
-    //Enable interrupts now
-    enableInterrupts();
-
-    systemProcess();
+	systemProcess();
 }

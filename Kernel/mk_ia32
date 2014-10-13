@@ -35,3 +35,6 @@ maps:
 
 .s.o:
 	@nasm $(ASFLAGS) $<
+
+clean:
+	rm $(OBJECTS)

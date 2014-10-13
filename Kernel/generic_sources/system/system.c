@@ -123,11 +123,10 @@ void systemMainProcess()
 				DEBUG_PRINT("Creating new instance of %s\n", settingsReadValue("system.on_boot"));
 
                 //Create the new process with the program set as system.on_boot
-				createNewProcess( settingsReadValue("system.on_boot"), init_vfs());
+				createNewProcess(settingsReadValue("system.on_boot"), init_vfs());
 
                 //Re enable them once your done
 				enableInterrupts();
-
 			}
 
 		}

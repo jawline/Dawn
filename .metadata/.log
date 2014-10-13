@@ -1,0 +1,12 @@
+!SESSION 2014-10-13 21:41:52.632 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_32
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
+Command-line arguments:  -data /home/blake/Dropbox/Current/Dawn -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2014-10-13 21:43:21.187
+!MESSAGE Indexed 'Kernel' (64 sources, 78 headers) in 1.72 sec: 1,807 declarations; 5,584 references; 93 unresolved inclusions; 0 syntax errors; 875 unresolved names (10.59%)
+
+!ENTRY org.eclipse.ui 4 4 2014-10-13 21:43:30.541
+!MESSAGE Invalid preference page path: XML Syntax

@@ -37,3 +37,288 @@ make all
 make all 
 
 **** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/startnew.o all/syscall/startnew.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/terminal_syscalls.o all/syscall/terminal_syscalls.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/clock_syscalls.o all/syscall/clock_syscalls.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/system_syscalls.o all/syscall/system_syscalls.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/postbox_syscalls.o all/syscall/postbox_syscalls.c
+all/input/keyboard.c:23:20: warning: multi-character character constant [-Wmultichar]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/syscall.o all/syscall/syscall.c
+all/input/keyboard.c:23:4: warning: overflow in implicit constant conversion [-Woverflow]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/process_syscalls.o all/syscall/process_syscalls.c
+all/input/input.c: In function ‘inputInitialize’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/syscall/debug_mode.o all/syscall/debug_mode.c
+all/input/input.c:13:2: warning: implicit declaration of function ‘initializeKeyboard’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/input/keyboard.o all/input/keyboard.c
+all/heap/kheap.c: In function ‘kmalloc’:
+all/heap/kheap.c:12:2: warning: implicit declaration of function ‘heapAllocateMemory’ [-Wimplicit-function-declaration]
+all/heap/kheap.c:12:2: warning: return makes pointer from integer without a cast [enabled by default]
+all/heap/kheap.c: In function ‘kfree’:
+all/heap/kheap.c:20:2: warning: implicit declaration of function ‘heapFreeMemory’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/input/input.o all/input/input.c
+all/heap/kheap.c: In function ‘initializeKernelHeap’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/heap/kheap.o all/heap/kheap.c
+all/heap/kheap.c:29:2: warning: implicit declaration of function ‘initializeHeap’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/heap/heap.o all/heap/heap.c
+all/heap/heap.c: In function ‘mapInitialHeap’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/debug/debugprint.o all/debug/debugprint.c
+all/heap/heap.c:18:2: warning: statement with no effect [-Wunused-value]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/debug/debug.o all/debug/debug.c
+all/heap/heap.c: In function ‘initializeHeap’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/lib/printf.o all/lib/printf.c
+all/heap/heap.c:52:29: warning: initialisation makes pointer from integer without a cast [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/lib/io.o all/lib/io.c
+all/heap/heap.c: In function ‘expandHeap’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/fs/rfs.o all/fs/rfs.c
+all/heap/heap.c:69:2: warning: statement with no effect [-Wunused-value]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/fs/initrd.o all/fs/initrd.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/fs/vfs.o all/fs/vfs.c
+all/heap/heap.c:82:29: warning: initialisation makes pointer from integer without a cast [enabled by default]
+all/heap/heap.c: In function ‘heapAllocateMemory’:
+all/heap/heap.c:120:31: warning: initialisation makes pointer from integer without a cast [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/hash/md5use.o all/hash/md5use.c
+all/heap/heap.c:134:29: warning: initialisation makes integer from pointer without a cast [enabled by default]
+all/heap/heap.c:158:21: warning: initialisation makes integer from pointer without a cast [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/hash/md5.o all/hash/md5.c
+all/heap/heap.c: In function ‘printHeap’:
+all/heap/heap.c:204:23: warning: initialisation makes pointer from integer without a cast [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/system/reboot.o all/system/reboot.c
+all/debug/debugprint.c: In function ‘printDebugMessage’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/system/system.o all/system/system.c
+all/debug/debugprint.c:14:3: warning: implicit declaration of function ‘vsprintf’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/timers/clock.o all/timers/clock.c
+all/debug/debugprint.c:20:3: warning: implicit declaration of function ‘kputs’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/settings/settingsmanager.o all/settings/settingsmanager.c
+all/debug/debug.c: In function ‘setDebugModeOn’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o all/loaders/executable_parser.o all/loaders/executable_parser.c
+all/debug/debug.c:8:2: warning: implicit declaration of function ‘settingsExecuteLine’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/gdt.o arch/ia32/mm/gdt.c
+all/debug/debug.c: In function ‘getDebugMode’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/init.o arch/ia32/mm/init.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/virt_mm.o arch/ia32/mm/virt_mm.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+all/debug/debug.c:20:2: warning: implicit declaration of function ‘settingsGetEntry’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/syscall/ia32_syscall.o arch/ia32/syscall/ia32_syscall.c
+all/debug/debug.c:25:2: warning: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+all/debug/debug.c:25:2: warning: implicit declaration of function ‘settingsReadValue’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/input/keyboard_generic_ps2.o arch/ia32/input/keyboard_generic_ps2.c
+all/lib/printf.c: In function ‘printf’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/gpf/gpf.o arch/ia32/gpf/gpf.c
+all/lib/printf.c:13:9: warning: implicit declaration of function ‘vsprintf’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/usermode/usermode.o arch/ia32/usermode/usermode.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/scheduler/process_scheduler.o arch/ia32/scheduler/process_scheduler.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/interrupts/isr_handler.o arch/ia32/interrupts/isr_handler.c
+all/lib/printf.c:19:9: warning: implicit declaration of function ‘kputs’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/interrupts/irq_handler.o arch/ia32/interrupts/irq_handler.c
+all/hash/md5use.c: In function ‘MDData’:
+all/hash/md5use.c:7:3: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/interrupts/interrupt_handler.o arch/ia32/interrupts/interrupt_handler.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/interrupts/idt.o arch/ia32/interrupts/idt.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/stack/stack.o arch/ia32/stack/stack.c
+all/hash/md5use.c: In function ‘MDString’:
+all/hash/md5use.c:22:3: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/cpu/cpuid_vendor.o arch/ia32/cpu/cpuid_vendor.c
+all/hash/md5.c: In function ‘Transform’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/cpu/cpuid_support.o arch/ia32/cpu/cpuid_support.c
+all/hash/md5.c:180:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/cpu/cpuid_features.o arch/ia32/cpu/cpuid_features.c
+all/hash/md5.c:181:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/process/procfault.o arch/ia32/process/procfault.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/process/used_list.o arch/ia32/process/used_list.c
+all/hash/md5.c:183:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/process/process.o arch/ia32/process/process.c
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/tss/tss.o arch/ia32/tss/tss.c
+all/hash/md5.c:184:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/clock/clock.o arch/ia32/clock/clock.c
+all/hash/md5.c:186:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/clock/pit.o arch/ia32/clock/pit.c
+all/hash/md5.c:187:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/screen/screen_textmode.o arch/ia32/screen/screen_textmode.c
+all/hash/md5.c:189:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/screen/screen.o arch/ia32/screen/screen.c
+all/hash/md5.c:190:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/screen/vga.o arch/ia32/screen/vga.c
+all/hash/md5.c:191:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/boot/post_init.o arch/ia32/boot/post_init.c
+all/hash/md5.c:193:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/boot/kernel_init.o arch/ia32/boot/kernel_init.c
+all/hash/md5.c:194:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:202:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:203:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:205:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/boot/boot_highlevel.o arch/ia32/boot/boot_highlevel.c
+all/hash/md5.c:206:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/loaders/executable_loader.o arch/ia32/loaders/executable_loader.c
+all/hash/md5.c:208:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:209:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:211:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:212:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:214:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:215:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:217:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:224:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:225:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:227:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:228:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:230:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:231:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:233:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:234:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:236:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:237:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:239:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:246:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:248:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:249:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:251:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:252:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:253:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:255:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:256:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:258:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:259:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/hash/md5.c:261:3: warning: this decimal constant is unsigned only in ISO C90 [enabled by default]
+all/system/reboot.c: In function ‘kernelReboot’:
+all/system/reboot.c:35:3: warning: implicit declaration of function ‘inb’ [-Wimplicit-function-declaration]
+all/system/reboot.c:40:2: warning: implicit declaration of function ‘outb’ [-Wimplicit-function-declaration]
+all/system/system.c: In function ‘systemMainProcess’:
+all/system/system.c:92:6: warning: implicit declaration of function ‘freeProcess’ [-Wimplicit-function-declaration]
+all/system/system.c: In function ‘systemProcess’:
+all/system/system.c:145:5: warning: implicit declaration of function ‘kfork’ [-Wimplicit-function-declaration]
+all/settings/settingsmanager.c: In function ‘settingsExecuteLine’:
+all/settings/settingsmanager.c:49:2: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+all/settings/settingsmanager.c:51:2: warning: implicit declaration of function ‘strchr’ [-Wimplicit-function-declaration]
+all/settings/settingsmanager.c:51:27: warning: initialisation makes pointer from integer without a cast [enabled by default]
+all/settings/settingsmanager.c:59:28: warning: initialisation makes pointer from integer without a cast [enabled by default]
+all/settings/settingsmanager.c:89:2: warning: implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+all/settings/settingsmanager.c: In function ‘parseConfigFile’:
+all/settings/settingsmanager.c:146:2: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+all/settings/settingsmanager.c:148:9: warning: unused variable ‘length’ [-Wunused-variable]
+all/settings/settingsmanager.c: In function ‘settingsGetEntry’:
+all/settings/settingsmanager.c:192:4: warning: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+all/settings/settingsmanager.c: In function ‘settingsModifyEntry’:
+all/settings/settingsmanager.c:239:2: warning: implicit declaration of function ‘strcpy’ [-Wimplicit-function-declaration]
+all/loaders/executable_parser.c: In function ‘parseStringTableEntry’:
+all/loaders/executable_parser.c:55:3: warning: ‘return’ with a value, in function returning void [enabled by default]
+arch/ia32/mm/gdt.c: In function ‘initialize_gdt’:
+arch/ia32/mm/gdt.c:13:4: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+arch/ia32/mm/gdt.c:24:4: warning: implicit declaration of function ‘flushGdt’ [-Wimplicit-function-declaration]
+arch/ia32/mm/gdt.c: At top level:
+arch/ia32/mm/gdt.c:27:6: warning: conflicting types for ‘flushGdt’ [enabled by default]
+arch/ia32/mm/gdt.c:24:4: note: previous implicit declaration of ‘flushGdt’ was here
+arch/ia32/mm/init.c: In function ‘initializeMemory’:
+arch/ia32/mm/init.c:7:4: warning: implicit declaration of function ‘initialize_gdt’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:8:4: warning: implicit declaration of function ‘initializeTss’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:9:4: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:13:4: warning: implicit declaration of function ‘initializePhysicalMemoryManager’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:15:4: warning: implicit declaration of function ‘map_free_pages’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:19:4: warning: implicit declaration of function ‘moveStack’ [-Wimplicit-function-declaration]
+arch/ia32/mm/virt_mm.c: In function ‘page_fault’:
+arch/ia32/mm/virt_mm.c:56:2: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+arch/ia32/mm/virt_mm.c:67:2: warning: implicit declaration of function ‘printFormattedStringToBuffer’ [-Wimplicit-function-declaration]
+arch/ia32/mm/virt_mm.c: In function ‘copyPage’:
+arch/ia32/mm/virt_mm.c:276:27: warning: initialisation makes integer from pointer without a cast [enabled by default]
+arch/ia32/mm/virt_mm.c:279:28: warning: initialisation makes integer from pointer without a cast [enabled by default]
+arch/ia32/mm/virt_mm.c:282:2: warning: passing argument 1 of ‘memcpy’ makes pointer from integer without a cast [enabled by default]
+../Shared/headers/common.h:14:6: note: expected ‘void *’ but argument is of type ‘uint32_t’
+arch/ia32/mm/virt_mm.c:282:2: warning: passing argument 2 of ‘memcpy’ makes pointer from integer without a cast [enabled by default]
+../Shared/headers/common.h:14:6: note: expected ‘void *’ but argument is of type ‘uint32_t’
+arch/ia32/mm/virt_mm.c: In function ‘copyPageTable’:
+arch/ia32/mm/virt_mm.c:296:2: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:299:2: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:314:5: warning: statement with no effect [-Wunused-value]
+arch/ia32/mm/virt_mm.c:324:2: warning: passing argument 1 of ‘unmap’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:9:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:325:2: warning: passing argument 1 of ‘unmap’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:9:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c: In function ‘copyPageDir’:
+arch/ia32/mm/virt_mm.c:339:2: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:339:2: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:342:2: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:342:2: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:376:2: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:380:2: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:386:2: warning: passing argument 1 of ‘unmap’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:9:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:387:2: warning: passing argument 1 of ‘unmap’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:9:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:391:2: warning: passing argument 1 of ‘unmap’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:9:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c:392:2: warning: passing argument 1 of ‘unmap’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:9:6: note: expected ‘uint32_t’ but argument is of type ‘uint32_t *’
+arch/ia32/mm/virt_mm.c: In function ‘kernelFirstFreeVirtualAddress’:
+arch/ia32/mm/virt_mm.c:402:2: warning: statement with no effect [-Wunused-value]
+arch/ia32/mm/virt_mm.c:406:4: warning: return makes pointer from integer without a cast [enabled by default]
+arch/ia32/mm/virt_mm.c: In function ‘unmap’:
+arch/ia32/mm/virt_mm.c:430:2: warning: passing argument 1 of ‘ia32_unmap’ makes pointer from integer without a cast [enabled by default]
+arch/ia32/mm/virt_mm.c:111:6: note: expected ‘void *’ but argument is of type ‘uint32_t’
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+arch/ia32/mm/phys_mm.c:132:6: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:132:6: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/syscall/ia32_syscall.c: In function ‘kernelInitializeSyscallSystem’:
+arch/ia32/syscall/ia32_syscall.c:52:2: warning: implicit declaration of function ‘registerInterruptHandler’ [-Wimplicit-function-declaration]
+arch/ia32/input/keyboard_generic_ps2.c: In function ‘keyboardIrqCallback’:
+arch/ia32/input/keyboard_generic_ps2.c:13:5: warning: implicit declaration of function ‘inb’ [-Wimplicit-function-declaration]
+arch/ia32/input/keyboard_generic_ps2.c:14:10: warning: unused variable ‘new_char’ [-Wunused-variable]
+arch/ia32/input/keyboard_generic_ps2.c:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+arch/ia32/usermode/usermode.c: In function ‘switchToUserMode’:
+arch/ia32/usermode/usermode.c:8:5: warning: implicit declaration of function ‘setKernelStack’ [-Wimplicit-function-declaration]
+arch/ia32/scheduler/process_scheduler.c: In function ‘swapToProcess’:
+arch/ia32/scheduler/process_scheduler.c:42:2: warning: implicit declaration of function ‘setKernelStack’ [-Wimplicit-function-declaration]
+arch/ia32/scheduler/process_scheduler.c: In function ‘schedulerAdd’:
+arch/ia32/scheduler/process_scheduler.c:92:15: warning: unused variable ‘iterator’ [-Wunused-variable]
+arch/ia32/scheduler/process_scheduler.c: In function ‘schedulerKillCurrentProcess’:
+arch/ia32/scheduler/process_scheduler.c:200:25: warning: ‘return’ with a value, in function returning void [enabled by default]
+arch/ia32/scheduler/process_scheduler.c: In function ‘schedulerGetProcessFromPid’:
+arch/ia32/scheduler/process_scheduler.c:229:15: warning: unused variable ‘i’ [-Wunused-variable]
+arch/ia32/scheduler/process_scheduler.c: In function ‘schedulerGlobalMessage’:
+arch/ia32/scheduler/process_scheduler.c:254:3: warning: suggest parentheses around comparison in operand of ‘&’ [-Wparentheses]
+arch/ia32/interrupts/irq_handler.c: In function ‘irq_handler’:
+arch/ia32/interrupts/irq_handler.c:14:8: warning: implicit declaration of function ‘outb’ [-Wimplicit-function-declaration]
+arch/ia32/interrupts/idt.c: In function ‘Initialize_IDT’:
+arch/ia32/interrupts/idt.c:12:2: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+arch/ia32/interrupts/idt.c:16:2: warning: implicit declaration of function ‘outb’ [-Wimplicit-function-declaration]
+arch/ia32/stack/stack.c: In function ‘moveStack’:
+arch/ia32/stack/stack.c:19:16: warning: initialisation makes integer from pointer without a cast [enabled by default]
+arch/ia32/stack/stack.c:22:12: warning: assignment makes integer from pointer without a cast [enabled by default]
+arch/ia32/stack/stack.c:24:3: warning: implicit declaration of function ‘allocateFrame’ [-Wimplicit-function-declaration]
+arch/ia32/stack/stack.c:39:30: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+arch/ia32/stack/stack.c:40:30: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+arch/ia32/process/process.c: In function ‘new_process_entry’:
+arch/ia32/process/process.c:80:3: warning: implicit declaration of function ‘initializeHeap’ [-Wimplicit-function-declaration]
+arch/ia32/tss/tss.c: In function ‘write_tss’:
+arch/ia32/tss/tss.c:13:4: warning: implicit declaration of function ‘gdt_set_gate’ [-Wimplicit-function-declaration]
+arch/ia32/tss/tss.c: In function ‘initializeTss’:
+arch/ia32/tss/tss.c:40:4: warning: implicit declaration of function ‘flushGdt’ [-Wimplicit-function-declaration]
+arch/ia32/clock/pit.c: In function ‘pitOnTickCallback’:
+arch/ia32/clock/pit.c:12:2: warning: implicit declaration of function ‘schedulerOnTick’ [-Wimplicit-function-declaration]
+In file included from arch/ia32/boot/kernel_init.c:27:0:
+./all/devices/devices.h:6:8: warning: extra tokens at end of #endif directive [enabled by default]
+arch/ia32/boot/kernel_init.c: In function ‘initializeRamdisk’:
+arch/ia32/boot/kernel_init.c:87:2: warning: passing argument 2 of ‘memcpy’ makes pointer from integer without a cast [enabled by default]
+../Shared/headers/common.h:14:6: note: expected ‘void *’ but argument is of type ‘uint32_t’
+arch/ia32/boot/kernel_init.c:98:17: warning: initialisation makes integer from pointer without a cast [enabled by default]
+arch/ia32/boot/kernel_init.c:101:2: warning: implicit declaration of function ‘MDData’ [-Wimplicit-function-declaration]
+arch/ia32/boot/kernel_init.c:123:2: warning: implicit declaration of function ‘MDCompare’ [-Wimplicit-function-declaration]
+arch/ia32/boot/kernel_init.c:132:3: warning: implicit declaration of function ‘initialize_initrd’ [-Wimplicit-function-declaration]
+arch/ia32/boot/kernel_init.c:132:23: warning: initialisation makes pointer from integer without a cast [enabled by default]
+arch/ia32/boot/kernel_init.c: In function ‘initializeKernel’:
+arch/ia32/boot/kernel_init.c:148:34: warning: taking address of expression of type ‘void’ [enabled by default]
+arch/ia32/boot/kernel_init.c:148:25: warning: initialisation makes integer from pointer without a cast [enabled by default]
+arch/ia32/boot/kernel_init.c:150:2: warning: implicit declaration of function ‘initializeMemory’ [-Wimplicit-function-declaration]
+
+**** Build Finished ****

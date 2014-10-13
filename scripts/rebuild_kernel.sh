@@ -5,10 +5,9 @@ echo "Moving to Kernel directory"
 cd Kernel
 
 echo "Cleaning previous build output files"
-make -f mk_ia32 clean
+make clean
 
 echo "Building Kernel"
-make -f mk_ia32
+make
 
 echo "Done!"
-

@@ -26,7 +26,7 @@ else
 
 fi
 
-
+sudo losetup -d /dev/loop0
 sudo losetup /dev/loop0 $image_name
 
 #Mount the virtual directory
@@ -44,6 +44,7 @@ sudo cp etc/grub.cfg tmount/boot/grub/grub.cfg
 #Unmount it and remove the tmount directory
 sudo umount ./tmount
 rmdir tmount
+sudo losetup -d /dev/loop0
 
 #Print done
 echo "Done!"

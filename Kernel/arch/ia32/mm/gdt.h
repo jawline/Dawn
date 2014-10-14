@@ -23,6 +23,6 @@ struct gdt_ptr_struct
 } __attribute__((packed));
 typedef struct gdt_ptr_struct gdt_ptr_t;
 
-void initialize_gdt();
+void initializeGdt();
 
 #endif //_GDT_DEFINITIONS_DEF_H_

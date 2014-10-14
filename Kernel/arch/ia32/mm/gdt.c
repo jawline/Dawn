@@ -8,7 +8,7 @@ void gdt_set_gate(unsigned int, uint32_t, uint32_t, uint8_t, uint8_t);
 extern void gdt_flush(uint32_t);
 
 //Global descriptor table setup
-void initialize_gdt()
+void initializeGdt()
 {
    memset(&gdt_entries, 0, sizeof(gdt_entry_t) * NUM_GDT_ENTRIES);
 

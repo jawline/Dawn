@@ -37,8 +37,7 @@ typedef struct {
 
 } new_process_orders_t;
 
-new_process_orders_t* make_orders(const char* Where, fs_node_t* fromWhere) {
-
+new_process_orders_t* makeOrders(const char* Where, fs_node_t* fromWhere) {
 	new_process_orders_t* createdOrder = malloc(sizeof(new_process_orders_t));
 	memset(createdOrder, 0, sizeof(new_process_orders_t));
 	createdOrder->filename = malloc(strlen(Where) + 1);
@@ -47,7 +46,7 @@ new_process_orders_t* make_orders(const char* Where, fs_node_t* fromWhere) {
 	return createdOrder;
 }
 
-void free_orders(new_process_orders_t* orders) {
+void freeOrders(new_process_orders_t* orders) {
 	free(orders->filename);
 	free(orders);
 }
@@ -60,16 +59,13 @@ void new_process_entry() {
 
 	if (msg.ID == LOAD_MESSAGE) {
 		int userMode = 0;
-
 		new_process_orders_t* orders =
 				(new_process_orders_t*) msg.messageAdditionalData;
 
 		fs_node_t* node = evaluatePath(orders->filename, orders->fromWhere);
 		userMode = orders->userMode;
-
 		renameCurrentProcess(orders->filename);
-
-		free_orders(orders);
+		freeOrders(orders);
 
 		if (!node || !node->parent) {
 			DEBUG_PRINT(
@@ -79,7 +75,6 @@ void new_process_entry() {
 			setProcessExecutionDirectory(getCurrentProcess(), node->parent);
 			loadAndExecuteProgram(node, userMode);
 		}
-
 		schedulerKillCurrentProcess();
 	} else {
 		DEBUG_PRINT("Invalid message. Killing self\n");
@@ -245,7 +240,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where) {
 	process_message InfomaticMessage;
 	InfomaticMessage.from_PID = getCurrentProcess()->id;
 	InfomaticMessage.ID = LOAD_MESSAGE;
-	InfomaticMessage.messageAdditionalData = (MEM_LOC) make_orders(Filename,
+	InfomaticMessage.messageAdditionalData = (MEM_LOC) makeOrders(Filename,
 			Where);
 
 	postbox_add(&new_process->processPostbox, InfomaticMessage);

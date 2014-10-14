@@ -47,6 +47,8 @@ void swapToProcess(scheduler_proc* scheduler_entry) {
 
 void schedulerYield() {
 
+	ASSERT(list_current, "Cannot yield if no current process");
+
 	if (list_current->next->process_pointer->m_shouldDestroy == 1) {
 		swapToProcess(list_root);
 	} else {
@@ -56,17 +58,15 @@ void schedulerYield() {
 }
 
 void schedulerOnTick() {
-	if (list_root == 0)
-		return;
 
-	if (list_current->ticks_tell_die < 1) {
+	if (list_root == 0) {
+		return;
+	}
+
+	if (!list_current->ticks_tell_die) {
 		schedulerYield();
 	} else {
-
-		//increment the counter of the time spent on this process
 		list_current->process_pointer->m_processingTime++;
-
-		//One tick closer to being context switched
 		list_current->ticks_tell_die--;
 	}
 }
@@ -132,16 +132,6 @@ void schedulerRemove(process_t* op) {
 	free(next);
 
 	return;
-}
-
-//Sleeps the current process on the next tick
-void schedulerBlockMe() {
-
-	if (!list_current) {
-		return;
-	}
-
-	list_current->ticks_tell_die = 0;
 }
 
 process_t* getCurrentProcess() {

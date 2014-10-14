@@ -123,8 +123,7 @@ void systemMainProcess() {
 
 		}
 
-		//Sleep the current process
-		schedulerBlockMe();
+		schedulerYield();
 	}
 }
 

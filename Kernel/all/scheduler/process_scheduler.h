@@ -1,7 +1,7 @@
 #ifndef _PROCESS_SCHEDULER_DEF_H_
 #define _PROCESS_SCHEDULER_DEF_H_
 #include <process/process.h>
-#define _STD_NANO_ 5
+#define _STD_NANO_ 50
 
 void schedulerInitialize(process_t* kproc);
 
@@ -9,7 +9,6 @@ void schedulerAdd(process_t* new_process);
 void schedulerRemove(process_t* old_process);
 
 void schedulerOnTick();
-void schedulerBlockMe();
 
 process_t* getCurrentProcess();
 int schedulerNumProcesses();

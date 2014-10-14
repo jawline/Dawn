@@ -7,11 +7,11 @@
 
 void syscallPrint_t(const char* Line)
 {
-	if (getCurrentProcess()->m_pTerminal != 0)
+	if (getCurrentProcess()->processTerminal != 0)
 	{
 		while (*Line)
 		{
-			getCurrentProcess()->m_pTerminal->f_putchar(getCurrentProcess()->m_pTerminal, *Line);
+			getCurrentProcess()->processTerminal->f_putchar(getCurrentProcess()->processTerminal, *Line);
 			Line++;
 		}
 	}
@@ -19,24 +19,24 @@ void syscallPrint_t(const char* Line)
 
 void syscallClearscreen()
 {
-	if (getCurrentProcess()->m_pTerminal != 0)
+	if (getCurrentProcess()->processTerminal != 0)
 	{
-		getCurrentProcess()->m_pTerminal->f_clear(getCurrentProcess()->m_pTerminal);
+		getCurrentProcess()->processTerminal->f_clear(getCurrentProcess()->processTerminal);
 	}
 }
 
 void syscallSetFgc(unsigned char fgc)
 {
-	if (getCurrentProcess()->m_pTerminal != 0)
+	if (getCurrentProcess()->processTerminal != 0)
 	{
-		getCurrentProcess()->m_pTerminal->f_setForeground(getCurrentProcess()->m_pTerminal, fgc);
+		getCurrentProcess()->processTerminal->f_setForeground(getCurrentProcess()->processTerminal, fgc);
 	}	
 }
 
 void syscallSetBgc(unsigned char bgc)
 {
-	if (getCurrentProcess()->m_pTerminal != 0)
+	if (getCurrentProcess()->processTerminal != 0)
 	{
-		getCurrentProcess()->m_pTerminal->f_setBackground(getCurrentProcess()->m_pTerminal, bgc);
+		getCurrentProcess()->processTerminal->f_setBackground(getCurrentProcess()->processTerminal, bgc);
 	}	
 }

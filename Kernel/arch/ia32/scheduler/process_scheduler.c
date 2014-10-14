@@ -49,7 +49,7 @@ void schedulerYield() {
 
 	ASSERT(list_current, "Cannot yield if no current process");
 
-	if (list_current->next->process_pointer->m_shouldDestroy == 1) {
+	if (list_current->next->process_pointer->shouldDestroy == 1) {
 		swapToProcess(list_root);
 	} else {
 		swapToProcess(list_current->next);
@@ -66,7 +66,7 @@ void schedulerOnTick() {
 	if (!list_current->ticks_tell_die) {
 		schedulerYield();
 	} else {
-		list_current->process_pointer->m_processingTime++;
+		list_current->process_pointer->processingTime++;
 		list_current->ticks_tell_die--;
 	}
 }
@@ -168,7 +168,7 @@ int schedulerNumProcesses() {
 void schedulerKillCurrentProcess() {
 	ASSERT(list_current, "Cannot kill current - no executing process");
 	process_t* process = getCurrentProcess();
-	process->m_shouldDestroy = 1;
+	process->shouldDestroy = 1;
 	schedulerYield();
 
 	for (;;) {
@@ -195,7 +195,7 @@ process_t* schedulerGetProcessFromPid(unsigned int pid) {
 
 	for (;;) {
 		//If it is the process I'm loooking for break
-		if (iterator->process_pointer->m_ID == pid)
+		if (iterator->process_pointer->id == pid)
 			break;
 
 		//If its the last entry and not correct then return null
@@ -215,8 +215,8 @@ void schedulerGlobalMessage(process_message msg, unsigned int bit) {
 
 	while (1) {
 		//Test if this process wants to hear about this event
-		if (iter->process_pointer->m_postboxFlags & bit == bit) {
-			postbox_add(&iter->process_pointer->m_processPostbox, msg);
+		if (iter->process_pointer->postboxFlags & bit == bit) {
+			postbox_add(&iter->process_pointer->processPostbox, msg);
 
 		}
 

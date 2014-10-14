@@ -43,7 +43,7 @@ void systemMainProcess() {
 
 			//Grab the top message
 			process_message pb_top = postbox_top(
-					&getCurrentProcess()->m_processPostbox);
+					&getCurrentProcess()->processPostbox);
 
 			if (pb_top.ID != -1) {
 				//Its a message to be handled
@@ -62,26 +62,26 @@ void systemMainProcess() {
 
 			if (schedulerPtr == 0) {
 				break;
-			} else if (schedulerPtr->m_shouldDestroy == 1) {
+			} else if (schedulerPtr->shouldDestroy == 1) {
 				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
 				disableInterrupts();
 
 				if ((schedulerPtr == systemIdlePtr)
 						|| (schedulerPtr == systemProcPtr)) {
 					DEBUG_PRINT("Cannot close SystemIdle or System\n");
-					schedulerPtr->m_shouldDestroy = 0;
+					schedulerPtr->shouldDestroy = 0;
 				} else {
 					DEBUG_PRINT(
 							"Process %i (%s) terminated with return value %i\n",
-							schedulerPtr->m_ID, schedulerPtr->m_Name,
-							schedulerPtr->m_returnValue);
+							schedulerPtr->id, schedulerPtr->name,
+							schedulerPtr->returnValue);
 
 					schedulerRemove(schedulerPtr);
 
 					DEBUG_PRINT(
 							"Freeing process %x (%i:%s) current process %i\n",
-							schedulerPtr, schedulerPtr->m_ID,
-							schedulerPtr->m_Name, getCurrentProcess()->m_ID);
+							schedulerPtr, schedulerPtr->id,
+							schedulerPtr->name, getCurrentProcess()->id);
 					freeProcess(schedulerPtr);
 
 				}

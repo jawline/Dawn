@@ -13,7 +13,7 @@ unsigned char syscallProcessValid(unsigned int pid)
 		iterator = schedulerReturnProcess(number);
 
 		if (iterator == 0) return 0;
-		if (iterator->m_ID == pid) break;
+		if (iterator->id == pid) break;
 
 		number = number + 1;
 	}
@@ -24,7 +24,7 @@ unsigned char syscallProcessValid(unsigned int pid)
 int syscallGetPid(unsigned int iter)
 {
 	if (schedulerReturnProcess(iter) == 0) return -1;
-	return schedulerReturnProcess(iter)->m_ID;
+	return schedulerReturnProcess(iter)->id;
 }
 
 unsigned long syscallGetProcessingTime(unsigned int pid)
@@ -39,13 +39,13 @@ unsigned long syscallGetProcessingTime(unsigned int pid)
 		iterator = schedulerReturnProcess(number);
 
 		if (iterator == 0) return 0;
-		if (iterator->m_ID == pid) break;
+		if (iterator->id == pid) break;
 
 		number = number + 1;
 	}
 
 	//Return the processing time
-	return iterator->m_processingTime;
+	return iterator->processingTime;
 }
 
 void syscallGetName(char* StrLocation, unsigned int pid)
@@ -63,13 +63,13 @@ void syscallGetName(char* StrLocation, unsigned int pid)
 			strcpy(StrLocation, "Unknown");
 			return;
 		}
-		if (iterator->m_ID == pid) break;
+		if (iterator->id == pid) break;
 
 		number = number + 1;
 	}
 
 	//Copy the name into the StrLocation
-	strcpy(StrLocation, iterator->m_Name);
+	strcpy(StrLocation, iterator->name);
 }
 
 void syscallKillCurrentProcess()
@@ -79,6 +79,6 @@ void syscallKillCurrentProcess()
 
 void syscallRequestExit(int returnValue)
 {
-	getCurrentProcess()->m_returnValue = returnValue;
+	getCurrentProcess()->returnValue = returnValue;
 	schedulerKillCurrentProcess();
 }

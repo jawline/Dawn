@@ -5,55 +5,55 @@
 const unsigned long usedListExpansionSize = 1024;
 
 void initializeUsedList(process_t* process) {
-	process->m_usedListRoot = (MEM_LOC*) malloc(1024);
-	process->m_usedListSize = 1024;
-	process->m_usedListLocation = 0;
+	process->usedListRoot = (MEM_LOC*) malloc(1024);
+	process->usedListSize = 1024;
+	process->usedListLocation = 0;
 }
 
 void expandUsedList(process_t* process) {
 	MEM_LOC* new_loc =
-			(MEM_LOC*) malloc(process->m_usedListSize + usedListExpansionSize);
-	memcpy(new_loc, process->m_usedListRoot, process->m_usedListSize);
-	free(process->m_usedListRoot);
-	process->m_usedListSize += usedListExpansionSize;
-	process->m_usedListRoot = new_loc;
+			(MEM_LOC*) malloc(process->usedListSize + usedListExpansionSize);
+	memcpy(new_loc, process->usedListRoot, process->usedListSize);
+	free(process->usedListRoot);
+	process->usedListSize += usedListExpansionSize;
+	process->usedListRoot = new_loc;
 }
 
 //TODO: Used list shrinking
 
 MEM_LOC usedListTop(process_t* process) {
-	return *((MEM_LOC*) process->m_usedListRoot);
+	return *((MEM_LOC*) process->usedListRoot);
 }
 
 void usedListAdd(process_t* process, MEM_LOC location) {
 
-	if (process->m_usedListSize == process->m_usedListLocation) {
+	if (process->usedListSize == process->usedListLocation) {
 		//Gotta expand the used list
 		expandUsedList(process);
 	}
 
-	MEM_LOC* ulocation = process->m_usedListRoot;
+	MEM_LOC* ulocation = process->usedListRoot;
 	ulocation = (MEM_LOC*) (((MEM_LOC) ulocation)
-			+ ((MEM_LOC) process->m_usedListLocation));
+			+ ((MEM_LOC) process->usedListLocation));
 
 	*ulocation = location;
 	ulocation--;
 
-	process->m_usedListLocation += sizeof(MEM_LOC);
+	process->usedListLocation += sizeof(MEM_LOC);
 }
 
 void usedListRemove(process_t* process, MEM_LOC location) {
 
-	MEM_LOC* ulocation = process->m_usedListRoot;
+	MEM_LOC* ulocation = process->usedListRoot;
 	unsigned long iter = 0;
 
-	for (iter = 0; iter < process->m_usedListLocation; iter +=
+	for (iter = 0; iter < process->usedListLocation; iter +=
 			sizeof(MEM_LOC)) {
 
 		if (*ulocation == location) {
 			memcpy(ulocation, ulocation + 1,
-					process->m_usedListLocation - iter);
-			process->m_usedListLocation -= sizeof(MEM_LOC);
+					process->usedListLocation - iter);
+			process->usedListLocation -= sizeof(MEM_LOC);
 			return;
 		}
 

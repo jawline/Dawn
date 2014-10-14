@@ -5,5 +5,5 @@
 
 void syscallRequestRunNewProcess(const char* NewProcess) {
 
-	createNewProcess(NewProcess, getCurrentProcess()->m_executionDirectory);
+	createNewProcess(NewProcess, getCurrentProcess()->executionDirectory);
 }

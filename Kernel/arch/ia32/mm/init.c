@@ -1,7 +1,10 @@
 #include <mm/general.h>
 #include <mm/gdt.h>
 #include <mm/phys_mm.h>
+#include <tss/tss.h>
+#include <stack/stack.h>
 #include <stack/kstack.h>
+#include <printf.h>
 
 void initializeMemory(struct multiboot* mboot_ptr, MEM_LOC kernel_start,
 		MEM_LOC kernel_end, MEM_LOC initial_esp) {

@@ -1,7 +1,5 @@
 #include <stack/kstack.h>
 
-//Function: switchToUserMode
-//Purpose: To set the current code path to execute in user mode, stopping access to kernel data areas and specific instructions (Stop evil programmers/hackers from screwing up the system)
 void switchToUserMode()
 {
 

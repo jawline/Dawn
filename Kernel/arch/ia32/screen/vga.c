@@ -1,5 +1,4 @@
 #include "vga.h"
 
-void init_vga_driver()
-{
+void init_vga_driver() {
 }

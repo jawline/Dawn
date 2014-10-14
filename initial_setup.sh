@@ -1,0 +1,1 @@
+cp ./etc/base.img hdd.img

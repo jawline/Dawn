@@ -4,7 +4,7 @@
 
 tss_entry_t tss_entry;
 
-void write_tss(int num, uint16_t ss0, uint32_t esp0)
+void writeTss(int num, uint16_t ss0, uint32_t esp0)
 {
    //Generate the base and limit values
    MEM_LOC base = (MEM_LOC) &tss_entry;
@@ -36,7 +36,7 @@ void flushTss()
 
 void initializeTss()
 {
-   write_tss(5, 0x10, KERNEL_STACK_START);
+   writeTss(5, 0x10, KERNEL_STACK_START);
    flushGdt();
    flushTss();
 }

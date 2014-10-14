@@ -1,10 +1,11 @@
 #ifndef _PROGRAMMABLE_INTERRUPT_TIMER_DEF_H_
 #define _PROGRAMMABLE_INTERRUPT_TIMER_DEF_H_
-
-#include "common.h"
 #include <interrupts/interrupt_handler.h>
 
-typedef void (*clock_callback)(); //Call one of these on each tick if setup.
+/**
+ * Clock callback is a function called on every clock tick
+ */
+typedef void (*clock_callback)();
 
 void initializePit(unsigned int frequency);
 void setPitCallback(clock_callback cb);

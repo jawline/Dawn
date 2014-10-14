@@ -1,7 +1,6 @@
 #include <clock/rate.h>
 #include <clock/pit.h>
 
-void initializeSystemClock()
-{
+void initializeSystemClock() {
 	initializePit(CLOCKS_PER_SECOND);
 }

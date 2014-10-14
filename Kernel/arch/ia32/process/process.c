@@ -71,8 +71,6 @@ void new_process_entry() {
 
 		free_orders(orders);
 
-		initializeHeap(&getCurrentProcess()->processHeap, PROCESS_HEAP_START);
-
 		if (!node || !node->parent) {
 			DEBUG_PRINT(
 					"Unable to evaluate node. process could not load file specified\n");

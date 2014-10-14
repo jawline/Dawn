@@ -70,11 +70,6 @@ struct process_structure {
 	 * The return value of this process is stored here when it is set
 	 */
 	int returnValue;
-
-	/**
-	 * The heap created for the process
-	 */
-	heap_t processHeap;
 };
 
 typedef struct process_structure process_t;

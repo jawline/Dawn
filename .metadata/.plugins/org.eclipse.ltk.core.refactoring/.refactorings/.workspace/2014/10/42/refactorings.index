@@ -6,3 +6,5 @@
 1413233182122	Delete resource 'Kernel/headers/time/cmos_time.h~'
 1413234173073	Delete resource 'Kernel/generic_sources/devices/devices.c~'
 1413234280085	Delete resource 'Kernel/generic_sources/syscall/clock_syscalls.c~'
+1413240866566	Delete resource 'Kernel/arch/ia32/stack/stack.c~'
+1413311337080	Delete resource 'Kernel/all/heap/heap.c~'

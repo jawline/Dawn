@@ -3,9 +3,7 @@
 #include <process/message.h>
 
 struct process_postbox_message {
-
 	process_message data;
-
 	struct process_postbox_message* next; //The next entry
 };
 

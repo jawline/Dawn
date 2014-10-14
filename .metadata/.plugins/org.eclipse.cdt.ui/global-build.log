@@ -322,3 +322,113 @@ arch/ia32/boot/kernel_init.c:148:25: warning: initialisation makes integer from 
 arch/ia32/boot/kernel_init.c:150:2: warning: implicit declaration of function ‘initializeMemory’ [-Wimplicit-function-declaration]
 
 **** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/init.o arch/ia32/mm/init.c
+arch/ia32/mm/init.c: In function ‘initializeMemory’:
+arch/ia32/mm/init.c:11:2: warning: implicit declaration of function ‘initializeTss’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:12:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:18:2: warning: implicit declaration of function ‘map_free_pages’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:22:2: warning: implicit declaration of function ‘moveStack’ [-Wimplicit-function-declaration]
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/init.o arch/ia32/mm/init.c
+arch/ia32/mm/init.c: In function ‘initializeMemory’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/init.c:11:2: warning: implicit declaration of function ‘initializeTss’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:12:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+arch/ia32/mm/init.c:22:2: warning: implicit declaration of function ‘moveStack’ [-Wimplicit-function-declaration]
+In file included from arch/ia32/mm/phys_mm.c:1:0:
+./arch/ia32/mm/phys_mm.h:11:26: warning: ‘struct multiboot’ declared inside parameter list [enabled by default]
+./arch/ia32/mm/phys_mm.h:11:26: warning: its scope is only this definition or declaration, which is probably not what you want [enabled by default]
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+arch/ia32/mm/phys_mm.c:119:3: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:119:3: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c: At top level:
+arch/ia32/mm/phys_mm.c:132:6: error: conflicting types for ‘mapFreePages’
+./arch/ia32/mm/phys_mm.h:11:6: note: previous declaration of ‘mapFreePages’ was here
+make: *** [arch/ia32/mm/phys_mm.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/process/used_list.o arch/ia32/process/used_list.c
+arch/ia32/mm/phys_mm.c:119:3: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:119:3: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/phys_mm.c: In function ‘allocateKernelFrame’:
+arch/ia32/mm/phys_mm.c:36:3: error: expected expression before ‘if’
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+arch/ia32/mm/phys_mm.c:125:3: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:125:3: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+make: *** [arch/ia32/mm/phys_mm.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/phys_mm.c:8:19: fatal error: panic.h: No such file or directory
+compilation terminated.
+make: *** [arch/ia32/mm/phys_mm.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+arch/ia32/mm/phys_mm.c:126:3: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:126:3: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+arch/ia32/mm/phys_mm.c:116:3: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:116:3: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+
+**** Build Finished ****
+
+**** Build of configuration Default for project Kernel ****
+
+make all 
+gcc -nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1   -c -o arch/ia32/mm/phys_mm.o arch/ia32/mm/phys_mm.c
+arch/ia32/mm/phys_mm.c: In function ‘freeFrame’:
+arch/ia32/mm/phys_mm.c:77:3: warning: passing argument 1 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+arch/ia32/mm/phys_mm.c:77:3: warning: passing argument 2 of ‘map’ makes integer from pointer without a cast [enabled by default]
+./all/mm/virtual.h:8:6: note: expected ‘uint32_t’ but argument is of type ‘void *’
+
+**** Build Finished ****

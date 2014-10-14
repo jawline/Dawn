@@ -22,7 +22,7 @@ unsigned char getDebugMode() {
 	}
 
 	//Read the value of the debug_state flag, if its 1 return true
-	if (strcmp(settingsReadValue("kernel.debug_state"), "1") == 0) {
+	if (strcmp(settingsReadValue("kernel.debug_state", "0"), "1") == 0) {
 		return 1;
 	}
 

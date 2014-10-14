@@ -10,21 +10,20 @@
 process_t* systemIdlePtr = 0;
 process_t* systemProcPtr = 0;
 
-void systemIdleProcess()
-{
+void systemIdleProcess() {
 	systemIdlePtr = getCurrentProcess();
 
-	for (;;)
-	{
+	for (;;) {
 		//Halt the processor tell the next interrupt
 		__asm__ volatile("hlt");
 	}
 }
 
-void systemMainProcess()
-{
+void systemMainProcess() {
+
 	//Create the process set as onstart in the global settings
-	createNewProcess(settingsReadValue("system.on_boot"), init_vfs());
+	createNewProcess(settingsReadValue("system.on_boot", "/system/Line"),
+			init_vfs());
 
 	//Enable interrupts
 	enableInterrupts();
@@ -40,21 +39,15 @@ void systemMainProcess()
 	for (;;) {
 
 		//Check all messages
-		while (1)
-		{
+		while (1) {
+
 			//Grab the top message
-			process_message pb_top = postbox_top(&getCurrentProcess()->m_processPostbox);
+			process_message pb_top = postbox_top(
+					&getCurrentProcess()->m_processPostbox);
 
-			if (pb_top.ID != -1)
-			{
+			if (pb_top.ID != -1) {
 				//Its a message to be handled
-
-
-			}
-			else
-			{
-
-
+			} else {
 				break;
 			}
 
@@ -64,45 +57,43 @@ void systemMainProcess()
 
 		schedulerIter = 0;
 		//Shut down all processes that need a-killin
-		while (1)
-		{
+		while (1) {
 			schedulerPtr = schedulerReturnProcess(schedulerIter);
 
-			if (schedulerPtr == 0)
-			{
+			if (schedulerPtr == 0) {
 				break;
-			}
-			else if (schedulerPtr->m_shouldDestroy == 1)
-			{
+			} else if (schedulerPtr->m_shouldDestroy == 1) {
 				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
 				disableInterrupts();
 
-				if ((schedulerPtr == systemIdlePtr) || (schedulerPtr == systemProcPtr))
-				{
+				if ((schedulerPtr == systemIdlePtr)
+						|| (schedulerPtr == systemProcPtr)) {
 					DEBUG_PRINT("Cannot close SystemIdle or System\n");
 					schedulerPtr->m_shouldDestroy = 0;
-				}
-				else
-				{
-					DEBUG_PRINT("Process %i (%s) terminated with return value %i\n", schedulerPtr->m_ID, schedulerPtr->m_Name, schedulerPtr->m_returnValue);
+				} else {
+					DEBUG_PRINT(
+							"Process %i (%s) terminated with return value %i\n",
+							schedulerPtr->m_ID, schedulerPtr->m_Name,
+							schedulerPtr->m_returnValue);
 
 					schedulerRemove(schedulerPtr);
 
-					DEBUG_PRINT("Freeing process %x (%i:%s) current process %i\n", schedulerPtr, schedulerPtr->m_ID, schedulerPtr->m_Name, getCurrentProcess()->m_ID);
+					DEBUG_PRINT(
+							"Freeing process %x (%i:%s) current process %i\n",
+							schedulerPtr, schedulerPtr->m_ID,
+							schedulerPtr->m_Name, getCurrentProcess()->m_ID);
 					freeProcess(schedulerPtr);
 
 				}
 
 				//Enable interrupts once the deed is done
 				enableInterrupts();
-			}
-			else
-			{
+			} else {
 			}
 
 			//Count up the number of non system processes (To check there is a interface active)
-			if ((schedulerPtr != systemIdlePtr) && (schedulerPtr != systemProcPtr))
-			{
+			if ((schedulerPtr != systemIdlePtr)
+					&& (schedulerPtr != systemProcPtr)) {
 				numNonSystem++;
 			}
 
@@ -110,22 +101,23 @@ void systemMainProcess()
 		}
 
 		//If this is the last process alive?
-		if (numNonSystem == 0)
-		{
+		if (numNonSystem == 0) {
 
-		    //Is the system set to restart the boot program when there are no other active programs
-			if (strcmp(settingsReadValue("system.boot_program_keep_alive"), "yes") == 0)
-			{
+			//Is the system set to restart the boot program when there are no other active programs
+			if (strcmp(settingsReadValue("system.boot_program_keep_alive", "yes"),
+					"yes") == 0) {
 
-                //Disable interrupts while the new process is being created
+				//Disable interrupts while the new process is being created
 				disableInterrupts();
 
-				DEBUG_PRINT("Creating new instance of %s\n", settingsReadValue("system.on_boot"));
+				DEBUG_PRINT("Creating new instance of %s\n",
+						settingsReadValue("system.on_boot", "/system/Line"));
 
-                //Create the new process with the program set as system.on_boot
-				createNewProcess(settingsReadValue("system.on_boot"), init_vfs());
+				//Create the new process with the program set as system.on_boot
+				createNewProcess(settingsReadValue("system.on_boot", "/system/Line"),
+						init_vfs());
 
-                //Re enable them once your done
+				//Re enable them once your done
 				enableInterrupts();
 			}
 
@@ -136,37 +128,32 @@ void systemMainProcess()
 	}
 }
 
-void systemProcess()
-{
-    //Disable interrupts while forking
-    disableInterrupts();
+void systemProcess() {
+	//Disable interrupts while forking
+	disableInterrupts();
 
-    //Fork the current process
-    int forkedID = kfork();
+	//Fork the current process
+	int forkedID = kfork();
 
-    //Enable them once the processes are set up
-    enableInterrupts();
+	//Enable them once the processes are set up
+	enableInterrupts();
 
+	if (forkedID == 1) {
 
-    if (forkedID == 1)
-    {
+		//Create the main system process
+		setProcessName(getCurrentProcess(), "System");
 
-        //Create the main system process
-        setProcessName(getCurrentProcess(), "System");
+		//And run it
+		systemMainProcess();
 
-        //And run it
-        systemMainProcess();
+	} else {
 
-    }
-    else
-    {
+		//Create the idle process
+		setProcessName(getCurrentProcess(), "SystemIdle");
 
-        //Create the idle process
-        setProcessName(getCurrentProcess(), "SystemIdle");
+		//And jump into the idle loop
+		systemIdleProcess();
 
-        //And jump into the idle loop
-        systemIdleProcess();
-
-    }
+	}
 
 }

@@ -3,8 +3,8 @@
 
 struct settings_manager_entry
 {
-	char* Name;
-	char* Data;
+	char* name;
+	char* data;
 
 	struct settings_manager_entry* next;
 };
@@ -12,7 +12,7 @@ struct settings_manager_entry
 typedef struct settings_manager_entry settingsEntry;
 
 void initializeSettingsManager();
-const char* settingsExecuteLine(const char* Line);
-const char* settingsReadValue(const char* Name);
+unsigned char settingsExecuteLine(char const* line);
+const char* settingsReadValue(char const* name, char const* defaultValue);
 
 #endif //_SETTINGS_MANAGER_DEF_H_

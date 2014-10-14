@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="20" version="2.0">
+<workbenchAdvisor/>
+<window height="744" maximized="true" width="1024" x="0" y="24">
+<fastViewData fastViewLocation="1024"/>
+<intro standby="true"/>
+<perspectiveBar>
+<itemSize x="160"/>
+</perspectiveBar>
+<coolbarLayout>
+<coolItem id="group.file" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="164" y="28"/>
+<coolItem id="additions" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="46" y="28"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="74" y="28"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="38" y="28"/>
+<coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="group.nav" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="182" y="28"/>
+<coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.cdt.make.editor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="group.help" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
+</coolbarLayout>
+<page aggregateWorkingSetId="Aggregate for window 1413232917433" focus="true" label="Workspace - Resource">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
+<part id="12"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor id="org.eclipse.cdt.make.editor" name="Makefile" partName="Makefile" path="/home/blake/Dropbox/Current/Dawn/Kernel/Makefile" title="Makefile" tooltip="Kernel/Makefile" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/Makefile"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="562" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="debug.c" partName="debug.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/debug/debug.c" title="debug.c" tooltip="Kernel/all/debug/debug.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/debug/debug.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="197" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="debug.h" partName="debug.h" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/debug/debug.h" title="debug.h" tooltip="Kernel/all/debug/debug.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/debug/debug.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="13" selectionOffset="72" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ia32_syscall.c" partName="ia32_syscall.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/arch/ia32/syscall/ia32_syscall.c" title="ia32_syscall.c" tooltip="Kernel/arch/ia32/syscall/ia32_syscall.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/arch/ia32/syscall/ia32_syscall.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="274" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stdio.h" partName="stdio.h" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/stdio.h" title="stdio.h" tooltip="Kernel/all/stdio.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/stdio.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stdlib.h" partName="stdlib.h" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/stdlib.h" title="stdlib.h" tooltip="Kernel/all/stdlib.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/stdlib.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="161" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="heap.c" partName="heap.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/heap/heap.c" title="heap.c" tooltip="Kernel/all/heap/heap.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/heap/heap.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3786" selectionTopPixel="2533"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="used_list.c" partName="used_list.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/arch/ia32/process/used_list.c" title="used_list.c" tooltip="Kernel/arch/ia32/process/used_list.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/arch/ia32/process/used_list.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="25" selectionOffset="619" selectionTopPixel="846"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="input.c" partName="input.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/input/input.c" title="input.c" tooltip="Kernel/all/input/input.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/input/input.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="135" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="system.h" partName="system.h" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/system/system.h" title="system.h" tooltip="Kernel/all/system/system.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/system/system.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="system.c" partName="system.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/system/system.c" title="system.c" tooltip="Kernel/all/system/system.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/system/system.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3154" selectionTopPixel="1804"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="settingsmanager.h" partName="settingsmanager.h" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/settings/settingsmanager.h" title="settingsmanager.h" tooltip="Kernel/all/settings/settingsmanager.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/settings/settingsmanager.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="269" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="settingsmanager.c" partName="settingsmanager.c" path="/home/blake/Dropbox/Current/Dawn/Kernel/all/settings/settingsmanager.c" title="settingsmanager.c" tooltip="Kernel/all/settings/settingsmanager.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Kernel/all/settings/settingsmanager.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1104" selectionTopPixel="493"/>
+</editor>
+</editors>
+<views>
+<view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
+<viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+</view>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="org.eclipse.cdt.ui.pdomSearchViewPage" definitionColumnWidth="150" locationColumnWidth="300" matchColumnWidth="300" org.eclipse.search.lastActivation="3" org.eclipse.search.resultpage.layout="2" showEnclosingDefinitions="true"/>
+<view IMemento.internal.id="org.eclipse.search.text.FileSearchResultPage" org.eclipse.search.lastActivation="4" org.eclipse.search.resultpage.layout="2" org.eclipse.search.resultpage.limit="1000" org.eclipse.search.resultpage.sorting="2"/>
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+</viewState>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.internal.introview" partName="Welcome">
+<viewState>
+<presentation currentPage="root" restore="true"/>
+<standbyPart/>
+</viewState>
+</view>
+<view id="org.eclipse.ui.views.TaskList" partName="Tasks">
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.completionField" categoryGroup="none" markerContentGenerator="org.eclipse.ui.ide.tasksGenerator" partName="Tasks">
+<columnWidths org.eclipse.ui.ide.completionField="40" org.eclipse.ui.ide.descriptionField="250" org.eclipse.ui.ide.locationField="75" org.eclipse.ui.ide.markerType="266" org.eclipse.ui.ide.pathField="100" org.eclipse.ui.ide.priorityField="25" org.eclipse.ui.ide.resourceField="75"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.completionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.priorityField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.descriptionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
+</viewState>
+</view>
+<view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
+<viewState/>
+</view>
+</views>
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.eclipse.ui.resourcePerspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
+<alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
+<show_view_action id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<show_view_action id="org.eclipse.ui.views.BookmarkView"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<show_view_action id="org.eclipse.ui.views.ProblemView"/>
+<show_view_action id="org.eclipse.ui.views.ProgressView"/>
+<show_view_action id="org.eclipse.ui.views.TaskList"/>
+<show_view_action id="org.eclipse.ant.ui.views.AntView"/>
+<show_view_action id="org.eclipse.pde.runtime.LogView"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.folder"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.file"/>
+<new_wizard_action id="org.eclipse.ui.editors.wizards.UntitledTextFileWizard"/>
+<perspective_action id="com.android.ide.eclipse.ddms.Perspective"/>
+<perspective_action id="org.eclipse.cdt.ui.CPerspective"/>
+<perspective_action id="org.eclipse.jdt.ui.JavaPerspective"/>
+<perspective_action id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+<perspective_action id="org.eclipse.team.cvs.ui.cvsPerspective"/>
+<perspective_action id="org.eclipse.team.ui.TeamSynchronizingPerspective"/>
+<perspective_action id="org.eclipse.wst.xml.ui.perspective"/>
+<hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<view id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
+<view id="org.eclipse.ui.views.TaskList"/>
+<view id="org.eclipse.ui.internal.introview"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="topLeft">
+<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
+<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<page content="org.eclipse.team.ccvs.ui.RepositoriesView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@2872d60b" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="topLeft">
+<folder activePageID="org.eclipse.search.ui.views.SearchView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.internal.introview" label="Welcome"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.25940594" ratioLeft="262" ratioRight="748" relationship="2" relative="topLeft"/>
+<info folder="true" part="bottomRight" ratio="0.6586151" ratioLeft="409" ratioRight="212" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.TaskList" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
+<page content="org.eclipse.team.ui.GenericHistoryView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="bottomLeft" ratio="0.49919486" ratioLeft="310" ratioRight="311" relationship="4" relative="topLeft">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/debug/debug.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/heap/heap.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/arch/ia32/process/used_list.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/input/input.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/arch/ia32/screen/screen.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/terminal/kterminal.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/terminal/kterminal.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/system/system.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/system/system.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/settings/settingsmanager.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/all/settings/settingsmanager.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Kernel/arch/ia32/mm/virt_mm.c"/>
+</editors>
+<item historyLabel="heap.c" index="1">
+<position info="not_deleted" x="3753" y="0"/>
+</item>
+<item historyLabel="used_list.c" index="2">
+<position info="not_deleted" x="619" y="25"/>
+</item>
+<item historyLabel="input.c" index="3">
+<position info="not_deleted" x="135" y="0"/>
+</item>
+<item historyLabel="heap.c" index="1">
+<position info="not_deleted" x="3701" y="0"/>
+</item>
+<item historyLabel="screen.c" index="4">
+<position info="not_deleted" x="382" y="62"/>
+</item>
+<item historyLabel="kterminal.h" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="kterminal.c" index="6">
+<position info="not_deleted" x="3045" y="1"/>
+</item>
+<item historyLabel="kterminal.h" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="screen.c" index="4">
+<position info="not_deleted" x="382" y="62"/>
+</item>
+<item historyLabel="heap.c" index="1">
+<position info="not_deleted" x="3701" y="0"/>
+</item>
+<item historyLabel="input.c" index="3">
+<position info="not_deleted" x="135" y="0"/>
+</item>
+<item historyLabel="heap.c" index="1">
+<position info="not_deleted" x="5120" y="0"/>
+</item>
+<item historyLabel="system.h" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="810" y="0"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="3662" y="0"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="debug.c" index="0">
+<position info="not_deleted" x="569" y="17"/>
+</item>
+<item historyLabel="debug.c" index="0">
+<position info="not_deleted" x="612" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="578" y="17"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="627" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="1227" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="2712" y="17"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="2768" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="2769" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="2938" y="17"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="2987" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="3132" y="0"/>
+</item>
+<item historyLabel="system.c" index="8">
+<position info="not_deleted" x="3154" y="0"/>
+</item>
+<item historyLabel="heap.c" index="1">
+<position info="not_deleted" x="5120" y="0"/>
+</item>
+<item historyLabel="heap.c" index="1">
+<position info="not_deleted" x="3786" y="0"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="3113" y="0"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="121" y="0"/>
+</item>
+<item historyLabel="virt_mm.c" index="11">
+<position info="not_deleted" x="5208" y="90"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="121" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="3116" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="3864" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="3097" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="2431" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="1152" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="921" y="0"/>
+</item>
+<item historyLabel="settingsmanager.h" index="9">
+<position info="not_deleted" x="269" y="0"/>
+</item>
+<item historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="921" y="0"/>
+</item>
+<item historyLabel="debug.c" index="0">
+<position info="not_deleted" x="282" y="19"/>
+</item>
+<item historyLabel="debug.c" index="0">
+<position info="not_deleted" x="197" y="0"/>
+</item>
+<item active="true" historyLabel="settingsmanager.c" index="10">
+<position info="not_deleted" x="810" y="5"/>
+</item>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="virt_mm.c" tooltip="Kernel/arch/ia32/mm/virt_mm.c">
+<persistable path="/Kernel/arch/ia32/mm/virt_mm.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="settingsmanager.c" tooltip="Kernel/all/settings/settingsmanager.c">
+<persistable path="/Kernel/all/settings/settingsmanager.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="settingsmanager.h" tooltip="Kernel/all/settings/settingsmanager.h">
+<persistable path="/Kernel/all/settings/settingsmanager.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system.c" tooltip="Kernel/all/system/system.c">
+<persistable path="/Kernel/all/system/system.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system.h" tooltip="Kernel/all/system/system.h">
+<persistable path="/Kernel/all/system/system.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="kterminal.c" tooltip="Kernel/all/terminal/kterminal.c">
+<persistable path="/Kernel/all/terminal/kterminal.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="kterminal.h" tooltip="Kernel/all/terminal/kterminal.h">
+<persistable path="/Kernel/all/terminal/kterminal.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="screen.c" tooltip="Kernel/arch/ia32/screen/screen.c">
+<persistable path="/Kernel/arch/ia32/screen/screen.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="input.c" tooltip="Kernel/all/input/input.c">
+<persistable path="/Kernel/all/input/input.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="used_list.c" tooltip="Kernel/arch/ia32/process/used_list.c">
+<persistable path="/Kernel/arch/ia32/process/used_list.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="heap.c" tooltip="Kernel/all/heap/heap.c">
+<persistable path="/Kernel/all/heap/heap.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stdlib.h" tooltip="Kernel/all/stdlib.h">
+<persistable path="/Kernel/all/stdlib.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stdio.h" tooltip="Kernel/all/stdio.h">
+<persistable path="/Kernel/all/stdio.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ia32_syscall.c" tooltip="Kernel/arch/ia32/syscall/ia32_syscall.c">
+<persistable path="/Kernel/arch/ia32/syscall/ia32_syscall.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tss.c" tooltip="Kernel/arch/ia32/sources/tss/tss.c">
+<persistable path="/Kernel/arch/ia32/sources/tss/tss.c"/>
+</file>
+</mruList>
+</workbench>

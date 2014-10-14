@@ -3,32 +3,34 @@
 #include <va_list.h>
 
 void printf(const char * fmt, ...) {
-        static char buf [2096]; //Maximum size to be printed is 1024 chars.
-        va_list args;
 
-        int i;
+	static char buf[2096]; //Maximum size to be printed is 1024 chars.
+	va_list args;
 
-        va_start(args, fmt);
+	int i;
 
-        i = vsprintf(buf,fmt,args);
+	va_start(args, fmt);
 
-        va_end(args);
+	i = vsprintf(buf, fmt, args);
 
-        buf[i] = '\0';
+	va_end(args);
 
-        prints(buf);
+	buf[i] = '\0';
+
+	prints(buf);
 }
 
 void printFormattedStringToBuffer(char* buffer, const char * fmt, ...) {
-        va_list args;
 
-        int i;
+	va_list args;
 
-        va_start(args, fmt);
+	int i;
 
-        i = vsprintf(buffer,fmt,args);
+	va_start(args, fmt);
 
-        va_end(args);
+	i = vsprintf(buffer, fmt, args);
 
-        buffer[i] = '\0';
+	va_end(args);
+
+	buffer[i] = '\0';
 }

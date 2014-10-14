@@ -7,34 +7,32 @@
 ///TODO: Rewrite the line evaluator so its more robust
 
 /*
-	GLOBAL VARIABLES
-*/
+ GLOBAL VARIABLES
+ */
 
 settingsEntry* settingsListStart = 0;
 
 /*
-	FUNCTION DEFINITIONS
-*/
+ FUNCTION DEFINITIONS
+ */
 
-settingsEntry* settingsGetEntry(const char* Name);
-void settingsCreateEntry(const char* Name, const char* Data);
-void parseConfigFile(const char* Filename);
-void settingsModifyEntry(settingsEntry* Entry, const char* newData);
+settingsEntry* settingsGetEntry(const char* name);
+void settingsCreateEntry(const char* name, const char* data);
+void parseConfigFile(const char* filePath);
+void settingsModifyEntry(settingsEntry* entry, const char* newData);
 
 /*
-	PUBLIC FUNCTIONS
+ PUBLIC FUNCTIONS
  */
 
 /**
  * Initializes the settings manager
  * Loads base settings from /system/root/kernel.config
- **/
-void initializeSettingsManager()
-{
+ */
+void initializeSettingsManager() {
+
 	DEBUG_PRINT("Initialized settings manager\n");
-
 	settingsListStart = 0;
-
 	parseConfigFile("/system/system.config");
 	parseConfigFile("/system/kconf.config");
 }
@@ -43,65 +41,54 @@ void initializeSettingsManager()
  * Executes a line, like a query and returns any results there may be
  */
 
-const char* settingsExecuteLine(const char* Line)
-{
+unsigned char settingsExecuteLine(const char* line) {
 
-	size_t length = strlen(Line);
+	size_t length = strlen(line);
+	const char* firstSpace = strchr(line, ' ');
 
-	const char* FirstSpace = strchr(Line, ' ');
-
-	if (FirstSpace == 0)
-	{
+	if (firstSpace == 0) {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
-		return "FAIL";
+		return 0;
 	}
 
-	const char* SecondSpace = strchr(FirstSpace + 1, ' ');
+	const char* secondSpace = strchr(firstSpace + 1, ' ');
 
-	if (SecondSpace == 0)
-	{
+	if (secondSpace == 0) {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
-		return "FAIL";
+		return 0;
 	}
 
-	const char* End = Line + length;
+	const char* end = line + length;
 
-
-	if (*(FirstSpace + 1) != '=')
-	{
+	if (*(firstSpace + 1) != '=') {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
-		return "FAIL";
+		return 0;
 	}
 
-	if (FirstSpace - Line == 0)
-	{
+	if (firstSpace - line == 0) {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
-		return "FAIL";
+		return 0;
 	}
 
-	if (End - SecondSpace == 0)
-	{
+	if (end - secondSpace == 0) {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
-		return "FAIL";
+		return 0;
 	}
 
 	char* Name = malloc(length + 2);
-	memcpy(Name, Line, FirstSpace - Line);
-	Name[FirstSpace - Line] = '\0';
+	memcpy(Name, line, firstSpace - line);
+	Name[firstSpace - line] = '\0';
 
 	char* Data = malloc(length + 2);
-	memcpy(Data, SecondSpace + 1, End - SecondSpace - 1);
-	Data[End - SecondSpace - 1] = '\0';
+	memcpy(Data, secondSpace + 1, end - secondSpace - 1);
+	Data[end - secondSpace - 1] = '\0';
 
 	settingsEntry* oldEntry = settingsGetEntry(Name);
 
-	if (oldEntry == 0)
-	{
+	if (oldEntry == 0) {
 		//Create a new entry
 		settingsCreateEntry(Name, Data);
-	}
-	else
-	{
+	} else {
 		//Reuse a old entry
 		settingsModifyEntry(oldEntry, Data);
 	}
@@ -109,68 +96,55 @@ const char* settingsExecuteLine(const char* Line)
 	free(Name);
 	free(Data);
 
-	return "FINE";
+	return 1;
 }
 
 /**
  * Reads the value of the specified settings entry
  **/
 
-const char* settingsReadValue(const char* Name)
-{
-	settingsEntry* entry = settingsGetEntry(Name);
+const char* settingsReadValue(char const* name, char const* defaultValue) {
 
-	if (entry == 0)
-	{
-		return "";
-	}
-	else
-	{
-		return entry->Data;
-	}
+	settingsEntry* entry = settingsGetEntry(name);
+	return entry ? entry->data : defaultValue;
 }
 
 /*
-	PRIVATE FUNCTIONS
+ PRIVATE FUNCTIONS
  */
 
-void parseConfigFile(const char* Filename)
-{
-    DEBUG_PRINT("Parsing configuration file %s\n", Filename);
+void parseConfigFile(const char* filePath) {
 
-	fs_node_t* cfgNode = evaluatePath(Filename, init_vfs());
+	DEBUG_PRINT("Parsing configuration file %s\n", filePath);
 
-	if (cfgNode == 0) return;
+	fs_node_t* cfgNode = evaluatePath(filePath, init_vfs());
 
-	char cfgBuffer[1024];
-	memset(cfgBuffer, 0, 1024);
+	if (cfgNode == 0)
+		return;
+
+	char* cfgBuffer = malloc(4096);
+	memset(cfgBuffer, 0, 4096);
 
 	size_t length = cfgNode->length;
 	size_t current = 0;
 	size_t iter = 0;
 
-
 	open_fs(cfgNode);
 
+	while (1) {
 
-	while (1)
-	{
-		if (current >= cfgNode->length)
+		if (current >= cfgNode->length) {
 			break;
+		}
 
 		read_fs(cfgNode, current, 1, (uint8_t*) cfgBuffer + iter);
 
-		if (*(cfgBuffer + iter) == '\n')
-		{
+		if (*(cfgBuffer + iter) == '\n') {
 			*(cfgBuffer + iter) = '\0';
 			iter = 0;
-
 			settingsExecuteLine(cfgBuffer);
-
-			memset(cfgBuffer, 0, 1024);
-		}
-		else
-		{
+			memset(cfgBuffer, 0, 4096);
+		} else {
 			iter++;
 		}
 
@@ -178,19 +152,19 @@ void parseConfigFile(const char* Filename)
 	}
 
 	close_fs(cfgNode);
+
+	free(cfgBuffer);
 }
 
-settingsEntry* settingsGetEntry(const char* Name)
-{
-	if (settingsListStart != 0)
-	{
+settingsEntry* settingsGetEntry(const char* name) {
+
+	if (settingsListStart != 0) {
+
 		settingsEntry* iter = settingsListStart;
 
-		while (iter->next != 0)
-		{
+		while (iter->next != 0) {
 
-			if (strcmp(Name, iter->Name) == 0)
-			{
+			if (strcmp(name, iter->name) == 0) {
 				break;
 			}
 
@@ -198,8 +172,7 @@ settingsEntry* settingsGetEntry(const char* Name)
 		}
 
 		//Double check
-		if (strcmp(Name, iter->Name) != 0)
-		{
+		if (strcmp(name, iter->name) != 0) {
 			return 0;
 		}
 
@@ -210,44 +183,38 @@ settingsEntry* settingsGetEntry(const char* Name)
 	return 0;
 }
 
-settingsEntry* settingsGetLastEntry()
-{
-	if (settingsListStart != 0)
-	{
+settingsEntry* settingsGetLastEntry() {
+
+	if (settingsListStart != 0) {
+
 		settingsEntry* iter = settingsListStart;
 
-		while (iter->next != 0)
-		{
+		while (iter->next != 0) {
 			iter = iter->next;
 		}
 
 		return iter;
-
 	}
 
 	return 0;
 }
 
-void settingsModifyEntry(settingsEntry* Entry, const char* newData)
-{
-	if (Entry->Data != 0)
-	{
-		free(Entry->Data);
+void settingsModifyEntry(settingsEntry* entry, const char* newData) {
+
+	if (entry->data != 0) {
+		free(entry->data);
 	}
 
-	Entry->Data = malloc(strlen(newData) + 1);
-	strcpy(Entry->Data, newData);
-
-	return;
+	entry->data = malloc(strlen(newData) + 1);
+	strcpy(entry->data, newData);
 }
 
-void settingsCreateEntry(const char* Name, const char* Data)
-{
-	settingsEntry* entryCheck = settingsGetEntry(Name);
+void settingsCreateEntry(const char* name, const char* data) {
 
-	if (entryCheck != 0)
-	{
-		settingsModifyEntry(entryCheck, Data);
+	settingsEntry* entryCheck = settingsGetEntry(name);
+
+	if (entryCheck != 0) {
+		settingsModifyEntry(entryCheck, data);
 		return;
 	}
 
@@ -256,12 +223,12 @@ void settingsCreateEntry(const char* Name, const char* Data)
 	memset(newEntry, 0, sizeof(settingsEntry));
 
 	//Allocate memory for the settings entry name and data
-	newEntry->Name = malloc(strlen(Name) + 1);
-	newEntry->Data = malloc(strlen(Data) + 1);
+	newEntry->name = malloc(strlen(name) + 1);
+	newEntry->data = malloc(strlen(data) + 1);
 
 	//Copy the name and data
-	strcpy(newEntry->Name, Name);
-	strcpy(newEntry->Data, Data);
+	strcpy(newEntry->name, name);
+	strcpy(newEntry->data, data);
 
 	//Double check the next entry is pointed to null
 	newEntry->next = 0;
@@ -269,16 +236,11 @@ void settingsCreateEntry(const char* Name, const char* Data)
 	//Find the last entry
 	settingsEntry* last = settingsGetLastEntry();
 
-	if (last != 0)
-	{
+	if (last != 0) {
 		//Tack this entry on to the end
 		last->next = newEntry;
-	}
-	else
-	{
+	} else {
 		//Set settingsListStart to this new entry
 		settingsListStart = newEntry;
 	}
-
-	return;
 }

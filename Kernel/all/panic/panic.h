@@ -3,7 +3,7 @@
 #include <common.h>
 
 #define PANIC(msg) panic(msg, __FILE__, __LINE__);
-#define ASSERT(b) ((b) ? (void)0 : panic_assert(__FILE__, __LINE__, #b))
+#define ASSERT(b,msg) ((b) ? ((void)0) : panic_assert(__FILE__, __LINE__, msg))
 
 void panic(const char *message, const char *file, uint32_t line);
 void panic_assert(const char *file, uint32_t line, const char *desc);

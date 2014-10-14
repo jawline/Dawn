@@ -13,9 +13,10 @@ MEM_LOC heapAllocateMemory(size_t size, heap_t* heap);
 
 size_t mapInitialHeap(MEM_LOC start) {
 
-	MEM_LOC iter = start;
+	MEM_LOC iter;
 
-	for (iter; iter <= start + PAGE_SIZE * HEAP_BASE_PAGES; iter += PAGE_SIZE) {
+	for (iter = start; iter <= start + PAGE_SIZE * HEAP_BASE_PAGES; iter +=
+			PAGE_SIZE) {
 
 		map(iter, allocateFrameForProcess(getCurrentProcess()),
 				MEMORY_RESTRICTED_ACCESS);
@@ -103,22 +104,28 @@ MEM_LOC heapAllocateMemory(size_t size, heap_t* heap) {
 
 	heap_entry_t* iterator = (heap_entry_t*) heap->heap_location;
 
+	if (!iterator) {
+		PANIC("Cannot allocate memory, invalid heap");
+	}
+
 	//Loop through all heap entrys
-	while (iterator != 0) {
+	while (1) {
+
 		//If it isn't used and its bigger then the size requested
-		if ((iterator->used == 0) && (iterator->size >= size)) {
+		if (!iterator->used && iterator->size >= size) {
+
 			heap_entry_t* used_block = iterator;
-
 			used_block->used = 1;
-
 			size_t remainder = used_block->size - size; //How much is left over
 
 			if (remainder > sizeof(heap_entry_t) + MINIMUM_BLOCK_SIZE) {
+
 				//Create a new entry and reduce the size of the original
 
 				//The new entry
 				heap_entry_t* new_block = ((MEM_LOC) used_block)
 						+ sizeof(heap_entry_t) + size;
+
 				memset(new_block, 0, sizeof(heap_entry_t));
 				new_block->magic = HEAP_MAGIC;
 				new_block->size = remainder - sizeof(heap_entry_t);
@@ -128,26 +135,15 @@ MEM_LOC heapAllocateMemory(size_t size, heap_t* heap) {
 				//The used entry
 				used_block->size = size;
 				used_block->next = new_block;
-			} else {
 			}
 
 			MEM_LOC returnLocation = used_block;
 			returnLocation += sizeof(heap_entry_t);
 
 			return returnLocation;
-		} else {
 		}
 
-		iterator = iterator->next;
-
-	}
-
-	//This bit of code sets iterator to the last valid entry on the heap
-	iterator = (heap_entry_t*) heap->heap_location;
-
-	for (;;) {
-
-		if (iterator->next == 0) {
+		if (!iterator->next) {
 			break;
 		}
 
@@ -158,43 +154,43 @@ MEM_LOC heapAllocateMemory(size_t size, heap_t* heap) {
 	MEM_LOC heap_end = iterator;
 	heap_end += sizeof(heap_entry_t) + iterator->size;
 
-	//Expands the heap by x pages
-	expandHeap(iterator, heap_end, 2);
+	expandHeap(iterator, heap_end, (size / PAGE_SIZE) + 1);
 
 	//Recall this function
 	return heapAllocateMemory(size, heap);
 }
 
 /**
- * @brief If there are 2 unused entrys next to each other, this function turns them into one entry
+ * Merge this entry with the entry to the right
+ */
+void mergeRight(heap_entry_t* entry) {
+	entry->size = entry->size + entry->next->size + sizeof(heap_entry_t);
+	entry->next = entry->next->next;
+}
+
+/**
+ * Merge adjacent unused entries together
  */
 void unifyHeapEntry(heap_entry_t* entry) {
 
 	while (entry->prev && !entry->prev->used) {
 		entry = entry->prev;
+		mergeRight(entry);
 	}
 
 	while (entry->next && !entry->next->used) {
-
-		//Can unify right
-		heap_entry_t* engulfed = entry->next;
-
-		//Add the two heap elements sizes together
-		entry->size = entry->size + engulfed->size
-				+ sizeof(heap_entry_t);
-
-		entry->next = engulfed->next;
+		mergeRight(entry);
 	}
 
 }
 
 void printHeap(heap_t* heap) {
+
 	heap_entry_t* iter = heap->heap_location;
 
 	while (iter) {
-
-		printf("heap_entry 0x%x, used: %i size: 0x%x\n", iter,
-				iter->used, iter->size);
+		printf("heap_entry 0x%x, used: %i size: 0x%x\n", iter, iter->used,
+				iter->size);
 		iter = iter->next;
 	}
 
@@ -218,6 +214,5 @@ void heapFreeMemory(MEM_LOC address, heap_t* heap) {
 	} else {
 		specificEntry->used = 0;
 		unifyHeapEntry(specificEntry);
-		//printHeap(heap);
 	}
 }

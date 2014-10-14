@@ -14,6 +14,7 @@ void schedulerBlockMe();
 process_t* getCurrentProcess();
 int schedulerNumProcesses();
 void schedulerKillCurrentProcess();
+void schedulerYield();
 process_t* schedulerReturnProcess(unsigned int iter);
 process_t* schedulerGetProcessFromPid(unsigned int pid);
 

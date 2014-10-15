@@ -1,11 +1,10 @@
 #include <stack/kstack.h>
 
-void switchToUserMode()
-{
+void switchToUserMode() {
 
-    setKernelStack(KERNEL_STACK_START);
+	setKernelStack(KERNEL_STACK_START);
 
-    __asm__ volatile("  \
+	__asm__ volatile("  \
       cli; \
       mov $0x23, %ax; \
       mov %ax, %ds; \

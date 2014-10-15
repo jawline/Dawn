@@ -11,39 +11,34 @@
 #include <scheduler/process_scheduler.h>
 #include <fs/vfs.h>
 
-typedef int (*entry_point) (int argc, void* argv);
+typedef int (*entry_point)(int argc, void* argv);
 
-unsigned char mapMemoryUsingHeader(e32_pheader program_header)
-{
+unsigned char mapMemoryUsingHeader(e32_pheader program_header) {
 
 	//If the program header is a loadable object, map it into memory
-	if (program_header.p_type == PT_LOAD)
-	{
+	if (program_header.p_type == PT_LOAD) {
 
 		MEM_LOC v_addr_start = program_header.p_vaddr;
 		MEM_LOC v_addr_end = v_addr_start + program_header.p_memsz;
 
 		MEM_LOC iterator = v_addr_start;
 
-		while (iterator < v_addr_end)
-		{
+		while (iterator < v_addr_end) {
 			map(iterator, allocateFrameForProcess(getCurrentProcess()), 0);
 			iterator += PAGE_SIZE;
 		}
-	} else
-	{
+	} else {
 	}
 
 	return 1;
 }
 
-unsigned char loadToMemoryUsingHeader(e32_pheader program_header, fs_node_t* Node)
-{
+unsigned char loadToMemoryUsingHeader(e32_pheader program_header,
+		fs_node_t* Node) {
 	//If the program header is a loadable object, map it into memory
-	if (program_header.p_type == PT_LOAD)
-	{
-		if (read_fs(Node, program_header.p_offset, program_header.p_filesz, (uint8_t*)program_header.p_vaddr) != program_header.p_filesz)
-		{
+	if (program_header.p_type == PT_LOAD) {
+		if (read_fs(Node, program_header.p_offset, program_header.p_filesz,
+				(uint8_t*) program_header.p_vaddr) != program_header.p_filesz) {
 			DEBUG_PRINT("Error bad read\n");
 			return 0;
 		}
@@ -53,8 +48,7 @@ unsigned char loadToMemoryUsingHeader(e32_pheader program_header, fs_node_t* Nod
 }
 
 //NOTE: This function relies on Node being readable (read_fs functioning properly)
-int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode)
-{
+int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode) {
 	DEBUG_PRINT("Loading program\n");
 
 	//Read the ELF info
@@ -67,32 +61,27 @@ int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode)
 	e32_header head = fileInfo->m_mainHeader;
 
 	//Is it a executable?
-	if (head.e_type != ELF_EXE)
-	{
+	if (head.e_type != ELF_EXE) {
 		return LOAD_ERROR_NOT_EXE;
 	}
 
 	//Valid header?
-	if (elfHeaderValid(head) != 1)
-	{
+	if (elfHeaderValid(head) != 1) {
 		return LOAD_ERROR_BAD_HEAD;
 	}
 
 	//32bit executable?
-	if (getElfHeaderClass(head) != ELF_CLASS_32)
-	{
+	if (getElfHeaderClass(head) != ELF_CLASS_32) {
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
 	//Version correct?
-	if (getElfHeaderVersion(head) != ELF_VERSION_CURRENT)
-	{
+	if (getElfHeaderVersion(head) != ELF_VERSION_CURRENT) {
 		return LOAD_ERROR_BAD_HEAD;
 	}
 
 	//ELF_DATA_LSB + ELF_CLASS_32 = IA32 = 8086 compatable
-	if (getElfHeaderData(head) != ELF_DATA_LSB)
-	{
+	if (getElfHeaderData(head) != ELF_DATA_LSB) {
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
@@ -100,13 +89,12 @@ int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode)
 
 	//Iterate through every program header
 	unsigned int header_iter = 0;
-	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders; ++header_iter)
-	{
+	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders;
+			++header_iter) {
 
 		e32_pheader program_header = fileInfo->m_programHeaders[header_iter];
 
-		if (mapMemoryUsingHeader(program_header) != 1)
-		{
+		if (mapMemoryUsingHeader(program_header) != 1) {
 			DEBUG_PRINT("Error mapping program header %i\n", header_iter);
 			return LOAD_ERROR_BAD_MAP;
 		}
@@ -114,12 +102,11 @@ int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode)
 	}
 
 	//Load the object blocks that where just mapped
-	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders; ++header_iter)
-	{
+	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders;
+			++header_iter) {
 
 		e32_pheader program_header = fileInfo->m_programHeaders[header_iter];
-		if (loadToMemoryUsingHeader(program_header, Node) != 1)
-		{
+		if (loadToMemoryUsingHeader(program_header, Node) != 1) {
 			DEBUG_PRINT("Error unable to load header %i\n", header_iter);
 			return LOAD_ERROR_BAD_LOAD;
 		}
@@ -133,12 +120,12 @@ int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode)
 	freeElfFileInfo(fileInfo);
 	free(fileInfo);
 
-	if (usermode == 1)
-	{
+	if (usermode == 1) {
 		switchToUserMode();
 	}
 
 	program_entry_ponter(0, 0);
-
-	return 0; //Should never really get here
+	schedulerKillCurrentProcess();
+	PANIC("I should never get here");
+	return 0;
 }

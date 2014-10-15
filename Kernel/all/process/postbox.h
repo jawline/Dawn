@@ -14,4 +14,8 @@ typedef struct {
 
 typedef struct process_postbox_message postbox_message_entry;
 
+process_message postboxPeek(process_postbox* pb);
+process_message postboxTop(process_postbox* pb);
+void postboxPush(process_postbox* pb, process_message msg);
+
 #endif //_PROCESS_POSTBOX_DEF_H

@@ -1,8 +1,7 @@
+#include <process/process.h>
 #include <stdlib.h>
 #include <panic/panic.h>
 #include <mm/virt_mm.h>
-#include <mm/pagedir.h>
-#include <messages/messages.h>
 #include <debug/debug.h>
 #include <stack/kstack.h>
 #include <scheduler/process_scheduler.h>
@@ -11,10 +10,14 @@
 #include <loaders/executable_loader.h>
 #include <interrupts/interrupts.h>
 #include <fs/vfs.h>
+#include <messages/messages.h>
 
+extern MEM_LOC read_eip();
 static process_t* kernel_proc = 0;
 static unsigned int next_pid = 0;
 extern terminal_t* g_kernelTerminal;
+
+static const int cProcessSwapMagic = 0x12345;
 
 #define PROCESS_HEAP_START 0xA0000000
 
@@ -31,7 +34,9 @@ typedef struct {
 	fs_node_t* fromWhere;
 
 	/**
-	 * Should the application be run in systems software mode (needs access to privilidged instructions) or user mode (Limited access, better control by OS, Safer)
+	 * Should the application be run in systems software mode (needs access
+	 * to privileged instructions) or user mode (Limited access, better control
+	 * by OS, safer)
 	 */
 	int userMode;
 
@@ -52,10 +57,11 @@ void freeOrders(new_process_orders_t* orders) {
 }
 
 /**
- * @brief Acts as a entry point for new applications
+ * Acts as a entry point for new OS processes
  */
-void new_process_entry() {
-	process_message msg = postbox_top(&getCurrentProcess()->processPostbox);
+void newProcessEntryPoint() {
+
+	process_message msg = postboxTop(&getCurrentProcess()->processPostbox);
 
 	if (msg.ID == LOAD_MESSAGE) {
 		int userMode = 0;
@@ -86,8 +92,10 @@ void new_process_entry() {
 
 process_t* initializeKernelProcess() {
 	disableInterrupts();
-	if (kernel_proc != 0)
+
+	if (kernel_proc != 0) {
 		return kernel_proc;
+	}
 
 	process_t* ret = (process_t*) malloc(sizeof(process_t));
 	memset(ret, 0, sizeof(process_t));
@@ -97,22 +105,18 @@ process_t* initializeKernelProcess() {
 
 	extern page_directory_t* kernel_pagedir;
 	ret->pageDir = kernel_pagedir;
-
 	ret->executionDirectory = init_vfs();
-
 	kernel_proc = ret;
-
 	initializeUsedList(kernel_proc);
-
 	ret->processTerminal = g_kernelTerminal;
 
 	return ret;
 }
 
 void freeProcess(process_t* process) {
+
 	//This kills the used list and frees every used page
 	while (process->usedListLocation != 0) {
-
 		MEM_LOC top = usedListTop(process);
 		freeFrame(top);
 		usedListRemove(process, top);
@@ -122,18 +126,11 @@ void freeProcess(process_t* process) {
 		free(process->usedListRoot);
 	}
 
-	//Empty the post box
 	while (process->processPostbox.first != 0) {
-
-		postbox_top(&process->processPostbox);
-
+		postboxTop(&process->processPostbox);
 	}
 
 	free(process);
-}
-
-void setProcessExecutionDirectory(process_t* proc, fs_node_t* node) {
-	proc->executionDirectory = node;
 }
 
 int kfork() {
@@ -151,7 +148,7 @@ int kfork() {
 	memset(new_process, 0, sizeof(process_t));
 
 	//Give it a generic name fo-now
-	strcpy(new_process->name, "ChildProcess");
+	strcpy(new_process->name, "Forklet");
 
 	new_process->processTerminal = parent->processTerminal;
 	initializeUsedList(new_process);
@@ -177,20 +174,17 @@ int kfork() {
 	if (parent->id == getCurrentProcess()->id) {
 		__asm__ volatile("mov %%esp, %0" : "=r"(esp));
 		__asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
-
 		new_process->esp = esp;
 		new_process->ebp = ebp;
 		new_process->eip = current_eip;
-
 		schedulerAdd(new_process);
-
 		return 0; //Return 0 - Parent
 	} else {
 		return 1; //Return 1 - Child
 	}
 }
 
-int createNewProcess(const char* Filename, fs_node_t* Where) {
+int createNewProcess(const char* filename, fs_node_t* where) {
 	uint32_t esp, ebp;
 
 	disableInterrupts();
@@ -228,7 +222,7 @@ int createNewProcess(const char* Filename, fs_node_t* Where) {
 	//Give it a page directory
 	new_process->pageDir = newprocesspd;
 
-	MEM_LOC current_eip = (MEM_LOC) new_process_entry;
+	MEM_LOC current_eip = (MEM_LOC) newProcessEntryPoint;
 
 	__asm__ volatile("mov %%esp, %0" : "=r"(esp));
 	__asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
@@ -240,23 +234,19 @@ int createNewProcess(const char* Filename, fs_node_t* Where) {
 	process_message InfomaticMessage;
 	InfomaticMessage.from_PID = getCurrentProcess()->id;
 	InfomaticMessage.ID = LOAD_MESSAGE;
-	InfomaticMessage.messageAdditionalData = (MEM_LOC) makeOrders(Filename,
-			Where);
+	InfomaticMessage.messageAdditionalData = (MEM_LOC) makeOrders(filename,
+			where);
 
-	postbox_add(&new_process->processPostbox, InfomaticMessage);
+	postboxPush(&new_process->processPostbox, InfomaticMessage);
 
 	schedulerAdd(new_process);
 
 	return 0; //Return 0 - Parent
 }
 
-void renameCurrentProcess(const char* Str) {
-	setProcessName(getCurrentProcess(), Str);
-}
+inline void switchProcess(process_t* from, process_t* to) {
 
-inline void switch_process(process_t* from, process_t* to) {
-	if (!from || !to)
-		return; //Invalid ptrs?
+	ASSERT(from && to, "from & to process have to be valid for switchProcess");
 	disableInterrupts();
 
 	uint32_t esp, ebp, eip;
@@ -266,9 +256,9 @@ inline void switch_process(process_t* from, process_t* to) {
 
 	eip = read_eip();
 
-	if (eip == 0x12345) //Just switched tasks?
-			{
-		return; //Return to whence you came!
+	if (eip == cProcessSwapMagic) {
+		//If this is triggered then we have just switched tasks so return
+		return;
 	}
 
 	from->eip = eip;
@@ -288,103 +278,9 @@ inline void switch_process(process_t* from, process_t* to) {
 		      mov %2, %%ebp; \
 		      mov %0, %%ecx; \
 		      mov %3, %%cr3; \
-		      mov $0x12345, %%eax; \
+		      mov %4, %%eax; \
 		      sti; \
-		      jmp *%%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
+		      jmp *%%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir), "r" (cProcessSwapMagic));
 
 	return;
-}
-
-//Jump to the next process
-inline void jump_process(process_t* to) {
-	if (!to)
-		return; //Invalid ptrs?
-	disableInterrupts();
-
-	uint32_t esp, ebp, eip;
-
-	eip = to->eip;
-	esp = to->esp;
-	ebp = to->ebp;
-
-	page_directory_t* pagedir = to->pageDir;
-
-	extern page_directory_t* current_pagedir;
-	current_pagedir = pagedir;
-
-	__asm__ volatile("cli; \
-		      mov %1, %%esp; \
-		      mov %2, %%ebp; \
-		      mov %0, %%ecx; \
-		      mov %3, %%cr3; \
-		      mov $0x12345, %%eax; \
-		      sti; \
-		      jmp *%%ecx;" :: "r" (eip), "r" (esp), "r" (ebp), "r" (pagedir));
-
-	return;
-}
-
-process_message postbox_top(process_postbox* pb) {
-	if (pb->first == 0) {
-		process_message ret;
-		ret.ID = -1; //-1 = No messages left to read
-		return ret;
-	}
-
-	postbox_message_entry* message = pb->first;
-
-	if (pb->first->next != 0) {
-		pb->first = message->next;
-	} else {
-		pb->first = 0;
-	}
-
-	process_message ret = message->data;
-	free(message);
-
-	return ret;
-}
-
-//Get the top message without removing it
-process_message postbox_peek(process_postbox* pb) {
-	if (pb->first == 0) {
-		process_message ret;
-		ret.ID = -1; //-1 = No messages left to read
-		return ret;
-	}
-
-	return pb->first->data;
-}
-
-void setProcessName(process_t* proc, const char* Name) {
-	strcpy(proc->name, Name);
-}
-
-void postbox_add(process_postbox* pb, process_message msg) {
-	if (pb->first == 0) {
-		//Create pb->first
-		postbox_message_entry* new_entry = malloc(sizeof(postbox_message_entry));
-		new_entry->data = msg;
-		new_entry->next = 0;
-
-		pb->first = new_entry;
-	} else {
-		//Add to the end of the list
-		postbox_message_entry* last = pb->first;
-
-		//Find the last entry
-		while (1) {
-			if (last->next == 0) {
-				break;
-			} else {
-				last = last->next;
-			}
-		}
-
-		postbox_message_entry* new_entry = malloc(sizeof(postbox_message_entry));
-		new_entry->data = msg;
-		new_entry->next = 0;
-
-		last->next = new_entry;
-	}
 }

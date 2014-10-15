@@ -42,7 +42,7 @@ void swapToProcess(scheduler_proc* scheduler_entry) {
 	list_current = scheduler_entry;
 	process_t* new_proc = list_current->process_pointer;
 	list_current->ticks_tell_die = _STD_NANO_;
-	switch_process(old_proc, new_proc);
+	switchProcess(old_proc, new_proc);
 }
 
 void schedulerYield() {
@@ -216,7 +216,7 @@ void schedulerGlobalMessage(process_message msg, unsigned int bit) {
 	while (1) {
 		//Test if this process wants to hear about this event
 		if (iter->process_pointer->postboxFlags & bit == bit) {
-			postbox_add(&iter->process_pointer->processPostbox, msg);
+			postboxPush(&iter->process_pointer->processPostbox, msg);
 
 		}
 

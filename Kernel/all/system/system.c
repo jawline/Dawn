@@ -42,7 +42,7 @@ void systemMainProcess() {
 		while (1) {
 
 			//Grab the top message
-			process_message pb_top = postbox_top(
+			process_message pb_top = postboxTop(
 					&getCurrentProcess()->processPostbox);
 
 			if (pb_top.ID != -1) {

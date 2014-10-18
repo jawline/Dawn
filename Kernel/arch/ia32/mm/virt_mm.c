@@ -298,7 +298,7 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8_t copy, process_t* process) {
 				temp_write_addr[i] = New_Frame | PAGE_PRESENT | PAGE_USER
 						| PAGE_WRITE;
 			} else {
-				temp_write_addr[i] == temp_read_addr[i];
+				temp_write_addr[i] = temp_read_addr[i];
 			}
 		} else {
 			temp_write_addr[i] = 0;

@@ -9,10 +9,6 @@
 #include <input/keyboard.h>
 #include <syscall/num.h>
 
-extern heap_t kernel_heap;
-
-extern MEM_LOC calculate_free_frames();
-
 extern unsigned char postboxHasNext();
 extern void postboxReadTop(process_message* Message);
 extern void postboxPopTop();

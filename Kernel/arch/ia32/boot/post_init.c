@@ -16,8 +16,6 @@
 #include <system/system.h>
 #include <interrupts/interrupts.h>
 
-extern heap_t kernel_heap;
-
 //The kernel callback for a keyboard event
 //Registered with the kernel input manager in void post_init(); with a register_input_listener(DEVICE_KEYBOARD) call
 void kernelInputCallback(uint32_t device, uint32_t main, void* additional) {
@@ -58,10 +56,6 @@ void kernelMouseCallback(uint32_t device, uint32_t main, void* additional) {
 	//Tell the scheduler to send the message to all processes with the INPUT_BIT flag set
 	schedulerGlobalMessage(da, INPUT_BIT);
 }
-
-//External links to the kernel page directory and kernel heap
-extern page_directory_t* kernel_pagedir;
-extern heap_t kernel_heap;
 
 int alive = 0;
 

@@ -65,9 +65,7 @@ void initializeHeap(heap_t* heap, MEM_LOC address) {
 void expandHeap(heap_entry_t* last_heap_entry, MEM_LOC heap_end,
 		size_t expansionSize) {
 
-	MEM_LOC iter = heap_end;
-
-	for (iter; iter <= heap_end + (PAGE_SIZE * expansionSize); iter +=
+	for (MEM_LOC iter = heap_end; iter <= heap_end + (PAGE_SIZE * expansionSize); iter +=
 			PAGE_SIZE) {
 		map(iter, allocateFrameForProcess(getCurrentProcess()),
 				MEMORY_RESTRICTED_ACCESS);

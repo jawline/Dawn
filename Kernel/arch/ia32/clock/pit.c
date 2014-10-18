@@ -1,13 +1,13 @@
 #include "pit.h"
+#include <clock/clock.h>
+#include <scheduler/scheduler.h>
 #include <interrupts/idt.h>
 #include <lib/io.h>
 
-extern long systemClockTicks;
-
 //Callback is called every time the PIT fires
 static idt_call_registers_t pitOnTickCallback(idt_call_registers_t regs) {
-	systemClockTicks++;
-	schedulerOnTick();
+
+	clockHandleTick();
 	return regs;
 }
 

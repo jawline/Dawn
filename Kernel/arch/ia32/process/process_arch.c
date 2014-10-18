@@ -4,7 +4,7 @@
 #include <mm/virt_mm.h>
 #include <debug/debug.h>
 #include <stack/kstack.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <process/used_list.h>
 #include <mm/phys_mm.h>
 #include <loaders/executable_loader.h>
@@ -244,7 +244,7 @@ int createNewProcess(const char* filename, fs_node_t* where) {
 	return 0; //Return 0 - Parent
 }
 
-inline void switchProcess(process_t* from, process_t* to) {
+void switchProcess(process_t* from, process_t* to) {
 
 	ASSERT(from && to, "from & to process have to be valid for switchProcess");
 	disableInterrupts();

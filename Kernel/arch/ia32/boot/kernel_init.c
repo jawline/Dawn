@@ -20,13 +20,13 @@
 #include <devices/pci/pci.h>
 #include <terminal/terminal.h>
 #include <initrd/initrd_header.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <input/input.h>
 #include <syscall/syscall.h>
 #include <settings/settingsmanager.h>
 #include <devices/devices.h>
 #include <terminal/kterminal.h>
-#include <timers/clock.h>
+#include <clock/clock.h>
 #include <screen/screen.h>
 #include <heap/kheap.h>
 #include <gpf/gpf.h>

@@ -4,20 +4,19 @@
 #include <stdlib.h>
 #include <system/reboot.h>
 #include <common.h>
-#include <timers/clock.h>
+#include <clock/clock.h>
 #include <input/input.h>
 #include <input/mouse.h>
 #include <terminal/terminal.h>
 #include <process/process.h>
 #include <panic/panic.h>
 #include <messages/messages.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <fs/vfs.h>
 #include <system/system.h>
 #include <interrupts/interrupts.h>
 
 extern heap_t kernel_heap;
-extern process_t* get_current_process();
 
 //The kernel callback for a keyboard event
 //Registered with the kernel input manager in void post_init(); with a register_input_listener(DEVICE_KEYBOARD) call

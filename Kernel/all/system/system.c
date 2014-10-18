@@ -3,7 +3,7 @@
 #include <process/message.h>
 #include <messages/messages.h>
 #include <debug/debug.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <settings/settingsmanager.h>
 #include <interrupts/interrupts.h>
 

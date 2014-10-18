@@ -8,7 +8,7 @@
 #include <panic/panic.h>
 #include <debug/debug.h>
 #include <usermode/usermode.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <fs/vfs.h>
 
 typedef int (*entry_point)(int argc, void* argv);

@@ -1,4 +1,4 @@
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <panic/panic.h>
 #include <stdlib.h>
 #include <common.h>
@@ -8,7 +8,6 @@
 struct process_entry_t {
 	process_t* process_pointer;
 	int ticks_tell_die;
-
 	struct process_entry_t* next;
 };
 
@@ -16,22 +15,6 @@ typedef struct process_entry_t scheduler_proc;
 
 scheduler_proc* list_root = 0;
 scheduler_proc* list_current = 0;
-
-void schedulerInitialize(process_t* kp) {
-	//Create and set new_process to all 0's
-	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
-	memset(new_process, 0, sizeof(scheduler_proc));
-
-	//Set its process pointer to the kernels processing path
-	new_process->process_pointer = kp;
-
-	//Loop backs
-	new_process->next = new_process;
-
-	//Set the root and current set of the list to new_process
-	list_root = new_process;
-	list_current = new_process;
-}
 
 void swapToProcess(scheduler_proc* scheduler_entry) {
 
@@ -46,15 +29,13 @@ void swapToProcess(scheduler_proc* scheduler_entry) {
 }
 
 void schedulerYield() {
-
-	ASSERT(list_current, "Cannot yield if no current process");
-
+	ASSERT(list_current && list_root,
+			"Cannot yield if scheduler has not been initialized");
 	if (list_current->next->process_pointer->shouldDestroy == 1) {
 		swapToProcess(list_root);
 	} else {
 		swapToProcess(list_current->next);
 	}
-
 }
 
 void schedulerOnTick() {
@@ -73,14 +54,12 @@ void schedulerOnTick() {
 
 //To anybody calling this function, remember to re-enable interrupts where applicable
 void schedulerAdd(process_t* op) {
+
 	//Create and set new_process to all 0's
 	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
 	memset(new_process, 0, sizeof(scheduler_proc));
-
 	new_process->process_pointer = op;
-
 	unsigned int iterator = 0;
-
 	scheduler_proc* iterator_process = list_root;
 
 	//Loop to find the last entry in the list
@@ -91,9 +70,7 @@ void schedulerAdd(process_t* op) {
 			iterator_process = iterator_process->next;
 		}
 	}
-
 	iterator_process->next = new_process;
-
 	new_process->next = list_root;
 }
 
@@ -117,9 +94,8 @@ void schedulerRemove(process_t* op) {
 		}
 	}
 
-	//Store the proc
+	//Store the procecess
 	scheduler_proc* next = iterator_process->next;
-
 	if (list_current == next) {
 		PANIC(
 				"Scheduler trying to remove currently accessed process, this shouldn't happen... DEBUG!!\n");
@@ -127,11 +103,7 @@ void schedulerRemove(process_t* op) {
 
 	//Remove it from the list
 	iterator_process->next = iterator_process->next->next;
-
-	//Free it
 	free(next);
-
-	return;
 }
 
 process_t* getCurrentProcess() {
@@ -144,14 +116,12 @@ process_t* getCurrentProcess() {
 }
 
 int schedulerNumProcesses() {
-	if (!list_root) {
-		return 0;
-	}
+
+	ASSERT(list_root,
+			"schedulerNumProcess cannot be run before the scheduler is initialized");
 
 	scheduler_proc* iter = list_root;
-
 	int numTotal = 0;
-
 	while (1) {
 		numTotal++;
 
@@ -161,16 +131,15 @@ int schedulerNumProcesses() {
 
 		iter = iter->next;
 	}
-
 	return numTotal;
 }
 
 void schedulerKillCurrentProcess() {
+
 	ASSERT(list_current, "Cannot kill current - no executing process");
 	process_t* process = getCurrentProcess();
 	process->shouldDestroy = 1;
 	schedulerYield();
-
 	for (;;) {
 	}
 }
@@ -214,17 +183,35 @@ void schedulerGlobalMessage(process_message msg, unsigned int bit) {
 	scheduler_proc* iter = list_root;
 
 	while (1) {
+
 		//Test if this process wants to hear about this event
 		if (iter->process_pointer->postboxFlags & bit == bit) {
 			postboxPush(&iter->process_pointer->processPostbox, msg);
-
 		}
 
 		if (iter->next == list_root)
 			break;
 
 		iter = iter->next;
-
 	}
 
+}
+
+void schedulerInitialize(process_t* kp) {
+
+	//Create and set new_process to all 0's
+	scheduler_proc* new_process = malloc(sizeof(scheduler_proc));
+	memset(new_process, 0, sizeof(scheduler_proc));
+
+	//Set its process pointer to the kernels processing path
+	new_process->process_pointer = kp;
+
+	//Loop backs
+	new_process->next = new_process;
+
+	//Set the root and current set of the list to new_process
+	list_root = new_process;
+	list_current = new_process;
+
+	registerClockTickCallback(schedulerOnTick);
 }

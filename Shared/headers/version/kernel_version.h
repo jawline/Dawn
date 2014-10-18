@@ -5,7 +5,7 @@
 
 #define KVERSION_MAJOR 3
 #define KVERSION_MINOR 142
-#define KVERSION_BUILD 0
+#define KVERSION_BUILD 1
 
 #define KVERSION_CODENAME "Envy"
 

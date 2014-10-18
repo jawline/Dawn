@@ -10,7 +10,7 @@ OBJECTS := $(shell find $(SOURCE_DIRS) -name "*.o")
 SOURCES := $(patsubst %.s,%.o,$(SSOURCES)) $(patsubst %.c,%.o,$(CSOURCES))
 
 CC=gcc
-CFLAGS=-nostdlib -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1
+CFLAGS=-nostdlib -std=c99 -nostdinc -fno-builtin -I ./all/ -I ../Shared/headers -I ./arch/ia32/ -fno-stack-protector -m32 -Wall -D _ARCH_IA32_=1 -D _ARCH_AMD64_=2 -D _ARCH_=1
 LDFLAGS=-Tlink.ld -melf_i386
 ASFLAGS=-felf32
 

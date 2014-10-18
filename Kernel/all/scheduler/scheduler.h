@@ -8,8 +8,6 @@ void schedulerInitialize(process_t* kproc);
 void schedulerAdd(process_t* new_process);
 void schedulerRemove(process_t* old_process);
 
-void schedulerOnTick();
-
 process_t* getCurrentProcess();
 int schedulerNumProcesses();
 void schedulerKillCurrentProcess();

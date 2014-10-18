@@ -76,7 +76,7 @@ struct processStructure {
 
 typedef struct processStructure process_t;
 
-inline void switchProcess(process_t* from, process_t* proc);
+void switchProcess(process_t* from, process_t* proc);
 void setProcessInputBuffer(process_t* process, char* data, unsigned int len);
 int createNewProcess(const char* filename, fs_node_t* originFilesystemNode);
 int kfork();

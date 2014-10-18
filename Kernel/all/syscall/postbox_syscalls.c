@@ -2,7 +2,7 @@
 #include <process/process.h>
 #include <process/postbox.h>
 #include <process/message.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 
 extern process_message postboxPeek(process_postbox* pb);
 

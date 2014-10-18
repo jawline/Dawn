@@ -4,7 +4,7 @@
 #include <panic/panic.h>
 #include <mm/virtual.h>
 #include <mm/phys_mm.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 
 MEM_LOC heapAllocateMemory(size_t size, heap_t* heap);
 

@@ -4,6 +4,6 @@
 #define OS_VERSION_MAJOR 0
 #define OS_VERSION_MINOR 0
 #define OS_VERSION_REVISION 2
-#define OS_VERSION_CODENAME "Othello"
+#define OS_VERSION_CODENAME "Triangles"
 
 #endif //_OS_VERSION_DEF_H_

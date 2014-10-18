@@ -36,7 +36,6 @@ unsigned int PAGE_SIZE = 4096;
 
 extern uint32_t used_mem_end; //End of kernel used memory at initialization of paging
 
-extern process_t* get_current_process();
 void switchPageDirectory (page_directory_t * nd);
 void startPaging();
 

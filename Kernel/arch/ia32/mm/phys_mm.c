@@ -3,7 +3,7 @@
 #include <debug/debug.h>
 #include <panic/panic.h>
 #include <types/memory.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <process/used_list.h>
 #include <panic/panic.h>
 

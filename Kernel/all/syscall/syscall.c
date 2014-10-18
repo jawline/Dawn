@@ -1,6 +1,6 @@
 #include <syscall/syscall.h>
 #include <stdio.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <heap/heap.h>
 #include <panic/panic.h>
 #include <mm/virtual.h>
@@ -11,7 +11,6 @@
 
 extern heap_t kernel_heap;
 
-extern process_t* get_current_process();
 extern MEM_LOC calculate_free_frames();
 
 extern unsigned char postboxHasNext();

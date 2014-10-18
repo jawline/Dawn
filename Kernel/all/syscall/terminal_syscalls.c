@@ -1,6 +1,6 @@
 #include <syscall/syscall.h>
 #include <stdio.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <heap/heap.h>
 #include <panic/panic.h>
 #include <mm/virt_mm.h>

@@ -1,4 +1,4 @@
-#include <timers/clock.h>
+#include <clock/clock.h>
 
 unsigned int syscallClocksPerSecond() {
 	return CLOCKS_PER_SECOND;

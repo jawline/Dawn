@@ -1,6 +1,6 @@
 #include <process/procfault.h>
 #include <panic/panic.h>
-#include <scheduler/process_scheduler.h>
+#include <scheduler/scheduler.h>
 #include <printf.h>
 
 void handleFatalProcessFault(FAULT_ID id, FAULT_MSG msg) {

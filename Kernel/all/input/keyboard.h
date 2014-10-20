@@ -8,7 +8,10 @@
 #define FLAG_ESCAPED 2
 #define FLAG_CAPS_LOCK 4
 
-//Lookup a asci character from the keyboard lookup table (If it cannot be done return 0)
+/**
+ * Lookup a asci character from the keyboard lookup table, if that key doesnt map to an ASCII character return 0
+ */
+
 char lookupAsciCharacterFromScancode(unsigned char scancode, uint32_t flags);
 
 #endif //_KEYBOARD_DEF_H_

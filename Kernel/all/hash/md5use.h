@@ -2,13 +2,23 @@
 #define _MD5_USE_DEF_H_
 #include <hash/md5.h>
 
-//Hash some data
-void MDData(const unsigned char* m_Data, unsigned long len, char* Digest);
+/**
+ * Hash some data
+ */
 
-//Hash a string
-void MDString (const unsigned char* Input, char* Digest);
+void MDData(const unsigned char* data, unsigned long len, char* digest);
 
-//Compare two digests to see if they are equal (1 if true 0 if false)
-unsigned char MDCompare(const unsigned char* One, const unsigned char* Two);
+/**
+ * Hash a string
+ */
+
+void MDString (const unsigned char* input, char* digest);
+
+/**
+ * Compare two digests to see if they are equal
+ * returns 1 if they match and 0 otherwise
+ */
+
+unsigned char MDCompare(const unsigned char* one, const unsigned char* Two);
 
 #endif //_MD5_USE_DEF_H_

@@ -6,13 +6,13 @@
 
 //Callback is called every time the PIT fires
 static idt_call_registers_t pitOnTickCallback(idt_call_registers_t regs) {
-
 	clockHandleTick();
 	return regs;
 }
 
 //Initialize the programmable interrupt time to fire at the frequency sent
 void initializePit(unsigned int frequency) {
+
 	registerInterruptHandler(GET_IRQ(0), &pitOnTickCallback);
 
 	//The value sent to the PIT is the value 1193180 divided by the frequency wanted

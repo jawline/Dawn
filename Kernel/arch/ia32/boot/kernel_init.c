@@ -136,8 +136,6 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 	}
 }
 
-extern heap_t kernel_heap;
-
 /**
  @brief Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
  @callgraph
@@ -150,7 +148,7 @@ void initializeKernel(struct multiboot* mboot_ptr, uint32_t initial_esp) //visua
 	initializeMemory(mboot_ptr, KERNEL_START, kEndLocation, initial_esp);
 
 	//Initialize the kernel heap
-        initializeKernelHeap();
+    initializeKernelHeap();
 
 	//Initialize interrupts
 	initializeIdt();

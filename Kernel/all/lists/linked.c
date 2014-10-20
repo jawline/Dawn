@@ -43,3 +43,30 @@ linked_list_t* linkedListRemove(linked_list_t* item, linked_list_t* list) {
 linked_list_t* linkedListNext(linked_list_t* item) {
 	return item->next;
 }
+
+linked_list_t* linkedListAppend(linked_list_t* list, void* payload) {
+
+	linked_list_t* end = linkedListEnd(list);
+
+	if (!end) {
+		return linkedListCreate(payload);
+	}
+
+	end->next = linkedListCreate(payload);
+	return list;
+}
+
+linked_list_t* linkedListEnd(linked_list_t const* list) {
+
+	if (!list) {
+		return 0;
+	}
+
+	linked_list_t* iter = list;
+
+	while (iter->next) {
+		iter = iter->next;
+	}
+
+	return iter;
+}

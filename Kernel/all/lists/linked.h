@@ -14,6 +14,8 @@ typedef struct linked_list {
 } linked_list_t;
 
 linked_list_t* linkedListPrepend(linked_list_t* list, void* payload);
+linked_list_t* linkedListAppend(linked_list_t* list, void* payload);
+linked_list_t* linkedListEnd(linked_list_t const* list);
 linked_list_t* linkedListRemove(linked_list_t* item, linked_list_t* list);
 linked_list_t* linkedListNext(linked_list_t* item);
 

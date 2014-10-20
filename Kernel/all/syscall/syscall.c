@@ -39,10 +39,7 @@ extern void syscallPrint_t(const char* Line);
 extern void syscallClearscreen();
 extern void syscallSetFgc(unsigned char fgc);
 extern void syscallSetBgc(unsigned char bgc);
-
 extern void syscallSetDebugMode(uint8_t Mode);
-
-extern void scheduler_block_me();
 
 void* syscall_callbacks[KERNEL_NUM_SYSCALLS];
 

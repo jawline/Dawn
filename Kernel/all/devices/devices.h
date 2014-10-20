@@ -3,4 +3,4 @@
 
 void initializeDevices();
 
-#endif _DEVICES_FUNCTIONS_DEF_H_
+#endif //_DEVICES_FUNCTIONS_DEF_H_

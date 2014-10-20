@@ -34,8 +34,6 @@ char getPageEntry(MEM_LOC va, MEM_LOC *pa);
 
 unsigned int PAGE_SIZE = 4096;
 
-extern uint32_t used_mem_end; //End of kernel used memory at initialization of paging
-
 void switchPageDirectory(page_directory_t * nd);
 void startPaging();
 
@@ -156,19 +154,17 @@ char getPageEntry(MEM_LOC va, MEM_LOC *pa) {
 
 inline void switchPageDirectory(page_directory_t * nd) {
 	current_pagedir = nd;
+	//Move the page directory into cr3
 	__asm__ volatile ("mov %0, %%cr3" : : "r" (nd));
 }
 
 inline void startPaging() {
 	uint32_t cr0;
-
-	__asm__ volatile ("mov %%cr0, %0" : "=r" (cr0));
 	//Get the current value of cr0
-
+	__asm__ volatile ("mov %%cr0, %0" : "=r" (cr0));
 	cr0 |= 0x80000000; //Bitwise or
-
-	__asm__ volatile ("mov %0, %%cr0" : : "r" (cr0));
 	//Set the value of cr0 to the new desired value
+	__asm__ volatile ("mov %0, %%cr0" : : "r" (cr0));
 }
 
 void markPagingEnabled() {
@@ -180,11 +176,14 @@ uint32_t getTable(uint32_t address) {
 	return address / PAGE_SIZE / 1024;
 }
 
-//Used in initialization only!
-//Identity maps the first page or so
-
+/**
+ * Used in initialisation only!
+ * Identity maps the first page of memory
+ * TODO: Work out what this actually does
+ */
 //TODO: Fix up this code - Possible problems = frame out of first 4mb causing a boot failure
 void identityMapPages(page_directory_t* pagedir) {
+
 	//Map a page at the end of used memory
 	MEM_LOC frame = allocateFrame();
 	pagedir[0] = frame | PAGE_PRESENT | PAGE_USER;
@@ -193,9 +192,8 @@ void identityMapPages(page_directory_t* pagedir) {
 	LPOINTER pt = (POINTER) frame; //Pointer to the page directory
 
 	//Iterate through, setting each page to the correct location in memories
-	unsigned int i = 0;
-	for (i = 0; i < 1024; i++) //Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
-			{
+	//Loop 1024 times so 1024 * 4096 bytes of data are mapped (4MB)
+	for (unsigned int i = 0; i < 1024; i++) {
 		pt[i] = (i * PAGE_SIZE) | PAGE_PRESENT | PAGE_USER;
 	}
 
@@ -261,6 +259,7 @@ void initializeVirtualMemoryManager(MEM_LOC mem_end) {
 }
 
 MEM_LOC copyPage(MEM_LOC pt, process_t* process) {
+
 	MEM_LOC new_page_addr = allocateFrameForProcess(process);
 
 	MEM_LOC temp_read_addr = kernelFirstFreeVirtualAddress();
@@ -302,7 +301,6 @@ MEM_LOC copyPageTable(MEM_LOC pt, uint8_t copy, process_t* process) {
 			}
 		} else {
 			temp_write_addr[i] = 0;
-			//Nufink to copy
 		}
 	}
 

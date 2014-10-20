@@ -142,6 +142,7 @@ void initializeKernel(struct multiboot* mboot_ptr, uint32_t initial_esp) {
 	initializeKernelTerminal();
 	getTerminalInContext()->f_clear(getTerminalInContext());
 
+	//TODO: Move this into its own space
 	//Map the kernel stack
 	MEM_LOC iterator;
 	for (iterator = KERNEL_STACK_START - PAGE_SIZE;

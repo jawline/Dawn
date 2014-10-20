@@ -1,7 +1,6 @@
-
 /* The purpose of this file is to initialize the kernel into a standard state with virtual memory, a heap, a virtual file system, a IDT and a GDT if necessary.
-   Also to initialize any other subsystems such as the timer which may be required for Dawn to function properly
-*/
+ Also to initialize any other subsystems such as the timer which may be required for Dawn to function properly
+ */
 
 #include "kernel_init.h"
 #include <screen/screen.h>
@@ -43,28 +42,17 @@ extern terminal_t* getTerminalInContext();
  @brief IDT = Interrupt descriptor table. Allows interrupt calls to trigger functions int he kernel pointed to by it
  @callgraph
  */
-void initializeIdt()
-{
-   Initialize_IDT();
-   printf("IDT [OK]\n");
+void initializeIdt() {
+	Initialize_IDT();
+	printf("IDT [OK]\n");
 }
 
 /**
  @brief This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
  @callgraph
  */
-void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_node_t * root)
-{
-
-
-	/*
-	//OLD
-	MEM_LOC addr = ramdisk_phys_start;
-
-	fs_node_t* initrd = initialize_initrd( addr, "system", init_vfs());
-
-	bindnode_fs(init_vfs() , initrd);
-	*/
+void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end,
+		fs_node_t * root) {
 
 	size_t ramdisk_size = ramdisk_phys_end - ramdisk_phys_start;
 
@@ -75,132 +63,97 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end, fs_
 	MEM_LOC start_mapping_location = ramdisk_phys_start;
 	MEM_LOC end_mapping_location = ramdisk_phys_end;
 
-	while (start_mapping_location < end_mapping_location)
-	{
-		map(start_mapping_location, start_mapping_location, MEMORY_RESTRICTED_ACCESS);
-		start_mapping_location += PAGE_SIZE;
+	//Identity map the ramdisk (1x1 mapping between virtual and physical)
+	for (MEM_LOC current = start_mapping_location;
+			current < end_mapping_location; current += PAGE_SIZE) {
+		map(current, current, MEMORY_RESTRICTED_ACCESS);
 	}
-
-	start_mapping_location = ramdisk_phys_start;
-	end_mapping_location = ramdisk_phys_end;
 
 	memcpy(ramdisk_new_location, start_mapping_location, ramdisk_size);
 
-	while (end_mapping_location > start_mapping_location)
-	{
-		unmap(end_mapping_location);
-		end_mapping_location -= PAGE_SIZE;
+	//Unmap the crap we just ID mapped
+	for (MEM_LOC current = start_mapping_location;
+			current < end_mapping_location; current += PAGE_SIZE) {
+		unmap(current);
 	}
 
 	struct initial_ramdisk_header* head = ramdisk_new_location;
 
 	unsigned char digest[16];
-	MEM_LOC DLOC = head;
-	DLOC += sizeof(struct initial_ramdisk_header);
+	MEM_LOC ramdiskDataLocation = ((MEM_LOC) head)
+			+ sizeof(struct initial_ramdisk_header);
 
-	MDData(DLOC, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
+	MDData(ramdiskDataLocation,
+			head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
 
-    printf("Digest on our side: ");
-
-	unsigned int iter = 0;
-	for (iter = 0; iter < 16; iter++)
-	{
-		printf("%x", digest[iter]);
+	//Print out RAMDisk MD5 hash
+	printf("Digest on our side: ");
+	for (unsigned int i = 0; i < 16; i++) {
+		printf("%x", digest[i]);
 	}
-
 	printf("\n");
 
-    printf("Digest on their side: ");
-
-    iter = 0;
-    for (iter = 0; iter < 16; iter++)
-    {
-        printf("%x", head->ramdisk_checksum[iter]);
-    }
-
-    printf("\n");
-
-	if (MDCompare(head->ramdisk_checksum, digest) == 0)
-	{
-		PANIC("Ramdisk CHECKSUM bad");
-
+	//Print out the stored MD5 hash
+	printf("Digest on their side: ");
+	for (unsigned int i = 0; i < 16; i++) {
+		printf("%x", head->ramdisk_checksum[i]);
 	}
-	else
-	{
+	printf("\n");
 
-		//Load the ramdisk only of consistancy check is coo
-		fs_node_t* initrd = initialize_initrd(ramdisk_new_location, "system", init_vfs());
+	ASSERT(MDCompare(head->ramdisk_checksum, digest) != 0,
+			"Ramdisk CHECKSUM bad");
 
-		bindnode_fs(init_vfs() , initrd);
-
-	}
+	//Well it looks like this RAMDisk is legit & loaded fine
+	fs_node_t* initrd = initialize_initrd(ramdisk_new_location, "system",
+			init_vfs());
+	bindnode_fs(init_vfs(), initrd);
 }
 
 /**
- @brief Run all the initial -one time- kernel initialization routines - once this is called the Kernel assumes a valid Heap, Page directory, Physical and virtual memory manager, etc
- @callgraph
+ * Run all the kernel initialisation routines - once this is called
+ * the Kernel assumes a valid Heap, Page directory, Physical and virtual
+ * memory manager, etc has been setup or a panic has occurred
  */
-void initializeKernel(struct multiboot* mboot_ptr, uint32_t initial_esp) //visual_output signals whether or not to call printf
-{
-	extern void k_end;
-	MEM_LOC kEndLocation = (POINTER)&k_end;
+void initializeKernel(struct multiboot* mboot_ptr, uint32_t initial_esp) {
 
-	initializeMemory(mboot_ptr, KERNEL_START, kEndLocation, initial_esp);
+	extern void* k_end;
 
-	//Initialize the kernel heap
-    initializeKernelHeap();
+	initializeMemory(mboot_ptr, KERNEL_START, (MEM_LOC)&k_end, initial_esp);
+	initializeKernelHeap();
 
-	//Initialize interrupts
+	//Initialise interrupt handlers
 	initializeIdt();
-
-	//Initialize the devices connected to the system (Abstracted - Uses w/e method to contact devices it pleases)
 	initializeDevices();
-
 	initializeScreen();
-
-
 	initializeGeneralProtectionFaultHandler();
-
-
-
-
-
-	//System timers
 	initializeSystemClock();
 
 	//Init the virtual file system
 	fs_node_t* rootfs = init_vfs();
 
-	if (mboot_ptr->mods_count == 1)
-	{
-		//Load and hook the ramdisk to the root file system
-		initializeRamdisk(*((LPOINTER)(mboot_ptr->mods_addr)), *((LPOINTER)(mboot_ptr->mods_addr + 4)), rootfs);
-	}
+	ASSERT(mboot_ptr->mods_count == 1,
+			"No RAMDisk or incorrect number of modules. Kernel should start with ramdisk only");
 
-	//Init the kernel terminal //TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
+	//Load and hook the ramdisk to the root file system
+	initializeRamdisk(*((LPOINTER)(mboot_ptr->mods_addr)),
+			*((LPOINTER)(mboot_ptr->mods_addr + 4)), rootfs);
+
+	//TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	initializeKernelTerminal();
 	getTerminalInContext()->f_clear(getTerminalInContext());
 
 	//Map the kernel stack
-
 	MEM_LOC iterator;
-	for (iterator = KERNEL_STACK_START - PAGE_SIZE; iterator >= KERNEL_STACK_START - KERNEL_STACK_SIZE; iterator -= PAGE_SIZE)
-	{
+	for (iterator = KERNEL_STACK_START - PAGE_SIZE;
+			iterator >= KERNEL_STACK_START - KERNEL_STACK_SIZE; iterator -=
+					PAGE_SIZE) {
 		MEM_LOC page = allocateFrame();
 		map(iterator, page, MEMORY_RESTRICTED_ACCESS);
 	}
 
-	//Initialize the system call interface
 	kernelInitializeSyscallSystem();
-
 	kernelInitializeSyscalls();
-
-	//Initialize the system scheduler
 	schedulerInitialize(initializeKernelProcess());
-
-	//Input interfaces
 	inputInitialize();
-
-	//Initialize the settings manager
 	initializeSettingsManager();
 }

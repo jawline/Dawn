@@ -7,37 +7,38 @@
 #define HEAP_MAGIC 0xAB
 
 /**
- * @The structure of a single memory entry on the heap
+ * The structure of a single memory entry on the heap
  */
 
 struct heap_entry {
 
 	/**
-	 * @brief A magic variable designed to check that it is a block
+	 * A magic number char used to check that it is a block and that free
+	 * hasn't been called on an unmapped area
 	 */
 
 	unsigned char magic;
 
 	/**
-	 * @brief Variable to store whether this block of memory is used (boolean)
+	 * Variable to store whether this block of memory is used (boolean)
 	 */
 
 	unsigned char used;
 
 	/**
-	 * @brief Variable to store the size of the chunk of memory
+	 * Variable to store the size of the chunk of memory
 	 */
 
 	size_t size; //Size (in bytes) of this block
 
 	/**
-	 * @brief Pointer to the next memory block NULL if last
+	 * Pointer to the next memory block NULL if last
 	 */
 
 	struct heap_entry* next; //Location of the next header
 
 	/**
-	 * @brief Pointer to the previous heap entry
+	 * Pointer to the previous heap entry
 	 */
 
 	struct heap_entry* prev; //Location of the previous header.
@@ -46,16 +47,17 @@ struct heap_entry {
 typedef struct heap_entry heap_entry_t;
 
 /**
- * @brief A structure to hold information about a heap in memory
+ * A structure to hold information about a heap in memory
  */
 
 typedef struct {
 
 	/**
-	 * @brief The location of the heap in memory
+	 * The location of the heap in mapped memory
 	 */
 
-	MEM_LOC heap_location; //Heaps location (In virtual memory)
+	MEM_LOC heap_location;
+
 } heap_t;
 
 void init_heap(heap_t* heap, uint32_t address);

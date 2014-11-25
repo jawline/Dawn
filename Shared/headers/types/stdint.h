@@ -16,13 +16,9 @@ typedef unsigned long long int uint64_t;
 typedef 	 long long int sint64_t;
 
 #elif _ARCH_ == _ARCH_AMD64_
-
 #error "Still designing AMD64 support"
-
 #else
-
 #error "Unsupported archectecture"
-
 #endif
 
 #endif

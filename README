@@ -4,6 +4,20 @@ Dawn is a project to create a simple, working x86 operating system.
 
 This is a educational project - not a profesional endeavour. Don't expect perfection
 
+All documentation assumes Linux is being used and the following software is installed
+
+g++
+gcc
+nasm
+qemu
+make
+
+After pulling the git repo execute the shell script initial_setup.sh
+
+To compile & test execute the shell script test.sh
+
+To just compile the kernel execute the make command from the Kernel directory
+
 The code and other resources in this project are provided as is, with no warranty (Explicit or otherwise).
 
 The source is distributed under the creative commons non commercial license (View below) or view http://creativecommons.org/licenses/by-nc/3.0/ for a simplified interpretation of the license

@@ -1,4 +1,5 @@
 *.o
 *~
 .metadata
+bin/*
 hdd.img

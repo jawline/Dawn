@@ -14,10 +14,9 @@ terminal_t* getTerminalInContext()
 
 void kernel_terminal_putc(terminal_t* term, char c)
 {
-	if (term == g_terminalInContext)
+	if (term == g_terminalInContext) {
 		text_mode_tputc(term, c);
-	else
-	{
+	} else {
 		//Write to the backup data which stores a copy of the terminal when its not in context
 		text_mode_putc_prec(term->m_backupData, term->m_backgroundColour, term->m_foregroundColour, &term->m_cursorX, &term->m_cursorY, c);
 	}
@@ -27,22 +26,24 @@ void kernel_terminal_setfg(terminal_t* term, uint8_t col)
 {
 	term->m_foregroundColour = col;
 
-	if (term == g_terminalInContext)
+	if (term == g_terminalInContext) {
 		text_mode_tsetfg(term, col);
+	}
 }
 
 void kernel_terminal_setbg(terminal_t* term, uint8_t col)
 {
 	term->m_backgroundColour = col;
 
-	if (term == g_terminalInContext)
+	if (term == g_terminalInContext) {
 		text_mode_tsetbg(term, col);
+	}
 }
 
-void kernel_terminal_clear(terminal_t* term)
-{
-	if (term == g_terminalInContext)
+void kernel_terminal_clear(terminal_t* term) {
+	if (term == g_terminalInContext) {
 		text_mode_tclear(term);
+	}
 	else
 	{
 		//Clear the screen using the direct video memory access on the backup data
@@ -50,13 +51,9 @@ void kernel_terminal_clear(terminal_t* term)
 	}
 }
 
-void kernel_terminal_update_cursor(terminal_t* term)
-{
-	if (term == g_terminalInContext)
+void kernel_terminal_update_cursor(terminal_t* term) {
+	if (term == g_terminalInContext) {
 		text_mode_tup(term);
-	else
-	{
-		//Don't need to do anything. Not in context
 	}
 }
 
@@ -143,6 +140,7 @@ unsigned int kgetcy()
 //Put a string to the kernel terminal
 void kputs(const char* s)
 {
-	for (; *s != 0; s++)
+	for (; *s; s++) {
 		kputc(*s);
+	}
 }

@@ -118,7 +118,7 @@ void freeElfFileInfo(e32info* info) {
 	}
 }
 
-unsigned char elfHeaderValid(e32_header h) {
+unsigned char elfHeaderValid(e32_header const& h) {
 	unsigned char mag0 = h.elf_ident[ID_MAG0] == ELF_MAG0;
 	unsigned char mag1 = h.elf_ident[ID_MAG1] == ELF_MAG1;
 	unsigned char mag2 = h.elf_ident[ID_MAG2] == ELF_MAG2;
@@ -131,14 +131,14 @@ unsigned char elfHeaderValid(e32_header h) {
 	return 0;
 }
 
-unsigned int getElfHeaderClass(e32_header h) {
-	return h.elf_ident[ID_CLASS];
+unsigned int getElfHeaderClass(e32_header const& header) {
+	return header.elf_ident[ID_CLASS];
 }
 
-unsigned int getElfHeaderVersion(e32_header header) {
+unsigned int getElfHeaderVersion(e32_header const& header) {
 	return header.elf_ident[ID_VERSION];
 }
 
-unsigned int getElfHeaderData(e32_header header) {
+unsigned int getElfHeaderData(e32_header const& header) {
 	return header.elf_ident[ID_DATA];
 }

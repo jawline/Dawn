@@ -2,9 +2,19 @@
 #define _CPU_DEFINITION_DEF_H_
 #include <common.h>
 
-//Export - Returns 1 if cpuid calls (And therefore the OS's ability to read cpu information) are supported
+/**
+ * Returns 1 if cpuid can be used to query CPU features, 0 otherwise
+ */
 unsigned char cpuidSupported();
+
+/**
+ * Returns the CPU vendor from cpuid
+ */
 const char* cpuidGetVendor();
-unsigned long cpuidFeatures(); //get the edx register from a cpuid with eax set to 1
+
+/**
+ * Returns the CPUID features list
+ */
+unsigned long cpuidFeatures();
 
 #endif //_CPU_DEFINITION_DEF_H_

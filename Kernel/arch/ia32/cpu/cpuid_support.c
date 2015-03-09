@@ -1,16 +1,9 @@
 #include "cpu.h"
 
-//Function: checkCpuidInlne
-//Arguments: None
-//Return: 1 if true 0 if false
-//Description: Inline ASM to check whether CPUID is supported
-
-unsigned char checkCpuid()
-{
+unsigned char cpuidSupported() {
 	unsigned long eax_reg_value = 0;
 	unsigned char return_value = 0;
 
-	//Description
 	//pushfd pushes the EFLAGS register to the stack
 	//pop eax sets the value of eax to EFLAGs
 	//mov eax, ecx; stores the value of eax in ecx
@@ -40,13 +33,4 @@ unsigned char checkCpuid()
 	return_value = eax_reg_value;
 
 	return return_value;
-}
-
-//Function:
-//Arguments: None
-//Returns: 1 if true 0 if false
-//Description: Check if the CPUID function is supported
-unsigned char cpuidSupported()
-{
-	return checkCpuid();
 }

@@ -1,3 +1,7 @@
-void initialize_driver()
+void start_driver()
+{
+}
+
+void remove_driver()
 {
 }

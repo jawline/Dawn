@@ -66,22 +66,22 @@ int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode) {
 	}
 
 	//Valid header?
-	if (elfHeaderValid(head) != 1) {
+	if (elfHeaderValid(&head) != 1) {
 		return LOAD_ERROR_BAD_HEAD;
 	}
 
 	//32bit executable?
-	if (getElfHeaderClass(head) != ELF_CLASS_32) {
+	if (getElfHeaderClass(&head) != ELF_CLASS_32) {
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
 	//Version correct?
-	if (getElfHeaderVersion(head) != ELF_VERSION_CURRENT) {
+	if (getElfHeaderVersion(&head) != ELF_VERSION_CURRENT) {
 		return LOAD_ERROR_BAD_HEAD;
 	}
 
 	//ELF_DATA_LSB + ELF_CLASS_32 = IA32 = 8086 compatable
-	if (getElfHeaderData(head) != ELF_DATA_LSB) {
+	if (getElfHeaderData(&head) != ELF_DATA_LSB) {
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 

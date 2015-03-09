@@ -15,24 +15,18 @@ e32_header parseElfHeader(fs_node_t* file) {
 	return ret;
 }
 
-e32_pheader parseElfProgramHeader(fs_node_t* File, e32_header Header, unsigned int number)
-{
+e32_pheader parseElfProgramHeader(fs_node_t* file, e32_header header, unsigned int number) {
 	e32_pheader headerStruct;
-	MEM_LOC start_loc = Header.e_phoff + (Header.e_phentsize * number);
+	MEM_LOC start_loc = header.e_phoff + (header.e_phentsize * number);
 
-	if (File->length < start_loc) {
+	if (file->length < start_loc) {
 		//Out of bounds. Null the return and then exit the function
 		memset(&headerStruct, 0, sizeof(e32_pheader));
-		return headerStruct;
-	}
-
-	if (read_fs(File, start_loc, Header.e_phentsize, (uint8_t*) &headerStruct) != Header.e_phentsize)
-	{
+	} else if (read_fs(file, start_loc, header.e_phentsize, (uint8_t*) &headerStruct) != header.e_phentsize) {
 		//Error reading. Null the return and then exit the function
 		memset(&headerStruct, 0, sizeof(e32_pheader));
 	}
 
-	//Return value should equal pointer to the program header structure
 	return headerStruct;
 }
 

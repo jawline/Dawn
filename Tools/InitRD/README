@@ -1,7 +1,7 @@
-This program creates a ramdisk image in a format that SimpleOS can load, and then computes a MD5 hash of all the data within the file (Excluding the header) which SimpleOS can use to verify Ramdisks after boot.
+This program creates a ramdisk image in a format that Dawn can load, and then computes a MD5 hash of all the data within the file (Excluding the header) which Dawn can use to verify Ramdisks after boot.
 
 Needs work
 
-Follows the same licensing as the rest of the SimpleOS project
+Follows the same licensing as the rest of the Dawn project
 
 Author: Blake Loring

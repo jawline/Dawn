@@ -2,29 +2,19 @@
 #include <stdlib.h>
 #include <common.h>
 
-//NOTE: Assumes the fs_node_t* is available to read
-e32_header parseElfHeader(fs_node_t* File)
-{
-	e32_header Ret;
-
-	if (File->length < sizeof(e32_header))
-	{
+e32_header parseElfHeader(fs_node_t* file) {
+	e32_header ret;
+	if (file->length < sizeof(e32_header)) {
 		//Out of bounds. null the return and then memset to 0
-		memset(&Ret, 0, sizeof(e32_header));
-		return Ret;
-	}
-
-	if (read_fs(File, 0, sizeof(e32_header), (uint8_t*) &Ret) != sizeof(e32_header))
-	{
+		memset(&ret, 0, sizeof(e32_header));
+	} else if (read_fs(file, 0, sizeof(e32_header), (uint8_t*) &ret) != sizeof(e32_header)) {
 		//Error reading, null and exit the function
-		memset(&Ret, 0, sizeof(e32_header));
-		return Ret;
+		memset(&ret, 0, sizeof(e32_header));
 	}
 
-	return Ret;
+	return ret;
 }
 
-//NOTE: Assumes the fs_node_t* is available to read
 e32_pheader parseElfProgramHeader(fs_node_t* File, e32_header Header, unsigned int number)
 {
 	e32_pheader headerStruct;

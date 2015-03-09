@@ -31,11 +31,10 @@ e32_pheader parseElfProgramHeader(fs_node_t* file, e32_header header, unsigned i
 }
 
 //The purpose of this function is to find a string table entry from a ELF file
-void parseStringTableEntry(char* CharBuffer, unsigned int max_length, unsigned int idx, fs_node_t* File, e32info* info)
-{
+void parseStringTableEntry(char* charBuffer, unsigned int max_length, unsigned int idx, fs_node_t* file, e32info* info) {
+	
 	//Check that its not out of bounds
-	if (info->m_numSectionHeaders < info->m_mainHeader.e_shtrndx)
-	{
+	if (info->m_numSectionHeaders < info->m_mainHeader.e_shtrndx) {
 		return 0;
 	}
 
@@ -46,32 +45,22 @@ void parseStringTableEntry(char* CharBuffer, unsigned int max_length, unsigned i
 	MEM_LOC read_loc = stringtable_header.sh_offset + idx;
 
 	//Use this character to store each character as it is read
-	char Buffer = ' ';
-
-	//Used to tell where we are
+	char buffer = ' ';
 	unsigned int iter = 0;
 
-	//While Buffer isn't a null terminator
-	while (Buffer != '\0')
-	{
-
-		if (iter > max_length) break;
-
+	while (buffer != '\0' && iter < max_length) {
 		//Read a character from the file
-		read_fs(File, read_loc, 1, (uint8_t*) &Buffer);
-
+		read_fs(file, read_loc, 1, (uint8_t*) &buffer);
 		//Move that character to the characterbuffer supplied
-		CharBuffer[iter] = Buffer;
-
-		//Increment both of the iterators
-		iter++; read_loc++;
+		charBuffer[iter] = buffer;
+		iter++;
+		read_loc++;
 	}
 
 	return;
 }
 
-e32_sheader parseElfSectionHeader(fs_node_t* File, e32_header Header, unsigned int number)
-{
+e32_sheader parseElfSectionHeader(fs_node_t* File, e32_header Header, unsigned int number) {
 	//Create a new section header structure
 	e32_sheader headerStruct;
 

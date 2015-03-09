@@ -9,51 +9,40 @@
 static uint32_t flags = 0;
 
 idt_call_registers_t keyboardIrqCallback(idt_call_registers_t regs) {
-    uint8_t sc = inb(0x60);
-    char new_char;
+    uint8_t keyboardCharacter = inb(0x60);
 
-    switch(sc) {
-        case 0x2a: 
+    switch(keyboardCharacter) {
+        case 0x2a: {
             flags = flags | FLAG_SHIFT_STATE;
             break;
- 
-        case 0xaa: 
+        }
+        case 0xaa: {
             flags = flags ^ FLAG_SHIFT_STATE;
             break;
-
-	case 0xe0:
+        }
+	case 0xe0: {
 	    flags = flags | FLAG_ESCAPED; 
 	    break;
-
-	case 0x3a:
-
-	    if ((flags & FLAG_CAPS_LOCK))
-	    {
+	}
+	case 0x3a: {
+	    if ((flags & FLAG_CAPS_LOCK)) {
 		//Caps lock is on
 		flags = flags ^ FLAG_CAPS_LOCK; //Swap bit to 0 using XOR
-            }
- 	    else 
-	    {
+            } else {
 		flags = flags | FLAG_CAPS_LOCK; //Swap bit to 1 using OR
 	    }
-
 	    break;
- 
-        default:
-	   if ((flags & FLAG_ESCAPED)) 
-	   { 
+	}
+        default: {
+	   if (flags & FLAG_ESCAPED) { 
 		flags = flags ^ FLAG_ESCAPED; /* Set the bit to 0 */
-		break; 
-	   }
-           if (sc & 0x80) 
-	   {
+	   } else if (keyboardCharacter & 0x80) {
               /* Ignore the break code */
-           } 
-	   else 
-	   {
+           } else {
 		sendInputMessage(DEVICE_KEYBOARD, sc, &flags);
            }
            break;
+        }
      }
 }
 

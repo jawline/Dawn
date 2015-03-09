@@ -5,10 +5,10 @@
 #include <fs/vfs.h>
 
 
-unsigned char elfHeaderValid(e32_header header);
-unsigned int getElfHeaderClass(e32_header header);
-unsigned int getElfHeaderVersion(e32_header header);
-unsigned int getElfHeaderData(e32_header header);
+unsigned char elfHeaderValid(e32_header const& header);
+unsigned int getElfHeaderClass(e32_header const& header);
+unsigned int getElfHeaderVersion(e32_header const& header);
+unsigned int getElfHeaderData(e32_header const& header);
 
 e32_pheader parseElfProgramHeader(fs_node_t* File, e32_header Header, unsigned int number);
 e32_header parseElfHeader(fs_node_t* File);

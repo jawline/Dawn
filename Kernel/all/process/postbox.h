@@ -14,8 +14,21 @@ typedef struct {
 
 typedef struct process_postbox_message postbox_message_entry;
 
+/**
+ * Peeks into the postbox without removing anything from it, will copy the first message from the postbox to dest
+ * Returns dest if there is a message waiting or 0 otherwise
+ */
 process_message* postboxPeek(process_postbox* pb, process_message* dest);
+
+/**
+ * Pops into the postbox, will copy the first message from the postbox to dest and then remove it from the postbox
+ * Returns dest if there is a message waiting or 0 otherwise
+ */
 process_message* postboxTop(process_postbox* pb, process_message* dest);
-void postboxPush(process_postbox* pb, process_message msg);
+
+/**
+ * Pushes the given message to the postbox
+ */
+void postboxPush(process_postbox* pb, process_message* msg);
 
 #endif //_PROCESS_POSTBOX_DEF_H

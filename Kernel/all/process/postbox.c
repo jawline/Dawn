@@ -8,6 +8,10 @@
 #include <process/postbox.h>
 #include <stdlib.h>
 
+unsigned char postboxEmpty(process_postbox* pb) {
+	return pb->first == 0;
+}
+
 process_message* postboxTop(process_postbox* pb, process_message* dest) {
 
 	if (!pb->first) {

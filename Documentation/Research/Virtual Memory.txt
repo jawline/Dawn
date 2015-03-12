@@ -3,4 +3,7 @@ With virtual memory all physical addresses have to be mapped to a virtual addres
 can be executed at any physical location, even if it requires to be executed at address 0x1000. Virtual memory managment
 in SimpleOS is done in mm/virt_mm.h and mm/virt_mm.c.
 
+Another significant advantage of VMM is that by limiting the physical memory applications are exposed to the risk of damage
+to the system, by accident or malicious behaviour, is reduced.
+
 //TODO, Elaborate on types of virtual memory (Paged, Segmented) why segmentation sucks and go into more detail about how virtual memory is useful

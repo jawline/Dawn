@@ -4,11 +4,8 @@
 #include <process/message.h>
 #include <scheduler/scheduler.h>
 
-extern process_message postboxPeek(process_postbox* pb);
-
 unsigned char postboxHasNext() {
-	process_message toTest;
-	return postboxPeek(&getCurrentProcess()->processPostbox, &toTest) != 0;
+	return !postboxEmpty(&getCurrentProcess()->processPostbox);
 }
 
 void postboxReadTop(process_message* message) {

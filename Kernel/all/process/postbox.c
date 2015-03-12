@@ -39,13 +39,13 @@ process_message postboxPeek(process_postbox* pb, process_message* dest) {
 	return dest;
 }
 
-void postboxPush(process_postbox* pb, process_message msg) {
+void postboxPush(process_postbox* pb, process_message* msg) {
 
 	if (pb->first == 0) {
 		//Create pb->first
 		postbox_message_entry* new_entry = malloc(
 				sizeof(postbox_message_entry));
-		new_entry->data = msg;
+		new_entry->data = *msg;
 		new_entry->next = 0;
 
 		pb->first = new_entry;
@@ -64,7 +64,7 @@ void postboxPush(process_postbox* pb, process_message msg) {
 
 		postbox_message_entry* new_entry = malloc(
 				sizeof(postbox_message_entry));
-		new_entry->data = msg;
+		new_entry->data = *msg;
 		new_entry->next = 0;
 
 		last->next = new_entry;

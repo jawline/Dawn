@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$screen_8h.html#a725a0aeb460aedb0e888ce9e52ff4beb" title="text_mode_putc" alt="" coords="113,5,239,35"/>
-<area shape="rect" id="node5" href="$screen__textmode_8c.html#a102d41035365ee4092039fa5ac6b722d" title="text_mode_putc_prec" alt="" coords="289,5,449,35"/>
-<area shape="rect" id="node7" href="$screen__textmode_8c.html#a8cff436a4d8eb01698282e2a3bef8ee6" title="text_mode_scroll_prec" alt="" coords="500,5,665,35"/>
-</map>

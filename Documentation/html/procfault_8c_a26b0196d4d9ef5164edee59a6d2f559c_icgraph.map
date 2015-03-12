@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$gpf_8c.html#a2be4c2c7d4e533f23cef010fc57e8a55" title="gpfHandler" alt="" coords="231,5,321,35"/>
-<area shape="rect" id="node11" href="$virt__mm_8c.html#a30018f558207db0e20b3e50a1cfa2650" title="page_fault" alt="" coords="232,59,320,88"/>
-<area shape="rect" id="node5" href="$gpf_8c.html#a0c40c2bb85384d8c85b9e44259c49aeb" title="initializeGeneralProtectionFaultHandler" alt="" coords="644,5,911,35"/>
-<area shape="rect" id="node7" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="960,32,1072,61"/>
-<area shape="rect" id="node9" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1121,32,1175,61"/>
-<area shape="rect" id="node13" href="$virt__mm_8c.html#a61bc20f6fa853ec99ebf058b35a8741a" title="Initialize the virtual memory manager (Keeps track of virtual memory mappings and handles the mapping..." alt="" coords="372,59,593,88"/>
-<area shape="rect" id="node15" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="684,59,871,88"/>
-</map>

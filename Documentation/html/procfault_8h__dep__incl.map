@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$gpf_8c.html" title="Kernel/sources/gpf/gpf.c" alt="" coords="5,83,179,112"/>
-<area shape="rect" id="node5" href="$virt__mm_8c.html" title="Kernel/sources/mm/virt_mm.c" alt="" coords="203,83,416,112"/>
-<area shape="rect" id="node7" href="$procfault_8c.html" title="Kernel/sources/process/procfault.c" alt="" coords="440,83,680,112"/>
-</map>

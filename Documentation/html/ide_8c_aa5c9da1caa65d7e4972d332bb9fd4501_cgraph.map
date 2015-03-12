@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$ide_8c.html#adf7f0f4b2677023e2b706fd973383fa9" title="ideDetectDeviceType" alt="" coords="227,96,381,125"/>
-<area shape="rect" id="node5" href="$ide_8c.html#a26cce83788e66341fcb4a98ca5c9ae9f" title="ideSelectDevice" alt="" coords="431,96,553,125"/>
-<area shape="rect" id="node7" href="$ide_8c.html#a5e5db185484e15dcc429410d00339869" title="ideSoftReset" alt="" coords="604,5,705,35"/>
-<area shape="rect" id="node11" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="903,133,943,163"/>
-<area shape="rect" id="node9" href="$ide_8c.html#ac6d9c9786b6684f47826bec9c48c0f50" title="ideWaitBusy" alt="" coords="755,107,853,136"/>
-<area shape="rect" id="node14" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="779,53,829,83"/>
-</map>

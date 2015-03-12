@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$common_8h.html#a22e98a8cf2e2c79d738830b387cace28" title="itoa" alt="" coords="165,5,211,35"/>
-<area shape="rect" id="node5" href="$screen__textmode_8c.html#a82d8a1839569ffa9802aa680593eeeda" title="text_mode_hardwrite" alt="" coords="109,59,267,88"/>
-<area shape="rect" id="node7" href="$screen_8h.html#a725a0aeb460aedb0e888ce9e52ff4beb" title="text_mode_putc" alt="" coords="316,59,441,88"/>
-<area shape="rect" id="node9" href="$screen__textmode_8c.html#a102d41035365ee4092039fa5ac6b722d" title="text_mode_putc_prec" alt="" coords="492,59,652,88"/>
-<area shape="rect" id="node11" href="$screen__textmode_8c.html#a8cff436a4d8eb01698282e2a3bef8ee6" title="text_mode_scroll_prec" alt="" coords="703,59,868,88"/>
-</map>

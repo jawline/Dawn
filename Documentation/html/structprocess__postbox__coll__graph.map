@@ -1,4 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$structprocess__postbox__message.html" title="{process_postbox_message\n|+ data\l+ next\l|}" alt="" coords="5,211,200,314"/>
-<area shape="rect" id="node5" href="$structprocess__message.html" title="{process_message\n|+ ID\l+ from_PID\l+ message_data\l+ messageAdditionalData\l|}" alt="" coords="8,6,197,143"/>
-</map>

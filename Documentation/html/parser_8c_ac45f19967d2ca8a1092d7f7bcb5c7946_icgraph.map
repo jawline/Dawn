@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$parser_8h.html#a5ad5e59604a08596c7c06e5b1770b1bb" title="parseElfFile" alt="" coords="229,5,323,35"/>
-<area shape="rect" id="node5" href="$loader_8h.html#ae721b082b5cf1e5def77eb6a753a3904" title="loadAndExecuteElf" alt="" coords="372,5,511,35"/>
-<area shape="rect" id="node7" href="$process_8c.html#a3f16568d609a026b0a08796175f20244" title="Acts as a entry point for new applications." alt="" coords="560,5,704,35"/>
-</map>

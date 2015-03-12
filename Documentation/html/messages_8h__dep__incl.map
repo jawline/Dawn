@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$_applications_2_game_of_life_2sources_2main_8c.html" title="Applications/GameOfLife/sources/main.c" alt="" coords="5,83,283,112"/>
-<area shape="rect" id="node5" href="$_applications_2_line_2sources_2main_8c.html" title="Applications/Line/sources/main.c" alt="" coords="307,83,536,112"/>
-<area shape="rect" id="node7" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="560,83,776,112"/>
-<area shape="rect" id="node9" href="$process_8c.html" title="Kernel/sources/process/process.c" alt="" coords="800,83,1035,112"/>
-<area shape="rect" id="node11" href="$system_8c.html" title="Kernel/sources/system/system.c" alt="" coords="1059,83,1285,112"/>
-</map>

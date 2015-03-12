@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$parser_8h.html" title="Kernel/sources/loaders/elf/parser.h" alt="" coords="244,83,484,112"/>
-<area shape="rect" id="node11" href="$loader_8h.html" title="Kernel/sources/loaders/elf/loader.h" alt="" coords="508,83,748,112"/>
-<area shape="rect" id="node14" href="$executable_8h.html" title="Kernel/sources/loaders/executable.h" alt="" coords="772,83,1023,112"/>
-<area shape="rect" id="node5" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="5,160,221,189"/>
-<area shape="rect" id="node7" href="$loader_8c.html" title="Kernel/sources/loaders/elf/loader.c" alt="" coords="509,160,747,189"/>
-<area shape="rect" id="node9" href="$parser_8c.html" title="Kernel/sources/loaders/elf/parser.c" alt="" coords="245,160,485,189"/>
-<area shape="rect" id="node16" href="$executable_8c.html" title="Kernel/sources/loaders/executable.c" alt="" coords="772,160,1023,189"/>
-</map>

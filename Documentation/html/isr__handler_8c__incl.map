@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="113,160,228,189"/>
-<area shape="rect" id="node11" href="$common_8h.html" title="common.h" alt="" coords="423,83,513,112"/>
-<area shape="rect" id="node15" href="$interrupt__handler_8h.html" title="interrupts/interrupt_handler.h" alt="" coords="191,83,399,112"/>
-<area shape="rect" id="node7" href="$isr_8h.html" title="isr.h" alt="" coords="176,237,224,267"/>
-<area shape="rect" id="node9" href="$irq_8h.html" title="irq.h" alt="" coords="248,237,299,267"/>
-<area shape="rect" id="node13" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="323,237,453,267"/>
-<area shape="rect" id="node18" href="$headers_2interrupts_2idt_8h.html" title="idt.h" alt="" coords="261,160,312,189"/>
-</map>

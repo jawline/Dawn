@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$keyboard__generic__ps2_8c.html#aaba71403c84ae43669b0a6ff5dcf185e" title="initializeKeyboard" alt="" coords="220,57,351,87"/>
-<area shape="rect" id="node5" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="689,5,729,35"/>
-<area shape="rect" id="node7" href="$keyboard__generic__ps2_8c.html#a8a4c199263c1e81791215b333c7c02d1" title="keyboardIrqCallback" alt="" coords="420,57,569,87"/>
-<area shape="rect" id="node12" href="$interrupt__handler_8h.html#aa4621946877eeab8c7032277d1974ff3" title="register_interrupt_handler" alt="" coords="401,111,588,140"/>
-<area shape="rect" id="node10" href="$input_8c.html#a0f24c1c366692eb15f5a4825a40bda6a" title="sendInputMessage" alt="" coords="639,59,780,88"/>
-</map>

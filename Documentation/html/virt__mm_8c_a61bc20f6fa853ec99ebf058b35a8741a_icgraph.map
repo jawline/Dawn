@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$kernel__init_8c.html#afc8d3a4beb30d0fbbb6bfd7a416cd26a" title="Initialize the physical and virtual memory managers uses the last loaded module (The one after the RA..." alt="" coords="279,5,465,35"/>
-<area shape="rect" id="node5" href="$kernel__init_8c.html#a2f7d149ce9d9c12c2d567d231b81986b" title="Run all the initial &#45;one time&#45; kernel initialization routines &#45; once this is called the Kernel assume..." alt="" coords="515,5,627,35"/>
-<area shape="rect" id="node7" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="676,5,729,35"/>
-</map>

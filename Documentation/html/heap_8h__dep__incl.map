@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
-<area shape="rect" id="node5" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="256,83,472,112"/>
-<area shape="rect" id="node7" href="$vfs_8c.html" title="Kernel/sources/fs/vfs.c" alt="" coords="496,83,659,112"/>
-<area shape="rect" id="node9" href="$_kernel_2sources_2heap_2heap_8c.html" title="Kernel/sources/heap/heap.c" alt="" coords="683,83,880,112"/>
-<area shape="rect" id="node11" href="$kheap_8c.html" title="Kernel/sources/heap/kheap.c" alt="" coords="904,83,1109,112"/>
-<area shape="rect" id="node13" href="$syscall_8c.html" title="Kernel/sources/syscall/syscall.c" alt="" coords="1133,83,1352,112"/>
-<area shape="rect" id="node15" href="$terminal__syscalls_8c.html" title="Kernel/sources/syscall/terminal_syscalls.c" alt="" coords="1376,83,1661,112"/>
-</map>

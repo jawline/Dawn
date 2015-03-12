@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$post__init_8c.html" title="Kernel/sources/boot/post_init.c" alt="" coords="5,83,221,112"/>
-<area shape="rect" id="node5" href="$clock__syscalls_8c.html" title="Kernel/sources/syscall/clock_syscalls.c" alt="" coords="245,83,509,112"/>
-<area shape="rect" id="node7" href="$_kernel_2sources_2timers_2clock_8c.html" title="Kernel/sources/timers/clock.c" alt="" coords="533,83,739,112"/>
-</map>

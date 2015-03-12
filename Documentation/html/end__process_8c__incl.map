@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$end__process_8h.html" title="process/end_process.h" alt="" coords="85,83,253,112"/>
-<area shape="rect" id="node5" href="$_kernel_2sources_2syscall_2syscall_8h.html" title="syscall/syscall.h" alt="" coords="108,160,231,189"/>
-<area shape="rect" id="node7" href="$common_8h.html" title="common.h" alt="" coords="43,237,133,267"/>
-<area shape="rect" id="node11" href="$sources_2interrupts_2idt_8h.html" title="interrupts/idt.h" alt="" coords="236,237,351,267"/>
-<area shape="rect" id="node9" href="$int__types_8h.html" title="types/int_types.h" alt="" coords="5,315,136,344"/>
-<area shape="rect" id="node15" href="$isr_8h.html" title="isr.h" alt="" coords="331,315,379,344"/>
-<area shape="rect" id="node17" href="$irq_8h.html" title="irq.h" alt="" coords="403,315,453,344"/>
-</map>

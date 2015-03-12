@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$process_8c.html#af5a135382a0aec005626b91452d84269" title="createNewProcess" alt="" coords="217,57,356,87"/>
-<area shape="rect" id="node15" href="$process_8c.html#a2ab1b490d95e4615cb42ed29ddef2ab6" title="kfork" alt="" coords="260,111,313,140"/>
-<area shape="rect" id="node5" href="$syscall_8c.html#a3172ce9200a8a63b853db9311a8b4fee" title="syscallRequestRunNewProcess" alt="" coords="407,5,620,35"/>
-<area shape="rect" id="node7" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="439,59,588,88"/>
-<area shape="rect" id="node9" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="671,85,788,115"/>
-<area shape="rect" id="node11" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="837,85,963,115"/>
-<area shape="rect" id="node13" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="1012,85,1065,115"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$vfs_8c.html#a45cd72de0b5fe65f00a4436954bf8404" title="Binds the specified target node to the node supplied." alt="" coords="152,5,251,35"/>
-<area shape="rect" id="node5" href="$common_8h.html#a22e98a8cf2e2c79d738830b387cace28" title="itoa" alt="" coords="179,59,224,88"/>
-<area shape="rect" id="node7" href="$common_8h.html#a69c5cef4ad95f487c4a223ff0104efbc" title="memcpy" alt="" coords="163,112,240,141"/>
-<area shape="rect" id="node9" href="$common_8h.html#a1352f6ab5222470fd3d6df50a3102125" title="memset" alt="" coords="164,165,239,195"/>
-<area shape="rect" id="node11" href="$common_8h.html#a7a82515b5d377be04817715c5465b647" title="strcpy" alt="" coords="171,219,232,248"/>
-</map>

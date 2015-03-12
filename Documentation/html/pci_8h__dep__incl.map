@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="5,83,232,112"/>
-<area shape="rect" id="node5" href="$devices_8c.html" title="Kernel/sources/devices/devices.c" alt="" coords="256,83,485,112"/>
-<area shape="rect" id="node7" href="$pci_8c.html" title="Kernel/sources/devices/pci/pci.c" alt="" coords="509,83,731,112"/>
-</map>

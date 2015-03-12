@@ -1,4 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a24a780b4e38547b00f955a39a83a466f" title="Allocates x bytes of memory from a heap, expanding it if necessary." alt="" coords="157,5,315,35"/>
-<area shape="rect" id="node5" href="$kheap_8c.html#aeaa749e04a2e7354317df9b286f9e994" title="Allocates x amount of memory from the kernel heap." alt="" coords="364,5,433,35"/>
-</map>

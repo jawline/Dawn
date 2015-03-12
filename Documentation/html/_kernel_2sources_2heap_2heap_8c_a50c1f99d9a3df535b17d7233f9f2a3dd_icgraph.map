@@ -1,4 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$_kernel_2sources_2heap_2heap_8c.html#a26b7c9cdab062506e23b0adad898871f" title="Free&#39;s the memory at location address on the heap specified. Shrinking if necessary." alt="" coords="149,5,283,35"/>
-<area shape="rect" id="node5" href="$kheap_8c.html#ae4015277190032503df791f56e73d7e9" title="Free memory at location x on the kernel heap making it available again." alt="" coords="332,5,385,35"/>
-</map>

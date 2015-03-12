@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$cpu_8h.html#a59cb60a81e05993ad95f97391856f002" title="cpuidSupported" alt="" coords="172,5,295,35"/>
-<area shape="rect" id="node7" href="$cpuid__features_8c.html#a3ecac8f0f9359ea07582ec1ff09dc184" title="getCpuidFeatures" alt="" coords="167,59,300,88"/>
-<area shape="rect" id="node5" href="$cpuid__support_8c.html#a6273b6f531c284717a3f63c26047efad" title="checkCpuidInline" alt="" coords="349,5,477,35"/>
-</map>

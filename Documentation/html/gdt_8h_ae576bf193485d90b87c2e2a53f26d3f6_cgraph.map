@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$gdt_8c.html#a4f2e163cdb5efdfe0fd358763fe51d72" title="flushGdt" alt="" coords="171,5,245,35"/>
-<area shape="rect" id="node7" href="$gdt_8c.html#ad57e976b13f592834eae0c9e07f71bd5" title="gdt_set_gate" alt="" coords="155,59,261,88"/>
-<area shape="rect" id="node9" href="$common_8h.html#a1352f6ab5222470fd3d6df50a3102125" title="memset" alt="" coords="171,112,245,141"/>
-<area shape="rect" id="node5" href="$gdt_8c.html#a8e57c48390f1d202e56b03d4b294dcd5" title="gdt_flush" alt="" coords="309,5,389,35"/>
-</map>

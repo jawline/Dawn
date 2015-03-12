@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$pci_8c.html#a29147cf7af779acdbf9b138c50c388c0" title="pciDeviceExists" alt="" coords="413,5,533,35"/>
-<area shape="rect" id="node7" href="$pci_8c.html#ac19e489d76d9f2d54bc9f201e633ffbd" title="pciDeviceGetDeviceId" alt="" coords="197,57,357,87"/>
-<area shape="rect" id="node12" href="$pci_8c.html#a2fdb9e8acb51a9cafc0aeb63a014163c" title="pciDeviceGetVendor" alt="" coords="203,111,352,140"/>
-<area shape="rect" id="node5" href="$devices_8c.html#a6e8eb1d30cc91ea3f3329ba1727410dc" title="initializeDevices" alt="" coords="589,32,712,61"/>
-<area shape="rect" id="node9" href="$devices_8c.html#a67f8800c1903adc1273cf3d01c4e2ae6" title="initializePciDevice" alt="" coords="407,59,540,88"/>
-</map>

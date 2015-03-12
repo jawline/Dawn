@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$structfilesystem__node.html" title="{filesystem_node\n|+ name\l+ parent\l+ flags\l+ length\l+ inode\l+ device\l+ write\l+ read\l+ open\l+ close\l+ readdir\l+ finddir\l+ bindnode\l+ unbindnode\l|}" alt="" coords="43,246,168,557"/>
-<area shape="rect" id="node4" href="$structdisk__device.html" title="{disk_device\n|+ BAR0\l+ BAR1\l+ BAR2\l+ BAR3\l+ disk\l+ name\l|}" alt="" coords="5,6,99,178"/>
-<area shape="rect" id="node7" href="$structdirent.html" title="{dirent\n|+ name\l+ ino\l|}" alt="" coords="123,41,197,143"/>
-</map>

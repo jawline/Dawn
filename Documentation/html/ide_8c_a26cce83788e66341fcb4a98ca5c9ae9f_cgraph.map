@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$ide_8c.html#a5e5db185484e15dcc429410d00339869" title="ideSoftReset" alt="" coords="180,57,281,87"/>
-<area shape="rect" id="node5" href="$ide_8c.html#ac6d9c9786b6684f47826bec9c48c0f50" title="ideWaitBusy" alt="" coords="331,5,429,35"/>
-<area shape="rect" id="node7" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="479,57,519,87"/>
-<area shape="rect" id="node10" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="355,109,405,139"/>
-</map>

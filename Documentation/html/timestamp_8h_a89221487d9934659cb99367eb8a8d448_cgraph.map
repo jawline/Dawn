@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$cmos__time_8h.html#a36a323f11d223241bbd980e3b8818a83" title="fill_cmos_tstruct" alt="" coords="169,32,295,61"/>
-<area shape="rect" id="node5" href="$cmos__time_8c.html#a9bd89eb60fe08d3d492d3b3c3c635211" title="cmos_bcd_to_decimal" alt="" coords="345,5,508,35"/>
-<area shape="rect" id="node7" href="$cmos_8h.html#a67111067d690dfb1a9f7ab5ba05a5e3a" title="CMOS_READ" alt="" coords="376,59,477,88"/>
-<area shape="rect" id="node9" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="563,32,603,61"/>
-<area shape="rect" id="node11" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="557,85,608,115"/>
-</map>

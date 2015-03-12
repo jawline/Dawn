@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$pio_8c.html#afbefbfca70639c2ded2e564fe12e64a1" title="pio_28bit_read" alt="" coords="135,61,249,90"/>
-<area shape="rect" id="node5" href="$io_8c.html#a34feca64a4f1e4dc09a64e8693f63bfa" title="inb" alt="" coords="527,62,567,92"/>
-<area shape="rect" id="node7" href="$io_8c.html#a28b0dbe809800b41ca4afa986f98ffaa" title="inw" alt="" coords="367,34,409,64"/>
-<area shape="rect" id="node9" href="$io_8c.html#ab66218b0d63b41250d65dd4164f51eb5" title="outb" alt="" coords="363,88,413,117"/>
-<area shape="rect" id="node11" href="$pio_8c.html#abbb2887af23c6515a5595f7847206c2c" title="pio_28bit_wait_busy_drq" alt="" coords="300,141,476,170"/>
-</map>

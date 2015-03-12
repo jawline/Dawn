@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$process_8c.html#abe7c11b22c98c24e107f6d09868f463f" title="freeProcess" alt="" coords="161,5,257,35"/>
-<area shape="rect" id="node5" href="$system_8c.html#a219b8fbd0c077a8573900da5ffea94a5" title="systemMainProcess" alt="" coords="307,5,456,35"/>
-<area shape="rect" id="node7" href="$system_8c.html#ab17bd525ddbf27d4710ba2db35809a9f" title="systemProcess" alt="" coords="505,5,623,35"/>
-<area shape="rect" id="node9" href="$post__init_8c.html#a30b317fd00ea2a795ad44f74e01cffb1" title="postInitialization" alt="" coords="672,5,797,35"/>
-<area shape="rect" id="node11" href="$boot__highlevel_8c.html#ab7a786ad42abddccc501c8067f946c3c" title="Main entry point of the Kernel. It is passed the multiboot header by GRUB when the bootloader begins ..." alt="" coords="847,5,900,35"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$boot__highlevel_8c.html" title="Kernel/sources/boot/boot_highlevel.c" alt="" coords="5,83,259,112"/>
-<area shape="rect" id="node5" href="$kernel__init_8c.html" title="Kernel/sources/boot/kernel_init.c" alt="" coords="283,83,509,112"/>
-<area shape="rect" id="node7" href="$phys__mm_8c.html" title="Kernel/sources/mm/phys_mm.c" alt="" coords="533,83,755,112"/>
-</map>

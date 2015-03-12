@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$postbox__syscalls_8c.html#ab88f67de56ab20fd05b26a8c242ef6dd" title="This function returns true if the application postbox has data waiting to be read." alt="" coords="165,5,293,35"/>
-<area shape="rect" id="node9" href="$syscall_8c.html#aead17db7d001bbfc192a381d07236367" title="postboxReadTop" alt="" coords="167,59,292,88"/>
-<area shape="rect" id="node5" href="$_applications_2_game_of_life_2sources_2main_8c.html#ac846977f69fcf6e59be102495930be63" title="The entry point of a text&#45;based remake of the game of life for Dawn &#160;int Argc and void* Argv are give..." alt="" coords="343,5,396,35"/>
-<area shape="rect" id="node7" href="$_applications_2_game_of_life_2sources_2main_8c.html#a8d8d3cea2174e13f5aee45e225d6f7cd" title="_start" alt="" coords="445,5,504,35"/>
-</map>

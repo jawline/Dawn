@@ -8,38 +8,35 @@
 #include <process/postbox.h>
 #include <stdlib.h>
 
-process_message postboxTop(process_postbox* pb) {
+process_message* postboxTop(process_postbox* pb, process_message* dest) {
 
-	if (pb->first == 0) {
-		process_message ret;
-		ret.ID = -1; //-1 = No messages left to read
-		return ret;
+	if (!pb->first) {
+		return 0;
 	}
 
 	postbox_message_entry* message = pb->first;
 
+	//Update the linked list head
 	if (pb->first->next != 0) {
 		pb->first = message->next;
 	} else {
 		pb->first = 0;
 	}
 
-	process_message ret = message->data;
+	*dest = message->data;
 	free(message);
 
-	return ret;
+	return dest;
 }
 
-//Get the top message without removing it
-process_message postboxPeek(process_postbox* pb) {
+process_message postboxPeek(process_postbox* pb, process_message* dest) {
 
-	if (pb->first == 0) {
-		process_message ret;
-		ret.ID = -1; //-1 = No messages left to read
-		return ret;
+	if (!pb->first) {
+		return 0;
 	}
 
-	return pb->first->data;
+	*dest = pb->first->data;
+	return dest;
 }
 
 void postboxPush(process_postbox* pb, process_message msg) {

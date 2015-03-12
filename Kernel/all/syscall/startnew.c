@@ -3,7 +3,6 @@
 #include <scheduler/scheduler.h>
 #include <debug/debug.h>
 
-void syscallRequestRunNewProcess(const char* NewProcess) {
-
-	createNewProcess(NewProcess, getCurrentProcess()->executionDirectory);
+void syscallRequestRunNewProcess(const char* executablePath) {
+	createNewProcess(executablePath, getCurrentProcess()->executionDirectory);
 }

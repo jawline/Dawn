@@ -15,6 +15,11 @@ typedef struct {
 typedef struct process_postbox_message postbox_message_entry;
 
 /**
+ * Returns 1 if the postbox is empty, 0 otherwise
+ */
+unsigned char postboxEmpty(process_postbox* pb);
+
+/**
  * Peeks into the postbox without removing anything from it, will copy the first message from the postbox to dest
  * Returns dest if there is a message waiting or 0 otherwise
  */

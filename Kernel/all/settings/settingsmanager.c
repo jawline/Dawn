@@ -82,10 +82,6 @@ const char* settingsReadValue(char const* name, char const* defaultValue) {
 	return entry ? entry->data : defaultValue;
 }
 
-/*
- PRIVATE FUNCTIONS
- */
-
 void parseConfigFile(const char* filePath) {
 
 	DEBUG_PRINT("Parsing configuration file %s\n", filePath);
@@ -111,12 +107,13 @@ void parseConfigFile(const char* filePath) {
 		}
 
 		read_fs(cfgNode, current, 1, (uint8_t*) cfgBuffer + iter);
-
+		
+		//At the end of each line execute the statement
 		if (*(cfgBuffer + iter) == '\n') {
 			*(cfgBuffer + iter) = '\0';
+			memset(cfgBuffer, 0, iter);
 			iter = 0;
 			settingsExecuteLine(cfgBuffer);
-			memset(cfgBuffer, 0, 4096);
 		} else {
 			iter++;
 		}

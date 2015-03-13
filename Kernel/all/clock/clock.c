@@ -7,15 +7,13 @@
 unsigned long systemClockTicks;
 
 //Return the number of clock ticks that have occured since boot
-unsigned long getClockTicks()
-{
+unsigned long getClockTicks() {
 	return systemClockTicks;
 }
 
 linked_list_t* callbackList;
 
 void clockHandleTick() {
-
 	linked_list_t* iter = callbackList;
 
 	while (iter) {

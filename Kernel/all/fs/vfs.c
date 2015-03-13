@@ -129,7 +129,7 @@ fs_node_t* finddir_fs(fs_node_t* node, const char* name) {
 		return node;
 	}
 
-	if (node->finddir != 0) {
+	if (node->finddir) {
 		return (fs_node_t*) node->finddir(node, name);
 	}
 
@@ -140,11 +140,9 @@ fs_node_t* finddir_fs(fs_node_t* node, const char* name) {
  * @brief Binds the specified target node to the node supplied
  */
 void bindnode_fs(fs_node_t* node, fs_node_t* target) {
-
-	if (node->bindnode != 0) {
+	if (node->bindnode) {
 		node->bindnode(node, target);
 	}
-
 }
 
 /**
@@ -152,11 +150,9 @@ void bindnode_fs(fs_node_t* node, fs_node_t* target) {
  */
 
 void unbindnode_fs(fs_node_t* node, fs_node_t* target) {
-
-	if (node->unbindnode != 0) {
+	if (node->unbindnode) {
 		node->unbindnode(node, target);
 	}
-
 }
 
 /**
@@ -165,30 +161,31 @@ void unbindnode_fs(fs_node_t* node, fs_node_t* target) {
  */
 fs_node_t* evaluatePath(const char* path, fs_node_t* current_node) {
 
-	if (path == 0)
+	if (!path) {
 		return 0;
+	}
 
 	if (path[0] == '/') {
 		return evaluatePath(path + 1, init_vfs());
 	}
 
-	char* Buffer = strchr(path, '/');
+	char* buffer = strchr(path, '/');
 
-	if (Buffer == 0) {
+	if (buffer == 0) {
 		if (strcmp(path, "") == 0) {
 			return current_node;
+		} else {
+			return finddir_fs(current_node, path);
 		}
-
-		return finddir_fs(current_node, path);
 	} else {
-		char splitLeftBuffer[Buffer - path + 1];
-		memcpy((void*) splitLeftBuffer, (void*) path, Buffer - path);
-		splitLeftBuffer[Buffer - path] = '\0';
+		char splitLeftBuffer[buffer - path + 1];
+		memcpy((void*) splitLeftBuffer, (void*) path, buffer - path);
+		splitLeftBuffer[buffer - path] = '\0';
 
 		fs_node_t* temp = finddir_fs(current_node, splitLeftBuffer);
 
 		if (temp != 0) {
-			return evaluatePath(Buffer + 1, temp);
+			return evaluatePath(buffer + 1, temp);
 		}
 
 		return 0;

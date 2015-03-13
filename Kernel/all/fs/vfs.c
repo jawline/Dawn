@@ -51,23 +51,20 @@ void close_fs(fs_node_t* node) {
 
 struct dirent readdir_fs(fs_node_t* node, uint32_t idx) {
 
+	struct dirent ret;
+	memset(&ret, 0, sizeof(struct dirent));
+
 	if (!node->parent) {
 		if (idx == 0) {
-			struct dirent ret;
-			memset(&ret, 0, sizeof(struct dirent));
 			strcpy(ret.name, ".");
 			return ret;
 		}
 		idx = idx - 1;
 	} else {
 		if (idx == 0) {
-			struct dirent ret;
-			memset(&ret, 0, sizeof(struct dirent));
 			strcpy(ret.name, ".");
 			return ret;
 		} else if (idx == 1) {
-			struct dirent ret;
-			memset(&ret, 0, sizeof(struct dirent));
 			strcpy(ret.name, "..");
 			return ret;
 		}
@@ -78,8 +75,6 @@ struct dirent readdir_fs(fs_node_t* node, uint32_t idx) {
 		return node->readdir(node, idx);
 	}
 
-	struct dirent ret;
-	memset(&ret, 0, sizeof(struct dirent));
 	strcpy(ret.name, "");
 	return ret;
 }

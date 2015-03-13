@@ -4,56 +4,33 @@
 #include <types/size_t.h>
 #include <fs/vfs.h>
 
-///TODO: Rewrite the line evaluator so its more robust
-
-/*
- GLOBAL VARIABLES
- */
-
+//TODO: Rewrite the line evaluator so its more robust
 settingsEntry* settingsListStart = 0;
-
-/*
- FUNCTION DEFINITIONS
- */
 
 settingsEntry* settingsGetEntry(const char* name);
 void settingsCreateEntry(const char* name, const char* data);
 void parseConfigFile(const char* filePath);
 void settingsModifyEntry(settingsEntry* entry, const char* newData);
 
-/*
- PUBLIC FUNCTIONS
- */
-
-/**
- * Initializes the settings manager
- * Loads base settings from /system/root/kernel.config
- */
 void initializeSettingsManager() {
-
 	DEBUG_PRINT("Initialized settings manager\n");
 	settingsListStart = 0;
 	parseConfigFile("/system/system.config");
 	parseConfigFile("/system/kconf.config");
 }
 
-/**
- * Executes a line, like a query and returns any results there may be
- */
-
 unsigned char settingsExecuteLine(const char* line) {
-
 	size_t length = strlen(line);
 	const char* firstSpace = strchr(line, ' ');
 
-	if (firstSpace == 0) {
+	if (!firstSpace) {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
 		return 0;
 	}
 
 	const char* secondSpace = strchr(firstSpace + 1, ' ');
 
-	if (secondSpace == 0) {
+	if (!secondSpace) {
 		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
 		return 0;
 	}
@@ -98,10 +75,6 @@ unsigned char settingsExecuteLine(const char* line) {
 
 	return 1;
 }
-
-/**
- * Reads the value of the specified settings entry
- **/
 
 const char* settingsReadValue(char const* name, char const* defaultValue) {
 

@@ -12,16 +12,12 @@
    The initial ramdisk is not writable
 */
 
-static uint32_t mem_start = 0;
-
 static uint32_t* start_list = 0;
 static fs_node_t* file_list = 0;
 static uint32_t num_files = 0;
-
 fs_node_t* initrd_root_node = 0;
 
-struct dirent ird_root_readdir (fs_node_t* node, uint32_t idx)
-{
+struct dirent ird_root_readdir (fs_node_t* node, uint32_t idx) {
 	if (num_files > idx)
 	{
 		struct dirent ret;
@@ -36,8 +32,7 @@ struct dirent ird_root_readdir (fs_node_t* node, uint32_t idx)
 	return ret;
 }
 
-fs_node_t* ird_root_finddir (fs_node_t* node, char* name)
-{
+fs_node_t* ird_root_finddir (fs_node_t* node, char* name) {
 	unsigned int i = 0;
 
 	for (i = 0; i < num_files; i++)
@@ -51,33 +46,29 @@ fs_node_t* ird_root_finddir (fs_node_t* node, char* name)
 	return 0;
 }
 
-uint32_t read_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t* buffer)
-{
+uint32_t read_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t* buffer) {
 	if (offset + size > node->length) return 0;
 	uint8_t* loc = (uint8_t*) start_list[node->inode];
 	memcpy(buffer, (void*) (((uint32_t)loc + (uint32_t)offset)), size); //Copy the mem mems
 	return size; //Not much error checking we can do. If a page fault occurs somethings gone wrong =)
 }
 
-uint32_t write_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t *buffer)
-{
+uint32_t write_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t *buffer) {
 	return 0; //Can't write to the RAM disk.
 }
 
 /**
- * @brief Initialize the initial ramdisk so that it is visible to Dawn as a file system which can be read from (Not written to)
- * @callgraph
+ * Initialize the initial ramdisk and bind it to a node on the virtual filesystem.
+ * This ramdisk based filesystem can be read from but not written to
  */
-fs_node_t* initialize_initrd(uint32_t start, char* name, fs_node_t* parent)
-{
+fs_node_t* initialiseRamdisk(void* ramdiskLocation, char const* name, fs_node_t* parent) {
+	
+	if (initrd_root_node) {
+		return initrd_root_node;
+	}
 
-	mem_start = start;
-	struct initial_ramdisk_header* header;
-
-	struct initrd_fent* fe_ptr = 0;
-	uint32_t iter = 0;
-
-	header = (struct initial_ramdisk_header*) start; //Header = the start location
+	//The front of the ramdisk contains a header with all the file descriptors
+	struct initial_ramdisk_header* header = (struct initial_ramdisk_header*) start;
 
 	if (header->ramdisk_magic != RAMMAGIC) {
 		printf("0x%x should be 0x%x\n", header->ramdisk_magic, RAMMAGIC);
@@ -88,21 +79,16 @@ fs_node_t* initialize_initrd(uint32_t start, char* name, fs_node_t* parent)
 	initrd_root_node = malloc(sizeof(fs_node_t));
 
 	//Find the file chunk header
-	uint32_t* nm_files = (uint32_t*) ((uint32_t) ((uint32_t) start) + sizeof(struct initial_ramdisk_header));
-
-	num_files = *nm_files;
+	uint32_t nm_files = *((uint32_t*) ((uint32_t) ((uint32_t) start) + sizeof(struct initial_ramdisk_header)));
 
 	start_list = malloc(sizeof(uint32_t) * (*nm_files));
 	file_list = malloc(sizeof(fs_node_t) * (*nm_files));
 
-	fe_ptr = (struct initrd_fent*) (((uint32_t) nm_files) + sizeof(uint32_t));
-
+	struct initrd_fent* fe_ptr = (struct initrd_fent*) (((uint32_t) nm_files) + sizeof(uint32_t));
+	
 	//Add all the files to a file list.
-	for (iter = 0; iter < (*nm_files); iter++)
-	{
-
+	for (unsigned int iter = 0; iter < (*nm_files); iter++) {
 		start_list[iter] = (start + fe_ptr->start) - 1;
-
 		memset(&file_list[iter], 0, sizeof(fs_node_t));
 		strcpy(file_list[iter].name, fe_ptr->name);
 		file_list[iter].inode = iter;
@@ -110,7 +96,6 @@ fs_node_t* initialize_initrd(uint32_t start, char* name, fs_node_t* parent)
 		file_list[iter].write = (io_operation) write_ird;
 		file_list[iter].read = (io_operation) read_ird;
 		file_list[iter].parent = initrd_root_node;
-
 		fe_ptr++;
 	}
 

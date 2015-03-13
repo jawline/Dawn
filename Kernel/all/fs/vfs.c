@@ -4,28 +4,17 @@
 #include "rfs.h"
 #include <debug/debug.h>
 #include <common.h>
-#include "rfs.h"
-
-/*
- The intent of this file is to create a set of functions providing the kernel with easy manipulation of the virtual file system.
- the file also contains a pointer to the root node of root_fs for easy access
-
- STATUS: Working, no immediate revision needed
- */
 
 fs_node_t* root_fs = 0;
 
-void init_root_fs() {
+void initialiseRootFilesytem() {
 	root_fs = createRfsDirectory("root", 0);
 }
 
 fs_node_t* init_vfs() {
-
-	if (root_fs != 0) {
-		return root_fs;
+	if (!root_fs) {
+		initialiseRootFilesytem();
 	}
-
-	init_root_fs();
 	return root_fs;
 }
 
@@ -38,63 +27,38 @@ int is_directory(fs_node_t* node) {
 	return 0;
 }
 
-unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size,
-		uint8_t* buffer) {
-
-	// Has the node got a read callback?
-	if (node->read != 0) {
-		return node->read(node, offset, size, buffer);
-	} else {
-		return 0;
-	}
-
+unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8_t* buffer) {
+	return node->read && node->read(node, offset, size, buffer);
 }
 
-unsigned long write_fs(fs_node_t* node, unsigned long offset,
-		unsigned long size, uint8_t* buffer) {
-
-	// Has the node got a read callback?
-	if (node->write != 0) {
-		return node->write(node, offset, size, buffer);
-	}
-
-	else {
-		return 0;
-	}
-
+unsigned long write_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8_t* buffer) {
+	return node->write && node->write(node, offset, size, buffer);
 }
 
 void open_fs(fs_node_t* node) {
-
-	if (node->open != 0) {
+	if (node->open) {
 		DEBUG_PRINT("Opening file %s\n", node->name);
 		node->open(node);
 	}
-
-	return;
 }
 
 void close_fs(fs_node_t* node) {
-
-	if (node->close != 0) {
+	if (node->close) {
 		DEBUG_PRINT("Closing file %s\n", node->name);
 		node->close(node);
 	}
-
-	return;
 }
 
 struct dirent readdir_fs(fs_node_t* node, uint32_t idx) {
 
-	if (node->parent == 0) {
+	if (!node->parent) {
 		if (idx == 0) {
 			struct dirent ret;
 			memset(&ret, 0, sizeof(struct dirent));
 			strcpy(ret.name, ".");
 			return ret;
-		} else {
-			idx = idx - 1;
 		}
+		idx = idx - 1;
 	} else {
 		if (idx == 0) {
 			struct dirent ret;
@@ -106,12 +70,11 @@ struct dirent readdir_fs(fs_node_t* node, uint32_t idx) {
 			memset(&ret, 0, sizeof(struct dirent));
 			strcpy(ret.name, "..");
 			return ret;
-		} else {
-			idx = idx - 2;
 		}
+		idx = idx - 2;
 	}
 
-	if (node->readdir != 0) {
+	if (node->readdir) {
 		return node->readdir(node, idx);
 	}
 

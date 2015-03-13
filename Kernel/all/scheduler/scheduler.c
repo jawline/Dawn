@@ -186,7 +186,7 @@ void schedulerGlobalMessage(process_message msg, unsigned int bit) {
 
 		//Test if this process wants to hear about this event
 		if (iter->process_pointer->postboxFlags & bit == bit) {
-			postboxPush(&iter->process_pointer->processPostbox, msg);
+			postboxPush(&iter->process_pointer->processPostbox, &msg);
 		}
 
 		if (iter->next == list_root)

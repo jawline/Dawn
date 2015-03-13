@@ -61,14 +61,14 @@ uint32_t write_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t *buf
  * Initialize the initial ramdisk and bind it to a node on the virtual filesystem.
  * This ramdisk based filesystem can be read from but not written to
  */
-fs_node_t* initialiseRamdisk(void* ramdiskLocation, char const* name, fs_node_t* parent) {
+fs_node_t* initialiseRamdisk(uint8_t* ramdiskLocation, char const* name, fs_node_t* parent) {
 	
 	if (initrd_root_node) {
 		return initrd_root_node;
 	}
 
 	//The front of the ramdisk contains a header with all the file descriptors
-	struct initial_ramdisk_header* header = (struct initial_ramdisk_header*) start;
+	struct initial_ramdisk_header* header = (struct initial_ramdisk_header*) ramdiskLocation;
 
 	if (header->ramdisk_magic != RAMMAGIC) {
 		printf("0x%x should be 0x%x\n", header->ramdisk_magic, RAMMAGIC);
@@ -79,16 +79,16 @@ fs_node_t* initialiseRamdisk(void* ramdiskLocation, char const* name, fs_node_t*
 	initrd_root_node = malloc(sizeof(fs_node_t));
 
 	//Find the file chunk header
-	uint32_t nm_files = *((uint32_t*) ((uint32_t) ((uint32_t) start) + sizeof(struct initial_ramdisk_header)));
+	uint32_t nm_files = *((uint32_t*) ((uint32_t) ((uint32_t) ramdiskLocation) + sizeof(struct initial_ramdisk_header)));
 
-	start_list = malloc(sizeof(uint32_t) * (*nm_files));
-	file_list = malloc(sizeof(fs_node_t) * (*nm_files));
+	start_list = malloc(sizeof(uint32_t) * nm_files);
+	file_list = malloc(sizeof(fs_node_t) * nm_files);
 
-	struct initrd_fent* fe_ptr = (struct initrd_fent*) (((uint32_t) nm_files) + sizeof(uint32_t));
+	struct initrd_fent* fe_ptr = (struct initrd_fent*) ramdiskLocation + sizeof(struct initial_ramdisk_header) + sizeof(uint32_t);
 	
 	//Add all the files to a file list.
-	for (unsigned int iter = 0; iter < (*nm_files); iter++) {
-		start_list[iter] = (start + fe_ptr->start) - 1;
+	for (unsigned int iter = 0; iter < nm_files; iter++) {
+		start_list[iter] = (ramdiskLocation + fe_ptr->start) - 1;
 		memset(&file_list[iter], 0, sizeof(fs_node_t));
 		strcpy(file_list[iter].name, fe_ptr->name);
 		file_list[iter].inode = iter;

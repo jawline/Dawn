@@ -33,7 +33,7 @@ process_message* postboxTop(process_postbox* pb, process_message* dest) {
 	return dest;
 }
 
-process_message postboxPeek(process_postbox* pb, process_message* dest) {
+process_message* postboxPeek(process_postbox* pb, process_message* dest) {
 
 	if (!pb->first) {
 		return 0;

@@ -51,8 +51,7 @@ void initializeIdt() {
  @brief This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
  @callgraph
  */
-void initializeRamdisk(void* ramdisk_phys_start, void* ramdisk_phys_end,
-		fs_node_t * root) {
+void initializeRamdisk(uint8_t* ramdisk_phys_start, uint8_t* ramdisk_phys_end, fs_node_t* root) {
 
 	size_t ramdisk_size = ramdisk_phys_end - ramdisk_phys_start;
 
@@ -61,21 +60,24 @@ void initializeRamdisk(void* ramdisk_phys_start, void* ramdisk_phys_end,
 	uint8_t* ramdiskNewLocation = malloc(ramdisk_size);
 
 	//Identity map the ramdisk (1x1 mapping between virtual and physical)
-	for (uint8_t* current = (uint8_t*) ramdisk_phys_start;
-			current < end_mapping_location; current += PAGE_SIZE) {
+	for (uint8_t* current = ramdisk_phys_start;
+			current < ramdisk_phys_end; current += PAGE_SIZE) {
 		map(current, current, MEMORY_RESTRICTED_ACCESS);
 	}
 
-	memcpy(ramdiskNewLocation, start_mapping_location, ramdisk_size);
+	memcpy(ramdiskNewLocation, ramdisk_phys_start, ramdisk_size);
 
 	//Unmap the crap we just ID mapped
-	for (uint8_t* current = (uint8_t*) ramdisk_phys_start;
-			current < end_mapping_location; current += PAGE_SIZE) {
+	for (uint8_t* current = ramdisk_phys_start;
+			current < ramdisk_phys_end; current += PAGE_SIZE) {
 		unmap(current);
 	}
 
 	unsigned char digest[16];
-	uint8_t* ramdiskDataLocation = ramdisk_new_location + sizeof(struct initial_ramdisk_header);
+	
+	struct initial_ramdisk_header* head = (struct initial_ramdisk_header*) ramdiskNewLocation;
+	uint8_t* ramdiskDataLocation = ramdiskNewLocation + sizeof(struct initial_ramdisk_header);
+
 	MDData(ramdiskDataLocation, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
 
 	//Print out RAMDisk MD5 hash
@@ -95,7 +97,7 @@ void initializeRamdisk(void* ramdisk_phys_start, void* ramdisk_phys_end,
 	ASSERT(MDCompare(head->ramdisk_checksum, digest), "Ramdisk CHECKSUM bad");
 
 	//Well it looks like this RAMDisk is legit & loaded fine
-	fs_node_t* initrd = initialiseRamdisk(ramdisk_new_location, "system", init_vfs());
+	fs_node_t* initrd = initialiseRamdisk(ramdiskNewLocation, "system", init_vfs());
 	bindnode_fs(init_vfs(), initrd);
 }
 

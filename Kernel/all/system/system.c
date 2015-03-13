@@ -38,19 +38,12 @@ void systemMainProcess() {
 	//Loop and continually halt the processor, this will cause the processor to idle between interrupts
 	for (;;) {
 
+		process_message msg;
+
 		//Check all messages
-		while (1) {
-
-			//Grab the top message
-			process_message pb_top = postboxTop(
-					&getCurrentProcess()->processPostbox);
-
-			if (pb_top.ID != -1) {
-				//Its a message to be handled
-			} else {
-				break;
-			}
-
+		while (postboxTop(&getCurrentProcess()->processPostbox, &msg)) {
+			//TODO: Do something
+			DEBUG_PRINT("System has recieved a message");
 		}
 
 		numNonSystem = 0;

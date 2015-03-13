@@ -61,9 +61,8 @@ void freeOrders(new_process_orders_t* orders) {
  */
 void newProcessEntryPoint() {
 
-	process_message msg = postboxTop(&getCurrentProcess()->processPostbox);
-
-	if (msg.ID == LOAD_MESSAGE) {
+	process_message msg;
+	if (postboxTop(&getCurrentProcess()->processPostbox, &msg) && msg.ID == LOAD_MESSAGE) {
 		int userMode = 0;
 		new_process_orders_t* orders =
 				(new_process_orders_t*) msg.messageAdditionalData;
@@ -126,9 +125,9 @@ void freeProcess(process_t* process) {
 		free(process->usedListRoot);
 	}
 
-	while (process->processPostbox.first != 0) {
-		postboxTop(&process->processPostbox);
-	}
+	//Empty the postbox
+	process_message msg;
+	while (postboxTop(&process->processPostbox, &msg)) {}
 
 	free(process);
 }
@@ -237,7 +236,7 @@ int createNewProcess(const char* filename, fs_node_t* where) {
 	InfomaticMessage.messageAdditionalData = (MEM_LOC) makeOrders(filename,
 			where);
 
-	postboxPush(&new_process->processPostbox, InfomaticMessage);
+	postboxPush(&new_process->processPostbox, &InfomaticMessage);
 
 	schedulerAdd(new_process);
 

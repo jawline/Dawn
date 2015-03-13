@@ -146,7 +146,7 @@ fs_node_t* createRfsDirectory(char * name, fs_node_t* parent)
 		rfs_entrys_pointer = rfse_n;
 
 		fs_node_t* ret = (fs_node_t*) malloc(sizeof(fs_node_t));
-		memset(ret, 0, sizeof(fs_node_t)); //Init it
+		memset(ret, 0, sizeof(fs_node_t));
 		strcpy(ret->name, name);
 		ret->flags |= FS_DIR;
 		ret->inode = num_rfs_entrys - 1;

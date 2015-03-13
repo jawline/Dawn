@@ -26,18 +26,12 @@ struct dirent root_readdir (fs_node_t* node, uint32_t idx) {
 }
 
 fs_node_t* root_finddir (fs_node_t* node, char* name) {
-
 	rfs_t* rfs_struct = &rfs_entrys_pointer[node->inode];
-	uint32_t iter = 0;
-
-	for (iter = 0; iter < rfs_struct->num_directory_entrys; iter++)
-	{
-		if (strcmp(rfs_struct->directory_entrys[iter]->name, name) == 0)
-		{
+	for (unsigned int = 0; iter < rfs_struct->num_directory_entrys; iter++) {
+		if (strcmp(rfs_struct->directory_entrys[iter]->name, name) == 0){
 			return rfs_struct->directory_entrys[iter];
 		}
 	}
-
 	return 0;
 }
 

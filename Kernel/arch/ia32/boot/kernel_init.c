@@ -51,40 +51,32 @@ void initializeIdt() {
  @brief This segment of code makes a copy of the RAMDISK module loaded by the bootloader in a reserved memory area in the kheap
  @callgraph
  */
-void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end,
+void initializeRamdisk(void* ramdisk_phys_start, void* ramdisk_phys_end,
 		fs_node_t * root) {
 
 	size_t ramdisk_size = ramdisk_phys_end - ramdisk_phys_start;
 
 	printf("Ramdisk Size: 0x%x bytes\n", ramdisk_size);
 
-	void* ramdisk_new_location = malloc(ramdisk_size);
-
-	MEM_LOC start_mapping_location = ramdisk_phys_start;
-	MEM_LOC end_mapping_location = ramdisk_phys_end;
+	uint8_t* ramdiskNewLocation = malloc(ramdisk_size);
 
 	//Identity map the ramdisk (1x1 mapping between virtual and physical)
-	for (MEM_LOC current = start_mapping_location;
+	for (uint8_t* current = (uint8_t*) ramdisk_phys_start;
 			current < end_mapping_location; current += PAGE_SIZE) {
 		map(current, current, MEMORY_RESTRICTED_ACCESS);
 	}
 
-	memcpy(ramdisk_new_location, start_mapping_location, ramdisk_size);
+	memcpy(ramdiskNewLocation, start_mapping_location, ramdisk_size);
 
 	//Unmap the crap we just ID mapped
-	for (MEM_LOC current = start_mapping_location;
+	for (uint8_t* current = (uint8_t*) ramdisk_phys_start;
 			current < end_mapping_location; current += PAGE_SIZE) {
 		unmap(current);
 	}
 
-	struct initial_ramdisk_header* head = ramdisk_new_location;
-
 	unsigned char digest[16];
-	MEM_LOC ramdiskDataLocation = ((MEM_LOC) head)
-			+ sizeof(struct initial_ramdisk_header);
-
-	MDData(ramdiskDataLocation,
-			head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
+	uint8_t* ramdiskDataLocation = ramdisk_new_location + sizeof(struct initial_ramdisk_header);
+	MDData(ramdiskDataLocation, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
 
 	//Print out RAMDisk MD5 hash
 	printf("Digest on our side: ");
@@ -100,12 +92,10 @@ void initializeRamdisk(MEM_LOC ramdisk_phys_start, MEM_LOC ramdisk_phys_end,
 	}
 	printf("\n");
 
-	ASSERT(MDCompare(head->ramdisk_checksum, digest) != 0,
-			"Ramdisk CHECKSUM bad");
+	ASSERT(MDCompare(head->ramdisk_checksum, digest), "Ramdisk CHECKSUM bad");
 
 	//Well it looks like this RAMDisk is legit & loaded fine
-	fs_node_t* initrd = initialize_initrd(ramdisk_new_location, "system",
-			init_vfs());
+	fs_node_t* initrd = initialiseRamdisk(ramdisk_new_location, "system", init_vfs());
 	bindnode_fs(init_vfs(), initrd);
 }
 

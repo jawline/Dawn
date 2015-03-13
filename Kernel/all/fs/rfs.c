@@ -46,23 +46,27 @@ void root_bind_node(fs_node_t* boundto, fs_node_t* node) {
 
 	rfs_struct->num_directory_entrys++;
 
-	if (rfs_struct->directory_entrys == 0) //First bind
-	{
+	//First bind
+	if (rfs_struct->directory_entrys == 0) {
 		rfs_struct->directory_entrys = (fs_node_t**) malloc(sizeof(fs_node_t*) * rfs_struct->num_directory_entrys);
-
-		rfs_struct->directory_entrys[rfs_struct->num_directory_entrys - 1] = node;
-
+		rfs_struct->directory_entrys[0] = node;
 	} else {
+		//Expand directory entries array
 		fs_node_t** dir_entrys_new = (fs_node_t**) malloc(sizeof(fs_node_t*) * rfs_struct->num_directory_entrys);
-		memcpy(dir_entrys_new, rfs_struct->directory_entrys, sizeof(fs_node_t*) * (rfs_struct->num_directory_entrys - 1));
+		memcpy(dir_entrys_new, rfs_struct->directory_entrys, sizeof(fs_node_t*) * (rfs_struct->num_directory_entrys));
 		dir_entrys_new[rfs_struct->num_directory_entrys - 1] = node;
-
+		
+		//Free old data
 		free(rfs_struct->directory_entrys);
+		
+		//Replace with new data
 		rfs_struct->directory_entrys = dir_entrys_new;
 	}
 
 	boundto->length = rfs_struct->num_directory_entrys;
-
+	
+	//Update the parent of the bound node
+	node->parent = boundto;
 	return;
 }
 
@@ -98,6 +102,7 @@ void root_unbind_node(fs_node_t* boundto, fs_node_t* node) {
 	}
 
 	boundto->length = rfs_struct->num_directory_entrys;
+	node->parent = 0;
 
 	return;
 }

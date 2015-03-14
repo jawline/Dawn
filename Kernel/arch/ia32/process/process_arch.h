@@ -14,7 +14,7 @@
  * It must have a set of common properties across all architectures as well
  * as whatever other properties the architecture requires to store the process
  */
-struct processStructure {
+typedef struct processStructure {
 
 	/**
 	 * The process ID or pID unique to this process (At this run)
@@ -72,9 +72,7 @@ struct processStructure {
 	 * The return value of this process is stored here when it is set
 	 */
 	int returnValue;
-};
-
-typedef struct processStructure process_t;
+} process_t;
 
 void switchProcess(process_t* from, process_t* proc);
 void setProcessInputBuffer(process_t* process, char* data, unsigned int len);

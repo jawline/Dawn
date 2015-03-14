@@ -135,22 +135,20 @@ int schedulerNumProcesses() {
 }
 
 void schedulerKillCurrentProcess() {
-
 	ASSERT(list_current, "Cannot kill current - no executing process");
 	process_t* process = getCurrentProcess();
 	process->shouldDestroy = 1;
 	schedulerYield();
-	for (;;) {
-	}
+	for (;;) {}
 }
 
 process_t* schedulerReturnProcess(unsigned int iter) {
 	scheduler_proc* iterator = list_root;
-	unsigned int i = 0;
 
-	for (i = 0; i < iter; i++) {
-		if (iterator->next == list_root)
+	for (unsigned int i = 0; i < iter; i++) {
+		if (iterator->next == list_root) {
 			return 0;
+		}
 		iterator = iterator->next;
 	}
 

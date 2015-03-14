@@ -60,6 +60,7 @@ void kernelMouseCallback(uint32_t device, uint32_t main, void* additional) {
 int alive = 0;
 
 void postInitialization() {
+
 	//Disable interrupts
 	disableInterrupts();
 

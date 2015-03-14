@@ -11,8 +11,6 @@ process_t* systemIdlePtr = 0;
 process_t* systemProcPtr = 0;
 
 void systemIdleProcess() {
-	systemIdlePtr = getCurrentProcess();
-
 	for (;;) {
 		//Halt the processor tell the next interrupt
 		__asm__ volatile("hlt");
@@ -47,15 +45,14 @@ void systemMainProcess() {
 		}
 
 		numNonSystem = 0;
-
 		schedulerIter = 0;
+
 		//Shut down all processes that need a-killin
 		while (1) {
 			schedulerPtr = schedulerReturnProcess(schedulerIter);
 
-			if (schedulerPtr == 0) {
-				break;
-			} else if (schedulerPtr->shouldDestroy == 1) {
+			if (schedulerPtr != 0 && schedulerPtr->shouldDestroy == 1) {
+
 				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
 				disableInterrupts();
 
@@ -81,12 +78,10 @@ void systemMainProcess() {
 
 				//Enable interrupts once the deed is done
 				enableInterrupts();
-			} else {
 			}
 
 			//Count up the number of non system processes (To check there is a interface active)
-			if ((schedulerPtr != systemIdlePtr)
-					&& (schedulerPtr != systemProcPtr)) {
+			if (schedulerPtr && schedulerPtr != systemIdlePtr && schedulerPtr != systemProcPtr) {
 				numNonSystem++;
 			}
 
@@ -131,21 +126,12 @@ void systemProcess() {
 	enableInterrupts();
 
 	if (forkedID == 1) {
-
-		//Create the main system process
+		systemProcPtr = getCurrentProcess();
 		setProcessName(getCurrentProcess(), "System");
-
-		//And run it
 		systemMainProcess();
-
 	} else {
-
-		//Create the idle process
+		systemIdlePtr = getCurrentProcess();
 		setProcessName(getCurrentProcess(), "SystemIdle");
-
-		//And jump into the idle loop
 		systemIdleProcess();
-
 	}
-
 }

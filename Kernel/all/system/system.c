@@ -29,10 +29,6 @@ void systemMainProcess() {
 	//Store a pointer to the current process to be used when checking close requests
 	systemProcPtr = getCurrentProcess();
 
-	int schedulerIter = 0;
-	process_t* schedulerPtr = 0;
-	int numNonSystem = 0;
-
 	//Loop and continually halt the processor, this will cause the processor to idle between interrupts
 	for (;;) {
 
@@ -44,14 +40,16 @@ void systemMainProcess() {
 			DEBUG_PRINT("System has recieved a message");
 		}
 
-		numNonSystem = 0;
-		schedulerIter = 0;
+		int numNonSystem = 0;
+		int schedulerIter = 0;
+		process_t* schedulerPtr;
 
 		//Shut down all processes that need a-killin
-		while (1) {
-			schedulerPtr = schedulerReturnProcess(schedulerIter);
+		while (schedulerPtr = schedulerReturnProcess(schedulerIter)) {
 
-			if (schedulerPtr != 0 && schedulerPtr->shouldDestroy == 1) {
+			printf("Process %s state %i\n", schedulerPtr->name, schedulerPtr->shouldDestroy);
+
+			if (schedulerPtr->shouldDestroy == 1) {
 
 				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted
 				disableInterrupts();
@@ -81,7 +79,7 @@ void systemMainProcess() {
 			}
 
 			//Count up the number of non system processes (To check there is a interface active)
-			if (schedulerPtr && schedulerPtr != systemIdlePtr && schedulerPtr != systemProcPtr) {
+			if (schedulerPtr != systemIdlePtr && schedulerPtr != systemProcPtr) {
 				numNonSystem++;
 			}
 
@@ -92,8 +90,7 @@ void systemMainProcess() {
 		if (numNonSystem == 0) {
 
 			//Is the system set to restart the boot program when there are no other active programs
-			if (strcmp(settingsReadValue("system.boot_program_keep_alive", "yes"),
-					"yes") == 0) {
+			if (strcmp(settingsReadValue("system.boot_program_keep_alive", "yes"), "yes") == 0) {
 
 				//Disable interrupts while the new process is being created
 				disableInterrupts();

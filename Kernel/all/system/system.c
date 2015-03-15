@@ -47,8 +47,6 @@ void systemMainProcess() {
 		//Shut down all processes that need a-killin
 		while (schedulerPtr = schedulerReturnProcess(schedulerIter)) {
 
-			printf("Process %s state %i\n", schedulerPtr->name, schedulerPtr->shouldDestroy);
-
 			if (schedulerPtr->shouldDestroy == 1) {
 
 				//Must remove this process and kill it! so disable interrupts don't wanna be interrupted

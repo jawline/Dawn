@@ -20,35 +20,37 @@ void initializeSettingsManager() {
 }
 
 unsigned char settingsExecuteLine(const char* line) {
+	DEBUG_PRINT("Processing setting query (%s)\n", line);
+
 	size_t length = strlen(line);
 	const char* firstSpace = strchr(line, ' ');
 
 	if (!firstSpace) {
-		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
+		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND (%s)\n", line);
 		return 0;
 	}
 
 	const char* secondSpace = strchr(firstSpace + 1, ' ');
 
 	if (!secondSpace) {
-		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
+		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND (%s)\n", line);
 		return 0;
 	}
 
 	const char* end = line + length;
 
 	if (*(firstSpace + 1) != '=') {
-		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
+		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND (%s)\n", line);
 		return 0;
 	}
 
 	if (firstSpace - line == 0) {
-		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
+		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND (%s)\n", line);
 		return 0;
 	}
 
 	if (end - secondSpace == 0) {
-		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND\n");
+		DEBUG_PRINT("SETTINGS: ERROR INVALID COMMAND (%s)\n", line);
 		return 0;
 	}
 
@@ -88,8 +90,9 @@ void parseConfigFile(const char* filePath) {
 
 	fs_node_t* cfgNode = evaluatePath(filePath, init_vfs());
 
-	if (cfgNode == 0)
+	if (cfgNode == 0) {
 		return;
+	}
 
 	char* cfgBuffer = malloc(4096);
 	memset(cfgBuffer, 0, 4096);
@@ -100,25 +103,26 @@ void parseConfigFile(const char* filePath) {
 
 	open_fs(cfgNode);
 
-	while (1) {
+	while (read_fs(cfgNode, current, 1, (uint8_t*) cfgBuffer + iter)) {
 
-		if (current >= cfgNode->length) {
-			break;
-		}
-
-		read_fs(cfgNode, current, 1, (uint8_t*) cfgBuffer + iter);
-		
 		//At the end of each line execute the statement
 		if (*(cfgBuffer + iter) == '\n') {
+
+			//Null terminate the buffer
 			*(cfgBuffer + iter) = '\0';
-			memset(cfgBuffer, 0, iter);
-			iter = 0;
+
+			//Process the line
 			settingsExecuteLine(cfgBuffer);
+			iter = 0;
 		} else {
 			iter++;
 		}
 
 		current++;
+	}
+
+	if (iter) {
+		settingsExecuteLine(cfgBuffer);
 	}
 
 	close_fs(cfgNode);

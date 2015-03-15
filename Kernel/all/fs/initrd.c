@@ -18,8 +18,7 @@ static uint32_t num_files = 0;
 fs_node_t* initrd_root_node = 0;
 
 struct dirent ird_root_readdir (fs_node_t* node, uint32_t idx) {
-	if (num_files > idx)
-	{
+	if (num_files > idx) {
 		struct dirent ret;
 		memset(&ret, 0, sizeof(struct dirent));
 		strcpy(ret.name, file_list[idx].name);
@@ -34,11 +33,8 @@ struct dirent ird_root_readdir (fs_node_t* node, uint32_t idx) {
 
 fs_node_t* ird_root_finddir (fs_node_t* node, char* name) {
 	unsigned int i = 0;
-
-	for (i = 0; i < num_files; i++)
-	{
-		if (strcmp(file_list[i].name, name) == 0)
-		{
+	for (i = 0; i < num_files; i++) {
+		if (strcmp(file_list[i].name, name) == 0) {
 			return &file_list[i];
 		}
 	}
@@ -79,15 +75,15 @@ fs_node_t* initialiseRamdisk(uint8_t* ramdiskLocation, char const* name, fs_node
 	initrd_root_node = malloc(sizeof(fs_node_t));
 
 	//Find the file chunk header
-	uint32_t nm_files = *((uint32_t*) ((uint32_t) ((uint32_t) ramdiskLocation) + sizeof(struct initial_ramdisk_header)));
+	num_files = *((uint32_t*) ((uint32_t) ((uint32_t) ramdiskLocation) + sizeof(struct initial_ramdisk_header)));
 
-	start_list = malloc(sizeof(uint32_t) * nm_files);
-	file_list = malloc(sizeof(fs_node_t) * nm_files);
+	start_list = malloc(sizeof(uint32_t) * num_files);
+	file_list = malloc(sizeof(fs_node_t) * num_files);
 
-	struct initrd_fent* fe_ptr = (struct initrd_fent*) ramdiskLocation + sizeof(struct initial_ramdisk_header) + sizeof(uint32_t);
+	struct initrd_fent* fe_ptr = (struct initrd_fent*) (ramdiskLocation + sizeof(struct initial_ramdisk_header) + sizeof(uint32_t));
 	
 	//Add all the files to a file list.
-	for (unsigned int iter = 0; iter < nm_files; iter++) {
+	for (unsigned int iter = 0; iter < num_files; iter++) {
 		start_list[iter] = (ramdiskLocation + fe_ptr->start) - 1;
 		memset(&file_list[iter], 0, sizeof(fs_node_t));
 		strcpy(file_list[iter].name, fe_ptr->name);

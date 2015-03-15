@@ -85,32 +85,26 @@ int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode) {
 		return LOAD_ERROR_BAD_PLATFORM;
 	}
 
+	DEBUG_PRINT("Headers valid\n");
+
 	//This segment of code correlates to the loading of the data into virtual memory
 
 	//Iterate through every program header
-	unsigned int header_iter = 0;
-	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders;
-			++header_iter) {
-
+	for (unsigned int header_iter = 0; header_iter < fileInfo->m_numProgramHeaders; ++header_iter) {
 		e32_pheader program_header = fileInfo->m_programHeaders[header_iter];
-
 		if (mapMemoryUsingHeader(program_header) != 1) {
 			DEBUG_PRINT("Error mapping program header %i\n", header_iter);
 			return LOAD_ERROR_BAD_MAP;
 		}
-
 	}
 
 	//Load the object blocks that where just mapped
-	for (header_iter = 0; header_iter < fileInfo->m_numProgramHeaders;
-			++header_iter) {
-
+	for (unsigned int header_iter = 0; header_iter < fileInfo->m_numProgramHeaders; ++header_iter) {
 		e32_pheader program_header = fileInfo->m_programHeaders[header_iter];
 		if (loadToMemoryUsingHeader(program_header, Node) != 1) {
 			DEBUG_PRINT("Error unable to load header %i\n", header_iter);
 			return LOAD_ERROR_BAD_LOAD;
 		}
-
 	}
 
 	//This segment of code correlates to its execution

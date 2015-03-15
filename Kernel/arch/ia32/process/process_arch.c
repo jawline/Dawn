@@ -73,8 +73,7 @@ void newProcessEntryPoint() {
 		freeOrders(orders);
 
 		if (!node || !node->parent) {
-			DEBUG_PRINT(
-					"Unable to evaluate node. process could not load file specified\n");
+			DEBUG_PRINT("Unable to evaluate node. process could not load file specified\n");
 			schedulerKillCurrentProcess();
 		} else {
 			setProcessExecutionDirectory(getCurrentProcess(), node->parent);

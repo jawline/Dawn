@@ -5,12 +5,7 @@ static unsigned int g_screenMode;
 static unsigned int g_screenWidth;
 static unsigned int g_screenHeight;
 
-/**
- * @brief Initialize the screen if one exists
- * @callgraph
- */
-void initializeScreen()
-{
+void initializeScreen() {
 	//The screen starts in text mode (The BIOS & GRUB should see to that)
 	g_screenMode = MODE_TEXTMODE;
 
@@ -22,33 +17,19 @@ void initializeScreen()
 	text_mode_clearscreen();
 }
 
-//Get the screen mode
-unsigned int getScreenMode()
-{
+unsigned int getScreenMode() {
 	return g_screenMode;
 }
 
-//Get a screen attribute (Width, height, Mode, etc)
-unsigned int getScreenAttribute(unsigned int ID)
-{
-	switch (ID)
-	{
+int getScreenAttribute(unsigned int ID) {
+	switch (ID) {
 		case SCREEN_MODE:
-		{
 			return g_screenMode;
-		}
-
 		case SCREEN_WIDTH:
-		{
 			return g_screenWidth;
-		}
-
 		case SCREEN_HEIGHT:
-		{
 			return g_screenHeight;
-		}
-		
-		default:
-			return 0;
 	}
+	
+	return -1;
 }

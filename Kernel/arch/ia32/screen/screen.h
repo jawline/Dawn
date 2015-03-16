@@ -29,7 +29,7 @@ unsigned int getScreenMode();
 /**
  * Get a screen attribute
  */
-unsigned int getScreenAttribute(unsigned int ID)
+int getScreenAttribute(unsigned int ID);
 
 void text_mode_clearscreen();
 void text_mode_putc(char Character);

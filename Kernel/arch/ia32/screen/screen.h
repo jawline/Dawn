@@ -16,8 +16,20 @@
 #define BROWN 6
 #define GREEN 2
 
+/**
+ * Initialize the screen if one exists
+ */
 void initializeScreen();
-unsigned int get_attr(unsigned int ID);
+
+/**
+ * Get the current screen mode
+ */
+unsigned int getScreenMode();
+
+/**
+ * Get a screen attribute
+ */
+unsigned int getScreenAttribute(unsigned int ID)
 
 void text_mode_clearscreen();
 void text_mode_putc(char Character);

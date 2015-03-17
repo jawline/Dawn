@@ -28,7 +28,6 @@ file_helper* helper_list;
 struct file_list_entry file_list;
 
 unsigned int num_files;
-unsigned int i;
 
 int main(int argc, char **argv) {
 	file_list.name = 0;
@@ -109,28 +108,22 @@ int main(int argc, char **argv) {
 	}
 
 	struct initrd_fent ent;
-
 	struct file_list_entry* fiter = &file_list;
 
-	for (i = 0; i < num_files; i++) {
-
+	for (unsigned int i = 0; i < num_files; i++) {
+		
 		//Strip the name from the entity
 		char* lastString = strrchr(fiter->name, '/');
-		if (lastString == 0)
-		{
+		if (!lastString) {
 			printf("lastString null\n");
 			lastString = strchr(fiter->name, '\\');
-			if (lastString == 0)
-			{
+			if (!lastString) {
 				printf("lastString still null\n");
 				lastString = fiter->name;
-			}
-			else
-			{
+			} else {
 				lastString = lastString + 1;
 			}
-		} else
-		{
+		} else {
 			lastString = lastString + 1;
 		}
 
@@ -140,49 +133,42 @@ int main(int argc, char **argv) {
 		helper_list[i].loc = ftell(fout);
 
 		if (fwrite(&ent, sizeof(struct initrd_fent), 1, fout) != 1) {
-
 			printf("Unable to write a file chunk\n");
-			return 0;
-
+			return -1;
 		}
 
 		fiter = fiter->next;
 	}
 
 	FILE * fin = 0;
-	size_t end;
 
 	fiter = &file_list;
 
-	for (i = 0; i < num_files; i++) {
-
+	for (unsigned int i = 0; i < num_files; i++) {
 		helper_list[i].mloc = ftell(fout) + 1;
 		fin = fopen(fiter->name, "rb");
-
 		if (fin == 0) {
-			printf("Unable to open helper file %s\nAbort\n", fiter->name); return 0;
+			printf("Unable to open helper file %s\nAbort\n", fiter->name);
+			return -1;
 		}
 
 		fseek(fin, 0, SEEK_END);
-		end = ftell(fin);
-		helper_list[i].mlen = end;
+		size_t filesize = ftell(fin);
+		helper_list[i].mlen = filesize;
 		fseek(fin, 0, SEEK_SET);
-		printf("File %s File Size (Bytes): %i\n", helper_list[i].st.name, end);
+		printf("File %s File Size (Bytes): %i\n", helper_list[i].st.name, filesize);
 
-		void * mem = malloc(end);
-
-		if (fread(mem, end, 1, fin) != 1) {
-			printf("Read Error\n");	return 0;
+		void * mem = malloc(2048);
+		size_t read = 0;
+		
+		while (read = fread(mem, 2048, 1, fin) {
+			if (!fwrite(mem, read, 1, fout)) {
+				printf("Could not write block\n");
+				return -1;
+			}
 		}
-
-		if (fwrite(mem, end, 1, fout) != 1) {
-			printf("Write Error\n"); return 0;
-		}
-
 		free(mem);
-
 		fclose(fin);
-
 		fiter = fiter->next;
 	}
 
@@ -214,8 +200,7 @@ int main(int argc, char **argv) {
 	void* Data = malloc(end - sizeof(struct initial_ramdisk_header));
 	size_t Read = fread(Data, end - sizeof(struct initial_ramdisk_header), 1, fout);
 
-	if (Read != 1)
-	{
+	if (Read != 1) {
 		printf("Error computing ramdisk hash\n");
 		printf("RDBYTE %i\n", Read);
 		return -1;
@@ -226,9 +211,7 @@ int main(int argc, char **argv) {
 
 	printf("CHECKSUM ");
 
-	unsigned int iter = 0;
-	for (iter = 0; iter < 16; iter++)
-	{
+	for (unsigned int iter = 0; iter < 16; iter++) {
 		printf("%x", digest[iter]);
 		head.ramdisk_checksum[iter] = digest[iter];
 	}
@@ -240,11 +223,10 @@ int main(int argc, char **argv) {
 	fclose(fout);
 
 	fout = fopen(argv[2], "r+b");
-
-	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
-		printf("Unable to write the initial RAM disk header\n");
+	if (!fout || fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
+		printf("Unable to rewrite the RAMDisk header\n");
+		return -1;
 	}
-
 	fclose(fout);
 
 	return 0;

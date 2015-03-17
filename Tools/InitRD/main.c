@@ -198,11 +198,10 @@ int main(int argc, char **argv) {
 	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);
 
 	void* data = malloc(end - sizeof(struct initial_ramdisk_header));
-	size_t Read = fread(data, end - sizeof(struct initial_ramdisk_header), 1, fout);
-
-	if (Read != 1) {
+	
+	if (!fread(data, end - sizeof(struct initial_ramdisk_header), 1, fout)) {
 		printf("Error computing ramdisk hash\n");
-		printf("RDBYTE %i\n", Read);
+		printf("RDBYTE %i\n", read);
 		return -1;
 	}
 

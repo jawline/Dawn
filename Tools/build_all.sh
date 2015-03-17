@@ -12,7 +12,7 @@ for direc in $Dirlist ; do
 		make
 
 		cd ..
-		cp $direc/Build/* ../bin/Tools
+		cp $direc/bin/* ../bin/Tools
 
             fi
             

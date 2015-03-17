@@ -12,16 +12,13 @@
 #define VER_REV 8
 
 typedef struct {
-
 	struct initrd_fent st; //File header structure
 	uint32_t loc; //Header location
 	uint32_t mloc; //Memory location
 	uint32_t mlen; //Memory length
-
 } file_helper;
 
-struct file_list_entry
-{
+struct file_list_entry {
 	char* name;
 	struct file_list_entry* next;
 };
@@ -33,8 +30,7 @@ struct file_list_entry file_list;
 unsigned int num_files;
 unsigned int i;
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	file_list.name = 0;
 	file_list.next = 0;
 
@@ -44,57 +40,39 @@ int main(int argc, char **argv)
 
 	if (argc != 3) {
 		printf("Usage: RamdiskCompiler Directory OutputFile ...\n");
-		return 0;
+		return -1;
 	}
 
 	DIR           *d;
 	struct dirent *dir;
 	d = opendir(argv[1]);
 
-	if (d)
-	{
-	  while ((dir = readdir(d)) != NULL)
-	  {
-
-		if (dir->d_type != DT_DIR)
-		{
-
+	if (!d) {
+		printf("Could not open %s for reading\n", argv[1]);
+		return -1;
+	}
+	
+	while ((dir = readdir(d)) != NULL) {
+		if (dir->d_type != DT_DIR) {
 			struct file_list_entry* iter = &file_list;
-
-			while (1)
-			{
-
-				if (iter->name == 0)
-				{
-
+			while (1) {
+				if (iter->name == 0) {
 					iter->name = malloc(strlen(argv[1]) + strlen(dir->d_name) + 1);
 					strcpy(iter->name, argv[1]);
 					strcpy(iter->name + strlen(argv[1]), dir->d_name);
-
 					num_files++;
-
 					break;
 				}
-				else
-				{
-
-					if (iter->next == 0)
-					{
+				else {
+					if (iter->next == 0) {
 						iter->next = (struct file_list_entry*) malloc(sizeof(struct file_list_entry));
 						iter->next->name = 0;
 						iter->next->next = 0;
 					}
-
 					iter = iter->next;
 				}
-
 			}
-
 		}
-
-	  }
-
-	  closedir(d);
 	}
 
 	helper_list = malloc(sizeof(file_helper) * num_files);
@@ -102,9 +80,9 @@ int main(int argc, char **argv)
 	FILE * fout = 0;
 	fout = fopen(argv[2], "wb");
 
-	if (fout == 0) {
-		printf("Unable to open output file\n");
-		return 0;
+	if (!fout) {
+		printf("Unable to open %s (Cannot write ramdisk)\n");
+		return -1;
 	}
 
 	struct initial_ramdisk_header head;
@@ -120,13 +98,14 @@ int main(int argc, char **argv)
 
 	if (fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
 		printf("Unable to write the initial RAM disk header\n");
+		return -1;
 	}
 
 	uint32_t nmfiles = num_files;
 
 	if (fwrite(&nmfiles, sizeof(uint32_t), 1, fout) != 1) {
 		printf("Unable to write File chunk header\n");
-		return 0;
+		return -1;
 	}
 
 	struct initrd_fent ent;

@@ -197,8 +197,8 @@ int main(int argc, char **argv) {
 	fout = fopen(argv[2], "rb");
 	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);
 
-	void* Data = malloc(end - sizeof(struct initial_ramdisk_header));
-	size_t Read = fread(Data, end - sizeof(struct initial_ramdisk_header), 1, fout);
+	void* data = malloc(end - sizeof(struct initial_ramdisk_header));
+	size_t Read = fread(data, end - sizeof(struct initial_ramdisk_header), 1, fout);
 
 	if (Read != 1) {
 		printf("Error computing ramdisk hash\n");
@@ -207,7 +207,7 @@ int main(int argc, char **argv) {
 	}
 
 	unsigned char digest[16];
-	MDData(Data, end - sizeof(struct initial_ramdisk_header), digest);
+	MDData(data, end - sizeof(struct initial_ramdisk_header), digest);
 
 	printf("CHECKSUM ");
 
@@ -218,7 +218,7 @@ int main(int argc, char **argv) {
 
 	printf("\n");
 
-	free(Data);
+	free(data);
 
 	fclose(fout);
 

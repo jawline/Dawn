@@ -38,22 +38,11 @@ void switchPageDirectory(page_directory_t * nd);
 void startPaging();
 
 void page_fault(idt_call_registers_t regs) {
-	int present = (regs.err_code & 0x1); // Page not present
-	int rw = regs.err_code & 0x2; // Write operation?
-	if (rw == 0x2)
-		rw = 1;
-
-	int us = regs.err_code & 0x4; // Processor was in user-mode?
-	if (us == 0x4)
-		us = 1;
-
-	int reserved = regs.err_code & 0x8; // Overwritten CPU-reserved bits of page entry?
-	if (reserved == 0x8)
-		reserved = 1;
-
-	int id = regs.err_code & 0x10; // Caused by an instruction fetch?
-	if (id = 0x10)
-		id = 1;
+	int present = regs.err_code & 0x1 ? 1 : 0; // Page not present
+	int rw = regs.err_code & 0x2 ? 1 : 0; // Write operation?
+	int us = regs.err_code & 0x4 ? 1 : 0; // Processor was in user-mode?
+	int reserved = regs.err_code & 0x8 ? 1 : 0; // Overwritten CPU-reserved bits of page entry?
+	int id = regs.err_code & 0x10 ? 1 : 0; // Caused by an instruction fetch?
 
 	//Read the address at which the fault occured from CR2 (Where the page fault handler puts it)
 	uint32_t faulting_address;

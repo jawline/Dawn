@@ -315,8 +315,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process) {
 	//First 4 megabytings are ID Mapped. Kernel pages are identical across all page directories. The rest gets copied
 	copying_to[0] = being_copied[0];
 
-	unsigned int i = 0;
-	for (i = 1; i < getTable(KERNEL_START); i++) {
+	for (unsigned int i = 1; i < getTable(KERNEL_START); i++) {
 		if ((being_copied[i]) != 0) {
 			MEM_LOC Location = copyPageTable(being_copied[i] & ~(0xFFF), 1,
 					process);
@@ -326,7 +325,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process) {
 		}
 	}
 
-	for (i = getTable(KERNEL_START); i < 1022; i++) {
+	for (unsigned int i = getTable(KERNEL_START); i < 1022; i++) {
 		copying_to[i] = being_copied[i];
 	}
 
@@ -349,8 +348,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process) {
 	unmap(pt);
 	unmap(opt);
 
-	copying_to[1023] = ((MEM_LOC) return_location & PAGE_MASK) | PAGE_PRESENT
-			| PAGE_USER; //Loop back address
+	copying_to[1023] = ((MEM_LOC) return_location & PAGE_MASK) | PAGE_PRESENT | PAGE_USER; //Loop back address
 
 	unmap(being_copied);
 	unmap(copying_to);

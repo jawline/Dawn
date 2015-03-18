@@ -13,10 +13,10 @@
 #include <interrupts/interrupts.h>
 #include <mm/virtual.h>
 
-#define ReloadCR3() \
+#define _reload_cr3() \
       __asm__ __volatile__ ("push %eax;mov %cr3,%eax;mov %eax,%cr3;pop %eax");
 
-#define __flush_tlb_single(addr) \
+#define _flush_tlb_single(addr) \
    __asm__ __volatile__("invlpg %0": :"m" (*(char *) addr))
 
 uint8_t paging_setup = 0;
@@ -89,7 +89,7 @@ void ia32_map(MEM_LOC va, MEM_LOC pa, uint32_t flags) {
 				| PAGE_WRITE;
 
 		//Reload the CR3 register to update virtual mappings
-		ReloadCR3();
+		_reload_cr3();
 
 		unsigned int i = 0;
 
@@ -102,7 +102,7 @@ void ia32_map(MEM_LOC va, MEM_LOC pa, uint32_t flags) {
 	// Now that the page table definately exists, we can update the PTE.
 	page_tables[(MEM_LOC) virtual_page] = (((MEM_LOC) pa)) | (flags & 0xFFF);
 
-	__flush_tlb_single(va);
+	_flush_tlb_single(va);
 }
 
 //Unmap the virtual address VA from its physical address
@@ -112,7 +112,7 @@ void ia32_unmap(POINTER va) {
 	page_tables[(MEM_LOC) virtual_page] = 0;
 
 	//Signal to the CPU that a page mapping has been invalidated.
-	__flush_tlb_single((MEM_LOC)va);
+	_flush_tlb_single((MEM_LOC)va);
 }
 
 //Get whether the virtual address is mapped or not (Returns 1 or 0, true or false)
@@ -250,7 +250,7 @@ void initializeVirtualMemoryManager(MEM_LOC mem_end) {
 		if (page_directory[i] == 0) {
 			MEM_LOC address = allocateFrame();
 			page_directory[i] = (address & PAGE_MASK) | PAGE_PRESENT | PAGE_USER;
-			ReloadCR3();
+			_reload_cr3();
 		}
 	}
 

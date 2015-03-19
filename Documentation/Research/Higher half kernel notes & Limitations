@@ -1,1 +1,5 @@
-Current limitations, if the Kernel & Ramdisk together use more then 4MB of physical space there will be a oopsie. Will look into fixing soon
+The following document keeps track of current issues with the higher half kernel implementation (Mapping the kernel to the last GB of memory)
+
+
+Current limitations:
+1. if the Kernel & Ramdisk together use more then 4MB of physical space there will be a oopsie. Will look into fixing soon.

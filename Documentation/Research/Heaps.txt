@@ -1,7 +1,13 @@
-Heaps are of critical importance to a operating system. They allow the dynamic allocation of data.
-This meens that they allow the kernel to keep track of what memory is in use and what is not on a
-much more precise level then the frame and page allocaters (Which can keep track of what memory 
-"Pages" are in use and what are not. Pages are typically 4kb (On x86 systems) in size). Without one the kernel and
-therefore the operating system will be very limited in functionality. The drawbacks of heaps is that they have a memory
-offset, in the implementation that I plan to use 16 bytes of memory are required for heap 'headers', these headers however
-are essential and this overhead is miniscule.
+Heaps are of critical importance to a operating system as they allow for the dynamic allocation of memory at runtime.
+
+The kernel heap is a structure which exists in a area of memory allocated during kernel initialisation. This data structure 
+is able to keep track of memory allocations (kmalloc's) and deallocations (kfree's). Whenever a memory allocation is requested
+the heap will find the next available block of space and create an allocation or return 0 if no allocation can be made. Whenever
+a allocation is free'd the heap entry header is marked to show that the allocation is unused and the allocation will be merged
+with adjacent allocations if they are also unused (This allows for the heap to merge several small unused allocations into one
+large unused allocation, increasing the maximum size for a kmalloc).
+
+The drawbacks of heaps is that they have additional memory and performance costs over compile time allocations.
+As finding space for an allocation requires a lookup there can be a performance cost (Especially on large heaps) for finding a
+allocation. In the current implementation 16 bytes of memory are required for heap entry headers. Heap entry headers are fixed
+size data structures which contain information about the allocation and surrounding allocations.

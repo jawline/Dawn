@@ -47,7 +47,6 @@ unsigned char loadToMemoryUsingHeader(e32_pheader program_header,
 	return 1;
 }
 
-//NOTE: This function relies on Node being readable (read_fs functioning properly)
 int loadAndExecuteProgram(fs_node_t* Node, unsigned char usermode) {
 	DEBUG_PRINT("Loading program\n");
 

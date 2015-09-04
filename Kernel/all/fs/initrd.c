@@ -43,14 +43,19 @@ fs_node_t* ird_root_finddir (fs_node_t* node, char* name) {
 }
 
 uint32_t read_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t* buffer) {
-	if (offset + size > node->length) return 0;
-	uint8_t* loc = (uint8_t*) start_list[node->inode];
-	memcpy(buffer, (void*) (((uint32_t)loc + (uint32_t)offset)), size); //Copy the mem mems
-	return size; //Not much error checking we can do. If a page fault occurs somethings gone wrong =)
-}
+	
+	if (offset > node->length) {
+		return 0;
+	}
 
-uint32_t write_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t *buffer) {
-	return 0; //Can't write to the RAM disk.
+	if (offset + size > node->length) {
+		size = offset + size - node->length;
+	}
+
+	uint8_t* loc = (uint8_t*) start_list[node->inode];
+	memcpy(buffer, (void*) (((uint32_t)loc + (uint32_t)offset)), size);
+	
+	return size;
 }
 
 /**
@@ -84,12 +89,11 @@ fs_node_t* initialiseRamdisk(uint8_t* ramdiskLocation, char const* name, fs_node
 	
 	//Add all the files to a file list.
 	for (unsigned int iter = 0; iter < num_files; iter++) {
-		start_list[iter] = (ramdiskLocation + fe_ptr->start) - 1;
+		start_list[iter] = (uint8_t*)(ramdiskLocation + fe_ptr->start);
 		memset(&file_list[iter], 0, sizeof(fs_node_t));
 		strcpy(file_list[iter].name, fe_ptr->name);
 		file_list[iter].inode = iter;
 		file_list[iter].length = fe_ptr->size;
-		file_list[iter].write = (io_operation) write_ird;
 		file_list[iter].read = (io_operation) read_ird;
 		file_list[iter].parent = initrd_root_node;
 		fe_ptr++;

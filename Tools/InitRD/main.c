@@ -179,11 +179,15 @@ void calculate_checksum(struct initial_ramdisk_header* head, char const* path) {
 
 void rewrite_header(struct initial_ramdisk_header* head, char const* path) {
 	FILE* fout = fopen(path, "r+b");
-	fseek(fout, 0, SEEK_SET);
-	
-	if (!fout || fwrite(head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
-		printf("Unable to rewrite the RAMDisk header\n");
+
+	if (!fout) {
+		printf("Unable to open output file for header rewrite");
 		exit(-5);
+	}
+	
+	if (!fwrite(head, sizeof(struct initial_ramdisk_header), 1, fout)) {
+		printf("Unable to rewrite the RAMDisk header\n");
+		exit(-6);
 	}
 
 	fclose(fout);

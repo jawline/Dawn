@@ -18,21 +18,16 @@ fs_node_t* init_vfs() {
 	return root_fs;
 }
 
-int is_directory(fs_node_t* node) {
-
-	if ((node->flags & FS_DIR) == FS_DIR) {
-		return 1;
-	}
-
-	return 0;
+char is_directory(fs_node_t* node) {
+	return node->flags & FS_DIR;
 }
 
 unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8_t* buffer) {
-	return node->read && node->read(node, offset, size, buffer);
+	return node->read ? node->read(node, offset, size, buffer) : 0;
 }
 
 unsigned long write_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8_t* buffer) {
-	return node->write && node->write(node, offset, size, buffer);
+	return node->write ? node->write(node, offset, size, buffer) : 0;
 }
 
 void open_fs(fs_node_t* node) {
@@ -114,8 +109,7 @@ void unbindnode_fs(fs_node_t* node, fs_node_t* target) {
 }
 
 /**
- @brief Recursive find node given string
- @bug Not finished!
+ * Recursive search for node with string
  */
 fs_node_t* evaluatePath(const char* path, fs_node_t* current_node) {
 

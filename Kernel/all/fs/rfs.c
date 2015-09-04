@@ -10,17 +10,15 @@ uint32_t num_rfs_entrys = 0;
 struct dirent root_readdir (fs_node_t* node, uint32_t idx) {
 	rfs_t* rfs_struct = &rfs_entrys_pointer[node->inode];
 
-	if (rfs_struct->num_directory_entrys > idx)
-	{
-		struct dirent ret;
+	struct dirent ret;
+
+	if (rfs_struct->num_directory_entrys > idx) {
 		memset(&ret, 0, sizeof(struct dirent));
 		strcpy(ret.name, rfs_struct->directory_entrys[idx]->name);
-		return ret;
+	} else {
+		memset(&ret, 0, sizeof(struct dirent));
+		strcpy(ret.name, "BAD");
 	}
-
-	struct dirent ret;
-	memset(&ret, 0, sizeof(struct dirent));
-	strcpy(ret.name, "");
 
 	return ret;
 }
@@ -63,7 +61,6 @@ void root_bind_node(fs_node_t* boundto, fs_node_t* node) {
 	
 	//Update the parent of the bound node
 	node->parent = boundto;
-	return;
 }
 
 void root_unbind_node(fs_node_t* boundto, fs_node_t* node) {

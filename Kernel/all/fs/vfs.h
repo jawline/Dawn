@@ -50,10 +50,9 @@ typedef struct filesystem_node fs_node_t;
 
 fs_node_t* init_vfs();
 
-int is_directory(fs_node_t* node);
+char is_directory(fs_node_t* node);
 
 fs_node_t* evaluatePath(const char* path, fs_node_t* current_node);
-
 
 unsigned long read_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8_t* buffer);
 unsigned long write_fs(fs_node_t* node, unsigned long offset, unsigned long size, uint8_t* buffer);

@@ -79,7 +79,6 @@ unsigned char settingsExecuteLine(const char* line) {
 }
 
 const char* settingsReadValue(char const* name, char const* defaultValue) {
-
 	settingsEntry* entry = settingsGetEntry(name);
 	return entry ? entry->data : defaultValue;
 }
@@ -107,11 +106,7 @@ void parseConfigFile(const char* filePath) {
 
 		//At the end of each line execute the statement
 		if (*(cfgBuffer + iter) == '\n') {
-
-			//Null terminate the buffer
-			*(cfgBuffer + iter) = '\0';
-
-			//Process the line
+			cfgBuffer[iter] = '\0';
 			settingsExecuteLine(cfgBuffer);
 			iter = 0;
 		} else {
@@ -122,6 +117,7 @@ void parseConfigFile(const char* filePath) {
 	}
 
 	if (iter) {
+		cfgBuffer[iter] = '\0';
 		settingsExecuteLine(cfgBuffer);
 	}
 

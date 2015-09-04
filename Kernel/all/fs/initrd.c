@@ -32,24 +32,22 @@ struct dirent ird_root_readdir (fs_node_t* node, uint32_t idx) {
 }
 
 fs_node_t* ird_root_finddir (fs_node_t* node, char* name) {
-	unsigned int i = 0;
-	for (i = 0; i < num_files; i++) {
+	for (unsigned i = 0; i < num_files; i++) {
 		if (strcmp(file_list[i].name, name) == 0) {
 			return &file_list[i];
 		}
 	}
-
 	return 0;
 }
 
 uint32_t read_ird(fs_node_t *node, uint32_t offset, uint32_t size, uint8_t* buffer) {
 	
-	if (offset > node->length) {
+	if (offset >= node->length) {
 		return 0;
 	}
 
 	if (offset + size > node->length) {
-		size = offset + size - node->length;
+		size = offset + size - node->length - 1;
 	}
 
 	uint8_t* loc = (uint8_t*) start_list[node->inode];

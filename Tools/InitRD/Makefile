@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -w  -I ../../Shared/headers
+CFLAGS= -std=c99 -w  -I ../../Shared/headers
 LDFLAGS=
 
 main: main.o md5.o md5use.o

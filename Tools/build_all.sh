@@ -9,6 +9,7 @@ for direc in $dirlist ; do
 		make clean
 		make
 		cd ..
-		cp $direc/bin/* ../bin/Tools
+		mkdir ../bin/Tools/
+		cp $direc/bin/* ../bin/Tools/
             fi
 done

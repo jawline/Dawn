@@ -1,7 +1,6 @@
 Dirlist=$(find . -maxdepth 1 -type d)
 
 for direc in $Dirlist ; do
-	    
 	    if [ "$direc" = "." ]; then
                echo Not evaluating .
 	    else
@@ -15,5 +14,4 @@ for direc in $Dirlist ; do
 			mkdir ../bin/RamdiskFolder/
 			cp $direc/Build/* ../bin/RamdiskFolder/
         fi
-            
 done

@@ -104,6 +104,7 @@ void write_fiter(struct file_list_entry* fiter, unsigned int i, FILE* fout) {
 			printf("Could not write block\n");
 			exit(-3);
 		}
+		printf("Wrote %i bytes\n", read);
 	}
 	
 	fclose(fin);
@@ -151,6 +152,7 @@ void construct_file_list(char const* target_dir) {
 void calculate_checksum(struct initial_ramdisk_header* head, char const* path) {
 
 	FILE* fout = fopen(path, "rb");
+
 	fseek(fout, sizeof(struct initial_ramdisk_header), SEEK_SET);
 
 	void* data = malloc(head->ramdisk_size - sizeof(struct initial_ramdisk_header));
@@ -166,20 +168,20 @@ void calculate_checksum(struct initial_ramdisk_header* head, char const* path) {
 	MDData(data, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
 
 	printf("CHECKSUM ");
-
 	for (unsigned int iter = 0; iter < 16; iter++) {
 		printf("%x", digest[iter]);
 		head->ramdisk_checksum[iter] = digest[iter];
 	}
-
 	printf("\n");
+	
 	fclose(fout);
 }
 
 void rewrite_header(struct initial_ramdisk_header* head, char const* path) {
 	FILE* fout = fopen(path, "r+b");
+	fseek(fout, 0, SEEK_SET);
 	
-	if (!fout || fwrite(&head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
+	if (!fout || fwrite(head, sizeof(struct initial_ramdisk_header), 1, fout) != 1) {
 		printf("Unable to rewrite the RAMDisk header\n");
 		exit(-5);
 	}

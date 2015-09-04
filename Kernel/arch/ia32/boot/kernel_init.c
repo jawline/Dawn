@@ -60,23 +60,30 @@ void initializeRamdisk(uint8_t* ramdisk_phys_start, uint8_t* ramdisk_phys_end, f
 	uint8_t* ramdiskNewLocation = malloc(ramdisk_size);
 
 	//Identity map the ramdisk (1x1 mapping between virtual and physical)
-	for (uint8_t* current = ramdisk_phys_start;
-			current < ramdisk_phys_end; current += PAGE_SIZE) {
+	for (uint8_t* current = ramdisk_phys_start; current < ramdisk_phys_end; current += PAGE_SIZE) {
 		map(current, current, MEMORY_RESTRICTED_ACCESS);
 	}
 
+	printf("MAP RD\n");
+
 	memcpy(ramdiskNewLocation, ramdisk_phys_start, ramdisk_size);
 
-	//Unmap the crap we just ID mapped
-	for (uint8_t* current = ramdisk_phys_start;
-			current < ramdisk_phys_end; current += PAGE_SIZE) {
+	printf("CP RD\n");
+
+	for (uint8_t* current = ramdisk_phys_start; current < ramdisk_phys_end; current += PAGE_SIZE) {
 		unmap(current);
 	}
+
+	printf("UNMAP RD\n");
 
 	unsigned char digest[16];
 	
 	struct initial_ramdisk_header* head = (struct initial_ramdisk_header*) ramdiskNewLocation;
 	uint8_t* ramdiskDataLocation = ramdiskNewLocation + sizeof(struct initial_ramdisk_header);
+
+	printf("PREPARING CHECKSUM\n");
+
+	ASSERT(head->ramdisk_magic == RAMMAGIC, "Ramdisk MAGIC bad");
 
 	MDData(ramdiskDataLocation, head->ramdisk_size - sizeof(struct initial_ramdisk_header), digest);
 

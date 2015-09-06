@@ -3,8 +3,10 @@
 
 void initializeUsedList(process_t* process);
 void expandUsedList(process_t* process);
-MEM_LOC usedListTop(process_t* process);
-void usedListAdd(process_t* process, MEM_LOC location);
-void usedListRemove(process_t* process, MEM_LOC location);
+void* usedListTop(process_t* process);
+void usedListAdd(process_t* process, void* location);
+void usedListRemove(process_t* process, void* location);
+char usedListHasItems(process_t* process);
+void usedListFree(process_t* process);
 
 #endif //_PROCESS_USED_LIST_DEF_H_

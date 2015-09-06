@@ -57,9 +57,9 @@ typedef struct processStructure {
 	/**
 	 * A list of all the frames of memory mapped by this application
 	 */
-	MEM_LOC* usedListRoot; //Root location of the used list
-	unsigned long usedListSize;
-	unsigned long usedListLocation; //Location of the end of the current list irrespect to the root
+	void** usedListRoot; //Root location of the used list
+	unsigned long usedListMaxItems;
+	unsigned long usedListNumItems; //Location of the end of the current list irrespect to the root
 
 	unsigned char shouldDestroy;
 

@@ -5,58 +5,64 @@
 const unsigned long usedListExpansionSize = 1024;
 
 void initializeUsedList(process_t* process) {
-	process->usedListRoot = (MEM_LOC*) malloc(1024);
-	process->usedListSize = 1024;
-	process->usedListLocation = 0;
+	process->usedListRoot = malloc(1024 * sizeof(void*));
+	process->usedListMaxItems = 1024;
+	process->usedListNumItems = 0;
 }
 
 void expandUsedList(process_t* process) {
-	MEM_LOC* new_loc =
-			(MEM_LOC*) malloc(process->usedListSize + usedListExpansionSize);
-	memcpy(new_loc, process->usedListRoot, process->usedListSize);
+	void** newAllocation = malloc((process->usedListMaxItems + usedListExpansionSize) * sizeof(void*));
+	memcpy(newAllocation, process->usedListRoot, process->usedListNumItems * sizeof(void*));
 	free(process->usedListRoot);
-	process->usedListSize += usedListExpansionSize;
-	process->usedListRoot = new_loc;
+	process->usedListRoot = newAllocation;
+	process->usedListMaxItems += usedListExpansionSize;
 }
 
-//TODO: Used list shrinking
-
-MEM_LOC usedListTop(process_t* process) {
-	return *((MEM_LOC*) process->usedListRoot);
+void* usedListTop(process_t* process) {
+	return process->usedListRoot[0];
 }
 
-void usedListAdd(process_t* process, MEM_LOC location) {
+char usedListHasItems(process_t* process) {
+	return process->usedListRoot && process->usedListNumItems > 0;
+}
 
-	if (process->usedListSize == process->usedListLocation) {
-		//Gotta expand the used list
+void usedListAdd(process_t* process, void* location) {
+
+	if (process->usedListNumItems == process->usedListMaxItems) {
 		expandUsedList(process);
 	}
 
-	MEM_LOC* ulocation = process->usedListRoot;
-	ulocation = (MEM_LOC*) (((MEM_LOC) ulocation)
-			+ ((MEM_LOC) process->usedListLocation));
+	void** ulocation = &process->usedListRoot[process->usedListNumItems];
 
 	*ulocation = location;
 	ulocation--;
 
-	process->usedListLocation += sizeof(MEM_LOC);
+	process->usedListNumItems++;
 }
 
-void usedListRemove(process_t* process, MEM_LOC location) {
+void usedListRemove(process_t* process, void* location) {
 
-	MEM_LOC* ulocation = process->usedListRoot;
+	void** ulocation = process->usedListRoot;
 	unsigned long iter = 0;
 
-	for (iter = 0; iter < process->usedListLocation; iter +=
-			sizeof(MEM_LOC)) {
-
-		if (*ulocation == location) {
-			memcpy(ulocation, ulocation + 1,
-					process->usedListLocation - iter);
-			process->usedListLocation -= sizeof(MEM_LOC);
+	for (unsigned int i = 0; i < process->usedListNumItems; i++) {
+		if (process->usedListRoot[i] == location) {
+			memcpy(&process->usedListRoot[i], &process->usedListRoot[i + 1], (process->usedListNumItems - i) * sizeof(void*));
+			process->usedListNumItems--;
 			return;
 		}
+	}
+}
 
-		ulocation++;
+void usedListFree(process_t* process) {
+
+	while (usedListHasItems(process)) {
+		void* top = usedListTop(process);
+		freeFrame(top);
+		usedListRemove(process, top);
+	}
+
+	if (process->usedListRoot != 0) {
+		free(process->usedListRoot);
 	}
 }

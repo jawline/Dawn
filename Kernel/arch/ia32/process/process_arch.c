@@ -113,16 +113,7 @@ process_t* initializeKernelProcess() {
 
 void freeProcess(process_t* process) {
 
-	//This kills the used list and frees every used page
-	while (process->usedListLocation != 0) {
-		MEM_LOC top = usedListTop(process);
-		freeFrame(top);
-		usedListRemove(process, top);
-	}
-
-	if (process->usedListRoot != 0) {
-		free(process->usedListRoot);
-	}
+	usedListFree(process);
 
 	//Empty the postbox
 	process_message msg;

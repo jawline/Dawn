@@ -32,11 +32,7 @@ unsigned int num_files;
 
 char is_directory(char const* path) {
 	struct stat r;
-	if (stat(path, &r)) {
-		return S_ISDIR(r.st_mode);
-	} else {
-		return 0;
-	}
+	return stat(path, &r) ? S_ISDIR(r.st_mode) : 0;
 }
 
 char is_not_local(char const* name) {

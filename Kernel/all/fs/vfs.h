@@ -48,7 +48,7 @@ struct filesystem_node {
 
 typedef struct filesystem_node fs_node_t;
 
-fs_node_t* init_vfs();
+fs_node_t* get_vfs();
 
 char is_directory(fs_node_t* node);
 

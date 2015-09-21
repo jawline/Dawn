@@ -91,24 +91,23 @@ void newProcessEntryPoint() {
 process_t* initializeKernelProcess() {
 	disableInterrupts();
 
-	if (kernel_proc != 0) {
-		return kernel_proc;
+	if (!kernel_proc) {
+		process_t* kernelProcess = (process_t*) malloc(sizeof(process_t));
+		memset(kernelProcess, 0, sizeof(process_t));
+		strcpy(kernelProcess->name, "KernelProcess");
+
+		kernelProcess->id = 0;
+
+		extern page_directory_t* kernel_pagedir;
+
+		kernelProcess->pageDir = kernel_pagedir;
+		kernelProcess->executionDirectory = get_vfs();
+		kernel_proc = kernelProcess;
+		initializeUsedList(kernel_proc);
+		kernelProcess->processTerminal = g_kernelTerminal;
 	}
 
-	process_t* ret = (process_t*) malloc(sizeof(process_t));
-	memset(ret, 0, sizeof(process_t));
-	strcpy(ret->name, "KernelProcess");
-
-	ret->id = 0;
-
-	extern page_directory_t* kernel_pagedir;
-	ret->pageDir = kernel_pagedir;
-	ret->executionDirectory = init_vfs();
-	kernel_proc = ret;
-	initializeUsedList(kernel_proc);
-	ret->processTerminal = g_kernelTerminal;
-
-	return ret;
+	return kernel_proc;
 }
 
 void freeProcess(process_t* process) {

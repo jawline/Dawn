@@ -87,7 +87,7 @@ void parseConfigFile(const char* filePath) {
 
 	DEBUG_PRINT("Parsing configuration file %s\n", filePath);
 
-	fs_node_t* cfgNode = evaluatePath(filePath, init_vfs());
+	fs_node_t* cfgNode = evaluatePath(filePath, get_vfs());
 
 	if (cfgNode == 0) {
 		return;

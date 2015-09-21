@@ -104,8 +104,7 @@ void initializeRamdisk(uint8_t* ramdisk_phys_start, uint8_t* ramdisk_phys_end, f
 	ASSERT(MDCompare(head->ramdisk_checksum, digest), "Ramdisk CHECKSUM bad");
 
 	//Well it looks like this RAMDisk is legit & loaded fine
-	fs_node_t* initrd = initialiseRamdisk(ramdiskNewLocation, "system", init_vfs());
-	bindnode_fs(init_vfs(), initrd);
+	bindnode_fs(get_vfs(), initialiseRamdisk(ramdiskNewLocation, "system", get_vfs()));
 }
 
 /**
@@ -128,14 +127,12 @@ void initializeKernel(struct multiboot* mboot_ptr, uint32_t initial_esp) {
 	initializeSystemClock();
 
 	//Init the virtual file system
-	fs_node_t* rootfs = init_vfs();
+	fs_node_t* rootfs = get_vfs();
 
-	ASSERT(mboot_ptr->mods_count == 1,
-			"No RAMDisk or incorrect number of modules. Kernel should start with ramdisk only");
+	ASSERT(mboot_ptr->mods_count == 1, "No RAMDisk or incorrect number of modules. Kernel should start with ramdisk only");
 
 	//Load and hook the ramdisk to the root file system
-	initializeRamdisk(*((LPOINTER)(mboot_ptr->mods_addr)),
-			*((LPOINTER)(mboot_ptr->mods_addr + 4)), rootfs);
+	initializeRamdisk(*((LPOINTER)(mboot_ptr->mods_addr)), *((LPOINTER)(mboot_ptr->mods_addr + 4)), rootfs);
 
 	//TODO: Improoove terminals, Abstractions cool and all but mine really isn't very good
 	initializeKernelTerminal();
@@ -143,10 +140,7 @@ void initializeKernel(struct multiboot* mboot_ptr, uint32_t initial_esp) {
 
 	//TODO: Move this into its own space
 	//Map the kernel stack
-	MEM_LOC iterator;
-	for (iterator = KERNEL_STACK_START - PAGE_SIZE;
-			iterator >= KERNEL_STACK_START - KERNEL_STACK_SIZE; iterator -=
-					PAGE_SIZE) {
+	for (MEM_LOC iterator = KERNEL_STACK_START - PAGE_SIZE; iterator >= KERNEL_STACK_START - KERNEL_STACK_SIZE; iterator -= PAGE_SIZE) {
 		MEM_LOC page = allocateFrame();
 		map(iterator, page, MEMORY_RESTRICTED_ACCESS);
 	}

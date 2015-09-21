@@ -7,14 +7,16 @@
 
 fs_node_t* root_fs = 0;
 
-void initialiseRootFilesytem() {
+void initialiseRootFilesystem() {
 	root_fs = createRfsDirectory("root", 0);
 }
 
-fs_node_t* init_vfs() {
+fs_node_t* get_vfs() {
+	
 	if (!root_fs) {
-		initialiseRootFilesytem();
+		initialiseRootFilesystem();
 	}
+
 	return root_fs;
 }
 
@@ -118,7 +120,7 @@ fs_node_t* evaluatePath(const char* path, fs_node_t* current_node) {
 	}
 
 	if (path[0] == '/') {
-		return evaluatePath(path + 1, init_vfs());
+		return evaluatePath(path + 1, get_vfs());
 	}
 
 	char* buffer = strchr(path, '/');

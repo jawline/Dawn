@@ -20,8 +20,7 @@ void systemIdleProcess() {
 void systemMainProcess() {
 
 	//Create the process set as onstart in the global settings
-	createNewProcess(settingsReadValue("system.on_boot", "/system/Line"),
-			init_vfs());
+	createNewProcess(settingsReadValue("system.on_boot", "/system/Line"), get_vfs());
 
 	//Enable interrupts
 	enableInterrupts();
@@ -93,12 +92,10 @@ void systemMainProcess() {
 				//Disable interrupts while the new process is being created
 				disableInterrupts();
 
-				DEBUG_PRINT("Creating new instance of %s\n",
-						settingsReadValue("system.on_boot", "/system/Line"));
+				DEBUG_PRINT("Creating new instance of %s\n", settingsReadValue("system.on_boot", "/system/Line"));
 
 				//Create the new process with the program set as system.on_boot
-				createNewProcess(settingsReadValue("system.on_boot", "/system/Line"),
-						init_vfs());
+				createNewProcess(settingsReadValue("system.on_boot", "/system/Line"), get_vfs());
 
 				//Re enable them once your done
 				enableInterrupts();

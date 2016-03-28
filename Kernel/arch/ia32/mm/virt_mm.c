@@ -29,12 +29,12 @@ uint32_t* page_directory = (uint32_t*) PAGE_DIR_VIRTUAL_ADDR;
 uint32_t* page_tables = (uint32_t*) PAGE_TABLE_VIRTUAL_ADDR;
 
 POINTER kernelFirstFreeVirtualAddress();
-char getMapping(MEM_LOC va, MEM_LOC *pa);
-char getPageEntry(MEM_LOC va, MEM_LOC *pa);
+char getMapping(MEM_LOC va, MEM_LOC* pa);
+char getPageEntry(MEM_LOC va, MEM_LOC* pa);
 
 unsigned int PAGE_SIZE = 4096;
 
-void switchPageDirectory(page_directory_t * nd);
+void switchPageDirectory(page_directory_t* nd);
 void startPaging();
 
 void page_fault(idt_call_registers_t regs) {
@@ -53,9 +53,7 @@ void page_fault(idt_call_registers_t regs) {
 	char buffer[1024];
 	memset(buffer, 0, 1024);
 
-	printFormattedStringToBuffer(buffer,
-			"Page fault at location 0x%x (present: %i write: %i us: %i reserved: %i instr: %i mapping: %i)",
-			faulting_address, present, rw, us, reserved, id, mapping);
+	printFormattedStringToBuffer(buffer, "Page fault at location 0x%x (present: %i write: %i us: %i reserved: %i instr: %i mapping: %i)", faulting_address, present, rw, us, reserved, id, mapping);
 
 	handleFatalProcessFault(FAULT_ID_PAGEFAULT, buffer);
 

@@ -1,18 +1,19 @@
 #include <hash/md5use.h>
 #include <debug/debug.h>
 
-void MDData(const unsigned char* m_Data, unsigned long len, char* Digest)
+void MDData(const unsigned char* m_data, unsigned long len, char* digest)
 {
   MD5_CTX mdContext;
   memset(&mdContext, 0, sizeof(MD5_CTX));
 
   MD5Init (&mdContext);
-  MD5Update (&mdContext, m_Data, len);
+  MD5Update (&mdContext, m_data, len);
   MD5Final (&mdContext);
 
   unsigned int iter = 0;
-  for (iter = 0; iter < 16; iter++)
-	Digest[iter] = mdContext.digest[iter];
+  for (iter = 0; iter < 16; iter++) {
+	digest[iter] = mdContext.digest[iter];
+}
 
   return;
 }

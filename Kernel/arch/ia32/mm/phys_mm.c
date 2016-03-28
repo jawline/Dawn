@@ -100,8 +100,7 @@ void mapFreePages(struct multiboot* mboot_ptr) {
 			uint32_t j;
 
 			// For every page in this entry, add to the free page stack.
-			for (j = me->base_addr_low; j < me->base_addr_low + me->length_low;
-					j += 0x1000) {
+			for (j = me->base_addr_low; j < me->base_addr_low + me->length_low; j += 0x1000) {
 				freeFrame(j);
 				freeCounter++;
 			}
@@ -114,9 +113,7 @@ void mapFreePages(struct multiboot* mboot_ptr) {
 		i += me->size + sizeof(uint32_t);
 	}
 
-	DEBUG_PRINT(
-			"Debug Message: Map Free Pages finished with 0x%x pages of free memory (PAGE SIZE: 0x%x)\n",
-			freeCounter, PAGE_SIZE);
+	DEBUG_PRINT("Debug Message: Map Free Pages finished with 0x%x pages of free memory (PAGE SIZE: 0x%x)\n", freeCounter, PAGE_SIZE);
 }
 
 unsigned long calculateFreeFrames() {

@@ -1,8 +1,7 @@
 #include <hash/md5use.h>
 #include <debug/debug.h>
 
-void MDData(const unsigned char* m_data, unsigned long len, char* digest)
-{
+void MDData(const unsigned char* m_data, unsigned long len, char* digest) {
   MD5_CTX mdContext;
   memset(&mdContext, 0, sizeof(MD5_CTX));
 
@@ -11,6 +10,7 @@ void MDData(const unsigned char* m_data, unsigned long len, char* digest)
   MD5Final (&mdContext);
 
   unsigned int iter = 0;
+
   for (iter = 0; iter < 16; iter++) {
 	digest[iter] = mdContext.digest[iter];
   }
@@ -18,9 +18,8 @@ void MDData(const unsigned char* m_data, unsigned long len, char* digest)
   return;
 }
 
-void MDString (const unsigned char* Input, char* Digest)
-{
-  MDData(Input, strlen(Input), Digest);
+void MDString (const unsigned char* input, char* digest) {
+  MDData(input, strlen(input), digest);
   return;
 }
 

@@ -13,7 +13,7 @@ void MDData(const unsigned char* m_data, unsigned long len, char* digest)
   unsigned int iter = 0;
   for (iter = 0; iter < 16; iter++) {
 	digest[iter] = mdContext.digest[iter];
-}
+  }
 
   return;
 }

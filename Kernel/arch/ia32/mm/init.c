@@ -6,8 +6,7 @@
 #include <stack/kstack.h>
 #include <printf.h>
 
-void initializeMemory(struct multiboot* mboot_ptr, MEM_LOC kernel_start,
-		MEM_LOC kernel_end, MEM_LOC initial_esp) {
+void initializeMemory(struct multiboot* mboot_ptr, MEM_LOC kernel_start, MEM_LOC kernel_end, MEM_LOC initial_esp) {
 
 	//Initializes the global descriptor table and the TSS
 	initializeGdt();

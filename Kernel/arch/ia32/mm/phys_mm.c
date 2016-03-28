@@ -21,9 +21,7 @@ void initializePhysicalMemoryManager(MEM_LOC start) {
 }
 
 MEM_LOC allocateFrame() {
-
 	if (paging_enabled == 0) {
-
 		//The reason why this works is that all memory up to used_mem_end
 		//is identity mapped when paging is enabled
 		//This means that when paging is enabled the

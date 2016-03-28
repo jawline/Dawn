@@ -124,24 +124,26 @@ char getMapping(MEM_LOC va, MEM_LOC *pa) {
 }
 
 //Get Page entry
-char getPageEntry(MEM_LOC va, MEM_LOC *pa) {
+char getPageEntry(MEM_LOC va, MEM_LOC* pa) {
 	uint32_t virtual_page = va / 0x1000;
 	uint32_t pt_idx = PAGE_DIR_IDX(virtual_page);
 
 	// Find the appropriate page table for 'va'.
-	if (page_directory[pt_idx] == 0)
+	if (page_directory[pt_idx] == 0) {
 		return 0;
+	}
 
 	if (page_tables[virtual_page] != 0) {
-		if (pa)
+		if (pa) {
 			*pa = page_tables[virtual_page];
+		}
 		return 1;
 	}
 
 	return 0;
 }
 
-inline void switchPageDirectory(page_directory_t * nd) {
+inline void switchPageDirectory(page_directory_t* nd) {
 	current_pagedir = nd;
 	//Move the page directory into cr3
 	__asm__ volatile ("mov %0, %%cr3" : : "r" (nd));
@@ -360,8 +362,7 @@ page_directory_t* copyPageDir(page_directory_t* pagedir, process_t* process) {
 POINTER kernelFirstFreeVirtualAddress() {
 
 	//Start after the IDMapped region
-	for (unsigned int i = KERNEL_RESERVED_START; i < KERNEL_MEMORY_END; i +=
-			PAGE_SIZE) {
+	for (unsigned int i = KERNEL_RESERVED_START; i < KERNEL_MEMORY_END; i += PAGE_SIZE) {
 		if (getMapping(i, 0) == 0) {
 			return i;
 		}

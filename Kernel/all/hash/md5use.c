@@ -23,15 +23,15 @@ void MDString (const unsigned char* input, char* digest) {
   return;
 }
 
-unsigned char MDCompare(const unsigned char* One, const unsigned char* Two)
-{
+unsigned char MDCompare(const unsigned char* one, const unsigned char* two) {
 
 	unsigned int iter = 0;
 
-	for (iter = 0; iter < 16; iter++)
-	{
-	    DEBUG_PRINT("The two that don't match %i %x %x\n", iter, One[iter], Two[iter]);
-		if (One[iter] != Two[iter]) return 0;
+	for (iter = 0; iter < 16; iter++) {
+	    DEBUG_PRINT("The two that don't match %i %x %x\n", iter, one[iter], two[iter]);
+	    if (one[iter] != two[iter]) {
+                return 0;
+	    }
 	}
 
 	return 1;

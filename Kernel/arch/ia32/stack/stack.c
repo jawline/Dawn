@@ -31,9 +31,9 @@ stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp) {
 	//This copies the size between the current stack pointer and the initial stack start to the new stack
 	memcpy((void*)new_stack_pointer, (void*)old_stack_pointer, initial_esp -  ((size_t)old_stack_pointer));
 
-	size_t i = 0;
+	MEM_LOC i = 0;
 
-	for(i = (size_t) new_start; i > (size_t) new_start-size; i -= sizeof(uint32_t)) {
+	for(i = (MEM_LOC) new_start; i > (MEM_LOC) (new_start - size); i -= sizeof(uint32_t)) {
            //Clarification on this ickle bit. tmp = *i (The actual value of memory at location i)
 	   size_t tmp = *(size_t*)i;
 

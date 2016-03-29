@@ -2,7 +2,7 @@
 #define _USER_MODE_DEF_H_
 
 /**
- * Puts the processor into the restricted user mode
+ * Puts the process in context into user mode
  */
 void switchToUserMode();
 

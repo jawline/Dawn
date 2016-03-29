@@ -9,11 +9,9 @@ stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp) {
 	MEM_LOC end = new_start - size; //The stack expands downwards.
 
 	//This for loop maps new_start to new_start - size with physical memory
-	for (iter = new_start; iter >= end; iter -= PAGE_SIZE)
-	{
+	for (iter = new_start; iter >= end; iter -= PAGE_SIZE) {
 		MEM_LOC frame = allocateFrame(); //Allocate the frame
-
-		map( (MEM_LOC) iter, (MEM_LOC) frame, 0); //Map it to the virtual address
+		map((MEM_LOC)iter,(MEM_LOC)frame, 0); //Map it to the virtual address
 	}
 
 	stack_t old_stack_pointer = 0;
@@ -35,16 +33,14 @@ stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp) {
 
 	size_t i = 0;
 
-	for(i = (size_t) new_start; i > (size_t) new_start-size; i -= sizeof(uint32_t))
-	{
+	for(i = (size_t) new_start; i > (size_t) new_start-size; i -= sizeof(uint32_t)) {
            //Clarification on this ickle bit. tmp = *i (The actual value of memory at location i)
 	   size_t tmp = *(size_t*)i;
 
 	   // If the value of tmp is inside the range of the old stack, assume it is a base pointer
 	   // and remap it. This will unfortunately remap ANY value in this range, whether they are
 	   // base pointers or not.
-	   if ((((size_t)old_stack_pointer) < tmp) && (tmp < initial_esp))
-	   {
+	   if ((((size_t)old_stack_pointer) < tmp) && (tmp < initial_esp)) {
 	     tmp = tmp + offset;
 	     size_t *tmp2 = (size_t*)i;
 	     *tmp2 = tmp;

@@ -3,8 +3,9 @@
 #include <common.h>
 #include <types/size_t.h>
 
-/* A set of utility functions concerning the stack */
-
+/*
+ * A set of utility functions concerning the stack
+ */
 typedef void* stack_t;
 
 /**

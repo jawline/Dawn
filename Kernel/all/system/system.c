@@ -108,22 +108,6 @@ void systemMainProcess() {
 }
 
 void systemProcess() {
-	//Disable interrupts while forking
-	disableInterrupts();
-
-	//Fork the current process
-	int forkedID = kfork();
-
-	//Enable them once the processes are set up
-	enableInterrupts();
-
-	if (forkedID == 1) {
-		systemProcPtr = getCurrentProcess();
-		setProcessName(getCurrentProcess(), "System");
-		systemMainProcess();
-	} else {
-		systemIdlePtr = getCurrentProcess();
-		setProcessName(getCurrentProcess(), "SystemIdle");
-		systemIdleProcess();
-	}
+	setProcessName(getCurrentProcess(), "System");
+	systemMainProcess();
 }

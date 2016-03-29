@@ -10,12 +10,8 @@
 //Returns: the location of the new stack (The value passed in new_start) if succesful, null otherwise
 //NOTE: A stack unwinds downards, so the mapping = new_start to new_start - size
 
-stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp)
-{
-
+stack_t moveStack(stack_t new_start, size_t size, MEM_LOC initial_esp) {
 	MEM_LOC iter = 0; //for iterator
-
-
 	MEM_LOC end = new_start - size; //The stack expands downwards.
 
 	//This for loop maps new_start to new_start - size with physical memory

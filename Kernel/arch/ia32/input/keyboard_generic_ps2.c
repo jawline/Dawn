@@ -29,12 +29,12 @@ idt_call_registers_t keyboardIrqCallback(idt_call_registers_t regs) {
 		break;
 	    }
 	    default: {
-		    if (flags & FLAG_ESCAPED) { 
-				flags = flags ^ FLAG_ESCAPED; /* Set the bit to 0 */
-		    } else if (keyboardCharacter & 0x80) {
-	        /* Ignore the break code */
+                if (flags & FLAG_ESCAPED) { 
+		    flags = flags ^ FLAG_ESCAPED; /* Set the bit to 0 */
+		} else if (keyboardCharacter & 0x80) {
+	            /* Ignore the break code */
 	        } else {
-				sendInputMessage(DEVICE_KEYBOARD, keyboardCharacter, &flags);
+		    sendInputMessage(DEVICE_KEYBOARD, keyboardCharacter, &flags);
 	        }
 	        break;
 	    }

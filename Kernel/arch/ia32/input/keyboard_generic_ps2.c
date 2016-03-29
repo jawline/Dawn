@@ -20,14 +20,14 @@ idt_call_registers_t keyboardIrqCallback(idt_call_registers_t regs) {
 	        flags = flags ^ FLAG_SHIFT_STATE;
 	        break;
 	    }
-		case 0xe0: {
-		    flags = flags | FLAG_ESCAPED; 
-		    break;
-		}
-		case 0x3a: {
-			flags = (flags & FLAG_CAPS_LOCK) ? (flags ^ FLAG_CAPS_LOCK) : (flags | FLAG_CAPS_LOCK);
-		    break;
-		}
+	    case 0xe0: {
+	        flags = flags | FLAG_ESCAPED; 
+		break;
+	    }
+	    case 0x3a: {
+	        flags = (flags & FLAG_CAPS_LOCK) ? (flags ^ FLAG_CAPS_LOCK) : (flags | FLAG_CAPS_LOCK);
+		break;
+	    }
 	    default: {
 		    if (flags & FLAG_ESCAPED) { 
 				flags = flags ^ FLAG_ESCAPED; /* Set the bit to 0 */

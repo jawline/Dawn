@@ -4,7 +4,7 @@
 DEFN_SYSCALL1(kernel_print_string, 0, const char*);
 DEFN_SYSCALL0(cls, 12);
 
-void api_printf(const char* fmt, ...) {
+void printf(const char* fmt, ...) {
         static char buf [1024]; //Maximum size to be printed is 1024 chars.
         va_list args;
         int i;

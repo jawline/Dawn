@@ -3,13 +3,11 @@
 
 DEFN_SYSCALL1(request_debug_level, 22, uint8_t);
 
-void requestSystemDebugMode()
-{
+void requestSystemDebugMode() {
 	syscall_request_debug_level(1);
 }
 
-void requestDisableSystemDebugMode()
-{
+void requestDisableSystemDebugMode() {
 	syscall_request_debug_level(0);
 }
 

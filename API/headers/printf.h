@@ -4,17 +4,10 @@
 #include <va_list.h>
 #include <vsprintf.h>
 
-#define printf api_printf
-
 /**
- * @ingroup Output
- * 
- * @brief Formatted print function.
- * @param const char* fmt, the formatted string. ..., any additional arguments
- * @return None
+ * API definition of printf, sends a formatted string to syscall 0 (Should print to active terminal)
  */
-
-void api_printf(const char* fmt, ...);
+void printf(const char* fmt, ...);
 void cls();
 void clearscreen();
 
